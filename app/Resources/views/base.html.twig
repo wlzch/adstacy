@@ -25,9 +25,11 @@
         '@AdsAppBundle/Resources/public/js/holder.js'
         '@AdsAppBundle/Resources/public/js/bootstrap.min.js'
         '@AdsAppBundle/Resources/public/js/jquery.scrolltofixed.min.js'
+        'bundles/fosjsrouting/js/router.js'
       %}
         <script src="{{ asset_url }}" type="text/javascript"></script>
       {% endjavascripts %}
+      <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}" type="text/javascript"></script>
     {% endblock %}
 
   </head>
