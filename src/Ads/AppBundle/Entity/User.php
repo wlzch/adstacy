@@ -81,7 +81,7 @@ class User implements UserInterface, GroupableInterface
     private $followedWalls;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="following")
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="followings")
      **/
     private $followers;
 
