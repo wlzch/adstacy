@@ -8,5 +8,6 @@ web/js
 web/css
 web/uploads
 web/media
+composer.phar
 *~
 *.swp
