@@ -3,6 +3,7 @@
 namespace Ads\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="Ads\AppBundle\Repository\PostRepository")
@@ -17,6 +18,10 @@ class Post
     private $id;
 
     /**
+     * @Assert\Length(
+     *  max = "255",
+     *  maxMessage = "Post description at most {{ limit }} characters"
+     * )
      * @ORM\COlumn(type="string", length=255)
      */
     private $description;
