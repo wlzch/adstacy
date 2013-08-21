@@ -100,7 +100,7 @@ buka file /etc/hosts dan tambahkan `127.0.0.1 ads.dev`. Kemudian restart apache.
 ## Langkah 7: Command
 Jalankan perintah `php app/console doctrine:database:create` untuk membuat database
 
-Jalankan perintah `php app/console doctrine:schema:update --force` untuk mengupdate skema tabel ke database
+Jalankan perintah `php app/console doctrine:migrations:migrate` untuk mengupdate skema tabel ke database
 
 Jalankan perintah `php app/console assetic:dump` untuk dump assets yang memakai assetic.
 
