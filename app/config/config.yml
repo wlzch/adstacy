@@ -2,6 +2,18 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
 
+parameters:
+    elastica_website_types:
+        post:
+            mappings:
+                tags: { boost: 5 }
+            persistence:
+                driver: orm
+                model: Ads\AppBundle\Entity\Post
+                provider: ~
+                finder: ~
+                listener: ~
+
 framework:
     #esi:             ~
     #translator:      { fallback: %locale% }
@@ -120,3 +132,16 @@ liip_imagine:
             quality: 75
             filters:
                 relative_resize: { widen: 236 }
+
+fos_elastica:
+    clients:
+        default:
+            host: localhost
+            port: 9200
+    serializer: ~
+    indexes:
+        website:
+            client: default
+            index_name: website
+            finder: ~
+            types: %elastica_website_types%
