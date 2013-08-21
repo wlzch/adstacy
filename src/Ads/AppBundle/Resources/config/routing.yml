@@ -1,0 +1,4 @@
+ads_app_homepage:
+    pattern:  /
+    defaults:
+        _controller: AdsAppBundle:App:index

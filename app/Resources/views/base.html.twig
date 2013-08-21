@@ -1,13 +1,37 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="Description" content="{{ block('title') }}">
+    <meta name="Keywords" content="{% block meta_keywords %}iklan, promo, lowongan kerja, jual beli{% endblock %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>{% block title %}Ads.com - Ads have never been so fun{% endblock %}</title>
+
+    <link rel="icon shortcut" type="image/ico" href="{{ asset('favicon.ico') }}">
+
+    {% block stylesheets %}
+    {% endblock %}
+
+    {% block head_scripts %}
+    {% endblock %}
+
+  </head>
+  <body>
+    {% block body %}
+      <header id="main-header">
+      </header>
+      <div class="body container">
+        {% for key, flashes in app.session.flashbag.all() %}
+          {% for flash in flashes %}
+            <div class="alert alert-{{ key }}">{{ flash }}</div>
+          {% endfor %}
+        {% endfor %}
+
+        {% block content %}{% endblock %}
+      </div>
+    {% endblock %}
+
+    {% block javascripts %}
+    {% endblock %}
+  </body>
 </html>
