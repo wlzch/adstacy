@@ -99,6 +99,29 @@ class User implements UserInterface, GroupableInterface
     private $following;
 
     /**
+     * @ORM\Column(type="simple_array")
+     */
+    private $interests;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Post", inversedBy="promotees")
+     * @ORM\JoinTable(name="promotes_post",
+     *    joinColumns={
+     *      @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *    },
+     *    inverseJoinColumns={
+     *      @ORM\JoinColumn(name="post_id", referencedColumnName="id")
+     *    }
+     * )
+     */
+    private $promotes;
+
+    /**
+     * @ORM\Column(name="promotes_count", type="integer")
+     */
+    private $promotesCount;
+
+    /**
      * @ORM\Column(name="profile_picture", type="string", length=255, nullable=true)
      */
     protected $profilePicture;

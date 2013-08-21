@@ -46,4 +46,14 @@ class Post
      * @ORM\JoinColumn(nullable=false)
      */
     private $wall;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="promotes")
+     */
+    private $promotees;
+
+    /**
+     * @ORM\Column(name="promotees_count", type="integer")
+     */
+    private $promotessCount;
 }
