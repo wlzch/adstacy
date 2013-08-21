@@ -1,3 +1,7 @@
+_imagine:
+    resource: .
+    type:     imagine
+
 ads_app:
     resource: "@AdsAppBundle/Resources/config/routing.yml"
     prefix:   /

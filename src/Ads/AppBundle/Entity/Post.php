@@ -18,7 +18,7 @@ class Post
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Image")
+     * @ORM\OneToOne(targetEntity="Image", cascade={"persist"}, fetch="EAGER")
      */
     private $image;
 

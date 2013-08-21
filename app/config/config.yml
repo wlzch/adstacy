@@ -113,3 +113,10 @@ vich_uploader:
             uri_prefix: /uploads
             upload_destination: image_fs
             namer: vich_uploader.namer_origname
+
+liip_imagine:
+    filter_sets:
+        thumbnail:
+            quality: 75
+            filters:
+                relative_resize: { widen: 236 }
