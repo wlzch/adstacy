@@ -3,10 +3,7 @@
 {% block content %}
   <div class="posts">
     {% for post in posts %}
-      <div class="post">
-        <img src="{{ vich_uploader_asset(post.image, 'file') | imagine_filter('thumbnail') }}" />
-        {{ parse_hashtag(post.description) }}
-      </div>
+      {% include 'AdsAppBundle:Includes:post.html.twig' with {post: post} %}
     {% endfor %}
   </div>
 {% endblock %}
