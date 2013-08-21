@@ -86,6 +86,11 @@ class User implements UserInterface, GroupableInterface
     private $followers;
 
     /**
+     * @ORM\Column(name="followers_count", type="integer")
+     */
+    private $followersCount;
+
+    /**
      * @ORM\ManyToMany(targetEntity="User", inversedBy="followers")
      * @ORM\JoinTable(name="follow",
      *      joinColumns={
@@ -96,7 +101,12 @@ class User implements UserInterface, GroupableInterface
      *      }
      * )
      **/
-    private $following;
+    private $followings;
+
+    /**
+     * @ORM\Column(name="following_counts", type="integer")
+     */
+    private $followingsCount;
 
     /**
      * @ORM\Column(type="simple_array")
@@ -901,4 +911,277 @@ class User implements UserInterface, GroupableInterface
            }
        }
    }
+
+    /**
+     * Set interests
+     *
+     * @param array $interests
+     * @return User
+     */
+    public function setInterests($interests)
+    {
+        $this->interests = $interests;
+    
+        return $this;
+    }
+
+    /**
+     * Get interests
+     *
+     * @return array 
+     */
+    public function getInterests()
+    {
+        return $this->interests;
+    }
+
+    /**
+     * Set promotesCount
+     *
+     * @param integer $promotesCount
+     * @return User
+     */
+    public function setPromotesCount($promotesCount)
+    {
+        $this->promotesCount = $promotesCount;
+    
+        return $this;
+    }
+
+    /**
+     * Get promotesCount
+     *
+     * @return integer 
+     */
+    public function getPromotesCount()
+    {
+        return $this->promotesCount;
+    }
+
+    /**
+     * Add walls
+     *
+     * @param \Ads\AppBundle\Entity\Wall $walls
+     * @return User
+     */
+    public function addWall(\Ads\AppBundle\Entity\Wall $walls)
+    {
+        $this->walls[] = $walls;
+    
+        return $this;
+    }
+
+    /**
+     * Remove walls
+     *
+     * @param \Ads\AppBundle\Entity\Wall $walls
+     */
+    public function removeWall(\Ads\AppBundle\Entity\Wall $walls)
+    {
+        $this->walls->removeElement($walls);
+    }
+
+    /**
+     * Get walls
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getWalls()
+    {
+        return $this->walls;
+    }
+
+    /**
+     * Add followedWalls
+     *
+     * @param \Ads\AppBundle\Entity\Wall $followedWalls
+     * @return User
+     */
+    public function addFollowedWall(\Ads\AppBundle\Entity\Wall $followedWalls)
+    {
+        $this->followedWalls[] = $followedWalls;
+    
+        return $this;
+    }
+
+    /**
+     * Remove followedWalls
+     *
+     * @param \Ads\AppBundle\Entity\Wall $followedWalls
+     */
+    public function removeFollowedWall(\Ads\AppBundle\Entity\Wall $followedWalls)
+    {
+        $this->followedWalls->removeElement($followedWalls);
+    }
+
+    /**
+     * Get followedWalls
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFollowedWalls()
+    {
+        return $this->followedWalls;
+    }
+
+    /**
+     * Add followers
+     *
+     * @param \Ads\AppBundle\Entity\User $followers
+     * @return User
+     */
+    public function addFollower(\Ads\AppBundle\Entity\User $followers)
+    {
+        $this->followers[] = $followers;
+        $this->setFollowersCount($this->getFollowersCount() + 1);
+    
+        return $this;
+    }
+
+    /**
+     * Remove followers
+     *
+     * @param \Ads\AppBundle\Entity\User $followers
+     */
+    public function removeFollower(\Ads\AppBundle\Entity\User $followers)
+    {
+        $this->followers->removeElement($followers);
+        $this->setFollowersCount($this->getFollowersCount() - 1);
+    }
+
+    /**
+     * Get followers
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFollowers()
+    {
+        return $this->followers;
+    }
+
+    /**
+     * Add following
+     *
+     * @param \Ads\AppBundle\Entity\User $following
+     * @return User
+     */
+    public function addFollowing(\Ads\AppBundle\Entity\User $following)
+    {
+        $this->followings[] = $following;
+        $this->setFollowingsCount($this->getFollowingsCount() + 1);
+    
+        return $this;
+    }
+
+    /**
+     * Remove following
+     *
+     * @param \Ads\AppBundle\Entity\User $following
+     */
+    public function removeFollowing(\Ads\AppBundle\Entity\User $following)
+    {
+        $this->followings->removeElement($following);
+        $this->setFollowingsCount($this->getFollowingsCount() - 1);
+    }
+
+    /**
+     * Get following
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFollowing()
+    {
+        return $this->followings;
+    }
+
+    /**
+     * Add promotes
+     *
+     * @param \Ads\AppBundle\Entity\Post $promotes
+     * @return User
+     */
+    public function addPromote(\Ads\AppBundle\Entity\Post $promotes)
+    {
+        $this->promotes[] = $promotes;
+        $this->setPromotesCount($this->getPromotesCount() + 1);
+    
+        return $this;
+    }
+
+    /**
+     * Remove promotes
+     *
+     * @param \Ads\AppBundle\Entity\Post $promotes
+     */
+    public function removePromote(\Ads\AppBundle\Entity\Post $promotes)
+    {
+        $this->promotes->removeElement($promotes);
+        $this->setPromotesCount($this->getPromotesCount() - 1);
+    }
+
+    /**
+     * Get promotes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPromotes()
+    {
+        return $this->promotes;
+    }
+
+    /**
+     * Set followersCount
+     *
+     * @param integer $followersCount
+     * @return User
+     */
+    public function setFollowersCount($followersCount)
+    {
+        $this->followersCount = $followersCount;
+    
+        return $this;
+    }
+
+    /**
+     * Get followersCount
+     *
+     * @return integer 
+     */
+    public function getFollowersCount()
+    {
+        return $this->followersCount;
+    }
+
+    /**
+     * Set followingsCount
+     *
+     * @param integer $followingsCount
+     * @return User
+     */
+    public function setFollowingsCount($followingsCount)
+    {
+        $this->followingsCount = $followingsCount;
+    
+        return $this;
+    }
+
+    /**
+     * Get followingsCount
+     *
+     * @return integer 
+     */
+    public function getFollowingsCount()
+    {
+        return $this->followingsCount;
+    }
+
+    /**
+     * Get followings
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFollowings()
+    {
+        return $this->followings;
+    }
 }
