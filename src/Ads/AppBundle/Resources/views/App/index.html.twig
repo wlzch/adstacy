@@ -1,5 +1,11 @@
 {% extends 'AdsAppBundle::layout.html.twig' %}
 
 {% block content %}
-
+  <div class="posts">
+    {% for post in posts %}
+      <div class="post">
+        {{ parse_hashtag(post.description) }}
+      </div>
+    {% endfor %}
+  </div>
 {% endblock %}
