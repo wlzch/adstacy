@@ -1,0 +1,17 @@
+{
+  "name": "ads",
+  "version": "0.0.1",
+  "description": "Ads have never been so fun",
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/wlzch/ads.git"
+  },
+  "dependencies": {
+    "uglify-js": "2.3.x",
+    "uglifycss": "0.0.x"
+  },
+  "engine": {
+    "node": "0.10.x"
+  },
+  "private": true
+}

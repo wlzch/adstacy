@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8">
     <meta name="Description" content="{{ block('title') }}">
@@ -10,9 +10,24 @@
     <link rel="icon shortcut" type="image/ico" href="{{ asset('favicon.ico') }}">
 
     {% block stylesheets %}
+      {% stylesheets filter='cssrewrite, uglifycss'
+        'bundles/adsapp/less/ads.less'
+        'bundles/adsapp/css/font-awesome.css'
+      %}
+        <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
+      {% endstylesheets %}
     {% endblock %}
 
     {% block head_scripts %}
+      {% javascripts filter='uglifyjs2'
+        '@AdsAppBundle/Resources/public/js/modernizr.min.js'
+        '@AdsAppBundle/Resources/public/js/jquery.min.js'
+        '@AdsAppBundle/Resources/public/js/holder.js'
+        '@AdsAppBundle/Resources/public/js/bootstrap.min.js'
+        '@AdsAppBundle/Resources/public/js/jquery.scrolltofixed.min.js'
+      %}
+        <script src="{{ asset_url }}" type="text/javascript"></script>
+      {% endjavascripts %}
     {% endblock %}
 
   </head>
