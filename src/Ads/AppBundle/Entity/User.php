@@ -109,7 +109,7 @@ class User implements UserInterface, GroupableInterface
     private $followingsCount;
 
     /**
-     * @ORM\Column(type="simple_array")
+     * @ORM\Column(type="simple_array", nullable=true)
      */
     private $interests;
 
@@ -258,6 +258,9 @@ class User implements UserInterface, GroupableInterface
         $this->roles = array();
         $this->credentialsExpired = false;
         $this->walls = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->followersCount = 0;
+        $this->followingsCount = 0;
+        $this->promotesCount = 0;
     }
 
     /**
