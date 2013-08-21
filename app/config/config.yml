@@ -65,3 +65,30 @@ swiftmailer:
     username:  %mailer_user%
     password:  %mailer_password%
     spool:     { type: memory }
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: Ads\AppBundle\Entity\User
+
+hwi_oauth:
+    firewall_name: main
+    resource_owners:
+        facebook:
+            type: facebook
+            client_id: "138676862997429"
+            client_secret: "09a25b9562d2927df1e49e8d5dfee8b5"
+            scope: "email"
+            infos_url:     "https://graph.facebook.com/me?fields=username,name,email,picture.type(square)"
+            paths:
+                email: email
+                profilepicture: picture.data.url
+        twitter:
+            type: twitter
+            client_id: "VNgnUYWcvjnmLiVHzYNEg"
+            client_secret: "RF4WbIdC86hRMLQHj8OIRHDx5nApXRKhj5B4Ah5Rg"
+    fosub:
+        username_iterations: 30
+        properties:
+            facebook: facebookId
+            twitter: twitterId
