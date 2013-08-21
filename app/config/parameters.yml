@@ -1,0 +1,14 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_pgsql
+    database_host: '%database.host%'
+    database_port: null
+    database_name: '%database.name%'
+    database_user: '%database.user%'
+    database_password: '%database.password%'
+    mailer_transport: sendmail
+    mailer_host: '%mail.host%'
+    mailer_user: '%mail.user%'
+    mailer_password: '%mail.password%'
+    locale: en
+    secret: 37a42ee3eb2108bdc8597808d48fb3fbc

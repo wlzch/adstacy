@@ -1,0 +1,12 @@
+app/cache
+app/logs
+app/var
+vendor
+node_modules
+web/bundles
+web/js
+web/css
+web/uploads
+web/media
+*~
+*.swp
