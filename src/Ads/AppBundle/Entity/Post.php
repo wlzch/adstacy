@@ -18,6 +18,11 @@ class Post
     private $id;
 
     /**
+     * @ORM\OneToOne(targetEntity="Image")
+     */
+    private $image;
+
+    /**
      * @Assert\Length(
      *  max = "255",
      *  maxMessage = "Post description at most {{ limit }} characters"
@@ -37,13 +42,8 @@ class Post
     private $tags;
 
     /**
-     * @ORM\OneToOne(targetEntity="Image")
-     */
-    private $image;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Wall", inversedBy="posts")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $wall;
 
@@ -55,7 +55,7 @@ class Post
     /**
      * @ORM\Column(name="promotees_count", type="integer")
      */
-    private $promotessCount;
+    private $promoteesCount;
     /**
      * Constructor
      */
@@ -84,6 +84,9 @@ class Post
     public function setDescription($description)
     {
         $this->description = $description;
+        $matches = null;
+        preg_match_all('/#(\w+)/', $description, $matches);
+        $this->setTags($matches[1]);
     
         return $this;
     }
@@ -145,26 +148,26 @@ class Post
     }
 
     /**
-     * Set promotessCount
+     * Set promoteesCount
      *
-     * @param integer $promotessCount
+     * @param integer $promoteesCount
      * @return Post
      */
-    public function setPromotessCount($promotessCount)
+    public function setPromoteesCount($promoteesCount)
     {
-        $this->promotessCount = $promotessCount;
+        $this->promoteesCount = $promoteesCount;
     
         return $this;
     }
 
     /**
-     * Get promotessCount
+     * Get promoteesCount
      *
      * @return integer 
      */
-    public function getPromotessCount()
+    public function getPromoteesCount()
     {
-        return $this->promotessCount;
+        return $this->promoteesCount;
     }
 
     /**

@@ -24,7 +24,7 @@ class Wall
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="Post", mappedBy="wall")
+     * @ORM\OneToMany(targetEntity="Post", mappedBy="wall", cascade={"remove"})
      */
     private $posts;
 
