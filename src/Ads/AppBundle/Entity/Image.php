@@ -26,7 +26,7 @@ class Image
      *    mimeTypes = {"image/png", "image/jpeg", "image/pjpeg"},
      *    minWidth = 240,
      *    mimeTypesMessage = "Image must be type of png or jpg",
-     *    minWidthMessage = "Image width is too small({{ width }}px). Min width allowed is {{ min_width }}px",
+     *    minWidthMessage = "Image width is too small({{ width }}px). Min width allowed is {{ min_width }}px"
      * )
      * @Vich\UploadableField(mapping="image", fileNameProperty="filename")
      */

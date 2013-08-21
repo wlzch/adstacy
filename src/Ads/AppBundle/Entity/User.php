@@ -63,6 +63,42 @@ class User implements UserInterface, GroupableInterface
     protected $emailCanonical;
 
     /**
+     * @ORM\OneToMany(targetEntity="Wall", mappedBy="user")
+     */
+    private $walls;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Wall", inversedBy="followers")
+     * @ORM\JoinTable(name="followed_walls",
+     *    joinColumns={
+     *      @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *    },
+     *    inverseJoinColumns={
+     *      @ORM\JoinColumn(name="wall_id", referencedColumnName="id")
+     *    }
+     * )
+     */
+    private $followedWalls;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="following")
+     **/
+    private $followers;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="followers")
+     * @ORM\JoinTable(name="follow",
+     *      joinColumns={
+     *        @ORM\JoinColumn(name="user_1_id", referencedColumnName="id")
+     *      },
+     *      inverseJoinColumns={
+     *        @ORM\JoinColumn(name="user_2_id", referencedColumnName="id")
+     *      }
+     * )
+     **/
+    private $following;
+
+    /**
      * @ORM\Column(name="profile_picture", type="string", length=255, nullable=true)
      */
     protected $profilePicture;
@@ -188,6 +224,7 @@ class User implements UserInterface, GroupableInterface
         $this->expired = false;
         $this->roles = array();
         $this->credentialsExpired = false;
+        $this->walls = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

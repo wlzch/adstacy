@@ -1,0 +1,44 @@
+<?php
+
+namespace Ads\AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass="Ads\AppBundle\Repository\PostRepository")
+ */
+class Post
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\COlumn(type="string", length=255)
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $content;
+
+    /**
+     * @ORM\Column(type="simple_array", nullable=true)
+     */
+    private $tags;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Image")
+     */
+    private $image;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Wall", inversedBy="posts")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $wall;
+}
