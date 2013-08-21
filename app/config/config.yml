@@ -92,3 +92,24 @@ hwi_oauth:
         properties:
             facebook: facebookId
             twitter: twitterId
+
+knp_gaufrette:
+    stream_wrapper: ~
+    adapters:
+        image_adapter:
+            local:
+                directory: %kernel.root_dir%/../web/uploads
+
+    filesystems:
+        image_fs:
+            adapter: image_adapter
+
+vich_uploader:
+    db_driver: orm
+    gaufrette: true
+    storage: vich_uploader.storage.gaufrette
+    mappings:
+        image:
+            uri_prefix: /uploads
+            upload_destination: image_fs
+            namer: vich_uploader.namer_origname
