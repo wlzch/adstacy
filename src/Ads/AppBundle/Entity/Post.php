@@ -42,6 +42,11 @@ class Post
     private $tags;
 
     /**
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Wall", inversedBy="posts")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
@@ -63,6 +68,7 @@ class Post
     {
         $this->promotees = new \Doctrine\Common\Collections\ArrayCollection();
         $this->promoteesCount = 0;
+        $this->created = new \Datetime();
     }
     
     /**
