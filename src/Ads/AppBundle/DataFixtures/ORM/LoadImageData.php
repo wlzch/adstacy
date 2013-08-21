@@ -14,12 +14,14 @@ class LoadImageData extends DataFixture
         $finder = new Finder();
 
         $path = __DIR__.'/../img';
+        $i = 1;
         foreach ($finder->files()->in($path) as $img) {
             $image = new Image();
             $image->setFile(new UploadedFile($img->getRealPath(), $img->getFilename()));
             $manager->persist($image);
 
-            $this->setReference('image-'.$img->getBasename('.jpg'), $image);
+            $this->setReference('image-'.$i, $image);
+            $i++;
         }
 
         $manager->flush();
