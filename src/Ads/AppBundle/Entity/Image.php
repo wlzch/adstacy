@@ -25,10 +25,8 @@ class Image
      *    maxSize = "1M",
      *    mimeTypes = {"image/png", "image/jpeg", "image/pjpeg"},
      *    minWidth = 240,
-     *    minHeight = 160,
-     *    mimeTypesMessage = "Image yang diupload harus berupa png atau jpg",
-     *    minWidthMessage = "Lebar image yang diupload terlalu kecil ({{ width }}px). Minimal lebar yang diperbolehkan adalah {{ min_width }}px",
-     *    minHeightMessage = "Panjang image yang diupload terlalu kecil ({{ height }}px). Minimal panjang yang diperbolehkan adalah {{ min_height }}px"
+     *    mimeTypesMessage = "Image must be type of png or jpg",
+     *    minWidthMessage = "Image width is too small({{ width }}px). Min width allowed is {{ min_width }}px",
      * )
      * @Vich\UploadableField(mapping="image", fileNameProperty="filename")
      */

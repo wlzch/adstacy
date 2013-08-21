@@ -18,8 +18,8 @@ use Symfony\Component\Validator\ExecutionContextInterface;
  *   @ORM\Index(name="user_username", columns={"username_canonical"}),
  *   @ORM\Index(name="user_email", columns={"email_canonical"})
  * })
- * @UniqueEntity(fields="emailCanonical", message="email ini sudah digunakan", errorPath="email", groups={"Registration", "Profile"})
- * @UniqueEntity(fields="usernameCanonical", message="username ini sudah digunakan", errorPath="username", groups={"Registration", "Profile"})
+ * @UniqueEntity(fields="emailCanonical", message="Email does not exists", errorPath="email", groups={"Registration", "Profile"})
+ * @UniqueEntity(fields="usernameCanonical", message="Username does not exists", errorPath="username", groups={"Registration", "Profile"})
  * @Assert\Callback(methods={"isUsernameValid"})
  */
 class User implements UserInterface, GroupableInterface
@@ -32,7 +32,7 @@ class User implements UserInterface, GroupableInterface
     protected $id;
 
     /**
-     * @Assert\NotBlank(message="Username tidak boleh kosong", groups={"Registration", "Profile"})
+     * @Assert\NotBlank(message="Username cannot be blank", groups={"Registration", "Profile"})
      * @Assert\Length(
      *    min = 2,
      *    max = 100,
@@ -50,14 +50,7 @@ class User implements UserInterface, GroupableInterface
     protected $usernameCanonical;
 
     /**
-     * @Assert\NotBlank(message="Email tidak boleh kosong", groups={"Registration", "Profile"})
-     * @Assert\Length(
-     *    min = 2,
-     *    max = 254,
-     *    minMessage = "Email minimal {{ limit }} karakter",
-     *    maxMessage = "Email maksimal {{ limit }} karakter",
-     *    groups = {"Registration", "Profile"}
-     *  )
+     * @Assert\NotBlank(message="Email cannot be blank", groups={"Registration", "Profile"})
      * @Assert\Email(message="Email tidak valid", groups={"Registration", "Profile"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
@@ -116,10 +109,10 @@ class User implements UserInterface, GroupableInterface
     protected $password;
 
     /**
-     * @Assert\NotBlank(message="Password tidak boleh kosong", groups={"Registration", "ResetPassword", "ChangePassword"})
+     * @Assert\NotBlank(message="Password cannot be blank", groups={"Registration", "ResetPassword", "ChangePassword"})
      * @Assert\Length(
      *    min = 5,
-     *    minMessage = "Password minimal {{ limit }} karakter",
+     *    minMessage = "Password requires at least {{ limit }} characters",
      *    groups = {"Registration", "Profile", "ResetPassword", "ChangePassword"}
      * )
      * Plain password. Used for model validation. Must not be persisted.
@@ -844,7 +837,7 @@ class User implements UserInterface, GroupableInterface
    {
        if ($this->username && $this) {
            if (!preg_match('/^[a-zA-Z0-9\.\_]{1,}$/', $this->username)) { // for english chars + numbers only
-               $context->addViolationAt('username', 'Username hanya boleh berisi abjad(a-z), angka(0-9), garis bawah(_) dan titik(.)');
+               $context->addViolationAt('username', 'Username can only contains a-z0-9._');
            }
        }
    }
