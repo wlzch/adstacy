@@ -6,6 +6,10 @@ services:
         class: Ads\AppBundle\Security\User\Provider\UserProvider
         arguments: [@fos_user.user_manager]
 
+    ads.manager.post:
+        class: Ads\AppBundle\Manager\PostManager
+        arguments: [@service_container]
+
     ads.twig.formatter_extension:
         class: Ads\AppBundle\Twig\FormatterExtension
         tags:
