@@ -6,8 +6,16 @@ ads_app:
     resource: "@AdsAppBundle/Resources/config/routing.yml"
     prefix:   /
 
+hwi_oauth_login:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix: /auth/
+
 hwi_oauth_redirect:
     resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix: /auth/
+
+hwi_oauth_connect_user:
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
     prefix: /connect
 
 facebook_login:

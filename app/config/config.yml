@@ -106,6 +106,8 @@ hwi_oauth:
         properties:
             facebook: facebookId
             twitter: twitterId
+    connect:
+        account_connector: ads.user.provider
 
 knp_gaufrette:
     stream_wrapper: ~

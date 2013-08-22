@@ -27,6 +27,7 @@ class AppKernel extends Kernel
             new Vich\UploaderBundle\VichUploaderBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Ads\AppBundle\AdsAppBundle(),
+            new Ads\UserBundle\AdsUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
