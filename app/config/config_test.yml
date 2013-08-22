@@ -14,3 +14,15 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: true
+
+doctrine:
+    dbal:
+        dbname: %test.database.name%
+
+fos_elastica:
+    indexes:
+        website:
+            client: default
+            index_name: website_test
+            finder: ~
+            types: %elastica_website_types%

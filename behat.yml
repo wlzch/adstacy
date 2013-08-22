@@ -1,0 +1,14 @@
+default:
+    extensions:
+        Behat\Symfony2Extension\Extension:
+            mink_driver: true
+        Behat\MinkExtension\Extension:
+            base_url: http://ads.dev/app_test.php
+            zombie: ~
+            default_session: symfony2 
+            javascript_session: zombie
+
+app:
+    extensions:
+        Behat\Symfony2Extension\Extension:
+            bundle: AdsAppBundle
