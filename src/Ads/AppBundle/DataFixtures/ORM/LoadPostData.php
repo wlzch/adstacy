@@ -16,13 +16,10 @@ class LoadPostData extends DataFixture
             $tags = array_merge($tags, $definedTags);
             $description = $this->faker->sentence($this->faker->randomNumber(1, 10)).implode('#', $tags);
             $image = $this->getReference('image-'.$i);
-            $size = getimagesize($image->getFile());
-            $height = round((234 / $size[0]) * $size[1]);
             $post = new Post();
             $post->setImage($image);
             $post->setDescription($description);
             $post->setWall($this->getReference('wall-'.$this->faker->randomNumber(1, 15)));
-            $post->setThumbHeight($height);
             $posts[] = $post;
             $manager->persist($post);
             $this->addReference('post-'.$i, $post);

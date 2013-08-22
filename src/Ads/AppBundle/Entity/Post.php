@@ -189,7 +189,12 @@ class Post
      */
     public function setImage(\Ads\AppBundle\Entity\Image $image = null)
     {
-        $this->image = $image;
+        if ($image) {
+            $this->image = $image;
+            $size = getimagesize($image->getFile());
+            $height = round((234 / $size[0]) * $size[1]);
+            $this->setThumbHeight($height);
+        }
     
         return $this;
     }

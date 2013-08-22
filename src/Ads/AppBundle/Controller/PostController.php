@@ -31,7 +31,6 @@ class PostController extends Controller
             $em = $this->getManager();
             $em->persist($post);
             $em->flush();
-            $this->get('ads.manager.post')->setHeight($post);
         }
 
         return $this->render('AdsAppBundle:Post:add.html.twig', array(
