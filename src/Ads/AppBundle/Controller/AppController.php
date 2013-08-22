@@ -12,4 +12,20 @@ class AppController extends Controller
             'posts' => $posts
         ));
     }
+
+    public function searchAction()
+    {
+        $request = $this->getRequest();
+        $finder = $this->get('fos_elastica.finder.website.post');
+
+        $postsPaginator = $finder->findPaginated($request->query->get('q'));
+        $postsPaginator
+            ->setMaxPerPage(20)
+            ->setCurrentPage($request->query->get('page') ?: 1)
+        ;
+
+        return $this->render('AdsAppBundle:App:search.html.twig', array(
+            'postsPaginator' => $postsPaginator
+        ));
+    }
 }

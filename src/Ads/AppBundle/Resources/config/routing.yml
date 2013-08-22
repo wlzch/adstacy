@@ -2,3 +2,8 @@ ads_app_homepage:
     pattern:  /
     defaults:
         _controller: AdsAppBundle:App:index
+
+ads_app_search:
+    pattern: /search
+    defaults:
+        _controller: AdsAppBundle:App:search
