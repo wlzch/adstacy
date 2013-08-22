@@ -1,7 +1,9 @@
 <div class="post">
-  <img src="{{ vich_uploader_asset(post.image, 'file') | imagine_filter('thumbnail') }}" />
-  <p>{{ parse_hashtag(post.description) }}</p>
-  <div>
+  <div class="pic">
+    <img src="{{ vich_uploader_asset(post.image, 'file') | imagine_filter('thumbnail') }}" />
+  </div>
+  <div class="desc">
+    <p>{{ parse_hashtag(post.description) }}</p>
     {{ post.promoteesCount }} promotes
   </div>
 </div>
