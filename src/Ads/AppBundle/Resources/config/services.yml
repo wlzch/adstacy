@@ -1,3 +1,6 @@
+imports:
+  - { resource: types.yml }
+
 services:
     ads.user.provider:
         class: Ads\AppBundle\Security\User\Provider\UserProvider

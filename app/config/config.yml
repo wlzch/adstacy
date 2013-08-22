@@ -39,6 +39,9 @@ framework:
 twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
+    form:
+        resources:
+            - 'AdsAppBundle:Form:fields.html.twig'
 
 assetic:
     debug:          %kernel.debug%

@@ -1,0 +1,7 @@
+services:
+    ads.type.image:
+        class: Ads\AppBundle\Form\Type\ImageType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: image}
+

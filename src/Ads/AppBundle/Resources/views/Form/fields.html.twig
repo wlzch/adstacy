@@ -1,0 +1,9 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{% block image_widget %}
+<input class="image-upload" type="file" {{ block('widget_attributes') }}>
+
+<div class="image-preview">
+  {% include '::image.html.twig' with {image: image, lazy: false} %}
+</div>
+{% endblock %}
