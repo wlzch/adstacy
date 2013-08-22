@@ -1,7 +1,7 @@
 {% extends 'AdsAppBundle::layout.html.twig' %}
 
 {% block content %}
-  <div class="posts">
+  <div id="posts">
     {% for post in posts %}
       {% include 'AdsAppBundle:Includes:post.html.twig' with {post: post} %}
     {% endfor %}

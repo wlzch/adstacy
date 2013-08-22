@@ -38,7 +38,7 @@
     {% block body %}
       <header id="main-header">
       </header>
-      <div class="body container">
+      <div class="body">
         {% for key, flashes in app.session.flashbag.all() %}
           {% for flash in flashes %}
             <div class="alert alert-{{ key }}">{{ flash }}</div>
@@ -50,6 +50,13 @@
     {% endblock %}
 
     {% block javascripts %}
+      <script type="text/javascript">
+      $('#posts').masonry({
+        columnWidth: 250,
+        isFitWidth: true,
+        itemSelector: '.post'
+      });
+      </script>
     {% endblock %}
   </body>
 </html>
