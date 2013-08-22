@@ -4,6 +4,7 @@ namespace Ads\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation\Exclude;
 
 /**
  * @ORM\Entity(repositoryClass="Ads\AppBundle\Repository\WallRepository")
@@ -19,32 +20,41 @@ class Wall
 
     /**
      * @Assert\NotBlank(message="Wall name must not be blank")
+     * @Assert\Length(
+     *    max = "50",
+     *    maxMessage = "Wall name must not exceed {{ limit }} characters|Wall name must not exceed {{ limit }} characters"
+     * )
      * @ORM\Column(type="string", length=50)
      */
     private $name;
 
     /**
+     * @Exclude
      * @ORM\OneToMany(targetEntity="Post", mappedBy="wall", cascade={"remove"})
      */
     private $posts;
 
     /**
+     * @Exclude
      * @ORM\Column(name="posts_count", type="integer")
      */
     private $postsCount;
 
     /**
+     * @Exclude
      * @ORM\ManyToOne(targetEntity="User", inversedBy="walls")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
     /**
+     * @Exclude
      * @ORM\ManyToMany(targetEntity="User", mappedBy="followedWalls")
      */
     private $followers;
 
     /**
+     * @Exclude
      * @ORM\Column(name="followers_count", type="integer")
      */
     private $followersCount;

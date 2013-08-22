@@ -8,7 +8,12 @@ ads_app_search:
     defaults:
         _controller: AdsAppBundle:App:search
 
-ads_app_add:
+ads_app_post_add:
     pattern: /add
     defaults:
         _controller: AdsAppBundle:Post:add
+
+ads_app_wall_add:
+    pattern: /walls/add
+    defaults:
+        _controller: AdsAppBundle:Wall:add
