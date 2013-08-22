@@ -3,6 +3,7 @@ imports:
     - { resource: security.yml }
 
 parameters:
+    thumb_width: 234
     elastica_website_types:
         post:
             mappings:
@@ -39,6 +40,8 @@ framework:
 twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
+    globals:
+        thumb_width: %thumb_width%
     form:
         resources:
             - 'AdsAppBundle:Form:fields.html.twig'
@@ -138,7 +141,7 @@ liip_imagine:
         thumbnail:
             quality: 75
             filters:
-                relative_resize: { widen: 234 }
+                relative_resize: { widen: %thumb_width% }
 
 fos_elastica:
     clients:

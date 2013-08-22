@@ -10,9 +10,3 @@ services:
         class: Ads\AppBundle\Twig\FormatterExtension
         tags:
             - { name: twig.extension }
-
-    ads.twig.post_extension:
-        class: Ads\AppBundle\Twig\PostExtension
-        arguments: [@service_container]
-        tags:
-            - { name: twig.extension }

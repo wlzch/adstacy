@@ -1,7 +1,6 @@
 <div class="post">
   <div class="pic">
-    {% set size = post_thumbnail_size(post) %}
-    <img src="{{ vich_uploader_asset(post.image, 'file') | imagine_filter('thumbnail') }}" width="{{ size[0] }}" height="{{ size[1] }}" />
+    <img src="{{ vich_uploader_asset(post.image, 'file') | imagine_filter('thumbnail') }}" width="{{ thumb_width }}" height="{{ post.thumbHeight }}" />
   </div>
   <div class="desc">
     <p>{{ parse_hashtag(post.description) }}</p>
