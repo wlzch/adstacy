@@ -51,7 +51,7 @@ class FormatterExtension extends \Twig_Extension
      */
     public function parseHashtag($text)
     {
-      return preg_replace('/(#\w+)/', '<a href="#">$1</a>', $text);
+      return preg_replace('/(#\w+)/', ' <a href="#">$1</a>', $text);
     }
 
 
