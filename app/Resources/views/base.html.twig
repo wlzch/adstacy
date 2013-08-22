@@ -13,6 +13,7 @@
       {% stylesheets filter='cssrewrite, uglifycss'
         'bundles/adsapp/less/ads.less'
         'bundles/adsapp/css/font-awesome.css'
+        'bundles/adsapp/css/brand.css'
       %}
         <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
       {% endstylesheets %}
@@ -37,6 +38,39 @@
   <body>
     {% block body %}
       <header id="main-header">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+          <div id="header-container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Brand</a>
+            </div>
+
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+              <form class="navbar-form navbar-left" style="position: relative;" role="search">
+                <input id="search" type="text" class="form-control" placeholder="Search">
+                <button class="search-btn" type="submit">
+                  <span aria-hidden="true" data-icon="&#xe006;"></span>
+                </button>
+              </form>
+              <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li><a href="#">Separated link</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
       </header>
       <div class="body">
         {% for key, flashes in app.session.flashbag.all() %}

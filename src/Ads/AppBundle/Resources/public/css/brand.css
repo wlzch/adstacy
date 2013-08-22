@@ -1,0 +1,21 @@
+@font-face {
+	font-family: 'brand';
+	src:url('../font/brand.eot');
+	src:url('../font/brand.eot?#iefix') format('embedded-opentype'),
+		url('../font/brand.woff') format('woff'),
+		url('../font/brand.ttf') format('truetype'),
+		url('../font/brand.svg#brand') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[data-icon]:before {
+	font-family: 'brand';
+	content: attr(data-icon);
+	speak: none;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}

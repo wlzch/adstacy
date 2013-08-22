@@ -1,3 +1,7 @@
+body {
+  padding-top: 70px;
+}
+
 #posts {
   margin: 0 auto 14px auto;
 }
@@ -23,4 +27,34 @@
   padding: 7px 14px;
   .hyphens(word-break);
   word-break: break-all;
+}
+
+#search {
+  padding-right: 40px;
+  &:focus + button span {
+    color: darken(@input-color-placeholder, 20%);
+  }
+}
+
+.search-btn {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  height: 34px;
+
+  @media (min-width: @grid-float-breakpoint) {
+    top: 0;
+  }
+
+  span {
+    color: @input-color-placeholder;
+    font-size: 25px;
+  }
+
+  &:hover span, &:active span {
+    color: darken(@input-color-placeholder, 50%);
+  }
 }
