@@ -16,7 +16,8 @@ parameters:
 
 framework:
     #esi:             ~
-    #translator:      { fallback: %locale% }
+    translator:
+        fallback: %locale%
     secret:          %secret%
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -29,7 +30,8 @@ framework:
         #assets_version: SomeVersionScheme
     default_locale:  "%locale%"
     trusted_proxies: ~
-    session:         ~
+    session:
+        save_path: %kernel.root_dir%/var/sessions
     fragments:       ~
     http_method_override: true
 
@@ -145,3 +147,6 @@ fos_elastica:
             index_name: website
             finder: ~
             types: %elastica_website_types%
+
+fos_js_routing:
+    routes_to_expose: [ /* ]
