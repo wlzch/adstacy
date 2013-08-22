@@ -47,6 +47,11 @@ class Post
     private $created;
 
     /**
+     * @ORM\Column(name="thumb_height", type="smallint", nullable=true)
+     */
+    private $thumbHeight;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Wall", inversedBy="posts")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
@@ -255,5 +260,51 @@ class Post
     public function getPromotees()
     {
         return $this->promotees;
+    }
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     * @return Post
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+    
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime 
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set thumbHeight
+     *
+     * @param integer $thumbHeight
+     * @return Post
+     */
+    public function setThumbHeight($thumbHeight)
+    {
+        $this->thumbHeight = $thumbHeight;
+    
+        return $this;
+    }
+
+    /**
+     * Get thumbHeight
+     *
+     * @return integer 
+     */
+    public function getThumbHeight()
+    {
+        return $this->thumbHeight;
     }
 }

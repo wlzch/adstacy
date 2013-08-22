@@ -6,7 +6,13 @@ services:
         class: Ads\AppBundle\Security\User\Provider\UserProvider
         arguments: [@fos_user.user_manager]
 
-    ads.twig.header_extension:
+    ads.twig.formatter_extension:
         class: Ads\AppBundle\Twig\FormatterExtension
+        tags:
+            - { name: twig.extension }
+
+    ads.twig.post_extension:
+        class: Ads\AppBundle\Twig\PostExtension
+        arguments: [@service_container]
         tags:
             - { name: twig.extension }
