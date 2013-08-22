@@ -231,4 +231,9 @@ class Wall
     {
         return $this->postsCount;
     }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }
