@@ -24,12 +24,13 @@
       {% javascripts filter='uglifyjs2'
         '@AdsAppBundle/Resources/public/js/modernizr.min.js'
         '@AdsAppBundle/Resources/public/js/jquery.min.js'
-        '@AdsAppBundle/Resources/public/js/holder.js'
+        '@AdsAppBundle/Resources/public/js/holder.min.js'
         '@AdsAppBundle/Resources/public/js/bootstrap.min.js'
         '@AdsAppBundle/Resources/public/js/jquery.scrolltofixed.min.js'
         '@AdsAppBundle/Resources/public/js/easing.js'
         '@AdsAppBundle/Resources/public/js/jquery.ui.totop.min.js'
         '@AdsAppBundle/Resources/public/js/masonry.pkgd.min.js'
+        '@AdsAppBundle/Resources/public/js/jquery.lazyload.min.js'
         'bundles/fosjsrouting/js/router.js'
       %}
         <script src="{{ asset_url }}" type="text/javascript"></script>
@@ -105,6 +106,8 @@
           */
           $().UItoTop({ easingType: 'easeOutQuart' });
         });
+
+        $("img.lazy").lazyload();
       </script>
     {% endblock %}
   </body>
