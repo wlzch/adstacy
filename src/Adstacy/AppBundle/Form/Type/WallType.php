@@ -13,7 +13,19 @@ class WallType extends AbstractType
     {
         $builder->add('name', 'text', array(
             'label' => 'Name',
-            'error_bubbling' => true
+            'error_bubbling' => true,
+            'attr' => array(
+                'class' => 'form-control',
+                'placeholder' => 'Kemeja Pria'
+            )
+        ));
+        $builder->add('description', 'textarea', array(
+            'label' => 'Description',
+            'error_bubbling' => true,
+            'attr' => array(
+                'class' => 'form-control',
+                'placeholder' => 'Semua #Kemeja #Pria ber#Kualitas'
+            )
         ));
     }
 

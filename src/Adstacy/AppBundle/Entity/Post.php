@@ -95,9 +95,7 @@ class Post
     public function setDescription($description)
     {
         $this->description = $description;
-        $matches = null;
-        preg_match_all('/#(\w+)/', $description, $matches);
-        $this->setTags($matches[1]);
+        $this->generateTags();
     
         return $this;
     }
@@ -133,6 +131,21 @@ class Post
     public function getContent()
     {
         return $this->content;
+    }
+
+    /**
+     * Generate tags from description
+     */
+    public function generateTags()
+    {
+        $matches = null;
+        preg_match_all('/#(\w+)/', $this->description, $matches);
+        // TODO: make tags unique
+        $tags = $matches[1];
+        if ($wall = $this->getWall()) {
+            $tags = array_merge($tags, $wall->getTags());
+        }
+        $this->setTags($tags);
     }
 
     /**
@@ -218,6 +231,7 @@ class Post
     public function setWall(\Adstacy\AppBundle\Entity\Wall $wall)
     {
         $this->wall = $wall;
+        $this->generateTags();
     
         return $this;
     }

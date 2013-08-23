@@ -29,8 +29,22 @@ class Wall
     private $name;
 
     /**
+     * @Assert\Length(
+     *    max = "255",
+     *    maxMessage = "Wall description must not exceed {{ limit }} characters|Wall description must not exceed {{ limit }} characters"
+     * )
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="simple_array", nullable=true)
+     */
+    private $tags;
+
+    /**
      * @Exclude
-     * @ORM\OneToMany(targetEntity="Post", mappedBy="wall", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Post", mappedBy="wall", cascade={"remove", "persist"})
      */
     private $posts;
 
@@ -240,6 +254,72 @@ class Wall
     public function getPostsCount()
     {
         return $this->postsCount;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Wall
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+        $matches = null;
+        preg_match_all('/#(\w+)/', $description, $matches);
+
+        if ($this->getTags() != $matches[1]) { // only generate tags if tags are modified
+            $this->generateTags();
+        }
+    
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Generate tags from description
+     */
+    public function generateTags()
+    {
+        $matches = null;
+        preg_match_all('/#(\w+)/', $this->description, $matches);
+        $this->setTags($matches[1]);
+        // TODO: unique tags
+        foreach ($this->getPosts() as $post) {
+            $post->setTags(array_merge($matches[1], $post->getTags()));
+        }
+    }
+
+    /**
+     * Set tags
+     *
+     * @param array $tags
+     * @return Wall
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+    
+        return $this;
+    }
+
+    /**
+     * Get tags
+     *
+     * @return array 
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 
     public function __toString()
