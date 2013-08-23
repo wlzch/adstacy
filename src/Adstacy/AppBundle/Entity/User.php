@@ -109,6 +109,11 @@ class User implements UserInterface, GroupableInterface
     private $followingsCount;
 
     /**
+     * @ORM\Column(name="about", type="string", length=255, nullable=true)
+     */
+    private $about;
+
+    /**
      * @ORM\Column(type="simple_array", nullable=true)
      */
     private $interests;
@@ -1186,5 +1191,28 @@ class User implements UserInterface, GroupableInterface
     public function getFollowings()
     {
         return $this->followings;
+    }
+
+    /**
+     * Set about
+     *
+     * @param string $about
+     * @return User
+     */
+    public function setAbout($about)
+    {
+        $this->about = $about;
+    
+        return $this;
+    }
+
+    /**
+     * Get about
+     *
+     * @return string 
+     */
+    public function getAbout()
+    {
+        return $this->about;
     }
 }

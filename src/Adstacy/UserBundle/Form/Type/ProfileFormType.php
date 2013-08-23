@@ -27,6 +27,10 @@ class ProfileFormType extends BaseType
                 'required' => false 
             ))->addModelTransformer(new HashtagToArrayTransformer())
         );
+        $builder->add('about', 'text', array(
+            'label' => 'About Me',
+            'required' => false
+        ));
         $builder->add('save', 'submit', array(
             'label' => 'Save'
         ));
