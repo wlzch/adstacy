@@ -17,13 +17,13 @@ class WallController extends Controller
     {
         $request = $this->getRequest();
         $wall = new Wall();
+        $wall->setUser($this->getUser()); // must be set here for uniqueness check
         $form = $this->createForm(new WallType(), $wall);
         $form->handleRequest($request);
 
         $serializer = $this->get('serializer');
         if ($form->isValid()) {
             $em = $this->getManager();
-            $wall->setUser($this->getUser());
             $em->persist($wall);
             $em->flush();
 

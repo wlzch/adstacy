@@ -21,6 +21,7 @@ class WallType extends AbstractType
         ));
         $builder->add('description', 'textarea', array(
             'label' => 'Description',
+            'required' => false,
             'error_bubbling' => true,
             'attr' => array(
                 'class' => 'form-control',
