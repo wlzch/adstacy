@@ -74,12 +74,13 @@ class UserProvider implements UserProviderInterface, OAuthAwareUserProviderInter
         $setter = 'set'.ucfirst($service);
         $setter_id = $setter.'Id';
         $setter_token = $setter.'AccessToken';
+        $setter_username = $setter.'Username';
+        $setter_real_name = $setter.'RealName';
 
         //when the user is registrating
         if (null === $user) {
             if ($email && $_user = $this->userManager->findUserByEmail($email)) {
               $user = $_user;
-              $user->$setter_id($username);
             } else {
               // create new user here
               $user = $this->userManager->createUser();
@@ -91,12 +92,14 @@ class UserProvider implements UserProviderInterface, OAuthAwareUserProviderInter
               } else {
                 $user->setUsername($nickname);
               }
-              $user->$setter_id($username);
               $user->setEmail($response->getEmail());
               $user->setPassword(base_convert(sha1(uniqid(mt_rand(), true)), 16, 36));
               $user->setProfilePicture($response->getProfilePicture());
               $user->setEnabled(true);
             }
+            $user->$setter_id($username);
+            $user->$setter_username($response->getNickname());
+            $user->$setter_real_name($response->getRealName());
         }
 
         //update access token
@@ -121,17 +124,24 @@ class UserProvider implements UserProviderInterface, OAuthAwareUserProviderInter
         $setter = 'set'.ucfirst($service);
         $setter_id = $setter.'Id';
         $setter_token = $setter.'AccessToken';
+        $setter_username = $setter.'Username';
+        $setter_real_name = $setter.'RealName';
  
         //we "disconnect" previously connected users
         if (null !== $previousUser = $this->userManager->findUserBy(array($property => $username))) {
             $previousUser->$setter_id(null);
             $previousUser->$setter_token(null);
+            $previousUser->$setter_username(null);
+            $previousUser->$setter_real_name(null);
             $this->userManager->updateUser($previousUser);
         }
  
         //we connect current user
         $user->$setter_id($username);
         $user->$setter_token($response->getAccessToken());
+        $user->$setter_username($response->getNickname());
+        $user->$setter_real_name($response->getRealName());
+        $user->addRole('ROLE_'.strtoupper($service));
  
         $this->userManager->updateUser($user);
     }

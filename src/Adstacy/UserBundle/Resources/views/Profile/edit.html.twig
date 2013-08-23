@@ -4,7 +4,21 @@
 
 {% block content %}
 {{ form_start(form) }}
+  {% set user = form.vars.data %}
   {{ form_rest(form) }}
   <a href="{{ path('fos_user_change_password') }}">change password</a>
+
+  <div class="social-connect">
+    {% if user.facebookId %}
+      <p>Connected to {{ user.facebookRealName }}</p>
+    {% endif %}
+    <a href="{{ path('hwi_oauth_service_redirect', {service: 'facebook'}) }}" class="btn btn-facebook">Connect with Facebook</a>
+  </div>
+  <div class="social-connect">
+    {% if user.twitterId %}
+      <p>Connected to {{ user.twitterRealName }}</p>
+    {% endif %}
+    <a href="{{ path('hwi_oauth_service_redirect', {service: 'twitter'}) }}" class="btn btn-facebook">Connect with Twitter</a>
+  </div>
 {{ form_end(form) }}
 {% endblock %}

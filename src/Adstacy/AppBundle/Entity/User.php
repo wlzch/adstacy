@@ -147,6 +147,16 @@ class User implements UserInterface, GroupableInterface
     protected $facebookId;
 
     /**
+     * @ORM\Column(name="facebook_username", type="string", length=255, nullable=true, unique=true)
+     */
+    protected $facebookUsername;
+
+    /**
+     * @ORM\Column(name="facebook_real_name", type="string", length=255, nullable=true)
+     */
+    protected $facebookRealName;
+
+    /**
      * @ORM\Column(name="facebook_access_token", type="string", length=255, nullable=true)
      */
     protected $facebookAccessToken;
@@ -160,6 +170,16 @@ class User implements UserInterface, GroupableInterface
      * @ORM\Column(name="twitter_access_token", type="string", length=255, nullable=true)
      */
     protected $twitterAccessToken;
+
+    /**
+     * @ORM\Column(name="twitter_username", type="string", length=255, nullable=true, unique=true)
+     */
+    protected $twitterUsername;
+
+    /**
+     * @ORM\Column(name="twitter_real_name", type="string", length=255, nullable=true)
+     */
+    protected $twitterRealName;
 
     /**
      * @var boolean
@@ -1214,5 +1234,97 @@ class User implements UserInterface, GroupableInterface
     public function getAbout()
     {
         return $this->about;
+    }
+
+    /**
+     * Set facebookUsername
+     *
+     * @param string $facebookUsername
+     * @return User
+     */
+    public function setFacebookUsername($facebookUsername)
+    {
+        $this->facebookUsername = $facebookUsername;
+    
+        return $this;
+    }
+
+    /**
+     * Get facebookUsername
+     *
+     * @return string 
+     */
+    public function getFacebookUsername()
+    {
+        return $this->facebookUsername;
+    }
+
+    /**
+     * Set facebookRealName
+     *
+     * @param string $facebookRealName
+     * @return User
+     */
+    public function setFacebookRealName($facebookRealName)
+    {
+        $this->facebookRealName = $facebookRealName;
+    
+        return $this;
+    }
+
+    /**
+     * Get facebookRealName
+     *
+     * @return string 
+     */
+    public function getFacebookRealName()
+    {
+        return $this->facebookRealName;
+    }
+
+    /**
+     * Set twitterUsername
+     *
+     * @param string $twitterUsername
+     * @return User
+     */
+    public function setTwitterUsername($twitterUsername)
+    {
+        $this->twitterUsername = $twitterUsername;
+    
+        return $this;
+    }
+
+    /**
+     * Get twitterUsername
+     *
+     * @return string 
+     */
+    public function getTwitterUsername()
+    {
+        return $this->twitterUsername;
+    }
+
+    /**
+     * Set twitterRealName
+     *
+     * @param string $twitterRealName
+     * @return User
+     */
+    public function setTwitterRealName($twitterRealName)
+    {
+        $this->twitterRealName = $twitterRealName;
+    
+        return $this;
+    }
+
+    /**
+     * Get twitterRealName
+     *
+     * @return string 
+     */
+    public function getTwitterRealName()
+    {
+        return $this->twitterRealName;
     }
 }
