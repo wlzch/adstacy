@@ -12,6 +12,7 @@
     {% block stylesheets %}
       {% stylesheets filter='cssrewrite, uglifycss'
         'bundles/adstacyapp/less/adstacy.less'
+        'bundles/adstacyapp/css/ui.totop.css'
         'bundles/adstacyapp/css/font-awesome.css'
         'bundles/adstacyapp/css/social-buttons.css'
         'bundles/adstacyapp/css/brand.css'
@@ -27,7 +28,10 @@
         '@AdstacyAppBundle/Resources/public/js/holder.js'
         '@AdstacyAppBundle/Resources/public/js/bootstrap.min.js'
         '@AdstacyAppBundle/Resources/public/js/jquery.scrolltofixed.min.js'
+        '@AdstacyAppBundle/Resources/public/js/easing.js'
+        '@AdstacyAppBundle/Resources/public/js/jquery.ui.totop.min.js'
         '@AdstacyAppBundle/Resources/public/js/masonry.pkgd.min.js'
+        '@AdstacyAppBundle/Resources/public/js/jquery.lazyload.min.js'
         'bundles/fosjsrouting/js/router.js'
       %}
         <script src="{{ asset_url }}" type="text/javascript"></script>
@@ -55,12 +59,12 @@
               <form action="{{ path('adstacy_app_search') }}" class="navbar-form navbar-left" style="position: relative;" role="search">
                 <input id="search" type="text" class="form-control" placeholder="Search" name="q" value="{{ app.request.query.get('q') }}" >
                 <button class="search-btn" type="submit">
-                  <span aria-hidden="true" data-icon="&#xe006;"></span>
+                  <span aria-hidden="true" data-icon="&#xe007;"></span>
                 </button>
               </form>
               <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile <b class="caret"></b></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li><a href="#">Action</a></li>
                     <li><a href="#">Another action</a></li>
@@ -86,11 +90,25 @@
 
     {% block javascripts %}
       <script type="text/javascript">
-      $('#posts').masonry({
-        columnWidth: 250,
-        isFitWidth: true,
-        itemSelector: '.post'
-      });
+        $('#posts').masonry({
+          columnWidth: 250,
+          isFitWidth: true,
+          itemSelector: '.post'
+        });
+
+        $(document).ready(function() {
+          /*
+          var defaults = {
+              containerID: 'toTop', // fading element id
+            containerHoverID: 'toTopHover', // fading element hover id
+            scrollSpeed: 1200,
+            easingType: 'linear'
+          };
+          */
+          $().UItoTop({ easingType: 'easeOutQuart' });
+        });
+
+        $("img.lazy").lazyload();
       </script>
     {% endblock %}
   </body>

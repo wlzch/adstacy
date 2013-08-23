@@ -30,7 +30,7 @@
   {% set src = vich_uploader_asset(image, 'file') %}
 
   {% if filter is defined and filter is not null %}
-    {% set src = src | imagine_filter(filter) %}
+    {% set src = src|imagine_filter(filter) %}
   {% endif %}
 {% endif %}
 
@@ -42,6 +42,6 @@
     <img class="{{ class }}" data-original="{{ src }}" src="{{ loading }}">
   {% endif %}
 {% else %}
-  <img class="{{ class }}" src="{{ placeholder }}" />
+  <img class="{{ class }}" src="{{ placeholder }}">
 {% endif %}
 </div>

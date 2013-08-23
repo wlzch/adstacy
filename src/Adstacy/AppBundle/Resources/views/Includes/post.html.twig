@@ -1,8 +1,8 @@
 <div class="post">
   <div class="pic">
-    <div style="width: {{thumb_width}}px; height: {{ post.thumbHeight }}px;">
-      <img src="{{ vich_uploader_asset(post.image, 'file') | imagine_filter('thumbnail') }}" width="{{ thumb_width }}" height="{{ post.thumbHeight }}" />
-    </div>
+    <img class="lazy" src="{{ asset('bundles/adstacyapp/img/transparent.gif') }}"
+      data-original="{{ vich_uploader_asset(post.image, 'file')|imagine_filter('thumbnail') }}"
+      width="{{ thumb_width }}px" height="{{ post.thumbHeight }}px" alt="testing">
   </div>
   <div class="desc">
     <p>{{ parse_hashtag(post.description) }}</p>
