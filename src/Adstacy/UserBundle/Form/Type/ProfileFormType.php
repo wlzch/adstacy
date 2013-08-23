@@ -24,12 +24,18 @@ class ProfileFormType extends BaseType
         $builder->add(
             $builder->create('interests', 'text', array(
                 'label' => 'Interests',
-                'required' => false 
+                'required' => false,
+                'attr' => array(
+                    'placeholder' => '#fashion #men #medan'
+                )
             ))->addModelTransformer(new HashtagToArrayTransformer())
         );
         $builder->add('about', 'text', array(
             'label' => 'About Me',
-            'required' => false
+            'required' => false,
+            'attr' => array(
+                'placeholder' => 'A men fashion enthusiasts'
+            )
         ));
         $builder->add('save', 'submit', array(
             'label' => 'Save'
