@@ -1,0 +1,85 @@
+{% extends 'AdstacyAppBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  {% stylesheets filter='cssrewrite, uglifycss'
+    'bundles/adstacyapp/css/select2.css'
+  %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
+  {% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+  {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div id="form-wall">
+      {{ form_label(form.wall) }}
+      {{ form_widget(form.wall) }}
+      <a data-toggle="modal" href="#new-wall-modal" class="btn btn-primary "><i class="icon-plus-sign"></i></a>
+      {{ form_errors(form.wall) }}
+    </div>
+
+    {{ form_rest(form) }}
+  {{ form_end(form) }}
+
+  <div class="modal fade" id="new-wall-modal" tabindex="-1" role="dialog"> 
+    <div class="modal-dialog">
+      <div class="modal-content">
+        {{ form_start(wallForm) }}
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Create Wall</h4>
+        </div>
+        <div class="modal-body">
+          <div class="modal-errors"></div>
+          {{ form_row(wallForm.name) }}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button id="save-wall" type="button" class="btn btn-primary">Save changes</button>
+        </div>
+        {{ form_end(wallForm) }}
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  {{ elfinder_tinymce_init4() }}
+  {{ tinymce_init() }}
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {% javascripts filter='uglifyjs2'
+    '@AdstacyAppBundle/Resources/public/js/select2.js'
+  %}
+    <script src="{{ asset_url }}" type="text/javascript"></script>
+  {% endjavascripts %}
+  <script type="text/javascript">
+    $(function() {
+      var $modal = $('#new-wall-modal');
+      var $errors = $('.modal-errors');
+      var $wall = $('#{{ form.wall.vars.id }}');
+      $wall.select2();
+      $('#save-wall').click(function() {
+        $form = $modal.find('form');
+        $.post($form.attr('action'), $form.serialize(), function(raw) {
+          var data = JSON.parse(raw);
+          if ($.isArray(data)) {
+            $errors.find('p').remove();
+            $.each(data, function() {
+              $errors.append('<p>'+this+'</p>');
+            });
+          } else if ($.isPlainObject(data)) {
+            $option = $('<option value="'+data.id+'">'+data.name+'</option>');
+            $option.appendTo($wall);
+            $wall.find('option:last').prop('selected', true);
+            $wall.select2();
+            $modal.modal('hide');
+          }
+        });
+
+        return false;
+      });
+    });
+  </script>
+{% endblock %}

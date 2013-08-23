@@ -5,15 +5,15 @@
     <meta name="Description" content="{{ block('title') }}">
     <meta name="Keywords" content="{% block meta_keywords %}iklan, promo, lowongan kerja, jual beli{% endblock %}">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>{% block title %}Ads.com - Ads have never been so fun{% endblock %}</title>
+    <title>{% block title %}Adstacy.com - Adstacy have never been so fun{% endblock %}</title>
 
     <link rel="icon shortcut" type="image/ico" href="{{ asset('favicon.ico') }}">
 
     {% block stylesheets %}
       {% stylesheets filter='cssrewrite, uglifycss'
-        'bundles/adsapp/less/ads.less'
-        'bundles/adsapp/css/font-awesome.css'
-        'bundles/adsapp/css/brand.css'
+        'bundles/adstacyapp/less/adstacy.less'
+        'bundles/adstacyapp/css/font-awesome.css'
+        'bundles/adstacyapp/css/brand.css'
       %}
         <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
       {% endstylesheets %}
@@ -21,12 +21,12 @@
 
     {% block head_scripts %}
       {% javascripts filter='uglifyjs2'
-        '@AdsAppBundle/Resources/public/js/modernizr.min.js'
-        '@AdsAppBundle/Resources/public/js/jquery.min.js'
-        '@AdsAppBundle/Resources/public/js/holder.js'
-        '@AdsAppBundle/Resources/public/js/bootstrap.min.js'
-        '@AdsAppBundle/Resources/public/js/jquery.scrolltofixed.min.js'
-        '@AdsAppBundle/Resources/public/js/masonry.pkgd.min.js'
+        '@AdstacyAppBundle/Resources/public/js/modernizr.min.js'
+        '@AdstacyAppBundle/Resources/public/js/jquery.min.js'
+        '@AdstacyAppBundle/Resources/public/js/holder.js'
+        '@AdstacyAppBundle/Resources/public/js/bootstrap.min.js'
+        '@AdstacyAppBundle/Resources/public/js/jquery.scrolltofixed.min.js'
+        '@AdstacyAppBundle/Resources/public/js/masonry.pkgd.min.js'
         'bundles/fosjsrouting/js/router.js'
       %}
         <script src="{{ asset_url }}" type="text/javascript"></script>
@@ -51,7 +51,7 @@
             </div>
 
             <div class="collapse navbar-collapse navbar-ex1-collapse">
-              <form action="{{ path('ads_app_search') }}" class="navbar-form navbar-left" style="position: relative;" role="search">
+              <form action="{{ path('adstacy_app_search') }}" class="navbar-form navbar-left" style="position: relative;" role="search">
                 <input id="search" type="text" class="form-control" placeholder="Search" name="q" value="{{ app.request.query.get('q') }}" >
                 <button class="search-btn" type="submit">
                   <span aria-hidden="true" data-icon="&#xe006;"></span>

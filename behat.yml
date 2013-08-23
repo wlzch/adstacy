@@ -3,7 +3,7 @@ default:
         Behat\Symfony2Extension\Extension:
             mink_driver: true
         Behat\MinkExtension\Extension:
-            base_url: http://ads.dev/app_test.php
+            base_url: http://adstacy.dev/app_test.php
             zombie: ~
             default_session: symfony2 
             javascript_session: zombie
@@ -11,4 +11,4 @@ default:
 app:
     extensions:
         Behat\Symfony2Extension\Extension:
-            bundle: AdsAppBundle
+            bundle: AdstacyAppBundle

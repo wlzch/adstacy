@@ -3,7 +3,7 @@ imports:
     - { resource: security.yml }
 
 parameters:
-    elfinder.loader: Ads\AppBundle\Loader\FMElfinderLoader
+    elfinder.loader: Adstacy\AppBundle\Loader\FMElfinderLoader
     thumb_width: 234
     web_dir: %kernel.root_dir%/../web
     elastica_website_types:
@@ -12,7 +12,7 @@ parameters:
                 tags: { boost: 5 }
             persistence:
                 driver: orm
-                model: Ads\AppBundle\Entity\Post
+                model: Adstacy\AppBundle\Entity\Post
                 provider: ~
                 finder: ~
                 listener: ~
@@ -46,7 +46,7 @@ twig:
         thumb_width: %thumb_width%
     form:
         resources:
-            - 'AdsAppBundle:Form:fields.html.twig'
+            - 'AdstacyAppBundle:Form:fields.html.twig'
 
 assetic:
     debug:          %kernel.debug%
@@ -95,7 +95,7 @@ swiftmailer:
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: Ads\AppBundle\Entity\User
+    user_class: Adstacy\AppBundle\Entity\User
 
 hwi_oauth:
     firewall_name: main
@@ -119,14 +119,14 @@ hwi_oauth:
             facebook: facebookId
             twitter: twitterId
     connect:
-        account_connector: ads.user.provider
+        account_connector: adstacy.user.provider
 
 knp_gaufrette:
     stream_wrapper: ~
     adapters:
         image_adapter:
             local:
-                directory: %kernel.root_dir%/../web/uploads
+                directory: %kernel.root_dir%/../web/uploadstacy
 
     filesystems:
         image_fs:
@@ -138,7 +138,7 @@ vich_uploader:
     storage: vich_uploader.storage.gaufrette
     mappings:
         image:
-            uri_prefix: /uploads
+            uri_prefix: /uploadstacy
             upload_destination: image_fs
             namer: vich_uploader.namer_origname
 
@@ -174,7 +174,7 @@ fm_elfinder:
     connector:
         debug: false # defaults to false
         roots:       # at least one root must be defined
-            uploads:
+            uploadstacy:
                 driver: LocalFileSystem
                 path: files
                 upload_allow: ['image/png', 'image/jpg', 'image/jpeg']

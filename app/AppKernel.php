@@ -31,8 +31,8 @@ class AppKernel extends Kernel
             new Liip\ImagineBundle\LiipImagineBundle(),
             new FM\ElfinderBundle\FMElfinderBundle(),
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
-            new Ads\AppBundle\AdsAppBundle(),
-            new Ads\UserBundle\AdsUserBundle(),
+            new Adstacy\AppBundle\AdstacyAppBundle(),
+            new Adstacy\UserBundle\AdstacyUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

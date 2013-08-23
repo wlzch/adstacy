@@ -8,7 +8,7 @@ security:
 
     providers:
         fos_userbundle:
-            id: ads.user.provider
+            id: adstacy.user.provider
 
     firewalls:
         dev:
@@ -24,7 +24,7 @@ security:
                 login_path: /login
                 failure_path: /login
                 oauth_user_provider:
-                    service: ads.user.provider
+                    service: adstacy.user.provider
             form_login:
                 provider: fos_userbundle
                 csrf_provider:  form.csrf_provider

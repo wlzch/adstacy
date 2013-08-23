@@ -2,8 +2,8 @@ _imagine:
     resource: .
     type:     imagine
 
-ads_app:
-    resource: "@AdsAppBundle/Resources/config/routing.yml"
+adstacy_app:
+    resource: "@AdstacyAppBundle/Resources/config/routing.yml"
     prefix:   /
 
 hwi_oauth_login:

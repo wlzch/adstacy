@@ -1,0 +1,16 @@
+imports:
+  - { resource: types.yml }
+
+services:
+    adstacy.user.provider:
+        class: Adstacy\AppBundle\Security\User\Provider\UserProvider
+        arguments: [@fos_user.user_manager]
+
+    adstacy.manager.post:
+        class: Adstacy\AppBundle\Manager\PostManager
+        arguments: [@service_container]
+
+    adstacy.twig.formatter_extension:
+        class: Adstacy\AppBundle\Twig\FormatterExtension
+        tags:
+            - { name: twig.extension }

@@ -1,0 +1,10 @@
+{% extends 'AdstacyAppBundle::layout.html.twig' %}
+
+{% block content %}
+  {% for post in postsPaginator.getCurrentPageResults %}
+    {% include 'AdstacyAppBundle:Includes:post.html.twig' with {post: post} %}
+  {% endfor %}
+  {% if postsPaginator.hasNextPage %}
+    <a href="?page={{ postsPaginator.getNextPage }}">{{ postsPaginator.getNextPage }}</a>
+  {% endif %}
+{% endblock %}

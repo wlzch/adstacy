@@ -1,5 +1,5 @@
-Ads - Ads have never been so fun
+Adstacy - Ads have never been so fun
 ===
 
 ## Dokumentasi
-* [AppBundle](https://bitbucket.org/wlzch/ads/src/master/src/Ads/AppBundle/Resources/doc)
+* [AppBundle](https://bitbucket.org/wlzch/adstacy/src/master/src/Adstacy/AppBundle/Resources/doc)

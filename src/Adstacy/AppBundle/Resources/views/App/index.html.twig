@@ -1,0 +1,9 @@
+{% extends 'AdstacyAppBundle::layout.html.twig' %}
+
+{% block content %}
+  <div id="posts">
+    {% for post in posts %}
+      {% include 'AdstacyAppBundle:Includes:post.html.twig' with {post: post} %}
+    {% endfor %}
+  </div>
+{% endblock %}
