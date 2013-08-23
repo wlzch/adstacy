@@ -26,8 +26,11 @@ class PostType extends AbstractType
         $builder->add('image', 'image', array(
             'label' => 'Image' 
         ));
-        $builder->add('description', 'textarea', array(
-            'label' => 'Description' 
+        $builder->add('description', 'text', array(
+            'label' => 'Description',
+            'attr' => array(
+                'class' => 'form-control'
+            )
         ));
         $builder->add('content', 'textarea', array(
             'label' => 'Content',
