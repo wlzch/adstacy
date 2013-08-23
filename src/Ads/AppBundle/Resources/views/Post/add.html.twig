@@ -1,5 +1,14 @@
 {% extends 'AdsAppBundle::layout.html.twig' %}
 
+{% block stylesheets %}
+  {{ parent() }}
+  {% stylesheets filter='cssrewrite, uglifycss'
+    'bundles/adsapp/css/select2.css'
+  %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
+  {% endstylesheets %}
+{% endblock %}
+
 {% block content %}
   {{ form_start(form) }}
     {{ form_errors(form) }}
@@ -40,11 +49,17 @@
 
 {% block javascripts %}
   {{ parent() }}
+  {% javascripts filter='uglifyjs2'
+    '@AdsAppBundle/Resources/public/js/select2.js'
+  %}
+    <script src="{{ asset_url }}" type="text/javascript"></script>
+  {% endjavascripts %}
   <script type="text/javascript">
     $(function() {
       var $modal = $('#new-wall-modal');
       var $errors = $('.modal-errors');
       var $wall = $('#{{ form.wall.vars.id }}');
+      $wall.select2();
       $('#save-wall').click(function() {
         $form = $modal.find('form');
         $.post($form.attr('action'), $form.serialize(), function(raw) {
@@ -58,6 +73,7 @@
             $option = $('<option value="'+data.id+'">'+data.name+'</option>');
             $option.appendTo($wall);
             $wall.find('option:last').prop('selected', true);
+            $wall.select2();
             $modal.modal('hide');
           }
         });
