@@ -12,6 +12,7 @@
     {% block stylesheets %}
       {% stylesheets filter='cssrewrite, uglifycss'
         'bundles/adsapp/less/ads.less'
+        'bundles/adsapp/css/ui.totop.css'
         'bundles/adsapp/css/font-awesome.css'
         'bundles/adsapp/css/brand.css'
       %}
@@ -26,6 +27,8 @@
         '@AdsAppBundle/Resources/public/js/holder.js'
         '@AdsAppBundle/Resources/public/js/bootstrap.min.js'
         '@AdsAppBundle/Resources/public/js/jquery.scrolltofixed.min.js'
+        '@AdsAppBundle/Resources/public/js/easing.js'
+        '@AdsAppBundle/Resources/public/js/jquery.ui.totop.min.js'
         '@AdsAppBundle/Resources/public/js/masonry.pkgd.min.js'
         'bundles/fosjsrouting/js/router.js'
       %}
@@ -85,11 +88,23 @@
 
     {% block javascripts %}
       <script type="text/javascript">
-      $('#posts').masonry({
-        columnWidth: 250,
-        isFitWidth: true,
-        itemSelector: '.post'
-      });
+        $('#posts').masonry({
+          columnWidth: 250,
+          isFitWidth: true,
+          itemSelector: '.post'
+        });
+
+        $(document).ready(function() {
+          /*
+          var defaults = {
+              containerID: 'toTop', // fading element id
+            containerHoverID: 'toTopHover', // fading element hover id
+            scrollSpeed: 1200,
+            easingType: 'linear'
+          };
+          */
+          $().UItoTop({ easingType: 'easeOutQuart' });
+        });
       </script>
     {% endblock %}
   </body>
