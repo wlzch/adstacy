@@ -7,21 +7,62 @@
       <div>{{ error|trans }}</div>
   {% endif %}
 
-  <form action="{{ path("fos_user_security_check") }}" method="post">
-      <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
+  <style>
+    .form-container {
+      margin: 0 auto;
+      max-width: 400px;
+    }
 
-      <label for="username">{{ 'security.login.username'|trans }}</label>
-      <input type="text" id="username" name="_username" value="{{ last_username }}" required="required">
+    .form-container h1 {
+      text-align: center;
+    }
 
-      <label for="password">{{ 'security.login.password'|trans }}</label>
-      <input type="password" id="password" name="_password" required="required">
+    .social-login, .user-login {
+      padding: 20px;
+      border-bottom: 1px solid #ccc;
+    }
 
-      <input type="checkbox" id="remember_me" name="_remember_me" value="on">
-      <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+    .form-container .form-control {
+      margin: 10px auto;
+    }
 
-      <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}">
-  </form>
-  {% for owner in hwi_oauth_resource_owners() %}
-  <a href="{{ hwi_oauth_login_url(owner) }}">{{ owner|trans({}, 'HWIOAuthBundle') }}</a> <br>
-  {% endfor %}
+    .form-footer {
+      padding: 20px;
+    }
+
+    .btn-block + .btn-block {
+      margin-top: 10px;
+    }
+  </style>
+
+  <div class="form-container panel panel-default">
+    <form class="form-horizontal" role="form" action="{{ path("fos_user_security_check") }}" method="post">
+      <h1>Login</h1>
+
+      <div class="social-login">
+        {% for owner in hwi_oauth_resource_owners() %}
+          <button class="btn btn-primary btn-block btn-lg" href="{{ hwi_oauth_login_url(owner) }}">{{ owner|trans({}, 'HWIOAuthBundle') }}</button>
+        {% endfor %}
+      </div>
+
+      <div class="user-login clearfix">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
+
+        <label for="username" class="hide">{{ 'security.login.username'|trans }}</label>
+        <input type="text" class="form-control input-lg" id="username" name="_username" value="{{ last_username }}" required="required" placeholder="Username">
+
+        <label for="password" class="hide">{{ 'security.login.password'|trans }}</label>
+        <input type="password" class="form-control input-lg" id="password" name="_password" required="required" placeholder="Password">
+
+        <input type="checkbox" id="remember_me" name="_remember_me" value="on">
+        <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+
+        <input type="submit" class="btn btn-primary btn-lg pull-right" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}">
+      </div>
+
+      <div class="form-footer">
+        <a href="#">Register new account</a>
+      </div>
+    </form>
+  </div>
 {% endblock %}
