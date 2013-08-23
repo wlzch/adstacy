@@ -8,5 +8,6 @@ services:
 
     adstacy.twig.formatter_extension:
         class: Adstacy\AppBundle\Twig\FormatterExtension
+        arguments: [@service_container]
         tags:
             - { name: twig.extension }

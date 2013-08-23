@@ -9,6 +9,15 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class FormatterExtension extends \Twig_Extension
 {
+    private $container;
+    private $router;
+
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
+        $this->router = $this->container->get('router');
+    }
+
     public function getFunctions()
     {
         return array(
@@ -51,7 +60,10 @@ class FormatterExtension extends \Twig_Extension
      */
     public function parseHashtag($text)
     {
-      return preg_replace('/(#\w+)/', ' <a href="#">$1</a>', $text);
+        $url = $this->router->generate('adstacy_app_search');
+        return preg_replace_callback('/(#\w+)/', function($matches) use (&$url) {
+            return sprintf(' <a href="%s?q=%s">%s</a>', $url, substr($matches[0], 1), $matches[0]);
+        }, $text);
     }
 
 
