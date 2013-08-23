@@ -41,7 +41,7 @@
 
       <div class="social-login">
         {% for owner in hwi_oauth_resource_owners() %}
-          <button class="btn btn-primary btn-block btn-lg" href="{{ hwi_oauth_login_url(owner) }}">{{ owner|trans({}, 'HWIOAuthBundle') }}</button>
+          <a class="btn btn-primary btn-block btn-lg" href="{{ hwi_oauth_login_url(owner) }}">{{ owner|trans({}, 'HWIOAuthBundle') }}</a>
         {% endfor %}
       </div>
 
