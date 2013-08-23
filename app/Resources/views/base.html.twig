@@ -103,19 +103,19 @@
 
     {% block javascripts %}
       <script type="text/javascript">
-        var $posts = $('#posts');
+        var $masonry = $('.masonry');
         var $headerContainer = $('#header-container');
-        $posts.masonry({
+        $masonry.masonry({
           columnWidth: 250,
           isFitWidth: true,
           isInitLayout: false,
           transitionDuration: 0,
           itemSelector: '.post'
         });
-        $posts.masonry('on', 'layoutComplete', function(msnryInstance) {
+        $masonry.masonry('on', 'layoutComplete', function(msnryInstance) {
           $headerContainer.css('width', msnryInstance.cols * msnryInstance.columnWidth + 'px');
         });
-        $posts.masonry();
+        $masonry.masonry();
 
         $(document).ready(function() {
           /*

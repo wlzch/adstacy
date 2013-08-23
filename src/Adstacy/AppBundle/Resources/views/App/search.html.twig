@@ -1,7 +1,7 @@
 {% extends 'AdstacyAppBundle::layout.html.twig' %}
 
 {% block content %}
-  <div id="posts" class="jscroll">
+  <div class="masonry jscroll">
     {% include 'AdstacyAppBundle:Includes:posts_search.html.twig' with {paginator: paginator} %}
   </div>
 {% endblock %}
