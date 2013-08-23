@@ -1,0 +1,6 @@
+services:
+    adstacy.type.profile:
+        class: Adstacy\UserBundle\Form\Type\ProfileFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: adstacy_profile }

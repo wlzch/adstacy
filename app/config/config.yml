@@ -96,6 +96,9 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: Adstacy\AppBundle\Entity\User
+    profile:
+        form:
+            type: adstacy_profile
 
 hwi_oauth:
     firewall_name: main
