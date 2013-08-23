@@ -30,7 +30,10 @@ class PostType extends AbstractType
             'label' => 'Description' 
         ));
         $builder->add('content', 'textarea', array(
-            'label' => 'Content'
+            'label' => 'Content',
+            'attr' => array(
+                'class' => 'tinymce'
+            )
         ));
         $builder->add('post', 'submit', array(
             'label' => 'Post'

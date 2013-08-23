@@ -29,6 +29,8 @@ class AppKernel extends Kernel
             new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
+            new FM\ElfinderBundle\FMElfinderBundle(),
+            new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
             new Ads\AppBundle\AdsAppBundle(),
             new Ads\UserBundle\AdsUserBundle(),
         );
