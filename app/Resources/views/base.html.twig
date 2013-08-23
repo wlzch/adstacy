@@ -90,11 +90,18 @@
 
     {% block javascripts %}
       <script type="text/javascript">
-        $('#posts').masonry({
+        var $posts = $('#posts');
+        var $headerContainer = $('#header-container');
+        $posts.masonry({
           columnWidth: 250,
           isFitWidth: true,
+          isInitLayout: false,
           itemSelector: '.post'
         });
+        $posts.masonry('on', 'layoutComplete', function(msnryInstance) {
+          $headerContainer.css('width', msnryInstance.cols * msnryInstance.columnWidth + 'px');
+        });
+        $posts.masonry();
 
         $(document).ready(function() {
           /*
