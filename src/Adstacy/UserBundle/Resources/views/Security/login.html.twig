@@ -2,38 +2,19 @@
 
 {% trans_default_domain 'FOSUserBundle' %}
 
+{% block stylesheets %}
+  {{ parent() }}
+  {% stylesheets filter='cssrewrite, uglifycss'
+    'bundles/adstacyuser/less/layout.less'
+  %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
+  {% endstylesheets %}
+{% endblock %}
+
 {% block content %}
   {% if error %}
       <div>{{ error|trans }}</div>
   {% endif %}
-
-  <style>
-    .form-container {
-      margin: 0 auto;
-      max-width: 400px;
-    }
-
-    .form-container h1 {
-      text-align: center;
-    }
-
-    .social-login, .user-login {
-      padding: 20px;
-      border-bottom: 1px solid #ccc;
-    }
-
-    .form-container .form-control {
-      margin: 10px auto;
-    }
-
-    .form-footer {
-      padding: 20px;
-    }
-
-    .btn-block + .btn-block {
-      margin-top: 10px;
-    }
-  </style>
 
   <div class="form-container panel panel-default">
     <form class="form-horizontal" role="form" action="{{ path("fos_user_security_check") }}" method="post">
@@ -41,7 +22,7 @@
 
       <div class="social-login">
         {% for owner in hwi_oauth_resource_owners() %}
-          <a class="btn btn-primary btn-block btn-lg" href="{{ hwi_oauth_login_url(owner) }}">{{ owner|trans({}, 'HWIOAuthBundle') }}</a>
+          <a class="btn btn-primary btn-block btn-lg btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{ owner|trans({}, 'HWIOAuthBundle') }}</a>
         {% endfor %}
       </div>
 
