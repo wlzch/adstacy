@@ -97,7 +97,7 @@ class Post
         $this->description = $description;
         $matches = null;
         preg_match_all('/#(\w+)/', $description, $matches);
-        $this->setTags($matches[1]);
+        $this->setTags(array_unique($matches[1]));
     
         return $this;
     }
