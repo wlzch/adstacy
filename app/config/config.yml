@@ -129,7 +129,7 @@ knp_gaufrette:
     adapters:
         image_adapter:
             local:
-                directory: %kernel.root_dir%/../web/uploadstacy
+                directory: %kernel.root_dir%/../web/uploads
 
     filesystems:
         image_fs:
@@ -141,7 +141,7 @@ vich_uploader:
     storage: vich_uploader.storage.gaufrette
     mappings:
         image:
-            uri_prefix: /uploadstacy
+            uri_prefix: /uploads
             upload_destination: image_fs
             namer: vich_uploader.namer_origname
 
@@ -177,7 +177,7 @@ fm_elfinder:
     connector:
         debug: false # defaults to false
         roots:       # at least one root must be defined
-            uploadstacy:
+            uploads:
                 driver: LocalFileSystem
                 path: files
                 upload_allow: ['image/png', 'image/jpg', 'image/jpeg']

@@ -6,7 +6,7 @@ node_modules
 web/bundles
 web/js
 web/css
-web/uploadstacy
+web/uploads
 web/media
 web/assetic
 composer.phar
