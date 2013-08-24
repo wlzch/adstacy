@@ -79,14 +79,14 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
               <ul class="nav navbar-nav">
                 <li>
-                  <a id="btn-expand">
-                    <span aria-hidden="true" data-icon="&#xe000;"></span>
-                  </a>
+                  <button type="button" id="btn-navbar-expand" class="btn btn-default navbar-btn">
+                    <span aria-hidden="true" class="icon-chevron-up icon-chevron-down"></span>
+                  </button>
                 </li>
               </ul>
               <form action="{{ path('adstacy_app_search') }}" class="navbar-form navbar-left" style="position: relative;" role="search">
                 <input id="search" type="text" class="form-control" placeholder="Search" name="q" value="{{ app.request.query.get('q') }}" >
-                <button class="search-btn" type="submit">
+                <button type="submit" class="search-btn">
                   <span aria-hidden="true" data-icon="&#xe007;"></span>
                 </button>
               </form>
@@ -101,6 +101,11 @@
                     </ul>
                   </li>
                 {% else %}
+                  <li>
+                    <button type="button" class="btn btn-default navbar-btn">
+                      <span aria-hidden="true" class="icon-plus"></span> Create Ads
+                    </button>
+                  </li>
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login <b class="caret"></b></a>
                     <ul class="dropdown-menu dropdown-container">
@@ -121,7 +126,7 @@
               </ul>
             </div>
           </div>
-          <div id="nav-expand-container" class="hide">
+          <div id="navbar-expand-container" class="hide">
             <ul class="masonry-container nav-expand">
               <li><a href="#">#Komputer</a></li>
               <li><a href="#">#Handphone</a></li>
@@ -202,8 +207,12 @@
 
         $('img.lazy').lazyload();
 
-        $('#btn-expand').click(function() {
-          $('#nav-expand-container').toggleClass('hide');
+        var $btnNavbarExpand = $('#btn-navbar-expand');
+        var $btnNavbarExpand_span = $('#btn-navbar-expand span');
+        var $navbarExpandContainer = $('#navbar-expand-container');
+        $btnNavbarExpand.click(function() {
+          $btnNavbarExpand_span.toggleClass('icon-chevron-down');
+          $navbarExpandContainer.toggleClass('hide');
         });
         $('a.promote,a.unpromote').promote();
       </script>
