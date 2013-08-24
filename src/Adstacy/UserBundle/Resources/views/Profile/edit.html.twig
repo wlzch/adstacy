@@ -2,23 +2,111 @@
 
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% block content %}
-{{ form_start(form) }}
-  {% set user = form.vars.data %}
-  {{ form_rest(form) }}
-  <a href="{{ path('fos_user_change_password') }}">change password</a>
+{% block stylesheets %}
+  {{ parent() }}
+  {% stylesheets filter='cssrewrite, uglifycss'
+    'bundles/adstacyuser/less/settings.less'
+  %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
+  {% endstylesheets %}
+{% endblock %}
 
-  <div class="social-connect">
-    {% if user.facebookId %}
-      <p>Connected to {{ user.facebookRealName }}</p>
-    {% endif %}
-    <a href="{{ path('hwi_oauth_service_redirect', {service: 'facebook'}) }}" class="btn btn-facebook">Connect with Facebook</a>
-  </div>
-  <div class="social-connect">
-    {% if user.twitterId %}
-      <p>Connected to {{ user.twitterRealName }}</p>
-    {% endif %}
-    <a href="{{ path('hwi_oauth_service_redirect', {service: 'twitter'}) }}" class="btn btn-facebook">Connect with Twitter</a>
-  </div>
-{{ form_end(form) }}
+{% block content %}
+<div class="settings-container panel panel-default">
+  <section class="settings-section">
+    <h1>User Info</h1>
+    {{ form_start(form, { attr: { class: 'form-horizontal', role: 'form' } }) }}
+      {% set user = form.vars.data %}
+      
+      <div class="form-group">
+        {{ form_label(form.username, label|default(null), { label_attr: { class: 'control-label' } }) }}
+        <div class="form-widget">
+          {{ form_widget(form.username, { attr: { class: 'form-control' } }) }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label">Password</label>
+        <div class="form-widget">
+          <a href="{{ path('fos_user_change_password') }}">change password</a>
+        </div>
+      </div>
+
+      <div class="form-group">
+        {{ form_label(form.email, label|default(null), { label_attr: { class: 'control-label' } }) }}
+        <div class="form-widget">
+          {{ form_widget(form.email, { attr: { class: 'form-control' } }) }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        {{ form_label(form.interests, label|default(null), { label_attr: { class: 'control-label' } }) }}
+        <div class="form-widget">
+          {{ form_widget(form.interests, { attr: { class: 'form-control' } }) }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        {{ form_label(form.about, label|default(null), { label_attr: { class: 'control-label' } }) }}
+        <div class="form-widget">
+          {{ form_widget(form.about, { attr: { class: 'form-control' } }) }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label">&nbsp;</label>
+        <div class="form-widget">
+          {{ form_widget(form.save, { attr: { class: 'form-control btn btn-primary' } }) }}
+        </div>
+      </div>
+
+      {{ form_rest(form) }}
+      
+    {{ form_end(form) }}
+  </section>
+
+  <section class="settings-section">
+    <h1>Facebook Connect</h1>
+    <div class="form-horizontal">
+      <div class="form-group">
+        <label class="control-label">Status</label>
+        <div class="form-widget">
+          {% if user.facebookId %}
+            Connected to {{ user.facebookRealName }}
+          {% else %}
+            <p>Not Connected</p>
+          {% endif %}
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label">Login with Facebook</label>
+        <div class="form-widget">
+          <a href="{{ path('hwi_oauth_service_redirect', {service: 'facebook'}) }}" class="btn btn-facebook">Connect with Facebook</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="settings-section">
+    <h1>Twitter Connect</h1>
+    <div class="form-horizontal">
+      <div class="form-group">
+        <label class="control-label">Status</label>
+        <div class="form-widget">
+          {% if user.twitterId %}
+            <p>Connected to {{ user.twitterRealName }}</p>
+          {% else %}
+            <p>Not Connected</p>
+          {% endif %}
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label">Login with Facebook</label>
+        <div class="form-widget">
+          <a href="{{ path('hwi_oauth_service_redirect', {service: 'twitter'}) }}" class="btn btn-facebook">Connect with Twitter</a>
+        </div>
+      </div>
+    </div>
+  </section>:
+</div>
 {% endblock %}
