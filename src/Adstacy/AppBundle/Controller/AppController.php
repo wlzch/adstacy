@@ -2,11 +2,21 @@
 
 namespace Adstacy\AppBundle\Controller;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
+use JMS\Serializer\SerializationContext;
+
 class AppController extends Controller
 {
     public function indexAction()
     {
-        $posts = $this->getRepository('AdstacyAppBundle:Post')->findAll();
+        $request = $this->getRequest();
+        $maxPost = $this->getParameter('max_post_per_page');
+        $posts = $this->getRepository('AdstacyAppBundle:Post')->findPostsSinceId($request->query->get('id'), $maxPost);
+        if ($request->isXmlHttpRequest()) {
+            return $this->render('AdstacyAppBundle:Includes:posts.html.twig', array(
+                'posts' => $posts
+            ));
+        }
 
         return $this->render('AdstacyAppBundle:App:index.html.twig', array(
             'posts' => $posts

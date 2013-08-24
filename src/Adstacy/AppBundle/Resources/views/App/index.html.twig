@@ -1,9 +1,23 @@
 {% extends 'AdstacyAppBundle::layout.html.twig' %}
 
 {% block content %}
-  <div id="posts">
-    {% for post in posts %}
-      {% include 'AdstacyAppBundle:Includes:post.html.twig' with {post: post} %}
-    {% endfor %}
+  <div id="posts" class="jscroll clearfix">
+    {% include 'AdstacyAppBundle:Includes:posts.html.twig' with {posts: posts} %}
   </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script type="text/javascript">
+    $(function() {
+      $('.jscroll').jscroll({
+        nextSelector: 'a.next-page',
+        callback: function(a, b) {
+          var $posts = $('.jscroll-added:last .post');
+          $masonry = $('#posts').masonry('appended', $posts);
+          $posts.find('img.lazy').lazyload();
+        }
+      });
+    });
+  </script>
 {% endblock %}
