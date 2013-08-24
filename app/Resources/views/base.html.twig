@@ -45,7 +45,7 @@
     {% block body %}
       <header id="main-header">
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-          <div id="header-container">
+          <div class="header-container">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -57,6 +57,13 @@
             </div>
 
             <div class="collapse navbar-collapse navbar-ex1-collapse">
+              <ul class="nav navbar-nav">
+                <li>
+                  <a id="btn-expand">
+                    <span aria-hidden="true" data-icon="&#xe000;"></span>
+                  </a>
+                </li>
+              </ul>
               <form action="{{ path('adstacy_app_search') }}" class="navbar-form navbar-left" style="position: relative;" role="search">
                 <input id="search" type="text" class="form-control" placeholder="Search" name="q" value="{{ app.request.query.get('q') }}" >
                 <button class="search-btn" type="submit">
@@ -65,32 +72,73 @@
               </form>
               <ul class="nav navbar-nav navbar-right">
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ app.user.username }}<b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="{{ path('fos_user_profile_edit') }}">Settings</a></li>
-                    <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
-                  </ul>
-                </li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ app.user.username }}<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="{{ path('fos_user_profile_edit') }}">Settings</a></li>
+                      <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
+                    </ul>
+                  </li>
                 {% else %}
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                      <li>
+                    <ul class="dropdown-menu dropdown-container">
+                      <li class="user-login">
                         {{ form_login() }}
                       </li>
-                      {% for owner in hwi_oauth_resource_owners() %}
-                      <li><a class="btn btn-primary btn-block btn-lg btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{ owner|trans({}, 'HWIOAuthBundle') }}</a></li>
-                      {% endfor %}
+                      <li class="social-login">
+                        {% for owner in hwi_oauth_resource_owners() %}
+                          <a class="btn btn-primary btn-block btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{ owner|trans({}, 'HWIOAuthBundle') }}</a>
+                        {% endfor %}
+                      </li>
+                      <li class="form-footer">
+                        <a href="#">Register new account</a>
+                      </li>
                     </ul>
                   </li>
                 {% endif %}
               </ul>
             </div>
           </div>
+          <div id="nav-expand-container" class="hide">
+            <ul class="header-container nav-expand">
+              <li><a href="#">Komputer</a></li>
+              <li><a href="#">Handphone</a></li>
+              <li><a href="#">Kuliner</a></li>
+              <li><a href="#">Pendidikan</a></li>
+              <li><a href="#">Tempat Tinggal</a></li>
+              <li><a href="#">Otomotif</a></li>
+              <li><a href="#">Rumah Sakit</a></li>
+              <li><a href="#">Tempat Wisata</a></li>
+              <li><a href="#">Komputer</a></li>
+              <li><a href="#">Handphone</a></li>
+              <li><a href="#">Kuliner</a></li>
+              <li><a href="#">Pendidikan</a></li>
+              <li><a href="#">Tempat Tinggal</a></li>
+              <li><a href="#">Otomotif</a></li>
+              <li><a href="#">Rumah Sakit</a></li>
+              <li><a href="#">Tempat Wisata</a></li>
+              <li><a href="#">Komputer</a></li>
+              <li><a href="#">Handphone</a></li>
+              <li><a href="#">Kuliner</a></li>
+              <li><a href="#">Pendidikan</a></li>
+              <li><a href="#">Tempat Tinggal</a></li>
+              <li><a href="#">Otomotif</a></li>
+              <li><a href="#">Rumah Sakit</a></li>
+              <li><a href="#">Tempat Wisata</a></li>
+              <li><a href="#">Komputer</a></li>
+              <li><a href="#">Handphone</a></li>
+              <li><a href="#">Kuliner</a></li>
+              <li><a href="#">Pendidikan</a></li>
+              <li><a href="#">Tempat Tinggal</a></li>
+              <li><a href="#">Otomotif</a></li>
+              <li><a href="#">Rumah Sakit</a></li>
+              <li><a href="#">Tempat Wisata</a></li>
+            </ul>
+          </div>
         </nav>
       </header>
-      <div class="body">
+      <div class="body clearfix">
         {% for key, flashes in app.session.flashbag.all() %}
           {% for flash in flashes %}
             <div class="alert alert-{{ key }}">{{ flash }}</div>
@@ -104,7 +152,7 @@
     {% block javascripts %}
       <script type="text/javascript">
         var $masonry = $('.masonry');
-        var $headerContainer = $('#header-container');
+        var $headerContainer = $('.header-container');
         $masonry.masonry({
           columnWidth: 250,
           isFitWidth: true,
@@ -129,7 +177,11 @@
           $().UItoTop({ easingType: 'easeOutQuart' });
         });
 
-        $("img.lazy").lazyload();
+        $('img.lazy').lazyload();
+
+        $('#btn-expand').click(function() {
+          $('#nav-expand-container').toggleClass('hide');
+        });
       </script>
     {% endblock %}
   </body>
