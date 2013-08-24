@@ -6,9 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="Adstacy\AppBundle\Repository\PostRepository")
+ * @ORM\Entity(repositoryClass="Adstacy\AppBundle\Repository\AdRepository")
  */
-class Post
+class Ad
 {
     /**
      * @ORM\Id
@@ -25,7 +25,7 @@ class Post
     /**
      * @Assert\Length(
      *  max = "255",
-     *  maxMessage = "Post description at most {{ limit }} characters"
+     *  maxMessage = "Ad description at most {{ limit }} characters"
      * )
      * @ORM\COlumn(type="string", length=255)
      */
@@ -52,13 +52,21 @@ class Post
     private $thumbHeight;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Wall", inversedBy="posts")
+     * @ORM\ManyToOne(targetEntity="Wall", inversedBy="ads")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $wall;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="promotes")
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="promotes")
+     * @ORM\JoinTable(name="promotes_ad",
+     *    joinColumns={
+     *      @ORM\JoinColumn(name="ad_id", referencedColumnName="id")
+     *    },
+     *    inverseJoinColumns={
+     *      @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *    }
+     * )
      */
     private $promotees;
 
@@ -90,7 +98,7 @@ class Post
      * Set description
      *
      * @param string $description
-     * @return Post
+     * @return Ad
      */
     public function setDescription($description)
     {
@@ -114,7 +122,7 @@ class Post
      * Set content
      *
      * @param string $content
-     * @return Post
+     * @return Ad
      */
     public function setContent($content)
     {
@@ -152,7 +160,7 @@ class Post
      * Set tags
      *
      * @param array $tags
-     * @return Post
+     * @return Ad
      */
     public function setTags($tags)
     {
@@ -175,7 +183,7 @@ class Post
      * Set promoteesCount
      *
      * @param integer $promoteesCount
-     * @return Post
+     * @return Ad
      */
     public function setPromoteesCount($promoteesCount)
     {
@@ -198,7 +206,7 @@ class Post
      * Set image
      *
      * @param \Adstacy\AppBundle\Entity\Image $image
-     * @return Post
+     * @return Ad
      */
     public function setImage(\Adstacy\AppBundle\Entity\Image $image = null)
     {
@@ -226,7 +234,7 @@ class Post
      * Set wall
      *
      * @param \Adstacy\AppBundle\Entity\Wall $wall
-     * @return Post
+     * @return Ad
      */
     public function setWall(\Adstacy\AppBundle\Entity\Wall $wall)
     {
@@ -250,7 +258,7 @@ class Post
      * Add promotees
      *
      * @param \Adstacy\AppBundle\Entity\User $promotees
-     * @return Post
+     * @return Ad
      */
     public function addPromotee(\Adstacy\AppBundle\Entity\User $promotees)
     {
@@ -285,7 +293,7 @@ class Post
      * Set created
      *
      * @param \DateTime $created
-     * @return Post
+     * @return Ad
      */
     public function setCreated($created)
     {
@@ -308,7 +316,7 @@ class Post
      * Set thumbHeight
      *
      * @param integer $thumbHeight
-     * @return Post
+     * @return Ad
      */
     public function setThumbHeight($thumbHeight)
     {

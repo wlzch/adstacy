@@ -33,6 +33,7 @@
         '@AdstacyAppBundle/Resources/public/js/masonry.pkgd.min.js'
         '@AdstacyAppBundle/Resources/public/js/jquery.lazyload.min.js'
         '@AdstacyAppBundle/Resources/public/js/jquery.jscroll.js'
+        '@AdstacyAppBundle/Resources/public/js/module/promote.js'
         'bundles/fosjsrouting/js/router.js'
       %}
         <script src="{{ asset_url }}" type="text/javascript"></script>
@@ -158,7 +159,7 @@
           isFitWidth: true,
           isInitLayout: false,
           transitionDuration: 0,
-          itemSelector: '.post'
+          itemSelector: '.ad'
         });
         $masonry.masonry('on', 'layoutComplete', function(msnryInstance) {
           $headerContainer.css('width', msnryInstance.cols * msnryInstance.columnWidth + 'px');
@@ -182,6 +183,7 @@
         $('#btn-expand').click(function() {
           $('#nav-expand-container').toggleClass('hide');
         });
+        $('a.promote,a.unpromote').promote();
       </script>
     {% endblock %}
   </body>

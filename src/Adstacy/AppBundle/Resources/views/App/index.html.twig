@@ -2,7 +2,7 @@
 
 {% block content %}
   <div class="masonry jscroll clearfix">
-    {% include 'AdstacyAppBundle:Includes:posts.html.twig' with {posts: posts} %}
+    {% include 'AdstacyAppBundle:Includes:ads.html.twig' with {ads: ads} %}
   </div>
 {% endblock %}
 
@@ -13,7 +13,7 @@
       $('.jscroll').jscroll({
         nextSelector: 'a.next-page',
         callback: function() {
-          var $posts = $('.jscroll-added:last .post');
+          var $posts = $('.jscroll-added:last .ad');
           $masonry = $('.masonry').masonry('appended', $posts);
           $posts.find('img.lazy').lazyload();
         }

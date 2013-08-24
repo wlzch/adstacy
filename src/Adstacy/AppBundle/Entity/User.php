@@ -119,15 +119,7 @@ class User implements UserInterface, GroupableInterface
     private $interests;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Post", inversedBy="promotees")
-     * @ORM\JoinTable(name="promotes_post",
-     *    joinColumns={
-     *      @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     *    },
-     *    inverseJoinColumns={
-     *      @ORM\JoinColumn(name="post_id", referencedColumnName="id")
-     *    }
-     * )
+     * @ORM\ManyToMany(targetEntity="Ad", mappedBy="promotees")
      */
     private $promotes;
 
@@ -1125,10 +1117,10 @@ class User implements UserInterface, GroupableInterface
     /**
      * Add promotes
      *
-     * @param \Adstacy\AppBundle\Entity\Post $promotes
+     * @param \Adstacy\AppBundle\Entity\Ad $promotes
      * @return User
      */
-    public function addPromote(\Adstacy\AppBundle\Entity\Post $promotes)
+    public function addPromote(\Adstacy\AppBundle\Entity\Ad $promotes)
     {
         $this->promotes[] = $promotes;
         $this->setPromotesCount($this->getPromotesCount() + 1);
@@ -1139,9 +1131,9 @@ class User implements UserInterface, GroupableInterface
     /**
      * Remove promotes
      *
-     * @param \Adstacy\AppBundle\Entity\Post $promotes
+     * @param \Adstacy\AppBundle\Entity\Ad $promotes
      */
-    public function removePromote(\Adstacy\AppBundle\Entity\Post $promotes)
+    public function removePromote(\Adstacy\AppBundle\Entity\Ad $promotes)
     {
         $this->promotes->removeElement($promotes);
         $this->setPromotesCount($this->getPromotesCount() - 1);
@@ -1326,5 +1318,17 @@ class User implements UserInterface, GroupableInterface
     public function getTwitterRealName()
     {
         return $this->twitterRealName;
+    }
+
+    /**
+     * Checks where user has promote this ad
+     *
+     * @param Ad $ad
+     *
+     * @return boolean
+     */
+    public function hasPromote(Ad $ad)
+    {
+        return $this->getPromotes()->contains($ad);
     }
 }

@@ -2,7 +2,7 @@
 
 {% block content %}
   <div class="masonry jscroll">
-    {% include 'AdstacyAppBundle:Includes:posts_search.html.twig' with {paginator: paginator} %}
+    {% include 'AdstacyAppBundle:Includes:ads_search.html.twig' with {paginator: paginator} %}
   </div>
 {% endblock %}
 
@@ -13,9 +13,9 @@
       $('.jscroll').jscroll({
         nextSelector: 'a.next-page',
         callback: function(a, b) {
-          var $posts = $('.jscroll-added:last .post');
-          $masonry = $('#posts').masonry('appended', $posts);
-          $posts.find('img.lazy').lazyload();
+          var $ads = $('.jscroll-added:last .ad');
+          $masonry = $('#ads').masonry('appended', $ads);
+          $ads.find('img.lazy').lazyload();
         }
       });
     });

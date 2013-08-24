@@ -8,12 +8,22 @@ adstacy_app_search:
     defaults:
         _controller: AdstacyAppBundle:App:search
 
-adstacy_app_post_add:
-    pattern: /add
+adstacy_app_ad_add:
+    pattern: /ads/add
     defaults:
-        _controller: AdstacyAppBundle:Post:add
+        _controller: AdstacyAppBundle:Ad:add
 
 adstacy_app_wall_add:
     pattern: /walls/add
     defaults:
         _controller: AdstacyAppBundle:Wall:add
+
+adstacy_app_ad_promote:
+    pattern: /ads/{id}/promote
+    defaults:
+        _controller: AdstacyAppBundle:Ad:promote
+
+adstacy_app_ad_unpromote:
+    pattern: /ads/{id}/unpromote
+    defaults:
+        _controller: AdstacyAppBundle:Ad:unpromote

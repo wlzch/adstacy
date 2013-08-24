@@ -1,0 +1,8 @@
+{% set id = null %}
+{% for ad in ads %}
+  {% set id = ad.id %}
+  {% include 'AdstacyAppBundle:Includes:ad.html.twig' with {ad: ad} %}
+{% endfor %}
+{% if ads | length >= max_ad_per_page %}
+  <a href="{{ path('homepage', {'id': id})}}" class="btn btn-lg btn-default btn-block next-page">More</a>
+{% endif %}
