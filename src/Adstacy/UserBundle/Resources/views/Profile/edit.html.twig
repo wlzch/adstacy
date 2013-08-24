@@ -17,6 +17,14 @@
     <h1>User Info</h1>
     {{ form_start(form, { attr: { class: 'form-horizontal', role: 'form' } }) }}
       {% set user = form.vars.data %}
+
+      <div class="form-group">
+        {{ form_label(form.image, label|default(null), { label_attr: { class: 'control-label' } }) }}
+        <div class="form-widget">
+          {{ form_widget(form.image, { attr: { class: 'form-control' } }) }}
+        </div>
+      </div>
+
       
       <div class="form-group">
         {{ form_label(form.username, label|default(null), { label_attr: { class: 'control-label' } }) }}

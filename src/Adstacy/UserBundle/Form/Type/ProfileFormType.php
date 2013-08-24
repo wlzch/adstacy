@@ -20,6 +20,11 @@ class ProfileFormType extends BaseType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder->add('image', 'image', array(
+            'label' => 'Profile Picture',
+            'required' => false,
+            'image_size' => 'small'
+        ));
         parent::buildUserForm($builder, $options);
         $builder->add(
             $builder->create('interests', 'text', array(

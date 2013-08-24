@@ -32,13 +32,15 @@ class ImageType extends AbstractType
         $function = 'get'.$form->getName(); // entity field name
         $photo = $data->$function();
         $view->vars['image'] = $photo;
+        $view->vars['image_size'] = $options['image_size'];
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
             'invalid_message' => 'An error occured. please retry',
-            'required' => false
+            'required' => false,
+            'image_size' => 'medium'
         ));
     }
 

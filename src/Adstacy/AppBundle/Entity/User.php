@@ -63,6 +63,11 @@ class User implements UserInterface, GroupableInterface
     protected $emailCanonical;
 
     /**
+     * @ORM\OneToOne(targetEntity="Image", cascade={"persist"}, fetch="EAGER")
+     */
+    protected $image;
+
+    /**
      * @ORM\Column(name="real_name", type="string", length=255, nullable=true)
      */
     protected $realName;
@@ -1358,5 +1363,28 @@ class User implements UserInterface, GroupableInterface
     public function getRealName()
     {
         return $this->realName;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \Adstacy\AppBundle\Entity\Image $image
+     * @return User
+     */
+    public function setImage(\Adstacy\AppBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+    
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \Adstacy\AppBundle\Entity\Image 
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }
