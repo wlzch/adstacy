@@ -61,3 +61,8 @@ fos_js_routing:
 
 elfinder:
      resource: "@FMElfinderBundle/Resources/config/routing.yml"
+
+adstacy_app_user_profile:
+    pattern: /{username}
+    defaults:
+        _controller: AdstacyAppBundle:User:show

@@ -3,6 +3,7 @@
 namespace Adstacy\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Adstacy\AppBundle\Entity\User;
 
 /**
  * AdRepository
@@ -37,5 +38,26 @@ class AdRepository extends EntityRepository
         }
 
         return $builder->getQuery()->getResult();
+    }
+
+    /**
+     * Count total ads by $user
+     *
+     * @param User $user
+     *
+     * @return integer
+     */
+    public function countByUser(User $user)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('
+            SELECT COUNT(a.id)
+            FROM AdstacyAppBundle:Ad a
+            JOIN a.wall w
+            JOIN w.user u
+            WHERE u.id = :id
+        ');
+
+        return $query->setParameter('id', $user->getId())->getSingleScalarResult();
     }
 }
