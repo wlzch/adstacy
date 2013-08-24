@@ -4,6 +4,27 @@
 <input class="image-upload" type="file" {{ block('widget_attributes') }}>
 
 <div class="image-preview">
-  {% include '::image.html.twig' with {image: image, lazy: false} %}
+  {% if image %}
+    <img src="{{ vich_uploader_asset(image, 'file') }}" />
+  {% else %}
+    <img />  
+  {% endif %}
 </div>
+
+<script type="text/javascript">
+  $(function() {
+    var $upload = $('.image-upload');
+    var $preview = $('.image-preview');
+    $upload.change(function(e) {
+      var files = FileAPI.getFiles(e);
+      if (files && files[0]) {
+        FileAPI.readAsImage(files[0], function(evt) {
+          if (evt.type == 'load') {
+            $preview.find('img').replaceWith(evt.result);
+          }
+        });
+      }
+    });
+  });
+</script>
 {% endblock %}
