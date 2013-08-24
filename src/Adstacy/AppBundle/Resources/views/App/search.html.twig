@@ -1,10 +1,23 @@
 {% extends 'AdstacyAppBundle::layout.html.twig' %}
 
 {% block content %}
-  {% for post in postsPaginator.getCurrentPageResults %}
-    {% include 'AdstacyAppBundle:Includes:post.html.twig' with {post: post} %}
-  {% endfor %}
-  {% if postsPaginator.hasNextPage %}
-    <a href="?page={{ postsPaginator.getNextPage }}">{{ postsPaginator.getNextPage }}</a>
-  {% endif %}
+  <div id="posts" class="jscroll">
+    {% include 'AdstacyAppBundle:Includes:posts_search.html.twig' with {paginator: paginator} %}
+  </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script type="text/javascript">
+    $(function() {
+      $('.jscroll').jscroll({
+        nextSelector: 'a.next-page',
+        callback: function(a, b) {
+          var $posts = $('.jscroll-added:last .post');
+          $masonry = $('#posts').masonry('appended', $posts);
+          $posts.find('img.lazy').lazyload();
+        }
+      });
+    });
+  </script>
 {% endblock %}

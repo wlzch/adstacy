@@ -34,8 +34,14 @@ class AppController extends Controller
             ->setCurrentPage($request->query->get('page') ?: 1)
         ;
 
+        if ($request->isXmlHttpRequest()) {
+            return $this->render('AdstacyAppBundle:Includes:posts_search.html.twig', array(
+                'paginator' => $postsPaginator
+            ));
+        }
+
         return $this->render('AdstacyAppBundle:App:search.html.twig', array(
-            'postsPaginator' => $postsPaginator
+            'paginator' => $postsPaginator
         ));
     }
 }
