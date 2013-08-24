@@ -194,20 +194,33 @@
       <script type="text/javascript">
         var $masonry = $('.masonry');
         var $masonryContainer = $('.masonry-container');
+        var $window = $(window);
+        var $btnNavbarExpand = $('#btn-navbar-expand');
+        var $btnNavbarExpand_span = $('#btn-navbar-expand span');
+        var $navbarExpandContainer = $('#navbar-expand-container');
+
         $masonry.masonry({
           columnWidth: 250,
           isFitWidth: true,
+          isInitLayout: false,
           transitionDuration: 0,
           itemSelector: '.ad'
         });
 
-        var $window = $(window);
-        $window.on('resize orientationChanged', function() {
-          $masonryContainer.css('width', Math.floor($window.width()/250)*250);
+        $masonry.masonry('on', 'layoutComplete', function(msnryInstance) {
+          $masonryContainer.css('width', msnryInstance.cols * msnryInstance.columnWidth + 'px');
         });
+        $masonry.masonry();
 
-        $(document).ready(function() {
-          $masonryContainer.css('width', Math.floor($window.width()/250)*250);
+        var resizeCallback = function() {
+          if ($masonry.length == 0) {
+            $masonryContainer.css('width', Math.floor($window.width()/250)*250);
+          }
+        };
+        $window.on('resize orientationChanged', resizeCallback);
+
+        $(function() {
+          resizeCallback();
           /*
           var defaults = {
               containerID: 'toTop', // fading element id
@@ -220,15 +233,11 @@
         });
 
         $('img.lazy').lazyload();
-
-        var $btnNavbarExpand = $('#btn-navbar-expand');
-        var $btnNavbarExpand_span = $('#btn-navbar-expand span');
-        var $navbarExpandContainer = $('#navbar-expand-container');
+        $('a.promote,a.unpromote').promote();
         $btnNavbarExpand.click(function() {
           $btnNavbarExpand_span.toggleClass('icon-chevron-down');
           $navbarExpandContainer.toggleClass('hide');
         });
-        $('a.promote,a.unpromote').promote();
       </script>
     {% endblock %}
   </body>
