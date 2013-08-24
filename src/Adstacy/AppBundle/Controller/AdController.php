@@ -11,6 +11,21 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class AdController extends Controller
 {
+
+    /**
+     * Show single ad
+     */
+    public function showAction($id)
+    {
+        $ad = $this->getRepository('AdstacyAppBundle:Ad')->find($id);
+        if (!$ad) {
+            throw $this->createNotFoundException();
+        }
+
+        return $this->render('AdstacyAppBundle:Ad:show.html.twig', array(
+            'ad' => $ad
+        ));
+    }
     
     /**
      * @Secure(roles="ROLE_USER")

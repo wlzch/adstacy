@@ -13,17 +13,29 @@ adstacy_app_ad_add:
     defaults:
         _controller: AdstacyAppBundle:Ad:add
 
-adstacy_app_wall_add:
-    pattern: /walls/add
+adstacy_app_ad_show:
+    pattern: /ads/{id}
     defaults:
-        _controller: AdstacyAppBundle:Wall:add
+        _controller: AdstacyAppBundle:Ad:show
+    requirements:
+        id: \d+
 
 adstacy_app_ad_promote:
     pattern: /ads/{id}/promote
     defaults:
         _controller: AdstacyAppBundle:Ad:promote
+    requirements:
+        id: \d+
 
 adstacy_app_ad_unpromote:
     pattern: /ads/{id}/unpromote
     defaults:
         _controller: AdstacyAppBundle:Ad:unpromote
+    requirements:
+        id: \d+
+
+adstacy_app_wall_add:
+    pattern: /walls/add
+    defaults:
+        _controller: AdstacyAppBundle:Wall:add
+
