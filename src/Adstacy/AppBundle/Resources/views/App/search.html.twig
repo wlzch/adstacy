@@ -14,7 +14,7 @@
         nextSelector: 'a.next-page',
         callback: function(a, b) {
           var $ads = $('.jscroll-added:last .ad');
-          $masonry = $('#ads').masonry('appended', $ads);
+          $masonry = $('.masonry').masonry('appended', $ads);
           $ads.find('img.lazy').lazyload();
         }
       });
