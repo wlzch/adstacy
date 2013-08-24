@@ -75,35 +75,32 @@ body {
   h1 {
     text-align: center;
   }
+}
 
-  div {
-    padding: 20px;
-    border-bottom: 1px solid @border-color;
 
-    &:last-child {
-      border-bottom: 0;
-    }
+.ads-form-section  {
+  padding: 20px;
+  border-bottom: 1px solid @border-color;
+
+  &:last-child {
+    border-bottom: 0;
   }
 }
 
 .dropdown-container {
-  width: 200px;
+  width: 250px;
 
   .social-login > a {
     color: white;
   }
 
-  .form-footer {
-    display: inline;
+  a {
+    color: @brand-primary;
 
-    a {
-      color: @brand-primary;
-      &:hover {
-        text-decoration: underline;
-        background-color: white;
-        color: black;
-        // color: @brand-primary;
-      }
+    &:hover {
+      text-decoration: underline !important;
+      background-color: white !important;
+      color: @gray-dark !important;
     }
   }
 
@@ -114,27 +111,6 @@ body {
 
 .btn-block + .btn-block {
   margin-top: 10px;
-}
-
-// -------------------------------
-.nav-expand-wrapper {
-  position: relative;
-}
-
-.nav-expand-wrapper.scroll-to-fixed-fixed {
-  // kinda hack
-  width: 100% !important ;
-}
-
-.nav-expand-inner {
-  position: absolute;
-  padding: 20px;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  background-color: #000;
-  z-index: 1000;
 }
 
 ul.nav-expand {
@@ -156,7 +132,6 @@ ul.nav-expand {
   padding: 10px 0;
   border-top: 1px solid @border-color;
 }
-
 .image-preview {
   &.medium img {
     max-height: 500px;

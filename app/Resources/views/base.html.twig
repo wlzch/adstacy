@@ -112,8 +112,8 @@
                           <a class="btn btn-primary btn-block btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">Login with {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
                         {% endfor %}
                       </li>
-                      <li class="form-footer">
-                        <a href="#">Register new account</a>
+                      <li>
+                        <a href="{{ path('fos_user_registration_register') }}">Register new account</a>
                       </li>
                     </ul>
                   </li>

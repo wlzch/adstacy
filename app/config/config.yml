@@ -104,6 +104,9 @@ fos_user:
     registration:
         form:
             type: adstacy_registration
+    change_password:
+        form:
+            type: adstacy_change_password
 
 hwi_oauth:
     firewall_name: main

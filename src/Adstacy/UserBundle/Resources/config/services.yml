@@ -10,3 +10,9 @@ services:
         arguments: [%fos_user.model.user.class%]
         tags:
             - { name: form.type, alias: adstacy_registration }
+
+    adstacy.type.change_password:
+        class: Adstacy\UserBundle\Form\Type\ChangePasswordFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: adstacy_change_password }

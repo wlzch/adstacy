@@ -34,8 +34,8 @@ class RegistrationFormType extends AbstractType
                     'label' => 'form.username',
                     'translation_domain' => 'FOSUserBundle',
                     'attr' => array(
-                        'class' => 'form-control',
-                        'placeholder' => 'adstacy'
+                        'class' => 'form-control input-lg',
+                        'placeholder' => 'Username'
                     ),
                     'label_attr' => array(
                         'class' => 'hide'
@@ -46,8 +46,8 @@ class RegistrationFormType extends AbstractType
                     'label' => 'form.email',
                     'translation_domain' => 'FOSUserBundle',
                     'attr' => array(
-                        'class' => 'form-control',
-                        'placeholder' => 'xxx@example.com'
+                        'class' => 'form-control input-lg',
+                        'placeholder' => 'email@example.com'
                     ),
                     'label_attr' => array(
                         'class' => 'hide'
@@ -60,12 +60,32 @@ class RegistrationFormType extends AbstractType
                     'translation_domain' => 'FOSUserBundle'
                 ),
                 'first_options' => array(
-                    'label' => 'form.password'
+                    'label' => 'form.password',
+                    'attr' => array(
+                        'class' => 'form-control input-lg',
+                        'placeholder' => 'Password'
+                    ),
+                    'label_attr' => array(
+                        'class' => 'hide'
+                    )
                 ),
                 'second_options' => array(
-                    'label' => 'form.password_confirmation'
+                    'label' => 'form.password_confirmation',
+                    'attr' => array(
+                        'class' => 'form-control input-lg',
+                        'placeholder' => 'Confirm Password'
+                    ),
+                    'label_attr' => array(
+                        'class' => 'hide'
+                    )
                 ),
                 'invalid_message' => 'fos_user.password.mismatch',
+            ))
+            ->add('register', 'submit', array(
+                'label' => 'Register',
+                'attr' => array(
+                    'class' => 'btn btn-primary btn-block btn-lg'
+                )
             ))
         ;
     }
