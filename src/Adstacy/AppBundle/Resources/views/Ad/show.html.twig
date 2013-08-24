@@ -1,6 +1,11 @@
 {% extends 'AdstacyAppBundle::layout.html.twig' %}
 
 {% block content %}
-  {{ ad.description }}
+  <p>{{ parse_hashtag(ad.description) }} ({{ ad.promoteesCount }}) promotes</p>
   <a class="btn btn-primary btn-wall" href="{{ path('adstacy_app_wall_show', {id: ad.wall.id}) }}">{{ ad.wall.name }}</a>
+  <img src="{{ vich_uploader_asset(ad.image, 'file') }}" alt="{{ ad.description }}" />
+  <div class="ad-content">
+    {{ ad.content }}
+  </div>
+
 {% endblock %}
