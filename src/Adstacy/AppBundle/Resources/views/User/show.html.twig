@@ -1,5 +1,7 @@
 {% extends 'AdstacyAppBundle::layout.html.twig' %}
 
+{% block title %}{{ user.username }} | Adscaty{% endblock %}
+
 {% block content %}
   {{ user.username }}
   {{ adsCount }}

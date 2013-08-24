@@ -1,5 +1,9 @@
 {% extends 'AdstacyAppBundle::layout.html.twig' %}
 
+{% block title %}{{ wall.name }} | Adstacy{% endblock %}
+
+{% block meta_keywords %}{{ wall.tags | join(',') }}{% endblock %}
+
 {% block content %}
   <div class="masonry-container">
     <h2>{{ wall.name }} ({{ wall.adsCount }} ads) ({{ wall.followersCount }} followers)</h2>
