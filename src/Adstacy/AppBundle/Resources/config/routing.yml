@@ -9,7 +9,7 @@ adstacy_app_search:
         _controller: AdstacyAppBundle:App:search
 
 adstacy_app_post_add:
-    pattern: /add
+    pattern: /posts/add
     defaults:
         _controller: AdstacyAppBundle:Post:add
 
@@ -17,3 +17,13 @@ adstacy_app_wall_add:
     pattern: /walls/add
     defaults:
         _controller: AdstacyAppBundle:Wall:add
+
+adstacy_app_post_promote:
+    pattern: /posts/{id}/promote
+    defaults:
+        _controller: AdstacyAppBundle:Post:promote
+
+adstacy_app_post_unpromote:
+    pattern: /posts/{id}/unpromote
+    defaults:
+        _controller: AdstacyAppBundle:Post:unpromote

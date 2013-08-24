@@ -119,15 +119,7 @@ class User implements UserInterface, GroupableInterface
     private $interests;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Post", inversedBy="promotees")
-     * @ORM\JoinTable(name="promotes_post",
-     *    joinColumns={
-     *      @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     *    },
-     *    inverseJoinColumns={
-     *      @ORM\JoinColumn(name="post_id", referencedColumnName="id")
-     *    }
-     * )
+     * @ORM\ManyToMany(targetEntity="Post", mappedBy="promotees")
      */
     private $promotes;
 
@@ -1326,5 +1318,17 @@ class User implements UserInterface, GroupableInterface
     public function getTwitterRealName()
     {
         return $this->twitterRealName;
+    }
+
+    /**
+     * Checks where user has promote this post
+     *
+     * @param Post $post
+     *
+     * @return boolean
+     */
+    public function hasPromote(Post $post)
+    {
+        return $this->getPromotes()->contains($post);
     }
 }

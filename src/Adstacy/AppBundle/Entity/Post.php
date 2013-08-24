@@ -58,7 +58,15 @@ class Post
     private $wall;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="promotes")
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="promotes")
+     * @ORM\JoinTable(name="promotes_post",
+     *    joinColumns={
+     *      @ORM\JoinColumn(name="post_id", referencedColumnName="id")
+     *    },
+     *    inverseJoinColumns={
+     *      @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *    }
+     * )
      */
     private $promotees;
 

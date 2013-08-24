@@ -6,6 +6,13 @@
   </div>
   <div class="desc">
     <p>{{ parse_hashtag(post.description) }}</p>
-    {{ post.promoteesCount }} promotes
+    <div>
+      <span><span class="promotes-count">{{ post.promoteesCount }}</span> promotes</span>
+      {% if app.user and app.user.hasPromote(post) %}
+        <a href="{{ path('adstacy_app_post_unpromote', {id: post.id}) }}" class="unpromote">Unpromote</a>
+      {% else %}
+        <a href="{{ path('adstacy_app_post_promote', {id: post.id}) }}" class="promote">Promote</a>
+      {% endif %}
+    </div>
   </div>
 </div>
