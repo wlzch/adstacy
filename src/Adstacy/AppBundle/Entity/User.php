@@ -63,6 +63,11 @@ class User implements UserInterface, GroupableInterface
     protected $emailCanonical;
 
     /**
+     * @ORM\Column(name="real_name", type="string", length=255, nullable=true)
+     */
+    protected $realName;
+
+    /**
      * @ORM\OneToMany(targetEntity="Wall", mappedBy="user")
      */
     private $walls;
@@ -1330,5 +1335,28 @@ class User implements UserInterface, GroupableInterface
     public function hasPromote(Ad $ad)
     {
         return $this->getPromotes()->contains($ad);
+    }
+
+    /**
+     * Set realName
+     *
+     * @param string $realName
+     * @return User
+     */
+    public function setRealName($realName)
+    {
+        $this->realName = $realName;
+    
+        return $this;
+    }
+
+    /**
+     * Get realName
+     *
+     * @return string 
+     */
+    public function getRealName()
+    {
+        return $this->realName;
     }
 }

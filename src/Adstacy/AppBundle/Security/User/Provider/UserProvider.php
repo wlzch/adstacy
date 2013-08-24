@@ -92,6 +92,7 @@ class UserProvider implements UserProviderInterface, OAuthAwareUserProviderInter
               } else {
                 $user->setUsername($nickname);
               }
+              $user->setRealName($response->getRealName());
               $user->setEmail($response->getEmail());
               $user->setPassword(base_convert(sha1(uniqid(mt_rand(), true)), 16, 36));
               $user->setProfilePicture($response->getProfilePicture());

@@ -47,6 +47,13 @@
       </div>
 
       <div class="form-group">
+        {{ form_label(form.realName, label|default(null), { label_attr: { class: 'control-label' } }) }}
+        <div class="form-widget">
+          {{ form_widget(form.realName, { attr: { class: 'form-control' } }) }}
+        </div>
+      </div>
+
+      <div class="form-group">
         {{ form_label(form.about, label|default(null), { label_attr: { class: 'control-label' } }) }}
         <div class="form-widget">
           {{ form_widget(form.about, { attr: { class: 'form-control' } }) }}
@@ -79,7 +86,7 @@
         </div>
       </div>
       <div class="form-group">
-        <label class="control-label">Login with Facebook</label>
+        <label class="control-label">Connect with Facebook</label>
         <div class="form-widget">
           <a href="{{ path('hwi_oauth_service_redirect', {service: 'facebook'}) }}" class="btn btn-facebook">Connect with Facebook</a>
         </div>
@@ -101,9 +108,9 @@
         </div>
       </div>
       <div class="form-group">
-        <label class="control-label">Login with Facebook</label>
+        <label class="control-label">Connect with Facebook</label>
         <div class="form-widget">
-          <a href="{{ path('hwi_oauth_service_redirect', {service: 'twitter'}) }}" class="btn btn-facebook">Connect with Twitter</a>
+          <a href="{{ path('hwi_oauth_service_redirect', {service: 'twitter'}) }}" class="btn btn-twitter">Connect with Twitter</a>
         </div>
       </div>
     </div>
