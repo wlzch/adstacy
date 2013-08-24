@@ -25,15 +25,15 @@
       <div class="user-login clearfix">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
 
-        <label for="username" class="hide">{{ 'security.login.username'|trans }}</label>
-        <input type="text" class="form-control input-lg" id="username" name="_username" value="{{ last_username }}" required="required" placeholder="Username">
+        <label for="_username" class="hide">{{ 'security.login.username'|trans }}</label>
+        <input type="text" class="form-control input-lg" id="_username" name="_username" value="{{ last_username }}" required="required" placeholder="Username">
 
         <label for="password" class="hide">{{ 'security.login.password'|trans }}</label>
-        <input type="password" class="form-control input-lg" id="password" name="_password" required="required" placeholder="Password">
+        <input type="_password" class="form-control input-lg" id="_password" name="_password" required="required" placeholder="Password">
 
         <div class="clearfix">
-          <input type="checkbox" id="remember_me" name="_remember_me" value="on">
-          <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+          <input type="checkbox" id="_remember_me" name="_remember_me" value="on">
+          <label for="_remember_me">{{ 'security.login.remember_me'|trans }}</label>
 
           <input type="submit" class="btn btn-primary btn-lg pull-right" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}">
         </div>
