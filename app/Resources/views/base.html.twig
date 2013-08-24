@@ -38,6 +38,7 @@
         <script src="{{ asset_url }}" type="text/javascript"></script>
       {% endjavascripts %}
       <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}" type="text/javascript"></script>
+      <script type="text/javascript" src="{{ asset('bundles/adstacyapp/js/module/promote.js') }}"></script>
     {% endblock %}
 
   </head>
@@ -130,25 +131,7 @@
         });
 
         $("img.lazy").lazyload();
-        $('a.promote,a.unpromote').click(function() {
-          var $this = $(this);
-          $.post(this.href, function(data) {
-            var json = JSON.parse(data);
-            if (!json.error) {
-              $this.parent().find('.promotes-count').text(json.promotes_count);
-              if ($this.hasClass('promote')) {
-                $this.attr('href', Routing.generate('adstacy_app_post_unpromote', {id: json.id}));
-                $this.text('Unpromote');
-              } else {
-                $this.attr('href', Routing.generate('adstacy_app_post_promote', {id: json.id}));
-                $this.text('Promote');
-              }
-              $this.toggleClass('promote');
-              $this.toggleClass('unpromote');
-            }
-          });
-          return false;
-        });
+        $('a.promote,a.unpromote').promote();
       </script>
     {% endblock %}
   </body>
