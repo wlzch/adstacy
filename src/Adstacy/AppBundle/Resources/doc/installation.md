@@ -107,7 +107,7 @@ Jalankan perintah `php app/console doctrine:migrations:migrate` untuk mengupdate
 
 Jalankan perintah `php app/console assetic:dump` untuk dump assets yang memakai assetic.
 
-Jalankan perintah `php app/console doctrine:fixtures:load` untuk mengload data dummy.
+Jalankan perintah `php app/console doctrine:fixtures:load --purge-with-truncate` untuk mengload data dummy.
 
 Jalankan perintah `php app/console fos:elastica:populate` untuk mengpopulate data kedalam elasticsearch
 
