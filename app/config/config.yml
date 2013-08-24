@@ -101,6 +101,9 @@ fos_user:
     profile:
         form:
             type: adstacy_profile
+    registration:
+        form:
+            type: adstacy_registration
 
 hwi_oauth:
     firewall_name: main

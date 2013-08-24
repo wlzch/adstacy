@@ -90,6 +90,9 @@ export SYMFONY__DATABASE__HOST=host_database
 export SYMFONY__DATABASE__NAME=nama_database
 export SYMFONY__DATABASE__USER=username_database
 export SYMFONY__DATABASE__PASSWORD=password_database
+export SYMFONY__MAIL__HOST=mail_host
+export SYMFONY__MAIL__USER=mail_user
+export SYMFONY__MAIL__PASSWORD=mail_pass
 export SYMFONY__NODE__PATH="/usr/local/bin/node"
 export SYMFONY__NODE__MODULES_PATH="/usr/local/lib/node_modules"
 export SYMFONY__COFFEE__PATH="/usr/local/bin/coffee"
@@ -104,7 +107,7 @@ Jalankan perintah `php app/console doctrine:migrations:migrate` untuk mengupdate
 
 Jalankan perintah `php app/console assetic:dump` untuk dump assets yang memakai assetic.
 
-Jalankan perintah `php app/console doctrine:fixtures:load` untuk mengload data dummy.
+Jalankan perintah `php app/console doctrine:fixtures:load --purge-with-truncate` untuk mengload data dummy.
 
 Jalankan perintah `php app/console fos:elastica:populate` untuk mengpopulate data kedalam elasticsearch
 

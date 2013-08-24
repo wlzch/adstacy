@@ -89,7 +89,7 @@
                       </li>
                       <li class="social-login">
                         {% for owner in hwi_oauth_resource_owners() %}
-                          <a class="btn btn-primary btn-block btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{ owner|trans({}, 'HWIOAuthBundle') }}</a>
+                          <a class="btn btn-primary btn-block btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">Login with {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
                         {% endfor %}
                       </li>
                       <li class="form-footer">

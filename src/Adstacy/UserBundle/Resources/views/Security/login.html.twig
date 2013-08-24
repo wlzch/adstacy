@@ -12,10 +12,6 @@
 {% endblock %}
 
 {% block content %}
-  {% if error %}
-      <div>{{ error|trans }}</div>
-  {% endif %}
-
   <div class="form-container panel panel-default">
     <form class="form-horizontal" role="form" action="{{ path("fos_user_security_check") }}" method="post">
       <h1>Login</h1>
@@ -35,10 +31,15 @@
         <label for="password" class="hide">{{ 'security.login.password'|trans }}</label>
         <input type="password" class="form-control input-lg" id="password" name="_password" required="required" placeholder="Password">
 
-        <input type="checkbox" id="remember_me" name="_remember_me" value="on">
-        <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+        <div class="clearfix">
+          <input type="checkbox" id="remember_me" name="_remember_me" value="on">
+          <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
 
-        <input type="submit" class="btn btn-primary btn-lg pull-right" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}">
+          <input type="submit" class="btn btn-primary btn-lg pull-right" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}">
+        </div>
+        {% if error %}
+            <div class="alert alert-danger">{{ error|trans }}</div>
+        {% endif %}
       </div>
 
       <div class="form-footer">
