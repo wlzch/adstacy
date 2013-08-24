@@ -184,16 +184,17 @@
         $masonry.masonry({
           columnWidth: 250,
           isFitWidth: true,
-          isInitLayout: false,
           transitionDuration: 0,
           itemSelector: '.ad'
         });
-        $masonry.masonry('on', 'layoutComplete', function(msnryInstance) {
-          $masonryContainer.css('width', msnryInstance.cols * msnryInstance.columnWidth + 'px');
+
+        var $window = $(window);
+        $window.on('resize orientationChanged', function() {
+          $masonryContainer.css('width', Math.floor($window.width()/250)*250);
         });
-        $masonry.masonry();
 
         $(document).ready(function() {
+          $masonryContainer.css('width', Math.floor($window.width()/250)*250);
           /*
           var defaults = {
               containerID: 'toTop', // fading element id
