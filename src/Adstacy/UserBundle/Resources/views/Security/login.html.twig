@@ -16,13 +16,13 @@
     <form class="form-horizontal" role="form" action="{{ path("fos_user_security_check") }}" method="post">
       <h1>Login</h1>
 
-      <div class="social-login">
+      <div class="ads-form-section">
         {% for owner in hwi_oauth_resource_owners() %}
-          <a class="btn btn-primary btn-block btn-lg btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{ owner|trans({}, 'HWIOAuthBundle') }}</a>
+          <a class="btn btn-block btn-lg btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{ owner|trans({}, 'HWIOAuthBundle') }}</a>
         {% endfor %}
       </div>
 
-      <div class="user-login clearfix">
+      <div class="ads-form-section">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
 
         <label for="username" class="hide">{{ 'security.login.username'|trans }}</label>
@@ -31,19 +31,23 @@
         <label for="password" class="hide">{{ 'security.login.password'|trans }}</label>
         <input type="password" class="form-control input-lg" id="password" name="_password" required="required" placeholder="Password">
 
-        <div class="clearfix">
-          <input type="checkbox" id="remember_me" name="_remember_me" value="on">
-          <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
-
-          <input type="submit" class="btn btn-primary btn-lg pull-right" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}">
+        <div class="inline-block">
+          <div class="span1of2">
+            <input type="checkbox" id="remember_me" name="_remember_me" value="on">
+            <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+          </div>
+          <div class="span1of2">
+            <input type="submit" class="btn btn-primary btn-lg pull-right" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}">
+          </div>
         </div>
+
         {% if error %}
-            <div class="alert alert-danger">{{ error|trans }}</div>
+          <div class="alert alert-danger">{{ error|trans }}</div>
         {% endif %}
       </div>
 
-      <div class="form-footer">
-        <a href="#">Register new account</a>
+      <div class="ads-form-section">
+        <a href="{{ path('fos_user_registration_register') }}">Register new account</a>
       </div>
     </form>
   </div>
