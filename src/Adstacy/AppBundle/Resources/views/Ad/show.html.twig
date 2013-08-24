@@ -2,4 +2,5 @@
 
 {% block content %}
   {{ ad.description }}
+  <a class="btn btn-primary btn-wall" href="{{ path('adstacy_app_wall_show', {id: ad.wall.id}) }}">{{ ad.wall.name }}</a>
 {% endblock %}

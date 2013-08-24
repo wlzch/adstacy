@@ -34,8 +34,14 @@ adstacy_app_ad_unpromote:
     requirements:
         id: \d+
 
+adstacy_app_wall_show:
+    pattern: /walls/{id}
+    defaults:
+        _controller: AdstacyAppBundle:Wall:show
+    requirements:
+        id: \d+
+
 adstacy_app_wall_create:
     pattern: /walls/create
     defaults:
         _controller: AdstacyAppBundle:Wall:add
-

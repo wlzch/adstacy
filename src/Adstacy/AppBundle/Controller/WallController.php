@@ -9,6 +9,24 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class WallController extends Controller
 {
+
+    /**
+     * Show wall
+     *
+     * @param integer id
+     */
+    public function showAction($id)
+    {
+        $wall = $this->getRepository('AdstacyAppBundle:Wall')->find($id);
+
+        if (!$wall) {
+            throw $this->createNotFoundException();
+        }
+
+        return $this->render('AdstacyAppBundle:Wall:show.html.twig', array(
+            'wall' => $wall
+        ));
+    }
     
     /**
      * @Secure(roles="ROLE_USER")
