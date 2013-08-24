@@ -33,12 +33,12 @@
         '@AdstacyAppBundle/Resources/public/js/masonry.pkgd.min.js'
         '@AdstacyAppBundle/Resources/public/js/jquery.lazyload.min.js'
         '@AdstacyAppBundle/Resources/public/js/jquery.jscroll.js'
+        '@AdstacyAppBundle/Resources/public/js/module/promote.js'
         'bundles/fosjsrouting/js/router.js'
       %}
         <script src="{{ asset_url }}" type="text/javascript"></script>
       {% endjavascripts %}
       <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}" type="text/javascript"></script>
-      <script type="text/javascript" src="{{ asset('bundles/adstacyapp/js/module/promote.js') }}"></script>
     {% endblock %}
 
   </head>
@@ -104,19 +104,19 @@
 
     {% block javascripts %}
       <script type="text/javascript">
-        var $posts = $('#posts');
+        var $ads = $('#ads');
         var $headerContainer = $('#header-container');
-        $posts.masonry({
+        $ads.masonry({
           columnWidth: 250,
           isFitWidth: true,
           isInitLayout: false,
           transitionDuration: 0,
-          itemSelector: '.post'
+          itemSelector: '.ad'
         });
-        $posts.masonry('on', 'layoutComplete', function(msnryInstance) {
+        $ads.masonry('on', 'layoutComplete', function(msnryInstance) {
           $headerContainer.css('width', msnryInstance.cols * msnryInstance.columnWidth + 'px');
         });
-        $posts.masonry();
+        $ads.masonry();
 
         $(document).ready(function() {
           /*

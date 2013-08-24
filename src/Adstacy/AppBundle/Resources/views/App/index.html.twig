@@ -1,8 +1,8 @@
 {% extends 'AdstacyAppBundle::layout.html.twig' %}
 
 {% block content %}
-  <div id="posts" class="jscroll clearfix">
-    {% include 'AdstacyAppBundle:Includes:posts.html.twig' with {posts: posts} %}
+  <div id="ads" class="jscroll clearfix">
+    {% include 'AdstacyAppBundle:Includes:ads.html.twig' with {ads: ads} %}
   </div>
 {% endblock %}
 
@@ -13,9 +13,9 @@
       $('.jscroll').jscroll({
         nextSelector: 'a.next-page',
         callback: function(a, b) {
-          var $posts = $('.jscroll-added:last .post');
-          $masonry = $('#posts').masonry('appended', $posts);
-          $posts.find('img.lazy').lazyload();
+          var $ads = $('.jscroll-added:last .ad');
+          $masonry = $('#ads').masonry('appended', $ads);
+          $ads.find('img.lazy').lazyload();
         }
       });
     });

@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class PostType extends AbstractType
+class AdType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options = array())
     {
@@ -38,8 +38,8 @@ class PostType extends AbstractType
                 'class' => 'tinymce'
             )
         ));
-        $builder->add('post', 'submit', array(
-            'label' => 'Post'
+        $builder->add('ad', 'submit', array(
+            'label' => 'Ad'
         ));
     }
 
@@ -47,7 +47,7 @@ class PostType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Adstacy\AppBundle\Entity\Post'
+                'data_class' => 'Adstacy\AppBundle\Entity\Ad'
             )
         );
         $resolver->setRequired(array('username'));
@@ -55,6 +55,6 @@ class PostType extends AbstractType
 
     public function getName()
     {
-        return 'post';
+        return 'ad';
     }
 }

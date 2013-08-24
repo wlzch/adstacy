@@ -119,7 +119,7 @@ class User implements UserInterface, GroupableInterface
     private $interests;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Post", mappedBy="promotees")
+     * @ORM\ManyToMany(targetEntity="Ad", mappedBy="promotees")
      */
     private $promotes;
 
@@ -1117,10 +1117,10 @@ class User implements UserInterface, GroupableInterface
     /**
      * Add promotes
      *
-     * @param \Adstacy\AppBundle\Entity\Post $promotes
+     * @param \Adstacy\AppBundle\Entity\Ad $promotes
      * @return User
      */
-    public function addPromote(\Adstacy\AppBundle\Entity\Post $promotes)
+    public function addPromote(\Adstacy\AppBundle\Entity\Ad $promotes)
     {
         $this->promotes[] = $promotes;
         $this->setPromotesCount($this->getPromotesCount() + 1);
@@ -1131,9 +1131,9 @@ class User implements UserInterface, GroupableInterface
     /**
      * Remove promotes
      *
-     * @param \Adstacy\AppBundle\Entity\Post $promotes
+     * @param \Adstacy\AppBundle\Entity\Ad $promotes
      */
-    public function removePromote(\Adstacy\AppBundle\Entity\Post $promotes)
+    public function removePromote(\Adstacy\AppBundle\Entity\Ad $promotes)
     {
         $this->promotes->removeElement($promotes);
         $this->setPromotesCount($this->getPromotesCount() - 1);
@@ -1321,14 +1321,14 @@ class User implements UserInterface, GroupableInterface
     }
 
     /**
-     * Checks where user has promote this post
+     * Checks where user has promote this ad
      *
-     * @param Post $post
+     * @param Ad $ad
      *
      * @return boolean
      */
-    public function hasPromote(Post $post)
+    public function hasPromote(Ad $ad)
     {
-        return $this->getPromotes()->contains($post);
+        return $this->getPromotes()->contains($ad);
     }
 }

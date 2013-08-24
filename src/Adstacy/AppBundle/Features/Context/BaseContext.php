@@ -16,7 +16,7 @@ use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
 
 use Adstacy\AppBundle\Entity\Wall;
-use Adstacy\AppBundle\Entity\Post;
+use Adstacy\AppBundle\Entity\Ad;
 use Adstacy\AppBundle\Entity\User;
 use Adstacy\AppBundle\Entity\Image;
 use Faker\Factory as FakerFactory;
@@ -61,11 +61,11 @@ class BaseContext extends MinkContext
     }
 
     /**
-     * @Given /^I have (\d+) posts/
+     * @Given /^I have (\d+) ads/
      */
-    public function iHavePosts($num)
+    public function iHaveAds($num)
     {
-        $this->truncate('Post');
+        $this->truncate('Ad');
         $em = $this->get('doctrine')->getManager();
         $walls = $this->getWalls();
         $images = $this->getImages();
@@ -76,11 +76,11 @@ class BaseContext extends MinkContext
             $tags = array_merge($tags, $definedTags);
             $description = $this->faker->sentence($this->faker->randomNumber(1, 10)).implode('#', $tags);
             $wall = $walls[$this->faker->randomNumber(0, count($walls) - 1)];
-            $post = new Post();
-            $post->setImage($images[$i]);
-            $post->setDescription($description);
-            $post->setWall($wall);
-            $em->persist($post);
+            $ad = new Ad();
+            $ad->setImage($images[$i]);
+            $ad->setDescription($description);
+            $ad->setWall($wall);
+            $em->persist($ad);
         }
         $em->flush();
     }

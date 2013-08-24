@@ -1,0 +1,18 @@
+<div class="ad">
+  <div class="pic">
+    <img class="lazy" src="{{ asset('bundles/adstacyapp/img/transparent.gif') }}"
+      data-original="{{ vich_uploader_asset(ad.image, 'file')|imagine_filter('thumbnail') }}"
+      width="{{ thumb_width }}px" height="{{ ad.thumbHeight }}px" alt="testing">
+  </div>
+  <div class="desc">
+    <p>{{ parse_hashtag(ad.description) }}</p>
+    <div>
+      <span><span class="promotes-count">{{ ad.promoteesCount }}</span> promotes</span>
+      {% if app.user and app.user.hasPromote(ad) %}
+        <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="unpromote">Unpromote</a>
+      {% else %}
+        <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="promote">Promote</a>
+      {% endif %}
+    </div>
+  </div>
+</div>

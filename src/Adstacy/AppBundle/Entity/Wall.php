@@ -46,15 +46,15 @@ class Wall
 
     /**
      * @Exclude
-     * @ORM\OneToMany(targetEntity="Post", mappedBy="wall", cascade={"remove", "persist"})
+     * @ORM\OneToMany(targetEntity="Ad", mappedBy="wall", cascade={"remove", "persist"})
      */
-    private $posts;
+    private $ads;
 
     /**
      * @Exclude
-     * @ORM\Column(name="posts_count", type="integer")
+     * @ORM\Column(name="ads_count", type="integer")
      */
-    private $postsCount;
+    private $adsCount;
 
     /**
      * @Exclude
@@ -79,8 +79,8 @@ class Wall
      */
     public function __construct()
     {
-        $this->posts = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->setPostsCount(0);
+        $this->ads = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->setAdsCount(0);
         $this->followers = new \Doctrine\Common\Collections\ArrayCollection();
         $this->setFollowersCount(0);
     }
@@ -142,39 +142,39 @@ class Wall
     }
 
     /**
-     * Add posts
+     * Add ads
      *
-     * @param \Adstacy\AppBundle\Entity\Post $posts
+     * @param \Adstacy\AppBundle\Entity\Ad $ads
      * @return Wall
      */
-    public function addPost(\Adstacy\AppBundle\Entity\Post $posts)
+    public function addAd(\Adstacy\AppBundle\Entity\Ad $ads)
     {
-        $this->posts[] = $posts;
-        $this->setPostsCount($this->getPostsCount() + 1);
+        $this->ads[] = $ads;
+        $this->setAdsCount($this->getAdsCount() + 1);
     
         return $this;
     }
 
     /**
-     * Remove posts
+     * Remove ads
      *
-     * @param \Adstacy\AppBundle\Entity\Post $posts
+     * @param \Adstacy\AppBundle\Entity\Ad $ads
      */
-    public function removePost(\Adstacy\AppBundle\Entity\Post $posts)
+    public function removeAd(\Adstacy\AppBundle\Entity\Ad $ads)
     {
-        $this->posts->removeElement($posts);
-        $this->setPostsCount($this->getPostsCount() - 1);
+        $this->ads->removeElement($ads);
+        $this->setAdsCount($this->getAdsCount() - 1);
     
     }
 
     /**
-     * Get posts
+     * Get ads
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getPosts()
+    public function getAds()
     {
-        return $this->posts;
+        return $this->ads;
     }
 
     /**
@@ -236,26 +236,26 @@ class Wall
     }
 
     /**
-     * Set postsCount
+     * Set adsCount
      *
-     * @param integer $postsCount
+     * @param integer $adsCount
      * @return Wall
      */
-    public function setPostsCount($postsCount)
+    public function setAdsCount($adsCount)
     {
-        $this->postsCount = $postsCount;
+        $this->adsCount = $adsCount;
     
         return $this;
     }
 
     /**
-     * Get postsCount
+     * Get adsCount
      *
      * @return integer 
      */
-    public function getPostsCount()
+    public function getAdsCount()
     {
-        return $this->postsCount;
+        return $this->adsCount;
     }
 
     /**
@@ -296,8 +296,8 @@ class Wall
         preg_match_all('/#(\w+)/', $this->description, $matches);
         $this->setTags($matches[1]);
         // TODO: unique tags
-        foreach ($this->getPosts() as $post) {
-            $post->setTags(array_merge($matches[1], $post->getTags()));
+        foreach ($this->getAds() as $ad) {
+            $ad->setTags(array_merge($matches[1], $ad->getTags()));
         }
     }
 

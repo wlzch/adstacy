@@ -4,16 +4,16 @@ imports:
 
 parameters:
     elfinder.loader: Adstacy\AppBundle\Loader\FMElfinderLoader
-    max_post_per_page: 20
+    max_ad_per_page: 20
     thumb_width: 234
     web_dir: %kernel.root_dir%/../web
     elastica_website_types:
-        post:
+        ad:
             mappings:
                 tags: { boost: 5 }
             persistence:
                 driver: orm
-                model: Adstacy\AppBundle\Entity\Post
+                model: Adstacy\AppBundle\Entity\Ad
                 provider: ~
                 finder: ~
                 listener: ~
@@ -45,7 +45,7 @@ twig:
     strict_variables: %kernel.debug%
     globals:
         thumb_width: %thumb_width%
-        max_post_per_page: %max_post_per_page%
+        max_ad_per_page: %max_ad_per_page%
     form:
         resources:
             - 'AdstacyAppBundle:Form:fields.html.twig'
