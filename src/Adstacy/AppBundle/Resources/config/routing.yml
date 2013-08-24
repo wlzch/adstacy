@@ -8,8 +8,8 @@ adstacy_app_search:
     defaults:
         _controller: AdstacyAppBundle:App:search
 
-adstacy_app_ad_add:
-    pattern: /ads/add
+adstacy_app_ad_create:
+    pattern: /ads/create
     defaults:
         _controller: AdstacyAppBundle:Ad:add
 
@@ -34,8 +34,8 @@ adstacy_app_ad_unpromote:
     requirements:
         id: \d+
 
-adstacy_app_wall_add:
-    pattern: /walls/add
+adstacy_app_wall_create:
+    pattern: /walls/create
     defaults:
         _controller: AdstacyAppBundle:Wall:add
 

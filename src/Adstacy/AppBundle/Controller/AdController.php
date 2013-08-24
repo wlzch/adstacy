@@ -40,7 +40,7 @@ class AdController extends Controller
         ));
         $form->handleRequest($request);
         $wallForm = $this->createForm(new WallType(), new Wall(), array(
-            'action' => $this->generateUrl('adstacy_app_wall_add') 
+            'action' => $this->generateUrl('adstacy_app_wall_create') 
         ));
 
         if ($form->isValid()) {
@@ -49,7 +49,7 @@ class AdController extends Controller
             $em->flush();
         }
 
-        return $this->render('AdstacyAppBundle:Ad:add.html.twig', array(
+        return $this->render('AdstacyAppBundle:Ad:create.html.twig', array(
             'form' => $form->createView(),
             'wallForm' => $wallForm->createView()
         ));
