@@ -1,0 +1,18 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<form role="form" action="{{ path("fos_user_security_check") }}" method="post">
+  <div class="clearfix">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
+
+    <label for="username" class="hide">{{ 'security.login.username'|trans }}</label>
+    <input type="text" class="form-control input-lg" id="username" name="_username" required="required" placeholder="Username">
+
+    <label for="password" class="hide">{{ 'security.login.password'|trans }}</label>
+    <input type="password" class="form-control input-lg" id="password" name="_password" required="required" placeholder="Password">
+
+    <input type="checkbox" id="remember_me" name="_remember_me" value="on">
+    <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+
+    <input type="submit" class="btn btn-block btn-primary btn-lg pull-right" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}">
+  </div>
+</form>
