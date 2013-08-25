@@ -35,4 +35,29 @@ class WallRepository extends EntityRepository
 
         return $query->setParameter('id', $user->getId())->getResult();
     }
+
+    /**
+     * Return number of walls by $wallUser followed by $user
+     *
+     * @param User $wallUser
+     * @param User $user
+     *
+     * @return integer
+     */
+    public function countFollowedByUser(User $wallUser, User $user)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('
+            SELECT COUNT(w.id)
+            FROM AdstacyAppBundle:Wall w
+            JOIN w.user u
+            JOIN w.followers f
+            WHERE u.id = :wall_user_id AND f.id = :user_id
+        ');
+
+        return $query->setParameter('wall_user_id', $wallUser->getId())
+            ->setParameter('user_id', $user->getId())
+            ->getSingleScalarResult()
+        ;
+    }
 }

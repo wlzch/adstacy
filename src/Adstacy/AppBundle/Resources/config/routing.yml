@@ -41,6 +41,13 @@ adstacy_app_wall_show:
     requirements:
         id: \d+
 
+adstacy_app_wall_follow:
+    pattern: /walls/{id}/follow
+    defaults:
+        _controller: AdstacyAppBundle:Wall:follow
+    requirements:
+        id: \d+
+
 adstacy_app_wall_create:
     pattern: /walls/create
     defaults:

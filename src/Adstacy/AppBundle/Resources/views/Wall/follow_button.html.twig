@@ -1,0 +1,7 @@
+  {# only add button if logged in and wall is not owned by logged in user #}
+  {% set user = app.user %}
+  {% if user and wall.user != user %}
+    {% if not user.hasFollowedWall(wall) %}
+      <a href="{{ path('adstacy_app_wall_follow', {id: wall.id}) }}" class="btn btn-primary follow-wall">Follow</a>
+    {% endif %}
+  {% endif %}
