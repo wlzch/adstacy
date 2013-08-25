@@ -91,9 +91,9 @@ class UserController extends Controller
         }
         $adsCount = $this->getRepository('AdstacyAppBundle:Ad')->countByUser($user);
         $wallsCount = $this->getRepository('AdstacyAppBundle:Wall')->countByUser($user);
-        $promotesCount = $this->getRepository('AdstacyAppBundle:Ad')->countPromotesByUser($user);
-        $followersCount = $this->getRepository('AdstacyAppBundle:User')->countFollowersByUser($user);
-        $followingsCount = $this->getRepository('AdstacyAppBundle:User')->countFollowingsByUser($user);
+        $promotesCount = $user->getPromotesCount();
+        $followersCount = $user->getFollowersCount();
+        $followingsCount = $user->getFollowingsCount();
 
         return array(
             'user' => $user,
