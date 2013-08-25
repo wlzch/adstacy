@@ -54,7 +54,7 @@ class WallController extends Controller
             return new JsonResponse($serializer->serialize($form->getErrors(), 'json'));
         }
 
-        return $this->render('AdstacyAppBundle:Wall:add.html.twig', array(
+        return $this->render('AdstacyAppBundle:Wall:create.html.twig', array(
             'form' => $form->createView()
         ));
     }
