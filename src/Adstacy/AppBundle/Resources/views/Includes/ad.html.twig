@@ -6,12 +6,12 @@
       width="{{ thumb_width }}px" height="{{ ad.thumbHeight }}px" alt="{{ ad.description }}">
     </a>
   </div>
-  <div class="ad-desc">
+  <div class="ad-desc border-top">
     <div class="desc">
       <p>{{ parse_hashtag(ad.description) }}</p>
     </div>
     <div class="inline-block">
-      <a class="promotes-count-container btn-muted"><span class="promotes-count">{{ ad.promoteesCount }}</span> promotes</a>
+      <a class="border-top {% if app.user %}box-medium{% else %}box-large{% endif %} btn-muted"><span class="promotes-count">{{ ad.promoteesCount }}</span> promotes</a>
       {% if app.user %}
         {% if app.user.hasPromote(ad) %}
           <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" title="unpromote" class="btn-success unpromote">
