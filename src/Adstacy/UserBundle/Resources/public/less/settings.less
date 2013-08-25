@@ -1,7 +1,7 @@
 .settings-container {
   margin: 0 auto;
   margin-bottom: 40px;
-  max-width: 760px;
+  width: 760px;
 
   .settings-section {
     padding: 20px;
@@ -39,6 +39,50 @@
           padding: 6px 2px;
         }
       }
+    }
+
+    .image-area {
+      float: left;
+      border-right: 1px solid #dfdfdf;
+      margin-right: 30px;
+      min-height: 500px;
+      overflow: hidden;
+      padding-right: 29px;
+      width: 260px;
+
+      .image-upload {
+        width: 236px;
+      }
+
+      .image-preview {
+        display: block;
+        margin-top: 10px;
+      }
+    }
+    .meta-area {
+      float: left;
+      width: 520px;
+
+      > div {
+        margin-bottom: 20px;
+      }
+
+      .select2-container {
+        .select2-choice {
+          height: 34px;
+          padding: 3px 12px;
+        }
+      }
+    }
+  }
+}
+
+.create-ad-container {
+  width: 860px;
+
+  .modal-body {
+    > div {
+      margin-bottom: 10px;
     }
   }
 }

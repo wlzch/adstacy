@@ -39,7 +39,7 @@ class AdType extends AbstractType
             )
         ));
         $builder->add('ad', 'submit', array(
-            'label' => 'Ad'
+            'label' => 'Create Ads'
         ));
     }
 

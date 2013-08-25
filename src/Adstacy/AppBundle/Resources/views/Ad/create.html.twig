@@ -4,48 +4,67 @@
   {{ parent() }}
   {% stylesheets filter='cssrewrite, uglifycss'
     'bundles/adstacyapp/css/select2.css'
+    'bundles/adstacyuser/less/settings.less'
   %}
     <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
   {% endstylesheets %}
 {% endblock %}
 
 {% block content %}
-  {{ form_start(form) }}
-    {{ form_errors(form) }}
-    <div id="form-wall">
-      {{ form_label(form.wall) }}
-      {{ form_widget(form.wall) }}
-      <a data-toggle="modal" href="#new-wall-modal" class="btn btn-primary "><i class="icon-plus-sign"></i></a>
-      {{ form_errors(form.wall) }}
-    </div>
-
-    {{ form_rest(form) }}
-  {{ form_end(form) }}
-
-  <div class="modal fade" id="new-wall-modal" tabindex="-1" role="dialog"> 
-    <div class="modal-dialog">
-      <div class="modal-content">
-        {{ form_start(wallForm) }}
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Create Wall</h4>
+  <div class="settings-container create-ad-container panel panel-default">
+    <section class="settings-section clearfix">
+      {{ form_start(form) }}
+        {{ form_errors(form) }}
+        <div class="image-area">
+          {{ form_row(form.image) }}
         </div>
-        <div class="modal-body">
-          <div class="modal-errors"></div>
-          {{ form_row(wallForm.name) }}
-          {{ form_row(wallForm.description) }}
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button id="save-wall" type="button" class="btn btn-primary">Save changes</button>
-        </div>
-        {{ form_end(wallForm) }}
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
 
-  {{ elfinder_tinymce_init4() }}
-  {{ tinymce_init() }}
+        <div class="meta-area">
+          <div id="form-wall">
+            {{ form_label(form.wall) }}
+            <div>
+              {{ form_widget(form.wall) }}
+              <a data-toggle="modal" href="#new-wall-modal" class="btn btn-primary "><i class="icon-plus-sign"></i></a>
+            </div>
+            {{ form_errors(form.wall) }}
+          </div>
+
+          {{ form_row(form.description) }}
+
+          {{ form_row(form.content) }}
+
+          {{ form_widget(form.ad, { attr: { class: 'form-control btn btn-primary' } }) }}
+
+          {{ form_rest(form) }}
+        </div>
+      {{ form_end(form) }}
+
+      <div class="modal fade" id="new-wall-modal" tabindex="-1" role="dialog"> 
+        <div class="modal-dialog">
+          <div class="modal-content">
+            {{ form_start(wallForm) }}
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title">Create Wall</h4>
+            </div>
+            <div class="modal-body">
+              <div class="modal-errors"></div>
+              {{ form_row(wallForm.name) }}
+              {{ form_row(wallForm.description) }}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button id="save-wall" type="button" class="btn btn-primary">Save changes</button>
+            </div>
+            {{ form_end(wallForm) }}
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+
+      {{ elfinder_tinymce_init4() }}
+      {{ tinymce_init() }}
+    </section>
+  </div>
 {% endblock %}
 
 {% block javascripts %}
