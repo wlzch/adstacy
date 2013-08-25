@@ -1,15 +1,21 @@
 {% extends 'AdstacyAppBundle::layout.html.twig' %}
 
-{% block title %}{{ user.username }} | Adscaty{% endblock %}
+{% block title %}{{ user.username }} | Adstacy{% endblock %}
 
 {% block content %}
   <div class="adstacy-container">
-    {{ user.username }}
     <a class="btn btn-primary" href="{{ path('adstacy_app_user_ads', {username: user.username}) }}">{{ adsCount }} Ads</a>
     <a class="btn btn-primary" href="{{ path('adstacy_app_user_walls', {username: user.username}) }}">{{ wallsCount }} Walls</a>
     <a class="btn btn-primary" href="{{ path('adstacy_app_user_promotes', {username: user.username}) }}">{{ promotesCount }} Promotes</a>
-    <a class="btn btn-primary" href="{{ path('adstacy_app_user_followers', {username: user.username}) }}">{{ followersCount }} Followers</a>
+    <a class="btn btn-primary" href="{{ path('adstacy_app_user_followers', {username: user.username}) }}"><span class="user-followers-count">{{ followersCount }}</span> Followers</a>
     <a class="btn btn-primary" href="{{ path('adstacy_app_user_followings', {username: user.username}) }}">{{ followingsCount }} Followings</a>
+    {% if app.user and app.user != user %}
+      {% if app.user.hasFollowUser(user) %}
+        <a class="btn btn-primary unfollow-user" href="{{ path('adstacy_app_user_unfollow', {username: user.username}) }}">Unfollow</a> 
+      {% else %}
+        <a class="btn btn-primary follow-user" href="{{ path('adstacy_app_user_follow', {username: user.username}) }}">Follow</a> 
+      {% endif %}
+    {% endif %}
     {% block show_content %}{% endblock %}
   </div>
 {% endblock %}

@@ -1394,7 +1394,7 @@ class User implements UserInterface, GroupableInterface
      */
     public function hasFollowUser(User $user)
     {
-        return $this->getFollowers()->contains($user);
+        return $user->getFollowers()->contains($this);
     }
 
     /**
