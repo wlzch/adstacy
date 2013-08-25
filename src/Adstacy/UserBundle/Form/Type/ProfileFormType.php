@@ -42,11 +42,11 @@ class ProfileFormType extends BaseType
                 'placeholder' => 'Adstacy'
             )
         ));
-        $builder->add('about', 'text', array(
+        $builder->add('about', 'textarea', array(
             'label' => 'About Me',
             'required' => false,
             'attr' => array(
-                'placeholder' => 'A men fashion enthusiasts'
+                'placeholder' => 'A men fashion enthusiasts. Contact 08XXXXXXXXXX. BB 2BXXXX. Medan.'
             )
         ));
         $builder->add('save', 'submit', array(

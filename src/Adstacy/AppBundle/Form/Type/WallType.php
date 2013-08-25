@@ -16,7 +16,7 @@ class WallType extends AbstractType
             'error_bubbling' => true,
             'attr' => array(
                 'class' => 'form-control',
-                'placeholder' => 'Kemeja Pria'
+                'placeholder' => 'Men T-Shirt'
             )
         ));
         $builder->add('description', 'textarea', array(
@@ -25,7 +25,7 @@ class WallType extends AbstractType
             'error_bubbling' => true,
             'attr' => array(
                 'class' => 'form-control',
-                'placeholder' => 'Semua #Kemeja #Pria ber#Kualitas'
+                'placeholder' => 'Selling #Men #Tshirt with the #best #quality'
             )
         ));
     }

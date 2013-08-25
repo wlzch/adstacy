@@ -26,10 +26,11 @@ class AdType extends AbstractType
         $builder->add('image', 'image', array(
             'label' => 'Image' 
         ));
-        $builder->add('description', 'text', array(
+        $builder->add('description', 'textarea', array(
             'label' => 'Description',
             'attr' => array(
-                'class' => 'form-control'
+                'class' => 'form-control',
+                'placeholder' => 'Adstacy T-Shirt Rp250.000 #branded #tshirt #medan #cool'
             )
         ));
         $builder->add('content', 'textarea', array(
