@@ -48,6 +48,13 @@ adstacy_app_wall_follow:
     requirements:
         id: \d+
 
+adstacy_app_wall_unfollow:
+    pattern: /walls/{id}/unfollow
+    defaults:
+        _controller: AdstacyAppBundle:Wall:unfollow
+    requirements:
+        id: \d+
+
 adstacy_app_wall_create:
     pattern: /walls/create
     defaults:

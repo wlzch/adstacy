@@ -7,7 +7,7 @@
 {% block content %}
   {% set user = app.user %}
   <div class="masonry-container">
-    <h2>{{ wall.name }} ({{ wall.adsCount }} ads) ({{ wall.followersCount }} followers)
+    <h2>{{ wall.name }} ({{ wall.adsCount }} ads) (<span class="followers-count">{{ wall.followersCount }}</span> followers)
       {% include 'AdstacyAppBundle:Wall:follow_button.html.twig' with {wall: wall} %}
     </h2>
     <h3>{{ parse_hashtag(wall.description) }}</h3>

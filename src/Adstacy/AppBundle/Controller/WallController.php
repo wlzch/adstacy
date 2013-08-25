@@ -81,16 +81,15 @@ class WallController extends Controller
 
         if ($wallUser == $user) {
             if ($request->isXmlHttpRequest()) {
-                return new JsonResponse(json_encode(array('error' => 'You have not follow your own wall')));
+                return new JsonResponse(json_encode(array('error' => 'You may not follow your own wall')));
             }
             $this->addFlash('error', 'You may not follow your own wall');
         } else {
-            $wallsCount = $repo->countFollowedByUser($wallUser, $user);
-
-            if ($wallsCount == 0) {
-                $wallUser->addFollower($user);
-            }
             if (!$user->hasFollowedWall($wall)) {
+                $wallsCount = $repo->countFollowedByUser($wallUser, $user);
+                if ($wallsCount == 0) {
+                    $wallUser->addFollower($user);
+                }
                 $wall->addFollower($user);
 
                 $em->persist($wall);
@@ -103,9 +102,63 @@ class WallController extends Controller
                 $this->addFlash('success', 'successfully followed this wall');
             } else {
                 if ($request->isXmlHttpRequest()) {
-                    return new JsonResponse(json_encode(array('error' => 'You have not follow this wall yet')));
+                    return new JsonResponse(json_encode(array('error' => 'You may not follow this wall yet')));
                 }
                 $this->addFlash('error', 'You may not follow this wall twice');
+            }
+        }
+
+        return $this->redirect($this->generateUrl('adstacy_app_wall_show', array('id' => $id)));
+    }
+
+    /**
+     * @Secure(roles="ROLE_USER")
+     *
+     * User B will be automatically unfollowed by User A if there is only this wall left
+     */
+    public function unfollowAction($id)
+    {
+        $request = $this->getRequest();
+        $user = $this->getUser();
+        $repo = $this->getRepository('AdstacyAppBundle:Wall');
+        $em = $this->getManager();
+
+        $wall = $repo->find($id);
+        if (!$wall) {
+            throw $this->createNotFoundException();
+        }
+
+        $wallUser = $wall->getUser();
+
+        // user cannot unfollow his own wall
+        if ($wallUser == $user) {
+            if ($request->isXmlHttpRequest()) {
+                return new JsonResponse(json_encode(array('error' => 'You may not unfollow your own wall')));
+            }
+            $this->addFlash('error', 'You may not follow your own wall');
+        } else {
+            // user can only unfollow if he has follow it
+            if ($user->hasFollowedWall($wall)) {
+                // if this is the last wall $user follows $wallUser walls, $user will be automatically unfollow $wallUser
+                $wallsCount = $repo->countFollowedByUser($wallUser, $user);
+                if ($wallsCount == 1) {
+                    $wallUser->removeFollower($user);
+                }
+                $wall->removeFollower($user);
+
+                $em->persist($wall);
+                $em->persist($wallUser);
+                $em->flush();
+
+                if ($request->isXmlHttpRequest()) {
+                    return new JsonResponse(json_encode(array('id' => $wall->getId(), 'followers_count' => $wall->getFollowersCount())));
+                }
+                $this->addFlash('success', 'successfully unfollowed this wall');
+            } else {
+                if ($request->isXmlHttpRequest()) {
+                    return new JsonResponse(json_encode(array('error' => 'You may not unfollow this wall yet')));
+                }
+                $this->addFlash('error', 'You may not unfollow this wall twice');
             }
         }
 

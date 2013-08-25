@@ -10,14 +10,16 @@
     <p>{{ parse_hashtag(ad.description) }}</p>
     <div>
       <span><span class="promotes-count">{{ ad.promoteesCount }}</span> promotes</span>
-      {% if app.user and app.user.hasPromote(ad) %}
-        <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-primary unpromote">
-          <span aria-hidden="true" class="icon-thumbs-down"> Unpromote
-        </a>
-      {% else %}
-        <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-default promote">
-          <span aria-hidden="true" class="icon-thumbs-up"> Promote
-        </a>
+      {% if app.user %}
+        {% if app.user.hasPromote(ad) %}
+          <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-primary unpromote">
+            <span aria-hidden="true" class="icon-thumbs-down"> Unpromote
+          </a>
+        {% else %}
+          <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-default promote">
+            <span aria-hidden="true" class="icon-thumbs-up"> Promote
+          </a>
+        {% endif %}
       {% endif %}
     </div>
   </div>
