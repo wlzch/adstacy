@@ -229,6 +229,27 @@
           $btnNavbarExpand_span.toggleClass('icon-chevron-down');
           $navbarExpandContainer.toggleClass('hide');
         });
+        $('a.follow-wall,a.unfollow-wall').click(function() {
+          var $this = $(this);
+          $.post(this.href, function(data) {
+            var json = JSON.parse(data);
+            console.log(json);
+            if (!json.error) {
+              $this.parents().find('.followers-count').text(json.followers_count);
+              if ($this.hasClass('follow-wall')) {
+                $this.attr('href', Routing.generate('adstacy_app_wall_unfollow', {id: json.id}));
+                $this.text('Unfollow');
+              } else {
+                $this.attr('href', Routing.generate('adstacy_app_wall_follow', {id: json.id}));
+                $this.text('Follow');
+              }
+              $this.toggleClass('follow-wall');
+              $this.toggleClass('unfollow-wall');
+            }
+          });
+
+          return false;
+        });
       </script>
     {% endblock %}
   </body>
