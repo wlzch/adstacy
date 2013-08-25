@@ -68,7 +68,7 @@ class AdController extends Controller
 
         // user can only promote once
         if (!$user->hasPromote($ad)) {
-            $ad->addPromotee($this->getUser());
+            $ad->addPromotee($user);
             $em = $this->getManager();
             $em->persist($ad);
             $em->flush();
@@ -99,7 +99,7 @@ class AdController extends Controller
 
         // user can only unpromote if he has promote
         if ($user->hasPromote($ad)) {
-            $ad->removePromotee($this->getUser());
+            $ad->removePromotee($user);
             $em = $this->getManager();
             $em->persist($ad);
             $em->flush();

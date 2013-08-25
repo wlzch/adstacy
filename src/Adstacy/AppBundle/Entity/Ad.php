@@ -264,6 +264,7 @@ class Ad
     {
         $this->promotees[] = $promotees;
         $this->setPromoteesCount($this->getPromoteesCount() + 1);
+        $promotees->addPromote($this);
     
         return $this;
     }
@@ -277,6 +278,7 @@ class Ad
     {
         $this->promotees->removeElement($promotees);
         $this->setPromoteesCount($this->getPromoteesCount() - 1);
+        $promotees->removePromote($this);
     }
 
     /**
