@@ -45,7 +45,7 @@ class UserRepository extends EntityRepository
     {
         $em = $this->getEntitymanager();
         $query = $em->createQuery('
-            SELECT u.id
+            SELECT u
             FROM AdstacyAppBundle:User u
             JOIN u.followers f
             WHERE f.id = :id

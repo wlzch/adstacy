@@ -83,15 +83,7 @@ class User implements UserInterface, GroupableInterface
     private $followedWalls;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", inversedBy="followings")
-     * @ORM\JoinTable(name="follow",
-     *      joinColumns={
-     *        @ORM\JoinColumn(name="user_2_id", referencedColumnName="id")
-     *      },
-     *      inverseJoinColumns={
-     *        @ORM\JoinColumn(name="user_1_id", referencedColumnName="id")
-     *      }
-     * )
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="followings")
      **/
     private $followers;
 
@@ -101,7 +93,15 @@ class User implements UserInterface, GroupableInterface
     private $followersCount;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="followers")
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="followers")
+     * @ORM\JoinTable(name="follow",
+     *      joinColumns={
+     *        @ORM\JoinColumn(name="follower", referencedColumnName="id")
+     *      },
+     *      inverseJoinColumns={
+     *        @ORM\JoinColumn(name="followed", referencedColumnName="id")
+     *      }
+     * )
      **/
     private $followings;
 
