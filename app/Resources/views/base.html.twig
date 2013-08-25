@@ -228,9 +228,18 @@
 
         $('img.lazy').lazyload();
         $('a.promote,a.unpromote').promote();
-        $btnNavbarExpand.click(function() {
+        $btnNavbarExpand.click(function(event) {
           $btnNavbarExpand_span.toggleClass('icon-chevron-down');
           $navbarExpandContainer.toggleClass('hide');
+
+          event.stopPropagation();
+          event.preventDefault();
+
+          return false;
+        });
+        $('html, dropdown-toggle').click(function() {
+          $btnNavbarExpand_span.addClass('icon-chevron-down');
+          $navbarExpandContainer.addClass('hide');
         });
         $('a.follow-wall,a.unfollow-wall').click(function() {
           var $this = $(this);
