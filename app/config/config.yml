@@ -6,6 +6,7 @@ parameters:
     elfinder.loader: Adstacy\AppBundle\Loader\FMElfinderLoader
     max_ad_per_page: 20
     thumb_width: 234
+    mini_thumb_size: 118
     web_dir: %kernel.root_dir%/../web
     elastica_website_types:
         ad:
@@ -45,6 +46,7 @@ twig:
     strict_variables: %kernel.debug%
     globals:
         thumb_width: %thumb_width%
+        mini_thumb_size: %mini_thumb_size%
         max_ad_per_page: %max_ad_per_page%
     form:
         resources:
@@ -159,6 +161,10 @@ liip_imagine:
             quality: 75
             filters:
                 relative_resize: { widen: %thumb_width% }
+        mini_thumb:
+            quality: 50
+            filters:
+                thumbnail: { size: [118, 118], mode: outbound }
 
 fos_elastica:
     clients:

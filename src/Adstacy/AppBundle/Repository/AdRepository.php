@@ -41,6 +41,27 @@ class AdRepository extends EntityRepository
     }
 
     /**
+     * Find all ads by $user
+     *
+     * @param User $user
+     *
+     * @return array
+     */
+    public function findByUser(User $user)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('
+            SELECT a
+            FROM AdstacyAppBundle:Ad a
+            JOIN a.wall w
+            JOIN w.user u
+            WHERE u.id = :id
+        ');
+
+        return $query->setParameter('id', $user->getId())->getResult();
+    }
+
+    /**
      * Count total ads by $user
      *
      * @param User $user
@@ -56,6 +77,46 @@ class AdRepository extends EntityRepository
             JOIN a.wall w
             JOIN w.user u
             WHERE u.id = :id
+        ');
+
+        return $query->setParameter('id', $user->getId())->getSingleScalarResult();
+    }
+
+    /**
+     * Find promotes by $user
+     *
+     * @param User $user
+     *
+     * @return array
+     */
+    public function findPromotesByUser(User $user)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('
+            SELECT a
+            FROM AdstacyAppBundle:Ad a
+            JOIN a.promotees p
+            WHERE p.id = :id
+        ');
+
+        return $query->setParameter('id', $user->getId())->getResult();
+    }
+
+    /**
+     * Count number of promotes by $user
+     *
+     * @param User $user
+     *
+     * @return integer
+     */
+    public function countPromotesByUser(User $user)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('
+            SELECT COUNT(a.id)
+            FROM AdstacyAppBundle:Ad a
+            JOIN a.promotees p
+            WHERE p.id = :id
         ');
 
         return $query->setParameter('id', $user->getId())->getSingleScalarResult();

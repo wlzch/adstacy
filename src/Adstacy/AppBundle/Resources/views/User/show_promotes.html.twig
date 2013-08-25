@@ -1,0 +1,9 @@
+{% extends 'AdstacyAppBundle:User:show.html.twig' %}
+
+{% block show_content %}
+  <div class="masonry">
+    {% for promote in promotes %}
+      {% include 'AdstacyAppBundle:Includes:ad.html.twig' with {ad: promote} %}
+    {% endfor %}
+  </div>
+{% endblock %}

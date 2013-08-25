@@ -66,3 +66,18 @@ adstacy_app_user_profile:
     pattern: /{username}
     defaults:
         _controller: AdstacyAppBundle:User:show
+
+adstacy_app_user_walls:
+    pattern: /{username}/walls
+    defaults:
+        _controller: AdstacyAppBundle:User:showWalls
+
+adstacy_app_user_ads:
+    pattern: /{username}/ads
+    defaults:
+        _controller: AdstacyAppBundle:User:showAds
+
+adstacy_app_user_promotes:
+    pattern: /{username}/promotes
+    defaults:
+        _controller: AdstacyAppBundle:User:showPromotes
