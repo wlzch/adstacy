@@ -44,7 +44,7 @@
         '@AdstacyAppBundle/Resources/public/js/jquery.lazyload.min.js'
         '@AdstacyAppBundle/Resources/public/js/jquery.jscroll.js'
         '@AdstacyAppBundle/Resources/public/js/FileAPI.min.js'
-        '@AdstacyAppBundle/Resources/public/js/module/promote.js'
+        '@AdstacyAppBundle/Resources/public/js/module/ajaxlink.js'
         'bundles/fosjsrouting/js/router.js'
       %}
         <script src="{{ asset_url }}" type="text/javascript"></script>
@@ -227,7 +227,6 @@
         });
 
         $('img.lazy').lazyload();
-        $('a.promote,a.unpromote').promote();
         $btnNavbarExpand.click(function(event) {
           $btnNavbarExpand_span.toggleClass('icon-chevron-down');
           $navbarExpandContainer.toggleClass('hide');
@@ -241,25 +240,19 @@
           $btnNavbarExpand_span.addClass('icon-chevron-down');
           $navbarExpandContainer.addClass('hide');
         });
-        $('a.follow-wall,a.unfollow-wall').click(function() {
-          var $this = $(this);
-          $.post(this.href, function(data) {
-            var json = JSON.parse(data);
-            if (!json.error) {
-              $this.parents().find('.followers-count').text(json.followers_count);
-              if ($this.hasClass('follow-wall')) {
-                $this.attr('href', Routing.generate('adstacy_app_wall_unfollow', {id: json.id}));
-                $this.text('Unfollow');
-              } else {
-                $this.attr('href', Routing.generate('adstacy_app_wall_follow', {id: json.id}));
-                $this.text('Follow');
-              }
-              $this.toggleClass('follow-wall');
-              $this.toggleClass('unfollow-wall');
-            }
-          });
-
-          return false;
+        $('a.promote, a.unpromote').ajaxlink({
+          parentSelector: '.ad-desc',
+          countSelector: '.promotes-count',
+          jsonField: 'promotes_count',
+          firstSelector: '.promote',
+          secondSelector: '.unpromote'
+        });
+        $('a.follow-wall, a.unfollow-wall').ajaxlink({
+          parentSelector: '.show-wall-container',
+          countSelector: '.followers-count',
+          jsonField: 'followers_count',
+          firstSelector: '.follow-wall',
+          secondSelector: '.unfollow-wall'
         });
         $('a.follow-user, a.unfollow-user').click(function() {
           var $this = $(this);
