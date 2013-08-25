@@ -6,21 +6,23 @@
       width="{{ thumb_width }}px" height="{{ ad.thumbHeight }}px" alt="{{ ad.description }}">
     </a>
   </div>
-  <div class="inline-block promo">
-    <a class="span2of3 btn-muted"><span class="promotes-count">{{ ad.promoteesCount }}</span> promotes</a>
-    {% if app.user %}
-      {% if app.user.hasPromote(ad) %}
-        <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" title="unpromote" class="span1of3 btn-success unpromote">
-          <span aria-hidden="true" class="icon-bullhorn">
-        </a>
-      {% else %}
-        <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" title="promote" class="span1of3 btn-primary promote">
-          <span aria-hidden="true" class="icon-bullhorn">
-        </a>
+  <div class="ad-desc">
+    <div class="desc">
+      <p>{{ parse_hashtag(ad.description) }}</p>
+    </div>
+    <div class="inline-block">
+      <a class="promotes-count-container btn-muted"><span class="promotes-count">{{ ad.promoteesCount }}</span> promotes</a>
+      {% if app.user %}
+        {% if app.user.hasPromote(ad) %}
+          <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" title="unpromote" class="btn-success unpromote">
+            <span aria-hidden="true" class="icon-bullhorn">
+          </a>
+        {% else %}
+          <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" title="promote" class="btn-primary promote">
+            <span aria-hidden="true" class="icon-bullhorn">
+          </a>
+        {% endif %}
       {% endif %}
-    {% endif %}
-  </div>
-  <div class="desc">
-    <p>{{ parse_hashtag(ad.description) }}</p>
+    </div>
   </div>
 </div>

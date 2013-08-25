@@ -213,7 +213,7 @@ class Ad
         if ($image) {
             $this->image = $image;
             $size = getimagesize($image->getFile());
-            $height = round((234 / $size[0]) * $size[1]);
+            $height = round((236 / $size[0]) * $size[1]);
             $this->setThumbHeight($height);
         }
     
