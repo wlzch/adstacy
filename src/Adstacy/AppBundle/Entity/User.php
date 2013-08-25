@@ -78,6 +78,11 @@ class User implements UserInterface, GroupableInterface
     private $walls;
 
     /**
+     * @ORM\Column(name="ads_count", type="integer")
+     */
+    private $adsCount;
+
+    /**
      * @ORM\ManyToMany(targetEntity="Wall", mappedBy="followers")
      */
     private $followedWalls;
@@ -277,6 +282,7 @@ class User implements UserInterface, GroupableInterface
         $this->roles = array();
         $this->credentialsExpired = false;
         $this->walls = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->adsCount = 0;
         $this->followersCount = 0;
         $this->followingsCount = 0;
         $this->promotesCount = 0;
@@ -1011,6 +1017,37 @@ class User implements UserInterface, GroupableInterface
     public function getWalls()
     {
         return $this->walls;
+    }
+
+    /**
+     * Increase ads count
+     */
+    public function increaseAdsCount()
+    {
+        $this->setAdsCount($this->getAdsCount() + 1);
+    }
+
+    /**
+     * Set adsCount
+     *
+     * @param integer $adsCount
+     * @return User
+     */
+    public function setAdsCount($adsCount)
+    {
+        $this->adsCount = $adsCount;
+    
+        return $this;
+    }
+
+    /**
+     * Get adsCount
+     *
+     * @return integer 
+     */
+    public function getAdsCount()
+    {
+        return $this->adsCount;
     }
 
     /**

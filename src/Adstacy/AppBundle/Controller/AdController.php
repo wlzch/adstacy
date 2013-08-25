@@ -32,11 +32,12 @@ class AdController extends Controller
      */
     public function addAction()
     {
+        $user = $this->getUser();
         $request = $this->getRequest();
         $filter = 'thumbnail';
         $ad = new Ad();
         $form = $this->createForm(new AdType(), $ad, array(
-            'username' => $this->getUser()->getUsername() 
+            'username' => $user->getUsername() 
         ));
         $form->handleRequest($request);
         $wallForm = $this->createForm(new WallType(), new Wall(), array(
@@ -44,8 +45,10 @@ class AdController extends Controller
         ));
 
         if ($form->isValid()) {
+            $user->increaseAdsCount();
             $em = $this->getManager();
             $em->persist($ad);
+            $em->persist($user);
             $em->flush();
         }
 

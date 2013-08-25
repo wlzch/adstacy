@@ -89,7 +89,7 @@ class UserController extends Controller
         if (!$user) {
             throw $this->createNotFoundException();
         }
-        $adsCount = $this->getRepository('AdstacyAppBundle:Ad')->countByUser($user);
+        $adsCount = $user->getAdsCount();
         $wallsCount = $this->getRepository('AdstacyAppBundle:Wall')->countByUser($user);
         $promotesCount = $user->getPromotesCount();
         $followersCount = $user->getFollowersCount();
