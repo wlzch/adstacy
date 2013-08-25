@@ -78,20 +78,20 @@ class User implements UserInterface, GroupableInterface
     private $walls;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Wall", inversedBy="followers")
-     * @ORM\JoinTable(name="followed_walls",
-     *    joinColumns={
-     *      @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     *    },
-     *    inverseJoinColumns={
-     *      @ORM\JoinColumn(name="wall_id", referencedColumnName="id")
-     *    }
-     * )
+     * @ORM\ManyToMany(targetEntity="Wall", mappedBy="followers")
      */
     private $followedWalls;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="followings")
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="followings")
+     * @ORM\JoinTable(name="follow",
+     *      joinColumns={
+     *        @ORM\JoinColumn(name="user_2_id", referencedColumnName="id")
+     *      },
+     *      inverseJoinColumns={
+     *        @ORM\JoinColumn(name="user_1_id", referencedColumnName="id")
+     *      }
+     * )
      **/
     private $followers;
 
@@ -101,15 +101,7 @@ class User implements UserInterface, GroupableInterface
     private $followersCount;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", inversedBy="followers")
-     * @ORM\JoinTable(name="follow",
-     *      joinColumns={
-     *        @ORM\JoinColumn(name="user_1_id", referencedColumnName="id")
-     *      },
-     *      inverseJoinColumns={
-     *        @ORM\JoinColumn(name="user_2_id", referencedColumnName="id")
-     *      }
-     * )
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="followers")
      **/
     private $followings;
 
@@ -1064,6 +1056,7 @@ class User implements UserInterface, GroupableInterface
     {
         $this->followers[] = $followers;
         $this->setFollowersCount($this->getFollowersCount() + 1);
+        $followers->addFollowing($this);
     
         return $this;
     }
@@ -1331,7 +1324,7 @@ class User implements UserInterface, GroupableInterface
     }
 
     /**
-     * Checks where user has promote this ad
+     * Checks wheter user has promote $ad
      *
      * @param Ad $ad
      *
@@ -1340,6 +1333,30 @@ class User implements UserInterface, GroupableInterface
     public function hasPromote(Ad $ad)
     {
         return $this->getPromotes()->contains($ad);
+    }
+
+    /**
+     * Checks wheter user hash follow $wall
+     *
+     * @param Wall $wall
+     *
+     * @return boolean
+     */
+    public function hasFollowedWall(Wall $wall)
+    {
+        return $this->getFollowedWalls()->contains($wall);
+    }
+
+    /**
+     * Checks wheter user has follow $user
+     *
+     * @param User $user
+     *
+     * @return boolean
+     */
+    public function hasFollowUser(User $user)
+    {
+        return $this->getFollowers()->contains($user);
     }
 
     /**

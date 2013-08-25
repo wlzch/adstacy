@@ -65,7 +65,15 @@ class Wall
 
     /**
      * @Exclude
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="followedWalls")
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="followedWalls")
+     * @ORM\JoinTable(name="followed_walls",
+     *    joinColumns={
+     *      @ORM\JoinColumn(name="wall_id", referencedColumnName="id")
+     *    },
+     *    inverseJoinColumns={
+     *      @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *    }
+     * )
      */
     private $followers;
 

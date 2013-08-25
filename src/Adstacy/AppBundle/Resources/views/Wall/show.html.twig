@@ -5,8 +5,11 @@
 {% block meta_keywords %}{{ wall.tags | join(',') }}{% endblock %}
 
 {% block content %}
+  {% set user = app.user %}
   <div class="masonry-container">
-    <h2>{{ wall.name }} ({{ wall.adsCount }} ads) ({{ wall.followersCount }} followers)</h2>
+    <h2>{{ wall.name }} ({{ wall.adsCount }} ads) ({{ wall.followersCount }} followers)
+      {% include 'AdstacyAppBundle:Wall:follow_button.html.twig' with {wall: wall} %}
+    </h2>
     <h3>{{ parse_hashtag(wall.description) }}</h3>
   </div>
   <div class="masonry">
