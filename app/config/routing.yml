@@ -81,3 +81,13 @@ adstacy_app_user_promotes:
     pattern: /{username}/promotes
     defaults:
         _controller: AdstacyAppBundle:User:showPromotes
+
+adstacy_app_user_followers:
+    pattern: /{username}/followers
+    defaults:
+        _controller: AdstacyAppBundle:User:showFollowers
+
+adstacy_app_user_followings:
+    pattern: /{username}/followings
+    defaults:
+        _controller: AdstacyAppBundle:User:showFollowings

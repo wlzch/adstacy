@@ -8,8 +8,8 @@
     <a class="btn btn-primary" href="{{ path('adstacy_app_user_ads', {username: user.username}) }}">{{ adsCount }} Ads</a>
     <a class="btn btn-primary" href="{{ path('adstacy_app_user_walls', {username: user.username}) }}">{{ wallsCount }} Walls</a>
     <a class="btn btn-primary" href="{{ path('adstacy_app_user_promotes', {username: user.username}) }}">{{ promotesCount }} Promotes</a>
-    <a class="btn btn-primary" href="#">{{ followersCount }} Followers</a>
-    <a class="btn btn-primary" href="#">{{ followingsCount }} Followings</a>
+    <a class="btn btn-primary" href="{{ path('adstacy_app_user_followers', {username: user.username}) }}">{{ followersCount }} Followers</a>
+    <a class="btn btn-primary" href="{{ path('adstacy_app_user_followings', {username: user.username}) }}">{{ followingsCount }} Followings</a>
     {% block show_content %}{% endblock %}
   </div>
 {% endblock %}

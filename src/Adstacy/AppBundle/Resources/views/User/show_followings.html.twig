@@ -1,0 +1,7 @@
+{% extends 'AdstacyAppBundle:User:show.html.twig' %}
+
+{% block show_content %}
+  {% for following in followings %}
+    {{ user.username }}
+  {% endfor %}
+{% endblock %}

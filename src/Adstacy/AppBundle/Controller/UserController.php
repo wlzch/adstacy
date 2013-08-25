@@ -51,6 +51,32 @@ class UserController extends Controller
     }
 
     /**
+     * Show followers by $username
+     *
+     * @param string $username
+     */
+    public function showFollowersAction($username)
+    {
+        $params = $this->getParams($username);
+        $params['followers'] = $this->getRepository('AdstacyAppBundle:User')->findFollowersByUser($params['user']);
+
+        return $this->render('AdstacyAppBundle:User:show_followers.html.twig', $params);
+    }
+
+    /**
+     * Show followings by $username
+     *
+     * @param string $username
+     */
+    public function showFollowingsAction($username)
+    {
+        $params = $this->getParams($username);
+        $params['followings'] = $this->getRepository('AdstacyAppBundle:User')->findFollowingsByUser($params['user']);
+
+        return $this->render('AdstacyAppBundle:User:show_followings.html.twig', $params);
+    }
+
+    /**
      * Get parameters to render in twig
      *
      * @param string $username
@@ -66,8 +92,8 @@ class UserController extends Controller
         $adsCount = $this->getRepository('AdstacyAppBundle:Ad')->countByUser($user);
         $wallsCount = $this->getRepository('AdstacyAppBundle:Wall')->countByUser($user);
         $promotesCount = $this->getRepository('AdstacyAppBundle:Ad')->countPromotesByUser($user);
-        $followersCount = $this->getRepository('AdstacyAppBundle:User')->countFollowers($user);
-        $followingsCount = $this->getRepository('AdstacyAppBundle:User')->countFollowings($user);
+        $followersCount = $this->getRepository('AdstacyAppBundle:User')->countFollowersByUser($user);
+        $followingsCount = $this->getRepository('AdstacyAppBundle:User')->countFollowingsByUser($user);
 
         return array(
             'user' => $user,
