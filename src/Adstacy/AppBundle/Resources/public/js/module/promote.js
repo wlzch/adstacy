@@ -9,13 +9,13 @@ $.fn.promote = function() {
           $this.parent().find('.promotes-count').text(json.promotes_count);
           if ($this.hasClass('promote')) {
             $this.attr('href', Routing.generate('adstacy_app_ad_unpromote', {id: json.id}));
-            $this.find('span').text(' Unpromote');
+            $this.attr('title', 'unpromote');
           } else {
             $this.attr('href', Routing.generate('adstacy_app_ad_promote', {id: json.id}));
-            $this.find('span').text(' Promote');
+            $this.attr('title', 'promote');
           }
-          $this.toggleClass('btn-default promote');
-          $this.toggleClass('btn-primary unpromote');
+          $this.toggleClass('btn-primary promote');
+          $this.toggleClass('btn-success unpromote');
         }
       });
 

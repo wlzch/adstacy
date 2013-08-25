@@ -2,7 +2,7 @@
 
 {% block title %}{{ ad.description }} | Adstacy{%endblock %}
 
-{% block meta_keywords %}{{ ad.tags | join(',') }}{% endblock %}
+{% block meta_keywords %}{{ ad.tags|join(',') }}{% endblock %}
 
 {% block facebook_scripts %}
 <script>(function(d, s, id) {
@@ -22,7 +22,7 @@
   {% set wall = ad.wall %}
   <p>{{ parse_hashtag(ad.description) }} ({{ ad.promoteesCount }}) promotes</p>
   <a class="btn btn-primary btn-wall" href="{{ path('adstacy_app_wall_show', {id: ad.wall.id}) }}">{{ ad.wall.name }}</a>
-  <img src="{{ vich_uploader_asset(ad.image, 'file') }}" alt="{{ ad.description }}" />
+  <img src="{{ vich_uploader_asset(ad.image, 'file') }}" alt="{{ ad.description }}">
   <div class="ad-content">
     {{ ad.content }}
   </div>

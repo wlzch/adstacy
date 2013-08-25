@@ -2,7 +2,7 @@
 
 {% block title %}{{ wall.name }} | Adstacy{% endblock %}
 
-{% block meta_keywords %}{{ wall.tags | join(',') }}{% endblock %}
+{% block meta_keywords %}{{ wall.tags|join(',') }}{% endblock %}
 
 {% block stylesheets %}
   {{ parent() }}

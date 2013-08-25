@@ -11,10 +11,16 @@ div.table-block {
 div.inline-block {
   font-size: 0;
 
-  div {
+  div, a {
     font-size: initial;
     display: inline-block;
     vertical-align: middle;
+  }
+
+  a {
+    text-align: center;
+    padding: 10px 0;
+    text-decoration: none;
   }
 }
 
@@ -28,4 +34,8 @@ div.inline-block {
 
 .span2of3 {
   width: 66.66%;
+}
+
+.btn-muted {
+  .button-variant(@gray; #f8f8f8; #f8f8f8);
 }
