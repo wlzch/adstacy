@@ -96,6 +96,11 @@
               </form>
               <ul class="nav navbar-nav navbar-right">
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                  <li>
+                    <button type="button" class="btn btn-default navbar-btn">
+                      <span aria-hidden="true" class="icon-plus"></span> Create Ads
+                    </button>
+                  </li>
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ app.user.username }}<b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -105,11 +110,6 @@
                     </ul>
                   </li>
                 {% else %}
-                  <li>
-                    <button type="button" class="btn btn-default navbar-btn">
-                      <span aria-hidden="true" class="icon-plus"></span> Create Ads
-                    </button>
-                  </li>
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login <b class="caret"></b></a>
                     <ul class="dropdown-menu dropdown-container">
