@@ -7,7 +7,7 @@
 {% block content %}
   {% set user = app.user %}
   <div class="masonry-container">
-    <h2>{{ wall.name }} ({{ wall.adsCount }} ads) ({{ wall.followersCount }} followers)
+    <h2>{{ wall.name }} ({{ wall.adsCount }} ads) (<span class="follows-count">{{ wall.followersCount }}</span> followers)
       {% include 'AdstacyAppBundle:Wall:follow_button.html.twig' with {wall: wall} %}
     </h2>
     <h3>{{ parse_hashtag(wall.description) }}</h3>
@@ -17,4 +17,32 @@
     {% include 'AdstacyAppBundle:Includes:ad.html.twig' with {ad: ad} %}
   {% endfor %}
   </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script type="text/javascript">
+    $(function() {
+      $('.follow-wall').click(function() {
+        $.post(this.href, function(data) {
+          var $this = $(this);
+          var json = JSON.parse(data);
+          if (!json.error) {
+            $this.closest('.follows-count').text(json.follows_count);
+            if ($this.hasClass('follow-wall')) {
+              $this.attr('href', Routing.generate('adstacy_app_wall_follow', {id: json.id}));
+              $this.text('Follow');
+            } else {
+              $this.attr('href', Routing.generate('adstacy_app_wall_unfollow', {id: json.id}));
+              $this.text('Unfollow');
+            }
+            $this.toggleClass('follow-wall');
+            $this.toggleClass('unfollow-wall');
+          }
+        });
+
+        return false;
+      });
+    });
+  </script>
 {% endblock %}
