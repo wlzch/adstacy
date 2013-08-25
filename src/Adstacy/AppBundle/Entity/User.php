@@ -13,7 +13,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\ExecutionContextInterface;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Adstacy\AppBundle\Repository\UserRepository")
  * @ORM\Table(name="users", indexes={
  *   @ORM\Index(name="user_username", columns={"username_canonical"}),
  *   @ORM\Index(name="user_email", columns={"email_canonical"})

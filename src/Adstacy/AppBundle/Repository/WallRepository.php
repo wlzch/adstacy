@@ -25,15 +25,34 @@ class WallRepository extends EntityRepository
     {
         $em = $this->getEntityManager();
         $query = $em->createQuery('
-            SELECT w, COUNT(a.id) as adsCount
+            SELECT w, a
             FROM AdstacyAppBundle:Wall w
             JOIN w.user u
             JOIN w.ads a
             WHERE u.id = :id
-            GROUP BY w.id
         ');
 
         return $query->setParameter('id', $user->getId())->getResult();
+    }
+
+    /**
+     * Count walls by $user
+     *
+     * @param User $user
+     *
+     * @return integer
+     */
+    public function countByUser(User $user)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('
+            SELECT COUNT(w.id)
+            FROM AdstacyAppBundle:Wall w
+            JOIN w.user u
+            WHERE u.id = :id
+        ');
+
+        return $query->setParameter('id', $user->getId())->getSingleScalarResult();
     }
 
     /**

@@ -96,6 +96,11 @@
               </form>
               <ul class="nav navbar-nav navbar-right">
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                  <li>
+                    <button type="button" class="btn btn-default navbar-btn">
+                      <span aria-hidden="true" class="icon-plus"></span> Create Ads
+                    </button>
+                  </li>
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ app.user.username }}<b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -105,11 +110,6 @@
                     </ul>
                   </li>
                 {% else %}
-                  <li>
-                    <button type="button" class="btn btn-default navbar-btn">
-                      <span aria-hidden="true" class="icon-plus"></span> Create Ads
-                    </button>
-                  </li>
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login <b class="caret"></b></a>
                     <ul class="dropdown-menu dropdown-container">
@@ -132,50 +132,53 @@
           </div>
           <div id="navbar-expand-container" class="hide">
             <ul class="adstacy-container nav-expand">
-              <li><a href="#">#Komputer</a></li>
-              <li><a href="#">#Handphone</a></li>
-              <li><a href="#">#Kuliner</a></li>
-              <li><a href="#">#Pendidikan</a></li>
-              <li><a href="#">#TempatTinggal</a></li>
-              <li><a href="#">#Otomotif</a></li>
-              <li><a href="#">#RumahSakit</a></li>
-              <li><a href="#">#TempatWisata</a></li>
-              <li><a href="#">#Komputer</a></li>
-              <li><a href="#">#Handphone</a></li>
-              <li><a href="#">#Kuliner</a></li>
-              <li><a href="#">#Pendidikan</a></li>
-              <li><a href="#">#TempatTinggal</a></li>
-              <li><a href="#">#Otomotif</a></li>
-              <li><a href="#">#RumahSakit</a></li>
-              <li><a href="#">#TempatWisata</a></li>
-              <li><a href="#">#Komputer</a></li>
-              <li><a href="#">#Handphone</a></li>
-              <li><a href="#">#Kuliner</a></li>
-              <li><a href="#">#Pendidikan</a></li>
-              <li><a href="#">#TempatTinggal</a></li>
-              <li><a href="#">#Otomotif</a></li>
-              <li><a href="#">#RumahSakit</a></li>
-              <li><a href="#">#TempatWisata</a></li>
-              <li><a href="#">#Komputer</a></li>
-              <li><a href="#">#Handphone</a></li>
-              <li><a href="#">#Kuliner</a></li>
-              <li><a href="#">#Pendidikan</a></li>
-              <li><a href="#">#TempatTinggal</a></li>
-              <li><a href="#">#Otomotif</a></li>
-              <li><a href="#">#RumahSakit</a></li>
-              <li><a href="#">#TempatWisata</a></li>
+              <li><a href="#">Komputer</a></li>
+              <li><a href="#">Handphone</a></li>
+              <li><a href="#">Kuliner</a></li>
+              <li><a href="#">Pendidikan</a></li>
+              <li><a href="#">Tempat Tinggal</a></li>
+              <li><a href="#">Otomotif</a></li>
+              <li><a href="#">Rumah Sakit</a></li>
+              <li><a href="#">Tempat Wisata</a></li>
+              <li><a href="#">Komputer</a></li>
+              <li><a href="#">Handphone</a></li>
+              <li><a href="#">Kuliner</a></li>
+              <li><a href="#">Pendidikan</a></li>
+              <li><a href="#">Tempat Tinggal</a></li>
+              <li><a href="#">Otomotif</a></li>
+              <li><a href="#">Rumah Sakit</a></li>
+              <li><a href="#">Tempat Wisata</a></li>
+              <li><a href="#">Komputer</a></li>
+              <li><a href="#">Handphone</a></li>
+              <li><a href="#">Kuliner</a></li>
+              <li><a href="#">Pendidikan</a></li>
+              <li><a href="#">Tempat Tinggal</a></li>
+              <li><a href="#">Otomotif</a></li>
+              <li><a href="#">Rumah Sakit</a></li>
+              <li><a href="#">Tempat Wisata</a></li>
+              <li><a href="#">Komputer</a></li>
+              <li><a href="#">Handphone</a></li>
+              <li><a href="#">Kuliner</a></li>
+              <li><a href="#">Pendidikan</a></li>
+              <li><a href="#">Tempat Tinggal</a></li>
+              <li><a href="#">Otomotif</a></li>
+              <li><a href="#">Rumah Sakit</a></li>
+              <li><a href="#">Tempat Wisata</a></li>
             </ul>
           </div>
         </nav>
       </header>
       <div class="body clearfix">
-        <div class="adstacy-container">
-        {% for key, flashes in app.session.flashbag.all() %}
-          {% for flash in flashes %}
-            <div class="alert alert-{{ key }}">{{ flash }}</div>
-          {% endfor %}
-        {% endfor %}
-        </div>
+        {% set allFlashes = app.session.flashbag.all() %}
+        {% if allFlashes|length > 0 %}
+          <div class="adstacy-container">
+            {% for key, flashes in allFlashes %}
+              {% for flash in flashes %}
+                <div class="alert alert-{{ key }}">{{ flash }}</div>
+              {% endfor %}
+            {% endfor %}
+          </div>
+        {% endif %}
 
         {% block content %}{% endblock %}
       </div>

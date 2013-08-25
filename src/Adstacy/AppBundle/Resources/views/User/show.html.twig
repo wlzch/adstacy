@@ -3,15 +3,13 @@
 {% block title %}{{ user.username }} | Adscaty{% endblock %}
 
 {% block content %}
-  {{ user.username }}
-  {{ adsCount }}
-  <div>
-  {% for wall in walls %}
-    {% set _wall = wall[0] %}
-    <div>
-      <p>{{ _wall.name }}</p>
-    </div>
-    <div>{{ wall['adsCount'] }}</div>
-  {% endfor %}
+  <div class="adstacy-container">
+    {{ user.username }}
+    <a class="btn btn-primary" href="{{ path('adstacy_app_user_ads', {username: user.username}) }}">{{ adsCount }} Ads</a>
+    <a class="btn btn-primary" href="{{ path('adstacy_app_user_walls', {username: user.username}) }}">{{ wallsCount }} Walls</a>
+    <a class="btn btn-primary" href="{{ path('adstacy_app_user_promotes', {username: user.username}) }}">{{ promotesCount }} Promotes</a>
+    <a class="btn btn-primary" href="#">{{ followersCount }} Followers</a>
+    <a class="btn btn-primary" href="#">{{ followingsCount }} Followings</a>
+    {% block show_content %}{% endblock %}
   </div>
 {% endblock %}

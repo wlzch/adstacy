@@ -1,0 +1,11 @@
+{% extends 'AdstacyAppBundle:User:show.html.twig' %}
+
+{% block show_content %}
+  {% for wall in walls %}
+    <h4>{{ wall.name }}</h4>
+    {% for ad in wall.ads|slice(0, 9) %}
+      {{ ad.description }}
+      <img src="{{ vich_uploader_asset(ad.image, 'file')|imagine_filter('mini_thumb') }}" width="{{ mini_thumb_size }}" height="{{ mini_thumb_size }}" />
+    {% endfor %}
+  {% endfor %}
+{% endblock %}
