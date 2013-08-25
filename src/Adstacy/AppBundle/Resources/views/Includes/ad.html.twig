@@ -3,7 +3,7 @@
     <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}">
     <img class="lazy" src="{{ asset('bundles/adstacyapp/img/transparent.gif') }}"
       data-original="{{ vich_uploader_asset(ad.image, 'file')|imagine_filter('thumbnail') }}"
-      width="{{ thumb_width }}px" height="{{ ad.thumbHeight }}px">
+      width="{{ thumb_width }}px" height="{{ ad.thumbHeight }}px" alt="{{ ad.description }}">
     </a>
   </div>
   <div class="desc">
