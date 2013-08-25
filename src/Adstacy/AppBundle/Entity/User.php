@@ -1070,6 +1070,7 @@ class User implements UserInterface, GroupableInterface
     {
         $this->followers->removeElement($followers);
         $this->setFollowersCount($this->getFollowersCount() - 1);
+        $followers->removeFollowing($this);
     }
 
     /**
