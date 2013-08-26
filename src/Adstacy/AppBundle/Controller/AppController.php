@@ -22,26 +22,4 @@ class AppController extends Controller
             'ads' => $ads
         ));
     }
-
-    public function searchAction()
-    {
-        $request = $this->getRequest();
-        $finder = $this->get('fos_elastica.finder.website.ad');
-
-        $adsPaginator = $finder->findPaginated($request->query->get('q'));
-        $adsPaginator
-            ->setMaxPerPage(20)
-            ->setCurrentPage($request->query->get('page') ?: 1)
-        ;
-
-        if ($request->isXmlHttpRequest()) {
-            return $this->render('AdstacyAppBundle:Includes:ads_search.html.twig', array(
-                'paginator' => $adsPaginator
-            ));
-        }
-
-        return $this->render('AdstacyAppBundle:App:search.html.twig', array(
-            'paginator' => $adsPaginator
-        ));
-    }
 }

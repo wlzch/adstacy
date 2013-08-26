@@ -1,0 +1,21 @@
+{% extends 'AdstacyAppBundle:Search:search.html.twig' %}
+
+{% block search_content %}
+  <div class="jscroll adstacy-container">
+    {% include 'AdstacyAppBundle:Search:users_content.html.twig' with {paginator: paginator} %}
+  </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script type="text/javascript">
+    $(function() {
+      $('.jscroll').jscroll({
+        nextSelector: 'a.next-page',
+        callback: function(a, b) {
+          var $users = $('.jscroll-added:last .user');
+        }
+      });
+    });
+  </script>
+{% endblock %}

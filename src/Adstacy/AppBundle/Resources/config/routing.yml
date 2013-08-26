@@ -6,7 +6,17 @@ homepage:
 adstacy_app_search:
     pattern: /search
     defaults:
-        _controller: AdstacyAppBundle:App:search
+        _controller: AdstacyAppBundle:Search:search
+
+adstacy_app_search_ads:
+    pattern: /search/ads
+    defaults:
+        _controller: AdstacyAppBundle:Search:searchAds
+
+adstacy_app_search_users:
+    pattern: /search/users
+    defaults:
+        _controller: AdstacyAppBundle:Search:searchUsers
 
 adstacy_app_ad_create:
     pattern: /ads/create

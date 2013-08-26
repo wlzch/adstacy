@@ -1,10 +1,8 @@
-{% extends 'AdstacyAppBundle::layout.html.twig' %}
+{% extends 'AdstacyAppBundle:Search:search.html.twig' %}
 
-{% block title %}Search{% endblock %}
-
-{% block content %}
+{% block search_content %}
   <div class="masonry jscroll">
-    {% include 'AdstacyAppBundle:Includes:ads_search.html.twig' with {paginator: paginator} %}
+    {% include 'AdstacyAppBundle:Search:ads_content.html.twig' with {paginator: paginator} %}
   </div>
 {% endblock %}
 

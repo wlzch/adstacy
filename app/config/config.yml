@@ -20,6 +20,15 @@ parameters:
                 provider: ~
                 finder: ~
                 listener: ~
+        user:
+            mappings:
+                username: { boost: 5 }
+            persistence:
+                driver: orm
+                model: Adstacy\AppBundle\Entity\User
+                provider: ~
+                finder: ~
+                listener: ~
 
 framework:
     #esi:             ~

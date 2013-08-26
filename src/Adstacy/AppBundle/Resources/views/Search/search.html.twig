@@ -1,0 +1,13 @@
+{% extends 'AdstacyAppBundle::layout.html.twig' %}
+
+{% block title %}Search{% endblock %}
+
+{% block content %}
+  <div class="adstacy-container">
+    <ul class="nav nav-pills">
+      <li {% if search == 'ads' %}class="active"{% endif %}><a href="{{ path('adstacy_app_search_ads', {q: app.request.query.get('q')}) }}">Ads</a></li>
+      <li {% if search == 'users' %}class="active"{% endif %}><a href="{{ path('adstacy_app_search_users', {q: app.request.query.get('q')}) }}">Users</a></li>
+    </ul>
+  </div>
+  {% block search_content %}{% endblock %}
+{% endblock %}
