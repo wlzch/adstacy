@@ -30,7 +30,7 @@ class AdController extends Controller
     /**
      * @Secure(roles="ROLE_USER")
      */
-    public function addAction()
+    public function createAction()
     {
         $user = $this->getUser();
         $request = $this->getRequest();

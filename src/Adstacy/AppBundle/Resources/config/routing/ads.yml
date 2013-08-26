@@ -1,7 +1,7 @@
 adstacy_app_ad_create:
     pattern: /ads/create
     defaults:
-        _controller: AdstacyAppBundle:Ad:add
+        _controller: AdstacyAppBundle:Ad:create
 
 adstacy_app_ad_show:
     pattern: /ads/{id}

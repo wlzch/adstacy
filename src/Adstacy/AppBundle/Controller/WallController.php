@@ -31,7 +31,7 @@ class WallController extends Controller
     /**
      * @Secure(roles="ROLE_USER")
      */
-    public function addAction()
+    public function createAction()
     {
         $request = $this->getRequest();
         $wall = new Wall();
