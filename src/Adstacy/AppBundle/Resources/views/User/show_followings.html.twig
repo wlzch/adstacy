@@ -1,7 +1,30 @@
-{% extends 'AdstacyAppBundle:User:show.html.twig' %}
+{% extends is_ajax() ? '::ajax.html.twig' : 'AdstacyAppBundle:User:show.html.twig' %}
 
 {% block show_content %}
+{% endblock %}
+
+{% block ajax_content %}
   {% for following in paginator.getCurrentPageResults %}
     {% include 'AdstacyAppBundle:User:user.html.twig' with {user: following} %}
   {% endfor %}
+  {% if paginator.hasNextPage %}
+    {% set params = {username: user.username, page: paginator.getNextPage} | merge(app.request.query.all) %}
+    <a href="{{ path('userstacy_app_user_followings', params )}}" class="btn btn-lg btn-default btn-block next-page">More</a>
+  {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script type="text/javascript">
+    $(function() {
+      $('.jscroll').jscroll({
+        nextSelector: 'a.next-page',
+        callback: function(a, b) {
+          var $users = $('.jscroll-added:last .user');
+          $masonry = $('.masonry').masonry('appended', $users);
+          //$users.find('.ad-desc').ajaxlink('users');
+        }
+      });
+    });
+  </script>
 {% endblock %}

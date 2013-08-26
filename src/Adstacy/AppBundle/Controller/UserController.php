@@ -94,20 +94,16 @@ class UserController extends Controller
         if (!$user) {
             throw $this->createNotFoundException();
         }
-        $adsCount = $user->getAdsCount();
-        $wallsCount = $this->getRepository('AdstacyAppBundle:Wall')->countByUser($user);
-        $promotesCount = $user->getPromotesCount();
-        $followersCount = $user->getFollowersCount();
-        $followingsCount = $user->getFollowingsCount();
+        $params = array('user' => $user);
+        if (!$this->getRequest()->isXmlHttpRequest()) {
+            $params['adsCount'] = $user->getAdsCount();
+            $params['wallsCount'] = $this->getRepository('AdstacyAppBundle:Wall')->countByUser($user);
+            $params['promotesCount'] = $user->getPromotesCount();
+            $params['followersCount'] = $user->getFollowersCount();
+            $params['followingsCount'] = $user->getFollowingsCount();
+        }
 
-        return array(
-            'user' => $user,
-            'adsCount' => $adsCount,
-            'wallsCount' => $wallsCount,
-            'promotesCount' => $promotesCount,
-            'followersCount' => $followersCount,
-            'followingsCount' => $followingsCount
-        );
+        return $params;
     }
 
     /**

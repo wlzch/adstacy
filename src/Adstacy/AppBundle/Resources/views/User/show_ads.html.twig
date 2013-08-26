@@ -1,9 +1,35 @@
-{% extends 'AdstacyAppBundle:User:show.html.twig' %}
+{% extends is_ajax() ? '::ajax.html.twig' : 'AdstacyAppBundle:User:show.html.twig' %}
 
 {% block show_content %}
-  <div class="masonry">
-    {% for ad in paginator.getCurrentPageResults %}
-      {% include 'AdstacyAppBundle:Ad:ad.html.twig' with {ad: ad} %}
-    {% endfor %}
+  <div class="masonry jscroll">
+    {{ block('ajax_content') }}
   </div>
+{% endblock %}
+
+{% block ajax_content %}
+  {% for ad in paginator.getCurrentPageResults %}
+    {% include 'AdstacyAppBundle:Ad:ad.html.twig' with {ad: ad} %}
+  {% endfor %}
+  {% if paginator.hasNextPage %}
+    {% set params = {username: user.username, page: paginator.getNextPage} | merge(app.request.query.all) %}
+    <a href="{{ path('adstacy_app_user_ads', params )}}" class="btn btn-lg btn-default btn-block next-page">More</a>
+  {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script type="text/javascript">
+    $(function() {
+      $('.jscroll').jscroll({
+        nextSelector: 'a.next-page',
+        callback: function(a, b) {
+          var $ads = $('.jscroll-added:last .ad');
+          $masonry = $('.masonry').masonry('appended', $ads);
+          $ads.find('img.lazy').lazyload();
+          $ads.find('.ad-desc').ajaxlink('ads');
+          $ads.find('[data-toggle="tooltip"]').tooltip();
+        }
+      });
+    });
+  </script>
 {% endblock %}
