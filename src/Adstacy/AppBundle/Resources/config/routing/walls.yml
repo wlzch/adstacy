@@ -19,6 +19,13 @@ adstacy_app_wall_unfollow:
     requirements:
         id: \d+
 
+adstacy_app_wall_edit:
+    pattern: /walls/{id}/edit
+    defaults:
+        _controller: AdstacyAppBundle:Wall:edit
+    requirements:
+        id: \d+
+
 adstacy_app_wall_create:
     pattern: /walls/create
     defaults:

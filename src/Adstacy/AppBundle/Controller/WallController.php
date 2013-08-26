@@ -54,7 +54,36 @@ class WallController extends Controller
             return new JsonResponse($serializer->serialize($form->getErrors(), 'json'));
         }
 
-        return $this->render('AdstacyAppBundle:Wall:create.html.twig', array(
+        return $this->render('AdstacyAppBundle:Wall:form.html.twig', array(
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * @Secure(roles="ROLE_USER")
+     *
+     * @param integer $id
+     */
+    public function editAction($id)
+    {
+        $wall = $this->getRepository('AdstacyAppBundle:Wall')->find($id);
+        if (!$wall) {
+            throw $this->createNotFoundException();
+        }
+        $request = $this->getRequest();
+        $form = $this->createForm(new WallType(), $wall);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getManager();
+            $em->persist($wall);
+            $em->flush();
+            $this->addFlash('success', 'You have successfully edited your wall');
+
+            return $this->redirect($this->generateUrl('adstacy_app_wall_show', array('id' => $wall->getId())));
+        }
+
+        return $this->render('AdstacyAppBundle:Wall:form.html.twig', array(
             'form' => $form->createView()
         ));
     }

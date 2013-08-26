@@ -18,7 +18,12 @@
   <div class="masonry-container">
     <div class="show-wall-container adstacy-container panel panel-default clearfix">
       <div class="pull-left">
-        <h2 class="wall-name">{{ wall.name }} {% include 'AdstacyAppBundle:Wall:follow_button.html.twig' with {wall: wall} %}</h2>
+        <h2 class="wall-name">{{ wall.name }}
+          {% include 'AdstacyAppBundle:Wall:follow_button.html.twig' with {wall: wall} %}
+          {% if wall.user == user %}
+            <a class="btn btn-primary" href="{{ path('adstacy_app_wall_edit', {id: wall.id})}}">Edit</a>
+          {% endif %}
+        </h2>
         <h3 class="description">{{ parse_hashtag(wall.description) }}</h3>
       </div>
       <div class="pull-right">
