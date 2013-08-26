@@ -16,6 +16,7 @@
         <a class="btn btn-primary follow-user" href="{{ path('adstacy_app_user_follow', {username: user.username}) }}">Follow</a> 
       {% endif %}
     {% endif %}
+    <img src="{{ profile_pic(user) }}" />
     {% block show_content %}{% endblock %}
   </div>
 {% endblock %}
