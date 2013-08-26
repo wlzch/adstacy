@@ -3,7 +3,7 @@
 {% block show_content %}
   <div class="masonry">
     {% for ad in ads %}
-      {% include 'AdstacyAppBundle:Includes:ad.html.twig' with {ad: ad} %}
+      {% include 'AdstacyAppBundle:Ad:ad.html.twig' with {ad: ad} %}
     {% endfor %}
   </div>
 {% endblock %}
