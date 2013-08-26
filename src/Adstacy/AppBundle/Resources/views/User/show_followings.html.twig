@@ -1,7 +1,7 @@
 {% extends 'AdstacyAppBundle:User:show.html.twig' %}
 
 {% block show_content %}
-  {% for following in followings %}
+  {% for following in paginator.getCurrentPageResults %}
     {% include 'AdstacyAppBundle:User:user.html.twig' with {user: following} %}
   {% endfor %}
 {% endblock %}

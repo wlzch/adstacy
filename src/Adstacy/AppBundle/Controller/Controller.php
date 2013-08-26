@@ -3,6 +3,8 @@
 namespace Adstacy\AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller as BaseController;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 
 class Controller extends BaseController
 {
@@ -59,5 +61,28 @@ class Controller extends BaseController
     public function addFlash($key, $value)
     {
         $this->getSession()->getFlashBag()->add($key, $value);
+    }
+
+    /**
+     * Get doctrine paginator
+     *
+     * @param QueryBuilder|Query
+     * @param integer $maxPerPage
+     * @param integer $currentPage
+     *
+     * @return Pagerfanta
+     */
+    public function getDoctrinePaginator($query, $maxPerPage, $currentPage = null)
+    {
+        $adapter = new DoctrineORMAdapter($query);
+        $paginator = new Pagerfanta($adapter);
+        $paginator->setMaxPerPage($maxPerPage);
+        if ($currentPage) {
+            $paginator->setCurrentPage($currentPage);
+        } else {
+            $paginator->setCurrentPage($this->getRequest()->query->get('page') ?: 1);
+        }
+
+        return $paginator;
     }
 }

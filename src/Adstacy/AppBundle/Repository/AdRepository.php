@@ -41,13 +41,13 @@ class AdRepository extends EntityRepository
     }
 
     /**
-     * Find all ads by $user
+     * Findl all by $user query
      *
      * @param User $user
      *
-     * @return array
+     * @return Query
      */
-    public function findByUser(User $user)
+    public function findByUserQuery(User $user)
     {
         $em = $this->getEntityManager();
         $query = $em->createQuery('
@@ -58,7 +58,19 @@ class AdRepository extends EntityRepository
             WHERE u.id = :id
         ');
 
-        return $query->setParameter('id', $user->getId())->getResult();
+        return $query->setParameter('id', $user->getId());
+    }
+
+    /**
+     * Find all ads by $user
+     *
+     * @param User $user
+     *
+     * @return array
+     */
+    public function findByUser(User $user)
+    {
+        return $this->findByUserQuery($user)->getResult();
     }
 
     /**
@@ -83,13 +95,13 @@ class AdRepository extends EntityRepository
     }
 
     /**
-     * Find promotes by $user
+     * Find promotes by $user query
      *
      * @param User $user
      *
-     * @return array
+     * @return Query
      */
-    public function findPromotesByUser(User $user)
+    public function findPromotesByUserQuery(User $user)
     {
         $em = $this->getEntityManager();
         $query = $em->createQuery('
@@ -99,7 +111,19 @@ class AdRepository extends EntityRepository
             WHERE p.id = :id
         ');
 
-        return $query->setParameter('id', $user->getId())->getResult();
+        return $query->setParameter('id', $user->getId());
+    }
+
+    /**
+     * Find promotes by $user
+     *
+     * @param User $user
+     *
+     * @return array
+     */
+    public function findPromotesByUser(User $user)
+    {
+        return $this->findPromotesByUserQuery($user)->getResult();
     }
 
     /**

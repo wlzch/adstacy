@@ -2,7 +2,7 @@
 
 {% block show_content %}
   <div class="masonry">
-    {% for promote in promotes %}
+    {% for promote in paginator.getCurrentPageResults %}
       {% include 'AdstacyAppBundle:Ad:ad.html.twig' with {ad: promote} %}
     {% endfor %}
   </div>

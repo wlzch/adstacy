@@ -13,6 +13,25 @@ use Adstacy\AppBundle\Entity\User;
  */
 class UserRepository extends EntityRepository
 {
+    /**
+     * Find $user followers query
+     *
+     * @param User $user
+     *
+     * @return Query
+     */
+    public function findFollowersByUserQuery(User $user)
+    {
+        $em = $this->getEntitymanager();
+        $query = $em->createQuery('
+            SELECT u
+            FROM AdstacyAppBundle:User u
+            JOIN u.followings f
+            WHERE f.id = :id
+        ');
+
+        return $query->setParameter('id', $user->getId());
+    }
 
     /**
      * Find $user followers
@@ -23,15 +42,27 @@ class UserRepository extends EntityRepository
      */
     public function findFollowersByUser(User $user)
     {
+        return $this->findFollowersByUserQuery($user)->getResult();
+    }
+
+    /**
+     * Find $user followings query
+     *
+     * @param User $user
+     *
+     * @return Query
+     */
+    public function findFollowingsByUserQuery(User $user)
+    {
         $em = $this->getEntitymanager();
         $query = $em->createQuery('
             SELECT u
             FROM AdstacyAppBundle:User u
-            JOIN u.followings f
+            JOIN u.followers f
             WHERE f.id = :id
         ');
 
-        return $query->setParameter('id', $user->getId())->getResult();
+        return $query->setParameter('id', $user->getId());
     }
 
     /**
@@ -43,15 +74,7 @@ class UserRepository extends EntityRepository
      */
     public function findFollowingsByUser(User $user)
     {
-        $em = $this->getEntitymanager();
-        $query = $em->createQuery('
-            SELECT u
-            FROM AdstacyAppBundle:User u
-            JOIN u.followers f
-            WHERE f.id = :id
-        ');
-
-        return $query->setParameter('id', $user->getId())->getResult();
+        return $this->findFollowingsByUserQuery($user)->getResult();
     }
     /**
      * Count $user followers
