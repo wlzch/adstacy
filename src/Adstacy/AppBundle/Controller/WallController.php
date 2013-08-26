@@ -91,6 +91,35 @@ class WallController extends Controller
     /**
      * @Secure(roles="ROLE_USER")
      *
+     * @param integer $id
+     */
+    public function deleteAction($id)
+    {
+        $wall = $this->getRepository('AdstacyAppBundle:Wall')->find($id);
+        if (!$wall) {
+            throw $this->createNotFoundException();
+        }
+        $wallUser = $wall->getUser();
+        $user = $this->getUser();
+        if ($wallUser != $user) {
+            $this->addFlash('error', 'You can only delete your own wall');
+            return $this->redirect($this->generateUrl('homepage'));
+        }
+        
+        $user->setAdsCount($user->getAdsCount() - $wall->getAdsCount());
+        $em = $this->getManager();
+        $em->remove($wall);
+        $em->persist($user);
+        $em->flush();
+        $this->addFlash('success', 'You have successfully deleted your wall and all ads within this wall');
+
+        return $this->redirect($this->generateUrl('adstacy_app_user_profile', array('username' => $user->getUsername())));
+
+    }
+
+    /**
+     * @Secure(roles="ROLE_USER")
+     *
      * User B will be automatically followed by User A if it is not already
      */
     public function followAction($id)

@@ -172,7 +172,6 @@ class Wall
     {
         $this->ads->removeElement($ads);
         $this->setAdsCount($this->getAdsCount() - 1);
-    
     }
 
     /**

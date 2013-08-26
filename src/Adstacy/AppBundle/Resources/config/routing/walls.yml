@@ -26,7 +26,15 @@ adstacy_app_wall_edit:
     requirements:
         id: \d+
 
+adstacy_app_wall_delete:
+    pattern: /walls/{id}/delete
+    defaults:
+        _controller: AdstacyAppBundle:Wall:delete
+    requirements:
+        id: \d+
+
 adstacy_app_wall_create:
     pattern: /walls/create
     defaults:
         _controller: AdstacyAppBundle:Wall:create
+
