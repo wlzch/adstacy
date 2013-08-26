@@ -20,6 +20,8 @@ parameters:
                 provider: ~
                 finder: ~
                 listener: ~
+                elastica_to_model_transformer:
+                    ignore_missing: true
         user:
             mappings:
                 username: { boost: 5 }
@@ -29,6 +31,8 @@ parameters:
                 provider: ~
                 finder: ~
                 listener: ~
+                elastica_to_model_transformer:
+                    ignore_missing: true
 
 framework:
     #esi:             ~
