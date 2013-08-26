@@ -18,7 +18,7 @@
           <h3>Description</h3>
           <p>{{ parse_hashtag(ad.description) }}</p>
           <p>{{ ad.promoteesCount }} promotes</p>
-          <a class="tweet" href="{{ app.request.uri }}" data-via="adstacy">Tweet</a>
+          <a class="tweet" href="{{ app.request.uri }}" data-via="adstacy" data-text="{{ ad.description }}">Tweet</a>
           <a class="facebook-share" href="{{ app.request.uri }}">Share</a>
         </section>
         <section class="ad-detail-section list-section">

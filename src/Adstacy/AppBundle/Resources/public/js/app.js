@@ -50,8 +50,9 @@
   $('.tweet').click(function() {
     var $this = $(this);
     var via = '&via='+$this.attr('data-via');
+    var text = '&text='+$this.attr('data-text');
     window.open(
-      'https://twitter.com/share?url='+encodeURIComponent(this.href)+via,
+      'https://twitter.com/share?url='+encodeURIComponent(this.href)+via+text,
       'Twitter tweet', 
       'width=626,height=436'
     ); 
