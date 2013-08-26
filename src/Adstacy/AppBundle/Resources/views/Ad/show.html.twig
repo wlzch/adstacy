@@ -17,24 +17,46 @@
 {% block content %}
   {% set wall = ad.wall %}
   {% set user = wall.user %}
-  <div class="ad-single">
-    {% if app.user == user %}
-      <a href="{{ path('adstacy_app_ad_edit', {id: ad.id}) }}" class="btn btn-primary">Edit</a>
-      <a href="#" data-toggle="modal" data-target="#confirm-modal" class="btn btn-primary btn-log">Delete</a>
-    {% endif %}
-    <a href="https://twitter.com/share" class="twitter-share-button" data-related="adstacy">Tweet</a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-    <div class="fb-like" data-width="450" data-show-faces="false" data-send="false"></div>
 
-    <p>{{ parse_hashtag(ad.description) }} ({{ ad.promoteesCount }}) promotes</p>
-    <a class="btn btn-primary btn-wall" href="{{ path('adstacy_app_wall_show', {id: ad.wall.id}) }}">{{ ad.wall.name }}</a>
-    <img src="{{ vich_uploader_asset(ad.image, 'file') }}" alt="{{ ad.description }}">
-    <div class="ad-content">
-      {{ ad.content }}
+  <div class="adstacy-container ad-single">
+    <div class="ad-detail inline-block">
+      <div class="ad-detail-pic span-2of3">
+        <img src="{{ vich_uploader_asset(ad.image, 'file') }}" alt="{{ ad.description }}">
+      </div>
+      <div class="span-1of3">
+        <section class="ad-detail-section list-section">
+          <h3>Description</h3>
+          <p>{{ parse_hashtag(ad.description) }}</p>
+          <p>{{ ad.promoteesCount }} promotes</p>
+          <a href="https://twitter.com/share" class="twitter-share-button" data-related="adstacy">Tweet</a>
+          <div class="fb-like" data-width="200" data-show-faces="false" data-send="false"></div>
+        </section>
+        <section class="ad-detail-section list-section">
+          <h3>Wall</h3>
+          <p><a href="{{ path('adstacy_app_wall_show', {id: ad.wall.id}) }}">{{ ad.wall.name }}</a></p>
+          {% if app.user == user %}
+            <a href="{{ path('adstacy_app_ad_edit', {id: ad.id}) }}" class="btn btn-primary">Edit</a>
+            <a href="#" data-toggle="modal" data-target="#confirm-modal" class="btn btn-primary btn-log">Delete</a>
+          {% endif %}
+          {% include 'AdstacyAppBundle:Wall:follow_button.html.twig' with {wall: wall} %}
+        </section>
+
+        <section class="ad-detail-section list-section">
+          <div class="list-block" style="width: 100px;">
+            <img data-src="holder.js/100x100">
+          </div>
+          <div class="list-block">
+            <h3>{{ wall.user.username }}</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi, praesentium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, tenetur.</p>
+          </div>
+        </section>
+
+      </div>
+      <div class="ad-detail-content">
+        {{ ad.content }}
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit, voluptate, quaerat, possimus, magnam iste voluptatibus nihil soluta enim eum optio esse nisi adipisci blanditiis aperiam officiis aspernatur veritatis illo ab perspiciatis pariatur eligendi asperiores atque qui assumenda deserunt nobis est illum rem aliquam odit. Esse, minus, libero, commodi, quisquam cum asperiores et odio ratione explicabo non ducimus at pariatur autem cumque tenetur dolorem dolore. Facilis, rerum, in ratione odio aliquid aperiam nobis facere deleniti. Nostrum, est quidem eius libero inventore. Aperiam, fugit magnam optio laboriosam officia reiciendis voluptatum quae dignissimos maxime numquam alias accusantium modi libero vitae dolores odio suscipit.
+      </div>
     </div>
-    <h3>{{ user.username }}</h3>
-    {% include 'AdstacyAppBundle:Wall:follow_button.html.twig' with {wall: wall} %}
-
   </div>
   <div class="modal fade" id="confirm-modal">
     <div class="modal-dialog">
@@ -53,6 +75,8 @@
       </div>
     </div>
   </div>
+
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 {% endblock %}
 
 {% block javascripts %}
