@@ -18,16 +18,27 @@
   {% set wall = ad.wall %}
   {% set user = wall.user %}
 
-  <div class="adstacy-container ad-single">
-    <div class="ad-detail inline-block">
-      <div class="ad-detail-pic span-2of3">
+  <div class="adstacy-container ad-detail-container">
+    <div class="table-row">
+      <div class="table-cell ad-detail-pic centered">
         <img src="{{ vich_uploader_asset(ad.image, 'file') }}" alt="{{ ad.description }}">
       </div>
-      <div class="span-1of3">
+      <div class="table-cell" style="width: 400px;">
         <section class="ad-detail-section list-section">
           <h3>Description</h3>
           <p>{{ parse_hashtag(ad.description) }}</p>
-          <p>{{ ad.promoteesCount }} promotes</p>
+          <p>
+            {{ ad.promoteesCount }} promotes
+            <a href="/app_dev.php/ads/63/unpromote" data-toggle="tooltip" title="" class="btn btn-success unpromote hide" data-original-title="Unpromote">
+              <span aria-hidden="true" class="icon-bullhorn"></span>
+            </a>
+            <a href="/app_dev.php/ads/63/promote" data-toggle="tooltip" title="" class="btn btn-primary promote" data-original-title="Promote">
+              <span aria-hidden="true" class="icon-bullhorn"></span>
+            </a>
+          </p>
+
+
+
           <a href="https://twitter.com/share" class="twitter-share-button" data-related="adstacy">Tweet</a>
           <div class="fb-like" data-width="200" data-show-faces="false" data-send="false"></div>
         </section>
@@ -52,10 +63,10 @@
         </section>
 
       </div>
-      <div class="ad-detail-content">
-        {{ ad.content }}
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit, voluptate, quaerat, possimus, magnam iste voluptatibus nihil soluta enim eum optio esse nisi adipisci blanditiis aperiam officiis aspernatur veritatis illo ab perspiciatis pariatur eligendi asperiores atque qui assumenda deserunt nobis est illum rem aliquam odit. Esse, minus, libero, commodi, quisquam cum asperiores et odio ratione explicabo non ducimus at pariatur autem cumque tenetur dolorem dolore. Facilis, rerum, in ratione odio aliquid aperiam nobis facere deleniti. Nostrum, est quidem eius libero inventore. Aperiam, fugit magnam optio laboriosam officia reiciendis voluptatum quae dignissimos maxime numquam alias accusantium modi libero vitae dolores odio suscipit.
-      </div>
+    </div>
+    <div class="ad-detail-content">
+      {{ ad.content }}
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit, voluptate, quaerat, possimus, magnam iste voluptatibus nihil soluta enim eum optio esse nisi adipisci blanditiis aperiam officiis aspernatur veritatis illo ab perspiciatis pariatur eligendi asperiores atque qui assumenda deserunt nobis est illum rem aliquam odit. Esse, minus, libero, commodi, quisquam cum asperiores et odio ratione explicabo non ducimus at pariatur autem cumque tenetur dolorem dolore. Facilis, rerum, in ratione odio aliquid aperiam nobis facere deleniti. Nostrum, est quidem eius libero inventore. Aperiam, fugit magnam optio laboriosam officia reiciendis voluptatum quae dignissimos maxime numquam alias accusantium modi libero vitae dolores odio suscipit.
     </div>
   </div>
   <div class="modal fade" id="confirm-modal">
