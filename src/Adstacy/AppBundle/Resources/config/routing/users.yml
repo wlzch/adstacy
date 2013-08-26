@@ -1,0 +1,39 @@
+adstacy_app_user_profile:
+    pattern: /{username}
+    defaults:
+        _controller: AdstacyAppBundle:User:show
+
+adstacy_app_user_walls:
+    pattern: /{username}/walls
+    defaults:
+        _controller: AdstacyAppBundle:User:showWalls
+
+adstacy_app_user_ads:
+    pattern: /{username}/ads
+    defaults:
+        _controller: AdstacyAppBundle:User:showAds
+
+adstacy_app_user_promotes:
+    pattern: /{username}/promotes
+    defaults:
+        _controller: AdstacyAppBundle:User:showPromotes
+
+adstacy_app_user_followers:
+    pattern: /{username}/followers
+    defaults:
+        _controller: AdstacyAppBundle:User:showFollowers
+
+adstacy_app_user_followings:
+    pattern: /{username}/followings
+    defaults:
+        _controller: AdstacyAppBundle:User:showFollowings
+
+adstacy_app_user_follow:
+    pattern: /{username}/follow
+    defaults:
+        _controller: AdstacyAppBundle:User:follow
+
+adstacy_app_user_unfollow:
+    pattern: /{username}/unfollow
+    defaults:
+        _controller: AdstacyAppBundle:User:unfollow

@@ -3,69 +3,11 @@ homepage:
     defaults:
         _controller: AdstacyAppBundle:App:index
 
-adstacy_app_search:
-    pattern: /search
-    defaults:
-        _controller: AdstacyAppBundle:Search:search
+AdstacyAppBundle_search:
+    resource: "@AdstacyAppBundle/Resources/config/routing/search.yml"
 
-adstacy_app_search_ads:
-    pattern: /search/ads
-    defaults:
-        _controller: AdstacyAppBundle:Search:searchAds
+AdstacyAppBundle_ads:
+    resource: "@AdstacyAppBundle/Resources/config/routing/ads.yml"
 
-adstacy_app_search_users:
-    pattern: /search/users
-    defaults:
-        _controller: AdstacyAppBundle:Search:searchUsers
-
-adstacy_app_ad_create:
-    pattern: /ads/create
-    defaults:
-        _controller: AdstacyAppBundle:Ad:add
-
-adstacy_app_ad_show:
-    pattern: /ads/{id}
-    defaults:
-        _controller: AdstacyAppBundle:Ad:show
-    requirements:
-        id: \d+
-
-adstacy_app_ad_promote:
-    pattern: /ads/{id}/promote
-    defaults:
-        _controller: AdstacyAppBundle:Ad:promote
-    requirements:
-        id: \d+
-
-adstacy_app_ad_unpromote:
-    pattern: /ads/{id}/unpromote
-    defaults:
-        _controller: AdstacyAppBundle:Ad:unpromote
-    requirements:
-        id: \d+
-
-adstacy_app_wall_show:
-    pattern: /walls/{id}
-    defaults:
-        _controller: AdstacyAppBundle:Wall:show
-    requirements:
-        id: \d+
-
-adstacy_app_wall_follow:
-    pattern: /walls/{id}/follow
-    defaults:
-        _controller: AdstacyAppBundle:Wall:follow
-    requirements:
-        id: \d+
-
-adstacy_app_wall_unfollow:
-    pattern: /walls/{id}/unfollow
-    defaults:
-        _controller: AdstacyAppBundle:Wall:unfollow
-    requirements:
-        id: \d+
-
-adstacy_app_wall_create:
-    pattern: /walls/create
-    defaults:
-        _controller: AdstacyAppBundle:Wall:add
+AdstacyAppBundle_walls:
+    resource: "@AdstacyAppBundle/Resources/config/routing/walls.yml"
