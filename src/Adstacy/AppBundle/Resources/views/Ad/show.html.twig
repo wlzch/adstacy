@@ -71,26 +71,6 @@
   <script type="text/javascript">
     $(function() {
       $('.ad-single').ajaxlink('show_ad');
-      $('.tweet').click(function() {
-        var $this = $(this);
-        var via = '&via='+$this.attr('data-via');
-        window.open(
-          'https://twitter.com/share?url='+encodeURIComponent(location.href)+via,
-          'Twitter Dialog', 
-          'width=626,height=436'
-        ); 
-
-        return false;
-      });
-      $('.facebook-share').click(function() {
-        window.open(
-          'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href), 
-          'Facebook Like', 
-          'width=626,height=436'
-        ); 
-
-        return false;
-      });
     });
   </script>
 {% endblock %}

@@ -47,4 +47,24 @@
   });
   $('.ad-desc').ajaxlink('ads');
   $('[data-toggle="tooltip"]').tooltip();
+  $('.tweet').click(function() {
+    var $this = $(this);
+    var via = '&via='+$this.attr('data-via');
+    window.open(
+      'https://twitter.com/share?url='+encodeURIComponent(this.href)+via,
+      'Twitter tweet', 
+      'width=626,height=436'
+    ); 
+
+    return false;
+  });
+  $('.facebook-share').click(function() {
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(this.href), 
+      'Facebook share', 
+      'width=626,height=436'
+    ); 
+
+    return false;
+  });
 })();
