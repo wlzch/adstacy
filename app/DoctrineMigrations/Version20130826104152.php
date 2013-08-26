@@ -8,14 +8,14 @@ use Doctrine\DBAL\Migrations\AbstractMigration,
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20130825191718 extends AbstractMigration
+class Version20130826104152 extends AbstractMigration
 {
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != "postgresql", "Migration can only be executed safely on 'postgresql'.");
         
-        $this->addSql("ALTER TABLE users RENAME COLUMN followed_walls_count TO ads_count");
+        $this->addSql("ALTER TABLE users ADD ads_count INT NOT NULL");
     }
 
     public function down(Schema $schema)
@@ -23,6 +23,6 @@ class Version20130825191718 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != "postgresql", "Migration can only be executed safely on 'postgresql'.");
         
-        $this->addSql("ALTER TABLE users RENAME COLUMN ads_count TO followed_walls_count");
+        $this->addSql("ALTER TABLE users DROP ads_count");
     }
 }
