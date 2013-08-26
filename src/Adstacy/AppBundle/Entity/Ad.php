@@ -239,6 +239,7 @@ class Ad
     public function setWall(\Adstacy\AppBundle\Entity\Wall $wall)
     {
         $this->wall = $wall;
+        $wall->addAd($this);
         $this->generateTags();
     
         return $this;
