@@ -6,6 +6,8 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Routing\Router;
 use FOS\UserBundle\Model\UserManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\Exception\AccountNotLinkedException;
@@ -29,13 +31,25 @@ class UserProvider implements UserProviderInterface, OAuthAwareUserProviderInter
     protected $properties;
 
     /**
+     * @var Session
+     */
+    protected $session;
+
+    /**
+     * @var Router
+     */
+    protected $router;
+
+    /**
      * Constructor.
      *
      * @param UserManagerInterface $userManager FOSUB user provider.
      */
-    public function __construct(UserManagerInterface $userManager)
+    public function __construct(UserManagerInterface $userManager, Session $session, Router $router)
     {
         $this->userManager = $userManager;
+        $this->session = $session;
+        $this->router = $router;
         $this->properties  = array('facebook' => 'facebookId', 'twitter' => 'twitterId');
     }
 
@@ -82,21 +96,24 @@ class UserProvider implements UserProviderInterface, OAuthAwareUserProviderInter
             if ($email && $_user = $this->userManager->findUserByEmail($email)) {
               $user = $_user;
             } else {
-              // create new user here
-              $user = $this->userManager->createUser();
-              $nickname = $response->getNickname();
+                // create new user here
+                $user = $this->userManager->createUser();
+                $nickname = $response->getNickname();
 
-              if ($this->userManager->findUserByUsername($nickname)) {
-                // username exists
-                $user->setUsername(uniqid($nickname));
-              } else {
-                $user->setUsername($nickname);
-              }
-              $user->setRealName($response->getRealName());
-              $user->setEmail($response->getEmail());
-              $user->setPassword(base_convert(sha1(uniqid(mt_rand(), true)), 16, 36));
-              $user->setProfilePicture($response->getProfilePicture());
-              $user->setEnabled(true);
+                if ($this->userManager->findUserByUsername($nickname)) {
+                  // username exists
+                  $user->setUsername(uniqid($nickname));
+                } else {
+                  $user->setUsername($nickname);
+                }
+                $user->setRealName($response->getRealName());
+                $user->setEmail($response->getEmail());
+                $user->setPassword(base_convert(sha1(uniqid(mt_rand(), true)), 16, 36));
+                $user->setProfilePicture($response->getProfilePicture());
+                $user->setEnabled(true);
+                // redirect to settings if new user
+                $path = $this->router->getRouteCollection()->get('fos_user_profile_edit')->getPattern();
+                $this->session->set('_security.main.target_path', $path);
             }
             $user->$setter_id($username);
             $user->$setter_username($response->getNickname());

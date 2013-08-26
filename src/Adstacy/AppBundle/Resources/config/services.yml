@@ -4,7 +4,7 @@ imports:
 services:
     adstacy.user.provider:
         class: Adstacy\AppBundle\Security\User\Provider\UserProvider
-        arguments: [@fos_user.user_manager]
+        arguments: [@fos_user.user_manager, @session, @router]
 
     adstacy.twig.formatter_extension:
         class: Adstacy\AppBundle\Twig\FormatterExtension
