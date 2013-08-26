@@ -31,7 +31,10 @@
 
       $parent.find(settings.firstSelector+','+settings.secondSelector).click(function(event) {
         var $this = $(this);
+        var $html = $this.html();
+        $this.html('<img src="/bundles/adstacyapp/img/spinner.gif" width="16" height="16" />');
         $.post(this.href, function(data) {
+          $this.html($html);
           var json = JSON.parse(data);
           if (!json.error) {
             if (settings.countSelector) {
