@@ -240,39 +240,11 @@
           $btnNavbarExpand_span.addClass('icon-chevron-down');
           $navbarExpandContainer.addClass('hide');
         });
-        $('a.promote, a.unpromote').ajaxlink({
-          parentSelector: '.ad-desc',
+        $('.ad-desc').ajaxlink({
           countSelector: '.promotes-count',
           jsonField: 'promotes_count',
-          firstSelector: '.promote',
-          secondSelector: '.unpromote'
-        });
-        $('a.follow-wall, a.unfollow-wall').ajaxlink({
-          parentSelector: '.show-wall-container',
-          countSelector: '.followers-count',
-          jsonField: 'followers_count',
-          firstSelector: '.follow-wall',
-          secondSelector: '.unfollow-wall'
-        });
-        $('a.follow-user, a.unfollow-user').click(function() {
-          var $this = $(this);
-          $.post(this.href, function(data) {
-            var json = JSON.parse(data);
-            if (!json.error) {
-              $this.parents().find('.user-followers-count').text(json.followers_count);
-              if ($this.hasClass('follow-user')) {
-                $this.attr('href', Routing.generate('adstacy_app_user_unfollow', {username: json.username}));
-                $this.text('Unfollow');
-              } else {
-                $this.attr('href', Routing.generate('adstacy_app_user_follow', {username: json.username}));
-                $this.text('Follow');
-              }
-              $this.toggleClass('follow-user');
-              $this.toggleClass('unfollow-user');
-            }
-          });
-
-          return false;
+          firstSelector: 'a.promote',
+          secondSelector: 'a.unpromote'
         });
       </script>
     {% endblock %}

@@ -3,18 +3,23 @@
     var settings = $.extend({}, options);
 
     return this.each(function() {
-      var $this = $(this);
-      $this.click(function() {
+      var $parent = $(this);
+
+      $parent.find(settings.firstSelector+','+settings.secondSelector).click(function(event) {
+        var $this = $(this);
         $.post(this.href, function(data) {
           var json = JSON.parse(data);
           if (!json.error) {
-            var $parent = $this.closest(settings.parentSelector);
-            $parent.find(settings.countSelector).text(json[settings.jsonField]);
+            if (settings.countSelector) {
+              $parent.find(settings.countSelector).text(json[settings.jsonField]);
+            }
             $parent.find(settings.firstSelector).toggleClass('hide');
             $parent.find(settings.secondSelector).toggleClass('hide');
           }
         });
 
+        event.preventDefault();
+        event.stopPropagation();
         return false;
       });
     });

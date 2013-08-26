@@ -3,19 +3,29 @@
 {% block title %}{{ user.username }} | Adstacy{% endblock %}
 
 {% block content %}
-  <div class="adstacy-container">
+  <div class="adstacy-container user-profile">
     <a class="btn btn-primary" href="{{ path('adstacy_app_user_ads', {username: user.username}) }}">{{ adsCount }} Ads</a>
     <a class="btn btn-primary" href="{{ path('adstacy_app_user_walls', {username: user.username}) }}">{{ wallsCount }} Walls</a>
     <a class="btn btn-primary" href="{{ path('adstacy_app_user_promotes', {username: user.username}) }}">{{ promotesCount }} Promotes</a>
     <a class="btn btn-primary" href="{{ path('adstacy_app_user_followers', {username: user.username}) }}"><span class="user-followers-count">{{ followersCount }}</span> Followers</a>
     <a class="btn btn-primary" href="{{ path('adstacy_app_user_followings', {username: user.username}) }}">{{ followingsCount }} Followings</a>
     {% if app.user and app.user != user %}
-      {% if app.user.hasFollowUser(user) %}
-        <a class="btn btn-primary unfollow-user" href="{{ path('adstacy_app_user_unfollow', {username: user.username}) }}">Unfollow</a> 
-      {% else %}
-        <a class="btn btn-primary follow-user" href="{{ path('adstacy_app_user_follow', {username: user.username}) }}">Follow</a> 
-      {% endif %}
+      {% set followed = app.user.hasFollowUser(user) %}
+      <a class="btn btn-primary unfollow-user {% if not followed %}hide{% endif %}" href="{{ path('adstacy_app_user_unfollow', {username: user.username}) }}">Unfollow</a> 
+      <a class="btn btn-primary follow-user {% if followed %}hide{% endif %}" href="{{ path('adstacy_app_user_follow', {username: user.username}) }}">Follow</a> 
     {% endif %}
     {% block show_content %}{% endblock %}
   </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script type="text/javascript">
+    $('.user-profile').ajaxlink({
+      countSelector: '.user-followers-count',
+      jsonField: 'followers_count',
+      firstSelector: 'a.follow-user',
+      secondSelector: 'a.unfollow-user'
+    });
+  </script>
 {% endblock %}
