@@ -10,6 +10,11 @@ adstacy_app_ad_show:
     requirements:
         id: \d+
 
+adstacy_app_ad_edit:
+    pattern: /ads/{id}/edit
+    defaults:
+        _controller: AdstacyAppBundle:Ad:edit
+
 adstacy_app_ad_promote:
     pattern: /ads/{id}/promote
     defaults:

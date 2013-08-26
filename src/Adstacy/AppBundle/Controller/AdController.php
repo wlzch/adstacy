@@ -50,9 +50,55 @@ class AdController extends Controller
             $em->persist($ad);
             $em->persist($user);
             $em->flush();
+            $this->addFlash('success', 'You have successfully created your ads');
+
+            return $this->redirect($this->generateUrl('adstacy_app_ad_show', array('id' => $ad->getId())));
         }
 
-        return $this->render('AdstacyAppBundle:Ad:create.html.twig', array(
+        return $this->render('AdstacyAppBundle:Ad:form.html.twig', array(
+            'form' => $form->createView(),
+            'wallForm' => $wallForm->createView()
+        ));
+    }
+
+    /**
+     * @Secure(roles="ROLE_USER")
+     *
+     * @param integer $id
+     */
+    public function editAction($id)
+    {
+        $ad = $this->getRepository('AdstacyAppBundle:Ad')->find($id);
+        if (!$ad) {
+            throw $this->createNotFoundException();
+        }
+
+        $user = $this->getUser();
+        $request = $this->getRequest();
+        $filter = 'thumbnail';
+
+        if ($ad->getWall()->getUser() != $user) {
+            $this->addFlash('error', 'You can only edit your own ads');
+            return $this->redirect($this->generateUrl('homepage'));
+        }
+        $form = $this->createForm(new AdType(), $ad, array(
+            'username' => $user->getUsername() 
+        ));
+        $form->handleRequest($request);
+        $wallForm = $this->createForm(new WallType(), new Wall(), array(
+            'action' => $this->generateUrl('adstacy_app_wall_create') 
+        ));
+
+        if ($form->isValid()) {
+            $em = $this->getManager();
+            $em->persist($ad);
+            $em->flush();
+            $this->addFlash('success', 'You have successfully edited your ads');
+
+            return $this->redirect($this->generateUrl('adstacy_app_ad_show', array('id' => $ad->getId())));
+        }
+
+        return $this->render('AdstacyAppBundle:Ad:form.html.twig', array(
             'form' => $form->createView(),
             'wallForm' => $wallForm->createView()
         ));

@@ -15,19 +15,23 @@
 {% endblock %}
 
 {% block content %}
+  {% set wall = ad.wall %}
+  {% set user = wall.user %}
   <div class="ad-single">
+    {% if app.user == user %}
+      <a href="{{ path('adstacy_app_ad_edit', {id: ad.id}) }}">Edit</a>
+    {% endif %}
     <a href="https://twitter.com/share" class="twitter-share-button" data-related="adstacy">Tweet</a>
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
     <div class="fb-like" data-width="450" data-show-faces="false" data-send="false"></div>
 
-    {% set wall = ad.wall %}
     <p>{{ parse_hashtag(ad.description) }} ({{ ad.promoteesCount }}) promotes</p>
     <a class="btn btn-primary btn-wall" href="{{ path('adstacy_app_wall_show', {id: ad.wall.id}) }}">{{ ad.wall.name }}</a>
     <img src="{{ vich_uploader_asset(ad.image, 'file') }}" alt="{{ ad.description }}">
     <div class="ad-content">
       {{ ad.content }}
     </div>
-    <h3>{{ wall.user.username }}</h3>
+    <h3>{{ user.username }}</h3>
     {% include 'AdstacyAppBundle:Wall:follow_button.html.twig' with {wall: wall} %}
 
   </div>
