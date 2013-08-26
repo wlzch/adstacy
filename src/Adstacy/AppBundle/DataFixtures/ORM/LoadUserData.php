@@ -12,6 +12,7 @@ class LoadUserData extends DataFixture
         $suwandi = new User();
         $suwandi->setUsername('suwandi');
         $suwandi->setEmail('wandi.lin13@gmail.com');
+        $suwandi->setAbout($this->faker->sentence(4));
         $encoder = $this->get('security.encoder_factory')->getEncoder($suwandi);
         $password = $encoder->encodePassword('suwandi', $suwandi->getSalt());
         $suwandi->setPassword($password);
@@ -26,6 +27,7 @@ class LoadUserData extends DataFixture
         $erwin = new User();
         $erwin->setUsername('rwinz');
         $erwin->setEmail('rwinz.cyruz@gmail.com');
+        $erwin->setAbout($this->faker->sentence(10));
         $encoder = $this->get('security.encoder_factory')->getEncoder($erwin);
         $password = $encoder->encodePassword('erwin', $erwin->getSalt());
         $erwin->setPassword($password);

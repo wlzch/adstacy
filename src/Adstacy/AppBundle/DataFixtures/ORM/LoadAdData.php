@@ -18,10 +18,14 @@ class LoadAdData extends DataFixture
             $image = $this->getReference('image-'.$i);
             $wall = $this->getReference('wall-'.$this->faker->randomNumber(1, 15));
             $user = $wall->getUser();
+
             $ad = new Ad();
             $ad->setImage($image);
             $ad->setDescription($description);
             $ad->setWall($wall);
+            if ($this->faker->randomNumber(1, 5) % 2 == 0) {
+                $ad->setContent($this->faker->paragraph($this->faker->randomNumber(4, 30)));
+            }
             $ads[] = $ad;
             $user->increaseAdsCount();
             $manager->persist($ad);
