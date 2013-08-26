@@ -22,11 +22,6 @@
 {% block javascripts %}
   {{ parent() }}
   <script type="text/javascript">
-    $('.user-profile').ajaxlink({
-      countSelector: '.user-followers-count',
-      jsonField: 'followers_count',
-      firstSelector: 'a.follow-user',
-      secondSelector: 'a.unfollow-user'
-    });
+    $('.user-profile').ajaxlink('user_profile');
   </script>
 {% endblock %}

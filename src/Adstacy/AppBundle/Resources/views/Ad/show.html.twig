@@ -37,10 +37,7 @@
   {{ parent() }}
   <script type="text/javascript">
     $(function() {
-      $('.ad-single').ajaxlink({
-        firstSelector: 'a.follow-wall',
-        secondSelector: 'a.unfollow-wall'
-      });
+      $('.ad-single').ajaxlink('show_ad');
     });
   </script>
 {% endblock %}

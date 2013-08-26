@@ -240,12 +240,7 @@
           $btnNavbarExpand_span.addClass('icon-chevron-down');
           $navbarExpandContainer.addClass('hide');
         });
-        $('.ad-desc').ajaxlink({
-          countSelector: '.promotes-count',
-          jsonField: 'promotes_count',
-          firstSelector: 'a.promote',
-          secondSelector: 'a.unpromote'
-        });
+        $('.ad-desc').ajaxlink('ads');
       </script>
     {% endblock %}
   </body>

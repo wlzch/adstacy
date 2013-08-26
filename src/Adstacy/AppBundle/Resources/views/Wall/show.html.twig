@@ -43,11 +43,6 @@
 {% block javascripts %}
   {{ parent() }}
   <script type="text/javascript">
-    $('.show-wall-container').ajaxlink({
-      countSelector: '.followers-count',
-      jsonField: 'followers_count',
-      firstSelector: 'a.follow-wall',
-      secondSelector: 'a.unfollow-wall'
-    });
+    $('.show-wall-container').ajaxlink('show_wall');
   </script>
 {% endblock %}

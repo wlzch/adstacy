@@ -16,6 +16,7 @@
           var $posts = $('.jscroll-added:last .ad');
           $masonry = $('.masonry').masonry('appended', $posts);
           $posts.find('img.lazy').lazyload();
+          $posts.find('.ad-desc').ajaxlink('ads');
         }
       });
     });
