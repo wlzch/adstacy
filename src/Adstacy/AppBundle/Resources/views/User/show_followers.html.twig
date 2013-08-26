@@ -2,6 +2,6 @@
 
 {% block show_content %}
   {% for follower in followers %}
-    {{ user.username }}
+    {% include 'AdstacyAppBundle:User:user.html.twig' with {user: follower} %}
   {% endfor %}
 {% endblock %}
