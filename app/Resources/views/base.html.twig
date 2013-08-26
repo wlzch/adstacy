@@ -97,9 +97,9 @@
               <ul class="nav navbar-nav navbar-right">
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                   <li>
-                    <button id="create-ads" type="button" class="btn btn-primary navbar-btn">
+                    <a href="{{ path('adstacy_app_ad_create') }}" id="create-ads" class="btn btn-primary navbar-btn">
                       <span aria-hidden="true" class="icon-plus"></span> Create Ads
-                    </button>
+                    </a>
                   </li>
                   <li id="user-dropdown" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ app.user.username }}<b class="caret"></b></a>
