@@ -1,4 +1,4 @@
-{% extends 'AdstacyAppBundle::layout.html.twig' %}
+{% extends is_ajax() ? '::ajax.html.twig' : 'AdstacyAppBundle::layout.html.twig' %}
 
 {% block title %}Search{% endblock %}
 

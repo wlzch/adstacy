@@ -1,9 +1,20 @@
-{% extends 'AdstacyAppBundle::layout.html.twig' %}
+{% extends is_ajax() ? '::ajax.html.twig' : 'AdstacyAppBundle::layout.html.twig' %}
 
 {% block content %}
   <div class="masonry jscroll clearfix">
-    {% include 'AdstacyAppBundle:Includes:ads.html.twig' with {ads: ads} %}
+    {{ block('ajax_content') }}
   </div>
+{% endblock %}
+
+{% block ajax_content %}
+  {% set id = null %}
+  {% for ad in ads %}
+    {% set id = ad.id %}
+    {% include 'AdstacyAppBundle:Includes:ad.html.twig' with {ad: ad} %}
+  {% endfor %}
+  {% if ads | length >= max_ad_per_page %}
+    <a href="{{ path('homepage', {'id': id})}}" class="btn btn-lg btn-default btn-block next-page">More</a>
+  {% endif %}
 {% endblock %}
 
 {% block javascripts %}

@@ -2,8 +2,18 @@
 
 {% block search_content %}
   <div class="jscroll adstacy-container">
-    {% include 'AdstacyAppBundle:Search:users_content.html.twig' with {paginator: paginator} %}
+    {{ block('ajax_content') }}
   </div>
+{% endblock %}
+
+{% block ajax_content %}
+  {% for user in paginator.getCurrentPageResults %}
+    {% include 'AdstacyAppBundle:User:user.html.twig' with {user: user} %}
+  {% endfor %}
+  {% if paginator.hasNextPage %}
+    {% set params = {page: paginator.getNextPage} | merge(app.request.query.all) %}
+    <a href="{{ path('adstacy_app_search_users', params )}}" class="btn btn-lg btn-default btn-block next-page">More</a>
+  {% endif %}
 {% endblock %}
 
 {% block javascripts %}

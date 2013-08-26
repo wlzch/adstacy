@@ -1,7 +1,0 @@
-{% for ad in paginator.getCurrentPageResults %}
-  {% include 'AdstacyAppBundle:Includes:ad.html.twig' with {ad: ad} %}
-{% endfor %}
-{% if paginator.hasNextPage %}
-  {% set params = {page: paginator.getNextPage} | merge(app.request.query.all) %}
-  <a href="{{ path('adstacy_app_search_ads', params )}}" class="btn btn-lg btn-default btn-block next-page">More</a>
-{% endif %}

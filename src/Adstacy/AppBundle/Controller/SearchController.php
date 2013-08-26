@@ -23,12 +23,6 @@ class SearchController extends Controller
             ->setCurrentPage($request->query->get('page') ?: 1)
         ;
 
-        if ($request->isXmlHttpRequest()) {
-            return $this->render('AdstacyAppBundle:Search:ads_content.html.twig', array(
-                'paginator' => $adsPaginator
-            ));
-        }
-
         return $this->render('AdstacyAppBundle:Search:ads.html.twig', array(
             'paginator' => $adsPaginator,
             'search' => 'ads'
@@ -45,12 +39,6 @@ class SearchController extends Controller
             ->setMaxPerPage(20)
             ->setCurrentPage($request->query->get('page') ?: 1)
         ;
-
-        if ($request->isXmlHttpRequest()) {
-            return $this->render('AdstacyAppBundle:Search:users_content.html.twig', array(
-                'paginator' => $usersPaginator
-            ));
-        }
 
         return $this->render('AdstacyAppBundle:Search:users.html.twig', array(
             'paginator' => $usersPaginator,
