@@ -18,6 +18,8 @@ class Ad
     private $id;
 
     /**
+     * @Assert\Valid
+     * @Assert\NotNull(message="You must upload an image")
      * @ORM\OneToOne(targetEntity="Image", cascade={"persist"}, fetch="EAGER")
      */
     private $image;

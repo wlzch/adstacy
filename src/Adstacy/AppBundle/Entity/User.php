@@ -63,6 +63,7 @@ class User implements UserInterface, GroupableInterface
     protected $emailCanonical;
 
     /**
+     * @Assert\Valid
      * @ORM\OneToOne(targetEntity="Image", cascade={"persist"}, fetch="EAGER")
      */
     protected $image;
