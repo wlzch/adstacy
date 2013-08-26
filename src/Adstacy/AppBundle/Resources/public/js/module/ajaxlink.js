@@ -1,5 +1,5 @@
 (function ($) {
-  $.fn.ajaxlink = function(type) {
+  $.fn.ajaxlink = function(type, options) {
     var types = {
       ads: {
         countSelector: '.promotes-count',
@@ -24,6 +24,9 @@
         secondSelector: 'a.unfollow-user'
       }
     };
+    var options = $.extend({
+      loading: '<img src="/bundles/adstacyapp/img/spinner.gif" width="16" height="16" />'
+    }, options);
 
     return this.each(function() {
       var settings = types[type];
@@ -32,7 +35,7 @@
       $parent.find(settings.firstSelector+','+settings.secondSelector).click(function(event) {
         var $this = $(this);
         var $html = $this.html();
-        $this.html('<img src="/bundles/adstacyapp/img/spinner.gif" width="16" height="16" />');
+        $this.html(options.loading);
         $.post(this.href, function(data) {
           $this.html($html);
           var json = JSON.parse(data);
