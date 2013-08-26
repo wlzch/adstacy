@@ -3,6 +3,7 @@
 <form role="form" action="{{ path("fos_user_security_check") }}" method="post">
   <div class="clearfix">
     <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
+    <input type="hidden" name="_target_path" value="{{ app.request.uri}}">
 
     <label for="username" class="hide">{{ 'security.login.username'|trans }}</label>
     <input type="text" class="form-control input-sm" id="username" name="_username" required="required" placeholder="Username">
