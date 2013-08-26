@@ -8,7 +8,7 @@
   </div>
   <div class="ad-desc border-top">
     <div class="desc">
-      <p>{{ parse_hashtag(ad.description) }}</p>
+      <p>{{ parse_url(parse_hashtag(ad.description)) }}</p>
     </div>
     <div class="inline-block">
       <a class="border-top {% if app.user %}box-medium{% else %}box-large{% endif %} btn-muted"><span class="promotes-count">{{ ad.promoteesCount }}</span> promotes</a>

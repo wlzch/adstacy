@@ -22,6 +22,7 @@ class FormatterExtension extends \Twig_Extension
     {
         return array(
             'parse_hashtag' => new \Twig_Function_Method($this, 'parseHashtag', array('is_safe' => array('html'))),
+            'parse_url' => new \Twig_Function_Method($this, 'parseUrl', array('is_safe' => array('html'))),
             'more' => new \Twig_Function_Method($this, 'more', array('is_safe' => array('html'))),
         );
     }
@@ -64,6 +65,23 @@ class FormatterExtension extends \Twig_Extension
         return preg_replace_callback('/(#\w+)/', function($matches) use (&$url) {
             return sprintf(' <a href="%s?q=%s">%s</a>', $url, substr($matches[0], 1), $matches[0]);
         }, $text);
+    }
+
+    /**
+     * Parse url and add link to it
+     *
+     * @param string text
+     *
+     * @return string parsed text
+     */
+    public function parseUrl($text)
+    {
+        return preg_replace_callback(
+          "#((http|https|ftp)://(\S*?\.\S*?))(\s|\;|\)|\]|\[|\{|\}|,|\"|'|:|\<|$|\.\s)#i",
+          function($matches) {
+              return sprintf('<a class="url" href="%s" target="_blank">%s</a>', $matches[1], $matches[3]);
+          }, $text
+        );
     }
 
 
