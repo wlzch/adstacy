@@ -24,10 +24,11 @@
       $('.jscroll').jscroll({
         nextSelector: 'a.next-page',
         callback: function() {
-          var $posts = $('.jscroll-added:last .ad');
-          $masonry = $('.masonry').masonry('appended', $posts);
-          $posts.find('img.lazy').lazyload();
-          $posts.find('.ad-desc').ajaxlink('ads');
+          var $ads = $('.jscroll-added:last .ad');
+          $masonry = $('.masonry').masonry('appended', $ads);
+          $ads.find('img.lazy').lazyload();
+          $ads.find('.ad-desc').ajaxlink('ads');
+          $ads.find('[data-toggle="tooltip"]').tooltip();
         }
       });
     });

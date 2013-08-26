@@ -27,6 +27,7 @@
           $masonry = $('.masonry').masonry('appended', $ads);
           $ads.find('img.lazy').lazyload();
           $ads.find('.ad-desc').ajaxlink('ads');
+          $ads.find('[data-toggle="tooltip"]').tooltip();
         }
       });
     });
