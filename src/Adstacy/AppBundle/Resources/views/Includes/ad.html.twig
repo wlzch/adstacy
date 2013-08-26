@@ -13,15 +13,13 @@
     <div class="inline-block">
       <a class="border-top {% if app.user %}box-medium{% else %}box-large{% endif %} btn-muted"><span class="promotes-count">{{ ad.promoteesCount }}</span> promotes</a>
       {% if app.user %}
-        {% if app.user.hasPromote(ad) %}
-          <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" title="unpromote" class="btn-success unpromote">
-            <span aria-hidden="true" class="icon-bullhorn">
-          </a>
-        {% else %}
-          <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" title="promote" class="btn-primary promote">
-            <span aria-hidden="true" class="icon-bullhorn">
-          </a>
-        {% endif %}
+        {% set promoted = app.user.hasPromote(ad) %}
+        <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" title="unpromote" class="btn-success unpromote {% if not promoted %}hide{% endif %}">
+          <span aria-hidden="true" class="icon-bullhorn">
+        </a>
+        <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" title="promote" class="btn-primary promote {% if promoted %}hide{% endif %}">
+          <span aria-hidden="true" class="icon-bullhorn">
+        </a>
       {% endif %}
     </div>
   </div>

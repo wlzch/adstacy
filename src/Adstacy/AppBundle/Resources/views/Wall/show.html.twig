@@ -39,3 +39,15 @@
   {% endfor %}
   </div>
 {% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script type="text/javascript">
+    $('.show-wall-container').ajaxlink({
+      countSelector: '.followers-count',
+      jsonField: 'followers_count',
+      firstSelector: 'a.follow-wall',
+      secondSelector: 'a.unfollow-wall'
+    });
+  </script>
+{% endblock %}
