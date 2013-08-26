@@ -10,11 +10,6 @@ adstacy_app_ad_show:
     requirements:
         id: \d+
 
-adstacy_app_ad_edit:
-    pattern: /ads/{id}/edit
-    defaults:
-        _controller: AdstacyAppBundle:Ad:edit
-
 adstacy_app_ad_promote:
     pattern: /ads/{id}/promote
     defaults:
@@ -26,5 +21,19 @@ adstacy_app_ad_unpromote:
     pattern: /ads/{id}/unpromote
     defaults:
         _controller: AdstacyAppBundle:Ad:unpromote
+    requirements:
+        id: \d+
+
+adstacy_app_ad_edit:
+    pattern: /ads/{id}/edit
+    defaults:
+        _controller: AdstacyAppBundle:Ad:edit
+    requirements:
+        id: \d+
+
+adstacy_app_ad_delete:
+    pattern: /ads/{id}/delete
+    defaults:
+        _controller: AdstacyAppBundle:Ad:delete
     requirements:
         id: \d+

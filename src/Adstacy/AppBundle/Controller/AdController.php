@@ -105,6 +105,34 @@ class AdController extends Controller
     }
 
     /**
+     * Delete
+     *
+     * @param integer $id
+     */
+    public function deleteAction($id)
+    {
+        $ad = $this->getRepository('AdstacyAppBundle:Ad')->find($id);
+        if (!$ad) {
+            throw $this->createNotFoundException();
+        }
+        $wallUser = $ad->getWall()->getUser();
+        $user = $this->getUser();
+        if ($wallUser != $user) {
+            $this->addFlash('error', 'You can only delete your own ads');
+            return $this->redirect($this->generateUrl('homepage'));
+        }
+        
+        $em = $this->getManager();
+        $user->decreaseAdsCount();
+        $em->remove($ad);
+        $em->persist($user);
+        $em->flush();
+        $this->addFlash('success', 'You have successfully deleted your ads');
+
+        return $this->redirect($this->generateUrl('adstacy_app_user_profile', array('username' => $user->getUsername())));
+    }
+
+    /**
      * @Secure(roles="ROLE_USER")
      *
      * @param integer ad id

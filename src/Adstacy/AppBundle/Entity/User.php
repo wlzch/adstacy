@@ -1028,6 +1028,14 @@ class User implements UserInterface, GroupableInterface
     }
 
     /**
+     * Increase ads count
+     */
+    public function decreaseAdsCount()
+    {
+        $this->setAdsCount($this->getAdsCount() - 1);
+    }
+
+    /**
      * Set adsCount
      *
      * @param integer $adsCount
