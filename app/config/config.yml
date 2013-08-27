@@ -233,3 +233,9 @@ stfalcon_tinymce:
                 - "paste textcolor"
             toolbar1: "insertfile undo redo | styleselect | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
             file_browser_callback: elFinderBrowser
+
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts: [admin]
