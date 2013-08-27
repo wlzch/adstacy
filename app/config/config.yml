@@ -7,7 +7,7 @@ parameters:
     max_ad_per_page: 20
     thumb_width: 236
     mini_thumb_size: 118
-    profile_pic_size: 150
+    profile_pic_size: 100
     facebook_app_id: '476946822391252'
     web_dir: %kernel.root_dir%/../web
     no_profpic_img: /bundles/adstacyapp/img/nophoto.gif

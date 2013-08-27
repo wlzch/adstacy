@@ -1,6 +1,9 @@
 {% extends is_ajax() ? '::ajax.html.twig' : 'AdstacyAppBundle:User:show.html.twig' %}
 
 {% block show_content %}
+  <div class="jscroll">
+    {{ block('ajax_content') }}
+  </div>
 {% endblock %}
 
 {% block ajax_content %}
