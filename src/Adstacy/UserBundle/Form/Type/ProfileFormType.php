@@ -36,8 +36,8 @@ class ProfileFormType extends BaseType
             ))->addModelTransformer(new HashtagToArrayTransformer())
         );
         $builder->add('realName', 'text', array(
-            'label' => 'Name',
-            'required' => false,
+            'label' => 'Fullname',
+            'required' => 'required',
             'attr' => array(
                 'placeholder' => 'Adstacy'
             )

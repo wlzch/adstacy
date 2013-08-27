@@ -30,30 +30,41 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', null, array(
-                    'label' => 'form.username',
-                    'translation_domain' => 'FOSUserBundle',
-                    'attr' => array(
-                        'class' => 'form-control input-lg',
-                        'placeholder' => 'Username'
-                    ),
-                    'label_attr' => array(
-                        'class' => 'hide'
-                    )
-                )
-            )
             ->add('email', 'email', array(
-                    'label' => 'form.email',
-                    'translation_domain' => 'FOSUserBundle',
-                    'attr' => array(
-                        'class' => 'form-control input-lg',
-                        'placeholder' => 'email@example.com'
-                    ),
-                    'label_attr' => array(
-                        'class' => 'hide'
-                    )
+                'label' => 'form.email',
+                'translation_domain' => 'FOSUserBundle',
+                'required' => true,
+                'attr' => array(
+                    'class' => 'form-control input-lg',
+                    'placeholder' => 'email@example.com'
+                ),
+                'label_attr' => array(
+                    'class' => 'hide'
                 )
-            )
+            ))
+            ->add('username', 'text', array(
+                'label' => 'form.username',
+                'translation_domain' => 'FOSUserBundle',
+                'required' => true,
+                'attr' => array(
+                    'class' => 'form-control input-lg',
+                    'placeholder' => 'Username'
+                ),
+                'label_attr' => array(
+                    'class' => 'hide'
+                )
+            ))
+            ->add('realName', 'text', array(
+                'label' => 'Fullname',
+                'required' => true,
+                'attr' => array(
+                    'class' => 'form-control input-lg',
+                    'placeholder' => 'Fullname'
+                ),
+                'label_attr' => array(
+                    'class' => 'hide'
+                )
+            ))
             ->add('plainPassword', 'repeated', array(
                 'type' => 'password',
                 'options' => array(
@@ -61,6 +72,7 @@ class RegistrationFormType extends AbstractType
                 ),
                 'first_options' => array(
                     'label' => 'form.password',
+                    'required' => true,
                     'attr' => array(
                         'class' => 'form-control input-lg',
                         'placeholder' => 'Password'
@@ -71,6 +83,7 @@ class RegistrationFormType extends AbstractType
                 ),
                 'second_options' => array(
                     'label' => 'form.password_confirmation',
+                    'required' => true,
                     'attr' => array(
                         'class' => 'form-control input-lg',
                         'placeholder' => 'Confirm Password'

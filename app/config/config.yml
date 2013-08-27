@@ -233,3 +233,17 @@ stfalcon_tinymce:
                 - "paste textcolor"
             toolbar1: "insertfile undo redo | styleselect | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
             file_browser_callback: elFinderBrowser
+
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts: [admin]
+
+sonata_admin:
+    title: Adstacy Admin
+    dashboard:
+        blocks:
+            - { position: left, type: sonata.admin.block.admin_list }
+    templates:
+        edit: AdstacyAppBundle:Admin:edit.html.twig

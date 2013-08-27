@@ -28,7 +28,7 @@
           </h2>
           <div class="user-container">
             <div class="profile-picture"><img src="{{ profile_pic(user) }}" /></div>
-            <p><span class="created-by-label">Created by</span> <br /> <span class="user-realname">{{ user.realname }}</span></p>
+            <p><span class="created-by-label">Created by</span> <br /> <span class="user-realname"><a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">{{ user.realname }}</a></span></p>
           </div>
         </div>
         <div class="pull-right">

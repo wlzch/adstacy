@@ -20,6 +20,7 @@ class UserController extends Controller
     public function showWallsAction($username)
     {
         $params = $this->getParams($username);
+        $params['tab'] = 'walls';
         $params['walls'] = $this->getRepository('AdstacyAppBundle:Wall')->findByUser($params['user']);
 
         return $this->render('AdstacyAppBundle:User:show_walls.html.twig', $params);
@@ -33,6 +34,7 @@ class UserController extends Controller
     public function showAdsAction($username)
     {
         $params = $this->getParams($username);
+        $params['tab'] = 'ads';
         $query = $this->getRepository('AdstacyAppBundle:Ad')->findByUserQuery($params['user']);
         $params['paginator'] = $this->getDoctrinePaginator($query, 20);
 
@@ -47,6 +49,7 @@ class UserController extends Controller
     public function showPromotesAction($username)
     {
         $params = $this->getParams($username);
+        $params['tab'] = 'promotes';
         $query = $this->getRepository('AdstacyAppBundle:Ad')->findPromotesByUserQuery($params['user']);
         $params['paginator'] = $this->getDoctrinePaginator($query, 20);
 
@@ -61,6 +64,7 @@ class UserController extends Controller
     public function showFollowersAction($username)
     {
         $params = $this->getParams($username);
+        $params['tab'] = 'followers';
         $query = $this->getRepository('AdstacyAppBundle:User')->findFollowersByUserQuery($params['user']);
         $params['paginator'] = $this->getDoctrinePaginator($query, 20);
 
@@ -75,6 +79,7 @@ class UserController extends Controller
     public function showFollowingsAction($username)
     {
         $params = $this->getParams($username);
+        $params['tab'] = 'followings';
         $query = $this->getRepository('AdstacyAppBundle:User')->findFollowingsByUserQuery($params['user']);
         $params['paginator'] = $this->getDoctrinePaginator($query, 20);
 

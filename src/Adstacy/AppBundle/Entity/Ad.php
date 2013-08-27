@@ -212,11 +212,13 @@ class Ad
      */
     public function setImage(\Adstacy\AppBundle\Entity\Image $image = null)
     {
-        if ($image) {
+        if ($image && $this->image != $image) {
             $this->image = $image;
             $size = getimagesize($image->getFile());
-            $height = round((236 / $size[0]) * $size[1]);
-            $this->setThumbHeight($height);
+            if ($size[0] > 0) {
+                $height = round((236 / $size[0]) * $size[1]);
+                $this->setThumbHeight($height);
+            }
         }
     
         return $this;

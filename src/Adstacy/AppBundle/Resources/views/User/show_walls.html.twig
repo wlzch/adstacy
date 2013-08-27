@@ -1,20 +1,22 @@
 {% extends 'AdstacyAppBundle:User:show.html.twig' %}
 
 {% block show_content %}
-  {% for wall in walls %}
-    <div class="wall-thumb panel panel-defaul">
-      <h4 class="wall-name"><a href="{{ path('adstacy_app_wall_show', { id: wall.id }) }}">{{ wall.name }}</a></h4>
-      <div class="clearfix">
-        {% set ads = wall.ads|slice(0, 4) %}
-        {% for i in 0..3 %}
-          <div class="ad-thumb-{{ i+1 }} ad-thumb">
-            {% if ads[i] is defined %}
-              <img src="{{ vich_uploader_asset(ads[i].image, 'file')|imagine_filter('mini_thumb') }}" width="{{ mini_thumb_size }}" height="{{ mini_thumb_size }}" />
-            {% endif %}
-          </div> 
-        {% endfor %}
+  <div class="clearfix">
+    {% for wall in walls %}
+      <div class="wall-thumb panel panel-defaul">
+        <h4 class="wall-name"><a href="{{ path('adstacy_app_wall_show', { id: wall.id }) }}">{{ wall.name }}</a></h4>
+        <div class="clearfix">
+          {% set ads = wall.ads|slice(0, 4) %}
+          {% for i in 0..3 %}
+            <div class="ad-thumb-{{ i+1 }} ad-thumb">
+              {% if ads[i] is defined %}
+                <img src="{{ vich_uploader_asset(ads[i].image, 'file')|imagine_filter('mini_thumb') }}" width="{{ mini_thumb_size }}" height="{{ mini_thumb_size }}" />
+              {% endif %}
+            </div> 
+          {% endfor %}
+        </div>
+        <a class="btn btn-primary btn-block">Follow</a>
       </div>
-      <a class="btn btn-primary btn-block">Follow</a>
-    </div>
-  {% endfor %}
+    {% endfor %}
+  </div>
 {% endblock %}
