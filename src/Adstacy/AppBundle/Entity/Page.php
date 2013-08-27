@@ -5,7 +5,7 @@ namespace Adstacy\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Adstacy\AppBundle\Entity\PageRepository")
+ * @ORM\Entity(repositoryClass="Adstacy\AppBundle\Repository\PageRepository")
  * @ORM\Table(indexes={
  *   @ORM\Index(name="key", columns={"key"}) 
  * })
