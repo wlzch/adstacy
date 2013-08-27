@@ -1,3 +1,17 @@
-<div class="user">
-  <a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">@{{ user.username }}</>
+<div class="user-thumb panel panel-default">
+  <h4 class="user-realname"><a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">{{ user.realname }}</a></h4>
+  <div class="clearfix">
+    <div class="profile-picture"><img src="{{ profile_pic(user) }}" /></div>
+    <div class="user-info">
+      <div class="score-block">
+        <div class="score-block-label">Followers</div>
+        <div class="score-block-value">{{ user.followersCount }}</div>
+      </div>
+      <div class="score-block">
+        <div class="score-block-label">Ads</div>
+        <div class="score-block-value">{{ user.adsCount }}</div>
+      </div>
+    </div>
+  </div>
+  <a class="btn btn-primary btn-block">Follow</a>
 </div>
