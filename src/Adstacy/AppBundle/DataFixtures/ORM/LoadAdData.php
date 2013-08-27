@@ -17,7 +17,6 @@ class LoadAdData extends DataFixture
             $description = $this->faker->sentence($this->faker->randomNumber(1, 10)).implode('#', $tags);
             $image = $this->getReference('image-'.$i);
             $wall = $this->getReference('wall-'.$this->faker->randomNumber(1, 15));
-            $user = $wall->getUser();
 
             $ad = new Ad();
             $ad->setImage($image);
@@ -27,9 +26,7 @@ class LoadAdData extends DataFixture
                 $ad->setContent($this->faker->paragraph($this->faker->randomNumber(4, 30)));
             }
             $ads[] = $ad;
-            $user->increaseAdsCount();
             $manager->persist($ad);
-            $manager->persist($user);
             $this->addReference('ad-'.$i, $ad);
         }
         $manager->flush();

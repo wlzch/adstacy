@@ -80,6 +80,11 @@ class User implements UserInterface, GroupableInterface
     private $walls;
 
     /**
+     * @ORM\OneToMany(targetEntity="Ad", mappedBy="user")
+     */
+    private $ads;
+
+    /**
      * @ORM\Column(name="ads_count", type="integer")
      */
     private $adsCount;
@@ -1453,5 +1458,40 @@ class User implements UserInterface, GroupableInterface
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Add ads
+     *
+     * @param \Adstacy\AppBundle\Entity\Ad $ads
+     * @return User
+     */
+    public function addAd(\Adstacy\AppBundle\Entity\Ad $ads)
+    {
+        $this->ads[] = $ads;
+        $this->setAdsCount($this->getAdsCount() + 1);
+    
+        return $this;
+    }
+
+    /**
+     * Remove ads
+     *
+     * @param \Adstacy\AppBundle\Entity\Ad $ads
+     */
+    public function removeAd(\Adstacy\AppBundle\Entity\Ad $ads)
+    {
+        $this->ads->removeElement($ads);
+        $this->setAdsCount($this->getAdsCount() - 1);
+    }
+
+    /**
+     * Get ads
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAds()
+    {
+        return $this->ads;
     }
 }
