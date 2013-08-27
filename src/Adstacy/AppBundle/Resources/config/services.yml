@@ -1,18 +1,9 @@
 imports:
   - { resource: types.yml }
   - { resource: twig.yml }
+  - { resource: admin.yml }
 
 services:
     adstacy.user.provider:
         class: Adstacy\AppBundle\Security\User\Provider\UserProvider
         arguments: [@fos_user.user_manager, @session, @router]
-
-    adstacy.admin.page:
-        class: Adstacy\AppBundle\Admin\PageAdmin 
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: app, label: "Page" }
-        arguments:
-            - ~
-            - Adstacy\AppBundle\Entity\Page
-            - 'SonataAdminBundle:CRUD'
-
