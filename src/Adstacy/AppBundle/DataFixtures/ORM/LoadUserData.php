@@ -39,6 +39,7 @@ class LoadUserData extends DataFixture
 
         $admin = new User();
         $admin->setUsername('admin');
+        $admin->setRealname('Admin');
         $admin->setEmail('admin@termedan.com');
         $admin->addRole('ROLE_SUPER_ADMIN');
         $encoder = $this->get('security.encoder_factory')->getEncoder($admin);

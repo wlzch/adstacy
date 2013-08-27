@@ -69,7 +69,8 @@ class User implements UserInterface, GroupableInterface
     protected $image;
 
     /**
-     * @ORM\Column(name="real_name", type="string", length=255, nullable=true)
+     * @Assert\NotBlank(message="Full name must not be blank")
+     * @ORM\Column(name="real_name", type="string", length=255)
      */
     protected $realName;
 
