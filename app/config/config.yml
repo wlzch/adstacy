@@ -7,7 +7,7 @@ parameters:
     max_ads_per_page: 40
     max_users_per_page: 30
     thumb_width: 236
-    mini_thumb_size: 118
+    mini_thumb_size: 103
     profile_pic_size: 100
     facebook_app_id: '476946822391252'
     web_dir: %kernel.root_dir%/../web
