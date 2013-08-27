@@ -3,6 +3,11 @@
 {% block content %}
   <div class="form-container panel panel-default" style="padding: 20px;">
     <h1>Register</h1>
-    {{ form(form) }}
+    {{ form_start(form) }}
+      {% set submit = form_row(form.register) %}
+      {{ form_rest(form) }}
+      <p>By clicking sign up, you agree to our <a href="{{ path('adstacy_app_page_show', {key: 'terms'}) }}">Terms of Service</a> and <a href="{{ path('adstacy_app_page_show', {key: 'privacy-policy'}) }}">Privacy Policy</a></p>
+      {{ submit|raw }}
+    {{ form_end(form) }}
   </div>
 {% endblock %}
