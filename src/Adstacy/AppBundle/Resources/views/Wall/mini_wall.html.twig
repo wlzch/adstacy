@@ -1,3 +1,5 @@
+{% set user = wall.user %}
+{% set loggedInUser = app.user %}
 <div class="wall-thumb panel panel-defaul">
   <h4 class="wall-name"><a href="{{ path('adstacy_app_wall_show', {id: wall.id}) }}">{{ wall.name }}</a></h4>
   <div class="clearfix">
@@ -10,5 +12,5 @@
       </div> 
     {% endfor %}
   </div>
-  <a class="btn btn-primary btn-block">Follow</a>
+  {% include 'AdstacyAppBundle:Wall:follow_button.html.twig' with {wall: wall, btn_block: true} %}
 </div>
