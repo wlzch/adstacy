@@ -29,12 +29,6 @@ body {
   .promote, .unpromote {
     width: 86px;
   }
-  .promote {
-    border-top: 1px solid @btn-primary-border;
-  }
-  .unpromote {
-    border-top: 1px solid @btn-success-border;
-  }
   .box-medium {
     width: 150px;
   }
@@ -367,6 +361,10 @@ a.url {
 
 .btn-muted {
   .button-variant(@gray; #f8f8f8; #f8f8f8);
+}
+
+.btn-gray {
+  .button-variant(#fff; @gray; @gray);
 }
 
 // ----------------------
