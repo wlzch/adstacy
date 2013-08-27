@@ -38,6 +38,7 @@ class AppKernel extends Kernel
             new Sonata\AdminBundle\SonataAdminBundle(),
             new Adstacy\AppBundle\AdstacyAppBundle(),
             new Adstacy\UserBundle\AdstacyUserBundle(),
+            new Adstacy\OAuthBundle\AdstacyOAuthBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
