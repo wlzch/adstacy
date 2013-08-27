@@ -33,7 +33,8 @@ class UserController extends Controller
     public function showAdsAction($username)
     {
         $params = $this->getParams($username);
-        $params['ads'] = $this->getRepository('AdstacyAppBundle:Ad')->findByUser($params['user']);
+        $query = $this->getRepository('AdstacyAppBundle:Ad')->findByUserQuery($params['user']);
+        $params['paginator'] = $this->getDoctrinePaginator($query, 20);
 
         return $this->render('AdstacyAppBundle:User:show_ads.html.twig', $params);
     }
@@ -46,7 +47,8 @@ class UserController extends Controller
     public function showPromotesAction($username)
     {
         $params = $this->getParams($username);
-        $params['promotes'] = $this->getRepository('AdstacyAppBundle:Ad')->findPromotesByUser($params['user']);
+        $query = $this->getRepository('AdstacyAppBundle:Ad')->findPromotesByUserQuery($params['user']);
+        $params['paginator'] = $this->getDoctrinePaginator($query, 20);
 
         return $this->render('AdstacyAppBundle:User:show_promotes.html.twig', $params);
     }
@@ -59,7 +61,8 @@ class UserController extends Controller
     public function showFollowersAction($username)
     {
         $params = $this->getParams($username);
-        $params['followers'] = $this->getRepository('AdstacyAppBundle:User')->findFollowersByUser($params['user']);
+        $query = $this->getRepository('AdstacyAppBundle:User')->findFollowersByUserQuery($params['user']);
+        $params['paginator'] = $this->getDoctrinePaginator($query, 20);
 
         return $this->render('AdstacyAppBundle:User:show_followers.html.twig', $params);
     }
@@ -72,7 +75,8 @@ class UserController extends Controller
     public function showFollowingsAction($username)
     {
         $params = $this->getParams($username);
-        $params['followings'] = $this->getRepository('AdstacyAppBundle:User')->findFollowingsByUser($params['user']);
+        $query = $this->getRepository('AdstacyAppBundle:User')->findFollowingsByUserQuery($params['user']);
+        $params['paginator'] = $this->getDoctrinePaginator($query, 20);
 
         return $this->render('AdstacyAppBundle:User:show_followings.html.twig', $params);
     }
@@ -90,20 +94,16 @@ class UserController extends Controller
         if (!$user) {
             throw $this->createNotFoundException();
         }
-        $adsCount = $user->getAdsCount();
-        $wallsCount = $this->getRepository('AdstacyAppBundle:Wall')->countByUser($user);
-        $promotesCount = $user->getPromotesCount();
-        $followersCount = $user->getFollowersCount();
-        $followingsCount = $user->getFollowingsCount();
+        $params = array('user' => $user);
+        if (!$this->getRequest()->isXmlHttpRequest()) {
+            $params['adsCount'] = $user->getAdsCount();
+            $params['wallsCount'] = $this->getRepository('AdstacyAppBundle:Wall')->countByUser($user);
+            $params['promotesCount'] = $user->getPromotesCount();
+            $params['followersCount'] = $user->getFollowersCount();
+            $params['followingsCount'] = $user->getFollowingsCount();
+        }
 
-        return array(
-            'user' => $user,
-            'adsCount' => $adsCount,
-            'wallsCount' => $wallsCount,
-            'promotesCount' => $promotesCount,
-            'followersCount' => $followersCount,
-            'followingsCount' => $followingsCount
-        );
+        return $params;
     }
 
     /**

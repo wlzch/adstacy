@@ -28,7 +28,7 @@ class WallRepository extends EntityRepository
             SELECT w, a
             FROM AdstacyAppBundle:Wall w
             JOIN w.user u
-            JOIN w.ads a
+            LEFT JOIN w.ads a
             WHERE u.id = :id
         ');
 

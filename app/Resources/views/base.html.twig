@@ -5,6 +5,10 @@
     <meta name="Description" content="{{ block('title') }}">
     <meta name="Keywords" content="{% block meta_keywords %}iklan, promo, lowongan kerja, jual beli{% endblock %}">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta property="fb:app_id" content="{{ facebook_app_id }}">
+    <meta property="og:url" content="{{ app.request.uri }}">
+    <meta property="og:title" content="{{ block('title') }}">
+    <meta property="og:image" content="{% block meta_image %}{{ asset('favicon.ico') }}{% endblock %}">
     <title>{% block title %}Adstacy.com - Ads have never been so fun{% endblock %}</title>
 
     <link rel="icon shortcut" type="image/ico" href="{{ asset('favicon.ico') }}">
@@ -64,8 +68,6 @@
     {% endif %}
   </head>
   <body>
-    <div id="fb-root"></div>
-    {% block facebook_scripts %}{% endblock %}
     {% block body %}
       <header id="main-header">
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
