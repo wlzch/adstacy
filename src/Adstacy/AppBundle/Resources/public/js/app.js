@@ -66,7 +66,7 @@
       'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(this.href),
       'Facebook share',
       'width=626,height=436'
-git    );
+    );
 
     return false;
   });
