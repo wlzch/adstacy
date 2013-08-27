@@ -39,8 +39,8 @@ class AdType extends AbstractType
                 'class' => 'tinymce'
             )
         ));
-        $builder->add('ad', 'submit', array(
-            'label' => 'Create Ads'
+        $builder->add('save', 'submit', array(
+            'label' => 'Save'
         ));
     }
 
