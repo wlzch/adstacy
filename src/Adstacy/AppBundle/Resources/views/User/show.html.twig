@@ -2,19 +2,10 @@
 
 {% block title %}{{ user.username }} | Adstacy{% endblock %}
 
-{% block stylesheets %}
-  {{ parent() }}
-  {% stylesheets filter='cssrewrite, uglifycss'
-    'bundles/adstacyuser/less/settings.less'
-  %}
-    <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
-  {% endstylesheets %}
-{% endblock %}
-
 {% block content %}
   <div class="adstacy-container user-profile-container panel panel-default clearfix">
     <div class="profile-picture">
-      <img src="{{ profile_pic(user) }}" />
+      <img src="{{ profile_pic(user) }}">
     </div>
 
     <div class="user-info">

@@ -8,38 +8,37 @@
   {% set wall = ad.wall %}
   {% set user = ad.user %}
 
-  <div class="adstacy-container ad-detail-container">
-    <div class="table-row">
-      <div class="table-cell ad-detail-pic centered">
-        <div class="h-stack">
-          <a class="centered stack-item btn-muted">{{ ad.promoteesCount }} promotes</a>
-          <a href="/app_dev.php/ads/63/unpromote" data-toggle="tooltip" title="" class="stack-item centered btn-pad btn-success unpromote hide" data-original-title="Unpromote">
+  <div class="ad-detail-container" style="width: 750px; margin: auto;">
+    <div class="clearfix">
+      <div class="ad-detail-pic centered pull-left" style="width: 500px;">
+        <div class="inline-block">
+          <a class="w25 block-item btn-gray">{{ ad.promoteesCount }} promotes</a>
+          <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="block-item w25 btn-success unpromote hide">
             <span aria-hidden="true" class="icon-bullhorn"></span> Unpromote
           </a>
-          <a href="/app_dev.php/ads/63/promote" data-toggle="tooltip" title="" class="stack-item centered btn-pad btn-primary promote" data-original-title="Promote">
+          <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="block-item w25 btn-primary promote">
             <span aria-hidden="true" class="icon-bullhorn"></span> Promote
           </a>
-          <a class="tweet stack-item centered btn-twitter btn-pad btn-muted" href="{{ app.request.uri }}" data-via="adstacy" data-text="{{ ad.description }}">
+          <a href="{{ app.request.uri }}" class="tweet block-item w25 btn-twitter" data-via="adstacy" data-text="{{ ad.description }}">
             <span aria-hidden="true" data-icon="&#xe002;"></span> Tweet
           </a>
-          <a class="facebook-share stack-item centered btn-facebook btn-pad btn-muted" href="{{ app.request.uri }}">
+          <a href="{{ app.request.uri }}" class="facebook-share block-item w25 btn-facebook">
             <span aria-hidden="true" data-icon="&#xe003;"></span> Share
           </a>
         </div>
-        <img src="{{ vich_uploader_asset(ad.image, 'file') }}" alt="{{ ad.description }}">
+        <div class="ad-detail-picture vertical-image">
+          <a href="#"><img src="{{ vich_uploader_asset(ad.image, 'file') }}" alt="{{ ad.description }}"></a>
+        </div>
       </div>
-      <div class="table-cell" style="width: 250px;">
-        <section class="ad-detail-section">
+      <div class="ad-detail-detail pull-left" style="width: 250px;">
+        <div class="ad-detail-section">
           <p>{{ parse_hashtag(ad.description) }}</p>
-        </section>
-        <section class="ad-detail-section">
+        </div>
+        <div class="ad-detail-section">
           <div class="wall-container">
-            <div class="wall-pic">
-              <img data-src="holder.js/50x50">
-            </div>
-            <div class="wall-detail">
-              <h3><a href="{{ path('adstacy_app_wall_show', {id: ad.wall.id}) }}">{{ ad.wall.name }}</a></h3>
-              <h4><a href="#">{{ wall.user.username }}</a></h4>
+            <h3 class="text-overflow"><a href="{{ path('adstacy_app_wall_show', {id: ad.wall.id}) }}">{{ ad.wall.name }}</a></h3>
+            <div class="clearfix">
+              {% include 'AdstacyAppBundle:User:user_mini.html.twig' with {user: user, text: 'Ads by'} %}
             </div>
           </div>
           <div class="thumb-container">
@@ -48,20 +47,24 @@
             <div class="thumb"><img data-src="holder.js/110x110"></div>
             <div class="thumb"><img data-src="holder.js/110x110"></div>
           </div>
-          {% include 'AdstacyAppBundle:Wall:follow_button.html.twig' with {wall: wall} %}
-        </section>
+          <div class="follow-container">
+            <a class="btn btn-primary btn-block">Follow</a>
+          </div>
+        </div>
 
         {% if app.user == user %}
-          <section class="ad-detail-section list-section">
-            <a href="{{ path('adstacy_app_ad_edit', {id: ad.id}) }}" class="btn btn-primary">Edit</a>
-            <a href="#" data-toggle="modal" data-target="#confirm-modal" class="btn btn-primary btn-log">Delete</a>
-          </section>
+          <div class="ad-detail-section h-stack h-stack-pad">
+            <a href="{{ path('adstacy_app_ad_edit', {id: ad.id}) }}" class="stack-item w5 btn btn-primary">Edit</a>
+            <a href="#" data-toggle="modal" data-target="#confirm-modal" class="stack-item w5 btn btn-primary">Delete</a>
+          </div>
         {% endif %}
       </div>
     </div>
-    <div class="ad-detail-content">
-      {{ ad.content }}
-    </div>
+    {% if ad.content %}
+      <div class="ad-detail-content">
+        {{ ad.content }}
+      </div>
+    {% endif %}
   </div>
   <div class="modal fade" id="confirm-modal">
     <div class="modal-dialog">
