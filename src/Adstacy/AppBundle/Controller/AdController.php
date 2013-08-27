@@ -45,10 +45,8 @@ class AdController extends Controller
         ));
 
         if ($form->isValid()) {
-            $user->increaseAdsCount();
             $em = $this->getManager();
             $em->persist($ad);
-            $em->persist($user);
             $em->flush();
             $this->addFlash('success', 'You have successfully created your ads');
 
@@ -77,7 +75,7 @@ class AdController extends Controller
         $request = $this->getRequest();
         $filter = 'thumbnail';
 
-        if ($ad->getWall()->getUser() != $user) {
+        if ($ad->getUser() != $user) {
             $this->addFlash('error', 'You can only edit your own ads');
             return $this->redirect($this->generateUrl('homepage'));
         }
@@ -116,17 +114,16 @@ class AdController extends Controller
         if (!$ad) {
             throw $this->createNotFoundException();
         }
-        $wallUser = $ad->getWall()->getUser();
+        $adUser = $ad->getUser();
         $user = $this->getUser();
-        if ($wallUser != $user) {
+        if ($adUser != $user) {
             $this->addFlash('error', 'You can only delete your own ads');
             return $this->redirect($this->generateUrl('homepage'));
         }
+        $user->removeAd($ad);
         
         $em = $this->getManager();
-        $user->decreaseAdsCount();
         $em->remove($ad);
-        $em->persist($user);
         $em->flush();
         $this->addFlash('success', 'You have successfully deleted your ads');
 
