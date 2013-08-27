@@ -84,11 +84,8 @@ class AdController extends Controller
         $form = $this->createForm(new AdType(), $ad, array(
             'username' => $user->getUsername() 
         ));
+        $image = $ad->getImage(); //temporary hack because form set the image to null if image is not valid
         $form->handleRequest($request);
-        $wallForm = $this->createForm(new WallType(), new Wall(), array(
-            'action' => $this->generateUrl('adstacy_app_wall_create') 
-        ));
-
         if ($form->isValid()) {
             $em = $this->getManager();
             $em->persist($ad);
@@ -97,6 +94,10 @@ class AdController extends Controller
 
             return $this->redirect($this->generateUrl('adstacy_app_ad_show', array('id' => $ad->getId())));
         }
+        $wallForm = $this->createForm(new WallType(), new Wall(), array(
+            'action' => $this->generateUrl('adstacy_app_wall_create') 
+        ));
+        $ad->setImage($image);
 
         return $this->render('AdstacyAppBundle:Ad:form.html.twig', array(
             'form' => $form->createView(),
