@@ -36,7 +36,7 @@ class UserController extends Controller
         $params = $this->getParams($username);
         $params['tab'] = 'ads';
         $query = $this->getRepository('AdstacyAppBundle:Ad')->findByUserQuery($params['user']);
-        $params['paginator'] = $this->getDoctrinePaginator($query, 20);
+        $params['paginator'] = $this->getDoctrinePaginator($query, $this->getParameter('max_ads_per_page'));
 
         return $this->render('AdstacyAppBundle:User:show_ads.html.twig', $params);
     }
@@ -51,7 +51,7 @@ class UserController extends Controller
         $params = $this->getParams($username);
         $params['tab'] = 'promotes';
         $query = $this->getRepository('AdstacyAppBundle:Ad')->findPromotesByUserQuery($params['user']);
-        $params['paginator'] = $this->getDoctrinePaginator($query, 20);
+        $params['paginator'] = $this->getDoctrinePaginator($query, $this->getParameter('max_ads_per_page'));
 
         return $this->render('AdstacyAppBundle:User:show_promotes.html.twig', $params);
     }
@@ -66,7 +66,7 @@ class UserController extends Controller
         $params = $this->getParams($username);
         $params['tab'] = 'followers';
         $query = $this->getRepository('AdstacyAppBundle:User')->findFollowersByUserQuery($params['user']);
-        $params['paginator'] = $this->getDoctrinePaginator($query, 20);
+        $params['paginator'] = $this->getDoctrinePaginator($query, $this->getParameter('max_users_per_page'));
 
         return $this->render('AdstacyAppBundle:User:show_followers.html.twig', $params);
     }
@@ -81,7 +81,7 @@ class UserController extends Controller
         $params = $this->getParams($username);
         $params['tab'] = 'followings';
         $query = $this->getRepository('AdstacyAppBundle:User')->findFollowingsByUserQuery($params['user']);
-        $params['paginator'] = $this->getDoctrinePaginator($query, 20);
+        $params['paginator'] = $this->getDoctrinePaginator($query, $this->getParameter('max_users_per_page'));
 
         return $this->render('AdstacyAppBundle:User:show_followings.html.twig', $params);
     }

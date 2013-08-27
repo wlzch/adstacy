@@ -12,7 +12,7 @@
     {% set id = ad.id %}
     {% include 'AdstacyAppBundle:Ad:ad.html.twig' with {ad: ad} %}
   {% endfor %}
-  {% if ads | length >= max_ad_per_page %}
+  {% if ads | length >= max_ads_per_page %}
     <a href="{{ path('homepage', {'id': id})}}" class="btn btn-lg btn-default btn-block next-page">More</a>
   {% endif %}
 {% endblock %}

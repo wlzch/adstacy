@@ -4,7 +4,8 @@ imports:
 
 parameters:
     elfinder.loader: Adstacy\AppBundle\Loader\FMElfinderLoader
-    max_ad_per_page: 20
+    max_ads_per_page: 40
+    max_users_per_page: 30
     thumb_width: 236
     mini_thumb_size: 118
     profile_pic_size: 100
@@ -64,7 +65,8 @@ twig:
         thumb_width: %thumb_width%
         mini_thumb_size: %mini_thumb_size%
         profile_pic_size: %profile_pic_size%
-        max_ad_per_page: %max_ad_per_page%
+        max_ads_per_page: %max_ads_per_page%
+        max_users_per_page: %max_users_per_page%
         facebook_app_id: %facebook_app_id%
     form:
         resources:
