@@ -5,13 +5,13 @@
     <div class="user-info">
       <div class="score-block">
         <div class="score-block-label">Followers</div>
-        <div class="score-block-value">{{ user.followersCount }}</div>
+        <div class="score-block-value"><a href="{{ path('adstacy_app_user_followers', {username: user.username}) }}">{{ user.followersCount }}</a></div>
       </div>
       <div class="score-block">
         <div class="score-block-label">Ads</div>
-        <div class="score-block-value">{{ user.adsCount }}</div>
+        <div class="score-block-value"><a href="{{ path('adstacy_app_user_ads', {username: user.username}) }}">{{ user.adsCount }}</a></div>
       </div>
     </div>
   </div>
-  <a class="btn btn-primary btn-block">Follow</a>
+  {% include 'AdstacyAppBundle:User:follow_button.html.twig' with {user: user} %}
 </div>

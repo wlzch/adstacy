@@ -20,6 +20,7 @@
   {{ parent() }}
   <script type="text/javascript">
     $(function() {
+      $('.user-thumb').ajaxlink('user_profile');
       $('.jscroll').jscroll({
         nextSelector: 'a.next-page',
         callback: function(a, b) {
