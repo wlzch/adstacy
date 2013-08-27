@@ -15,16 +15,6 @@
 
 {% block content %}
   {% set user = app.user %}
-  <div class="adstacy-container user-profile-container panel panel-default clearfix">
-    <div class="profile-picture">
-      <img src="{{ profile_pic(user) }}" />
-    </div>
-
-    <div class="user-info">
-      <h1 class="user-realname">{{ user.realname }}</h1>
-      <h2 class="user-about">{{ user.about }}</h2>
-    </div>
-  </div>
   <div class="masonry-container">
     <div class="show-wall-container adstacy-container panel panel-default">
       <div class="clearfix">
