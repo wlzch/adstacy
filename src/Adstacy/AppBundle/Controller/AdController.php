@@ -77,7 +77,7 @@ class AdController extends Controller
 
         if ($ad->getUser() != $user) {
             $this->addFlash('error', 'You can only edit your own ads');
-            return $this->redirect($this->generateUrl('homepage'));
+            return $this->redirect($this->generateUrl('adstacy_app_ad_show', array('id' => $ad->getId())));
         }
         $form = $this->createForm(new AdType(), $ad, array(
             'username' => $user->getUsername() 
@@ -118,7 +118,7 @@ class AdController extends Controller
         $user = $this->getUser();
         if ($adUser != $user) {
             $this->addFlash('error', 'You can only delete your own ads');
-            return $this->redirect($this->generateUrl('homepage'));
+            return $this->redirect($this->generateUrl('adstacy_app_ad_show', array('id' => $ad->getId())));
         }
         $user->removeAd($ad);
         
