@@ -7,7 +7,7 @@
     {% for i in 0..3 %}
       <div class="ad-thumb-{{ i+1 }} ad-thumb">
         {% if ads[i] is defined %}
-          <img src="{{ vich_uploader_asset(ads[i].image, 'file')|imagine_filter('mini_thumb') }}" width="{{ mini_thumb_size }}" height="{{ mini_thumb_size }}" />
+          <a href="{{ path('adstacy_app_ad_show', {id: ads[i].id}) }}"><img src="{{ vich_uploader_asset(ads[i].image, 'file')|imagine_filter('mini_thumb') }}" width="{{ mini_thumb_size }}" height="{{ mini_thumb_size }}" /></a>
         {% endif %}
       </div> 
     {% endfor %}
