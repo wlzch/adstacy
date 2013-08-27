@@ -1437,7 +1437,9 @@ class User implements UserInterface, GroupableInterface
      */
     public function setImage(\Adstacy\AppBundle\Entity\Image $image = null)
     {
-        $this->image = $image;
+        if ($image && $this->image != $image) {
+            $this->image = $image;
+        }
     
         return $this;
     }
