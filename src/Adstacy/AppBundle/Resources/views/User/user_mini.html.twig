@@ -1,0 +1,12 @@
+{% if text is not defined %}
+  {% set text = 'Created by' %}
+{% endif %}
+<div class="user-mini">
+  <div class="profile-picture"><img src="{{ profile_pic(user) }}" alt="{{ user.username }}" /></div>
+  <div class="user-desc">
+      <div class="user-label">{{ text }}</div>
+      <div class="user-realname">
+        <a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">{{ user.username }}</a>
+      </div>
+  </div>
+</div>

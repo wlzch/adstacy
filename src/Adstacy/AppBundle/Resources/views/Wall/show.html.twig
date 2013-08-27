@@ -26,10 +26,7 @@
               <a class="btn" data-target="#confirm-modal" data-toggle="modal">Delete</a>
             {% endif %}
           </h2>
-          <div class="user-container">
-            <div class="profile-picture"><img src="{{ profile_pic(user) }}" /></div>
-            <p><span class="created-by-label">Created by</span> <br /> <span class="user-realname"><a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">{{ user.realname }}</a></span></p>
-          </div>
+          {% include 'AdstacyAppBundle:User:user_mini.html.twig' with {user: user} %}
         </div>
         <div class="pull-right">
           <div class="score-count">
