@@ -67,8 +67,9 @@ class UserController extends Controller
         $params['tab'] = 'followers';
         $query = $this->getRepository('AdstacyAppBundle:User')->findFollowersByUserQuery($params['user']);
         $params['paginator'] = $this->getDoctrinePaginator($query, $this->getParameter('max_users_per_page'));
+        $params['route'] = 'adstacy_app_user_followers';
 
-        return $this->render('AdstacyAppBundle:User:show_followers.html.twig', $params);
+        return $this->render('AdstacyAppBundle:User:show_users.html.twig', $params);
     }
 
     /**
@@ -82,8 +83,9 @@ class UserController extends Controller
         $params['tab'] = 'followings';
         $query = $this->getRepository('AdstacyAppBundle:User')->findFollowingsByUserQuery($params['user']);
         $params['paginator'] = $this->getDoctrinePaginator($query, $this->getParameter('max_users_per_page'));
+        $params['route'] = 'adstacy_app_user_followings';
 
-        return $this->render('AdstacyAppBundle:User:show_followings.html.twig', $params);
+        return $this->render('AdstacyAppBundle:User:show_users.html.twig', $params);
     }
 
     /**

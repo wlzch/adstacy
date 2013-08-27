@@ -17,7 +17,7 @@
         firstSelector: 'a.follow-wall',
         secondSelector: 'a.unfollow-wall'
       },
-      user_profile: {
+      follow_user: {
         countSelector: '.user-followers-count',
         jsonField: 'followers_count',
         firstSelector: 'a.follow-user',

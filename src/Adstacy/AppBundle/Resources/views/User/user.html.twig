@@ -5,7 +5,7 @@
     <div class="user-info">
       <div class="score-block">
         <div class="score-block-label">Followers</div>
-        <div class="score-block-value"><a href="{{ path('adstacy_app_user_followers', {username: user.username}) }}">{{ user.followersCount }}</a></div>
+        <div class="score-block-value"><a href="{{ path('adstacy_app_user_followers', {username: user.username}) }}" class="user-followers-count">{{ user.followersCount }}</a></div>
       </div>
       <div class="score-block">
         <div class="score-block-label">Ads</div>
