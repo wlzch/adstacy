@@ -4,6 +4,15 @@
 
 {% block meta_keywords %}{{ ad.tags|join(',') }}{% endblock %}
 
+{% block stylesheets %}
+  {{ parent() }}
+  {% if app.debug %}
+    <link href="{{ asset('bundles/adstacyapp/css/jquery.fancybox.min.css') }}" type="text/css" rel="stylesheet" />
+  {% else %}
+    <link href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" type="text/css" rel="stylesheet" />
+  {% endif %}
+{% endblock %}
+
 {% block content %}
   {% set wall = ad.wall %}
   {% set user = ad.user %}
@@ -27,7 +36,8 @@
           </a>
         </div>
         <div class="ad-detail-picture vertical-image">
-          <a href="#"><img src="{{ vich_uploader_asset(ad.image, 'file') }}" alt="{{ ad.description }}"></a>
+          {% set src = vich_uploader_asset(ad.image, 'file') %}
+          <a class="fancybox" href="{{ src }}"><img src="{{ src }}" alt="{{ ad.description }}" /></a>
         </div>
       </div>
       <div class="ad-detail-detail pull-left" style="width: 250px;">
@@ -87,9 +97,15 @@
 
 {% block javascripts %}
   {{ parent() }}
+  {% if app.debug %}
+    <script src="{{ asset('bundles/adstacyapp/js/jquery.fancybox.min.js') }}" type="text/javascript"></script>
+  {% else %}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js" type="text/javascript"></script>
+  {% endif %}
   <script type="text/javascript">
     $(function() {
       $('.ad-single').ajaxlink('show_ad');
+      $('.fancybox').fancybox();
     });
   </script>
 {% endblock %}
