@@ -6,7 +6,7 @@
 
 {% block content %}
   {% set wall = ad.wall %}
-  {% set user = wall.user %}
+  {% set user = ad.user %}
 
   <div class="adstacy-container ad-single">
     <div class="ad-detail inline-block">
@@ -36,7 +36,7 @@
             <img data-src="holder.js/100x100">
           </div>
           <div class="list-block">
-            <h3>{{ wall.user.username }}</h3>
+            <h3>{{ user.username }}</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi, praesentium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, tenetur.</p>
           </div>
         </section>
