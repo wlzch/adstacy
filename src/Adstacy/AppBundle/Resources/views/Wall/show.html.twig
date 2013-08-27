@@ -15,38 +15,36 @@
 
 {% block content %}
   {% set user = app.user %}
-  <div class="adstacy-container user-profile-container panel panel-default clearfix">
-    <div class="profile-picture">
-      <img src="{{ profile_pic(user) }}" />
-    </div>
-
-    <div class="user-info">
-      <h1 class="user-realname">{{ user.realname }}</h1>
-      <h2 class="user-about">{{ user.about }}</h2>
-    </div>
-  </div>
   <div class="masonry-container">
-    <div class="show-wall-container adstacy-container panel panel-default clearfix">
-      <div class="pull-left">
-        <h2 class="wall-name">{{ wall.name }}
-          {% include 'AdstacyAppBundle:Wall:follow_button.html.twig' with {wall: wall} %}
-          {% if wall.user == user %}
-            <a class="btn btn-primary" href="{{ path('adstacy_app_wall_edit', {id: wall.id})}}">Edit</a>
-            <a class="btn btn-primary" data-target="#confirm-modal" data-toggle="modal">Delete</a>
-          {% endif %}
-        </h2>
+    <div class="show-wall-container adstacy-container panel panel-default">
+      <div class="clearfix">
+        <div class="pull-left">
+          <h2 class="wall-name">{{ wall.name }}
+            {% include 'AdstacyAppBundle:Wall:follow_button.html.twig' with {wall: wall} %}
+            {% if wall.user == user %}
+              <a class="btn" href="{{ path('adstacy_app_wall_edit', {id: wall.id})}}">Edit</a>
+              <a class="btn" data-target="#confirm-modal" data-toggle="modal">Delete</a>
+            {% endif %}
+          </h2>
+          <div class="user-container">
+            <div class="profile-picture"><img src="{{ profile_pic(user) }}" /></div>
+            <p><span class="created-by-label">Created by</span> <br /> <span class="user-realname">{{ user.realname }}</span></p>
+          </div>
+        </div>
+        <div class="pull-right">
+          <div class="score-count">
+            <p class="label">Followers</p>
+            <p class="value followers-count">{{ wall.followersCount }}</p>
+          </div>
+          <div class="score-count">
+            <p class="label">Ads</p>
+            <p class="value">{{ wall.adsCount }}</p>
+          </div>
+        </div>
+      </div>
+      {% if wall.description %}
         <h3 class="description">{{ parse_hashtag(wall.description) }}</h3>
-      </div>
-      <div class="pull-right">
-        <div class="score-count">
-          <p class="label">Followers</p>
-          <p class="value followers-count">{{ wall.followersCount }}</p>
-        </div>
-        <div class="score-count">
-          <p class="label">Ads</p>
-          <p class="value">{{ wall.adsCount }}</p>
-        </div>
-      </div>
+      {% endif %}
     </div>
   </div>
   <div class="masonry">
