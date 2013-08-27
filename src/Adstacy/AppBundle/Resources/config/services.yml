@@ -1,6 +1,7 @@
 imports:
   - { resource: types.yml }
   - { resource: twig.yml }
+  - { resource: admin.yml }
 
 services:
     adstacy.user.provider:

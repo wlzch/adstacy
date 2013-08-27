@@ -69,7 +69,8 @@ class User implements UserInterface, GroupableInterface
     protected $image;
 
     /**
-     * @ORM\Column(name="real_name", type="string", length=255, nullable=true)
+     * @Assert\NotBlank(message="Full name must not be blank")
+     * @ORM\Column(name="real_name", type="string", length=255)
      */
     protected $realName;
 
@@ -77,6 +78,11 @@ class User implements UserInterface, GroupableInterface
      * @ORM\OneToMany(targetEntity="Wall", mappedBy="user")
      */
     private $walls;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Ad", mappedBy="user")
+     */
+    private $ads;
 
     /**
      * @ORM\Column(name="ads_count", type="integer")
@@ -1437,7 +1443,9 @@ class User implements UserInterface, GroupableInterface
      */
     public function setImage(\Adstacy\AppBundle\Entity\Image $image = null)
     {
-        $this->image = $image;
+        if ($image && $this->image != $image) {
+            $this->image = $image;
+        }
     
         return $this;
     }
@@ -1450,5 +1458,40 @@ class User implements UserInterface, GroupableInterface
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Add ads
+     *
+     * @param \Adstacy\AppBundle\Entity\Ad $ads
+     * @return User
+     */
+    public function addAd(\Adstacy\AppBundle\Entity\Ad $ads)
+    {
+        $this->ads[] = $ads;
+        $this->setAdsCount($this->getAdsCount() + 1);
+    
+        return $this;
+    }
+
+    /**
+     * Remove ads
+     *
+     * @param \Adstacy\AppBundle\Entity\Ad $ads
+     */
+    public function removeAd(\Adstacy\AppBundle\Entity\Ad $ads)
+    {
+        $this->ads->removeElement($ads);
+        $this->setAdsCount($this->getAdsCount() - 1);
+    }
+
+    /**
+     * Get ads
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAds()
+    {
+        return $this->ads;
     }
 }

@@ -1,0 +1,3 @@
+{% if is_granted('ROLE_SUPER_ADMIN') %}
+<a href="?_impersonate={{ object.username }}">Impersonate</a>
+{% endif %}

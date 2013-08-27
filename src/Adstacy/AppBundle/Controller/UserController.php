@@ -20,6 +20,7 @@ class UserController extends Controller
     public function showWallsAction($username)
     {
         $params = $this->getParams($username);
+        $params['tab'] = 'walls';
         $params['walls'] = $this->getRepository('AdstacyAppBundle:Wall')->findByUser($params['user']);
 
         return $this->render('AdstacyAppBundle:User:show_walls.html.twig', $params);
@@ -33,8 +34,10 @@ class UserController extends Controller
     public function showAdsAction($username)
     {
         $params = $this->getParams($username);
+        $params['tab'] = 'ads';
         $query = $this->getRepository('AdstacyAppBundle:Ad')->findByUserQuery($params['user']);
-        $params['paginator'] = $this->getDoctrinePaginator($query, 20);
+        $params['paginator'] = $this->getDoctrinePaginator($query, $this->getParameter('max_ads_per_page'));
+        $params['route'] = 'adstacy_app_user_ads';
 
         return $this->render('AdstacyAppBundle:User:show_ads.html.twig', $params);
     }
@@ -47,10 +50,12 @@ class UserController extends Controller
     public function showPromotesAction($username)
     {
         $params = $this->getParams($username);
+        $params['tab'] = 'promotes';
         $query = $this->getRepository('AdstacyAppBundle:Ad')->findPromotesByUserQuery($params['user']);
-        $params['paginator'] = $this->getDoctrinePaginator($query, 20);
+        $params['paginator'] = $this->getDoctrinePaginator($query, $this->getParameter('max_ads_per_page'));
+        $params['route'] = 'adstacy_app_user_promotes';
 
-        return $this->render('AdstacyAppBundle:User:show_promotes.html.twig', $params);
+        return $this->render('AdstacyAppBundle:User:show_ads.html.twig', $params);
     }
 
     /**
@@ -61,10 +66,12 @@ class UserController extends Controller
     public function showFollowersAction($username)
     {
         $params = $this->getParams($username);
+        $params['tab'] = 'followers';
         $query = $this->getRepository('AdstacyAppBundle:User')->findFollowersByUserQuery($params['user']);
-        $params['paginator'] = $this->getDoctrinePaginator($query, 20);
+        $params['paginator'] = $this->getDoctrinePaginator($query, $this->getParameter('max_users_per_page'));
+        $params['route'] = 'adstacy_app_user_followers';
 
-        return $this->render('AdstacyAppBundle:User:show_followers.html.twig', $params);
+        return $this->render('AdstacyAppBundle:User:show_users.html.twig', $params);
     }
 
     /**
@@ -75,10 +82,12 @@ class UserController extends Controller
     public function showFollowingsAction($username)
     {
         $params = $this->getParams($username);
+        $params['tab'] = 'followings';
         $query = $this->getRepository('AdstacyAppBundle:User')->findFollowingsByUserQuery($params['user']);
-        $params['paginator'] = $this->getDoctrinePaginator($query, 20);
+        $params['paginator'] = $this->getDoctrinePaginator($query, $this->getParameter('max_users_per_page'));
+        $params['route'] = 'adstacy_app_user_followings';
 
-        return $this->render('AdstacyAppBundle:User:show_followings.html.twig', $params);
+        return $this->render('AdstacyAppBundle:User:show_users.html.twig', $params);
     }
 
     /**
@@ -145,8 +154,8 @@ class UserController extends Controller
                 if ($request->isXmlHttpRequest()) {
                     return new JsonResponse(json_encode(array('username' => $username, 'followers_count' => $user->getFollowersCount())));
                 }
-                
-                $this->addFlash('success', 'You have successfully followed '.$username); 
+
+                $this->addFlash('success', 'You have successfully followed '.$username);
             }
         }
 
@@ -192,8 +201,8 @@ class UserController extends Controller
                 if ($request->isXmlHttpRequest()) {
                     return new JsonResponse(json_encode(array('username' => $username, 'followers_count' => $user->getFollowersCount())));
                 }
-                
-                $this->addFlash('success', 'You have successfully unfollowed '.$username); 
+
+                $this->addFlash('success', 'You have successfully unfollowed '.$username);
             }
         }
 

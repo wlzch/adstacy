@@ -60,6 +60,12 @@ class Ad
     private $wall;
 
     /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="ads", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    /**
      * @ORM\ManyToMany(targetEntity="User", inversedBy="promotes")
      * @ORM\JoinTable(name="promotes_ad",
      *    joinColumns={
@@ -212,11 +218,13 @@ class Ad
      */
     public function setImage(\Adstacy\AppBundle\Entity\Image $image = null)
     {
-        if ($image) {
+        if ($image && $this->image != $image) {
             $this->image = $image;
             $size = getimagesize($image->getFile());
-            $height = round((236 / $size[0]) * $size[1]);
-            $this->setThumbHeight($height);
+            if ($size[0] > 0) {
+                $height = round((236 / $size[0]) * $size[1]);
+                $this->setThumbHeight($height);
+            }
         }
     
         return $this;
@@ -242,6 +250,7 @@ class Ad
     {
         $this->wall = $wall;
         $wall->addAd($this);
+        $this->setUser($wall->getUser());
         $this->generateTags();
     
         return $this;
@@ -338,5 +347,29 @@ class Ad
     public function getThumbHeight()
     {
         return $this->thumbHeight;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Adstacy\AppBundle\Entity\User $user
+     * @return Ad
+     */
+    public function setUser(\Adstacy\AppBundle\Entity\User $user)
+    {
+        $this->user = $user;
+        $user->addAd($this);
+    
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Adstacy\AppBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

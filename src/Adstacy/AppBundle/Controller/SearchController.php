@@ -19,7 +19,7 @@ class SearchController extends Controller
 
         $adsPaginator = $finder->findPaginated($request->query->get('q'));
         $adsPaginator
-            ->setMaxPerPage(20)
+            ->setMaxPerPage($this->getParameter('max_ads_per_page'))
             ->setCurrentPage($request->query->get('page') ?: 1)
         ;
 
@@ -36,7 +36,7 @@ class SearchController extends Controller
 
         $usersPaginator = $finder->findPaginated($request->query->get('q'));
         $usersPaginator 
-            ->setMaxPerPage(20)
+            ->setMaxPerPage($this->getParameter('max_users_per_page'))
             ->setCurrentPage($request->query->get('page') ?: 1)
         ;
 

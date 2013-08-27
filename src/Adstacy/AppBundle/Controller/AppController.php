@@ -10,7 +10,7 @@ class AppController extends Controller
     public function indexAction()
     {
         $request = $this->getRequest();
-        $maxAd = $this->getParameter('max_ad_per_page');
+        $maxAd = $this->getParameter('max_ads_per_page');
         $ads = $this->getRepository('AdstacyAppBundle:Ad')->findAdsSinceId($request->query->get('id'), $maxAd);
 
         return $this->render('AdstacyAppBundle:App:index.html.twig', array(

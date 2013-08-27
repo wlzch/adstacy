@@ -6,7 +6,7 @@
 
 {% block content %}
   {% set wall = ad.wall %}
-  {% set user = wall.user %}
+  {% set user = ad.user %}
 
   <div class="adstacy-container ad-detail-container">
     <div class="table-row">
@@ -57,8 +57,6 @@
             <a href="#" data-toggle="modal" data-target="#confirm-modal" class="btn btn-primary btn-log">Delete</a>
           </section>
         {% endif %}
-
-
       </div>
     </div>
     <div class="ad-detail-content">

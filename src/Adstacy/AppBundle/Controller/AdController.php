@@ -45,10 +45,8 @@ class AdController extends Controller
         ));
 
         if ($form->isValid()) {
-            $user->increaseAdsCount();
             $em = $this->getManager();
             $em->persist($ad);
-            $em->persist($user);
             $em->flush();
             $this->addFlash('success', 'You have successfully created your ads');
 
@@ -77,18 +75,15 @@ class AdController extends Controller
         $request = $this->getRequest();
         $filter = 'thumbnail';
 
-        if ($ad->getWall()->getUser() != $user) {
+        if ($ad->getUser() != $user) {
             $this->addFlash('error', 'You can only edit your own ads');
-            return $this->redirect($this->generateUrl('homepage'));
+            return $this->redirect($this->generateUrl('adstacy_app_ad_show', array('id' => $ad->getId())));
         }
         $form = $this->createForm(new AdType(), $ad, array(
             'username' => $user->getUsername() 
         ));
+        $image = $ad->getImage(); //temporary hack because form set the image to null if image is not valid
         $form->handleRequest($request);
-        $wallForm = $this->createForm(new WallType(), new Wall(), array(
-            'action' => $this->generateUrl('adstacy_app_wall_create') 
-        ));
-
         if ($form->isValid()) {
             $em = $this->getManager();
             $em->persist($ad);
@@ -97,6 +92,10 @@ class AdController extends Controller
 
             return $this->redirect($this->generateUrl('adstacy_app_ad_show', array('id' => $ad->getId())));
         }
+        $wallForm = $this->createForm(new WallType(), new Wall(), array(
+            'action' => $this->generateUrl('adstacy_app_wall_create') 
+        ));
+        $ad->setImage($image);
 
         return $this->render('AdstacyAppBundle:Ad:form.html.twig', array(
             'form' => $form->createView(),
@@ -115,17 +114,16 @@ class AdController extends Controller
         if (!$ad) {
             throw $this->createNotFoundException();
         }
-        $wallUser = $ad->getWall()->getUser();
+        $adUser = $ad->getUser();
         $user = $this->getUser();
-        if ($wallUser != $user) {
+        if ($adUser != $user) {
             $this->addFlash('error', 'You can only delete your own ads');
-            return $this->redirect($this->generateUrl('homepage'));
+            return $this->redirect($this->generateUrl('adstacy_app_ad_show', array('id' => $ad->getId())));
         }
+        $user->removeAd($ad);
         
         $em = $this->getManager();
-        $user->decreaseAdsCount();
         $em->remove($ad);
-        $em->persist($user);
         $em->flush();
         $this->addFlash('success', 'You have successfully deleted your ads');
 

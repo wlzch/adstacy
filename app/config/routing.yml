@@ -67,5 +67,19 @@ fos_js_routing:
 elfinder:
      resource: "@FMElfinderBundle/Resources/config/routing.yml"
 
+adstacy_app_page_show:
+    pattern: /pages/{key}
+    defaults:
+        _controller: AdstacyAppBundle:Page:show
+
+admin:
+    resource: "@SonataAdminBundle/Resources/config/routing/sonata_admin.xml"
+    prefix: /_admin
+
+_sonata_admin:
+    resource: .
+    type: sonata_admin
+    prefix: /_admin
+
 AdstacyAppBundle_user:
     resource: "@AdstacyAppBundle/Resources/config/routing/users.yml"

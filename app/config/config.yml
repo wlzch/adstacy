@@ -4,9 +4,10 @@ imports:
 
 parameters:
     elfinder.loader: Adstacy\AppBundle\Loader\FMElfinderLoader
-    max_ad_per_page: 20
+    max_ads_per_page: 40
+    max_users_per_page: 30
     thumb_width: 236
-    mini_thumb_size: 118
+    mini_thumb_size: 103
     profile_pic_size: 100
     facebook_app_id: '476946822391252'
     web_dir: %kernel.root_dir%/../web
@@ -64,7 +65,8 @@ twig:
         thumb_width: %thumb_width%
         mini_thumb_size: %mini_thumb_size%
         profile_pic_size: %profile_pic_size%
-        max_ad_per_page: %max_ad_per_page%
+        max_ads_per_page: %max_ads_per_page%
+        max_users_per_page: %max_users_per_page%
         facebook_app_id: %facebook_app_id%
     form:
         resources:
@@ -233,3 +235,17 @@ stfalcon_tinymce:
                 - "paste textcolor"
             toolbar1: "insertfile undo redo | styleselect | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
             file_browser_callback: elFinderBrowser
+
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts: [admin]
+
+sonata_admin:
+    title: Adstacy Admin
+    dashboard:
+        blocks:
+            - { position: left, type: sonata.admin.block.admin_list }
+    templates:
+        edit: AdstacyAppBundle:Admin:edit.html.twig

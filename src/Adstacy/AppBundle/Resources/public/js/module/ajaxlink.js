@@ -17,7 +17,7 @@
         firstSelector: 'a.follow-wall',
         secondSelector: 'a.unfollow-wall'
       },
-      user_profile: {
+      follow_user: {
         countSelector: '.user-followers-count',
         jsonField: 'followers_count',
         firstSelector: 'a.follow-user',
@@ -45,7 +45,9 @@
             }
             $parent.find(settings.firstSelector).toggleClass('hide');
             $parent.find(settings.secondSelector).toggleClass('hide');
-            $this.tooltip('hide');
+            if ($this.attr('data-toggle') == 'tooltip') {
+              $this.tooltip('hide');
+            }
           }
         });
 

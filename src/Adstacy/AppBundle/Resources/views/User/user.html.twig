@@ -1,3 +1,17 @@
-<div class="user">
-  <a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">@{{ user.username }}</>
+<div class="user-thumb panel panel-default">
+  <h4 class="user-realname"><a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">{{ user.realname }}</a></h4>
+  <div class="clearfix">
+    <div class="profile-picture"><img src="{{ profile_pic(user) }}" /></div>
+    <div class="user-info">
+      <div class="score-block">
+        <div class="score-block-label">Followers</div>
+        <div class="score-block-value"><a href="{{ path('adstacy_app_user_followers', {username: user.username}) }}" class="user-followers-count">{{ user.followersCount }}</a></div>
+      </div>
+      <div class="score-block">
+        <div class="score-block-label">Ads</div>
+        <div class="score-block-value"><a href="{{ path('adstacy_app_user_ads', {username: user.username}) }}">{{ user.adsCount }}</a></div>
+      </div>
+    </div>
+  </div>
+  {% include 'AdstacyAppBundle:User:follow_button.html.twig' with {user: user} %}
 </div>

@@ -12,7 +12,7 @@
   {% endfor %}
   {% if paginator.hasNextPage %}
     {% set params = {username: user.username, page: paginator.getNextPage} | merge(app.request.query.all) %}
-    <a href="{{ path('userstacy_app_user_followings', params )}}" class="btn btn-lg btn-default btn-block next-page">More</a>
+    <a href="{{ path(route, params )}}" class="btn btn-lg btn-default btn-block next-page">More</a>
   {% endif %}
 {% endblock %}
 
@@ -20,12 +20,13 @@
   {{ parent() }}
   <script type="text/javascript">
     $(function() {
+      $('.user-thumb').ajaxlink('follow_user');
       $('.jscroll').jscroll({
         nextSelector: 'a.next-page',
         callback: function(a, b) {
           var $users = $('.jscroll-added:last .user');
           $masonry = $('.masonry').masonry('appended', $users);
-          //$users.find('.ad-desc').ajaxlink('users');
+          $users.find('.ad-desc').ajaxlink('follow_user');
         }
       });
     });
