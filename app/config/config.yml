@@ -239,3 +239,11 @@ sonata_block:
     blocks:
         sonata.admin.block.admin_list:
             contexts: [admin]
+
+sonata_admin:
+    title: Adstacy Admin
+    dashboard:
+        blocks:
+            - { position: left, type: sonata.admin.block.admin_list }
+    templates:
+        edit: AdstacyAppBundle:Admin:edit.html.twig
