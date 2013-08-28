@@ -159,7 +159,11 @@ class Ad
         // TODO: make tags unique
         $tags = $matches[1];
         if ($wall = $this->getWall()) {
-            $tags = array_merge($tags, $wall->getTags());
+            $wallTags = $wall->getTags();
+            if (null == $wallTags) {
+                $wallTags = array();
+            }
+            $tags = array_merge($tags, $wallTags);
         }
         $this->setTags($tags);
     }
