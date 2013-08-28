@@ -53,8 +53,7 @@ class AdRepository extends EntityRepository
         $query = $em->createQuery('
             SELECT a
             FROM AdstacyAppBundle:Ad a
-            JOIN a.wall w
-            JOIN w.user u
+            JOIN a.user u
             WHERE u.id = :id
         ');
 
@@ -86,8 +85,7 @@ class AdRepository extends EntityRepository
         $query = $em->createQuery('
             SELECT COUNT(a.id)
             FROM AdstacyAppBundle:Ad a
-            JOIN a.wall w
-            JOIN w.user u
+            JOIN a.user u
             WHERE u.id = :id
         ');
 

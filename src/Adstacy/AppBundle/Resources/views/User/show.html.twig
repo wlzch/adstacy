@@ -20,7 +20,6 @@
       <h2 class="user-about">{{ user.about }}</h2>
       <div class="profile-menu">
         <a class="btn {% if tab == 'ads' %}btn-primary{% endif %}" href="{{ path('adstacy_app_user_ads', {username: user.username}) }}">{{ adsCount }} Ads</a>
-        <a class="btn {% if tab == 'walls' %}btn-primary{% endif %}" href="{{ path('adstacy_app_user_walls', {username: user.username}) }}">{{ wallsCount }} Walls</a>
         <a class="btn {% if tab == 'promotes' %}btn-primary{% endif %}" href="{{ path('adstacy_app_user_promotes', {username: user.username}) }}">{{ promotesCount }} Promotes</a>
         <a class="btn {% if tab == 'followers' %}btn-primary{% endif %}" href="{{ path('adstacy_app_user_followers', {username: user.username}) }}"><span class="user-followers-count">{{ followersCount }}</span> Followers</a>
         <a class="btn {% if tab == 'followings' %}btn-primary{% endif %}" href="{{ path('adstacy_app_user_followings', {username: user.username}) }}">{{ followingsCount }} Followings</a>

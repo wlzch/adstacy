@@ -16,12 +16,13 @@ class LoadAdData extends DataFixture
             $tags = array_merge($tags, $definedTags);
             $description = $this->faker->sentence($this->faker->randomNumber(1, 10)).implode('#', $tags);
             $image = $this->getReference('image-'.$i);
-            $wall = $this->getReference('wall-'.$this->faker->randomNumber(1, 15));
+            $users = array($this->getReference('user-suwandi'), $this->getReference('user-welly'), $this->getReference('user-erwin'));
+            $user = $users[$this->faker->randomNumber(0, count($users) - 1)];
 
             $ad = new Ad();
             $ad->setImage($image);
             $ad->setDescription($description);
-            $ad->setWall($wall);
+            $ad->setUser($user);
             if ($this->faker->randomNumber(1, 5) % 2 == 0) {
                 $ad->setContent($this->faker->paragraph($this->faker->randomNumber(4, 30)));
             }
@@ -34,6 +35,6 @@ class LoadAdData extends DataFixture
 
     public function getOrder()
     {
-        return 4;
+        return 3;
     }
 }

@@ -13,20 +13,6 @@ class UserController extends Controller
     }
 
     /**
-     * Show walls by $username
-     *
-     * @param string username
-     */
-    public function showWallsAction($username)
-    {
-        $params = $this->getParams($username);
-        $params['tab'] = 'walls';
-        $params['walls'] = $this->getRepository('AdstacyAppBundle:Wall')->findByUser($params['user']);
-
-        return $this->render('AdstacyAppBundle:User:show_walls.html.twig', $params);
-    }
-
-    /**
      * Show ads by $username
      *
      * @param string $username
@@ -106,7 +92,6 @@ class UserController extends Controller
         $params = array('user' => $user);
         if (!$this->getRequest()->isXmlHttpRequest()) {
             $params['adsCount'] = $user->getAdsCount();
-            $params['wallsCount'] = $this->getRepository('AdstacyAppBundle:Wall')->countByUser($user);
             $params['promotesCount'] = $user->getPromotesCount();
             $params['followersCount'] = $user->getFollowersCount();
             $params['followingsCount'] = $user->getFollowingsCount();
@@ -144,10 +129,6 @@ class UserController extends Controller
                 $this->addFlash('error', 'You have already followed '.$username);
             } else {
                 $user->addFollower($loggedInUser);
-                foreach ($user->getWalls() as $wall) {
-                    $wall->addFollower($loggedInUser);
-                    $em->persist($wall);
-                }
                 $em->persist($user);
                 $em->flush();
 
@@ -191,10 +172,6 @@ class UserController extends Controller
                 $this->addFlash('error', 'You have not followed '.$username);
             } else {
                 $user->removeFollower($loggedInUser);
-                foreach ($user->getWalls() as $wall) {
-                    $wall->removeFollower($loggedInUser);
-                    $em->persist($wall);
-                }
                 $em->persist($user);
                 $em->flush();
 

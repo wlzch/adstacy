@@ -15,7 +15,6 @@ use Behat\Behat\Context\BehatContext,
 use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
 
-use Adstacy\AppBundle\Entity\Wall;
 use Adstacy\AppBundle\Entity\Ad;
 use Adstacy\AppBundle\Entity\User;
 use Adstacy\AppBundle\Entity\Image;
@@ -66,7 +65,6 @@ class BaseContext extends MinkContext
     public function iHaveAds($num)
     {
         $em = $this->get('doctrine')->getManager();
-        $walls = $this->getWalls();
         $images = $this->getImages();
 
         for ($i = 0; $i < $num; $i++) {
@@ -74,11 +72,9 @@ class BaseContext extends MinkContext
             $definedTags = array('promo', 'jual');
             $tags = array_merge($tags, $definedTags);
             $description = $this->faker->sentence($this->faker->randomNumber(1, 10)).implode('#', $tags);
-            $wall = $walls[$this->faker->randomNumber(0, count($walls) - 1)];
             $ad = new Ad();
             $ad->setImage($images[$i]);
             $ad->setDescription($description);
-            $ad->setWall($wall);
             $em->persist($ad);
         }
         $em->flush();
@@ -163,30 +159,6 @@ class BaseContext extends MinkContext
         return $users;
     }
 
-    public function getWalls()
-    {
-        $em = $this->get('doctrine')->getManager();
-        $users = $this->getUsers();
-        $walls = array();
-        $num = $this->faker->randomNumber(2, 10);
-
-        for ($i = 0; $i < $num; $i++) {
-            $name = $this->faker->sentence($this->faker->randomNumber(1, 3));
-            $user = $users[$this->faker->randomNumber(0, count($users) - 1)];
-
-            $wall = new Wall();
-            $wall->setName($name);
-            $wall->setUser($user);
-
-            $em->persist($wall);
-            $walls[] = $wall;
-        }
-        $em->flush();
-
-        return $walls;
-    }
-
-
     /**
      * @param string $entity
      */
@@ -202,7 +174,6 @@ class BaseContext extends MinkContext
     public function cleanDB(ScenarioEvent $event)
     {
         $this->truncate('Ad');
-        $this->truncate('Wall');
         $this->truncate('User');
         $this->truncate('Image');
     }

@@ -185,6 +185,7 @@
     {% endblock %}
 
     {% block javascripts %}
+      {% if not app.debug %}
       <script type="text/javascript"> 
         (function() {
           var ga = document.createElement('script');     ga.type = 'text/javascript'; ga.async = true;
@@ -192,6 +193,7 @@
           var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
         })();
       </script>
+      {% endif %}
       {% javascripts filter='uglifyjs2'
         '@AdstacyAppBundle/Resources/public/js/app.js'
       %}

@@ -11,18 +11,6 @@ class AdType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options = array())
     {
-        $username = $options['username'];
-        $builder->add('wall', 'entity', array(
-            'label' => 'Wall',
-            'class' => 'AdstacyAppBundle:Wall',
-            'query_builder' => function(EntityRepository $er) use (&$username) {
-                return $er->createQueryBuilder('w')
-                  ->innerJoin('w.user', 'u')
-                  ->andWhere('u.usernameCanonical = :username')
-                  ->setParameter('username', $username)
-                ;
-            }
-        ));
         $builder->add('image', 'image', array(
             'label' => 'Image' 
         ));
@@ -51,7 +39,6 @@ class AdType extends AbstractType
                 'data_class' => 'Adstacy\AppBundle\Entity\Ad'
             )
         );
-        $resolver->setRequired(array('username'));
     }
 
     public function getName()

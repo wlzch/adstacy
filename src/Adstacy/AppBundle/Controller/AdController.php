@@ -4,8 +4,6 @@ namespace Adstacy\AppBundle\Controller;
 
 use Adstacy\AppBundle\Entity\Ad;
 use Adstacy\AppBundle\Form\Type\AdType;
-use Adstacy\AppBundle\Entity\Wall;
-use Adstacy\AppBundle\Form\Type\WallType;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -34,15 +32,10 @@ class AdController extends Controller
     {
         $user = $this->getUser();
         $request = $this->getRequest();
-        $filter = 'thumbnail';
         $ad = new Ad();
-        $form = $this->createForm(new AdType(), $ad, array(
-            'username' => $user->getUsername() 
-        ));
+        $form = $this->createForm(new AdType(), $ad);
         $form->handleRequest($request);
-        $wallForm = $this->createForm(new WallType(), new Wall(), array(
-            'action' => $this->generateUrl('adstacy_app_wall_create') 
-        ));
+        $ad->setUser($user);
 
         if ($form->isValid()) {
             $em = $this->getManager();
@@ -54,8 +47,7 @@ class AdController extends Controller
         }
 
         return $this->render('AdstacyAppBundle:Ad:form.html.twig', array(
-            'form' => $form->createView(),
-            'wallForm' => $wallForm->createView()
+            'form' => $form->createView()
         ));
     }
 
@@ -73,15 +65,12 @@ class AdController extends Controller
 
         $user = $this->getUser();
         $request = $this->getRequest();
-        $filter = 'thumbnail';
 
         if ($ad->getUser() != $user) {
             $this->addFlash('error', 'You can only edit your own ads');
             return $this->redirect($this->generateUrl('adstacy_app_ad_show', array('id' => $ad->getId())));
         }
-        $form = $this->createForm(new AdType(), $ad, array(
-            'username' => $user->getUsername() 
-        ));
+        $form = $this->createForm(new AdType(), $ad);
         $image = $ad->getImage(); //temporary hack because form set the image to null if image is not valid
         $form->handleRequest($request);
         if ($form->isValid()) {
@@ -92,14 +81,10 @@ class AdController extends Controller
 
             return $this->redirect($this->generateUrl('adstacy_app_ad_show', array('id' => $ad->getId())));
         }
-        $wallForm = $this->createForm(new WallType(), new Wall(), array(
-            'action' => $this->generateUrl('adstacy_app_wall_create') 
-        ));
         $ad->setImage($image);
 
         return $this->render('AdstacyAppBundle:Ad:form.html.twig', array(
-            'form' => $form->createView(),
-            'wallForm' => $wallForm->createView()
+            'form' => $form->createView()
         ));
     }
 

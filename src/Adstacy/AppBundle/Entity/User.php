@@ -75,11 +75,6 @@ class User implements UserInterface, GroupableInterface
     protected $realName;
 
     /**
-     * @ORM\OneToMany(targetEntity="Wall", mappedBy="user")
-     */
-    private $walls;
-
-    /**
      * @ORM\OneToMany(targetEntity="Ad", mappedBy="user")
      */
     private $ads;
@@ -88,11 +83,6 @@ class User implements UserInterface, GroupableInterface
      * @ORM\Column(name="ads_count", type="integer")
      */
     private $adsCount;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="Wall", mappedBy="followers")
-     */
-    private $followedWalls;
 
     /**
      * @ORM\ManyToMany(targetEntity="User", mappedBy="followings")
@@ -288,7 +278,6 @@ class User implements UserInterface, GroupableInterface
         $this->expired = false;
         $this->roles = array();
         $this->credentialsExpired = false;
-        $this->walls = new \Doctrine\Common\Collections\ArrayCollection();
         $this->adsCount = 0;
         $this->followersCount = 0;
         $this->followingsCount = 0;
@@ -994,39 +983,6 @@ class User implements UserInterface, GroupableInterface
     }
 
     /**
-     * Add walls
-     *
-     * @param \Adstacy\AppBundle\Entity\Wall $walls
-     * @return User
-     */
-    public function addWall(\Adstacy\AppBundle\Entity\Wall $walls)
-    {
-        $this->walls[] = $walls;
-    
-        return $this;
-    }
-
-    /**
-     * Remove walls
-     *
-     * @param \Adstacy\AppBundle\Entity\Wall $walls
-     */
-    public function removeWall(\Adstacy\AppBundle\Entity\Wall $walls)
-    {
-        $this->walls->removeElement($walls);
-    }
-
-    /**
-     * Get walls
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getWalls()
-    {
-        return $this->walls;
-    }
-
-    /**
      * Increase ads count
      */
     public function increaseAdsCount()
@@ -1063,39 +1019,6 @@ class User implements UserInterface, GroupableInterface
     public function getAdsCount()
     {
         return $this->adsCount;
-    }
-
-    /**
-     * Add followedWalls
-     *
-     * @param \Adstacy\AppBundle\Entity\Wall $followedWalls
-     * @return User
-     */
-    public function addFollowedWall(\Adstacy\AppBundle\Entity\Wall $followedWalls)
-    {
-        $this->followedWalls[] = $followedWalls;
-    
-        return $this;
-    }
-
-    /**
-     * Remove followedWalls
-     *
-     * @param \Adstacy\AppBundle\Entity\Wall $followedWalls
-     */
-    public function removeFollowedWall(\Adstacy\AppBundle\Entity\Wall $followedWalls)
-    {
-        $this->followedWalls->removeElement($followedWalls);
-    }
-
-    /**
-     * Get followedWalls
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getFollowedWalls()
-    {
-        return $this->followedWalls;
     }
 
     /**
@@ -1386,18 +1309,6 @@ class User implements UserInterface, GroupableInterface
     public function hasPromote(Ad $ad)
     {
         return $this->getPromotes()->contains($ad);
-    }
-
-    /**
-     * Checks wheter user hash follow $wall
-     *
-     * @param Wall $wall
-     *
-     * @return boolean
-     */
-    public function hasFollowedWall(Wall $wall)
-    {
-        return $this->getFollowedWalls()->contains($wall);
     }
 
     /**

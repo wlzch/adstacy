@@ -7,17 +7,7 @@
         firstSelector: 'a.promote',
         secondSelector: 'a.unpromote'
       },
-      show_wall: {
-        countSelector: '.followers-count',
-        jsonField: 'followers_count',
-        firstSelector: 'a.follow-wall',
-        secondSelector: 'a.unfollow-wall'
-      },
       show_ad: {
-        firstSelector: 'a.follow-wall',
-        secondSelector: 'a.unfollow-wall'
-      },
-      walls: {
         firstSelector: 'a.follow-wall',
         secondSelector: 'a.unfollow-wall'
       },

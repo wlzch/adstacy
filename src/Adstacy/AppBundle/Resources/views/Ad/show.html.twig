@@ -14,7 +14,6 @@
 {% endblock %}
 
 {% block content %}
-  {% set wall = ad.wall %}
   {% set user = ad.user %}
 
   <div class="ad-detail-container" style="width: 750px; margin: auto;">
@@ -45,23 +44,6 @@
           <p>{{ parse_hashtag(ad.description) }}</p>
         </div>
         <div class="ad-detail-section">
-          <div class="wall-container">
-            <h3 class="text-overflow"><a href="{{ path('adstacy_app_wall_show', {id: ad.wall.id}) }}">{{ ad.wall.name }}</a></h3>
-            <div class="clearfix">
-              {% include 'AdstacyAppBundle:User:user_mini.html.twig' with {user: user, text: 'Ads by'} %}
-            </div>
-          </div>
-          <div class="thumb-container">
-            <div class="thumb"><img data-src="holder.js/110x110"></div>
-            <div class="thumb"><img data-src="holder.js/110x110"></div>
-            <div class="thumb"><img data-src="holder.js/110x110"></div>
-            <div class="thumb"><img data-src="holder.js/110x110"></div>
-          </div>
-          <div class="follow-container">
-            <a class="btn btn-primary btn-block">Follow</a>
-          </div>
-        </div>
-
         {% if app.user == user %}
           <div class="ad-detail-section h-stack h-stack-pad">
             <a href="{{ path('adstacy_app_ad_edit', {id: ad.id}) }}" class="stack-item w5 btn btn-primary">Edit</a>

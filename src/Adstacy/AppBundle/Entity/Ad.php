@@ -54,12 +54,6 @@ class Ad
     private $thumbHeight;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Wall", inversedBy="ads")
-     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
-     */
-    private $wall;
-
-    /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="ads", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
@@ -82,6 +76,7 @@ class Ad
      * @ORM\Column(name="promotees_count", type="integer")
      */
     private $promoteesCount;
+
     /**
      * Constructor
      */
@@ -158,13 +153,6 @@ class Ad
         preg_match_all('/#(\w+)/', $this->description, $matches);
         // TODO: make tags unique
         $tags = $matches[1];
-        if ($wall = $this->getWall()) {
-            $wallTags = $wall->getTags();
-            if (null == $wallTags) {
-                $wallTags = array();
-            }
-            $tags = array_merge($tags, $wallTags);
-        }
         $this->setTags($tags);
     }
 
@@ -242,32 +230,6 @@ class Ad
     public function getImage()
     {
         return $this->image;
-    }
-
-    /**
-     * Set wall
-     *
-     * @param \Adstacy\AppBundle\Entity\Wall $wall
-     * @return Ad
-     */
-    public function setWall(\Adstacy\AppBundle\Entity\Wall $wall)
-    {
-        $this->wall = $wall;
-        $wall->addAd($this);
-        $this->setUser($wall->getUser());
-        $this->generateTags();
-    
-        return $this;
-    }
-
-    /**
-     * Get wall
-     *
-     * @return \Adstacy\AppBundle\Entity\Wall 
-     */
-    public function getWall()
-    {
-        return $this->wall;
     }
 
     /**

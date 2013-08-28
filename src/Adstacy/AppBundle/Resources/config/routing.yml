@@ -8,6 +8,3 @@ AdstacyAppBundle_search:
 
 AdstacyAppBundle_ads:
     resource: "@AdstacyAppBundle/Resources/config/routing/ads.yml"
-
-AdstacyAppBundle_walls:
-    resource: "@AdstacyAppBundle/Resources/config/routing/walls.yml"
