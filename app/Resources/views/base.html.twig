@@ -91,14 +91,14 @@
               <form action="{{ path('adstacy_app_search') }}" class="navbar-form navbar-left" style="position: relative;" role="search">
                 <input id="search-bar" type="text" class="form-control" placeholder="Search" name="q" value="{{ app.request.query.get('q') }}" >
                 <button type="submit" class="search-btn">
-                  <span aria-hidden="true" data-icon="&#xe007;"></span>
+                  <span aria-hidden="true" class="icon-search"></span>
                 </button>
               </form>
               <ul class="nav navbar-nav navbar-right">
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                   <li>
                     <a href="{{ path('adstacy_app_ad_create') }}" id="create-ads" class="btn btn-primary navbar-btn">
-                      <span aria-hidden="true" class="icon-plus"></span> Ads
+                      <span aria-hidden="true" class="icon-plus"></span>
                     </a>
                   </li>
                   <li id="user-dropdown">
