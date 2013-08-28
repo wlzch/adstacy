@@ -65,7 +65,6 @@ class BaseContext extends MinkContext
      */
     public function iHaveAds($num)
     {
-        $this->truncate('Ad');
         $em = $this->get('doctrine')->getManager();
         $walls = $this->getWalls();
         $images = $this->getImages();
@@ -85,9 +84,16 @@ class BaseContext extends MinkContext
         $em->flush();
     }
 
+    /**
+     * @Given /^I have users/
+     */
+    public function iHaveUsers()
+    {
+        $this->getUsers();
+    }
+
     public function getImages()
     {
-        $this->truncate('Image');
         $em = $this->get('doctrine')->getManager();
         $finder = new Finder();
         $images = array();
@@ -108,7 +114,6 @@ class BaseContext extends MinkContext
 
     public function getUsers()
     {
-        $this->truncate('User');
         $em = $this->get('doctrine')->getManager();
         $users = array();
 
@@ -116,6 +121,7 @@ class BaseContext extends MinkContext
         $suwandi->setUsername('suwandi');
         $suwandi->setEmail('wandi.lin13@gmail.com');
         $encoder = $this->get('security.encoder_factory')->getEncoder($suwandi);
+        $suwandi->setRealName('Suwandi');
         $password = $encoder->encodePassword('suwandi', $suwandi->getSalt());
         $suwandi->setPassword($password);
         $users[] = $suwandi;
@@ -123,6 +129,7 @@ class BaseContext extends MinkContext
         $welly = new User();
         $welly->setUsername('welly');
         $welly->setEmail('wilzichi92@gmail.com');
+        $welly->setRealName('Welly');
         $encoder = $this->get('security.encoder_factory')->getEncoder($welly);
         $password = $encoder->encodePassword('welly', $welly->getSalt());
         $welly->setPassword($password);
@@ -131,6 +138,7 @@ class BaseContext extends MinkContext
         $erwin = new User();
         $erwin->setUsername('rwinz');
         $erwin->setEmail('rwinz.cyruz@gmail.com');
+        $erwin->setRealName('Erwin');
         $encoder = $this->get('security.encoder_factory')->getEncoder($erwin);
         $password = $encoder->encodePassword('erwin', $erwin->getSalt());
         $erwin->setPassword($password);
@@ -140,6 +148,7 @@ class BaseContext extends MinkContext
         $admin->setUsername('admin');
         $admin->setEmail('admin@termedan.com');
         $admin->addRole('ROLE_SUPER_ADMIN');
+        $admin->setRealName('Admin');
         $encoder = $this->get('security.encoder_factory')->getEncoder($admin);
         $password = $encoder->encodePassword('admin', $admin->getSalt());
         $admin->setPassword($password);
@@ -156,7 +165,6 @@ class BaseContext extends MinkContext
 
     public function getWalls()
     {
-        $this->truncate('Wall');
         $em = $this->get('doctrine')->getManager();
         $users = $this->getUsers();
         $walls = array();
@@ -186,6 +194,17 @@ class BaseContext extends MinkContext
     {
         $em = $this->get('doctrine')->getManager();
         $em->createQuery("DELETE FROM AdstacyAppBundle:$entity")->execute();
+    }
+
+    /**
+     * @BeforeScenario
+     */
+    public function cleanDB(ScenarioEvent $event)
+    {
+        $this->truncate('Ad');
+        $this->truncate('Wall');
+        $this->truncate('User');
+        $this->truncate('Image');
     }
 
     private function get($key)
