@@ -93,6 +93,9 @@ body {
   .form-control {
     margin: 10px auto;
   }
+  .btn-block + .btn-block {
+    margin-top: 10px;
+  }
 }
 
 .form-container {
@@ -102,8 +105,8 @@ body {
   h1 {
     text-align: center;
   }
-}
 
+}
 
 .ads-form-section  {
   padding: 20px;
@@ -119,25 +122,26 @@ body {
 
   .social-login > a {
     color: white;
+
+    &:hover {
+      text-decoration: none;
+    }
   }
 
-  a {
+  > li > a {
+    padding: 0;
     color: @brand-primary;
 
     &:hover {
-      text-decoration: underline !important;
-      background-color: white !important;
-      color: @gray-dark !important;
+      text-decoration: underline;
+      background-color: white;
+      color: darken(@brand-primary, 15%);
     }
   }
 
   > li {
     padding: 10px;
   }
-}
-
-.btn-block + .btn-block {
-  margin-top: 10px;
 }
 
 ul.nav-expand {
@@ -214,7 +218,6 @@ a.url {
 .w8 { width: 80%; }
 .w9 { width: 90%; }
 .w25 { width: 25%; }
-
 
 #create-ads {
   margin-right: 20px;
@@ -307,18 +310,6 @@ a.url {
     text-align: center;
     text-decoration: none;
   }
-}
-
-.span1of2 {
-  width: 50%;
-}
-
-.span1of3 {
-  width: 33.34%;
-}
-
-.span2of3 {
-  width: 66.66%;
 }
 
 .btn-muted {
