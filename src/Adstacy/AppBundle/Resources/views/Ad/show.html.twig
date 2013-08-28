@@ -7,48 +7,45 @@
 {% block content %}
   {% set user = ad.user %}
 
-  <div class="ad-detail-container" style="width: 750px; margin: auto;">
-    <div class="clearfix">
-      <div class="ad-detail-pic centered pull-left" style="width: 500px;">
-        <div class="inline-block">
-          <a class="w25 block-item btn-gray">{{ ad.promoteesCount }} promotes</a>
-          <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="block-item w25 btn-success unpromote hide">
-            <span aria-hidden="true" class="icon-bullhorn"></span> Unpromote
-          </a>
-          <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="block-item w25 btn-primary promote">
-            <span aria-hidden="true" class="icon-bullhorn"></span> Promote
-          </a>
-          <a href="{{ app.request.uri }}" class="tweet block-item w25 btn-twitter" data-via="adstacy" data-text="{{ ad.description }}">
-            <span aria-hidden="true" data-icon="&#xe002;"></span> Tweet
-          </a>
-          <a href="{{ app.request.uri }}" class="facebook-share block-item w25 btn-facebook">
-            <span aria-hidden="true" data-icon="&#xe003;"></span> Share
-          </a>
-        </div>
-        <div class="ad-detail-picture vertical-image">
-          {% set src = vich_uploader_asset(ad.image, 'file') %}
-          <a class="fancybox" href="{{ src }}"><img src="{{ src }}" alt="{{ ad.description }}" /></a>
-        </div>
+  <div class="ad-detail-container">
+    {% if app.user == user %}
+      <div class="toolbar">
+        <a href="{{ path('adstacy_app_ad_edit', {id: ad.id}) }}" class="btn btn-primary">Edit</a>
+        <a href="#" data-toggle="modal" data-target="#confirm-modal" class="btn btn-primary">Delete</a>
       </div>
-      <div class="ad-detail-detail pull-left" style="width: 250px;">
-        <div class="ad-detail-section">
-          <p>{{ parse_hashtag(ad.description) }}</p>
-        </div>
-        <div class="ad-detail-section">
-        {% if app.user == user %}
-          <div class="ad-detail-section h-stack h-stack-pad">
-            <a href="{{ path('adstacy_app_ad_edit', {id: ad.id}) }}" class="stack-item w5 btn btn-primary">Edit</a>
-            <a href="#" data-toggle="modal" data-target="#confirm-modal" class="stack-item w5 btn btn-primary">Delete</a>
-          </div>
-        {% endif %}
-      </div>
+    {% endif %}
+    <div class="text-center">
+      {% set src = vich_uploader_asset(ad.image, 'file') %}
+      <img src="{{ src }}" alt="{{ ad.description }}">
     </div>
+    <div class="inline-block">
+      <a class="w25 block-item btn-gray">{{ ad.promoteesCount }} promotes</a>
+      <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="block-item w25 btn-success unpromote hide">
+        <span aria-hidden="true" class="icon-bullhorn"></span> Unpromote
+      </a>
+      <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="block-item w25 btn-primary promote">
+        <span aria-hidden="true" class="icon-bullhorn"></span> Promote
+      </a>
+      <a href="{{ app.request.uri }}" class="tweet block-item w25 btn-twitter" data-via="adstacy" data-text="{{ ad.description }}">
+        <span aria-hidden="true" data-icon="&#xe002;"></span> Tweet
+      </a>
+      <a href="{{ app.request.uri }}" class="facebook-share block-item w25 btn-facebook">
+        <span aria-hidden="true" data-icon="&#xe003;"></span> Share
+      </a>
+    </div>
+
+    <div class="ad-detail-section">
+      <p>{{ parse_hashtag(ad.description) }}</p>
+    </div>
+
+
     {% if ad.content %}
-      <div class="ad-detail-content">
+      <div class="ad-detail-section">
         {{ ad.content }}
       </div>
     {% endif %}
   </div>
+
   <div class="modal fade" id="confirm-modal">
     <div class="modal-dialog">
       <div class="modal-content">
