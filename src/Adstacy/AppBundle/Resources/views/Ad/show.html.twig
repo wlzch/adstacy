@@ -4,15 +4,6 @@
 
 {% block meta_keywords %}{{ ad.tags|join(',') }}{% endblock %}
 
-{% block stylesheets %}
-  {{ parent() }}
-  {% if app.debug %}
-    <link href="{{ asset('bundles/adstacyapp/css/jquery.fancybox.min.css') }}" type="text/css" rel="stylesheet" />
-  {% else %}
-    <link href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" type="text/css" rel="stylesheet" />
-  {% endif %}
-{% endblock %}
-
 {% block content %}
   {% set user = ad.user %}
 
@@ -79,15 +70,9 @@
 
 {% block javascripts %}
   {{ parent() }}
-  {% if app.debug %}
-    <script src="{{ asset('bundles/adstacyapp/js/jquery.fancybox.min.js') }}" type="text/javascript"></script>
-  {% else %}
-    <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js" type="text/javascript"></script>
-  {% endif %}
   <script type="text/javascript">
     $(function() {
       $('.ad-single').ajaxlink('show_ad');
-      $('.fancybox').fancybox();
     });
   </script>
 {% endblock %}
