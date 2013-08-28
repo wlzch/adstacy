@@ -33,6 +33,10 @@
       <img src="{{ src }}" alt="{{ ad.description }}">
     </div>
 
+    <div class="ad-detail-section clearfix">
+      {% include 'AdstacyAppBundle:User:user_mini.html.twig' with { user: ad.user, text: '2 minutes ago' } %}
+    </div>
+
     <div class="ad-detail-section">
       <p>{{ parse_hashtag(ad.description) }}</p>
     </div>
