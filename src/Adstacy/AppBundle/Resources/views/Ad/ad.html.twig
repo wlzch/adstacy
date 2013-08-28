@@ -7,9 +7,6 @@
     </a>
   </div>
   <div class="ad-desc">
-    <div class="desc">
-      <p>{{ parse_url(parse_hashtag(ad.description)) }}</p>
-    </div>
     <div class="inline-block">
       <a class="{% if app.user %}box-medium{% else %}box-large{% endif %} btn-muted btn-gray"><span class="promotes-count">{{ ad.promoteesCount }}</span> promotes</a>
       {% if app.user %}
@@ -21,6 +18,9 @@
           <span aria-hidden="true" class="icon-bullhorn">
         </a>
       {% endif %}
+    </div>
+    <div class="desc">
+      <p>{{ parse_url(parse_hashtag(ad.description)) }}</p>
     </div>
     <div class="ad-user clearfix border-top">
       {% include 'AdstacyAppBundle:User:user_mini.html.twig' with {user: ad.user, text: 'Ads by'} %}

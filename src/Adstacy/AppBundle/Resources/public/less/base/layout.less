@@ -3,6 +3,10 @@ body {
   padding-top: 70px;
 }
 
+p {
+  font-size: 13px;
+}
+
 .masonry {
   margin: auto;
 }
@@ -62,6 +66,12 @@ body {
   width: 360px;
   &:focus + button span {
     color: darken(@input-color-placeholder, 20%);
+  }
+}
+
+@media screen and (max-width: @screen-tablet) {
+  #search-bar {
+    width: 100%;
   }
 }
 
@@ -244,7 +254,11 @@ a.url {
 
 #user-dropdown {
   li a {
-    padding: 10px 20px;
+    padding: 8px 15px;
+  }
+  .dropdown-toggle {
+    min-width: 110px;
+    text-align: left;
   }
 }
 
