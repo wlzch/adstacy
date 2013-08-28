@@ -1,5 +1,4 @@
 body {
-  background-color: @body-bg;
   padding-top: 70px;
 }
 
@@ -8,7 +7,7 @@ body {
 }
 
 .navbar {
-  box-shadow: 0 1px 2px #999;
+  .box-shadow(0 1px 2px @gray-light);
 }
 
 .body {
@@ -24,7 +23,6 @@ body {
   margin: 14px 7px 0 7px;
   background-color: #fff;
   border-radius: @border-radius-base;
-  box-shadow: 0 0 1px #333;
 
   .promote, .unpromote {
     width: 86px;
@@ -42,6 +40,7 @@ body {
     padding: 5px;
   }
   p {
+    margin: 0;
     font-size: 13px;
   }
 }
@@ -176,7 +175,7 @@ ul.nav-expand {
       text-decoration: none;
       font-weight: bold;
       background-color: @gray-lighter;
-      box-shadow: inset 0 0 3px 0 rgba(200,200,200,.9);
+      .box-shadow(inset 0 0 3px 0 fade(#000, 10%));
       border-radius: @border-radius-base;
     }
   }
@@ -202,33 +201,6 @@ ul.nav-expand {
 
 .border-top {
   border-top: 1px solid @border-color;
-}
-
-a.url {
-  color: #428bca;
-  &:hover {
-    color: darken(#428bca, 25%);
-  }
-}
-
-.table-row {
-  display: table;
-  width: 100%;
-}
-
-.table-cell {
-  display: table-cell;
-}
-
-.list-section {
-  display: table;
-  border-spacing: 10px;
-  width: 100%;
-}
-
-.list-block {
-  display: table-cell;
-  vertical-align: top;
 }
 
 .w1 { width: 10%; }
@@ -324,7 +296,7 @@ a.url {
   a.block-item {
     text-decoration: none;
     text-align: center;
-    padding: 10px;
+    line-height: 40px;
   }
 
   > div, a {
@@ -361,6 +333,10 @@ a.url {
   margin: auto;
   background-color: #fff;
   border-radius: @border-radius-base;
+
+  img {
+    .img-responsive(inline-block);
+  }
 }
 
 .ad-detail-section {
