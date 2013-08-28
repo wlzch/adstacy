@@ -41,120 +41,51 @@
       }
     }
 
-    .image-area {
-      float: left;
-      border-right: 1px solid #dfdfdf;
-      margin-right: 30px;
-      min-height: 500px;
-      overflow: hidden;
-      padding-right: 29px;
-      width: 260px;
-
-      .image-upload {
-        width: 236px;
-      }
-
-      .image-preview {
-        display: block;
-        margin-top: 10px;
-      }
-    }
-    .meta-area {
-      float: left;
-      width: 520px;
-
-      > div {
-        margin-bottom: 20px;
-      }
-
-      .select2-container {
-        .select2-choice {
-          height: 34px;
-          padding: 3px 12px;
-        }
-      }
-    }
   }
 }
 
 .create-ad-container {
-  width: 860px;
+  width: 1024px;
   label {
     color: #555;
   }
 
-  .modal-body {
-    > div {
-      margin-bottom: 10px;
+  #ad_content {
+    height: 250px;
+  }
+  .image-area {
+    float: left;
+    border-right: 1px solid #dfdfdf;
+    margin-right: 30px;
+    min-height: 500px;
+    overflow: hidden;
+    padding-right: 29px;
+    width: 260px;
+
+    .image-upload {
+      width: 236px;
+    }
+
+    .image-preview {
+      display: block;
+      margin-top: 10px;
     }
   }
-}
+  .meta-area {
+    float: left;
+    width: 690px;
 
-.create-wall-container {
-  width: 400px;
-
-  label {
-    color: #555;
-  }
-
-  form {
     > div {
       margin-bottom: 20px;
     }
-  }
-}
 
-.show-wall-container {
-  padding: 10px 20px;
-
-  .pull-left {
-    width: 70%;
-  }
-
-  .pull-right {
-    width: 20%;  
-  }
-
-  .wall-name {
-    color: #555;
-    font-size: 24px;
-    margin: 0;
-  }
-
-  .description {
-    border-top: 1px solid #dfdfdf;
-    font-size: 11px;
-    padding-top: 10px;
-    color: #555;
-    font-size: 14px;
-    font-weight: normal;
-    line-height: 1;
-    margin: 5px 0 5px 0;
-  }
-
-  .score-count {
-    color: #ccc;
-    float: right;
-    text-align: center;
-    width: 80px;
-
-    .label {
-      color: #999;
-      font-size: 14px;
-      margin: 0;
-      padding: 0;
-    }
-    .value {
-      color: #555;
-      font-size: 32px;
-      margin: 0;
+    .select2-container {
+      .select2-choice {
+        height: 34px;
+        padding: 3px 12px;
+      }
     }
   }
-
-  .follow-wall {
-    margin-left: 20px;
-  }
-
 }
 
 .user-profile-container {
@@ -188,35 +119,6 @@
     .profile-menu {
       border-top: 1px solid #dfdfdf;
       padding-top: 10px;
-    }
-  }
-}
-
-.wall-thumb {
-  width: 238px;
-  height: 311px;
-  margin: 14px 6px 0 6px;
-  padding: 5px 10px;
-  float: left;
-
-  .wall-name {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space:nowrap; 
-    width: 206px;
-  }
-  .ad-thumb-1, .ad-thumb-3 {
-    margin-right: 10px;
-    margin-bottom: 10px;
-  }
-  .ad-thumb {
-    background-color: #eeeeee;
-    border: 1px solid #dfdfdf;
-    float: left;
-    height: 103px;
-    width: 103px;
-    img {
-      border-radius: 3px;
     }
   }
 }
