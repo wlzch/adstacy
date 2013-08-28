@@ -113,6 +113,24 @@ doctrine:
         auto_generate_proxy_classes: %kernel.debug%
         auto_mapping: true
 
+monolog:
+    handlers:
+        elastica:
+            type: stream
+            path: %kernel.root_dir%/logs/elastica.log
+            channels: elastica
+            bubble: false
+        doctrine:
+            type: stream
+            path: %kernel.root_dir%/logs/doctrine.log
+            channels: doctrine
+            bubble: false
+        security:
+            type: stream
+            path: %kernel.root_dir%/logs/security.log
+            channels: security
+            bubble: false
+
 # Swiftmailer Configuration
 swiftmailer:
     transport: %mailer_transport%
