@@ -29,8 +29,8 @@
 .btn-facebook.active,
 .btn-facebook.disabled,
 .btn-facebook[disabled] {
-  color: #ffffff;
-  background-color: #133783;
+  color: #ffffff !important;
+  background-color: #133783 !important;
   *background-color: #102e6d;
 }
 
@@ -62,8 +62,8 @@
 .btn-twitter.active,
 .btn-twitter.disabled,
 .btn-twitter[disabled] {
-  color: #ffffff;
-  background-color: #0271bf;
+  color: #ffffff !important;
+  background-color: #0271bf !important;
   *background-color: #0262a6;
 }
 

@@ -18,7 +18,7 @@
 
       <div class="ads-form-section">
         {% for owner in hwi_oauth_resource_owners() %}
-          <a class="btn btn-block btn-lg btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{ owner|trans({}, 'HWIOAuthBundle') }}</a>
+          <a class="btn btn-block btn-lg btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">login with {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
         {% endfor %}
       </div>
 
@@ -32,11 +32,11 @@
         <input type="password" class="form-control input-lg" id="_password" name="_password" required="required" placeholder="Password">
 
         <div class="inline-block">
-          <div class="span1of2">
+          <div class="w5">
             <input type="checkbox" id="_remember_me" name="_remember_me" value="on">
             <label for="_remember_me">{{ 'security.login.remember_me'|trans }}</label>
           </div>
-          <div class="span1of2">
+          <div class="w5">
             <input type="submit" class="btn btn-primary btn-lg pull-right" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}">
           </div>
         </div>
