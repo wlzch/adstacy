@@ -19,6 +19,7 @@
       <p>{{ parse_url(parse_hashtag(ad.description)) }}</p>
     </div>
     {% if app.user %}
+      {% set promoted = app.user.hasPromote(ad) %}
       <div class="share-container">
         <div class="btn-group">
           <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-primary btn-promote unpromote {% if not promoted %}hide{% endif %}"><span class="icon-bullhorn"></span> Unpromote</a>

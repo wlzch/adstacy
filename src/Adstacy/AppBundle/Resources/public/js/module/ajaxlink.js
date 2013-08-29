@@ -5,7 +5,8 @@
         countSelector: '.promotes-count',
         jsonField: 'promotes_count',
         firstSelector: 'a.promote',
-        secondSelector: 'a.unpromote'
+        secondSelector: 'a.unpromote',
+        image_size: 14
       },
       promote_single: {
         countSelector: '.promotes-count',
@@ -21,17 +22,19 @@
       }
     };
     var options = $.extend({
-      loading: '<img src="/bundles/adstacyapp/img/spinner.gif" width="16" height="16" />'
+      image_size: 16
     }, options);
 
     return this.each(function() {
       var settings = types[type];
       var $parent = $(this);
+      var size = settings.image_size || options.image_size;
+      var loading = '<img src="/bundles/adstacyapp/img/spinner.gif" width="'+size+'" height="'+size+'" />';
 
       $parent.find(settings.firstSelector+','+settings.secondSelector).click(function(event) {
         var $this = $(this);
         var $html = $this.html();
-        $this.html(options.loading);
+        $this.html(loading);
         $.post(this.href, function(data) {
           $this.html($html);
           var json = JSON.parse(data);
