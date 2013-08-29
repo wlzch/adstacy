@@ -21,7 +21,7 @@
       <p>{{ parse_url(parse_hashtag(ad.description)) }}</p>
     </div>
     <div class="ad-user clearfix border-top">
-      {% include 'AdstacyAppBundle:User:user_mini.html.twig' with { user: ad.user, text: '2 minutes ago' } %}
+      {% include 'AdstacyAppBundle:User:user_mini.html.twig' with { user: ad.user, text: ago(ad.created) } %}
     </div>
   </div>
 </div>
