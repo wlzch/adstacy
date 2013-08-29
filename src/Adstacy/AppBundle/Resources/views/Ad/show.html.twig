@@ -7,9 +7,12 @@
 {% block content %}
   {% set user = ad.user %}
 
-  <div class="ad-detail-container">
+  <div class="ad-detail-container container-margin">
       <div class="toolbar clearfix">
-        <div class="pull-left">
+        <div>
+          {% include 'AdstacyAppBundle:User:user_mini.html.twig' with { user: ad.user, text: '2 minutes ago' } %}
+        </div>
+        <div class="pull-right">
           <div class="btn-group">
             {% set promoted = app.user.hasPromote(ad) %}
             <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-primary unpromote {% if not promoted %}hide{% endif %}"><span class="icon-bullhorn"></span> Unpromote</a>
@@ -19,34 +22,28 @@
           <a href="{{ app.request.uri }}" class="tweet block-item btn btn-twitter" data-via="adstacy" data-text="{{ ad.description }}">
             <span aria-hidden="true" data-icon="&#xe002;"></span> Twitter
           </a>
-        <a href="{{ app.request.uri }}" class="facebook-share block-item btn btn-facebook">
-          <span aria-hidden="true" data-icon="&#xe003;"></span> Facebook
-        </a>
-        </div>
-        {% if app.user == user %}
-          <div class="pull-right">
+          <a href="{{ app.request.uri }}" class="facebook-share block-item btn btn-facebook">
+            <span aria-hidden="true" data-icon="&#xe003;"></span> Facebook
+          </a>
+          {% if app.user == user %}
             <a href="{{ path('adstacy_app_ad_edit', {id: ad.id}) }}" class="btn btn-primary">Edit</a>
             <a href="#" data-toggle="modal" data-target="#confirm-modal" class="btn btn-primary">Delete</a>
-          </div>
-        {% endif %}
+          {% endif %}
+        </div>
       </div>
     <div class="text-center">
       {% set src = vich_uploader_asset(ad.image, 'file') %}
       <img src="{{ src }}" alt="{{ ad.description }}">
     </div>
 
-    <div class="ad-detail-section clearfix">
-      {% include 'AdstacyAppBundle:User:user_mini.html.twig' with { user: ad.user, text: '2 minutes ago' } %}
-    </div>
-
     <div class="ad-detail-section">
       <p>{{ parse_hashtag(ad.description) }}</p>
     </div>
-  </div>
 
-  <div class="ad-detail-container">
     {% if ad.content %}
-      {{ ad.content }}
+      <div class="ad-detail-section">
+        {{ ad.content }}
+      </div>
     {% endif %}
   </div>
 

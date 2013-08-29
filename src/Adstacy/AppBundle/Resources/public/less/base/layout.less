@@ -7,7 +7,7 @@ body {
 }
 
 .navbar {
-  box-shadow: 0 2px 8px #000;
+  .box-shadow(0 2px 8px #000);
 
   .icon-search {
     font-size: 16px;
@@ -285,15 +285,15 @@ ul.nav-expand {
     padding: 0;
   }
   .mini-profpic {
-    border-right: 1px solid #ccc; 
-    display: inline-block; 
-    height: 32px; 
+    border-right: 1px solid @border-color;
+    display: inline-block;
+    height: 32px;
     margin: 0;
   }
   .username-label {
     color: #888;
     font-weight: bold;
-    display:inline-block; 
+    display:inline-block;
     padding: 5px 12px;
     vertical-align: middle;
   }
@@ -330,10 +330,6 @@ ul.nav-expand {
       color: #888;
     }
   }
-}
-
-.btn-pad {
-  padding: 10px;
 }
 
 // ----------------------------------
@@ -378,10 +374,6 @@ ul.nav-expand {
   }
 }
 
-.btn-muted {
-  .button-variant(@gray; #f8f8f8; #f8f8f8);
-}
-
 .btn-gray {
   .button-variant(#fff; @gray; @gray);
 }
@@ -417,10 +409,6 @@ ul.nav-expand {
   p {
     font-size: @font-size-base;
     margin: 0;
-
-    a {
-      font-weight: bold;
-    }
   }
 }
 .wall-container {
@@ -489,6 +477,15 @@ ul.nav-expand {
 .toolbar {
   padding: 10px;
   border-bottom: 1px solid @border-color;
+
+  .btn {
+    padding: 4px 12px;
+  }
+}
+
+.container-margin {
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .search-menu-container {
