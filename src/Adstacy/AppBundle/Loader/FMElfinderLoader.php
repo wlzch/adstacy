@@ -53,8 +53,8 @@ class FMElfinderLoader
                 'URL'           => isset($parameter['url']) && $parameter['url']
                     ? strpos($parameter['url'], 'http') === 0
                         ? $parameter['url']
-                        : sprintf('%s://%s%s/%s/%s/', $request->getScheme(), $request->getHttpHost(), $request->getBasePath(), $username, $parameter['url'])
-                    : sprintf('%s://%s%s/%s/%s/', $request->getScheme(), $request->getHttpHost(), $request->getBasePath(), $username, $path),
+                        : sprintf('%s://%s%s/%s/%s/', $request->getScheme(), $request->getHttpHost(), $request->getBasePath(), $parameter['url'], $username)
+                    : sprintf('%s://%s%s/%s/%s/', $request->getScheme(), $request->getHttpHost(), $request->getBasePath(), $path, $username),
                 'accessControl' => array($this, 'access'),
                 'uploadAllow'   => $parameter['upload_allow'],
                 'uploadDeny'    => $parameter['upload_deny'],

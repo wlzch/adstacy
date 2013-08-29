@@ -9,6 +9,7 @@ web/css
 web/uploads
 web/media
 web/assetic
+web/files
 composer.phar
 *~
 *.swp
