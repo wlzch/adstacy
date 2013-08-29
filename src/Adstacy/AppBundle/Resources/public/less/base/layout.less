@@ -2,7 +2,7 @@ body {
   padding-top: 70px;
 }
 
-.masonry {
+.masonry, .adstacy-container {
   margin: auto;
 }
 
@@ -21,10 +21,6 @@ body {
 
 .body {
   margin-bottom: 14px;
-}
-
-.adstacy-container {
-  margin: auto;
 }
 
 .ad {
@@ -144,15 +140,6 @@ body {
 
 // -------------------------------------------
 
-.form-container, .dropdown-container {
-  .form-control {
-    margin: 10px auto;
-  }
-  .btn-block + .btn-block {
-    margin-top: 10px;
-  }
-}
-
 .form-container {
   margin: 0 auto;
   width: 400px;
@@ -251,17 +238,6 @@ ul.nav-expand {
   border-top: 1px solid @border-color;
 }
 
-.w1 { width: 10%; }
-.w2 { width: 20%; }
-.w3 { width: 30%; }
-.w4 { width: 40%; }
-.w5 { width: 50%; }
-.w6 { width: 60%; }
-.w7 { width: 70%; }
-.w8 { width: 80%; }
-.w9 { width: 90%; }
-.w25 { width: 25%; }
-
 #create-ads {
   border-color: 1px solid #555;
   box-shadow: 0 0 2px #555;
@@ -348,29 +324,19 @@ ul.nav-expand {
   border-spacing: 10px;
 }
 
-.centered {
-  text-align: center !important;
-  vertical-align: middle !important;
-}
-
 .inline-block {
   font-size: 0;
 
-  a.block-item {
-    text-decoration: none;
-    text-align: center;
-    line-height: 40px;
-  }
-
-  > div, a {
+  .block-item {
     font-size: initial;
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: top;
   }
 
-  > a {
-    text-align: center;
+  a.block-item {
+    line-height: 40px;
     text-decoration: none;
+    text-align: center;
   }
 }
 
@@ -407,10 +373,11 @@ ul.nav-expand {
   }
 
   p {
-    font-size: @font-size-base;
+    font-size: 16px;
     margin: 0;
   }
 }
+
 .wall-container {
   font-size: 0;
   width: 250px;
