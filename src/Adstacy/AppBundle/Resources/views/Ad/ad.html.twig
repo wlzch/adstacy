@@ -6,10 +6,10 @@
       width="{{ thumb_width }}px" height="{{ ad.thumbHeight }}px" alt="{{ ad.description }}">
     </a>
   </div>
+  {% set promoted = app.user.hasPromote(ad) %}
   <div class="ad-desc">
     <div>
       {% if app.user %}
-        {% set promoted = app.user.hasPromote(ad) %}
         {% if promoted %}
           <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-success btn-promote btn-block">{{ ad.promoteesCount }} promotes &nbsp; <span aria-hidden="true" class="icon-bullhorn"></span></a>
         {% else %}
@@ -17,11 +17,14 @@
         {% endif %}
       {% endif %}
     </div>
+    {% if promoted %}
+    <span class="promoted"><i class="icon-bullhorn"></i></span>
+    {% endif %}
     <div class="desc">
       <p>{{ parse_url(parse_hashtag(ad.description)) }}</p>
     </div>
     <div class="ad-user clearfix border-top">
-      {% include 'AdstacyAppBundle:User:user_mini.html.twig' with { user: ad.user, text: '2 minutes ago' } %}
+      {% include 'AdstacyAppBundle:User:user_mini.html.twig' with { user: ad.user, text: ago(ad.created) } %}
     </div>
   </div>
 </div>
