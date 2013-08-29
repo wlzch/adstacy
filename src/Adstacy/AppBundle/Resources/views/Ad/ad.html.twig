@@ -32,10 +32,10 @@
           </a>
           <ul class="social-list dropdown-menu" role="menu">
             <li>
-              <a href="{{ app.request.uri }}" class="facebook-share">
+              <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}" class="facebook-share">
                 <span aria-hidden="true" data-icon="&#xe003;"></span> Facebook
               </a>
-              <a href="{{ app.request.uri }}" class="tweet" data-via="adstacy" data-text="{{ ad.description }}">
+              <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}" class="tweet" data-via="adstacy" data-text="{{ ad.description }}">
                 <span aria-hidden="true" data-icon="&#xe002;" class="twitter-share"></span> Twitter
               </a>
             </li>
