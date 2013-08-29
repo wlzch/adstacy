@@ -7,23 +7,21 @@
     </a>
   </div>
   <div class="ad-desc">
-    <div class="inline-block">
-      <a class="{% if app.user %}box-medium{% else %}box-large{% endif %} btn-muted btn-gray"><span class="promotes-count">{{ ad.promoteesCount }}</span> promotes</a>
+    <div>
       {% if app.user %}
         {% set promoted = app.user.hasPromote(ad) %}
-        <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" data-toggle="tooltip" title="Unpromote" class="btn-success unpromote {% if not promoted %}hide{% endif %}">
-          <span aria-hidden="true" class="icon-bullhorn">
-        </a>
-        <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" data-toggle="tooltip" title="Promote" class="btn-primary promote {% if promoted %}hide{% endif %}">
-          <span aria-hidden="true" class="icon-bullhorn">
-        </a>
+        {% if promoted %}
+          <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-success btn-promote btn-block">{{ ad.promoteesCount }} promotes &nbsp; <span aria-hidden="true" class="icon-bullhorn"></span></a>
+        {% else %}
+          <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-primary btn-promote btn-block">{{ ad.promoteesCount }} promotes &nbsp; <span aria-hidden="true" class="icon-bullhorn"></span></a>
+        {% endif %}
       {% endif %}
     </div>
     <div class="desc">
       <p>{{ parse_url(parse_hashtag(ad.description)) }}</p>
     </div>
     <div class="ad-user clearfix border-top">
-      {% include 'AdstacyAppBundle:User:user_mini.html.twig' with {user: ad.user, text: 'Ads by'} %}
+      {% include 'AdstacyAppBundle:User:user_mini.html.twig' with { user: ad.user, text: '2 minutes ago' } %}
     </div>
   </div>
 </div>
