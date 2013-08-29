@@ -39,7 +39,7 @@ body {
     font-size: 11px;
     font-weight: bold;
     padding: 5px;
-    width: 85px;
+    width: 90px;
   }
   .btn-share {
     font-size: 11px;
@@ -88,10 +88,25 @@ body {
 .pic {
   background-image: url('../img/diagonal-line.png');
   border-radius: @border-radius-base @border-radius-base 0 0;
+  position: relative;
 
   img {
     background: url('../img/spinner.gif') no-repeat center center;
     border-radius: @border-radius-small @border-radius-small 0 0;
+  }
+  .promoted-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    #gradient > .directional(rgba(187,0,0,1) 50%, rgba(187,0,0,0) 0%, 225deg);
+  }
+  .promoted {
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    color: #fff;
   }
 }
 

@@ -1,3 +1,4 @@
+{% set promoted = app.user.hasPromote(ad) %}
 <div class="ad">
   <div class="pic">
     <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}">
@@ -5,16 +6,18 @@
       data-original="{{ vich_uploader_asset(ad.image, 'file')|imagine_filter('thumbnail') }}"
       width="{{ thumb_width }}px" height="{{ ad.thumbHeight }}px" alt="{{ ad.description }}">
     </a>
-  </div>
-  <div class="ad-desc">
     {#
       Promoted sign will only appear if the calling template pass a user variable to check for promoted or if the calling template doesnot pass user, it is assumed that the user passed is the current logged in user 
     #}
     {% if user is defined and user and user.hasPromote(ad) %}
+      <div class="promoted-container"></div>
       <span class="promoted"><i class="icon-bullhorn"></i></span>
     {% elseif app.user and app.user.hasPromote(ad) %}
+      <div class="promoted-container"></div>
       <span class="promoted"><i class="icon-bullhorn"></i></span>
     {% endif %}
+  </div>
+  <div class="ad-desc">
     <div class="desc">
       <p>{{ parse_url(parse_hashtag(ad.description)) }}</p>
     </div>
