@@ -47,8 +47,8 @@
         </ul>
       </div>
     </div>
-    <div class="ad-user clearfix border-top">
-      {% include 'AdstacyAppBundle:User:user_mini.html.twig' with { user: ad.user, text: ago(ad.created) } %}
-    </div>
+    <a href="{{ path('adstacy_app_user_profile', {username: ad.user.username} ) }}" class="ad-user clearfix border-top">
+      {% include 'AdstacyAppBundle:User:user_mini.html.twig' with {user: ad.user, text: ago(ad.created), as_link: false} %}
+    </a>
   </div>
 </div>
