@@ -11,8 +11,10 @@
       <div class="toolbar clearfix">
         <div class="pull-left">
           <div class="btn-group">
-            <button type="button" class="btn btn-primary"><span class="icon-bullhorn"></span> Promote</button>
-            <button type="button" class="btn btn-default">{{ ad.promoteesCount }}</button>
+            {% set promoted = app.user.hasPromote(ad) %}
+            <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-primary unpromote {% if not promoted %}hide{% endif %}"><span class="icon-bullhorn"></span> Unpromote</a>
+            <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-primary promote {% if promoted %}hide{% endif %}"><span class="icon-bullhorn"></span> Promote</a>
+            <button type="button" class="btn btn-default promotes-count">{{ ad.promoteesCount }}</button>
           </div>
           <a href="{{ app.request.uri }}" class="tweet block-item btn btn-twitter" data-via="adstacy" data-text="{{ ad.description }}">
             <span aria-hidden="true" data-icon="&#xe002;"></span> Twitter
@@ -71,7 +73,7 @@
   {{ parent() }}
   <script type="text/javascript">
     $(function() {
-      $('.ad-single').ajaxlink('show_ad');
+      $('.ad-detail-container').ajaxlink('promote_single');
     });
   </script>
 {% endblock %}

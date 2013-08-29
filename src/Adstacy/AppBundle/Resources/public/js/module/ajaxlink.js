@@ -7,9 +7,11 @@
         firstSelector: 'a.promote',
         secondSelector: 'a.unpromote'
       },
-      show_ad: {
-        firstSelector: 'a.follow-wall',
-        secondSelector: 'a.unfollow-wall'
+      promote_single: {
+        countSelector: '.promotes-count',
+        jsonField: 'promotes_count',
+        firstSelector: 'a.promote',
+        secondSelector: 'a.unpromote'
       },
       follow_user: {
         countSelector: '.user-followers-count',
@@ -47,6 +49,7 @@
 
         event.preventDefault();
         event.stopPropagation();
+
         return false;
       });
     });
