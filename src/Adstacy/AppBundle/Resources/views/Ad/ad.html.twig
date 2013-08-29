@@ -20,31 +20,33 @@
     <div class="desc">
       <p>{{ parse_url(parse_hashtag(ad.description)) }}</p>
     </div>
-    {% if app.user %}
-      {% set promoted = app.user.hasPromote(ad) %}
-      <div class="share-container">
+    <div class="share-container">
+      {% if app.user %}
+        {% set promoted = app.user.hasPromote(ad) %}
         <div class="btn-group">
           <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-primary btn-promote unpromote {% if not promoted %}hide{% endif %}"><span class="icon-bullhorn"></span> Unpromote</a>
           <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-primary btn-promote promote {% if promoted %}hide{% endif %}"><span class="icon-bullhorn"></span> Promote</a>
           <button type="button" class="btn btn-default promotes-count">{{ ad.promoteesCount }}</button>
         </div>
-        <div class="btn-group">
-          <a class="btn-share btn btn-default dropdown-toggle" data-toggle="dropdown">
-            <span class="icon-share"> Share</span>
-          </a>
-          <ul class="social-list dropdown-menu" role="menu">
-            <li>
-              <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}" class="facebook-share">
-                <span aria-hidden="true" data-icon="&#xe003;"></span> Facebook
-              </a>
-              <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}" class="tweet" data-via="adstacy" data-text="{{ ad.description }}">
-                <span aria-hidden="true" data-icon="&#xe002;" class="twitter-share"></span> Twitter
-              </a>
-            </li>
-          </ul>
-        </div>
+      {% else %}
+        <button class="btn btn-default">{{ ad.promoteesCount }} promotes</button>
+      {% endif %}
+      <div class="btn-group">
+        <a class="btn-share btn btn-default dropdown-toggle" data-toggle="dropdown">
+          <span class="icon-share"> Share</span>
+        </a>
+        <ul class="social-list dropdown-menu" role="menu">
+          <li>
+            <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}" class="facebook-share">
+              <span aria-hidden="true" data-icon="&#xe003;"></span> Facebook
+            </a>
+            <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}" class="tweet" data-via="adstacy" data-text="{{ ad.description }}">
+              <span aria-hidden="true" data-icon="&#xe002;" class="twitter-share"></span> Twitter
+            </a>
+          </li>
+        </ul>
       </div>
-    {% endif %}
+    </div>
     <div class="ad-user clearfix border-top">
       {% include 'AdstacyAppBundle:User:user_mini.html.twig' with { user: ad.user, text: ago(ad.created) } %}
     </div>

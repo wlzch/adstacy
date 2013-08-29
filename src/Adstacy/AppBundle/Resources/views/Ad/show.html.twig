@@ -13,12 +13,16 @@
         {% include 'AdstacyAppBundle:User:user_mini.html.twig' with { user: ad.user, text: '2 minutes ago' } %}
       </div>
       <div class="pull-right">
-        <div class="btn-group">
-          {% set promoted = app.user.hasPromote(ad) %}
-          <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-primary unpromote {% if not promoted %}hide{% endif %}"><span class="icon-bullhorn"></span> Unpromote</a>
-          <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-primary promote {% if promoted %}hide{% endif %}"><span class="icon-bullhorn"></span> Promote</a>
-          <button type="button" class="btn btn-default promotes-count">{{ ad.promoteesCount }}</button>
-        </div>
+        {% if app.user %}
+          <div class="btn-group">
+            {% set promoted = app.user.hasPromote(ad) %}
+            <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-primary unpromote {% if not promoted %}hide{% endif %}"><span class="icon-bullhorn"></span> Unpromote</a>
+            <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-primary promote {% if promoted %}hide{% endif %}"><span class="icon-bullhorn"></span> Promote</a>
+            <button type="button" class="btn btn-default promotes-count">{{ ad.promoteesCount }}</button>
+          </div>
+        {% else %}
+          <a class="btn btn-default">{{ ad.promoteesCount }} promotes</a>
+        {% endif %}
         <a href="{{ app.request.uri }}" class="tweet block-item btn btn-twitter" data-via="adstacy" data-text="{{ ad.description }}" data-hashtags="{{ ad.tags|join(',') }}">
             <span aria-hidden="true" data-icon="&#xe002;"></span> Twitter
           </a>
