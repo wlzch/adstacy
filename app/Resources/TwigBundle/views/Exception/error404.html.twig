@@ -1,0 +1,12 @@
+{% extends 'AdstacyAppBundle::layout.html.twig' %}
+
+{% block content %}
+  <div id="error-page">
+    <h2>Page Not Found</h2>
+    <h3>The page you are looking for is not here. Are you looking for something else?</h3>
+    <div class="links">
+      <a class="btn btn-success" href="{{ path('homepage') }}">Homepage</a>
+      <a class="btn btn-success" href="{{ app.request.headers.get('referer') }}">Back to previous page</a>
+    </div>
+  </div>
+{% endblock %}
