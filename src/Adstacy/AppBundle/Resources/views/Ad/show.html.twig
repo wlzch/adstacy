@@ -8,12 +8,11 @@
   {% set user = ad.user %}
 
   <div class="ad-detail-container">
-    {% if app.user == user %}
       <div class="toolbar clearfix">
         <div class="pull-left">
           <div class="btn-group">
-            <button type="button" class="btn btn-default">{{ ad.promoteesCount }}</button>
             <button type="button" class="btn btn-primary"><span class="icon-bullhorn"></span> Promote</button>
+            <button type="button" class="btn btn-default">{{ ad.promoteesCount }}</button>
           </div>
           <a href="{{ app.request.uri }}" class="tweet block-item btn btn-twitter" data-via="adstacy" data-text="{{ ad.description }}">
             <span aria-hidden="true" data-icon="&#xe002;"></span> Twitter
@@ -22,12 +21,13 @@
           <span aria-hidden="true" data-icon="&#xe003;"></span> Facebook
         </a>
         </div>
-        <div class="pull-right">
-          <a href="{{ path('adstacy_app_ad_edit', {id: ad.id}) }}" class="btn btn-primary">Edit</a>
-          <a href="#" data-toggle="modal" data-target="#confirm-modal" class="btn btn-primary">Delete</a>
-        </div>
+        {% if app.user == user %}
+          <div class="pull-right">
+            <a href="{{ path('adstacy_app_ad_edit', {id: ad.id}) }}" class="btn btn-primary">Edit</a>
+            <a href="#" data-toggle="modal" data-target="#confirm-modal" class="btn btn-primary">Delete</a>
+          </div>
+        {% endif %}
       </div>
-    {% endif %}
     <div class="text-center">
       {% set src = vich_uploader_asset(ad.image, 'file') %}
       <img src="{{ src }}" alt="{{ ad.description }}">
