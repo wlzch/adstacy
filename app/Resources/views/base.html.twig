@@ -137,38 +137,16 @@
           </div>
           <div id="navbar-expand-container" class="hide">
             <ul class="adstacy-container nav-expand">
-              <li><a href="#">Komputer</a></li>
-              <li><a href="#">Handphone</a></li>
-              <li><a href="#">Kuliner</a></li>
-              <li><a href="#">Pendidikan</a></li>
-              <li><a href="#">Tempat Tinggal</a></li>
-              <li><a href="#">Otomotif</a></li>
-              <li><a href="#">Rumah Sakit</a></li>
-              <li><a href="#">Tempat Wisata</a></li>
-              <li><a href="#">Komputer</a></li>
-              <li><a href="#">Handphone</a></li>
-              <li><a href="#">Kuliner</a></li>
-              <li><a href="#">Pendidikan</a></li>
-              <li><a href="#">Tempat Tinggal</a></li>
-              <li><a href="#">Otomotif</a></li>
-              <li><a href="#">Rumah Sakit</a></li>
-              <li><a href="#">Tempat Wisata</a></li>
-              <li><a href="#">Komputer</a></li>
-              <li><a href="#">Handphone</a></li>
-              <li><a href="#">Kuliner</a></li>
-              <li><a href="#">Pendidikan</a></li>
-              <li><a href="#">Tempat Tinggal</a></li>
-              <li><a href="#">Otomotif</a></li>
-              <li><a href="#">Rumah Sakit</a></li>
-              <li><a href="#">Tempat Wisata</a></li>
-              <li><a href="#">Komputer</a></li>
-              <li><a href="#">Handphone</a></li>
-              <li><a href="#">Kuliner</a></li>
-              <li><a href="#">Pendidikan</a></li>
-              <li><a href="#">Tempat Tinggal</a></li>
-              <li><a href="#">Otomotif</a></li>
-              <li><a href="#">Rumah Sakit</a></li>
-              <li><a href="#">Tempat Wisata</a></li>
+              <li class="hot-category"><a href="{{ path('homepage') }}" title="Home">Home</a></li>
+              {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+              <li class="hot-category"><a href="#">Ads Stream</a></li>
+              {% endif %}
+              <li class="hot-category"><a href="{{ path('adstacy_app_search', {q: 'jual'}) }}" title="Jual">Jual</a></li>
+              <li class="hot-category"><a href="{{ path('adstacy_app_search', {q: 'beli'}) }}" title="Beli">Beli</a></li>
+              <li class="hot-category"><a href="{{ path('adstacy_app_search', {q: 'loker'}) }}" title="Lowongan Kerja">Lowongan Kerja</a></li>
+              <li class="hot-category"><a href="{{ path('adstacy_app_search', {q: 'promo'}) }}" title="Promo">Promo</a></li>
+              <li class="hot-category"><a href="{{ path('adstacy_app_search', {q: 'event'}) }}" title="Event">Event</a></li>
+              <li><a href="{{ path('adstacy_app_search', {q: 'rumah'}) }}" title="Rumah">Rumah</a></li>
             </ul>
             <ul id="footer" class="adstacy-container clearfix">
               <li><a href="#">About</a></li>
