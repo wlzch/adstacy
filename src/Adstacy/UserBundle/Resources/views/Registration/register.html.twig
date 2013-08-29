@@ -6,7 +6,7 @@
     {{ form_start(form) }}
       {% set submit = form_row(form.register) %}
       {{ form_rest(form) }}
-      <p>By clicking sign up, you agree to our <a href="{{ path('adstacy_app_page_show', {key: 'terms'}) }}">Terms of Service</a> and <a href="{{ path('adstacy_app_page_show', {key: 'privacy-policy'}) }}">Privacy Policy</a></p>
+      <p>By clicking register, you agree to our <a href="{{ path('adstacy_app_page_show', {key: 'terms'}) }}">Terms of Service</a> and <a href="{{ path('adstacy_app_page_show', {key: 'privacy-policy'}) }}">Privacy Policy</a></p>
       {{ submit|raw }}
     {{ form_end(form) }}
   </div>
