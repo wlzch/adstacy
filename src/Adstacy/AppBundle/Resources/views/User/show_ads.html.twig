@@ -8,7 +8,7 @@
 
 {% block ajax_content %}
   {% for ad in paginator.getCurrentPageResults %}
-    {% include 'AdstacyAppBundle:Ad:ad.html.twig' with {ad: ad} %}
+    {% include 'AdstacyAppBundle:Ad:ad.html.twig' with {ad: ad, user: user} %}
   {% endfor %}
   {% if paginator.hasNextPage %}
     {% set params = {username: user.username, page: paginator.getNextPage} | merge(app.request.query.all) %}

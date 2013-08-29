@@ -6,10 +6,14 @@
       width="{{ thumb_width }}px" height="{{ ad.thumbHeight }}px" alt="{{ ad.description }}">
     </a>
   </div>
-  {% set promoted = app.user.hasPromote(ad) %}
   <div class="ad-desc">
-    {% if promoted %}
-    <span class="promoted"><i class="icon-bullhorn"></i></span>
+    {#
+      Promoted sign will only appear if the calling template pass a user variable to check for promoted or if the calling template doesnot pass user, it is assumed that the user passed is the current logged in user 
+    #}
+    {% if user is defined and user and user.hasPromote(ad) %}
+      <span class="promoted"><i class="icon-bullhorn"></i></span>
+    {% elseif app.user and app.user.hasPromote(ad) %}
+      <span class="promoted"><i class="icon-bullhorn"></i></span>
     {% endif %}
     <div class="desc">
       <p>{{ parse_url(parse_hashtag(ad.description)) }}</p>
