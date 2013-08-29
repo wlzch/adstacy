@@ -103,9 +103,8 @@
                   </li>
                   <li id="user-dropdown">
                     <div class="btn-group navbar-btn">
-                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        <img class="mini-profpic" src="{{ profile_pic(app.user) }}" alt="{{ app.user.username }}" width="20" height="20" /> &nbsp;
-                        {{ app.user.username }}
+                      <button type="button" class="btn btn-default btn-user dropdown-toggle" data-toggle="dropdown">
+                        <img class="mini-profpic" src="{{ profile_pic(app.user) }}" alt="{{ app.user.username }}" /><span class="username-label">{{ app.user.username }}</span>
                       </button>
                       <ul class="dropdown-menu" role="menu">
                         <li><a href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}">Profile</a></li>
