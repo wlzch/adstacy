@@ -66,6 +66,7 @@ class BaseContext extends MinkContext
     {
         $em = $this->get('doctrine')->getManager();
         $images = $this->getImages();
+        $users = $this->getUsers();
 
         for ($i = 0; $i < $num; $i++) {
             $tags = $this->faker->words($this->faker->randomNumber(0, 10));
@@ -75,6 +76,7 @@ class BaseContext extends MinkContext
             $ad = new Ad();
             $ad->setImage($images[$i]);
             $ad->setDescription($description);
+            $ad->setUser($users[$this->faker->randomNumber(0, count($users) - 1)]);
             $em->persist($ad);
         }
         $em->flush();
