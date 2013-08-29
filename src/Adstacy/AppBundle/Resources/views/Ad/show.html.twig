@@ -19,10 +19,10 @@
           <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-primary promote {% if promoted %}hide{% endif %}"><span class="icon-bullhorn"></span> Promote</a>
           <button type="button" class="btn btn-default promotes-count">{{ ad.promoteesCount }}</button>
         </div>
-        <a href="{{ app.request.uri }}" class="tweet btn btn-twitter" data-via="adstacy" data-text="{{ ad.description }}">
-          <span aria-hidden="true" data-icon="&#xe002;"></span> Twitter
-        </a>
-        <a href="{{ app.request.uri }}" class="facebook-share btn btn-facebook">
+        <a href="{{ app.request.uri }}" class="tweet block-item btn btn-twitter" data-via="adstacy" data-text="{{ ad.description }}" data-hashtags="{{ ad.tags|join(',') }}">
+            <span aria-hidden="true" data-icon="&#xe002;"></span> Twitter
+          </a>
+        <a href="{{ app.request.uri }}" class="facebook-share block-item btn btn-facebook">
           <span aria-hidden="true" data-icon="&#xe003;"></span> Facebook
         </a>
         {% if app.user == user %}
@@ -42,7 +42,7 @@
 
     {% if ad.content %}
       <div class="ad-detail-section">
-        {{ ad.content }}
+        {{ ad.content | raw }}
       </div>
     {% endif %}
   </div>

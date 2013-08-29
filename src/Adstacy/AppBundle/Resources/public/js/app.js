@@ -53,8 +53,9 @@
     var $this = $(this);
     var via = '&via='+$this.attr('data-via');
     var text = '&text='+$this.attr('data-text');
+    var hashtags = '&hashtags='+$this.attr('data-hashtags');
     window.open(
-      'https://twitter.com/share?url='+encodeURIComponent(this.href)+via+text,
+      'https://twitter.com/share?url='+encodeURIComponent(this.href)+via+text+hashtags,
       'Twitter tweet',
       'width=626,height=436'
     );
