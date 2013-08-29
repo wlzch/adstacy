@@ -7,7 +7,7 @@
       width="{{ thumb_width }}px" height="{{ ad.thumbHeight }}px" alt="{{ ad.description }}">
     </a>
     {#
-      Promoted sign will only appear if the calling template pass a user variable to check for promoted or if the calling template doesnot pass user, it is assumed that the user passed is the current logged in user 
+      Promoted sign will only appear if the calling template pass a user variable to check for promoted or if the calling template doesnot pass user, it is assumed that the user passed is the current logged in user
     #}
     {% if user is defined and user and user.hasPromote(ad) %}
       <div class="promoted-container"></div>
