@@ -118,11 +118,6 @@ class User implements UserInterface, GroupableInterface
     private $about;
 
     /**
-     * @ORM\Column(type="simple_array", nullable=true)
-     */
-    private $interests;
-
-    /**
      * @ORM\ManyToMany(targetEntity="Ad", mappedBy="promotees")
      */
     private $promotes;
@@ -935,29 +930,6 @@ class User implements UserInterface, GroupableInterface
            }
        }
    }
-
-    /**
-     * Set interests
-     *
-     * @param array $interests
-     * @return User
-     */
-    public function setInterests($interests)
-    {
-        $this->interests = $interests;
-    
-        return $this;
-    }
-
-    /**
-     * Get interests
-     *
-     * @return array 
-     */
-    public function getInterests()
-    {
-        return $this->interests;
-    }
 
     /**
      * Set promotesCount

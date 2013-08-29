@@ -26,15 +26,6 @@ class ProfileFormType extends BaseType
             'image_size' => 'small'
         ));
         parent::buildUserForm($builder, $options);
-        $builder->add(
-            $builder->create('interests', 'text', array(
-                'label' => 'Interests',
-                'required' => false,
-                'attr' => array(
-                    'placeholder' => '#fashion #men #medan'
-                )
-            ))->addModelTransformer(new HashtagToArrayTransformer())
-        );
         $builder->add('realName', 'text', array(
             'label' => 'Fullname',
             'required' => 'required',
