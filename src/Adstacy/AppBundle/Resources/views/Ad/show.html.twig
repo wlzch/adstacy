@@ -9,40 +9,38 @@
 
   <div class="ad-detail-container">
     {% if app.user == user %}
-      <div class="toolbar">
-        <a href="{{ path('adstacy_app_ad_edit', {id: ad.id}) }}" class="btn btn-primary">Edit</a>
-        <a href="#" data-toggle="modal" data-target="#confirm-modal" class="btn btn-primary">Delete</a>
+      <div class="toolbar clearfix">
+        <div class="pull-left">
+          <div class="btn-group">
+            <button type="button" class="btn btn-default">{{ ad.promoteesCount }}</button>
+            <button type="button" class="btn btn-primary"><span class="icon-bullhorn"></span> Promote</button>
+          </div>
+          <a href="{{ app.request.uri }}" class="tweet block-item btn btn-twitter" data-via="adstacy" data-text="{{ ad.description }}">
+            <span aria-hidden="true" data-icon="&#xe002;"></span> Twitter
+          </a>
+        <a href="{{ app.request.uri }}" class="facebook-share block-item btn btn-facebook">
+          <span aria-hidden="true" data-icon="&#xe003;"></span> Facebook
+        </a>
+        </div>
+        <div class="pull-right">
+          <a href="{{ path('adstacy_app_ad_edit', {id: ad.id}) }}" class="btn btn-primary">Edit</a>
+          <a href="#" data-toggle="modal" data-target="#confirm-modal" class="btn btn-primary">Delete</a>
+        </div>
       </div>
     {% endif %}
     <div class="text-center">
       {% set src = vich_uploader_asset(ad.image, 'file') %}
       <img src="{{ src }}" alt="{{ ad.description }}">
     </div>
-    <div class="inline-block">
-      <a class="w25 block-item btn-gray">{{ ad.promoteesCount }} promotes</a>
-      <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="block-item w25 btn-success unpromote hide">
-        <span aria-hidden="true" class="icon-bullhorn"></span> Unpromote
-      </a>
-      <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="block-item w25 btn-primary promote">
-        <span aria-hidden="true" class="icon-bullhorn"></span> Promote
-      </a>
-      <a href="{{ app.request.uri }}" class="tweet block-item w25 btn-twitter" data-via="adstacy" data-text="{{ ad.description }}">
-        <span aria-hidden="true" data-icon="&#xe002;"></span> Tweet
-      </a>
-      <a href="{{ app.request.uri }}" class="facebook-share block-item w25 btn-facebook">
-        <span aria-hidden="true" data-icon="&#xe003;"></span> Share
-      </a>
-    </div>
 
     <div class="ad-detail-section">
       <p>{{ parse_hashtag(ad.description) }}</p>
     </div>
+  </div>
 
-
+  <div class="ad-detail-container">
     {% if ad.content %}
-      <div class="ad-detail-section">
-        {{ ad.content }}
-      </div>
+      {{ ad.content }}
     {% endif %}
   </div>
 
