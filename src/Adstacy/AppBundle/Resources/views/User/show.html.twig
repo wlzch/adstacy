@@ -10,7 +10,7 @@
 
     <div class="user-info">
       <h1 class="user-realname">
-        {{ user.realname }}
+        <a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">{{ user.realname }}</a>
         {% if app.user and app.user != user %}
           {% set followed = app.user.hasFollowUser(user) %}
           <a class="btn btn-primary unfollow-user {% if not followed %}hide{% endif %}" href="{{ path('adstacy_app_user_unfollow', {username: user.username}) }}">Unfollow</a>
@@ -19,8 +19,6 @@
       </h1>
       <h2 class="user-about">{{ user.about }}</h2>
       <div class="profile-menu">
-        <a class="btn {% if tab == 'ads' %}btn-primary{% endif %}" href="{{ path('adstacy_app_user_ads', {username: user.username}) }}">{{ adsCount }} Ads</a>
-        <a class="btn {% if tab == 'promotes' %}btn-primary{% endif %}" href="{{ path('adstacy_app_user_promotes', {username: user.username}) }}">{{ promotesCount }} Promotes</a>
         <a class="btn {% if tab == 'followers' %}btn-primary{% endif %}" href="{{ path('adstacy_app_user_followers', {username: user.username}) }}"><span class="user-followers-count">{{ followersCount }}</span> Followers</a>
         <a class="btn {% if tab == 'followings' %}btn-primary{% endif %}" href="{{ path('adstacy_app_user_followings', {username: user.username}) }}">{{ followingsCount }} Followings</a>
       </div>

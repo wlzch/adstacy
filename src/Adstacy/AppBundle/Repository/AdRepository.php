@@ -54,7 +54,8 @@ class AdRepository extends EntityRepository
             SELECT a
             FROM AdstacyAppBundle:Ad a
             JOIN a.user u
-            WHERE u.id = :id
+            LEFT JOIN a.promotees p
+            WHERE u.id = :id OR p.id = :id
         ');
 
         return $query->setParameter('id', $user->getId());

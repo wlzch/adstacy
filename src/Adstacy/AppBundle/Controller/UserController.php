@@ -29,22 +29,6 @@ class UserController extends Controller
     }
 
     /**
-     * Show promotes by $username
-     *
-     * @param string $username
-     */
-    public function showPromotesAction($username)
-    {
-        $params = $this->getParams($username);
-        $params['tab'] = 'promotes';
-        $query = $this->getRepository('AdstacyAppBundle:Ad')->findPromotesByUserQuery($params['user']);
-        $params['paginator'] = $this->getDoctrinePaginator($query, $this->getParameter('max_ads_per_page'));
-        $params['route'] = 'adstacy_app_user_promotes';
-
-        return $this->render('AdstacyAppBundle:User:show_ads.html.twig', $params);
-    }
-
-    /**
      * Show followers by $username
      *
      * @param string $username
