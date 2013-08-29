@@ -18,6 +18,13 @@ hwi_oauth_connect_user:
     resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
     prefix: /connect
 
+adstacy_app_user_disconnect:
+    pattern: /disconnect/{service}
+    defaults:
+        _controller: AdstacyAppBundle:Account:disconnect
+    requirements:
+        service: facebook|twitter
+
 facebook_login:
     pattern: /login/facebook
 
