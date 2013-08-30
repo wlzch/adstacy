@@ -23,6 +23,7 @@ body {
   margin-bottom: 14px;
 }
 
+
 .ad {
   width: 236px;
   margin: 14px 7px 0 7px;
@@ -230,27 +231,6 @@ body {
     display:inline-block;
     padding: 5px 12px;
     vertical-align: middle;
-  }
-}
-
-@media screen and (max-width: @screen-tablet) {
-  #btn-navbar-expand {
-    width: 100%;  
-  }
-  #search-bar {
-    width: 100%;
-    margin-left: 0;
-  }
-  #create-ads {
-    margin-right: 0;
-  }
-  #user-dropdown {
-    .navbar-btn {
-      width: 100%;
-    }
-    .btn-user {
-      width: 100%;
-    }
   }
 }
 
@@ -528,3 +508,23 @@ ul.nav-expand {
 @-ms-viewport       { width: device-width; }
 @-o-viewport        { width: device-width; }
 @viewport           { width: device-width; }
+
+@media screen and (max-width: @screen-tablet) {
+  #btn-navbar-expand, #search-bar, .ad-detail-container, .settings-container {
+    width: 100% !important; 
+  }
+  #search-bar {
+    margin-left: 0;
+  }
+  #create-ads {
+    margin-right: 0;
+  }
+  #user-dropdown {
+    .navbar-btn {
+      width: 100%;
+    }
+    .btn-user {
+      width: 100%;
+    }
+  }
+}
