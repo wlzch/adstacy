@@ -28,13 +28,22 @@ class AdAdmin extends Admin
             ->add('description')
             ->add('user.username', null, array('label' => 'Username'))
             ->add('promoteesCount')
+            ->add('featured', 'doctrine_orm_callback', array(
+                'callback' => function($queryBuilder, $alias, $field, $value) {
+                    if (!$value['value']) {
+                        return;
+                    }
+                    $queryBuilder->innerJoin(sprintf('%s.featured', $alias), 'f');
+                },
+                'field_type' => 'checkbox'
+            ))
         ;
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id')
+            ->addIdentifier('id')
             ->add('description')
             ->add('user.username', null, array('label' => 'Username'))
             ->add('promoteesCount')

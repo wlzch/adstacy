@@ -78,6 +78,11 @@ class Ad
     private $promoteesCount;
 
     /**
+     * @ORM\OneToOne(targetEntity="FeaturedAd", mappedBy="ad")
+     */
+    private $featured;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -337,5 +342,28 @@ class Ad
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set featured
+     *
+     * @param \Adstacy\AppBundle\Entity\Image $featured
+     * @return Ad
+     */
+    public function setFeatured(\Adstacy\AppBundle\Entity\Image $featured = null)
+    {
+        $this->featured = $featured;
+    
+        return $this;
+    }
+
+    /**
+     * Get featured
+     *
+     * @return \Adstacy\AppBundle\Entity\Image 
+     */
+    public function getFeatured()
+    {
+        return $this->featured;
     }
 }
