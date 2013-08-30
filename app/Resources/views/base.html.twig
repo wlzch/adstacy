@@ -88,7 +88,7 @@
                   </button>
                 </li>
               </ul>
-              <form action="{{ path('adstacy_app_search') }}" class="navbar-form navbar-left" style="position: relative;" role="search">
+              <form id="form-search" action="{{ path('adstacy_app_search') }}" class="navbar-form navbar-left" style="position: relative;" role="search">
                 <input id="search-bar" type="text" class="form-control" placeholder="Search" name="q" value="{{ app.request.query.get('q') }}" >
                 <button type="submit" class="search-btn">
                   <span aria-hidden="true" class="icon-search"></span>
