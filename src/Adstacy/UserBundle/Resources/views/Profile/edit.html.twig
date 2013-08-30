@@ -87,9 +87,9 @@
         <label class="control-label">Status</label>
         <div class="form-widget">
           {% if user.facebookId %}
-            Connected to {{ user.facebookRealName }}
+            <p>Connected to {{ user.facebookRealName }}</p>
           {% else %}
-            Not Connected
+            <p>Not Connected</p>
           {% endif %}
         </div>
       </div>
@@ -113,9 +113,9 @@
         <label class="control-label">Status</label>
         <div class="form-widget">
           {% if user.twitterId %}
-            Connected to {{ user.twitterRealName }}
+          <p>Connected to {{ user.twitterRealName }}</p>
           {% else %}
-            Not Connected
+          <p>Not Connected</p>
           {% endif %}
         </div>
       </div>
