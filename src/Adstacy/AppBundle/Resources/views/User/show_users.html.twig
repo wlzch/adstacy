@@ -1,11 +1,15 @@
 {% extends is_ajax() ? '::ajax.html.twig' : 'AdstacyAppBundle:User:show.html.twig' %}
 
 {% block show_content %}
-  <div class="adstacy-container">
-    <div class="jscroll">
+  {% if paginator.getCurrentPageResults|length > 0 %}
+    <div class="adstacy-container jscroll">
       {{ block('ajax_content') }}
     </div>
-  </div>
+  {% else %}
+    <div class="jumbotron text-center">
+      <h1>Poor :-(</h1>
+    </div>
+  {% endif %}
 {% endblock %}
 
 {% block ajax_content %}
@@ -13,8 +17,8 @@
     {% include 'AdstacyAppBundle:User:user.html.twig' with {user: following} %}
   {% endfor %}
   {% if paginator.hasNextPage %}
-    {% set params = {username: user.username, page: paginator.getNextPage} | merge(app.request.query.all) %}
-    <a href="{{ path(route, params )}}" class="btn btn-lg btn-default btn-block next-page">More</a>
+    {% set params = {username: user.username, page: paginator.getNextPage}|merge(app.request.query.all) %}
+    <a href="{{ path(route, params )}}" class="btn btn-default btn-lg btn-block next-page">More</a>
   {% endif %}
 {% endblock %}
 

@@ -1,9 +1,16 @@
 {% extends 'AdstacyAppBundle:Search:search.html.twig' %}
 
 {% block search_content %}
-  <div class="jscroll adstacy-container">
-    {{ block('ajax_content') }}
-  </div>
+  {% if paginator.getCurrentPageResults|length > 0 %}
+    <div class="adstacy-container jscroll">
+      {{ block('ajax_content') }}
+    </div>
+  {% else %}
+    <div class="jumbotron text-center">
+      <h1>No Results Found</h1>
+      <p class="lead">Please try a different keywords.</p>
+    </div>
+  {% endif %}
 {% endblock %}
 
 {% block ajax_content %}
@@ -11,8 +18,8 @@
     {% include 'AdstacyAppBundle:User:user.html.twig' with {user: user} %}
   {% endfor %}
   {% if paginator.hasNextPage %}
-    {% set params = {page: paginator.getNextPage} | merge(app.request.query.all) %}
-    <a href="{{ path('adstacy_app_search_users', params )}}" class="btn btn-lg btn-default btn-block next-page">More</a>
+    {% set params = {page: paginator.getNextPage}|merge(app.request.query.all) %}
+    <a href="{{ path('adstacy_app_search_users', params )}}" class="btn btn-default btn-lg btn-block next-page">More</a>
   {% endif %}
 {% endblock %}
 

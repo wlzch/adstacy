@@ -1,9 +1,20 @@
 {% extends is_ajax() ? '::ajax.html.twig' : 'AdstacyAppBundle:User:show.html.twig' %}
 
 {% block show_content %}
-  <div class="masonry jscroll">
-    {{ block('ajax_content') }}
-  </div>
+  {% if paginator.getCurrentPageResults|length > 0 %}
+    <div class="masonry jscroll">
+      {{ block('ajax_content') }}
+    </div>
+  {% else %}
+    <div class="jumbotron text-center">
+      <h1>You have no ads</h1>
+      <p class="lead">Create an ads now.</p>
+      <a href="{{ path('adstacy_app_ad_create') }}" class="btn-group btn-group-lg">
+        <span class="btn btn-success"><span class="icon-plus"></span></span>
+        <span class="btn btn-success">Create Ads</span>
+      </a>
+    </div>
+  {% endif %}
 {% endblock %}
 
 {% block ajax_content %}
@@ -11,7 +22,7 @@
     {% include 'AdstacyAppBundle:Ad:ad.html.twig' with {ad: ad, user: user} %}
   {% endfor %}
   {% if paginator.hasNextPage %}
-    {% set params = {username: user.username, page: paginator.getNextPage} | merge(app.request.query.all) %}
+    {% set params = {username: user.username, page: paginator.getNextPage}|merge(app.request.query.all) %}
     <a href="{{ path(route, params )}}" class="btn btn-lg btn-default btn-block next-page">More</a>
   {% endif %}
 {% endblock %}
