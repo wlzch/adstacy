@@ -166,7 +166,9 @@ body {
 #form-search {
   padding: 0;
 }
-
+#btn-navbar-expand {
+  padding: 6px 12px;
+}
 #search-bar {
   box-shadow: 0 0 10px #cacaca inset;
   padding-right: 40px;
@@ -176,19 +178,14 @@ body {
   }
   margin-left: 20px;
 }
-
 .search-btn {
   background-color: transparent;
   border: none;
   padding: 0;
   position: absolute;
-  top: 10px;
-  right: 20px;
+  top: 0;
+  right: 10px;
   height: 34px;
-
-  @media (min-width: @grid-float-breakpoint) {
-    top: 0;
-  }
 
   span {
     color: @input-color-placeholder;
@@ -199,7 +196,6 @@ body {
     color: darken(@input-color-placeholder, 50%);
   }
 }
-
 #create-ads {
   border-color: 1px solid #555;
   box-shadow: 0 0 2px #555;
@@ -244,10 +240,6 @@ body {
   #search-bar {
     width: 100%;
     margin-left: 0;
-  }
-  .search-btn {
-    top: 0;
-    right: 10px;
   }
   #create-ads {
     margin-right: 0;

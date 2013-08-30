@@ -77,15 +77,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="{{ path('homepage') }}"><img src="{{ asset('bundles/adstacyapp/img/logo.png') }}" /></a>
+              <a class="navbar-brand" href="{{ path('homepage') }}" title="Adstacy"><img src="{{ asset('bundles/adstacyapp/img/logo.png') }}" alt="Adstacy" /></a>
             </div>
 
             <div class="collapse navbar-collapse navbar-ex1-collapse">
               <ul class="nav navbar-nav">
                 <li>
-                  <button type="button" id="btn-navbar-expand" class="btn btn-default navbar-btn">
+                  <a id="btn-navbar-expand" class="btn btn-default navbar-btn" title="Browse">
                     <span aria-hidden="true" class="icon-chevron-up icon-chevron-down"></span>
-                  </button>
+                  </a>
                 </li>
               </ul>
               <form id="form-search" action="{{ path('adstacy_app_search') }}" class="navbar-form navbar-left" style="position: relative;" role="search">
@@ -97,7 +97,7 @@
               <ul class="nav navbar-nav navbar-right">
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                   <li>
-                    <a href="{{ path('adstacy_app_ad_create') }}" id="create-ads" class="btn btn-primary navbar-btn">
+                    <a href="{{ path('adstacy_app_ad_create') }}" id="create-ads" class="btn btn-primary navbar-btn" title="Create ad">
                       <span aria-hidden="true" class="icon-plus"></span>
                     </a>
                   </li>
