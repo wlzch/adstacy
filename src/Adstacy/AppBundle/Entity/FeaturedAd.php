@@ -18,7 +18,7 @@ class FeaturedAd
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Ad", inversedBy="featured")
+     * @ORM\ManyToOne(targetEntity="Ad", inversedBy="featureds")
      */
     private $ad;
 

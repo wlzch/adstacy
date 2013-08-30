@@ -78,9 +78,9 @@ class Ad
     private $promoteesCount;
 
     /**
-     * @ORM\OneToOne(targetEntity="FeaturedAd", mappedBy="ad")
+     * @ORM\OneToMany(targetEntity="FeaturedAd", mappedBy="ad")
      */
-    private $featured;
+    private $featureds;
 
     /**
      * Constructor
@@ -345,25 +345,40 @@ class Ad
     }
 
     /**
-     * Set featured
+     * Add featureds
      *
-     * @param \Adstacy\AppBundle\Entity\Image $featured
+     * @param \Adstacy\AppBundle\Entity\FeaturedAd $featureds
      * @return Ad
      */
-    public function setFeatured(\Adstacy\AppBundle\Entity\Image $featured = null)
+    public function addFeatured(\Adstacy\AppBundle\Entity\FeaturedAd $featureds)
     {
-        $this->featured = $featured;
+        $this->featureds[] = $featureds;
     
         return $this;
     }
 
     /**
-     * Get featured
+     * Remove featureds
      *
-     * @return \Adstacy\AppBundle\Entity\Image 
+     * @param \Adstacy\AppBundle\Entity\FeaturedAd $featureds
      */
-    public function getFeatured()
+    public function removeFeatured(\Adstacy\AppBundle\Entity\FeaturedAd $featureds)
     {
-        return $this->featured;
+        $this->featureds->removeElement($featureds);
+    }
+
+    /**
+     * Get featureds
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFeatureds()
+    {
+        return $this->featureds;
+    }
+
+    public function __toString()
+    {
+        return $this->description;
     }
 }
