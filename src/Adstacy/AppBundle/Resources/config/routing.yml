@@ -8,6 +8,11 @@ adstacy_app_contact:
     defaults:
         _controller: AdstacyAppBundle:App:contact
 
+adstacy_app_page_show:
+    pattern: /pages/{key}
+    defaults:
+        _controller: AdstacyAppBundle:Page:show
+
 AdstacyAppBundle_search:
     resource: "@AdstacyAppBundle/Resources/config/routing/search.yml"
 
