@@ -504,3 +504,10 @@ ul.nav-expand {
   width: 30px;
   display: inline-block;
 }
+
+/** hack to support windows phone 8 and IE 10 for media queries */
+@-webkit-viewport   { width: device-width; }
+@-moz-viewport      { width: device-width; }
+@-ms-viewport       { width: device-width; }
+@-o-viewport        { width: device-width; }
+@viewport           { width: device-width; }
