@@ -30,7 +30,7 @@
     <div class="share-container">
       {% if app.user %}
         {% set promoted = app.user.hasPromote(ad) %}
-        <div class="btn-group">
+        <div class="btn-group btn-group-sm">
           <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-primary btn-promote unpromote {% if not promoted %}hide{% endif %}"><span class="icon-bullhorn"></span> Unpromote</a>
           <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-primary btn-promote promote {% if promoted %}hide{% endif %}"><span class="icon-bullhorn"></span> Promote</a>
           <button type="button" class="btn btn-default promotes-count">{{ ad.promoteesCount }}</button>
@@ -38,8 +38,8 @@
       {% else %}
         <button class="btn btn-default">{{ ad.promoteesCount }} promotes</button>
       {% endif %}
-      <div class="btn-group">
-        <a class="btn-share btn btn-default dropdown-toggle" data-toggle="dropdown">
+      <div class="btn-group btn-group-sm">
+        <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
           <span class="icon-share"> Share</span>
         </a>
         <ul class="social-list dropdown-menu" role="menu">
