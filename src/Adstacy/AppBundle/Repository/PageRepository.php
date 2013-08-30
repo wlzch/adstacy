@@ -1,6 +1,6 @@
 <?php
 
-namespace Adstacy\AppBundle\Entity;
+namespace Adstacy\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 

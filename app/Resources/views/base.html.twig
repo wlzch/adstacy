@@ -149,9 +149,9 @@
               <li><a href="{{ path('adstacy_app_search', {q: 'rumah'}) }}" title="Rumah">Rumah</a></li>
             </ul>
             <ul id="footer" class="adstacy-container clearfix">
-              <li><a href="#">About</a></li>
-              <li><a href="#">Privacy and Terms</a></li>
-              <li><a href="#">Copyright and Trademark</a></li>
+              <li><a href="{{ path('adstacy_app_page_show', {key: 'about'}) }}">about</a></li>
+              <li><a href="{{ path('adstacy_app_page_show', {key: 'terms'}) }}">terms</a></li>
+              <li><a href="{{ path('adstacy_app_page_show', {key: 'privacy-policy'}) }}">privacy policy</a></li>
             </ul>
           </div>
         </nav>
