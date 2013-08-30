@@ -14,24 +14,27 @@
       </div>
       <div class="pull-right">
         {% if app.user %}
-          <div class="btn-group">
+          <div class="btn-group btn-group-sm">
             {% set promoted = app.user.hasPromote(ad) %}
-            <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-primary unpromote {% if not promoted %}hide{% endif %}"><span class="icon-bullhorn"></span> Unpromote</a>
-            <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-primary promote {% if promoted %}hide{% endif %}"><span class="icon-bullhorn"></span> Promote</a>
+            <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-primary btn-promote unpromote {% if not promoted %}hide{% endif %}"><span class="icon-bullhorn"></span> Unpromote</a>
+            <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-primary btn-promote promote {% if promoted %}hide{% endif %}"><span class="icon-bullhorn"></span> Promote</a>
             <button type="button" class="btn btn-default promotes-count">{{ ad.promoteesCount }}</button>
           </div>
         {% else %}
-          <a class="btn btn-default">{{ ad.promoteesCount }} promotes</a>
+          <a class="btn btn-default btn-sm">{{ ad.promoteesCount }} promotes</a>
         {% endif %}
-        <a href="{{ app.request.uri }}" class="tweet block-item btn btn-twitter" data-via="adstacy" data-text="{{ ad.description }}" data-hashtags="{{ ad.tags|join(',') }}">
-            <span aria-hidden="true" data-icon="&#xe002;"></span> Twitter
-          </a>
-        <a href="{{ app.request.uri }}" class="facebook-share block-item btn btn-facebook">
+        <a href="{{ app.request.uri }}" class="tweet btn btn-twitter btn-sm" data-via="adstacy" data-text="{{ ad.description }}" data-hashtags="{{ ad.tags|join(',') }}">
+          <span aria-hidden="true" data-icon="&#xe002;"></span> Twitter
+        </a>
+        <a href="{{ app.request.uri }}" class="facebook-share btn btn-facebook btn-sm">
           <span aria-hidden="true" data-icon="&#xe003;"></span> Facebook
         </a>
         {% if app.user == user %}
-          <a href="{{ path('adstacy_app_ad_edit', {id: ad.id}) }}" class="btn btn-primary">Edit</a>
-          <a href="#" data-toggle="modal" data-target="#confirm-modal" class="btn btn-primary">Delete</a>
+          <span class="space"></span>
+          <div class="btn-group btn-group-sm">
+            <a href="{{ path('adstacy_app_ad_edit', {id: ad.id}) }}" class="btn btn-default">Edit</a>
+            <a href="#" data-toggle="modal" data-target="#confirm-modal" class="btn btn-primary">Delete</a>
+          </div>
         {% endif %}
       </div>
     </div>
@@ -46,7 +49,7 @@
 
     {% if ad.content %}
       <div class="ad-detail-section">
-        {{ ad.content | raw }}
+        {{ ad.content|raw }}
       </div>
     {% endif %}
   </div>

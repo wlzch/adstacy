@@ -42,12 +42,7 @@ body {
       padding: 3px 10px;
     }
   }
-  .btn-group > .btn-promote:not(:first-child):not(:last-child) {
-    .border-left-radius(@border-radius-small);
-  }
-  .promotes-count {
-    font-weight: bold;
-  }
+
   .box-medium {
     width: 150px;
   }
@@ -71,12 +66,21 @@ body {
     margin: 0;
     font-size: 13px;
   }
+}
+
+.ad, .toolbar {
   .btn-group > .btn-promote {
     margin-left: 0;
     margin-right: 1px;
   }
   .btn-promote {
     width: 110px;
+  }
+  .btn-group > .btn-promote:not(:first-child):not(:last-child) {
+    .border-left-radius(@border-radius-small);
+  }
+  .promotes-count {
+    font-weight: bold;
   }
 }
 
@@ -461,11 +465,6 @@ ul.nav-expand {
 .navbar-brand {
   padding: 8px 15px 0 15px;
 }
-.toolbar {
-  .btn {
-    padding: 4px 12px;
-  }
-}
 
 .container-margin {
   margin-top: 50px;
@@ -499,4 +498,9 @@ ul.nav-expand {
   a.btn {
     color: #fff;
   }
+}
+
+.space {
+  width: 30px;
+  display: inline-block;
 }
