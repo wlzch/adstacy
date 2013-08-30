@@ -10,6 +10,10 @@ parameters:
     mini_thumb_size: 103
     profile_pic_size: 100
 
+    adstacy.mail.support: support@adstacy.com
+    adstacy.mail.admin: admin@adstacy.com
+    adstacy.mail.updates: updates@adstacy.com
+
     facebook_app_id: '476946822391252'
     facebook_app_secret: '10af83878f15f4963c5a0a22fdc0e28b'
     twitter_client_id: 'VNgnUYWcvjnmLiVHzYNEg'

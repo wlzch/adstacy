@@ -3,6 +3,11 @@ homepage:
     defaults:
         _controller: AdstacyAppBundle:App:index
 
+adstacy_app_contact:
+    pattern: /contact
+    defaults:
+        _controller: AdstacyAppBundle:App:contact
+
 AdstacyAppBundle_search:
     resource: "@AdstacyAppBundle/Resources/config/routing/search.yml"
 
