@@ -25,3 +25,12 @@ services:
             - ~
             - Adstacy\AppBundle\Entity\Ad
             - 'SonataAdminBundle:CRUD'
+
+    adstacy.admin.featured_ad:
+        class: Adstacy\AppBundle\Admin\FeaturedAdAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm,group: app, label: "Featured Ads" }
+        arguments:
+            - ~
+            - Adstacy\AppBundle\Entity\FeaturedAd
+            - 'SonataAdminBundle:CRUD'
