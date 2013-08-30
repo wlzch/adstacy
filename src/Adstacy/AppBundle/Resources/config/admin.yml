@@ -17,3 +17,11 @@ services:
             - Adstacy\AppBundle\Entity\User
             - 'SonataAdminBundle:CRUD'
 
+    adstacy.admin.ad:
+        class: Adstacy\AppBundle\Admin\AdAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm,group: app, label: "Ads" }
+        arguments:
+            - ~
+            - Adstacy\AppBundle\Entity\Ad
+            - 'SonataAdminBundle:CRUD'
