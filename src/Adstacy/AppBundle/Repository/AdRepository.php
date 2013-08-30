@@ -144,4 +144,27 @@ class AdRepository extends EntityRepository
 
         return $query->setParameter('id', $user->getId())->getSingleScalarResult();
     }
+
+    /**
+     * Find user's stream Query
+     *
+     * @param User $user
+     *
+     * @return Query
+     */
+    public function findUserStreamQuery(User $user)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('
+            SELECT a, u, f, p
+            FROM AdstacyAppBundle:Ad a
+            JOIN a.user u
+            LEFT JOIN u.followers f
+            LEFT JOIN a.promotees p
+            WHERE u.id = :id OR f.id = :id OR p.id = :id
+            ORDER BY a.created DESC
+        ');
+
+        return $query->setParameter('id', $user->getId());
+    }
 }

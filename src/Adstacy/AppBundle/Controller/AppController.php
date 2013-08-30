@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use JMS\Serializer\SerializationContext;
 use Adstacy\AppBundle\Model\Contact;
 use Adstacy\AppBundle\Form\Type\ContactType;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 
 class AppController extends Controller
 {
@@ -17,6 +18,22 @@ class AppController extends Controller
 
         return $this->render('AdstacyAppBundle:App:index.html.twig', array(
             'ads' => $ads
+        ));
+    }
+
+    /**
+     * @Secure(roles="ROLE_USER")
+     *
+     * Show all ads created by loggedin user, ads promoted by loggedin user, ads by loggedin user's followings and ads promoted by loggedin user's followings
+     */
+    public function streamAction()
+    {
+        $user = $this->getUser(); 
+        $query = $this->getRepository('AdstacyAppBundle:Ad')->findUserStreamQuery($user);
+        $paginator = $this->getDoctrinePaginator($query, $this->getParameter('max_ads_per_page'));
+
+        return $this->render('AdstacyAppBundle:App:stream.html.twig', array(
+            'paginator' => $paginator
         ));
     }
 

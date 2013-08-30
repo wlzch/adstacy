@@ -139,7 +139,7 @@
             <ul class="adstacy-container nav-expand">
               <li class="hot-category"><a href="{{ path('homepage') }}" title="Home">Home</a></li>
               {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-              <li class="hot-category"><a href="#">Ads Stream</a></li>
+              <li class="hot-category"><a href="{{ path('adstacy_app_stream') }}">Ads Stream</a></li>
               {% endif %}
               <li class="hot-category"><a href="{{ path('adstacy_app_search', {q: 'jual'}) }}" title="Jual">Jual</a></li>
               <li class="hot-category"><a href="{{ path('adstacy_app_search', {q: 'beli'}) }}" title="Beli">Beli</a></li>

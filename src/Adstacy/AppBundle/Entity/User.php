@@ -1296,6 +1296,24 @@ class User implements UserInterface, GroupableInterface
     }
 
     /**
+     * Checks wheter followers has promote ad
+     *
+     * @param Ad $ad
+     *
+     * @return boolean
+     */
+    public function hasFollowingsPromote(Ad $ad)
+    {
+        foreach ($this->getFollowings() as $user) {
+            if ($user->hasPromote($ad)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Set realName
      *
      * @param string $realName

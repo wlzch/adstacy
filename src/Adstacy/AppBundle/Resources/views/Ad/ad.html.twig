@@ -6,12 +6,19 @@
       width="{{ thumb_width }}px" height="{{ ad.thumbHeight }}px" alt="{{ ad.description }}">
     </a>
     {#
+      There are 3 situations where promoted sign will appear:
+      1. If user variables is passed, then that user will be checked wheter he has promote the ad
+      2. If logged in user has promote the ad
+      3. If logged in user's followers has promote the ad
       Promoted sign will only appear if the calling template pass a user variable to check for promoted or if the calling template doesnot pass user, it is assumed that the user passed is the current logged in user
     #}
     {% if user is defined and user and user.hasPromote(ad) %}
       <div class="promoted-container"></div>
       <span class="promoted"><i class="icon-bullhorn"></i></span>
     {% elseif app.user and app.user.hasPromote(ad) %}
+      <div class="promoted-container"></div>
+      <span class="promoted"><i class="icon-bullhorn"></i></span>
+    {% elseif app.user and app.user.hasFollowingsPromote(ad) %}
       <div class="promoted-container"></div>
       <span class="promoted"><i class="icon-bullhorn"></i></span>
     {% endif %}
