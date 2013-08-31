@@ -7,7 +7,11 @@
     </div>
   {% else %}
     <div class="jumbotron text-center">
-      <h1>Poor :-(</h1>
+      {% if route == 'adstacy_app_user_followers' %}
+      <h1>{{"user.no_followers.message"|trans}}</h1>
+      {% elseif route == 'adstacy_app_user_followings' %}
+      <h1>{{"user.no_followings.message"|trans}}</h1>
+      {% endif %}
     </div>
   {% endif %}
 {% endblock %}

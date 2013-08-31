@@ -7,8 +7,8 @@
     </div>
   {% else %}
     <div class="jumbotron text-center">
-      <h1>No Results Found</h1>
-      <p class="lead">Please try a different keywords.</p>
+      <h1>{{"search.no_result.message"|trans}}</h1>
+      <p class="lead">{{"search.no_result.help"|trans}}</p>
     </div>
   {% endif %}
 {% endblock %}
@@ -19,7 +19,7 @@
   {% endfor %}
   {% if paginator.hasNextPage %}
     {% set params = {page: paginator.getNextPage}|merge(app.request.query.all) %}
-    <a href="{{ path('adstacy_app_search_ads', params )}}" class="btn btn-default btn-lg btn-block next-page">More</a>
+    <a href="{{ path('adstacy_app_search_ads', params )}}" class="btn btn-default btn-lg btn-block next-page">{{"more"|trans}}</a>
   {% endif %}
 {% endblock %}
 

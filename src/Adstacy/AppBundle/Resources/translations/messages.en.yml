@@ -1,0 +1,41 @@
+search: Search
+stream: My Stream
+profile: Profile
+settings: Settings
+logout: Logout
+login: Login
+login.with: Login With
+register: Register new account
+password.forgot: Forgot password?
+cancel: Cancel
+delete: Delete
+edit: Edit
+more: More
+
+#footer
+about: about
+terms: terms
+privacy: privacy policy
+contact_us: contact us
+
+#ads
+ads:
+    create: Create ad
+    delete:
+        confirm_title: Delete Confirmation
+        confirm_message: Are you sure you want to delete this ads?
+        button: DELETE!
+    no_ads:
+        message: You don't have any ads yet
+        help: Create an ads now
+
+user:
+    no_followers:
+        message: You don't have any followers yet
+    no_followings:
+        message: Nobody follows you yet.
+
+search:
+    no_result:
+        message: No Results Found
+        help: Please try a different keywords

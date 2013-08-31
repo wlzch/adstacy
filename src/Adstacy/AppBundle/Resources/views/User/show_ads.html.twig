@@ -7,11 +7,11 @@
     </div>
   {% else %}
     <div class="jumbotron text-center">
-      <h1>You have no ads</h1>
-      <p class="lead">Create an ads now.</p>
+      <h1>{{"ads.no_ads.message"|trans}}</h1>
+      <p class="lead">{{"ads.no_ads.help"|trans}}</p>
       <a href="{{ path('adstacy_app_ad_create') }}" class="btn-group btn-group-lg">
         <span class="btn btn-success"><span class="icon-plus"></span></span>
-        <span class="btn btn-success">Create Ads</span>
+        <span class="btn btn-success">{{"ads.create"|trans}}</span>
       </a>
     </div>
   {% endif %}
@@ -23,7 +23,7 @@
   {% endfor %}
   {% if paginator.hasNextPage %}
     {% set params = {username: user.username, page: paginator.getNextPage}|merge(app.request.query.all) %}
-    <a href="{{ path(route, params )}}" class="btn btn-lg btn-default btn-block next-page">More</a>
+    <a href="{{ path(route, params )}}" class="btn btn-lg btn-default btn-block next-page">{{"more"|trans}}</a>
   {% endif %}
 {% endblock %}
 

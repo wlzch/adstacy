@@ -12,7 +12,7 @@
   {% endfor %}
   {% if paginator.hasNextPage %}
     {% set params = app.request.query.all|merge({page: paginator.getNextPage}) %}
-    <a href="{{ path('adstacy_app_stream', params )}}" class="btn btn-lg btn-default btn-block next-page">More</a>
+    <a href="{{ path('adstacy_app_stream', params )}}" class="btn btn-lg btn-default btn-block next-page">{{"more"|trans}}</a>
   {% endif %}
 {% endblock %}
 
