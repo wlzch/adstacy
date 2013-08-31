@@ -107,6 +107,7 @@
                         <img class="mini-profpic" src="{{ profile_pic(app.user) }}" alt="{{ app.user.username }}" /><span class="username-label">{{ app.user.username }}</span>
                       </button>
                       <ul class="dropdown-menu" role="menu">
+                        <li><a href="{{ path('adstacy_app_stream') }}">My Stream</a></li>
                         <li><a href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}">Profile</a></li>
                         <li><a href="{{ path('fos_user_profile_edit') }}">Settings</a></li>
                         <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
@@ -138,9 +139,6 @@
           <div id="navbar-expand-container" class="hide">
             <ul class="adstacy-container nav-expand">
               <li class="hot-category"><a href="{{ path('homepage') }}" title="Home">Home</a></li>
-              {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-              <li class="hot-category"><a href="{{ path('adstacy_app_stream') }}">Ads Stream</a></li>
-              {% endif %}
               <li class="hot-category"><a href="{{ path('adstacy_app_search', {q: 'jual'}) }}" title="Jual">Jual</a></li>
               <li class="hot-category"><a href="{{ path('adstacy_app_search', {q: 'beli'}) }}" title="Beli">Beli</a></li>
               <li class="hot-category"><a href="{{ path('adstacy_app_search', {q: 'loker'}) }}" title="Lowongan Kerja">Lowongan Kerja</a></li>
