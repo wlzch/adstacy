@@ -39,7 +39,7 @@
       </div>
     </div>
     <div class="ad-detail-section">
-      <p>{{ parse_hashtag(ad.description) }}</p>
+      <p>{{ parse_url(parse_hashtag(ad.description)) }}</p>
     </div>
     <div class="text-center">
       {% set src = vich_uploader_asset(ad.image, 'file') %}
