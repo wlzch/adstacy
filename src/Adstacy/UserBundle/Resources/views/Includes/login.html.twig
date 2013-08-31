@@ -2,8 +2,12 @@
 
 <form role="form" action="{{ path("fos_user_security_check") }}" method="post">
   <div class="clearfix">
+    {% set targetPath = path('homepage') %}
+    {% if app.request.attributes.get('_route') != 'fos_user_security_login' and app.request.attributes.get('_route') != 'fos_user_registration_register' %}
+      {% set targetPath = app.request.uri %}
+    {% endif %}
     <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
-    <input type="hidden" name="_target_path" value="{{ app.request.uri}}">
+    <input type="hidden" name="_target_path" value="{{ targetPath }}">
 
     <label for="username" class="hide">{{ 'security.login.username'|trans }}</label>
     <input type="text" class="form-control input-sm" id="username" name="_username" required="required" placeholder="Username">
