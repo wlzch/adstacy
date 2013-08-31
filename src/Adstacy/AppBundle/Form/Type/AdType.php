@@ -12,7 +12,8 @@ class AdType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options = array())
     {
         $builder->add('image', 'image', array(
-            'label' => 'form_ad.image' 
+            'label' => 'form_ad.image',
+            'required' => true
         ));
         $builder->add('description', 'textarea', array(
             'label' => 'form_ad.description',
@@ -23,6 +24,7 @@ class AdType extends AbstractType
         ));
         $builder->add('content', 'textarea', array(
             'label' => 'form_ad.content',
+            'required' => false,
             'attr' => array(
                 'class' => 'tinymce'
             )
