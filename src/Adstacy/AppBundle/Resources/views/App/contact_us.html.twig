@@ -1,5 +1,17 @@
 {% extends 'AdstacyAppBundle::layout.html.twig' %}
 
+{% form_theme form _self %}
+
+{% block form_row %}
+  <div class="form-group">
+    {{ form_label(form, label, {label_attr: {class: 'control-label'} }) }}
+    <div class="control-widget">
+      {{ form_widget(form, {attr: {class: 'form-control'} }) }}
+      {{ form_errors(form, {attr: {class: 'alert alert-danger'} }) }}
+    </div>
+  </div>
+{% endblock %}
+
 {% block content %}
   <div class="main-container panel panel-default">
     <div class="panel-heading">
@@ -8,36 +20,16 @@
       </h1>
     </div>
 
-    {{ form_start(form, {attr: {class: 'form-horizontal panel-body', role: 'form'}}) }}
+    {{ form_start(form, {attr: {class: 'form-horizontal panel-body', role: 'form'} }) }}
       {{ form_errors(form) }}
 
-      <div class="form-group">
-        {{ form_label(form.subject, label|default(null), {label_attr: {class: 'control-label'}}) }}
-        <div class="control-widget">
-          {{ form_widget(form.subject, {attr: {class: 'form-control'}}) }}
-          {{ form_errors(form.subject, {attr: {class: 'alert alert-danger'}}) }}
-        </div>
-      </div>
-
-      <div class="form-group">
-        {{ form_label(form.email, label|default(null), {label_attr: {class: 'control-label'}}) }}
-        <div class="control-widget">
-          {{ form_widget(form.email, {attr: {class: 'form-control'}}) }}
-          {{ form_errors(form.email, {attr: {class: 'alert alert-danger'}}) }}
-        </div>
-      </div>
-
-      <div class="form-group">
-        {{ form_label(form.content, label|default(null), {label_attr: {class: 'control-label'}}) }}
-        <div class="control-widget">
-          {{ form_widget(form.content, {attr: {class: 'form-control'}}) }}
-          {{ form_errors(form.content, {attr: {class: 'alert alert-danger'}}) }}
-        </div>
-      </div>
+      {{ form_row(form.subject) }}
+      {{ form_row(form.email) }}
+      {{ form_row(form.content) }}
 
       <div class="form-group">
         <div class="control-widget offset-control-label">
-          {{ form_widget(form.submit, {attr: {class: 'btn btn-primary'}}) }}
+          {{ form_widget(form.submit, {attr: {class: 'btn btn-primary'} }) }}
         </div>
       </div>
 
