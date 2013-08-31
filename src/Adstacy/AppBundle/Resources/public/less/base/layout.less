@@ -23,55 +23,6 @@ body {
   }
 }
 
-.ad, .toolbar {
-  .btn-group > .btn-promote {
-    margin-left: 0;
-    margin-right: 1px;
-  }
-  .btn-promote {
-    width: 98px;
-  }
-  .btn-group > .btn-promote:not(:first-child):not(:last-child) {
-    .border-left-radius(@border-radius-small);
-  }
-  .promotes-count {
-    font-weight: bold;
-  }
-}
-
-.pic {
-  background-image: url('../img/diagonal-line.png');
-  border-radius: @border-radius-base @border-radius-base 0 0;
-  position: relative;
-
-  img {
-    background: url('../img/spinner.gif') no-repeat center center;
-    border-radius: @border-radius-small @border-radius-small 0 0;
-  }
-  .promoted-container {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 50px;
-    height: 50px;
-    #gradient > .directional(rgba(187,0,0,1) 50%, rgba(187,0,0,0) 0%, 225deg);
-  }
-  .promoted {
-    position: absolute;
-    top: 5px;
-    right: 8px;
-    color: #fff;
-  }
-}
-
-.desc {
-  border-top: 1px solid #ddd;
-  padding: 7px 14px;
-}
-
-
-// -------------------------------------------
-
 .form-container {
   margin: 0 auto;
   width: 400px;
@@ -293,30 +244,6 @@ ul.nav-expand {
     display: table-cell;
     vertical-align: top;
   }
-}
-
-.h-stack-pad {
-  border-spacing: 10px;
-}
-
-.inline-block {
-  font-size: 0;
-
-  .block-item {
-    font-size: initial;
-    display: inline-block;
-    vertical-align: top;
-  }
-
-  a.block-item {
-    line-height: 40px;
-    text-decoration: none;
-    text-align: center;
-  }
-}
-
-.btn-gray {
-  .button-variant(#fff; @gray; @gray);
 }
 
 // ----------------------

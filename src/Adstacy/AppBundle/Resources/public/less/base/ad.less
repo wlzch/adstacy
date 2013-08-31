@@ -35,3 +35,46 @@
     }
   }
 }
+
+.pic {
+  background-image: url('../img/diagonal-line.png');
+  border-radius: @border-radius-base @border-radius-base 0 0;
+  position: relative;
+
+  img {
+    background: url('../img/spinner.gif') no-repeat center center;
+    border-radius: @border-radius-small @border-radius-small 0 0;
+  }
+
+  .promoted-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    #gradient > .directional(rgba(187,0,0,1) 50%, rgba(187,0,0,0) 0%, 225deg);
+  }
+
+  .promoted {
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    color: #fff;
+  }
+}
+
+.ad, .toolbar {
+  .btn-group > .btn-promote {
+    margin-left: 0;
+    margin-right: 1px;
+  }
+  .btn-promote {
+    width: 98px;
+  }
+  .btn-group > .btn-promote:not(:first-child):not(:last-child) {
+    .border-left-radius(@border-radius-small);
+  }
+  .promotes-count {
+    font-weight: bold;
+  }
+}

@@ -1,9 +1,9 @@
 <div class="ad">
   <div class="pic">
     <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}">
-    <img class="lazy" src="{{ asset('bundles/adstacyapp/img/transparent.gif') }}"
-      data-original="{{ vich_uploader_asset(ad.image, 'file')|imagine_filter('thumbnail') }}"
-      width="{{ thumb_width }}px" height="{{ ad.thumbHeight }}px" alt="{{ ad.description }}">
+      <img class="lazy" src="{{ asset('bundles/adstacyapp/img/transparent.gif') }}"
+        data-original="{{ vich_uploader_asset(ad.image, 'file')|imagine_filter('thumbnail') }}"
+        width="{{ thumb_width }}px" height="{{ ad.thumbHeight }}px" alt="{{ ad.description }}">
     </a>
     {#
       There are 3 situations where promoted sign will appear:
@@ -23,9 +23,11 @@
       <span class="promoted"><i class="icon-bullhorn"></i></span>
     {% endif %}
   </div>
+
   <div class="ad-section">
     <p>{{ parse_url(parse_hashtag(ad.description)) }}</p>
   </div>
+
   <div class="ad-section ad-social">
     {% if app.user %}
       {% set promoted = app.user.hasPromote(ad) %}
@@ -55,6 +57,7 @@
       </ul>
     </div>
   </div>
+
   <a href="{{ path('adstacy_app_user_profile', {username: ad.user.username} ) }}" class="ad-section ad-user clearfix">
     {% include 'AdstacyAppBundle:User:user_mini.html.twig' with {user: ad.user, text: ago(ad.created), as_link: false} %}
   </a>
