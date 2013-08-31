@@ -54,7 +54,7 @@ class Ad
     private $thumbHeight;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="ads", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="ads", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
