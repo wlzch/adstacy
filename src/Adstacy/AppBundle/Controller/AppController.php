@@ -52,7 +52,7 @@ class AppController extends Controller
             ;
             $this->get('mailer')->send($message);
              
-            $this->addFlash('success', 'Your suggestions have already been emailed to our support team. We will response it soon. Thank you.');
+            $this->addFlash('success', $this->translate('flash.contact.success'));
 
             return $this->redirect($this->generateUrl('homepage'));
         }

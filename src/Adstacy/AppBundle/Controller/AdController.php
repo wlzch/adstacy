@@ -41,7 +41,7 @@ class AdController extends Controller
             $em = $this->getManager();
             $em->persist($ad);
             $em->flush();
-            $this->addFlash('success', 'You have successfully created your ads');
+            $this->addFlash('success', $this->translate('flash.ad.create.success'));
 
             return $this->redirect($this->generateUrl('adstacy_app_ad_show', array('id' => $ad->getId())));
         }
@@ -67,7 +67,7 @@ class AdController extends Controller
         $request = $this->getRequest();
 
         if ($ad->getUser() != $user) {
-            $this->addFlash('error', 'You can only edit your own ads');
+            $this->addFlash('error', $this->translate('flash.ad.edit.error_diff_user'));
             return $this->redirect($this->generateUrl('adstacy_app_ad_show', array('id' => $ad->getId())));
         }
         $form = $this->createForm(new AdType(), $ad);
@@ -77,7 +77,7 @@ class AdController extends Controller
             $em = $this->getManager();
             $em->persist($ad);
             $em->flush();
-            $this->addFlash('success', 'You have successfully edited your ads');
+            $this->addFlash('success', $this->translate('flash.ad.edit.success'));
 
             return $this->redirect($this->generateUrl('adstacy_app_ad_show', array('id' => $ad->getId())));
         }
@@ -102,7 +102,7 @@ class AdController extends Controller
         $adUser = $ad->getUser();
         $user = $this->getUser();
         if ($adUser != $user) {
-            $this->addFlash('error', 'You can only delete your own ads');
+            $this->addFlash('error', $this->translate('flash.ad.delete.error_diff_user'));
             return $this->redirect($this->generateUrl('adstacy_app_ad_show', array('id' => $ad->getId())));
         }
         $user->removeAd($ad);
@@ -110,7 +110,7 @@ class AdController extends Controller
         $em = $this->getManager();
         $em->remove($ad);
         $em->flush();
-        $this->addFlash('success', 'You have successfully deleted your ads');
+        $this->addFlash('success', $this->translate('flash.ad.delete.success'));
 
         return $this->redirect($this->generateUrl('adstacy_app_user_profile', array('username' => $user->getUsername())));
     }
@@ -135,12 +135,12 @@ class AdController extends Controller
             if ($request->isXmlHttpRequest()) {
                 return new JsonResponse(json_encode(array('id' => $ad->getId(), 'promotes_count' => $ad->getPromoteesCount())));
             }
-            $this->addFlash('success', 'You successfully promoted this ad');
+            $this->addFlash('success', $this->translate('flash.ad.promote.success'));
         } else {
             if ($request->isXmlHttpRequest()) {
-                return new JsonResponse(json_encode(array('error' => 'You have not promote this ad yet')));
+                return new JsonResponse(json_encode(array('error' => $this->translate('flash.ad.promote.error_twice'))));
             }
-            $this->addFlash('error', 'You may not promote this ad twice');
+            $this->addFlash('error', $this->translate('flash.ad.promote.error_twice'));
         }
 
         return $this->redirect($this->generateUrl('adstacy_app_ad_show', array('id' => $id)));
@@ -169,9 +169,9 @@ class AdController extends Controller
             $this->addFlash('success', 'You successfully unpromoted this ad');
         } else {
             if ($request->isXmlHttpRequest()) {
-                return new JsonResponse(json_encode(array('error' => 'You have not promote this ad yet')));
+                return new JsonResponse(json_encode(array('error' => $this->translate('flash.ad.unpromote.error_not_promote'))));
             }
-            $this->addFlash('error', 'You have not promote this ad yet');
+            $this->addFlash('error', $this->translate('flash.ad.unpromote.error_not_promote'));
         }
 
         return $this->redirect($this->generateUrl('adstacy_app_ad_show', array('id' => $id)));

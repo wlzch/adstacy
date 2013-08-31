@@ -30,9 +30,9 @@ class AccountController extends Controller
             $em->persist($user);
             $em->flush();
 
-            $this->addFlash('success', 'You have successfully disconnect your '.$service.' account');
+            $this->addFlash('success', $this->translate('flash.account.disconnect.success', array('%service%' => $service)));
         } else {
-            $this->addFlash('error', 'You have not connect your '.$service.' account yet');
+            $this->addFlash('error', $this->translate('flash.account.disconnect.error', array('%service%' => $service)));
         }
 
         return $this->redirect($this->generateUrl('fos_user_profile_edit'));

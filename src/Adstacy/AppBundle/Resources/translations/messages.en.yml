@@ -73,3 +73,35 @@ form_contact:
 form_password:
     submit: Change Password
     title: Change Password
+
+flash:
+    account:
+        disconnect:
+            success: You have successfully disconnect your %service% account
+            error: You have not connect your %service% account yet
+    ad:
+        create:
+            success: You have successfully created your ads
+        edit:
+            error_diff_user: You can only edit your own ads
+            success: You have successfully edited your ads
+        delete:
+            error_diff_user: You can only delete your own ads
+            success: You have successfully deleted your ads
+        promote:
+            success: You have successfully promoted this ad
+            error_twice: You may not promote this ad twice
+        unpromote:
+            success: You have successfully unpromoted this ad
+            error_not_promote: You have not promote this ad yet
+    contact:
+        success: Your suggestions have already been emailed to our support team. We will response it soon. Thank you.
+    user:
+        follow:
+            error_self: You may not follow yourself
+            error_followed: You have already followed %username%
+            success: You have successfully followed %username%
+        unfollow:
+            error_self: You may not unfollow yourself
+            error_not_followed: You have not followed %username%
+            success: You have successfully unfollowed %username%

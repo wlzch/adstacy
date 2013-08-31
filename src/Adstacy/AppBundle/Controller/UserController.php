@@ -101,16 +101,16 @@ class UserController extends Controller
         $loggedInUser = $this->getUser();
         if ($loggedInUser == $user) {
             if ($request->isXmlHttpRequest()) {
-                return new JsonResponse(json_encode(array('error' => 'You many not follow yourself')));
+                return new JsonResponse(json_encode(array('error' => $this->translate('flash.user.follow.error_self'))));
             }
-            $this->addFlash('error', 'You may not follow yourself');
+            $this->addFlash('error', $this->translate('flash.user.follow.error_self'));
         } else {
             if ($loggedInUser->hasFollowUser($user)) {
                 if ($request->isXmlHttpRequest()) {
-                    return new JsonResponse(json_encode(array('error' => 'You have already followed '.$username)));
+                    return new JsonResponse(json_encode(array('error' => $this->translate('flash.user.follow.error_followed', array('%username%' => $username)))));
                 }
 
-                $this->addFlash('error', 'You have already followed '.$username);
+                $this->addFlash('error', $this->translate('flash.user.follow.error_followed', array('%username%' => $username)));
             } else {
                 $user->addFollower($loggedInUser);
                 $em->persist($user);
@@ -120,7 +120,7 @@ class UserController extends Controller
                     return new JsonResponse(json_encode(array('username' => $username, 'followers_count' => $user->getFollowersCount())));
                 }
 
-                $this->addFlash('success', 'You have successfully followed '.$username);
+                $this->addFlash('success', $this->translate('flash.user.follow.success', array('%username%' => $username)));
             }
         }
 
@@ -144,16 +144,16 @@ class UserController extends Controller
         $loggedInUser = $this->getUser();
         if ($loggedInUser == $user) {
             if ($request->isXmlHttpRequest()) {
-                return new JsonResponse(json_encode(array('error' => 'You may not unfollow yourself')));
+                return new JsonResponse(json_encode(array('error' => $this->translate('flash.user.unfollow.error_self'))));
             }
-            $this->addFlash('error', 'You may not unfollow yourself');
+            $this->addFlash('error', $this->translate('flash.user.unfollow.error_self'));
         } else {
             if (!$loggedInUser->hasFollowUser($user)) {
                 if ($request->isXmlHttpRequest()) {
-                    return new JsonResponse(json_encode(array('error' => 'You have not followed '.$username)));
+                    return new JsonResponse(json_encode(array('error' => $this->translate('flash.user.unfollow.error_not_followed', array('%username%' => $username)))));
                 }
 
-                $this->addFlash('error', 'You have not followed '.$username);
+                $this->addFlash('error', $this->translate('flash.error.unfollow.error_not_followed', array('%username%' => $username)));
             } else {
                 $user->removeFollower($loggedInUser);
                 $em->persist($user);
@@ -163,7 +163,7 @@ class UserController extends Controller
                     return new JsonResponse(json_encode(array('username' => $username, 'followers_count' => $user->getFollowersCount())));
                 }
 
-                $this->addFlash('success', 'You have successfully unfollowed '.$username);
+                $this->addFlash('success', $this->translate('flash.user.unfollow.success', array('%username%' => $username)));
             }
         }
 

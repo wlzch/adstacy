@@ -85,4 +85,17 @@ class Controller extends BaseController
 
         return $paginator;
     }
+
+    /**
+     * Translate a message
+     *
+     * @param string keyword|word
+     * @param array replacements
+     *
+     * @return string translated message
+     */
+    public function translate($keyword, $replacements = array())
+    {
+        return $this->get('translator')->trans($keyword, $replacements);
+    }
 }
