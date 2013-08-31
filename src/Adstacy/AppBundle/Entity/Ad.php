@@ -19,7 +19,7 @@ class Ad
 
     /**
      * @Assert\Valid
-     * @Assert\NotNull(message="You must upload an image")
+     * @Assert\NotNull(message="ad.image.not_null")
      * @ORM\OneToOne(targetEntity="Image", cascade={"persist"}, fetch="EAGER")
      */
     private $image;
@@ -27,7 +27,7 @@ class Ad
     /**
      * @Assert\Length(
      *  max = "255",
-     *  maxMessage = "Ad description at most {{ limit }} characters"
+     *  maxMessage = "ad.description.max"
      * )
      * @ORM\COlumn(type="string", length=255)
      */

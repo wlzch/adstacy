@@ -1,0 +1,25 @@
+ad:
+    image:
+        not_null: You must upload an image
+    description:
+        max: Ad description at most {{ limit }} characters
+
+image:
+    file:
+        mime_types: Image must be of type png or jpg
+        min_width: Image width is too small({{ width }}px). Min width allowed is {{ min_width }}px
+
+user:
+    username:
+        not_blank: Username cannot be blank
+        min: Username minimal {{ limit }} characters
+        max: Username maximal {{ limit }} characters
+        valid: Username can only contains a-z0-9._
+    email:
+        not_blank: Email cannot be blank
+        email: Email is not valid
+    realname:
+        not_blank: Fullname cannot be blank
+    password:
+        not_blank: Password cannot be blank
+        min: Password requires at least {{ limit }} characters

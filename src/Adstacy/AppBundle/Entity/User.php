@@ -32,12 +32,12 @@ class User implements UserInterface, GroupableInterface
     protected $id;
 
     /**
-     * @Assert\NotBlank(message="Username cannot be blank", groups={"Registration", "Profile"})
+     * @Assert\NotBlank(message="user.username.not_blank", groups={"Registration", "Profile"})
      * @Assert\Length(
      *    min = 2,
      *    max = 100,
-     *    minMessage = "Username minimal {{ limit }} karakter",
-     *    maxMessage = "Username maksimal {{ limit }} karakter",
+     *    minMessage = "user.username.min",
+     *    maxMessage = "user.username.max",
      *    groups = {"Registration", "Profile"}
      *  )
      * @ORM\Column(type="string", length=100, nullable=false)
@@ -50,8 +50,8 @@ class User implements UserInterface, GroupableInterface
     protected $usernameCanonical;
 
     /**
-     * @Assert\NotBlank(message="Email cannot be blank", groups={"Registration", "Profile"})
-     * @Assert\Email(message="Email tidak valid", groups={"Registration", "Profile"})
+     * @Assert\NotBlank(message="user.email.not_blank", groups={"Registration", "Profile"})
+     * @Assert\Email(message="user.email.email", groups={"Registration", "Profile"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $email;
@@ -69,7 +69,7 @@ class User implements UserInterface, GroupableInterface
     protected $image;
 
     /**
-     * @Assert\NotBlank(message="Full name must not be blank")
+     * @Assert\NotBlank(message="user.realname.not_blank")
      * @ORM\Column(name="real_name", type="string", length=255)
      */
     protected $realName;
@@ -194,10 +194,10 @@ class User implements UserInterface, GroupableInterface
     protected $password;
 
     /**
-     * @Assert\NotBlank(message="Password cannot be blank", groups={"Registration", "ResetPassword", "ChangePassword"})
+     * @Assert\NotBlank(message="user.password.not_blank", groups={"Registration", "ResetPassword", "ChangePassword"})
      * @Assert\Length(
      *    min = 5,
-     *    minMessage = "Password requires at least {{ limit }} characters",
+     *    minMessage = "user.password.min",
      *    groups = {"Registration", "Profile", "ResetPassword", "ChangePassword"}
      * )
      * Plain password. Used for model validation. Must not be persisted.
@@ -926,7 +926,7 @@ class User implements UserInterface, GroupableInterface
    {
        if ($this->username && $this) {
            if (!preg_match('/^[a-zA-Z0-9\.\_]{1,}$/', $this->username)) { // for english chars + numbers only
-               $context->addViolationAt('username', 'Username can only contains a-z0-9._');
+               $context->addViolationAt('username', 'user.username.valid');
            }
        }
    }

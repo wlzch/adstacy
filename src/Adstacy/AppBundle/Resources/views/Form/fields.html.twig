@@ -4,7 +4,7 @@
 <input class="image-upload" type="file" {{ block('widget_attributes') }}>
 
 <div class="image-preview {{ image_size }}">
-  {% if image %}
+  {% if image and image.filename %}
     <img src="{{ vich_uploader_asset(image, 'file') }}" />
   {% else %}
     <img />  

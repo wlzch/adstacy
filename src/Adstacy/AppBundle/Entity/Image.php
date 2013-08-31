@@ -24,9 +24,9 @@ class Image
      * @Assert\Image(
      *    maxSize = "1M",
      *    mimeTypes = {"image/png", "image/jpeg", "image/pjpeg"},
-     *    minWidth = 240,
-     *    mimeTypesMessage = "Image must be type of png or jpg",
-     *    minWidthMessage = "Image width is too small({{ width }}px). Min width allowed is {{ min_width }}px"
+     *    minWidth = 236,
+     *    mimeTypesMessage = "image.file.mime_types",
+     *    minWidthMessage = "image.file.min_width"
      * )
      * @Vich\UploadableField(mapping="image", fileNameProperty="filename")
      */
