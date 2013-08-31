@@ -1,5 +1,46 @@
 {% extends 'AdstacyAppBundle::layout.html.twig' %}
 
 {% block content %}
-  {{ form(form) }}
+  <div class="main-container panel panel-default">
+    <div class="panel-heading">
+      <h1>
+        <span aria-hidden="true" class="icon-envelope-alt"></span> Contact Us
+      </h1>
+    </div>
+
+    {{ form_start(form, {attr: {class: 'form-horizontal panel-body', role: 'form'}}) }}
+      {{ form_errors(form) }}
+
+      <div class="form-group">
+        {{ form_label(form.subject, label|default(null), {label_attr: {class: 'control-label'}}) }}
+        <div class="control-widget">
+          {{ form_widget(form.subject, {attr: {class: 'form-control'}}) }}
+          {{ form_errors(form.subject, {attr: {class: 'alert alert-danger'}}) }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        {{ form_label(form.email, label|default(null), {label_attr: {class: 'control-label'}}) }}
+        <div class="control-widget">
+          {{ form_widget(form.email, {attr: {class: 'form-control'}}) }}
+          {{ form_errors(form.email, {attr: {class: 'alert alert-danger'}}) }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        {{ form_label(form.content, label|default(null), {label_attr: {class: 'control-label'}}) }}
+        <div class="control-widget">
+          {{ form_widget(form.content, {attr: {class: 'form-control'}}) }}
+          {{ form_errors(form.content, {attr: {class: 'alert alert-danger'}}) }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="control-widget offset-control-label">
+          {{ form_widget(form.submit, {attr: {class: 'btn btn-primary'}}) }}
+        </div>
+      </div>
+
+    {{ form_end(form) }}
+  </div>
 {% endblock %}

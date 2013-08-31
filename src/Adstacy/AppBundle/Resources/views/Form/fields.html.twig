@@ -5,9 +5,9 @@
 
 <div class="image-preview {{ image_size }}">
   {% if image and image.filename %}
-    <img src="{{ vich_uploader_asset(image, 'file') }}" />
+    <img src="{{ vich_uploader_asset(image, 'file') }}">
   {% else %}
-    <img />  
+    <img>
   {% endif %}
 </div>
 
