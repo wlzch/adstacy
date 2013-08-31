@@ -12,7 +12,10 @@
 {% block content %}
   <div class="form-container panel panel-default">
     <form class="form-horizontal" role="form" action="{{ path("fos_user_security_check") }}" method="post">
-      <h1>Login</h1>
+      <h1>
+        <span aria-hidden="true" class="icon-signin"></span>
+        Login
+      </h1>
 
       <div class="ads-form-section">
         {% for owner in hwi_oauth_resource_owners() %}
