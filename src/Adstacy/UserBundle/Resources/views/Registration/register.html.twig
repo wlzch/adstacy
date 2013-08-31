@@ -1,13 +1,32 @@
 {% extends 'AdstacyAppBundle::layout.html.twig' %}
 
+{% form_theme form _self %}
+
+{% block form_row %}
+  <div class="form-group">
+    {{ form_label(form, label, {label_attr: {class: 'hide'} }) }}
+    {{ form_widget(form, {attr: {class: 'form-control input-lg'} }) }}
+    {{ form_errors(form, {attr: {class: 'alert alert-danger'} }) }}
+  </div>
+{% endblock %}
+
 {% block content %}
-  <div class="form-container panel panel-default" style="padding: 20px;">
-    <h1>{{"form_registration.title"|trans}}</h1>
-    {{ form_start(form) }}
-      {% set submit = form_row(form.register) %}
-      {{ form_rest(form) }}
-      <p>{{"form_registration.agreement"|trans({'%terms_url%': path('adstacy_app_page_show', {key: 'terms'}), '%privacy_url%': path('adstacy_app_page_show', {key: 'privacy-policy'}) })|raw}}</p>
-      {{ submit|raw }}
+  <div class="form-container panel panel-default">
+    <div class="panel-heading">
+      <h1>{{ "form_registration.title"|trans }}</h1>
+    </div>
+
+    {{ form_start(form, {attr: {class: 'panel-body', role: 'form'} }) }}
+      {{ form_errors(form) }}
+
+      {{ form_row(form.email) }}
+      {{ form_row(form.username) }}
+      {{ form_row(form.realName) }}
+      {{ form_row(form.plainPassword) }}
+      <p>{{ "form_registration.agreement"|trans({'%terms_url%': path('adstacy_app_page_show', {key: 'terms'}),
+        '%privacy_url%': path('adstacy_app_page_show', {key: 'privacy-policy'}) })|raw }}</p>
+      {{ form_widget(form.register, {attr: {class: 'btn btn-primary btn-lg btn-block'} }) }}
+
     {{ form_end(form) }}
   </div>
 {% endblock %}
