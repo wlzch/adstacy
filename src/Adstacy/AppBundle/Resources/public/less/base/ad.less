@@ -1,0 +1,37 @@
+.ad {
+  width: 236px;
+  margin: 14px 7px 0 7px;
+  background-color: #fff;
+  border-radius: @border-radius-base;
+  box-shadow: 0 1px 6px #000;
+
+  > .ad-section {
+    padding: 5px 10px;
+
+    > p {
+      font-size: 13px;
+      margin: 0;
+    }
+  }
+
+  > .ad-social {
+    white-space: nowrap;
+  }
+
+  .ad-social-list a {
+    color: @gray-light;
+    font-size: @font-size-small;
+    font-weight: bold;
+  }
+
+  a.ad-user {
+    margin-top: 5px;
+    display: block;
+    border-top: 1px solid @border-color;
+    border-radius: 0 0 @border-radius-base @border-radius-base;
+
+    &:hover {
+      background-color: @gray-lighter;
+    }
+  }
+}

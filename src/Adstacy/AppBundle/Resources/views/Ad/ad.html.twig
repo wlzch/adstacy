@@ -23,39 +23,39 @@
       <span class="promoted"><i class="icon-bullhorn"></i></span>
     {% endif %}
   </div>
-  <div class="ad-desc">
-    <div class="desc">
-      <p>{{ parse_url(parse_hashtag(ad.description)) }}</p>
-    </div>
-    <div class="share-container">
-      {% if app.user %}
-        {% set promoted = app.user.hasPromote(ad) %}
-        <div class="btn-group btn-group-sm">
-          <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-primary btn-promote unpromote {% if not promoted %}hide{% endif %}"><span class="icon-bullhorn"></span> Unpromote</a>
-          <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-primary btn-promote promote {% if promoted %}hide{% endif %}"><span class="icon-bullhorn"></span> Promote</a>
-          <button type="button" class="btn btn-default promotes-count">{{ ad.promoteesCount }}</button>
-        </div>
-      {% else %}
-        <button class="btn btn-default btn-sm">{{ ad.promoteesCount }} promotes</button>
-      {% endif %}
-      <div class="btn-group btn-group-sm">
-        <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-          <span class="icon-share"> Share</span>
-        </a>
-        <ul class="social-list dropdown-menu" role="menu">
-          <li>
-            <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}" class="facebook-share">
-              <span aria-hidden="true" data-icon="&#xe003;"></span> Facebook
-            </a>
-            <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}" class="tweet" data-via="adstacy" data-text="{{ ad.description }}">
-              <span aria-hidden="true" data-icon="&#xe002;" class="twitter-share"></span> Twitter
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <a href="{{ path('adstacy_app_user_profile', {username: ad.user.username} ) }}" class="ad-user clearfix border-top">
-      {% include 'AdstacyAppBundle:User:user_mini.html.twig' with {user: ad.user, text: ago(ad.created), as_link: false} %}
-    </a>
+  <div class="ad-section">
+    <p>{{ parse_url(parse_hashtag(ad.description)) }}</p>
   </div>
+  <div class="ad-section ad-social">
+    {% if app.user %}
+      {% set promoted = app.user.hasPromote(ad) %}
+      <div class="btn-group btn-group-sm">
+        <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-primary btn-promote unpromote {% if not promoted %}hide{% endif %}"><span class="icon-bullhorn"></span> Unpromote</a>
+        <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-primary btn-promote promote {% if promoted %}hide{% endif %}"><span class="icon-bullhorn"></span> Promote</a>
+        <span class="btn btn-default promotes-count">{{ ad.promoteesCount }}</span>
+      </div>
+    {% else %}
+      <span class="btn btn-default btn-sm">{{ ad.promoteesCount }} promotes</span>
+    {% endif %}
+    <div class="btn-group btn-group-sm">
+      <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        <span aria-hidden="true" class="icon-share"></span> Share
+      </a>
+      <ul class="ad-social-list dropdown-menu" role="menu">
+        <li>
+          <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}" class="facebook-share">
+            <span aria-hidden="true" data-icon="&#xe003;"></span> Facebook
+          </a>
+        </li>
+        <li>
+          <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}" class="tweet" data-via="adstacy" data-text="{{ ad.description }}">
+            <span aria-hidden="true" data-icon="&#xe002;" class="twitter-share"></span> Twitter
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <a href="{{ path('adstacy_app_user_profile', {username: ad.user.username} ) }}" class="ad-section ad-user clearfix">
+    {% include 'AdstacyAppBundle:User:user_mini.html.twig' with {user: ad.user, text: ago(ad.created), as_link: false} %}
+  </a>
 </div>

@@ -2,6 +2,10 @@ body {
   padding-top: 70px;
 }
 
+.body {
+  margin-bottom: 14px;
+}
+
 .masonry, .adstacy-container {
   margin: auto;
 }
@@ -19,63 +23,13 @@ body {
   }
 }
 
-.body {
-  margin-bottom: 14px;
-}
-
-
-.ad {
-  width: 236px;
-  margin: 14px 7px 0 7px;
-  background-color: #fff;
-  border-radius: @border-radius-base;
-  box-shadow: 0 1px 6px #000;
-
-  .share-container {
-    padding: 0 10px 5px 10px;
-  }
-
-  .social-list {
-    a {
-      color: #888;
-      font-size: 12px;
-      font-weight: bold;
-      padding: 3px 10px;
-    }
-  }
-
-  .box-medium {
-    width: 150px;
-  }
-  .box-large {
-    width: 236px;
-  }
-  .inline-block a {
-    padding: 5px;
-  }
-  a.ad-user {
-    margin-top: 5px;
-    display: block;
-    padding: 5px;
-    border-top: 1px solid @border-color;
-    border-radius: 0 0 @border-radius-base @border-radius-base;
-    &:hover {
-      background-color: @gray-lighter;
-    }
-  }
-  p {
-    margin: 0;
-    font-size: 13px;
-  }
-}
-
 .ad, .toolbar {
   .btn-group > .btn-promote {
     margin-left: 0;
     margin-right: 1px;
   }
   .btn-promote {
-    width: 110px;
+    width: 98px;
   }
   .btn-group > .btn-promote:not(:first-child):not(:last-child) {
     .border-left-radius(@border-radius-small);
@@ -511,7 +465,7 @@ ul.nav-expand {
 
 @media screen and (max-width: @screen-tablet) {
   #btn-navbar-expand, #search-bar, .ad-detail-container, .settings-container {
-    width: 100% !important; 
+    width: 100% !important;
   }
   #search-bar {
     margin-left: 0;

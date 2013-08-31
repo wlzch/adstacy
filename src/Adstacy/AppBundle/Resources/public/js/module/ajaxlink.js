@@ -29,7 +29,7 @@
       var settings = types[type];
       var $parent = $(this);
       var size = settings.image_size || options.image_size;
-      var loading = '<img src="/bundles/adstacyapp/img/spinner.gif" width="'+size+'" height="'+size+'" />';
+      var loading = '<img src="/bundles/adstacyapp/img/spinner.gif" width="'+size+'" height="'+size+'">';
 
       $parent.find(settings.firstSelector+','+settings.secondSelector).click(function(event) {
         var $this = $(this);

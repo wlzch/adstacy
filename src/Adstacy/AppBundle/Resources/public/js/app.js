@@ -54,7 +54,7 @@
     $btnNavbarExpand_span.addClass('icon-chevron-down');
     $navbarExpandContainer.addClass('hide');
   });
-  $('.ad-desc').ajaxlink('ads');
+  $('.ad-social').ajaxlink('ads');
   $('[data-toggle=tooltip]').tooltip({
     container: "body"
   });
