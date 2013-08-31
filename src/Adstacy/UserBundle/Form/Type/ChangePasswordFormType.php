@@ -45,7 +45,7 @@ class ChangePasswordFormType extends AbstractType
             'second_name' => 'newPasswordConfirmation'
         ));
         $builder->add('save', 'submit', array(
-            'label' => 'Change Password'
+            'label' => 'form_password.submit'
         ));
     }
 

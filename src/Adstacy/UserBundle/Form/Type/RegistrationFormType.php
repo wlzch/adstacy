@@ -55,7 +55,7 @@ class RegistrationFormType extends AbstractType
                 )
             ))
             ->add('realName', 'text', array(
-                'label' => 'Fullname',
+                'label' => 'form_registration.fullname',
                 'required' => true,
                 'attr' => array(
                     'class' => 'form-control input-lg',
@@ -95,7 +95,7 @@ class RegistrationFormType extends AbstractType
                 'invalid_message' => 'fos_user.password.mismatch',
             ))
             ->add('register', 'submit', array(
-                'label' => 'Register',
+                'label' => 'form_registration.submit',
                 'attr' => array(
                     'class' => 'btn btn-primary btn-block btn-lg'
                 )

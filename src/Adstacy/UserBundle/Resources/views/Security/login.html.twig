@@ -1,7 +1,5 @@
 {% extends 'AdstacyAppBundle::layout.html.twig' %}
 
-{% trans_default_domain 'FOSUserBundle' %}
-
 {% block stylesheets %}
   {{ parent() }}
   {% stylesheets filter='cssrewrite, uglifycss'
@@ -48,10 +46,10 @@
 
       <div class="ads-form-section">
         <div>
-          <a href="{{ path('fos_user_registration_register') }}">Register new account</a>
+          <a href="{{ path('fos_user_registration_register') }}">{{"register"|trans}}</a>
         <div>
         <div>
-          <a href="{{ path('fos_user_resetting_request') }}">Forgot password?</a>
+          <a href="{{ path('fos_user_resetting_request') }}">{{"forgot_password"|trans}}</a>
         </div>
       </div>
     </form>

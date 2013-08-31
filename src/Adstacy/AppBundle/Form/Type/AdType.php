@@ -12,23 +12,23 @@ class AdType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options = array())
     {
         $builder->add('image', 'image', array(
-            'label' => 'Image' 
+            'label' => 'form_ad.image' 
         ));
         $builder->add('description', 'textarea', array(
-            'label' => 'Description',
+            'label' => 'form_ad.description',
             'attr' => array(
                 'class' => 'form-control',
                 'placeholder' => 'Adstacy T-Shirt Rp250.000 #branded #tshirt #medan #cool'
             )
         ));
         $builder->add('content', 'textarea', array(
-            'label' => 'Content',
+            'label' => 'form_ad.content',
             'attr' => array(
                 'class' => 'tinymce'
             )
         ));
         $builder->add('save', 'submit', array(
-            'label' => 'Save'
+            'label' => 'form_ad.submit'
         ));
     }
 

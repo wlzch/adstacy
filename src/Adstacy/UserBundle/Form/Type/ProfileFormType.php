@@ -21,27 +21,27 @@ class ProfileFormType extends BaseType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('image', 'image', array(
-            'label' => 'Profile Picture',
+            'label' => 'form_profile.profile_picture',
             'required' => false,
             'image_size' => 'small'
         ));
         parent::buildUserForm($builder, $options);
         $builder->add('realName', 'text', array(
-            'label' => 'Fullname',
+            'label' => 'form_profile.fullname',
             'required' => 'required',
             'attr' => array(
                 'placeholder' => 'Adstacy'
             )
         ));
         $builder->add('about', 'textarea', array(
-            'label' => 'About Me',
+            'label' => 'form_profile.about_me',
             'required' => false,
             'attr' => array(
                 'placeholder' => 'A men fashion enthusiasts. Contact 08XXXXXXXXXX. BB 2BXXXX. Medan.'
             )
         ));
         $builder->add('save', 'submit', array(
-            'label' => 'Save'
+            'label' => 'form_profile.submit'
         ));
     }
 

@@ -1,7 +1,5 @@
 {% extends 'AdstacyAppBundle::layout.html.twig' %}
 
-{% trans_default_domain 'FOSUserBundle' %}
-
 {% block stylesheets %}
   {{ parent() }}
   {% stylesheets filter='cssrewrite, uglifycss'
@@ -36,7 +34,7 @@
       <div class="form-group">
         <label class="control-label">Password</label>
         <div class="form-widget">
-          <a href="{{ path('fos_user_change_password') }}">change password</a>
+          <a href="{{ path('fos_user_change_password') }}">{{"form_profile.change_password"|trans}}</a>
         </div>
       </div>
 
@@ -71,7 +69,7 @@
       <div class="form-group">
         <label class="control-label">&nbsp;</label>
         <div class="form-widget">
-          <a href="{{ path('fos_user_resetting_request') }}">forgot your password?</a>
+          <a href="{{ path('fos_user_resetting_request') }}">{{"form_profile.forgot_password"|trans}}</a>
         </div>
       </div>
 
@@ -87,9 +85,9 @@
         <label class="control-label">Status</label>
         <div class="form-widget">
           {% if user.facebookId %}
-            <p>Connected to {{ user.facebookRealName }}</p>
+            <p>{{"form_profile.connected"|trans({'%name%': user.facebookRealName})}}</p>
           {% else %}
-            <p>Not Connected</p>
+            <p>{{"form_profile.not_connected"|trans}}</p>
           {% endif %}
         </div>
       </div>
@@ -97,9 +95,9 @@
         <label class="control-label">&nbsp;</label>
         <div class="form-widget">
           {% if user.facebookId %}
-            <a href="{{ path('adstacy_app_user_disconnect', {service: 'facebook'}) }}" class="btn btn-facebook">Disconnect Facebook Account</a>
+            <a href="{{ path('adstacy_app_user_disconnect', {service: 'facebook'}) }}" class="btn btn-facebook">{{"form_profile.disconnect"|trans({'%service%': 'Facebook'}) }}</a>
           {% else %}
-            <a href="{{ path('hwi_oauth_service_redirect', {service: 'facebook'}) }}" class="btn btn-facebook">Connect with Facebook</a>
+            <a href="{{ path('hwi_oauth_service_redirect', {service: 'facebook'}) }}" class="btn btn-facebook">{{"form_profile.connect"|trans({'%service%': 'Facebook'}) }}</a>
           {% endif %}
         </div>
       </div>
@@ -113,9 +111,9 @@
         <label class="control-label">Status</label>
         <div class="form-widget">
           {% if user.twitterId %}
-          <p>Connected to {{ user.twitterRealName }}</p>
+            <p>{{"form_profile.connected"|trans({'%name%': user.twitterRealName}) }}</p>
           {% else %}
-          <p>Not Connected</p>
+            <p>{{"form_profile.not_connected"|trans}}</p>
           {% endif %}
         </div>
       </div>
@@ -123,9 +121,9 @@
         <label class="control-label">&nbsp;</label>
         <div class="form-widget">
           {% if user.twitterId %}
-            <a href="{{ path('adstacy_app_user_disconnect', {service: 'twitter'}) }}" class="btn btn-twitter">Disconnect Twitter Account</a>
+            <a href="{{ path('adstacy_app_user_disconnect', {service: 'twitter'}) }}" class="btn btn-twitter">{{"form_profile.disconnect"|trans({'%service%': 'Twitter'}) }}</a>
           {% else %}
-            <a href="{{ path('hwi_oauth_service_redirect', {service: 'twitter'}) }}" class="btn btn-twitter">Connect with Twitter</a>
+            <a href="{{ path('hwi_oauth_service_redirect', {service: 'twitter'}) }}" class="btn btn-twitter">{{"form_profile.connect"|trans({'%service%': 'Twitter'}) }}</a>
           {% endif %}
         </div>
       </div>
