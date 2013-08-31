@@ -9,9 +9,9 @@ adstacy_app_stream:
         _controller: AdstacyAppBundle:App:stream
 
 adstacy_app_contact:
-    pattern: /contact
+    pattern: /contact-us
     defaults:
-        _controller: AdstacyAppBundle:App:contact
+        _controller: AdstacyAppBundle:App:contactUs
 
 adstacy_app_page_show:
     pattern: /pages/{key}

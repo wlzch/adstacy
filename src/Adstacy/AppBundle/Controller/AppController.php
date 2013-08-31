@@ -37,7 +37,7 @@ class AppController extends Controller
         ));
     }
 
-    public function contactAction()
+    public function contactUsAction()
     {
         $contact = new Contact();
         $form = $this->createForm(new ContactType(), $contact);
@@ -57,7 +57,7 @@ class AppController extends Controller
             return $this->redirect($this->generateUrl('homepage'));
         }
 
-        return $this->render('AdstacyAppBundle:App:contact.html.twig', array(
+        return $this->render('AdstacyAppBundle:App:contact_us.html.twig', array(
             'form' => $form->createView()
         ));
     }
