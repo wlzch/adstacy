@@ -16,7 +16,7 @@
 
       <div class="ads-form-section">
         {% for owner in hwi_oauth_resource_owners() %}
-          <a class="btn btn-block btn-lg btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">login with {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
+          <a class="btn btn-block btn-lg btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">Login with {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
         {% endfor %}
       </div>
 
@@ -32,15 +32,15 @@
         <div class="h-stack">
           <div class="stack-item w5">
             <input type="checkbox" id="_remember_me" name="_remember_me" value="on">
-            <label for="_remember_me">{{ 'security.login.remember_me'|trans }}</label>
+            <label for="_remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
           </div>
           <div class="stack-item w5">
-            <input type="submit" class="btn btn-primary btn-lg pull-right" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}">
+            <input type="submit" class="btn btn-primary btn-lg pull-right" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}">
           </div>
         </div>
 
         {% if error %}
-          <div class="alert alert-danger">{{ "security.login.failed"|trans }}</div>
+          <div class="alert alert-danger">{{ "security.login.failed"|trans({}, 'FOSUserBundle') }}</div>
         {% endif %}
       </div>
 
