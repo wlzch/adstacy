@@ -12,7 +12,9 @@
         <div class="meta-area">
           {{ form_row(form.description) }}
 
+          <div id="create-ad-content">
           {{ form_row(form.content) }}
+          </div>
 
           {{ form_widget(form.save, {attr: {class: 'form-control btn btn-primary'}}) }}
 
