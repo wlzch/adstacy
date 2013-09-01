@@ -32,8 +32,12 @@
     {% if app.user %}
       {% set promoted = app.user.hasPromote(ad) %}
       <div class="btn-group btn-group-sm">
-        <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-primary btn-promote unpromote {% if not promoted %}hide{% endif %}"><span class="icon-bullhorn"></span> Unpromote</a>
-        <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-primary btn-promote promote {% if promoted %}hide{% endif %}"><span class="icon-bullhorn"></span> Promote</a>
+        <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-primary btn-promote unpromote {% if not promoted %}hide{% endif %}">
+          <span aria-hidden="true" data-icon="&#xe008;"></span> Unpromote
+        </a>
+        <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-primary btn-promote promote {% if promoted %}hide{% endif %}">
+          <span aria-hidden="true" data-icon="&#xe007;"></span> Promote
+        </a>
         <span class="btn btn-default promotes-count">{{ ad.promoteesCount }}</span>
       </div>
     {% else %}
