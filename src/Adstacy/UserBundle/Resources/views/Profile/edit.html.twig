@@ -11,8 +11,8 @@
 
 {% block content %}
 <div class="settings-container panel panel-default">
-  <section class="settings-section">
-    <h1>User Info</h1>
+  <section class="panel-section">
+    <h1 class="title">User Info</h1>
     {{ form_start(form, { attr: { class: 'form-horizontal', role: 'form' } }) }}
       {% set user = form.vars.data %}
 
@@ -78,8 +78,8 @@
     {{ form_end(form) }}
   </section>
 
-  <section class="settings-section">
-    <h1>Facebook Connect</h1>
+  <section class="panel-section">
+    <h1 class="title">Facebook Connect</h1>
     <div class="form-horizontal">
       <div class="form-group">
         <label class="control-label">Status</label>
@@ -104,8 +104,8 @@
     </div>
   </section>
 
-  <section class="settings-section">
-    <h1>Twitter Connect</h1>
+  <section class="panel-section">
+    <h1 class="title">Twitter Connect</h1>
     <div class="form-horizontal">
       <div class="form-group">
         <label class="control-label">Status</label>
