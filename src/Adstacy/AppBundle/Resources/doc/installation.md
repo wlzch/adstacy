@@ -14,8 +14,9 @@ Instalasi membutuhkan beberapa langkah:
 4.  Install less
 5.  Setting virtual host dan environment variables
 6.  Update package composer
-7.  Command
-8.  Test
+7.  Update parameters.yml
+8.  Command
+9.  Test
 
 ## Langkah 1: Clone adstacy.git
 Download project Adstacy dengan perintah `git clone https://bitbucket.org/wlzch/adstacy.git` kemudian masuk ke folder tersebut
@@ -39,7 +40,7 @@ Jalankan perintah `npm install` untuk menginstall uglifyjs dan uglifycss
 ## Langkah 5: Install less
 Jalankan perintah `npm install -g less` untuk menginstall coffeescript dan less
 
-## Langkah 6: Setting virtual host dan environment variables
+## Langkah 6: Setting virtual host 
 Buka file konfigurasi apache (httpd.conf atau 000-default) dan masukkan konfigurasi sebagai berikut
 
 ```apache
@@ -68,14 +69,6 @@ NameVirtualHost *:80
     DocumentRoot /path/to/adstacy/web
     ServerName adstacy.dev
     DirectoryIndex app.php
-    SetEnv SYMFONY__DATABASE__HOST host_database
-    SetEnv SYMFONY__DATABASE__NAME nama_database
-    SetEnv SYMFONY__DATABASE__USER username_database
-    SetEnv SYMFONY__DATABASE__PASSWORD password_database
-    SetEnv SYMFONY__NODE__PATH /usr/local/bin/node
-    SetEnv SYMFONY__NODE__MODULES_PATH /usr/local/lib/node_modules
-    SetEnv SYMFONY__COFFEE__PATH /usr/local/bin/coffee
-
     <Directory "/path/to/adstacy/web">
         AllowOverride All
         allow from all
@@ -83,24 +76,33 @@ NameVirtualHost *:80
 </VirtualHost>
 ```
 
-Kemudian buka file .bashrc dan masukkan script berikut:
-
-``` sh
-export SYMFONY__DATABASE__HOST=host_database
-export SYMFONY__DATABASE__NAME=nama_database
-export SYMFONY__DATABASE__USER=username_database
-export SYMFONY__DATABASE__PASSWORD=password_database
-export SYMFONY__MAIL__HOST=mail_host
-export SYMFONY__MAIL__USER=mail_user
-export SYMFONY__MAIL__PASSWORD=mail_pass
-export SYMFONY__NODE__PATH="/usr/local/bin/node"
-export SYMFONY__NODE__MODULES_PATH="/usr/local/lib/node_modules"
-export SYMFONY__COFFEE__PATH="/usr/local/bin/coffee"
-```
-
 buka file /etc/hosts dan tambahkan `127.0.0.1 adstacy.dev`. Kemudian restart apache.
 
-## Langkah 7: Command
+## Langkah 7: Update parameters.yml
+Copy file parameters.yml.dist ke parameters.yml kemudian sesuaikan settingan dengan settingan mesin masing-masing
+
+```yml
+parameters:
+    database_driver:   pdo_mysql
+    database_host:     localhost
+    database_port:     null
+    database_name:     adstacy
+    database_user:     adstacy
+    database_password: adstacy
+
+    mailer_transport:  smtp
+    mailer_host:       localhost
+    mailer_user:       ~
+    mailer_password:   ~
+
+    node_path:         "/usr/local/bin/node"
+    node_modules_path: "/usr/local/lib/node_modules"
+
+    locale:            en
+    secret:            ThisTokenIsNotSoSecretChangeIt
+```
+
+## Langkah 8: Command
 Jalankan perintah `php app/console doctrine:database:create` untuk membuat database
 
 Jalankan perintah `php app/console doctrine:migrations:migrate` untuk mengupdate skema tabel ke database
@@ -113,5 +115,5 @@ Jalankan perintah `php app/console fos:elastica:populate` untuk mengpopulate dat
 
 Jalankan perintah `php app/console fos:js-routing:dump` untuk dump routing pada javascript
 
-## Langkah 8: Test
+## Langkah 9: Test
 Buka http://adstacy.dev/app_dev.php dan pastikan website bekerja dengan baik.

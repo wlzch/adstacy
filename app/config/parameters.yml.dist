@@ -1,15 +1,18 @@
 parameters:
-    database_driver:   pdo_mysql
-    database_host:     127.0.0.1
-    database_port:     ~
-    database_name:     symfony
-    database_user:     root
-    database_password: ~
+    database_driver:   pdo_pgsql
+    database_host:     localhost
+    database_port:     null
+    database_name:     adstacy
+    database_user:     adstacy
+    database_password: adstacy
 
     mailer_transport:  smtp
-    mailer_host:       127.0.0.1
+    mailer_host:       localhost
     mailer_user:       ~
     mailer_password:   ~
+
+    node_path:         "/usr/local/bin/node"
+    node_modules_path: "/usr/local/lib/node_modules"
 
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
