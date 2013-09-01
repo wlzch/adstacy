@@ -1,14 +1,5 @@
 {% extends 'AdstacyAppBundle::layout.html.twig' %}
 
-{% block stylesheets %}
-  {{ parent() }}
-  {% stylesheets filter='cssrewrite, uglifycss'
-    'bundles/adstacyuser/less/settings.less'
-  %}
-    <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
-  {% endstylesheets %}
-{% endblock %}
-
 {% block content %}
 <div class="settings-container panel panel-default">
   <section class="panel-section">
