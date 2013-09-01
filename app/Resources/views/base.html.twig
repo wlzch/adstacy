@@ -77,7 +77,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="{{ path('homepage') }}" title="Adstacy"><img src="{{ asset('bundles/adstacyapp/img/logo.png') }}" alt="Adstacy" /></a>
+              <a class="navbar-brand" href="{{ path('homepage') }}" title="Adstacy">
+                <img src="{{ asset('bundles/adstacyapp/img/logo.png') }}" alt="Adstacy">
+              </a>
             </div>
 
             <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -88,12 +90,14 @@
                   </a>
                 </li>
               </ul>
+
               <form id="form-search" action="{{ path('adstacy_app_search') }}" class="navbar-form navbar-left" style="position: relative;" role="search">
-                <input id="search-bar" type="text" class="form-control" placeholder="{{"search"|trans}}" name="q" value="{{ app.request.query.get('q') }}" >
+                <input id="search-bar" type="text" class="form-control" placeholder="{{"search"|trans}}" name="q" value="{{ app.request.query.get('q') }}">
                 <button type="submit" class="search-btn">
                   <span aria-hidden="true" class="icon-search"></span>
                 </button>
               </form>
+
               <ul class="nav navbar-nav navbar-right">
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                   <li>
@@ -104,7 +108,8 @@
                   <li id="user-dropdown">
                     <div class="btn-group navbar-btn">
                       <button type="button" class="btn btn-default btn-user dropdown-toggle" data-toggle="dropdown">
-                        <img class="mini-profpic" src="{{ profile_pic(app.user) }}" alt="{{ app.user.username }}" /><span class="username-label">{{ app.user.username }}</span>
+                        <img class="mini-profpic" src="{{ profile_pic(app.user) }}" alt="{{ app.user.username }}">
+                        <span class="username-label">{{ app.user.username }}</span>
                       </button>
                       <ul class="dropdown-menu" role="menu">
                         <li><a href="{{ path('adstacy_app_stream') }}">{{"stream"|trans}}</a></li>
@@ -116,19 +121,28 @@
                   </li>
                 {% else %}
                   <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{"login"|trans}}<b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      {{"login"|trans}} <b class="caret"></b>
+                    </a>
                     <ul class="dropdown-menu dropdown-container">
-                      <li class="user-login">
+                      <li>
                         {{ form_login() }}
                       </li>
-                      <li class="social-login">
-                        {% for owner in hwi_oauth_resource_owners() %}
-                        <a class="btn btn-primary btn-block btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{"login.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
-                        {% endfor %}
-                      </li>
+                      <li class="divider"></li>
                       <li>
-                        <a href="{{ path('fos_user_registration_register') }}">{{"register"|trans}}</a>
-                        <a href="{{ path('fos_user_resetting_request') }}">{{"forgot_password"|trans}}</a>
+                        <p>
+                          {% for owner in hwi_oauth_resource_owners() %}
+                            <a class="btn btn-block btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{"login.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
+                          {% endfor %}
+                        </p>
+                      </li>
+                      <li class="divider"></li>
+                      <li>
+                        <p>
+                          <a href="{{ path('fos_user_registration_register') }}">{{"register"|trans}}</a>
+                          <br>
+                          <a href="{{ path('fos_user_resetting_request') }}">{{"forgot_password"|trans}}</a>
+                        </p>
                       </li>
                     </ul>
                   </li>
@@ -136,6 +150,7 @@
               </ul>
             </div>
           </div>
+
           <div id="navbar-expand-container" class="hide">
             <ul class="adstacy-container nav-expand">
               <li class="hot-category"><a href="{{ path('homepage') }}" title="Home">Home</a></li>
