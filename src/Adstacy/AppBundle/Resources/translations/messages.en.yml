@@ -61,7 +61,7 @@ form_profile:
 form_ad:
     image: Image
     description: Description
-    content: Content
+    content: Long description
     submit: Save
 
 form_contact:
