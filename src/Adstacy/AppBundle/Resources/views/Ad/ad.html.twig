@@ -45,12 +45,17 @@
       </a>
       <ul class="ad-social-list dropdown-menu" role="menu">
         <li>
-          <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}" class="facebook-share">
+          {% set adUrl = url('adstacy_app_ad_show', {id: ad.id}) %}
+          {% set tags = ad.tags|join(',') %}
+          {% set desc = remove_hashtag(ad.description) %} {# remove hashtags because # character is fragment in url #}
+          {% set twitterUrl = "https://twitter.com/share?url=#{adUrl}&text=#{desc}&hashtags=#{tags}" %}
+          {% set facebookUrl = "https://www.facebook.com/sharer/sharer.php?u=#{adUrl}" %}
+          <a href="{{ facebookUrl }}" class="facebook-share">
             <span aria-hidden="true" data-icon="&#xe003;"></span> Facebook
           </a>
         </li>
         <li>
-          <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}" class="tweet" data-via="adstacy" data-text="{{ ad.description }}">
+          <a href="{{ twitterUrl }}" class="tweet"> 
             <span aria-hidden="true" data-icon="&#xe002;" class="twitter-share"></span> Twitter
           </a>
         </li>
