@@ -87,8 +87,8 @@ assetic:
     filters:
         cssrewrite: ~
         less:
-            node: %node.path%
-            node_paths: [%node.modules_path%]
+            node: %node_path%
+            node_paths: [%node_modules_path%]
             apply_to: "\.less$"
         uglifyjs2:
             bin: %kernel.root_dir%/../node_modules/.bin/uglifyjs

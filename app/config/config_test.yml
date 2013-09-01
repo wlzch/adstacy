@@ -17,7 +17,7 @@ swiftmailer:
 
 doctrine:
     dbal:
-        dbname: %test.database.name%
+        dbname: %test_database_name%
 
 fos_elastica:
     indexes:
