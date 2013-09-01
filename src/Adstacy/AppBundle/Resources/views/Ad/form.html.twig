@@ -1,8 +1,17 @@
 {% extends 'AdstacyAppBundle::layout.html.twig' %}
 
+{% block stylesheets %}
+  {{ parent() }}
+  {% stylesheets filter='cssrewrite, uglifycss'
+    'bundles/adstacyapp/less/create_ad.less'
+  %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
+  {% endstylesheets %}
+{% endblock %}
+
 {% block content %}
-  <div class="settings-container create-ad-container panel panel-default">
-    <section class="settings-section clearfix">
+  <div class="create-ad-container panel panel-default">
+    <section class="panel-section clearfix">
       {{ form_start(form) }}
         {{ form_errors(form) }}
         <div class="image-area">
