@@ -25,7 +25,7 @@ set  :keep_releases,  3
 
 set  :shared_files, ["app/config/parameters.yml"]
 set  :shared_children, ["app/logs", "web/uploads", "web/media", "web/files", "vendor", "node_modules"]
-set  :writable_dirs, ["app/cache", "app/logs", "web/uploads", "web/media", "web/files"]
+set  :writable_dirs, ["app/cache", "app/logs", "app/vars", "web/uploads", "web/media", "web/files"]
 set  :webserver_user, "www-data"
 set  :permission_method, :acl
 set  :use_set_permissions, true
