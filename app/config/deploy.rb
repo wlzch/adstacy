@@ -33,12 +33,22 @@ set  :use_composer, true
 set  :dump_assetic_assets, true
 
 # Change ACL on the app/logs and app/cache directories
-after 'symfony:composer:install', 'npm:install'
+after "symfony:composer:install", "npm:install"
+after "deploy", "symfony:clear_apc"
  
 namespace :npm do
   desc "Run npm install"
   task :install, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} sh -c 'cd #{latest_release} && npm install'";
+    capifony_puts_ok
+  end
+end
+
+namespace :symfony do
+  desc "Clear apc cache"
+  task :clear_apc do
+    capifony_pretty_print "--> Clear apc cache"
+    run "#{try_sudo} sh -c 'cd #{latest_release} && #{php_bin} #{symfony_console} apc:clear --env=#{symfony_env_prod}'"
     capifony_puts_ok
   end
 end
