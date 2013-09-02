@@ -236,9 +236,6 @@ fos_elastica:
             finder: ~
             types: %elastica_website_types%
 
-fos_js_routing:
-    routes_to_expose: [ /* ]
-
 fm_elfinder:
     locale: %locale%
     editor: tinymce4
