@@ -118,30 +118,32 @@
                   </li>
                 {% else %}
                   <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                      {{"login"|trans}} <b class="caret"></b>
-                    </a>
-                    <ul id="login-dropdown-container" class="dropdown-menu">
-                      <li>
-                        {{ form_login() }}
-                      </li>
-                      <li class="divider"></li>
-                      <li>
-                        <p>
-                          {% for owner in hwi_oauth_resource_owners() %}
-                            <a class="btn btn-block btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{"login.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
-                          {% endfor %}
-                        </p>
-                      </li>
-                      <li class="divider"></li>
-                      <li>
-                        <p>
-                          <a href="{{ path('fos_user_registration_register') }}">{{"register"|trans}}</a>
-                          <br>
-                          <a href="{{ path('fos_user_resetting_request') }}">{{"forgot_password"|trans}}</a>
-                        </p>
-                      </li>
-                    </ul>
+                    <div class="btn-group navbar-btn">
+                      <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        {{"login"|trans}}
+                      </button>
+                      <ul id="login-dropdown-container" class="dropdown-menu">
+                        <li>
+                          {{ form_login() }}
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                          <p>
+                            {% for owner in hwi_oauth_resource_owners() %}
+                              <a class="btn btn-block btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{"login.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
+                            {% endfor %}
+                          </p>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                          <p class="footer-link">
+                            <a href="{{ path('fos_user_registration_register') }}">{{"register"|trans}}</a>
+                            <br>
+                            <a href="{{ path('fos_user_resetting_request') }}">{{"forgot_password"|trans}}</a>
+                          </p>
+                        </li>
+                      </ul>
+                    </div>
                   </li>
                 {% endif %}
               </ul>
