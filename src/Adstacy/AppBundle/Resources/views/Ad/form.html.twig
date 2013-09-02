@@ -1,8 +1,8 @@
 {% extends 'AdstacyAppBundle::layout.html.twig' %}
 
 {% block content %}
-  <div class="create-ad-container panel panel-default">
-    <section class="panel-section clearfix">
+  <div class="panel panel-default" id="create-ad-container">
+    <div class="panel-body clearfix">
       {{ form_start(form) }}
         {{ form_errors(form) }}
         <div class="image-area">
@@ -24,6 +24,6 @@
 
       {{ elfinder_tinymce_init4() }}
       {{ tinymce_init() }}
-    </section>
+    </div>
   </div>
 {% endblock %}
