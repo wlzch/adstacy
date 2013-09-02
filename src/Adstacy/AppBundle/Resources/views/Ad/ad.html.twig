@@ -14,13 +14,13 @@
     #}
     {% if user is defined and user and user.hasPromote(ad) %}
       <div class="promoted-container"></div>
-      <span class="promoted"><i class="icon-bullhorn"></i></span>
+      <span class="promoted"><span aria-hidden="true" data-icon="&#xe008;"></span></span>
     {% elseif app.user and app.user.hasPromote(ad) %}
       <div class="promoted-container"></div>
-      <span class="promoted"><i class="icon-bullhorn"></i></span>
+      <span class="promoted"><span aria-hidden="true" data-icon="&#xe008;"></span></span>
     {% elseif app.user and app.user.hasFollowingsPromote(ad) %}
       <div class="promoted-container"></div>
-      <span class="promoted"><i class="icon-bullhorn"></i></span>
+      <span class="promoted"><span aria-hidden="true" data-icon="&#xe008;"></span></span>
     {% endif %}
   </div>
 
@@ -33,7 +33,7 @@
       {% set promoted = app.user.hasPromote(ad) %}
       <div class="btn-group btn-group-sm">
         <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-primary btn-promote unpromote {% if not promoted %}hide{% endif %}">
-          <span aria-hidden="true" data-icon="&#xe008;"></span> Unpromote
+          <span aria-hidden="true" data-icon="&#xe007;"></span> Unpromote
         </a>
         <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-primary btn-promote promote {% if promoted %}hide{% endif %}">
           <span aria-hidden="true" data-icon="&#xe007;"></span> Promote
@@ -59,7 +59,7 @@
           </a>
         </li>
         <li>
-          <a href="{{ twitterUrl }}" class="tweet"> 
+          <a href="{{ twitterUrl }}" class="tweet">
             <span aria-hidden="true" data-icon="&#xe002;" class="twitter-share"></span> Twitter
           </a>
         </li>
