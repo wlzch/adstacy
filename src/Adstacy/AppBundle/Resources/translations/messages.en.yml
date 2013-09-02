@@ -5,7 +5,7 @@ settings: Settings
 logout: Logout
 login: Login
 login.with: Login With
-register: Register new account
+register: Register
 forgot_password: Forgot password?
 cancel: Cancel
 delete: Delete
