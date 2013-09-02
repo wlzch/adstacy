@@ -3,6 +3,7 @@
 namespace Adstacy\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\Common\Cache\ApcCache;
 use Adstacy\AppBundle\Entity\User;
 
 /**
@@ -13,6 +14,43 @@ use Adstacy\AppBundle\Entity\User;
  */
 class UserRepository extends EntityRepository
 {
+
+    /**
+     * @override
+     *
+     * @param integer id
+     *
+     * @return User
+     */
+    public function find($id)
+    {
+        if (count(func_get_args()) > 1) {
+            return parent::find(func_get_args());
+        }
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT u FROM AdstacyAppBundle:User WHERE u.id = :id');
+        $query->useResultCache(true, 3600, 'UserFind');
+
+        return $query->setParameter('id', $id)->getSingleResult();
+    }
+
+    /**
+     * @override
+     *
+     * @param integer id
+     *
+     * @return User
+     */
+    public function findOneById($id)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT u FROM AdstacyAppBundle:User WHERE u.id = :id');
+        $query->useResultCache(true, 3600, 'UserFind');
+
+        return $query->setParameter('id', $id)->getSingleResult();
+    }
+
+
     /**
      * Find $user followers query
      *
@@ -24,7 +62,7 @@ class UserRepository extends EntityRepository
     {
         $em = $this->getEntitymanager();
         $query = $em->createQuery('
-            SELECT u
+            SELECT partial u.{id,username,imagename,realName,about,adsCount,followersCount,profilePicture}
             FROM AdstacyAppBundle:User u
             JOIN u.followings f
             WHERE f.id = :id
@@ -56,7 +94,7 @@ class UserRepository extends EntityRepository
     {
         $em = $this->getEntitymanager();
         $query = $em->createQuery('
-            SELECT u
+            SELECT partial u.{id,username,imagename,realName,about,adsCount,followersCount,profilePicture}
             FROM AdstacyAppBundle:User u
             JOIN u.followers f
             WHERE f.id = :id
@@ -114,5 +152,29 @@ class UserRepository extends EntityRepository
         ');
 
         return $query->setParameter('id', $user->getId())->getSingleScalarResult();
+    }
+
+    /**
+     * Find user join followings join promotes
+     *
+     * @param integer $id
+     *
+     * @return array
+     */
+    public function findFollowingsPromotes(User $user)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('
+            SELECT partial u.{id},
+            partial f.{id},
+            partial p.{id}
+            FROM AdstacyAppBundle:User u
+            JOIN u.followings f
+            JOIN f.promotes p
+            WHERE u.id = :id
+        ');
+        $query->useResultCache(true, 3600, 'UserFindFollowingsPromotes');
+
+        return $query->setParameter('id', $user->getId())->getSingleResult();
     }
 }

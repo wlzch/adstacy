@@ -26,8 +26,12 @@ class AdRepository extends EntityRepository
     {
         $em = $this->getEntityManager();
         $builder = $em->createQueryBuilder()
-            ->select('p')
+            ->select(array(
+              'partial p.{id,imagename,description,tags,thumbHeight,promoteesCount,created}',
+              'partial u.{id,username,imagename,realName}'
+            ))
             ->from('AdstacyAppBundle:Ad', 'p')
+            ->innerJoin('p.user', 'u')
             ->setMaxResults($limit)
             ->orderBy('p.id', 'DESC')
         ;
@@ -51,7 +55,7 @@ class AdRepository extends EntityRepository
     {
         $em = $this->getEntityManager();
         $query = $em->createQuery('
-            SELECT a
+            SELECT partial a.{id,imagename,description,tags,thumbHeight,promoteesCount,created}
             FROM AdstacyAppBundle:Ad a
             JOIN a.user u
             LEFT JOIN a.promotees p
@@ -156,7 +160,10 @@ class AdRepository extends EntityRepository
     {
         $em = $this->getEntityManager();
         $query = $em->createQuery('
-            SELECT a, u, f, p
+            SELECT partial a.{id,imagename,description,tags,thumbHeight,promoteesCount,created},
+            partial u.{id,username,imagename,realName},
+            partial f.{id,username,imagename,realName},
+            partial p.{id,username,imagename,realName}
             FROM AdstacyAppBundle:Ad a
             JOIN a.user u
             LEFT JOIN u.followers f
@@ -164,6 +171,7 @@ class AdRepository extends EntityRepository
             WHERE u.id = :id OR f.id = :id OR p.id = :id
             ORDER BY a.created DESC
         ');
+        $query->useResultCache(true, 300, 'AdFindUserStreamQuery');
 
         return $query->setParameter('id', $user->getId());
     }
