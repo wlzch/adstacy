@@ -169,8 +169,8 @@ class UserRepository extends EntityRepository
             partial f.{id},
             partial p.{id}
             FROM AdstacyAppBundle:User u
-            JOIN u.followings f
-            JOIN f.promotes p
+            LEFT JOIN u.followings f
+            LEFT JOIN f.promotes p
             WHERE u.id = :id
         ');
         $query->useResultCache(true, 3600, 'UserFindFollowingsPromotes');
