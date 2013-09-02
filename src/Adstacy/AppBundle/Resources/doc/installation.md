@@ -92,6 +92,8 @@ parameters:
 
     mailer_transport:  smtp
     mailer_host:       localhost
+    mailer_port:       24
+    mailer_encryption: null
     mailer_user:       ~
     mailer_password:   ~
 
