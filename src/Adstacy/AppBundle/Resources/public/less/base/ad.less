@@ -79,3 +79,30 @@
     font-weight: bold;
   }
 }
+
+.ad-detail-container {
+  position: relative;
+  width: 750px;
+  margin: auto;
+
+  img {
+    .img-responsive(inline-block);
+  }
+
+  .panel-body {
+    border-bottom: 1px solid @border-color;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+
+  p {
+    font-size: 16px;
+    margin: 0;
+  }
+}
+
+.ad-detail-container + .ad-detail-container {
+  margin-top: 20px;
+}

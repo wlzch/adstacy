@@ -7,8 +7,8 @@
 {% block content %}
   {% set user = ad.user %}
 
-  <div class="ad-detail-container container-margin">
-    <div class="ad-detail-section toolbar clearfix">
+  <div class="ad-detail-container panel panel-default">
+    <div class="panel-body toolbar clearfix">
       <div>
         {% include 'AdstacyAppBundle:User:user_mini.html.twig' with { user: ad.user, text: '2 minutes ago' } %}
       </div>
@@ -43,21 +43,22 @@
         {% endif %}
       </div>
     </div>
-    <div class="ad-detail-section">
+    <div class="panel-body">
       <p>{{ parse_url(parse_hashtag(ad.description)) }}</p>
     </div>
     <div class="text-center">
       {% set src = vich_uploader_asset(ad.image, 'file') %}
       <img src="{{ src }}" alt="{{ ad.description }}">
     </div>
+  </div>
 
-
-    {% if ad.content %}
-      <div class="ad-detail-section">
+  {% if ad.content %}
+    <div class="ad-detail-container panel panel-default">
+      <div class="panel-body">
         {{ ad.content|raw }}
       </div>
-    {% endif %}
-  </div>
+    </div>
+  {% endif %}
 
   <div class="modal fade" id="confirm-modal">
     <div class="modal-dialog">
