@@ -18,11 +18,12 @@
 {% endblock form_label %}
 
 {% block image_widget %}
-<input class="image-upload" type="file" {{ block('widget_attributes') }}>
+{% set imageExists = obj and obj.image and obj.imagename %}
+<input class="image-upload" type="file" name="{{ full_name }}" {% if not imageExists and image_required %}required=required{% endif %}>
 
 <div class="image-preview {{ image_size }}">
-  {% if image and image.filename %}
-    <img src="{{ vich_uploader_asset(image, 'file') }}">
+  {% if imageExists %}
+    <img src="{{ vich_uploader_asset(obj, 'image') }}">
   {% else %}
     <img>
   {% endif %}

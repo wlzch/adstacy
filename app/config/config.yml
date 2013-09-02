@@ -203,7 +203,11 @@ vich_uploader:
     gaufrette: true
     storage: vich_uploader.storage.gaufrette
     mappings:
-        image:
+        ad_image:
+            uri_prefix: /uploads
+            upload_destination: image_fs
+            namer: vich_uploader.namer_origname
+        user_image:
             uri_prefix: /uploads
             upload_destination: image_fs
             namer: vich_uploader.namer_origname

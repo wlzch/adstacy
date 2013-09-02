@@ -3,10 +3,13 @@
 namespace Adstacy\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="Adstacy\AppBundle\Repository\AdRepository")
+ * @Vich\Uploadable
  */
 class Ad
 {
@@ -18,11 +21,21 @@ class Ad
     private $id;
 
     /**
-     * @Assert\Valid
-     * @Assert\NotNull(message="ad.image.not_null")
-     * @ORM\OneToOne(targetEntity="Image", cascade={"persist"}, fetch="EAGER")
+     * @Assert\Image(
+     *    maxSize = "1M",
+     *    mimeTypes = {"image/png", "image/jpeg", "image/pjpeg"},
+     *    minWidth = 236,
+     *    mimeTypesMessage = "image.file.mime_types",
+     *    minWidthMessage = "image.file.min_width"
+     * )
+     * @Vich\UploadableField(mapping="ad_image", fileNameProperty="imagename")
      */
     private $image;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $imagename;
 
     /**
      * @Assert\Length(
@@ -81,6 +94,11 @@ class Ad
      * @ORM\OneToMany(targetEntity="FeaturedAd", mappedBy="ad")
      */
     private $featureds;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    protected $updated;
 
     /**
      * Constructor
@@ -205,36 +223,6 @@ class Ad
     public function getPromoteesCount()
     {
         return $this->promoteesCount;
-    }
-
-    /**
-     * Set image
-     *
-     * @param \Adstacy\AppBundle\Entity\Image $image
-     * @return Ad
-     */
-    public function setImage(\Adstacy\AppBundle\Entity\Image $image = null)
-    {
-        if ($image && $this->image != $image) {
-            $this->image = $image;
-            $size = getimagesize($image->getFile());
-            if ($size[0] > 0) {
-                $height = round((236 / $size[0]) * $size[1]);
-                $this->setThumbHeight($height);
-            }
-        }
-    
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return \Adstacy\AppBundle\Entity\Image 
-     */
-    public function getImage()
-    {
-        return $this->image;
     }
 
     /**
@@ -377,8 +365,79 @@ class Ad
         return $this->featureds;
     }
 
+    public function setImage(File $image = null)
+    {
+        if ($image && $this->image != $image) {
+            $this->image = $image;
+            $size = getimagesize($image);
+            if ($size[0] > 0) {
+                $height = round((236 / $size[0]) * $size[1]);
+                $this->setThumbHeight($height);
+            }
+            // hack for VichUploaderBundle because the listener will be called 
+            // only if there is any field changes
+            $this->setUpdated(new \Datetime());
+        }
+    
+        return $this;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set imagename
+     *
+     * @param string $imagename
+     * @return Ad
+     */
+    public function setImagename($imagename)
+    {
+        if ($imagename) {
+            $this->imagename = $imagename;
+        }
+    
+        return $this;
+    }
+
+    /**
+     * Get imagename
+     *
+     * @return string 
+     */
+    public function getImagename()
+    {
+        return $this->imagename;
+    }
+
     public function __toString()
     {
         return $this->description;
+    }
+
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     * @return Ad
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+    
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime 
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
     }
 }

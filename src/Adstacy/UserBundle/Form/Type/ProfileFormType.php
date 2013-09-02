@@ -23,6 +23,7 @@ class ProfileFormType extends BaseType
         $builder->add('image', 'image', array(
             'label' => 'form_profile.profile_picture',
             'required' => false,
+            'image_required' => false,
             'image_size' => 'small'
         ));
         parent::buildUserForm($builder, $options);

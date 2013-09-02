@@ -11,6 +11,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\ExecutionContextInterface;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="Adstacy\AppBundle\Repository\UserRepository")
@@ -21,6 +23,7 @@ use Symfony\Component\Validator\ExecutionContextInterface;
  * @UniqueEntity(fields="emailCanonical", message="Email does not exists", errorPath="email", groups={"Registration", "Profile"})
  * @UniqueEntity(fields="usernameCanonical", message="Username does not exists", errorPath="username", groups={"Registration", "Profile"})
  * @Assert\Callback(methods={"isUsernameValid"})
+ * @Vich\Uploadable
  */
 class User implements UserInterface, GroupableInterface
 {
@@ -29,7 +32,7 @@ class User implements UserInterface, GroupableInterface
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
 
     /**
      * @Assert\NotBlank(message="user.username.not_blank", groups={"Registration", "Profile"})
@@ -42,37 +45,48 @@ class User implements UserInterface, GroupableInterface
      *  )
      * @ORM\Column(type="string", length=100, nullable=false)
      */
-    protected $username;
+    private $username;
 
     /**
      * @ORM\Column(name="username_canonical", type="string", length=100, nullable=false, unique=true)
      */
-    protected $usernameCanonical;
+    private $usernameCanonical;
 
     /**
      * @Assert\NotBlank(message="user.email.not_blank", groups={"Registration", "Profile"})
      * @Assert\Email(message="user.email.email", groups={"Registration", "Profile"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    protected $email;
+    private $email;
 
     /**
      * @var string
      * @ORM\Column(name="email_canonical", type="string", length=255, nullable=true, unique=true)
      */
-    protected $emailCanonical;
+    private $emailCanonical;
 
     /**
-     * @Assert\Valid
-     * @ORM\OneToOne(targetEntity="Image", cascade={"persist"}, fetch="EAGER")
+     * @Assert\Image(
+     *    maxSize = "1M",
+     *    mimeTypes = {"image/png", "image/jpeg", "image/pjpeg"},
+     *    minWidth = 100,
+     *    mimeTypesMessage = "image.file.mime_types",
+     *    minWidthMessage = "image.file.min_width"
+     * )
+     * @Vich\UploadableField(mapping="user_image", fileNameProperty="imagename")
      */
-    protected $image;
+    private $image;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $imagename;
 
     /**
      * @Assert\NotBlank(message="user.realname.not_blank")
      * @ORM\Column(name="real_name", type="string", length=255)
      */
-    protected $realName;
+    private $realName;
 
     /**
      * @ORM\OneToMany(targetEntity="Ad", mappedBy="user")
@@ -130,60 +144,66 @@ class User implements UserInterface, GroupableInterface
     /**
      * @ORM\Column(name="profile_picture", type="string", length=255, nullable=true)
      */
-    protected $profilePicture;
+    private $profilePicture;
 
     /**
      * @ORM\Column(name="facebook_id", type="string", length=255, nullable=true, unique=true)
      */
-    protected $facebookId;
+    private $facebookId;
 
     /**
      * @ORM\Column(name="facebook_username", type="string", length=255, nullable=true, unique=true)
      */
-    protected $facebookUsername;
+    private $facebookUsername;
 
     /**
      * @ORM\Column(name="facebook_real_name", type="string", length=255, nullable=true)
      */
-    protected $facebookRealName;
+    private $facebookRealName;
 
     /**
      * @ORM\Column(name="facebook_access_token", type="string", length=255, nullable=true)
      */
-    protected $facebookAccessToken;
+    private $facebookAccessToken;
 
     /**
      * @ORM\Column(name="twitter_id", type="string", length=255, nullable=true, unique=true)
      */
-    protected $twitterId;
+    private $twitterId;
 
     /**
      * @ORM\Column(name="twitter_access_token", type="string", length=255, nullable=true)
      */
-    protected $twitterAccessToken;
+    private $twitterAccessToken;
 
     /**
      * @ORM\Column(name="twitter_username", type="string", length=255, nullable=true, unique=true)
      */
-    protected $twitterUsername;
+    private $twitterUsername;
 
     /**
      * @ORM\Column(name="twitter_real_name", type="string", length=255, nullable=true)
      */
-    protected $twitterRealName;
+    private $twitterRealName;
+
+    /**
+     * Hack for VichUploaderBundle
+     * @ORM\Column(type="datetime")
+     */
+    private $updated;
 
     /**
      * @var boolean
      * @ORM\Column(type="boolean")
      */
-    protected $enabled;
+    private $enabled;
 
     /**
      * The salt to use for hashing
      * @var string
      * @ORM\Column(type="string", length=255)
      */
-    protected $salt;
+    private $salt;
 
     /**
      * Encrypted password. Must be persisted.
@@ -191,7 +211,7 @@ class User implements UserInterface, GroupableInterface
      * @var string
      * @ORM\Column(type="string", length=255)
      */
-    protected $password;
+    private $password;
 
     /**
      * @Assert\NotBlank(message="user.password.not_blank", groups={"Registration", "ResetPassword", "ChangePassword"})
@@ -202,13 +222,13 @@ class User implements UserInterface, GroupableInterface
      * )
      * Plain password. Used for model validation. Must not be persisted.
      */
-    protected $plainPassword;
+    private $plainPassword;
 
     /**
      * @var \DateTime
      * @ORM\Column(name="last_login", type="datetime", nullable=true)
      */
-    protected $lastLogin;
+    private $lastLogin;
 
     /**
      * Random string sent to the user email address in order to verify it
@@ -216,54 +236,54 @@ class User implements UserInterface, GroupableInterface
      * @var string
      * @ORM\Column(name="confirmation_token", type="string", length=255, nullable=true)
      */
-    protected $confirmationToken;
+    private $confirmationToken;
 
     /**
      * @var \DateTime
      * @ORM\Column(name="password_requested_at", type="datetime", nullable=true)
      */
-    protected $passwordRequestedAt;
+    private $passwordRequestedAt;
 
     /**
      * @var Collection
      */
-    protected $groups;
+    private $groups;
 
     /**
      * @var boolean
      * @ORM\Column(type="boolean")
      */
-    protected $locked;
+    private $locked;
 
     /**
      * @var boolean
      * @ORM\Column(type="boolean")
      */
-    protected $expired;
+    private $expired;
 
     /**
      * @var \DateTime
      * @ORM\Column(name="expires_at", type="datetime", nullable=true)
      */
-    protected $expiresAt;
+    private $expiresAt;
 
     /**
      * @var array
      * @ORM\Column(type="array")
      */
-    protected $roles;
+    private $roles;
 
     /**
      * @var boolean
      * @ORM\Column(name="credentials_expired", type="boolean")
      */
-    protected $credentialsExpired;
+    private $credentialsExpired;
 
     /**
      * @var \DateTime
      * @ORM\Column(name="credentials_expire_at", type="datetime", nullable=true)
      */
-    protected $credentialsExpireAt;
+    private $credentialsExpireAt;
 
     public function __construct()
     {
@@ -1337,31 +1357,6 @@ class User implements UserInterface, GroupableInterface
     }
 
     /**
-     * Set image
-     *
-     * @param \Adstacy\AppBundle\Entity\Image $image
-     * @return User
-     */
-    public function setImage(\Adstacy\AppBundle\Entity\Image $image = null)
-    {
-        if ($image && $this->image != $image) {
-            $this->image = $image;
-        }
-    
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return \Adstacy\AppBundle\Entity\Image 
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
      * Add ads
      *
      * @param \Adstacy\AppBundle\Entity\Ad $ads
@@ -1394,5 +1389,70 @@ class User implements UserInterface, GroupableInterface
     public function getAds()
     {
         return $this->ads;
+    }
+
+    public function setImage(File $image = null)
+    {
+        if ($image) {
+            $this->image = $image;
+            // hack for VichUploaderBundle because the listener will be called 
+            // only if there is any field changes
+            $this->setUpdated(new \Datetime());
+        }
+    
+        return $this;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set imagename
+     *
+     * @param string $imagename
+     * @return User
+     */
+    public function setImagename($imagename)
+    {
+        if ($imagename) {
+            $this->imagename = $imagename;
+        }
+    
+        return $this;
+    }
+
+    /**
+     * Get imagename
+     *
+     * @return string 
+     */
+    public function getImagename()
+    {
+        return $this->imagename;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     * @return User
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+    
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime 
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
     }
 }
