@@ -47,7 +47,7 @@
       <p>{{ parse_url(parse_hashtag(ad.description)) }}</p>
     </div>
     <div class="text-center">
-      {% set src = vich_uploader_asset(ad.image, 'file') %}
+      {% set src = vich_uploader_asset(ad, 'image') %}
       <img src="{{ src }}" alt="{{ ad.description }}">
     </div>
 
