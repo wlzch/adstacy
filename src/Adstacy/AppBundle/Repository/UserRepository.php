@@ -3,6 +3,7 @@
 namespace Adstacy\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\Common\Cache\ApcCache;
 use Adstacy\AppBundle\Entity\User;
 
 /**
@@ -24,7 +25,7 @@ class UserRepository extends EntityRepository
     {
         $em = $this->getEntitymanager();
         $query = $em->createQuery('
-            SELECT u
+            SELECT partial u.{id,username,imagename,realName,about,adsCount,followersCount,profilePicture}
             FROM AdstacyAppBundle:User u
             JOIN u.followings f
             WHERE f.id = :id
@@ -56,7 +57,7 @@ class UserRepository extends EntityRepository
     {
         $em = $this->getEntitymanager();
         $query = $em->createQuery('
-            SELECT u
+            SELECT partial u.{id,username,imagename,realName,about,adsCount,followersCount,profilePicture}
             FROM AdstacyAppBundle:User u
             JOIN u.followers f
             WHERE f.id = :id
@@ -114,5 +115,29 @@ class UserRepository extends EntityRepository
         ');
 
         return $query->setParameter('id', $user->getId())->getSingleScalarResult();
+    }
+
+    /**
+     * Find user join followings join promotes
+     *
+     * @param integer $id
+     *
+     * @return array
+     */
+    public function findFollowingsPromotes(User $user)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('
+            SELECT partial u.{id},
+            partial f.{id},
+            partial p.{id}
+            FROM AdstacyAppBundle:User u
+            JOIN u.followings f
+            JOIN f.promotes p
+            WHERE u.id = :id
+        ');
+        $query->useResultCache(true, 3600, 'UserFindFollowingsPromotes');
+
+        return $query->setParameter('id', $user->getId())->getSingleResult();
     }
 }

@@ -11,6 +11,8 @@
       2. If logged in user has promote the ad
       3. If logged in user's followers has promote the ad
       Promoted sign will only appear if the calling template pass a user variable to check for promoted or if the calling template doesnot pass user, it is assumed that the user passed is the current logged in user
+
+      NOTE: Option 3 will be temporarily disabled for performance reason
     #}
     {% if user is defined and user and user.hasPromote(ad) %}
       <div class="promoted-container"></div>
@@ -18,7 +20,7 @@
     {% elseif app.user and app.user.hasPromote(ad) %}
       <div class="promoted-container"></div>
       <span class="promoted"><span aria-hidden="true" data-icon="&#xe008;"></span></span>
-    {% elseif app.user and app.user.hasFollowingsPromote(ad) %}
+    {% elseif app.user and user_followings_has_promote(app.user, ad) %}
       <div class="promoted-container"></div>
       <span class="promoted"><span aria-hidden="true" data-icon="&#xe008;"></span></span>
     {% endif %}
