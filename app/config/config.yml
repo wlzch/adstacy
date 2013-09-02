@@ -36,6 +36,7 @@ parameters:
         user:
             mappings:
                 username: { boost: 5 }
+                realname: { boost: 4 }
             persistence:
                 driver: orm
                 model: Adstacy\AppBundle\Entity\User
