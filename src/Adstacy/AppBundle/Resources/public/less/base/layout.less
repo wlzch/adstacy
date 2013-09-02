@@ -13,49 +13,15 @@ body {
 .navbar {
   .box-shadow(0 2px 8px #000);
 
-  .icon-search {
-    font-size: 16px;
-    margin-right: 10px;
-  }
-
   .btn-default {
-    box-shadow: 0 0 2px #cacaca;
+    .box-shadow(0 0 2px #cacaca);
   }
 }
 
-#form-search {
-  padding: 0;
-}
 #btn-navbar-expand {
   padding: 6px 12px;
 }
-#search-bar {
-  box-shadow: 0 0 5px #cacaca inset;
-  padding-right: 40px;
-  width: 360px;
-  &:focus + button span {
-    color: darken(@input-color-placeholder, 20%);
-  }
-  margin-left: 20px;
-}
-.search-btn {
-  background-color: transparent;
-  border: none;
-  padding: 0;
-  position: absolute;
-  top: 0;
-  right: 10px;
-  height: 34px;
 
-  span {
-    color: @input-color-placeholder;
-    font-size: 25px;
-  }
-
-  &:hover span, &:active span {
-    color: darken(@input-color-placeholder, 50%);
-  }
-}
 #create-ads {
   border-color: 1px solid #555;
   box-shadow: 0 0 2px #555;
@@ -216,11 +182,6 @@ ul.nav-expand {
   a.btn {
     color: #fff;
   }
-}
-
-.space {
-  width: 30px;
-  display: inline-block;
 }
 
 /** hack to support windows phone 8 and IE 10 for media queries */

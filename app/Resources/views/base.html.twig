@@ -89,8 +89,19 @@
               </ul>
 
               <form id="form-search" action="{{ path('adstacy_app_search') }}" class="navbar-form navbar-left" style="position: relative;" role="search">
-                <input id="search-bar" type="text" class="form-control" placeholder="{{"search"|trans}}" name="q" value="{{ app.request.query.get('q') }}">
-                <button type="submit" class="search-btn">
+                <div id="search-container" class="input-group">
+                  <input type="text" class="form-control" placeholder="{{"search"|trans}}" name="q" value="{{ app.request.query.get('q') }}">
+                  <div class="input-group-btn">
+                    <button id="search-dropdown-container" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                      Ads <span class="icon-angle-down"></span>
+                    </button>
+                    <ul class="dropdown-menu pull-right">
+                      <li><a href="#">Ads</a></li>
+                      <li><a href="#">Users</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <button type="submit" class="btn-icon btn-search">
                   <span aria-hidden="true" class="icon-search"></span>
                 </button>
               </form>

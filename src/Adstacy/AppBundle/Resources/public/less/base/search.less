@@ -1,0 +1,47 @@
+#search-container {
+  width: 360px;
+
+  .form-control {
+    padding-left: 35px;
+    box-shadow: 0 0 5px #cacaca inset;
+  }
+}
+
+#search-dropdown-container {
+  min-width: 80px;
+  text-align: left;
+  padding-right: 24px;
+  margin-left: -1px;
+
+  .icon-angle-down {
+    position: absolute;
+    font-size: 20px;
+    right: 10px;
+  }
+
+  + .dropdown-menu {
+    min-width: 80px;
+
+    > li > a {
+      padding-left: 12px;
+      padding-right: 24px;
+    }
+  }
+}
+
+.btn-search {
+  position: absolute;
+  top: 0;
+  left: 25px;
+  height: 34px;
+
+  .icon-search {
+    color: @input-color-placeholder;
+    font-size: 16px;
+  }
+
+  &:hover .icon-search,
+  &:active .icon-search {
+    color: darken(@input-color-placeholder, 50%);
+  }
+}
