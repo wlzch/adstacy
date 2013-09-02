@@ -14,6 +14,43 @@ use Adstacy\AppBundle\Entity\User;
  */
 class UserRepository extends EntityRepository
 {
+
+    /**
+     * @override
+     *
+     * @param integer id
+     *
+     * @return User
+     */
+    public function find($id)
+    {
+        if (count(func_get_args()) > 1) {
+            return parent::find(func_get_args());
+        }
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT u FROM AdstacyAppBundle:User WHERE u.id = :id');
+        $query->useResultCache(true, 3600, 'UserFind');
+
+        return $query->setParameter('id', $id)->getSingleResult();
+    }
+
+    /**
+     * @override
+     *
+     * @param integer id
+     *
+     * @return User
+     */
+    public function findOneById($id)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT u FROM AdstacyAppBundle:User WHERE u.id = :id');
+        $query->useResultCache(true, 3600, 'UserFind');
+
+        return $query->setParameter('id', $id)->getSingleResult();
+    }
+
+
     /**
      * Find $user followers query
      *
