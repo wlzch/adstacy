@@ -14,8 +14,13 @@
     }
   }
 
-  > .ad-social {
+  > .ad-counter {
     white-space: nowrap;
+    a {
+      color: #888;
+      font-size: 11px;
+      font-weight: bold;
+    }
   }
 
   .ad-social-list a {
@@ -24,14 +29,55 @@
     font-weight: bold;
   }
 
-  a.ad-user {
-    margin-top: 5px;
-    display: block;
+  .ad-user {
     border-top: 1px solid @border-color;
     border-radius: 0 0 @border-radius-base @border-radius-base;
-
-    &:hover {
-      background-color: @gray-lighter;
+    margin-top: 5px;
+    position: relative;
+  }
+  .ad-user-action {
+    position: absolute;
+    right: 0;
+    top: 0;
+    .btn {
+      height: 40px;
+      padding: 12px;
+    }
+    .btn-default, .btn-primary {
+      border-bottom: 0;
+      border-top: 0;
+      border-radius: 0 0 @border-radius-base 0;
+    }
+    .btn-group:first-child>.btn:last-child, 
+    .btn-group:first-child>.dropdown-toggle {
+      border-bottom-right-radius: @border-radius-base;
+    }
+  }
+  .user-mini {
+    .user-desc {
+      line-height: 1;
+      margin: 0;
+      float: left;
+    }
+    .profile-picture {
+      float: left;
+      margin-right: 10px;
+      width: 30px;
+    }
+    .profile-picture-img {
+        width: 30px;
+    }
+    .user-label {
+      color: #aaa;
+      font-size: 11px;
+    }
+    .user-realname {
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+    .user-realname-a {
+      color: #888;
     }
   }
 }
@@ -64,7 +110,7 @@
   }
 }
 
-.ad, .toolbar {
+.toolbar {
   .btn-group > .btn-promote {
     margin-left: 0;
     margin-right: 1px;

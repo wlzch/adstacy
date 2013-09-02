@@ -28,46 +28,38 @@
     <p>{{ parse_url(parse_hashtag(ad.description)) }}</p>
   </div>
 
-  <div class="ad-section ad-social">
-    {% if app.user %}
-      {% set promoted = app.user.hasPromote(ad) %}
-      <div class="btn-group btn-group-sm">
-        <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-primary btn-promote unpromote {% if not promoted %}hide{% endif %}">
-          <span aria-hidden="true" data-icon="&#xe007;"></span> Unpromote
-        </a>
-        <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-primary btn-promote promote {% if promoted %}hide{% endif %}">
-          <span aria-hidden="true" data-icon="&#xe007;"></span> Promote
-        </a>
-        <span class="btn btn-default promotes-count">{{ ad.promoteesCount }}</span>
-      </div>
-    {% else %}
-      <span class="btn btn-default btn-sm">{{ ad.promoteesCount }} promotes</span>
-    {% endif %}
-    <div class="btn-group btn-group-sm">
-      <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-        <span aria-hidden="true" class="icon-share"></span> Share
-      </a>
-      <ul class="ad-social-list dropdown-menu" role="menu">
-        <li>
-          {% set adUrl = url('adstacy_app_ad_show', {id: ad.id}) %}
-          {% set tags = ad.tags|join(',') %}
-          {% set desc = remove_hashtag(ad.description) %} {# remove hashtags because # character is fragment in url #}
-          {% set twitterUrl = "https://twitter.com/share?url=#{adUrl}&text=#{desc}&hashtags=#{tags}" %}
-          {% set facebookUrl = "https://www.facebook.com/sharer/sharer.php?u=#{adUrl}" %}
-          <a href="{{ facebookUrl }}" class="facebook-share">
-            <span aria-hidden="true" data-icon="&#xe003;"></span> Facebook
-          </a>
-        </li>
-        <li>
-          <a href="{{ twitterUrl }}" class="tweet">
-            <span aria-hidden="true" data-icon="&#xe002;" class="twitter-share"></span> Twitter
-          </a>
-        </li>
-      </ul>
-    </div>
+  <div class="ad-section ad-counter">
+    <a href="#">{{ ad.promoteesCount }} Promotes</a>
   </div>
 
-  <a href="{{ path('adstacy_app_user_profile', {username: ad.user.username} ) }}" class="ad-section ad-user clearfix">
+  <div class="ad-section ad-user clearfix">
     {% include 'AdstacyAppBundle:User:user_mini.html.twig' with {user: ad.user, text: ago(ad.created), as_link: false} %}
-  </a>
+    <div class="ad-user-action btn-group">
+      {% if app.user %}
+        {% set promoted = app.user.hasPromote(ad) %}
+        <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-primary btn-promote unpromote {% if not promoted %}hide{% endif %}"><span aria-hidden="true" data-icon="&#xe007;"></span></a>
+        <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-default btn-promote promote {% if promoted %}hide{% endif %}"><span aria-hidden="true" data-icon="&#xe007;"></span></a>
+      {% endif %}
+      <div class="btn-group">
+        <a class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span aria-hidden="true" class="icon-share"></span></a>
+        <ul class="ad-social-list dropdown-menu" role="menu">
+          <li>
+            {% set adUrl = url('adstacy_app_ad_show', {id: ad.id}) %}
+            {% set tags = ad.tags|join(',') %}
+            {% set desc = remove_hashtag(ad.description) %} {# remove hashtags because # character is fragment in url #}
+            {% set twitterUrl = "https://twitter.com/share?url=#{adUrl}&text=#{desc}&hashtags=#{tags}" %}
+            {% set facebookUrl = "https://www.facebook.com/sharer/sharer.php?u=#{adUrl}" %}
+            <a href="{{ facebookUrl }}" class="facebook-share">
+              <span aria-hidden="true" data-icon="&#xe003;"></span> Facebook
+            </a>
+          </li>
+          <li>
+            <a href="{{ twitterUrl }}" class="tweet">
+              <span aria-hidden="true" data-icon="&#xe002;" class="twitter-share"></span> Twitter
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
