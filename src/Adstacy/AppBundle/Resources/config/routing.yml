@@ -8,11 +8,12 @@ adstacy_app_stream:
     defaults:
         _controller: AdstacyAppBundle:App:stream
 
-adstacy_app_contact:
-    pattern: /contact-us
-    defaults:
-        _controller: AdstacyAppBundle:App:contactUs
-
+# Contact us not yet supported
+# adstacy_app_contact:
+#     pattern: /contact-us
+#     defaults:
+#         _controller: AdstacyAppBundle:App:contactUs
+#
 adstacy_app_page_show:
     pattern: /pages/{key}
     defaults:

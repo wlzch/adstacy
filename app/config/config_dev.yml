@@ -33,3 +33,8 @@ assetic:
 
 #swiftmailer:
 #    delivery_address: me@example.com
+#
+ornicar_apc:
+    host: http://adstacy.dev
+    web_dir: %kernel.root_dir%/../web
+    mode: curl

@@ -36,6 +36,7 @@ parameters:
         user:
             mappings:
                 username: { boost: 5 }
+                realname: { boost: 4 }
             persistence:
                 driver: orm
                 model: Adstacy\AppBundle\Entity\User
@@ -202,7 +203,11 @@ vich_uploader:
     gaufrette: true
     storage: vich_uploader.storage.gaufrette
     mappings:
-        image:
+        ad_image:
+            uri_prefix: /uploads
+            upload_destination: image_fs
+            namer: vich_uploader.namer_origname
+        user_image:
             uri_prefix: /uploads
             upload_destination: image_fs
             namer: vich_uploader.namer_origname
@@ -234,9 +239,6 @@ fos_elastica:
             index_name: website
             finder: ~
             types: %elastica_website_types%
-
-fos_js_routing:
-    routes_to_expose: [ /* ]
 
 fm_elfinder:
     locale: %locale%
