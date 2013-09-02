@@ -59,12 +59,7 @@
     container: "body"
   });
   $('.tweet').click(function() {
-    var $this = $(this);
-    var via = '&via='+$this.attr('data-via');
-    var text = '&text='+$this.attr('data-text');
-    var hashtags = '&hashtags='+$this.attr('data-hashtags');
-    window.open(
-      'https://twitter.com/share?url='+encodeURIComponent(this.href)+via+text+hashtags,
+    window.open(this.href,
       'Twitter tweet',
       'width=626,height=436'
     );
@@ -72,8 +67,7 @@
     return false;
   });
   $('.facebook-share').click(function() {
-    window.open(
-      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(this.href),
+    window.open(this.href,
       'Facebook share',
       'width=626,height=436'
     );

@@ -22,6 +22,7 @@ class FormatterExtension extends \Twig_Extension
     {
         return array(
             'parse_hashtag' => new \Twig_Function_Method($this, 'parseHashtag', array('is_safe' => array('html'))),
+            'remove_hashtag' => new \Twig_Function_Method($this, 'removeHashtag', array('is_safe' => array('html'))),
             'parse_url' => new \Twig_Function_Method($this, 'parseUrl', array('is_safe' => array('html'))),
             'more' => new \Twig_Function_Method($this, 'more', array('is_safe' => array('html'))),
             'ago' => new \Twig_Function_Method($this, 'ago', array('is_safe' => array('html'))),
@@ -66,6 +67,18 @@ class FormatterExtension extends \Twig_Extension
         return preg_replace_callback('/(#\w+)/', function($matches) use (&$url) {
             return sprintf(' <a href="%s?q=%s">%s</a>', $url, substr($matches[0], 1), $matches[0]);
         }, $text);
+    }
+
+    /**
+     * Remove all hashtags from text
+     *
+     * @param string text
+     *
+     * @return string
+     */
+    public function removeHashtag($text)
+    {
+        return preg_replace('/(#\w+)/', '', $text);
     }
 
     /**
