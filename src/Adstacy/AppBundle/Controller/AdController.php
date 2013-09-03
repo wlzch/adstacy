@@ -19,9 +19,11 @@ class AdController extends Controller
         if (!$ad) {
             throw $this->createNotFoundException();
         }
+        $adsByUser = $this->getRepository('AdstacyAppBundle:Ad')->findByUser($this->getUser(), 6);
 
         return $this->render('AdstacyAppBundle:Ad:show.html.twig', array(
-            'ad' => $ad
+            'ad' => $ad,
+            'adsByUser' => $adsByUser
         ));
     }
     

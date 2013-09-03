@@ -45,13 +45,13 @@ class AdRepository extends EntityRepository
     }
 
     /**
-     * Findl all by $user query
+     * Find all by $user query join promotees
      *
      * @param User $user
      *
      * @return Query
      */
-    public function findByUserQuery(User $user)
+    public function findByUserJoinPromoteQuery(User $user)
     {
         $em = $this->getEntityManager();
         $query = $em->createQuery('
@@ -66,15 +66,38 @@ class AdRepository extends EntityRepository
     }
 
     /**
-     * Find all ads by $user
+     * Find $limit ads by $user
      *
      * @param User $user
+     * @param integer limit
+     *
+     * @return Query
+     */
+    public function findByUserQuery(User $user, $limit = 20)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('
+            SELECT partial a.{id,imagename,description,tags,thumbHeight,promoteesCount,created}
+            FROM AdstacyAppBundle:Ad a
+            JOIN a.user u
+            WHERE u.id = :id
+        ');
+        $query->setMaxResults($limit);
+
+        return $query->setParameter('id', $user->getId());
+    }
+
+    /**
+     * Find $limit ads by $user
+     *
+     * @param User $user
+     * @param integer limit
      *
      * @return array
      */
-    public function findByUser(User $user)
+    public function findByUser(User $user, $limit = 20)
     {
-        return $this->findByUserQuery($user)->getResult();
+        return $this->findByUserQuery($user, $limit)->getResult();
     }
 
     /**
