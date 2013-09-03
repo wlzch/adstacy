@@ -137,7 +137,7 @@ class User implements UserInterface, GroupableInterface
     private $about;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Ad", mappedBy="promotees")
+     * @ORM\OneToMany(targetEntity="PromoteAd", mappedBy="user", orphanRemoval=true)
      */
     private $promotes;
 
@@ -1091,41 +1091,6 @@ class User implements UserInterface, GroupableInterface
     }
 
     /**
-     * Add promotes
-     *
-     * @param \Adstacy\AppBundle\Entity\Ad $promotes
-     * @return User
-     */
-    public function addPromote(\Adstacy\AppBundle\Entity\Ad $promotes)
-    {
-        $this->promotes[] = $promotes;
-        $this->setPromotesCount($this->getPromotesCount() + 1);
-    
-        return $this;
-    }
-
-    /**
-     * Remove promotes
-     *
-     * @param \Adstacy\AppBundle\Entity\Ad $promotes
-     */
-    public function removePromote(\Adstacy\AppBundle\Entity\Ad $promotes)
-    {
-        $this->promotes->removeElement($promotes);
-        $this->setPromotesCount($this->getPromotesCount() - 1);
-    }
-
-    /**
-     * Get promotes
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getPromotes()
-    {
-        return $this->promotes;
-    }
-
-    /**
      * Set followersCount
      *
      * @param integer $followersCount
@@ -1305,7 +1270,14 @@ class User implements UserInterface, GroupableInterface
      */
     public function hasPromote(Ad $ad)
     {
-        return $this->getPromotes()->contains($ad);
+        // will be lazyloaded
+        foreach ($this->getPromotes() as $promote) {
+            if ($promote->getAd() == $ad) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -1459,5 +1431,62 @@ class User implements UserInterface, GroupableInterface
     public function getUpdated()
     {
         return $this->updated;
+    }
+
+    /**
+     * Add promotes
+     *
+     * @param \Adstacy\AppBundle\Entity\PromoteAd $promotes
+     * @return User
+     */
+    public function addPromote(\Adstacy\AppBundle\Entity\PromoteAd $promotes)
+    {
+        $this->promotes[] = $promotes;
+        $this->setPromotesCount($this->getPromotesCount() + 1);
+        $promotes->setUser($this);
+    
+        return $this;
+    }
+
+    /**
+     * Remove promotes
+     *
+     * @param \Adstacy\AppBundle\Entity\PromoteAd $promotes
+     */
+    public function removePromote(\Adstacy\AppBundle\Entity\PromoteAd $promotes)
+    {
+        $this->promotes->removeElement($promotes);
+        $this->setPromotesCount($this->getPromotesCount() - 1);
+    }
+
+    /**
+     * Get promotes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPromotes()
+    {
+        return $this->promotes;
+    }
+
+    /**
+     * Get $limit followings user who has also promote $ad
+     *
+     * @param Ad $ad
+     * @param integer $limit
+     */
+    public function getFollowingsPromoted(Ad $ad, $limit = 3)
+    {
+        $i = 0;
+        $users = array();
+        foreach ($this->getFollowings() as $following) {
+            if ($following->hasPromote($ad)) {
+                $users[] = $following;
+                $i++;
+                if ($i == $limit) return $users;
+            }
+        }
+
+        return $users;
     }
 }

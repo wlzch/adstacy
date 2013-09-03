@@ -58,8 +58,9 @@ class AdRepository extends EntityRepository
             SELECT partial a.{id,imagename,description,tags,thumbHeight,promoteesCount,created}
             FROM AdstacyAppBundle:Ad a
             JOIN a.user u
-            LEFT JOIN a.promotees p
-            WHERE u.id = :id OR p.id = :id
+            LEFT JOIN a.promotees pa
+            LEFT JOIN pa.user pu
+            WHERE u.id = :id OR pu.id = :id
         ');
 
         return $query->setParameter('id', $user->getId());
@@ -101,78 +102,6 @@ class AdRepository extends EntityRepository
     }
 
     /**
-     * Count total ads by $user
-     *
-     * @param User $user
-     *
-     * @return integer
-     */
-    public function countByUser(User $user)
-    {
-        $em = $this->getEntityManager();
-        $query = $em->createQuery('
-            SELECT COUNT(a.id)
-            FROM AdstacyAppBundle:Ad a
-            JOIN a.user u
-            WHERE u.id = :id
-        ');
-
-        return $query->setParameter('id', $user->getId())->getSingleScalarResult();
-    }
-
-    /**
-     * Find promotes by $user query
-     *
-     * @param User $user
-     *
-     * @return Query
-     */
-    public function findPromotesByUserQuery(User $user)
-    {
-        $em = $this->getEntityManager();
-        $query = $em->createQuery('
-            SELECT a
-            FROM AdstacyAppBundle:Ad a
-            JOIN a.promotees p
-            WHERE p.id = :id
-        ');
-
-        return $query->setParameter('id', $user->getId());
-    }
-
-    /**
-     * Find promotes by $user
-     *
-     * @param User $user
-     *
-     * @return array
-     */
-    public function findPromotesByUser(User $user)
-    {
-        return $this->findPromotesByUserQuery($user)->getResult();
-    }
-
-    /**
-     * Count number of promotes by $user
-     *
-     * @param User $user
-     *
-     * @return integer
-     */
-    public function countPromotesByUser(User $user)
-    {
-        $em = $this->getEntityManager();
-        $query = $em->createQuery('
-            SELECT COUNT(a.id)
-            FROM AdstacyAppBundle:Ad a
-            JOIN a.promotees p
-            WHERE p.id = :id
-        ');
-
-        return $query->setParameter('id', $user->getId())->getSingleScalarResult();
-    }
-
-    /**
      * Find user's stream Query
      *
      * @param User $user
@@ -185,13 +114,13 @@ class AdRepository extends EntityRepository
         $query = $em->createQuery('
             SELECT partial a.{id,imagename,description,tags,thumbHeight,promoteesCount,created},
             partial u.{id,username,imagename,realName},
-            partial f.{id,username,imagename,realName},
-            partial p.{id,username,imagename,realName}
+            partial f.{id,username,imagename,realName}
             FROM AdstacyAppBundle:Ad a
             JOIN a.user u
             LEFT JOIN u.followers f
-            LEFT JOIN a.promotees p
-            WHERE u.id = :id OR f.id = :id OR p.id = :id
+            LEFT JOIN a.promotees pa
+            LEFT JOIN pa.user pu
+            WHERE u.id = :id OR f.id = :id OR pu.id = :id
             ORDER BY a.created DESC
         ');
         $query->useResultCache(true, 300, 'AdFindUserStreamQuery');
