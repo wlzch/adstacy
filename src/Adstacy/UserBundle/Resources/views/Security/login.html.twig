@@ -12,10 +12,7 @@
 {% block content %}
   <div id="login-container" class="panel panel-default">
     <div class="panel-heading">
-      <h1>
-        <span aria-hidden="true" class="icon-signin"></span>
-        Login
-      </h1>
+      <h1>Login</h1>
     </div>
 
     <div class="panel-body">
@@ -57,9 +54,6 @@
     </form>
 
     <div class="panel-footer">
-      <div>
-        <a href="{{ path('fos_user_registration_register') }}">{{ "register"|trans }}</a>
-      </div>
       <div>
         <a href="{{ path('fos_user_resetting_request') }}">{{ "forgot_password"|trans }}</a>
       </div>
