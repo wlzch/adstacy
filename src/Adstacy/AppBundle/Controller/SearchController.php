@@ -9,6 +9,9 @@ class SearchController extends Controller
 {
     public function searchAction()
     {
+        if ($this->getRequest()->query->get('type') == 'users') {
+            return $this->searchUsersAction();
+        }
         return $this->searchAdsAction();
     }
 
