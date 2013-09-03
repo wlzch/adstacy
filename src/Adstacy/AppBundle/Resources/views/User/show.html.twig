@@ -26,7 +26,7 @@
               <span class="empty">
                 No Description About User. Go to
                 {% if app.user %}
-                  <a href="">Settings</a>.
+                  <a href="{{ path('fos_user_profile_edit') }}">Settings</a>.
                 {% endif %}
               </span>
             </h2>
