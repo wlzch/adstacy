@@ -15,8 +15,8 @@
             <a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">{{ user.realname }}</a>
             {% if app.user and app.user != user %}
               {% set followed = app.user.hasFollowUser(user) %}
-              <a class="btn btn-primary btn-follow unfollow-user {% if not followed %}hide{% endif %}" href="{{ path('adstacy_app_user_unfollow', {username: user.username}) }}">Unfollow</a>
-              <a class="btn btn-primary btn-follow follow-user {% if followed %}hide{% endif %}" href="{{ path('adstacy_app_user_follow', {username: user.username}) }}">Follow</a>
+              <a class="btn btn-primary btn-sm btn-follow unfollow-user {% if not followed %}hide{% endif %}" href="{{ path('adstacy_app_user_unfollow', {username: user.username}) }}">Unfollow</a>
+              <a class="btn btn-primary btn-sm btn-follow follow-user {% if followed %}hide{% endif %}" href="{{ path('adstacy_app_user_follow', {username: user.username}) }}">Follow</a>
             {% endif %}
           </h1>
           {% if user.about %}
