@@ -89,15 +89,17 @@
               </ul>
 
               <form id="form-search" action="{{ path('adstacy_app_search') }}" class="navbar-form navbar-left" style="position: relative;" role="search">
+                {% set isSearchUser = app.request.attributes.get('_route') == 'adstacy_app_search' and app.request.query.get('type') == 'users' %}
                 <div id="search-container" class="input-group">
                   <input type="text" class="form-control" placeholder="{{"search"|trans}}" name="q" value="{{ app.request.query.get('q') }}">
+                  <input type="hidden" id="search-type" name="type" value="{% if isSearchUser %}users{% else %}ads{% endif %}">
                   <div class="input-group-btn">
                     <button id="search-dropdown-container" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                      Ads <span class="icon-angle-down"></span>
+                      <span id="search-type-text">{% if isSearchUser %}Users{% else %}Ads{% endif %}</span> <span class="icon-angle-down"></span>
                     </button>
                     <ul class="dropdown-menu pull-right">
-                      <li><a href="#">Ads</a></li>
-                      <li><a href="#">Users</a></li>
+                      <li><a href="#" data-val="ads">Ads</a></li>
+                      <li><a href="#" data-val="users">Users</a></li>
                     </ul>
                   </div>
                 </div>

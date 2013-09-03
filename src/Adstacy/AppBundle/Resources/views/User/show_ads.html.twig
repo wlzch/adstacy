@@ -64,7 +64,7 @@
     {% include 'AdstacyAppBundle:Ad:ad.html.twig' with {ad: ad, user: user} %}
   {% endfor %}
   {% if paginator.hasNextPage %}
-    {% set params = {username: user.username, page: paginator.getNextPage}|merge(app.request.query.all) %}
+    {% set params = app.request.query.all|merge({username: user.username, page: paginator.getNextPage}) %}
     <a href="{{ path(route, params )}}" class="btn btn-lg btn-default btn-block next-page">{{"more"|trans}}</a>
   {% endif %}
 {% endblock %}

@@ -20,6 +20,7 @@
           {{ form_label(form.username, label|default(null), { label_attr: { class: 'control-label' } }) }}
           <div class="form-widget">
             {{ form_widget(form.username, { attr: { class: 'form-control' } }) }}
+            {{ form_errors(form.username) }}
           </div>
         </div>
 
@@ -34,6 +35,7 @@
           {{ form_label(form.email, label|default(null), { label_attr: { class: 'control-label' } }) }}
           <div class="form-widget">
             {{ form_widget(form.email, { attr: { class: 'form-control' } }) }}
+            {{ form_errors(form.email) }}
           </div>
         </div>
 
@@ -41,6 +43,7 @@
           {{ form_label(form.realName, label|default(null), { label_attr: { class: 'control-label' } }) }}
           <div class="form-widget">
             {{ form_widget(form.realName, { attr: { class: 'form-control' } }) }}
+            {{ form_errors(form.realName) }}
           </div>
         </div>
 
@@ -48,6 +51,7 @@
           {{ form_label(form.about, label|default(null), { label_attr: { class: 'control-label' } }) }}
           <div class="form-widget">
             {{ form_widget(form.about, { attr: { class: 'form-control' } }) }}
+            {{ form_errors(form.about) }}
           </div>
         </div>
 

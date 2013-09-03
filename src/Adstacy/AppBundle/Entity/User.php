@@ -22,7 +22,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * })
  * @UniqueEntity(fields="emailCanonical", message="Email does not exists", errorPath="email", groups={"Registration", "Profile"})
  * @UniqueEntity(fields="usernameCanonical", message="Username does not exists", errorPath="username", groups={"Registration", "Profile"})
- * @Assert\Callback(methods={"isUsernameValid"})
+ * @Assert\Callback(methods={"isUsernameValid"}, groups={"Registration", "Profile"})
  * @Vich\Uploadable
  */
 class User implements UserInterface, GroupableInterface
@@ -83,7 +83,7 @@ class User implements UserInterface, GroupableInterface
     private $imagename;
 
     /**
-     * @Assert\NotBlank(message="user.realname.not_blank")
+     * @Assert\NotBlank(message="user.realname.not_blank", groups={"Registration", "Profile"})
      * @ORM\Column(name="real_name", type="string", length=255)
      */
     private $realName;
@@ -127,6 +127,11 @@ class User implements UserInterface, GroupableInterface
     private $followingsCount;
 
     /**
+     * @Assert\Length(
+     *    max = 255,
+     *    maxMessage = "user.about.max",
+     *    groups = {"Profile"}
+     *  )
      * @ORM\Column(name="about", type="string", length=255, nullable=true)
      */
     private $about;

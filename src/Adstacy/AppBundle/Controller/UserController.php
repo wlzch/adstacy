@@ -21,7 +21,7 @@ class UserController extends Controller
     {
         $params = $this->getParams($username);
         $params['tab'] = 'ads';
-        $query = $this->getRepository('AdstacyAppBundle:Ad')->findByUserQuery($params['user']);
+        $query = $this->getRepository('AdstacyAppBundle:Ad')->findByUserJoinPromoteQuery($params['user']);
         $params['paginator'] = $this->getDoctrinePaginator($query, $this->getParameter('max_ads_per_page'));
         $params['route'] = 'adstacy_app_user_ads';
 
