@@ -161,18 +161,21 @@
 
 .thumb-container {
   font-size: 0;
-  width: 230px;
-  padding: 10px;
-  margin-left: 2px;
-  margin-right: 2px;
+  width: 234px;
+  padding: 10px 10px 0;
 
   .thumb {
+    border: 1px solid @border-color;
     font-size: 16px;
-    width: 100px;
-    height: 100px;
+    width: 102px;
+    height: 102px;
     display: inline-block;
     margin: 0 10px 10px 0;
-    border-radius: @border-radius-small;
+    border-radius: @border-radius-base;
+
+    > img {
+      border-radius: @border-radius-small;
+    }
 
     &:nth-child(2n) {
       margin-right: 0;

@@ -73,12 +73,15 @@
         {% endif %}
         <div class="thumb-container">
           {% for adByUser in adsByUser %}
-          <div class="thumb"><img src="{{ vich_uploader_asset(adByUser, 'image')|imagine_filter('mini_thumb')}}"></div>
+            <div class="thumb">
+              <img src="{{ vich_uploader_asset(adByUser, 'image')|imagine_filter('mini_thumb')}}"
+                width="{{ mini_thumb_size }}px" height="{{ mini_thumb_size }}px">
+            </div>
           {% endfor %}
         </div>
 
         <div class="panel-body">
-          <a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">more ads</a>
+          <a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}" class="btn btn-default btn-block" style="margin-bottom: 10px;">more ads</a>
           {% if app.user != user %}
             {% set hasFollow = app.user.hasFollowUser(user) %}
             <a href="{{ path('adstacy_app_user_follow', {username: ad.user.username}) }}" class="btn btn-primary btn-block btn-follow follow-user {% if hasFollow %}hide{% endif %}">Follow</a>
@@ -94,14 +97,14 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">{{"ads.delete.confirm_title"|trans}}</h4>
+          <h4 class="modal-title">{{ "ads.delete.confirm_title"|trans }}</h4>
         </div>
         <div class="modal-body">
-          <p>{{"ads.delete.confirm_message"|trans}}</p>
+          <p>{{ "ads.delete.confirm_message"|trans }}</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">{{"cancel"|trans}}</button>
-          <a href="{{ path('adstacy_app_ad_delete', {id: ad.id}) }}" class="btn btn-primary">{{"ads.delete.button"|trans}}</a>
+          <button type="button" class="btn btn-default" data-dismiss="modal">{{ "cancel"|trans }}</button>
+          <a href="{{ path('adstacy_app_ad_delete', {id: ad.id}) }}" class="btn btn-primary">{{ "ads.delete.button"|trans }}</a>
         </div>
       </div>
     </div>
