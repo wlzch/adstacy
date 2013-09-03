@@ -3,6 +3,48 @@
 {% block show_content %}
   {% if paginator.getCurrentPageResults|length > 0 %}
     <div class="masonry jscroll">
+      <div class="masonry-item" id="user-profile">
+        <div class="panel panel-default">
+          <div class="clearfix">
+            <div class="profile-picture">
+              <img src="{{ profile_pic(user) }}">
+            </div>
+            <div class="user">
+              <div class="user-info">
+                <h1 class="user-info-realname">
+                  <a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">
+                    {{ user.realname }}
+                  </a>
+                </h1>
+                {% if user.about %}
+                  <h2 class="user-info-about">{{ user.about }}</h2>
+                {% else %}
+                  <h2 class="user-info-about">
+                    <span class="empty">
+                      No Description About User.
+                      {% if app.user %}
+                        Go to <a href="{{ path('fos_user_profile_edit') }}">Settings</a> to write.
+                      {% endif %}
+                    </span>
+                  </h2>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <div class="user-info-menu">
+            <a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}"><span class="user-followers-count">{{ adsCount }}</span> Ads</a>
+            <a href="{{ path('adstacy_app_user_followers', {username: user.username}) }}"><span class="user-followers-count">{{ followersCount }}</span> Followers</a>
+            <a href="{{ path('adstacy_app_user_followings', {username: user.username}) }}">{{ followingsCount }} Followings</a>
+            <div class="follow-action">
+              {% if app.user and app.user != user %}
+                {% set followed = app.user.hasFollowUser(user) %}
+                <a class="btn btn-primary btn-follow unfollow-user {% if not followed %}hide{% endif %}" href="{{ path('adstacy_app_user_unfollow', {username: user.username}) }}">Unfollow</a>
+                <a class="btn btn-primary btn-follow follow-user {% if followed %}hide{% endif %}" href="{{ path('adstacy_app_user_follow', {username: user.username}) }}">Follow</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
       {{ block('ajax_content') }}
     </div>
   {% else %}
