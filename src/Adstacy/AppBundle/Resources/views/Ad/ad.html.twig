@@ -45,16 +45,18 @@
       </div>
     </div>
   </div>
-  {% if app.user %}
-    {% set followingsWhoPromoted = app.user.getFollowingsPromoted(ad) %}
-    {% if followingsWhoPromoted|length > 0 %}
-      <div class="ad-section">
-        <p class="text-muted">promoted by
-          <a class="link-muted" href="#">
-            <b>{{ followingsWhoPromoted|join(',') }}</b>
-          </a>
-        </p>
-      </div>
+  {% if promotedBy is defined and promotedBy == true %}
+    {% if app.user %}
+      {% set followingsWhoPromoted = app.user.getFollowingsPromoted(ad) %}
+      {% if followingsWhoPromoted|length > 0 %}
+        <div class="ad-section">
+          <p class="text-muted">promoted by
+            <a class="link-muted" href="#">
+              <b>{{ followingsWhoPromoted|join(',') }}</b>
+            </a>
+          </p>
+        </div>
+      {% endif %}
     {% endif %}
   {% endif %}
 </div>
