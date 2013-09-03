@@ -38,7 +38,8 @@ class ProfileFormType extends BaseType
             'label' => 'form_profile.about_me',
             'required' => false,
             'attr' => array(
-                'placeholder' => 'A men fashion enthusiasts. Contact 08XXXXXXXXXX. BB 2BXXXX. Medan.'
+                'placeholder' => 'A men fashion enthusiasts. Contact 08XXXXXXXXXX. BB 2BXXXX. Medan.',
+                'rows' => 5
             )
         ));
         $builder->add('save', 'submit', array(
