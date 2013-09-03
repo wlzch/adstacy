@@ -14,6 +14,7 @@
   var $btnNavbarExpand = $('#btn-navbar-expand');
   var $btnNavbarExpand_span = $('#btn-navbar-expand span');
   var $navbarExpandContainer = $('#navbar-expand-container');
+  var $searchContainer = $('#search-container');
 
   $masonry.masonry({
     columnWidth: 250,
@@ -54,9 +55,14 @@
     $btnNavbarExpand_span.addClass('icon-chevron-down');
     $navbarExpandContainer.addClass('hide');
   });
-  $('.ad-social').ajaxlink('ads');
+  $('.ad').ajaxlink('ads');
   $('[data-toggle=tooltip]').tooltip({
     container: "body"
+  });
+  $searchContainer.find('.dropdown-menu li').click(function() {
+    var $type = $searchContainer.find('#search-type');
+    $type.val($(this).find('a').attr('data-val'));
+    $searchContainer.find('#search-type-text').text($(this).find('a').text());
   });
   $('.tweet').click(function() {
     window.open(this.href,

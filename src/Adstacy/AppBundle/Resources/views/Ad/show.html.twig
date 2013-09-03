@@ -16,7 +16,7 @@
               {% set promoted = app.user.hasPromote(ad) %}
               <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-primary btn-promote unpromote {% if not promoted %}hide{% endif %}"><span class="icon-bullhorn"></span> Unpromote</a>
               <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-primary btn-promote promote {% if promoted %}hide{% endif %}"><span class="icon-bullhorn"></span> Promote</a>
-              <button type="button" class="btn btn-default promotes-count">{{ ad.promoteesCount }}</button>
+              <button type="button" class="btn btn-default promotes-count"><span class="promotes-count">{{ ad.promoteesCount }}</span></button>
             </div>
           {% else %}
             <a class="btn btn-default btn-sm">{{ ad.promoteesCount }} promotes</a>
@@ -64,7 +64,7 @@
     <div id="ad-detail-sidebar" class="pull-left">
       <div class="panel panel-default">
         <div class="panel-body clearfix">
-          {% include 'AdstacyAppBundle:User:user_mini.html.twig' with { user: ad.user, text: '2 minutes ago' } %}
+          {% include 'AdstacyAppBundle:User:user_mini.html.twig' with { user: user, text: '2 minutes ago' } %}
         </div>
         <div class="panel-body">
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, molestias.</p>
@@ -74,7 +74,11 @@
           <div class="thumb"><img data-src="holder.js/100x100"></div>
           <div class="thumb"><img data-src="holder.js/100x100"></div>
           <div class="thumb"><img data-src="holder.js/100x100"></div>
-          <a href="#" class="btn btn-primary btn-block follow-user">Follow</a>
+          {% if app.user != user %}
+            {% set hasFollow = app.user.hasFollowUser(user) %}
+            <a href="{{ path('adstacy_app_user_follow', {username: ad.user.username}) }}" class="btn btn-primary btn-block follow-user {% if hasFollow %}hide{% endif %}">Follow</a>
+            <a href="{{ path('adstacy_app_user_unfollow', {username: ad.user.username}) }}" class="btn btn-primary btn-block unfollow-user {% if not hasFollow %}hide{% endif %}">Unfollow</a>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -103,7 +107,8 @@
   {{ parent() }}
   <script type="text/javascript">
     $(function() {
-      $('.ad-detail-container').ajaxlink('promote_single');
+      $('#ad-detail-container').ajaxlink('promote_single');
+      $('#ad-detail-sidebar').ajaxlink('follow_user');
     });
   </script>
 {% endblock %}
