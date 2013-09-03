@@ -1,16 +1,19 @@
 <div class="panel panel-default" id="search-user-thumb">
   <div class="clearfix">
+    <h5 class="user-realname text-overflow"><a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">{{ user.realname }}</a></h5>
     <div class="profile-picture"><img src="{{ profile_pic(user) }}" /></div>
-    <div class="user-info">
-      <h5 class="user-realname text-overflow"><a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">{{ user.realname }}</a></h5>
-      <p class="user-score">
-        <a href="{{ path('adstacy_app_user_followers', {username: user.username}) }}" class="user-followers-count">{{ user.followersCount }} Followers</a> &nbsp; &nbsp;
-        <a href="{{ path('adstacy_app_user_ads', {username: user.username}) }}">{{ user.adsCount }} Ads</a>
-      </p>
+    <div class="user-ads">
+      <img data-src="holder.js/50x50">
+      <img data-src="holder.js/50x50">
+      <img data-src="holder.js/50x50">
+      <img data-src="holder.js/50x50">
     </div>
   </div>
 
-  <p class="user-about text-overflow">{{ user.about }}</p>
+  <div class="user-score">
+    <a href="{{ path('adstacy_app_user_followers', {username: user.username}) }}" class="user-followers-count">{{ user.followersCount }} Followers</a> &nbsp; &nbsp;
+    <a href="{{ path('adstacy_app_user_ads', {username: user.username}) }}">{{ user.adsCount }} Ads</a>
+  </div>
 
   {% set loggedInUser = app.user %}
   {% if user and loggedInUser and user == loggedInUser %}
