@@ -114,13 +114,17 @@ class AdRepository extends EntityRepository
         $query = $em->createQuery('
             SELECT partial a.{id,imagename,description,tags,thumbHeight,promoteesCount,created},
             partial u.{id,username,imagename,realName},
-            partial f.{id,username,imagename,realName}
+            partial fi.{id,username,imagename,realName},
+            fip
             FROM AdstacyAppBundle:Ad a
             JOIN a.user u
-            LEFT JOIN u.followers f
-            LEFT JOIN a.promotees pa
-            LEFT JOIN pa.user pu
-            WHERE u.id = :id OR f.id = :id OR pu.id = :id
+            LEFT JOIN u.followers fe
+            LEFT JOIN u.followings fi
+            LEFT JOIN a.promotees ap
+            LEFT JOIN ap.user apu
+            LEFT JOIN fi.promotes fip
+            LEFT JOIN fip.user pu
+            WHERE u.id = :id OR pu.id = :id OR fe.id = :id OR apu.id = :id
             ORDER BY a.created DESC
         ');
         $query->useResultCache(true, 300, 'AdFindUserStreamQuery');
