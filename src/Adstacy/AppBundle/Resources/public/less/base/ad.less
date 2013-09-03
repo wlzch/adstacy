@@ -6,6 +6,7 @@
   box-shadow: 0 1px 6px #000;
 
   .ad-section {
+    border-top: 1px solid @border-color;
     padding: 5px 10px;
 
     > p {
@@ -15,16 +16,13 @@
   }
 
   .ad-counter {
-    white-space: nowrap;
+    border-top: 0;
+
     a {
       color: #888;
       font-size: 11px;
       font-weight: bold;
     }
-  }
-
-  .ad-description {
-    border-top: 1px solid #dfdfdf;
   }
 
   .ad-user {
@@ -46,7 +44,7 @@
       border-top: 0;
       border-radius: 0 0 @border-radius-base 0;
     }
-    .btn-group:first-child>.btn:last-child, 
+    .btn-group:first-child>.btn:last-child,
     .btn-group:first-child>.dropdown-toggle {
       border-bottom-right-radius: @border-radius-base;
     }

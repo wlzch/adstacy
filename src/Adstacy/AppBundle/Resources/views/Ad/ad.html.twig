@@ -7,11 +7,11 @@
     </a>
   </div>
 
-  <div class="ad-section ad-description">
+  <div class="ad-section">
     <p>{{ parse_url(parse_hashtag(ad.description)) }}</p>
   </div>
 
-  <div class="ad-section ad-counter">
+  <div class="ad-section ad-counter text-overflow">
     <a href="#"><span class="promotes-count">{{ ad.promoteesCount }}</span> Promotes</a>
   </div>
 
@@ -49,7 +49,11 @@
     {% set followingsWhoPromoted = app.user.getFollowingsPromoted(ad) %}
     {% if followingsWhoPromoted|length > 0 %}
       <div class="ad-section">
-        <p>{{ followingsWhoPromoted|join(',') }}</p>
+        <p class="text-muted">promoted by
+          <a class="link-muted" href="#">
+            <b>{{ followingsWhoPromoted|join(',') }}</b>
+          </a>
+        </p>
       </div>
     {% endif %}
   {% endif %}
