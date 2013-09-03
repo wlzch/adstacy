@@ -23,3 +23,5 @@ user:
     password:
         not_blank: Password cannot be blank
         min: Password requires at least {{ limit }} characters
+    about:
+        max: About maximal {{ limit }} characters

@@ -66,20 +66,22 @@
         <div class="panel-body clearfix">
           {% include 'AdstacyAppBundle:User:user_mini.html.twig' with { user: user, text: '2 minutes ago' } %}
         </div>
+        {% if user.about %}
         <div class="panel-body">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, molestias.</p>
+          <p>{{ user.about }}</p>
         </div>
+        {% endif %}
         <div class="thumb-container">
-          <div class="thumb"><img data-src="holder.js/100x100"></div>
-          <div class="thumb"><img data-src="holder.js/100x100"></div>
-          <div class="thumb"><img data-src="holder.js/100x100"></div>
-          <div class="thumb"><img data-src="holder.js/100x100"></div>
-          {% if app.user != user %}
-            {% set hasFollow = app.user.hasFollowUser(user) %}
-            <a href="{{ path('adstacy_app_user_follow', {username: ad.user.username}) }}" class="btn btn-primary btn-block follow-user {% if hasFollow %}hide{% endif %}">Follow</a>
-            <a href="{{ path('adstacy_app_user_unfollow', {username: ad.user.username}) }}" class="btn btn-primary btn-block unfollow-user {% if not hasFollow %}hide{% endif %}">Unfollow</a>
-          {% endif %}
+          {% for adByUser in adsByUser %}
+          <div class="thumb"><img src="{{ vich_uploader_asset(adByUser, 'image')|imagine_filter('mini_thumb')}}"></div>
+          {% endfor %}
         </div>
+        <a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">more ads</a>
+        {% if app.user != user %}
+          {% set hasFollow = app.user.hasFollowUser(user) %}
+          <a href="{{ path('adstacy_app_user_follow', {username: ad.user.username}) }}" class="btn btn-primary btn-block follow-user {% if hasFollow %}hide{% endif %}">Follow</a>
+          <a href="{{ path('adstacy_app_user_unfollow', {username: ad.user.username}) }}" class="btn btn-primary btn-block unfollow-user {% if not hasFollow %}hide{% endif %}">Unfollow</a>
+        {% endif %}
       </div>
     </div>
   </div>

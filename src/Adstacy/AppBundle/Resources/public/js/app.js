@@ -21,7 +21,7 @@
     isFitWidth: true,
     isInitLayout: false,
     transitionDuration: 0,
-    itemSelector: '.ad'
+    itemSelector: '.masonry-item'
   });
 
   $masonry.masonry('on', 'layoutComplete', function(msnryInstance) {

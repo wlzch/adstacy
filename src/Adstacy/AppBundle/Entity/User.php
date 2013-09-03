@@ -22,7 +22,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * })
  * @UniqueEntity(fields="emailCanonical", message="Email does not exists", errorPath="email", groups={"Registration", "Profile"})
  * @UniqueEntity(fields="usernameCanonical", message="Username does not exists", errorPath="username", groups={"Registration", "Profile"})
- * @Assert\Callback(methods={"isUsernameValid"})
+ * @Assert\Callback(methods={"isUsernameValid"}, groups={"Registration", "Profile"})
  * @Vich\Uploadable
  */
 class User implements UserInterface, GroupableInterface
@@ -83,7 +83,7 @@ class User implements UserInterface, GroupableInterface
     private $imagename;
 
     /**
-     * @Assert\NotBlank(message="user.realname.not_blank")
+     * @Assert\NotBlank(message="user.realname.not_blank", groups={"Registration", "Profile"})
      * @ORM\Column(name="real_name", type="string", length=255)
      */
     private $realName;
@@ -127,12 +127,17 @@ class User implements UserInterface, GroupableInterface
     private $followingsCount;
 
     /**
+     * @Assert\Length(
+     *    max = 255,
+     *    maxMessage = "user.about.max",
+     *    groups = {"Profile"}
+     *  )
      * @ORM\Column(name="about", type="string", length=255, nullable=true)
      */
     private $about;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Ad", mappedBy="promotees")
+     * @ORM\OneToMany(targetEntity="PromoteAd", mappedBy="user", orphanRemoval=true)
      */
     private $promotes;
 
@@ -1086,41 +1091,6 @@ class User implements UserInterface, GroupableInterface
     }
 
     /**
-     * Add promotes
-     *
-     * @param \Adstacy\AppBundle\Entity\Ad $promotes
-     * @return User
-     */
-    public function addPromote(\Adstacy\AppBundle\Entity\Ad $promotes)
-    {
-        $this->promotes[] = $promotes;
-        $this->setPromotesCount($this->getPromotesCount() + 1);
-    
-        return $this;
-    }
-
-    /**
-     * Remove promotes
-     *
-     * @param \Adstacy\AppBundle\Entity\Ad $promotes
-     */
-    public function removePromote(\Adstacy\AppBundle\Entity\Ad $promotes)
-    {
-        $this->promotes->removeElement($promotes);
-        $this->setPromotesCount($this->getPromotesCount() - 1);
-    }
-
-    /**
-     * Get promotes
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getPromotes()
-    {
-        return $this->promotes;
-    }
-
-    /**
      * Set followersCount
      *
      * @param integer $followersCount
@@ -1300,7 +1270,14 @@ class User implements UserInterface, GroupableInterface
      */
     public function hasPromote(Ad $ad)
     {
-        return $this->getPromotes()->contains($ad);
+        // will be lazyloaded
+        foreach ($this->getPromotes() as $promote) {
+            if ($promote->getAd() == $ad) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -1454,5 +1431,62 @@ class User implements UserInterface, GroupableInterface
     public function getUpdated()
     {
         return $this->updated;
+    }
+
+    /**
+     * Add promotes
+     *
+     * @param \Adstacy\AppBundle\Entity\PromoteAd $promotes
+     * @return User
+     */
+    public function addPromote(\Adstacy\AppBundle\Entity\PromoteAd $promotes)
+    {
+        $this->promotes[] = $promotes;
+        $this->setPromotesCount($this->getPromotesCount() + 1);
+        $promotes->setUser($this);
+    
+        return $this;
+    }
+
+    /**
+     * Remove promotes
+     *
+     * @param \Adstacy\AppBundle\Entity\PromoteAd $promotes
+     */
+    public function removePromote(\Adstacy\AppBundle\Entity\PromoteAd $promotes)
+    {
+        $this->promotes->removeElement($promotes);
+        $this->setPromotesCount($this->getPromotesCount() - 1);
+    }
+
+    /**
+     * Get promotes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPromotes()
+    {
+        return $this->promotes;
+    }
+
+    /**
+     * Get $limit followings user who has also promote $ad
+     *
+     * @param Ad $ad
+     * @param integer $limit
+     */
+    public function getFollowingsPromoted(Ad $ad, $limit = 3)
+    {
+        $i = 0;
+        $users = array();
+        foreach ($this->getFollowings() as $following) {
+            if ($following->hasPromote($ad)) {
+                $users[] = $following;
+                $i++;
+                if ($i == $limit) return $users;
+            }
+        }
+
+        return $users;
     }
 }

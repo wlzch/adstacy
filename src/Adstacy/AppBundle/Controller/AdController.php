@@ -3,6 +3,7 @@
 namespace Adstacy\AppBundle\Controller;
 
 use Adstacy\AppBundle\Entity\Ad;
+use Adstacy\AppBundle\Entity\PromoteAd;
 use Adstacy\AppBundle\Form\Type\AdType;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -19,9 +20,11 @@ class AdController extends Controller
         if (!$ad) {
             throw $this->createNotFoundException();
         }
+        $adsByUser = $this->getRepository('AdstacyAppBundle:Ad')->findByUser($this->getUser(), 6);
 
         return $this->render('AdstacyAppBundle:Ad:show.html.twig', array(
-            'ad' => $ad
+            'ad' => $ad,
+            'adsByUser' => $adsByUser
         ));
     }
     
@@ -128,9 +131,12 @@ class AdController extends Controller
 
         // user can only promote once
         if (!$user->hasPromote($ad)) {
-            $ad->addPromotee($user);
+            $promote = new PromoteAd();
+            $ad->addPromotee($promote);
+            $user->addPromote($promote);
             $em = $this->getManager();
             $em->persist($ad);
+            $em->persist($user);
             $em->flush();
             if ($request->isXmlHttpRequest()) {
                 return new JsonResponse(json_encode(array('id' => $ad->getId(), 'promotes_count' => $ad->getPromoteesCount())));
@@ -159,9 +165,12 @@ class AdController extends Controller
 
         // user can only unpromote if he has promote
         if ($user->hasPromote($ad)) {
-            $ad->removePromotee($user);
+            $promoteAd = $this->getRepository('AdstacyAppBundle:PromoteAd')->findOneBy(array('user' => $user, 'ad' => $ad));
+            $ad->removePromotee($promoteAd);
+            $user->removePromote($promoteAd);
             $em = $this->getManager();
             $em->persist($ad);
+            $em->persist($user);
             $em->flush();
             if ($request->isXmlHttpRequest()) {
                 return new JsonResponse(json_encode(array('id' => $ad->getId(), 'promotes_count' => $ad->getPromoteesCount())));
