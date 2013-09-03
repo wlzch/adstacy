@@ -83,12 +83,12 @@
               <ul class="nav navbar-nav">
                 <li>
                   <a id="btn-navbar-expand" class="btn btn-default navbar-btn" title="Browse">
-                    <span aria-hidden="true" class="icon-chevron-up icon-chevron-down"></span>
+                    <span aria-hidden="true" class="icon-angle-up icon-angle-down"></span>
                   </a>
                 </li>
               </ul>
 
-              <form id="form-search" action="{{ path('adstacy_app_search') }}" class="navbar-form navbar-left" style="position: relative;" role="search">
+              <form id="form-search" action="{{ path('adstacy_app_search') }}" class="navbar-form navbar-left" role="search">
                 {% set isSearchUser = app.request.attributes.get('_route') == 'adstacy_app_search' and app.request.query.get('type') == 'users' %}
                 <div id="search-container" class="input-group">
                   <input type="text" class="form-control" placeholder="{{"search"|trans}}" name="q" value="{{ app.request.query.get('q') }}">
@@ -98,8 +98,8 @@
                       <span id="search-type-text">{% if isSearchUser %}Users{% else %}Ads{% endif %}</span> <span class="icon-angle-down"></span>
                     </button>
                     <ul class="dropdown-menu pull-right">
-                      <li><a href="#" data-val="ads">Ads</a></li>
-                      <li><a href="#" data-val="users">Users</a></li>
+                      <li><a data-val="ads">Ads</a></li>
+                      <li><a data-val="users">Users</a></li>
                     </ul>
                   </div>
                 </div>

@@ -43,7 +43,7 @@
 
   $('img.lazy').lazyload();
   $btnNavbarExpand.click(function(event) {
-    $btnNavbarExpand_span.toggleClass('icon-chevron-down');
+    $btnNavbarExpand_span.toggleClass('icon-angle-down');
     $navbarExpandContainer.toggleClass('hide');
 
     event.stopPropagation();
