@@ -1468,4 +1468,25 @@ class User implements UserInterface, GroupableInterface
     {
         return $this->promotes;
     }
+
+    /**
+     * Get $limit followings user who has also promote $ad
+     *
+     * @param Ad $ad
+     * @param integer $limit
+     */
+    public function getFollowingsPromoted(Ad $ad, $limit = 3)
+    {
+        $i = 0;
+        $users = array();
+        foreach ($this->getFollowings() as $following) {
+            if ($following->hasPromote($ad)) {
+                $users[] = $following;
+                $i++;
+                if ($i == $limit) return $users;
+            }
+        }
+
+        return $users;
+    }
 }

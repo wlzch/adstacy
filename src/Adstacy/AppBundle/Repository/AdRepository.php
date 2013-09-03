@@ -113,7 +113,8 @@ class AdRepository extends EntityRepository
         $em = $this->getEntityManager();
         $query = $em->createQuery('
             SELECT partial a.{id,imagename,description,tags,thumbHeight,promoteesCount,created},
-            partial u.{id,username,imagename,realName}
+            partial u.{id,username,imagename,realName},
+            partial f.{id,username,imagename,realName}
             FROM AdstacyAppBundle:Ad a
             JOIN a.user u
             LEFT JOIN u.followers f

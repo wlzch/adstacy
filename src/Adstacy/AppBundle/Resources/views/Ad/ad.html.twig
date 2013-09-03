@@ -45,4 +45,12 @@
       </div>
     </div>
   </div>
+  {% if app.user %}
+    {% set followingsWhoPromoted = app.user.getFollowingsPromoted(ad) %}
+    {% if followingsWhoPromoted|length > 0 %}
+      <div class="ad-section">
+        <p>{{ followingsWhoPromoted|join(',') }}</p>
+      </div>
+    {% endif %}
+  {% endif %}
 </div>
