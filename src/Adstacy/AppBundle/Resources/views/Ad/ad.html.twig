@@ -35,7 +35,7 @@
   </div>
 
   <div class="ad-section ad-user clearfix">
-    {% include 'AdstacyAppBundle:User:user_mini.html.twig' with {user: ad.user, text: ago(ad.created), as_link: false} %}
+    {% include 'AdstacyAppBundle:User:user_mini.html.twig' with {user: ad.user, text: ago(ad.created), as_link: true} %}
     <div class="ad-user-action btn-group">
       {% if app.user %}
         {% set promoted = app.user.hasPromote(ad) %}

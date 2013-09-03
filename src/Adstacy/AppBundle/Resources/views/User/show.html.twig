@@ -11,7 +11,7 @@
         </div>
 
         <div class="user-info">
-          <h1 class="user-realname">
+          <h1 class="user-info-realname">
             <a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">{{ user.realname }}</a>
             {% if app.user and app.user != user %}
               {% set followed = app.user.hasFollowUser(user) %}
@@ -19,10 +19,21 @@
               <a class="btn btn-primary btn-follow follow-user {% if followed %}hide{% endif %}" href="{{ path('adstacy_app_user_follow', {username: user.username}) }}">Follow</a>
             {% endif %}
           </h1>
-          <h2 class="user-about">{{ user.about }}</h2>
-          <div class="profile-menu">
-            <a class="btn {% if tab == 'followers' %}btn-primary{% endif %}" href="{{ path('adstacy_app_user_followers', {username: user.username}) }}"><span class="user-followers-count">{{ followersCount }}</span> Followers</a>
-            <a class="btn {% if tab == 'followings' %}btn-primary{% endif %}" href="{{ path('adstacy_app_user_followings', {username: user.username}) }}">{{ followingsCount }} Followings</a>
+          {% if user.about %}
+            <h2 class="user-info-about">{{ user.about }}</h2>
+          {% else %}
+            <h2 class="user-info-about">
+              <span class="empty">
+                No Description About User. Go to
+                {% if app.user %}
+                  <a href="">Settings</a>.
+                {% endif %}
+              </span>
+            </h2>
+          {% endif %}
+          <div class="user-info-menu">
+            <a class="btn {% if tab == 'followers' %}btn-success{% endif %}" href="{{ path('adstacy_app_user_followers', {username: user.username}) }}"><span class="user-followers-count">{{ followersCount }}</span> Followers</a>
+            <a class="btn {% if tab == 'followings' %}btn-success{% endif %}" href="{{ path('adstacy_app_user_followings', {username: user.username}) }}">{{ followingsCount }} Followings</a>
           </div>
         </div>
       </div>
