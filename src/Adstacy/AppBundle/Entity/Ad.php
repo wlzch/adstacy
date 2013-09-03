@@ -73,15 +73,7 @@ class Ad
     private $user;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", inversedBy="promotes")
-     * @ORM\JoinTable(name="promotes_ad",
-     *    joinColumns={
-     *      @ORM\JoinColumn(name="ad_id", referencedColumnName="id")
-     *    },
-     *    inverseJoinColumns={
-     *      @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     *    }
-     * )
+     * @ORM\OneToMany(targetEntity="PromoteAd", mappedBy="ad", orphanRemoval=true, cascade={"persist","remove"})
      */
     private $promotees;
 
@@ -223,43 +215,6 @@ class Ad
     public function getPromoteesCount()
     {
         return $this->promoteesCount;
-    }
-
-    /**
-     * Add promotees
-     *
-     * @param \Adstacy\AppBundle\Entity\User $promotees
-     * @return Ad
-     */
-    public function addPromotee(\Adstacy\AppBundle\Entity\User $promotees)
-    {
-        $this->promotees[] = $promotees;
-        $this->setPromoteesCount($this->getPromoteesCount() + 1);
-        $promotees->addPromote($this);
-    
-        return $this;
-    }
-
-    /**
-     * Remove promotees
-     *
-     * @param \Adstacy\AppBundle\Entity\User $promotees
-     */
-    public function removePromotee(\Adstacy\AppBundle\Entity\User $promotees)
-    {
-        $this->promotees->removeElement($promotees);
-        $this->setPromoteesCount($this->getPromoteesCount() - 1);
-        $promotees->removePromote($this);
-    }
-
-    /**
-     * Get promotees
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getPromotees()
-    {
-        return $this->promotees;
     }
 
     /**
@@ -439,5 +394,41 @@ class Ad
     public function getUpdated()
     {
         return $this->updated;
+    }
+
+    /**
+     * Add promotees
+     *
+     * @param \Adstacy\AppBundle\Entity\PromoteAd $promotees
+     * @return Ad
+     */
+    public function addPromotee(\Adstacy\AppBundle\Entity\PromoteAd $promotees)
+    {
+        $this->promotees[] = $promotees;
+        $this->setPromoteesCount($this->getPromoteesCount() + 1);
+        $promotees->setAd($this);
+    
+        return $this;
+    }
+
+    /**
+     * Remove promotees
+     *
+     * @param \Adstacy\AppBundle\Entity\PromoteAd $promotees
+     */
+    public function removePromotee(\Adstacy\AppBundle\Entity\PromoteAd $promotees)
+    {
+        $this->promotees->removeElement($promotees);
+        $this->setPromoteesCount($this->getPromoteesCount() - 1);
+    }
+
+    /**
+     * Get promotees
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPromotees()
+    {
+        return $this->promotees;
     }
 }
