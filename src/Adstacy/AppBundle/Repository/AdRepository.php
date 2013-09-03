@@ -102,38 +102,6 @@ class AdRepository extends EntityRepository
     }
 
     /**
-     * Find promotes by $user query
-     *
-     * @param User $user
-     *
-     * @return Query
-     */
-    public function findPromotesByUserQuery(User $user)
-    {
-        $em = $this->getEntityManager();
-        $query = $em->createQuery('
-            SELECT a
-            FROM AdstacyAppBundle:Ad a
-            JOIN a.promotees p
-            WHERE p.id = :id
-        ');
-
-        return $query->setParameter('id', $user->getId());
-    }
-
-    /**
-     * Find promotes by $user
-     *
-     * @param User $user
-     *
-     * @return array
-     */
-    public function findPromotesByUser(User $user)
-    {
-        return $this->findPromotesByUserQuery($user)->getResult();
-    }
-
-    /**
      * Find user's stream Query
      *
      * @param User $user
