@@ -38,8 +38,8 @@
             <div class="follow-action">
               {% if app.user and app.user != user %}
                 {% set followed = app.user.hasFollowUser(user) %}
-                <a class="btn btn-primary btn-follow btn-sm unfollow-user {% if not followed %}hide{% endif %}" href="{{ path('adstacy_app_user_unfollow', {username: user.username}) }}">Unfollow</a>
                 <a class="btn btn-primary btn-follow btn-sm follow-user {% if followed %}hide{% endif %}" href="{{ path('adstacy_app_user_follow', {username: user.username}) }}">Follow</a>
+                <a class="btn btn-success btn-follow btn-sm unfollow-user {% if not followed %}hide{% endif %}" href="{{ path('adstacy_app_user_unfollow', {username: user.username}) }}">Following</a>
               {% endif %}
             </div>
           </div>

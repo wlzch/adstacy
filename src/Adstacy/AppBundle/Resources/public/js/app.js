@@ -52,9 +52,15 @@
     return false;
   })
   $('html, dropdown-toggle').click(function() {
-    $btnNavbarExpand_span.addClass('icon-chevron-down');
+    $btnNavbarExpand_span.addClass('icon-angle-down');
     $navbarExpandContainer.addClass('hide');
   });
+  $('.unfollow-user').hover(
+    function() { $(this).text('Unfollow'); },
+    function() { $(this).text('Following'); }
+  ).click(
+    function() { $(this).text('Following'); }
+  );
   $('.ad').ajaxlink('ads');
   $('[data-toggle=tooltip]').tooltip({
     container: "body"

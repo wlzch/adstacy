@@ -14,9 +14,15 @@
           {% if app.user %}
             <div class="btn-group btn-group-sm">
               {% set promoted = app.user.hasPromote(ad) %}
-              <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-primary btn-promote unpromote {% if not promoted %}hide{% endif %}"><span class="icon-bullhorn"></span> Unpromote</a>
-              <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-primary btn-promote promote {% if promoted %}hide{% endif %}"><span class="icon-bullhorn"></span> Promote</a>
-              <button type="button" class="btn btn-default promotes-count"><span class="promotes-count">{{ ad.promoteesCount }}</span></button>
+              <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-primary btn-promote unpromote {% if not promoted %}hide{% endif %}">
+                <span aria-hidden="true" class="icon-bullhorn"></span> Unpromote
+              </a>
+              <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-primary btn-promote promote {% if promoted %}hide{% endif %}">
+                <span aria-hidden="true" class="icon-bullhorn"></span> Promote
+              </a>
+              <button type="button" class="btn btn-default promotes-count">
+                <span class="promotes-count">{{ ad.promoteesCount }}</span>
+              </button>
             </div>
           {% else %}
             <a class="btn btn-default btn-sm">{{ ad.promoteesCount }} promotes</a>
@@ -29,15 +35,15 @@
           {% set facebookUrl = "https://www.facebook.com/sharer/sharer.php?u=#{adUrl}" %}
 
           <a href="{{ twitterUrl }}" class="tweet btn btn-twitter btn-sm">
-            <span aria-hidden="true" data-icon="&#xe002;"></span> Twitter
+            <span aria-hidden="true" class="icon-twitter"></span> Twitter
           </a>
           <a href="{{ facebookUrl }}" class="facebook-share btn btn-facebook btn-sm">
-            <span aria-hidden="true" data-icon="&#xe003;"></span> Facebook
+            <span aria-hidden="true" class="icon-facebook"></span> Facebook
           </a>
           {% if app.user == user %}
             <div class="btn-group btn-group-sm pull-right">
-              <a href="{{ path('adstacy_app_ad_edit', {id: ad.id}) }}" class="btn btn-default">{{"edit"|trans}}</a>
-              <a href="#" data-toggle="modal" data-target="#confirm-modal" class="btn btn-primary">{{"delete"|trans}}</a>
+              <a href="{{ path('adstacy_app_ad_edit', {id: ad.id}) }}" class="btn btn-default">{{ "edit"|trans }}</a>
+              <a href="#" data-toggle="modal" data-target="#confirm-modal" class="btn btn-primary">{{ "delete"|trans }}</a>
             </div>
           {% endif %}
         </div>
@@ -84,8 +90,10 @@
           <a href="{{ path('adstacy_app_user_ads', {username: user.username}) }}" class="btn btn-default btn-block" style="margin-bottom: 10px;">more ads</a>
           {% if app.user and app.user != user %}
             {% set hasFollow = app.user.hasFollowUser(user) %}
-            <a href="{{ path('adstacy_app_user_follow', {username: ad.user.username}) }}" class="btn btn-primary btn-block btn-follow follow-user {% if hasFollow %}hide{% endif %}">Follow</a>
-            <a href="{{ path('adstacy_app_user_unfollow', {username: ad.user.username}) }}" class="btn btn-primary btn-block btn-follow unfollow-user {% if not hasFollow %}hide{% endif %}">Unfollow</a>
+            <div class="follow-action">
+              <a href="{{ path('adstacy_app_user_follow', {username: ad.user.username}) }}" class="btn btn-primary btn-block follow-user {% if hasFollow %}hide{% endif %}">Follow</a>
+              <a href="{{ path('adstacy_app_user_unfollow', {username: ad.user.username}) }}" class="btn btn-success btn-block unfollow-user {% if not hasFollow %}hide{% endif %}">Following</a>
+            </div>
           {% endif %}
         </div>
       </div>
