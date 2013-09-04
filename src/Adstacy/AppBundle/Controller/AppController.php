@@ -37,6 +37,20 @@ class AppController extends Controller
         ));
     }
 
+    /**
+     * Show trending ads
+     */
+    public function trendingAction()
+    {
+        $since = date('Y-m-d', strtotime('-7 day', time())); // 7 days ago
+        $query = $this->getRepository('AdstacyAppBundle:Ad')->findTrendingSince($since);
+        $paginator = $this->getDoctrinePaginator($query, $this->getParameter('max_ads_per_page'));
+
+        return $this->render('AdstacyAppBundle:App:trending.html.twig', array(
+            'paginator' => $paginator
+        ));
+    }
+
     public function contactUsAction()
     {
         $contact = new Contact();

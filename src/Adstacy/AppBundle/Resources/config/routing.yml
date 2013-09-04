@@ -8,6 +8,11 @@ adstacy_app_stream:
     defaults:
         _controller: AdstacyAppBundle:App:stream
 
+adstacy_app_trending:
+    pattern: /trending
+    defaults:
+        _controller: AdstacyAppBundle:App:trending
+
 adstacy_app_contact:
     pattern: /contact-us
     defaults:
