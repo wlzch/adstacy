@@ -32,7 +32,7 @@
             </div>
           </div>
           <div class="user-info-menu">
-            <a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}"><span class="user-followers-count">{{ adsCount }}</span> Ads</a>
+            <a href="{{ path('adstacy_app_user_ads', {username: user.username}) }}"><span class="user-followers-count">{{ adsCount }}</span> Ads</a>
             <a href="{{ path('adstacy_app_user_followers', {username: user.username}) }}"><span class="user-followers-count">{{ followersCount }}</span> Followers</a>
             <a href="{{ path('adstacy_app_user_followings', {username: user.username}) }}">{{ followingsCount }} Followings</a>
             <div class="follow-action">
@@ -49,12 +49,16 @@
     </div>
   {% else %}
     <div class="jumbotron text-center">
-      <h1>{{"ads.no_ads.message"|trans}}</h1>
+      {% if app.user and app.user == user %}
+        <h1>{{"ads.no_ads.message"|trans({'%username%': 'You'})}}</h1>
       <p class="lead">{{"ads.no_ads.help"|trans}}</p>
       <a href="{{ path('adstacy_app_ad_create') }}" class="btn-group btn-group-lg">
         <span class="btn btn-success"><span class="icon-plus"></span></span>
         <span class="btn btn-success">{{"ads.create"|trans}}</span>
       </a>
+      {% else %}
+        <h1>{{"ads.no_ads.message"|trans({'%username%': user.username})}}</h1>
+      {% endif %}
     </div>
   {% endif %}
 {% endblock %}

@@ -12,9 +12,17 @@
   {% else %}
     <div class="jumbotron text-center">
       {% if route == 'adstacy_app_user_followers' %}
-      <h1>{{"user.no_followers.message"|trans}}</h1>
+        {% if app.user and app.user == user %}
+          <h1>{{"user.no_followers.message"|trans({'%username%': 'You'})}}</h1>
+        {% else %}
+          <h1>{{"user.no_followers.message"|trans({'%username%': user.username})}}</h1>
+        {% endif %}
       {% elseif route == 'adstacy_app_user_followings' %}
-      <h1>{{"user.no_followings.message"|trans}}</h1>
+        {% if app.user and app.user == user %}
+          <h1>{{"user.no_followings.message"|trans({'%username%': 'You'})}}</h1>
+        {% else %}
+          <h1>{{"user.no_followings.message"|trans({'%username%': user.username})}}</h1>
+        {% endif %}
       {% endif %}
     </div>
   {% endif %}

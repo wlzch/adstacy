@@ -26,14 +26,14 @@ ads:
         confirm_message: Are you sure you want to delete this ads?
         button: DELETE!
     no_ads:
-        message: You don't have any ads yet
+        message: %username% don't have any ads yet
         help: Create an ads now
 
 user:
     no_followers:
-        message: You don't have any followers yet
+        message: %username% don't have any followers yet
     no_followings:
-        message: Nobody follows you yet.
+        message: Nobody follows %username% yet.
 
 search:
     no_result:
