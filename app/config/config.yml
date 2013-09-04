@@ -147,6 +147,8 @@ swiftmailer:
     encryption: %mailer_encryption%
     username:  %mailer_user%
     password:  %mailer_password%
+    auth_mode: %mailer_auth_mode%
+    sender_address: %adstacy.mail.support%
     spool:     { type: memory }
 
 fos_user:

@@ -10,6 +10,7 @@ parameters:
     mailer_host:       localhost
     mailer_port:       25
     mailer_encryption: null
+    mailer_auth_mode: null
     mailer_user:       ~
     mailer_password:   ~
 
