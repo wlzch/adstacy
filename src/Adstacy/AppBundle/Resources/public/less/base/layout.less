@@ -1,8 +1,5 @@
 body {
   padding-top: 70px;
-}
-
-.body {
   margin-bottom: 14px;
 }
 
@@ -32,6 +29,10 @@ body {
   &:hover {
     background-color: darken(@brand-primary, 10%);
   }
+}
+
+#dropdown-register {
+  margin-right: 10px;
 }
 
 #user-dropdown {
@@ -191,26 +192,6 @@ ul.nav-expand {
 @-o-viewport        { width: device-width; }
 @viewport           { width: device-width; }
 
-@media screen and (max-width: @screen-tablet) {
-  #btn-navbar-expand, #search-bar, .ad-detail-container, .settings-container {
-    width: 100% !important;
-  }
-  #search-bar {
-    margin-left: 0;
-  }
-  #create-ads {
-    margin-right: 0;
-  }
-  #user-dropdown {
-    .navbar-btn {
-      width: 100%;
-    }
-    .btn-user {
-      width: 100%;
-    }
-  }
-}
-
 .btn-follow + .btn-block {
   margin-top: 0;
 }
@@ -224,4 +205,33 @@ span.required {
 .panel {
   margin-left: auto;
   margin-right: auto;
+}
+
+@media screen and (max-width: @screen-tablet) {
+  #dropdown-register a, #dropdown-login-btn, #dropdown-login > .navbar-btn, #search-container, #search-box, #btn-navbar-expand, #login-dropdown-container {
+    width: 100% !important;  
+  }
+  #form-search {
+    padding: 0;
+  }
+  #dropdown-register {
+    margin-right: 0;
+  }
+  #form-search .btn-search {
+    left: 10px;
+  }
+  #create-ads {
+    margin-right: 0;
+  }
+  #user-dropdown {
+    .navbar-btn {
+      width: 100%;
+    }
+    .btn-user {
+      width: 100%;
+    }
+  }
+  #login-dropdown-container {
+    padding: 0 !important;
+  }
 }

@@ -131,14 +131,14 @@
                     </div>
                   </li>
                 {% else %}
-                  <li>
-                    <div class="navbar-btn" style="margin-right: 10px">
+                  <li id="dropdown-register">
+                    <div class="navbar-btn">
                       <a class="btn btn-success" href="{{ path('fos_user_registration_register') }}">{{"register"|trans}}</a>
                     </div>
                   </li>
-                  <li class="dropdown">
+                  <li class="dropdown" id="dropdown-login">
                     <div class="btn-group navbar-btn">
-                      <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                      <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" id="dropdown-login-btn">
                         {{"login"|trans}}
                       </button>
                       <ul id="login-dropdown-container" class="dropdown-menu">
