@@ -43,7 +43,7 @@
         </div>
 
         <div class="panel-body">
-          <p class="lead">{{ parse_url(parse_hashtag(ad.description)) }}</p>
+          <p class="ad-description">{{ parse_url(parse_hashtag(ad.description)) }}</p>
         </div>
 
         <div class="text-center">
@@ -67,7 +67,7 @@
           {% include 'AdstacyAppBundle:User:user_mini.html.twig' with { user: user, text: '2 minutes ago' } %}
         </div>
         {% if user.about %}
-        <div class="panel-body">
+        <div class="panel-body user-about">
           <p>{{ user.about }}</p>
         </div>
         {% endif %}
