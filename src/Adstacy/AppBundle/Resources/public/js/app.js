@@ -61,6 +61,12 @@
   ).click(
     function() { $(this).text('Following'); }
   );
+  $('.unpromote').hover(
+    function() { $(this).find('.text').text('Unpromote'); },
+    function() { $(this).find('.text').text('Promoted'); }
+  ).click(
+    function() { $(this).find('.text').text('Promoted'); }
+  );
   $('.ad').ajaxlink('ads');
   $('[data-toggle=tooltip]').tooltip({
     container: "body"

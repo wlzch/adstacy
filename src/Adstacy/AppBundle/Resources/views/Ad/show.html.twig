@@ -12,13 +12,15 @@
       <div class="panel panel-default">
         <div class="panel-body toolbar">
           {% if app.user %}
-            <div class="btn-group btn-group-sm">
+            <div class="promote-action btn-group btn-group-sm">
               {% set promoted = app.user.hasPromote(ad) %}
-              <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-primary btn-promote unpromote {% if not promoted %}hide{% endif %}">
-                <span aria-hidden="true" class="icon-bullhorn"></span> Unpromote
-              </a>
               <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-primary btn-promote promote {% if promoted %}hide{% endif %}">
-                <span aria-hidden="true" class="icon-bullhorn"></span> Promote
+                <span aria-hidden="true" class="icon-bullhorn"></span>
+                <span class="text">Promote</span>
+              </a>
+              <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-success btn-promote unpromote {% if not promoted %}hide{% endif %}">
+                <span aria-hidden="true" class="icon-bullhorn"></span>
+                <span class="text">Promoted</span>
               </a>
               <button type="button" class="btn btn-default promotes-count">
                 <span class="promotes-count">{{ ad.promoteesCount }}</span>
