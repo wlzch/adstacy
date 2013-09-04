@@ -10,9 +10,9 @@ parameters:
     mini_thumb_size: 100
     profile_pic_size: 100
 
-    adstacy.mail.support: adstacycom@gmail.com
-    adstacy.mail.admin: adstacycom@gmail.com
-    adstacy.mail.updates: adstacycom@gmail.com
+    adstacy.mail.support: support@adstacy.com
+    adstacy.mail.admin: admin@adstacy.com
+    adstacy.mail.updates: updates@adstacy.com
 
     facebook_app_id: '476946822391252'
     facebook_app_secret: '10af83878f15f4963c5a0a22fdc0e28b'
@@ -78,6 +78,9 @@ twig:
         max_ads_per_page: %max_ads_per_page%
         max_users_per_page: %max_users_per_page%
         facebook_app_id: %facebook_app_id%
+        adstacy_mail_support: %adstacy.mail.support%
+        adstacy_mail_admin: %adstacy.mail.admin%
+        adstacy_mail_updates: %adstacy.mail.updates%
     form:
         resources:
             - 'AdstacyAppBundle:Form:fields.html.twig'
@@ -159,6 +162,9 @@ fos_user:
     change_password:
         form:
             type: adstacy_change_password
+    from_email:
+        address: %adstacy.mail.support%
+        sender_name: Adstacy Support
 
 hwi_oauth:
     firewall_name: main
