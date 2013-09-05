@@ -19,22 +19,19 @@
             <span class="icon-angle-down icon-angle-up"></span>
           </button>
           <div id="browse-dropdown" class="dropdown-menu" role="menu">
-            <div class="clearfix">
-              <ul id="browse-dropdown-menu" class="list-unstyled">
-                <li><a href="{{ path('homepage') }}" title="Explore"><span class="icon-home"></span>&nbsp; Explore</a></li>
-                <li><a href="{{ path('adstacy_app_stream') }}"><span class="icon-rss"></span>&nbsp; {{"stream"|trans}}</a></li>
-                <li><a href="{{ path('adstacy_app_trending') }}" title="Trending"><span class="icon-rocket"></span>&nbsp; Trending</a></li>
-              </ul>
-              <ul id="tags-dropdown" class="list-inline list-unstyled">
-                <li class="heading">POPULAR TAGS</li>
-                <li><a href="{{ path('adstacy_app_search', {q: 'jual'}) }}" title="Jual">Jual<small>#jual</small></a></li>
-                <li><a href="{{ path('adstacy_app_search', {q: 'beli'}) }}" title="Beli">Beli<small>#beli</small></a></li>
-                <li><a href="{{ path('adstacy_app_search', {q: 'loker'}) }}" title="Lowongan Kerja">Lowongan Kerja<small>#lowker</small></a></li>
-                <li><a href="{{ path('adstacy_app_search', {q: 'promo'}) }}" title="Promo">Promo<small>#promo</small></a></li>
-                <li><a href="{{ path('adstacy_app_search', {q: 'event'}) }}" title="Event">Event<small>#event</small></a></li>
-                <li><a href="{{ path('adstacy_app_search', {q: 'property'}) }}" title="Property">Rumah<small>#property</small></a></li>
-              </ul>
-            </div>
+            <ul id="browse-dropdown-menu" class="list-inline list-unstyled">
+              <li><a href="{{ path('homepage') }}" title="Explore"><span class="icon-home"></span>&nbsp; Explore</a></li>
+              <li><a href="{{ path('adstacy_app_stream') }}"><span class="icon-rss"></span>&nbsp; {{"stream"|trans}}</a></li>
+              <li><a href="{{ path('adstacy_app_trending') }}" title="Trending"><span class="icon-rocket"></span>&nbsp; Trending</a></li>
+            </ul>
+            <ul id="tags-dropdown" class="list-inline list-unstyled">
+              <li><a href="{{ path('adstacy_app_search', {q: 'jual'}) }}" title="Jual">Jual<small>#jual</small></a></li>
+              <li><a href="{{ path('adstacy_app_search', {q: 'beli'}) }}" title="Beli">Beli<small>#beli</small></a></li>
+              <li><a href="{{ path('adstacy_app_search', {q: 'loker'}) }}" title="Lowongan Kerja">Lowongan Kerja<small>#lowker</small></a></li>
+              <li><a href="{{ path('adstacy_app_search', {q: 'promo'}) }}" title="Promo">Promo<small>#promo</small></a></li>
+              <li><a href="{{ path('adstacy_app_search', {q: 'event'}) }}" title="Event">Event<small>#event</small></a></li>
+              <li><a href="{{ path('adstacy_app_search', {q: 'property'}) }}" title="Property">Rumah<small>#property</small></a></li>
+            </ul>
             <ul id="footer" class="list-inline list-unstyled">
               <li><a href="{{ path('adstacy_app_page_show', {key: 'about'}) }}">{{"about"|trans}}</a></li>
               <li><a href="{{ path('adstacy_app_page_show', {key: 'terms'}) }}">{{"terms"|trans}}</a></li>
