@@ -30,11 +30,11 @@ class LoadUserData extends DataFixture
         $erwin = new User();
         $erwin->setUsername('rwinz');
         $erwin->setRealname('Erwin Zhang');
-        $erwin->setEmail('rwinz.cyruz@gmail.com');
+        $erwin->setEmail('rw7nz.cyruz@gmail.com');
         $erwin->setAbout('IU fans\' items online seller, #IU \'s #album, #poster, #fashion and many more stuffs. Location for #Medan, #Indonesia. YM: wandi.lin@yahoo.com Hangout: wandi.lin13@gmail.com BB Pin: 25fa9088 HP: 0877 9399 5355');
         #$erwin->setAbout($this->faker->sentence(10));
         $encoder = $this->get('security.encoder_factory')->getEncoder($erwin);
-        $password = $encoder->encodePassword('erwin', $erwin->getSalt());
+        $password = $encoder->encodePassword('rwinz', $erwin->getSalt());
         $erwin->setPassword($password);
 
         $admin = new User();

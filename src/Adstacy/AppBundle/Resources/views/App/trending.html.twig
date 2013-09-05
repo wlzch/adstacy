@@ -1,0 +1,13 @@
+{% extends is_ajax() ? '::ajax.html.twig' : 'AdstacyAppBundle::layout.html.twig' %}
+
+{% block content %}
+  <div class="masonry clearfix">
+    {{ block('ajax_content') }}
+  </div>
+{% endblock %}
+
+{% block ajax_content %}
+  {% for ad in ads %}
+    {% include 'AdstacyAppBundle:Ad:ad.html.twig' with {ad: ad[0]} %}
+  {% endfor %}
+{% endblock %}

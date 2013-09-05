@@ -1,5 +1,5 @@
 #settings-container {
-  margin: 100px auto;
+  margin: auto;
   width: 760px;
 
   .panel {
@@ -33,5 +33,14 @@
 
   textarea.form-control {
     resize: vertical;
+  }
+}
+
+@media screen and (max-width: @screen-tablet) {
+  #settings-container {
+    width: 100%;
+  }
+  #settings-container .form-group .form-widget {
+    width: 100%;
   }
 }

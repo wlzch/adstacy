@@ -13,11 +13,16 @@
 {% block content %}
   <div id="register-container" class="panel panel-default">
     <div class="panel-heading">
-      <h1>
-        <span aria-hidden="true" class="icon-pencil"></span>
-        {{ "form_registration.title"|trans }}
-      </h1>
+      <h1>{{ "form_registration.title"|trans }}</h1>
     </div>
+
+    <div class="panel-body">
+      {% for owner in hwi_oauth_resource_owners() %}
+        <a class="btn btn-block btn-lg btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">Signup with {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
+      {% endfor %}
+    </div>
+
+    <hr>
 
     {{ form_start(form, {attr: {class: 'panel-body', role: 'form'} }) }}
       {{ form_errors(form) }}

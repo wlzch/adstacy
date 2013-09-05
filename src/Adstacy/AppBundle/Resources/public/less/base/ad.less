@@ -2,8 +2,10 @@
   width: 236px;
   margin: 14px 7px 0 7px;
   background-color: #fff;
+  border: 1px solid #ccc;
+  border-bottom: 0;
   border-radius: @border-radius-base;
-  box-shadow: 0 1px 6px #000;
+  box-shadow: 0 1px 1px #aaa;
 
   .ad-section {
     border-top: 1px solid @border-color;
@@ -43,6 +45,9 @@
       border-bottom: 0;
       border-top: 0;
       border-radius: 0 0 @border-radius-base 0;
+    }
+    .btn-default {
+      border-right: 0;
     }
     .btn-group:first-child>.btn:last-child,
     .btn-group:first-child>.dropdown-toggle {
@@ -189,3 +194,12 @@
   }
 }
 
+
+@media screen and (max-width: @screen-tablet) {
+  #ad-detail-container, #ad-detail-content {
+    width: 100%;
+  }
+  #ad-detail-sidebar {
+    display: none;
+  }
+}

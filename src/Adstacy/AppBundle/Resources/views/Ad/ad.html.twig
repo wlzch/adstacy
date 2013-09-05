@@ -22,6 +22,8 @@
         {% set promoted = app.user.hasPromote(ad) %}
         <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-primary btn-promote unpromote {% if not promoted %}hide{% endif %}"><span aria-hidden="true" data-icon="&#xe007;"></span></a>
         <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-default btn-promote promote {% if promoted %}hide{% endif %}"><span aria-hidden="true" data-icon="&#xe007;"></span></a>
+      {% else %}
+        <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-default btn-promote"><span aria-hidden="true" data-icon="&#xe007;"></span></a>
       {% endif %}
       <div class="btn-group dropup">
         <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">

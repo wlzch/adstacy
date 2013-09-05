@@ -13,10 +13,10 @@ edit: Edit
 more: More
 
 #footer
-about: about
-terms: terms
-privacy: privacy policy
-contact_us: contact us
+about: About
+terms: Terms
+privacy: Privacy Policy
+contact_us: Contact Us
 
 #ads
 ads:
@@ -33,7 +33,7 @@ user:
     no_followers:
         message: %username% don't have any followers yet
     no_followings:
-        message: Nobody follows %username% yet.
+        message: Nobody follows %username% yet
 
 search:
     no_result:

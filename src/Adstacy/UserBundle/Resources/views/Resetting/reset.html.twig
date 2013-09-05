@@ -2,13 +2,33 @@
 
 {% trans_default_domain 'FOSUserBundle' %}
 
+{% form_theme form _self %}
+
+{% block form_row %}
+  <div class="form-group">
+    {{ form_label(form, label, {label_attr: {class: 'control-label'} }) }}
+    <div class="control-widget">
+      {{ form_widget(form, {attr: {class: 'form-control'} }) }}
+      {{ form_errors(form, {attr: {class: 'alert alert-danger'} }) }}
+    </div>
+  </div>
+{% endblock %}
+
 {% block content %}
 {% trans_default_domain 'FOSUserBundle' %}
 
-<form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'resetting.reset.submit'|trans }}">
+<div id="reset-verification-container" class="panel panel-default">
+  <div class="panel-heading">
+    <h1>Reset Verification</h1>
+  </div>
+
+  <form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset form-horizontal panel-body">
+    {{ form_row(form.plainPassword) }}
+    <div class="form-group">
+      <div class="control-widget offset-control-label">
+        <input class="btn btn-primary" type="submit" value="{{ 'resetting.reset.submit'|trans }}">
+      </div>
     </div>
-</form>
+  </form>
+</div>
 {% endblock %}
