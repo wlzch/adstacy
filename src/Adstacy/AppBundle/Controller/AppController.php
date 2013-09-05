@@ -6,11 +6,25 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use JMS\Serializer\SerializationContext;
 use Adstacy\AppBundle\Model\Contact;
 use Adstacy\AppBundle\Form\Type\ContactType;
+use Adstacy\UserBundle\Form\Type\RegistrationFormType;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 
 class AppController extends Controller
 {
     public function indexAction()
+    {
+        if (!$this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            $form = $this->createForm(new RegistrationFormType('Adstacy\\AppBundle\\Entity\\User'));
+
+            return $this->render('AdstacyAppBundle:App:landing.html.twig', array(
+                'form' => $form->createView()
+            ));
+        }
+
+        return $this->exploreAction();
+    }
+
+    public function exploreAction()
     {
         $request = $this->getRequest();
         $maxAd = $this->getParameter('max_ads_per_page');
