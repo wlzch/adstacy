@@ -28,7 +28,7 @@ class AppController extends Controller
      */
     public function streamAction()
     {
-        $user = $this->getUser(); 
+        $user = $this->getUser();
         $query = $this->getRepository('AdstacyAppBundle:Ad')->findUserStreamQuery($user);
         $paginator = $this->getDoctrinePaginator($query, $this->getParameter('max_ads_per_page'));
 
@@ -43,11 +43,10 @@ class AppController extends Controller
     public function trendingAction()
     {
         $since = date('Y-m-d', strtotime('-7 day', time())); // 7 days ago
-        $query = $this->getRepository('AdstacyAppBundle:Ad')->findTrendingSince($since);
-        $paginator = $this->getDoctrinePaginator($query, $this->getParameter('max_ads_per_page'));
+        $ads = $this->getRepository('AdstacyAppBundle:Ad')->findTrendingSince($since);
 
         return $this->render('AdstacyAppBundle:App:trending.html.twig', array(
-            'paginator' => $paginator
+            'ads' => $ads
         ));
     }
 
@@ -65,7 +64,7 @@ class AppController extends Controller
                 ->setBody($contact->getContent())
             ;
             $this->get('mailer')->send($message);
-             
+
             $this->addFlash('success', $this->translate('flash.contact.success'));
 
             return $this->redirect($this->generateUrl('homepage'));

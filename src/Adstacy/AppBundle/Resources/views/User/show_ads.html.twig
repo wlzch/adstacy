@@ -9,7 +9,7 @@
             <div class="profile-picture">
               <img src="{{ profile_pic(user) }}">
             </div>
-            <div class="user">
+            <div class="user-desc">
               <div class="user-info">
                 <h1 class="user-info-realname">
                   <a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">
@@ -32,14 +32,18 @@
             </div>
           </div>
           <div class="user-info-menu">
-            <a href="{{ path('adstacy_app_user_ads', {username: user.username}) }}"><span class="user-followers-count">{{ adsCount }}</span> Ads</a>
+            <a href="{{ path('adstacy_app_user_ads', {username: user.username}) }}">{{ adsCount }} Ads</a>
             <a href="{{ path('adstacy_app_user_followers', {username: user.username}) }}"><span class="user-followers-count">{{ followersCount }}</span> Followers</a>
             <a href="{{ path('adstacy_app_user_followings', {username: user.username}) }}">{{ followingsCount }} Followings</a>
             <div class="follow-action">
-              {% if app.user and app.user != user %}
-                {% set followed = app.user.hasFollowUser(user) %}
-                <a class="btn btn-primary btn-follow btn-sm unfollow-user {% if not followed %}hide{% endif %}" href="{{ path('adstacy_app_user_unfollow', {username: user.username}) }}">Unfollow</a>
-                <a class="btn btn-primary btn-follow btn-sm follow-user {% if followed %}hide{% endif %}" href="{{ path('adstacy_app_user_follow', {username: user.username}) }}">Follow</a>
+              {% if app.user %}
+                {% if app.user != user %}
+                  {% set followed = app.user.hasFollowUser(user) %}
+                  <a class="btn btn-primary btn-follow btn-sm unfollow-user {% if not followed %}hide{% endif %}" href="{{ path('adstacy_app_user_unfollow', {username: user.username}) }}">Unfollow</a>
+                  <a class="btn btn-primary btn-follow btn-sm follow-user {% if followed %}hide{% endif %}" href="{{ path('adstacy_app_user_follow', {username: user.username}) }}">Follow</a>
+                {% endif %}
+              {% else %}
+                <a class="btn btn-primary btn-follow btn-sm" href="{{ path('adstacy_app_user_follow', {username: user.username}) }}">Follow</a>
               {% endif %}
             </div>
           </div>
@@ -77,6 +81,7 @@
   {{ parent() }}
   <script type="text/javascript">
     $(function() {
+      $('#user-profile').ajaxlink('follow_single');
       $('.jscroll').jscroll({
         nextSelector: 'a.next-page',
         callback: function(a, b) {

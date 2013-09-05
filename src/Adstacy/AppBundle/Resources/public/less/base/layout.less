@@ -117,7 +117,6 @@ span.required {
   li {
     margin-bottom: 10px;
   }
-  
   a {
     color: #333;
     display: inline-block;
@@ -209,7 +208,7 @@ span.required {
 #error-page {
   margin-top: 50px;
   text-align: center;
-  color: #fff;
+  color: @gray-dark;
   h2 {
     font-size: 6em;
     margin-bottom: 30px;
@@ -276,10 +275,10 @@ span.required {
     }
   }
 
-  // Adjust Components 
-  #search-container, 
+  // Adjust Components
+  #search-container,
   #search-box {
-    width: 100% !important;  
+    width: 100% !important;
   }
   #register-btn-link {
     display: block;
@@ -295,4 +294,12 @@ span.required {
     display: block;
     margin-right: 0;
   }
+}
+
+.next-page {
+  position: absolute;
+  bottom: -50px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: 0;
 }
