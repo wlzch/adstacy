@@ -47,7 +47,7 @@
               </button>
               <div class="dropdown-menu" role="menu">
                 <div class="clearfix">
-                  <ul id="menu-tags" class="list-inline list-unstyled">
+                  <ul id="tags-dropdown" class="list-inline list-unstyled">
                     <li class="heading">Tags Selection</li>
                     <li class="hot-category"><a href="{{ path('adstacy_app_search', {q: 'jual'}) }}" title="Jual">Jual</a></li>
                     <li class="hot-category"><a href="{{ path('adstacy_app_search', {q: 'beli'}) }}" title="Beli">Beli</a></li>
@@ -56,7 +56,7 @@
                     <li class="hot-category"><a href="{{ path('adstacy_app_search', {q: 'event'}) }}" title="Event">Event</a></li>
                     <li><a href="{{ path('adstacy_app_search', {q: 'rumah'}) }}" title="Rumah">Rumah</a></li>
                   </ul>
-                  <ul id="menu-user" class="list-unstyled">
+                  <ul id="user-dropdown-menu" class="list-unstyled">
                     <li><a href="{{ path('homepage') }}" title="Home"><span class="icon-home"></span>&nbsp; Home</a></li>
                     <li><a href="{{ path('adstacy_app_stream') }}"><span class="icon-rss">&nbsp; {{"stream"|trans}}</a></li>
                     <li><a href="{{ path('adstacy_app_trending') }}" title="Trending"><span class="icon-rocket"></span>&nbsp; Trending</a></li>
@@ -74,38 +74,40 @@
               </div>
             </div>
           {% else %}
-            <a id="dropdown-register" class="btn btn-success navbar-btn" href="{{ path('fos_user_registration_register') }}">{{"register"|trans}}</a>
-              <div id="dropdown-login" class="btn-group navbar-btn dropdown">
-                <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" id="dropdown-login-btn">
-                  {{"login"|trans}}
-                </button>
-                <ul id="login-dropdown-container" class="dropdown-menu">
-                  <li>
-                    {{ form_login() }}
-                  </li>
-                  <li class="divider"></li>
-                  <li>
-                    <p>
-                      {% for owner in hwi_oauth_resource_owners() %}
-                        <a class="btn btn-block btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{"login.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
-                      {% endfor %}
-                    </p>
-                  </li>
-                  <li class="divider"></li>
-                  <li>
-                    <p class="footer-link">
-                      <a href="{{ path('fos_user_resetting_request') }}">{{"forgot_password"|trans}}</a>
-                    </p>
-                  </li>
-                </ul>
-              </div>
+            <a id="register-btn-link" href="{{ path('fos_user_registration_register') }}" class="btn btn-success navbar-btn">{{"register"|trans}}</a>
+            <a id="login-btn-link" href="{{ path('fos_user_security_login') }}" class="btn btn-primary">Login</a>
+            <div id="login-dropdown" class="btn-group navbar-btn dropdown">
+              <button id="dropdown-login-btn" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                {{"login"|trans}}
+              </button>
+              <ul id="login-dropdown-container" class="dropdown-menu">
+                <li>
+                  {{ form_login() }}
+                </li>
+                <li class="divider"></li>
+                <li>
+                  <p>
+                    {% for owner in hwi_oauth_resource_owners() %}
+                      <a class="btn btn-block btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{"login.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
+                    {% endfor %}
+                  </p>
+                </li>
+                <li class="divider"></li>
+                <li>
+                  <p class="footer-link">
+                    <a href="{{ path('fos_user_resetting_request') }}">{{"forgot_password"|trans}}</a>
+                  </p>
+                </li>
+              </ul>
+            </div>
           {% endif %}
         </div>
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-          <ul id="mobile-user-dropdown" class="nav navbar-nav navbar-right">
+          <ul id="user-dropdown-mobile" class="nav navbar-nav navbar-right">
             <li><a href="{{ path('homepage') }}" title="Home"><span class="icon-home"></span>&nbsp; Home</a></li>
             <li><a href="{{ path('adstacy_app_stream') }}"><span class="icon-rss">&nbsp; {{"stream"|trans}}</a></li>
             <li><a href="{{ path('adstacy_app_trending') }}" title="Trending"><span class="icon-rocket"></span>&nbsp; Trending</a></li>
+            <li><a href="#" title="Trending"><span class="icon-bookmark"></span>&nbsp; Browse Tags Selection</a></li>
             <li><a href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}"><span class="icon-user"></span>&nbsp; {{"profile"|trans}}</a></li>
             <li><a href="{{ path('fos_user_profile_edit') }}"><span class="icon-gear"></span>&nbsp; {{"settings"|trans}}</a></li>
             <li><a href="{{ path('fos_user_security_logout') }}"><span class="icon-off"></span>&nbsp; {{"logout"|trans}}</a></li>
