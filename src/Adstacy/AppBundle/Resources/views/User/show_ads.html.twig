@@ -54,7 +54,7 @@
   {% else %}
     <div class="jumbotron text-center">
       {% if app.user and app.user == user %}
-        <h1>{{"ads.no_ads.message"|trans({'%username%': 'You'})}}</h1>
+        <h1>{{"ads.no_ads.self_message"|trans}}</h1>
       <p class="lead">{{"ads.no_ads.help"|trans}}</p>
       <a href="{{ path('adstacy_app_ad_create') }}" class="btn-group btn-group-lg">
         <span class="btn btn-success"><span class="icon-plus"></span></span>
