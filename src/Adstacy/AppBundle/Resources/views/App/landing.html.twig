@@ -1,5 +1,15 @@
 {% extends 'AdstacyAppBundle::layout.html.twig' %}
 
+{% form_theme form _self %}
+
+{% block form_row %}
+  <div class="form-group">
+    {{ form_label(form, null, { label_attr: { class: 'hide' } }) }}
+    {{ form_widget(form, { attr: { class: 'form-control' } }) }}
+    {{ form_errors(form, { attr: { class: 'alert alert-danger' } }) }}
+  </div>
+{% endblock %}
+
 {% block content %}
   <style>
     body {
@@ -8,11 +18,24 @@
       margin-bottom: 0;
     }
   </style>
-  <section class="jumbotron">
+  <section class="jumbotron clearfix">
     <div class="main-container">
       <h1 class="text-center">Welcome to Adstacy</h1>
     </div>
-    {# {{ form(form) }} #}
+    <div class="panel panel-default" style="width: 300px; float: right; margin-top: 100px;">
+      {{ form_start(form, {attr: {class: 'panel-body', role: 'form'} }) }}
+        {{ form_errors(form) }}
+
+        {{ form_row(form.email) }}
+        {{ form_row(form.username) }}
+        {{ form_row(form.realName) }}
+        {{ form_row(form.plainPassword) }}
+        <p class="h6">{{ "form_registration.agreement"|trans({'%terms_url%': path('adstacy_app_page_show', {key: 'terms'}),
+          '%privacy_url%': path('adstacy_app_page_show', {key: 'privacy-policy'}) })|raw }}</p>
+        {{ form_widget(form.register, {attr: {class: 'btn btn-primary btn-block'} }) }}
+
+      {{ form_end(form) }}
+    </div>
   </section>
   <section class="main-section red clearfix">
     <div class="main-container">
