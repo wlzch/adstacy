@@ -38,6 +38,7 @@
           {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <a href="{{ path('adstacy_app_ad_create') }}" id="create-ads" class="btn btn-primary navbar-btn" title="{{"ads.create"|trans}}">
               <span aria-hidden="true" class="icon-plus"></span>
+              <span id="create-ads-label">Create Ads</span>
             </a>
             <div id="user-dropdown" class="btn-group navbar-btn">
               <button type="button" class="btn btn-default btn-user dropdown-toggle" data-toggle="dropdown">
@@ -100,6 +101,16 @@
               </div>
           {% endif %}
         </div>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+          <ul id="mobile-user-dropdown" class="nav navbar-nav navbar-right">
+            <li><a href="{{ path('homepage') }}" title="Home"><span class="icon-home"></span>&nbsp; Home</a></li>
+            <li><a href="{{ path('adstacy_app_stream') }}"><span class="icon-rss">&nbsp; {{"stream"|trans}}</a></li>
+            <li><a href="{{ path('adstacy_app_trending') }}" title="Trending"><span class="icon-rocket"></span>&nbsp; Trending</a></li>
+            <li><a href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}"><span class="icon-user"></span>&nbsp; {{"profile"|trans}}</a></li>
+            <li><a href="{{ path('fos_user_profile_edit') }}"><span class="icon-gear"></span>&nbsp; {{"settings"|trans}}</a></li>
+            <li><a href="{{ path('fos_user_security_logout') }}"><span class="icon-off"></span>&nbsp; {{"logout"|trans}}</a></li>
+          </ul>
+        {% endif %}
       </div>
     </div>
   </nav>
