@@ -78,33 +78,41 @@ span.required {
   margin-right: 10px;
 }
 
-#user-dropdown {
-  > .dropdown-menu {
-    padding: 0;
-    width: 500px;
-  }
-  .btn-user {
-    padding: 0;
-  }
-  .mini-profpic {
-    border-right: 1px solid @border-color;
-    display: inline-block;
-    height: 32px;
-    margin: 0;
-  }
-  .username-label {
-    color: #888;
-    display:inline-block;
-    padding: 5px 12px;
-    vertical-align: middle;
+#browse-dropdown {
+  background-color: #f4f4f4;
+  padding: 0;
+  width: 600px;
+}
+
+#browse-dropdown-menu {
+  float: left;
+  margin: 0;
+  padding: 10px 10px;
+  width: 140px;
+
+  li {
+    margin-bottom: 10px;
+
+    a {
+      color: #999;
+      display: block;
+    }
+
+    a:hover {
+      background-color: transparent;
+      color: #b00;
+      text-decoration: none;
+    }
   }
 }
 
 #tags-dropdown {
-  float: left;
+  background-color: #fff;
+  border-left: 1px solid #d8d8d8;
+  float: right;
   margin: 0;
   padding: 10px;
-  width: 340px;
+  width: 450px;
 
   li {
     margin-bottom: 10px;
@@ -113,7 +121,6 @@ span.required {
   a {
     color: #333;
     display: inline-block;
-    font-size: 13px;
     padding: 2px 10px;
     width: 130px;
     &:hover {
@@ -143,30 +150,6 @@ span.required {
   }
 }
 
-#user-dropdown-menu {
-  background-color: #f4f4f4;
-  border-left: 1px solid #ddd;
-  float: right;
-  margin: 0;
-  min-height: 200px;
-  padding: 10px 15px;
-  width: 140px;
-
-  li {
-    margin-bottom: 10px;
-
-    a {
-      color: #999;
-      display: block;
-    }
-
-    a:hover {
-      color: #b00;
-      text-decoration: none;
-    }
-  }
-}
-
 #footer {
   background-color: #f0f0f0;
   border-top: 1px solid #ddd;
@@ -178,6 +161,48 @@ span.required {
     color: #888;
     font-size: 12px;
     font-weight: bold;
+  }
+}
+
+#user-dropdown {
+  > .dropdown-menu {
+    padding: 5px 0 0 0;
+  }
+  .btn-user {
+    padding: 0;
+  }
+  .mini-profpic {
+    border-right: 1px solid @border-color;
+    display: inline-block;
+    height: 32px;
+    margin: 0;
+  }
+  .username-label {
+    color: #888;
+    display:inline-block;
+    padding: 5px 12px;
+    vertical-align: middle;
+  }
+}
+
+#user-dropdown-menu {
+  background-color: #f4f4f4;
+  border-left: 1px solid #ddd;
+  padding: 10px 15px;
+
+  li {
+    margin-bottom: 10px;
+
+    a {
+      color: #999;
+      display: block;
+    }
+
+    a:hover {
+      background-color: transparent;
+      color: #b00;
+      text-decoration: none;
+    }
   }
 }
 
@@ -229,6 +254,9 @@ span.required {
     display: none;
   }
   #login-dropdown {
+    display: none;
+  }
+  #browse-btn {
     display: none;
   }
 
