@@ -5,10 +5,3 @@
 {% block content %}
   {% block show_content %}{% endblock %}
 {% endblock %}
-
-{% block javascripts %}
-  {{ parent() }}
-  <script type="text/javascript">
-    $('#user-profile').ajaxlink('follow_user');
-  </script>
-{% endblock %}
