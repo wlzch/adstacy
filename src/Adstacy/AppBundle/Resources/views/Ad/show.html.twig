@@ -4,6 +4,8 @@
 
 {% block meta_keywords %}{{ ad.tags|join(',') }}{% endblock %}
 
+{% block meta_image %}{{ app.request.scheme~"://"~app.request.host~vich_uploader_asset(ad, 'image') }}{% endblock %}
+
 {% block content %}
   {% set user = ad.user %}
 

@@ -2,6 +2,14 @@
 
 {% block title %}{{ user.username }} | Adstacy{% endblock %}
 
+{% block meta_image %}
+{% if user.image %}
+{{ app.request.scheme~"://"~app.request.host~vich_uploader_asset(user, 'image') }}
+{% else %}
+{{ profile_pic(user) }}
+{% endif %}
+{% endblock %}
+
 {% block content %}
   {% block show_content %}{% endblock %}
 {% endblock %}
