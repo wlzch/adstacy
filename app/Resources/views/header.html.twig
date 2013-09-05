@@ -58,7 +58,7 @@
                   </ul>
                   <ul id="user-dropdown-menu" class="list-unstyled">
                     <li><a href="{{ path('homepage') }}" title="Home"><span class="icon-home"></span>&nbsp; Home</a></li>
-                    <li><a href="{{ path('adstacy_app_stream') }}"><span class="icon-rss">&nbsp; {{"stream"|trans}}</a></li>
+                    <li><a href="{{ path('adstacy_app_stream') }}"><span class="icon-rss"></span>&nbsp; {{"stream"|trans}}</a></li>
                     <li><a href="{{ path('adstacy_app_trending') }}" title="Trending"><span class="icon-rocket"></span>&nbsp; Trending</a></li>
                     <li><a href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}"><span class="icon-user"></span>&nbsp; {{"profile"|trans}}</a></li>
                     <li><a href="{{ path('fos_user_profile_edit') }}"><span class="icon-gear"></span>&nbsp; {{"settings"|trans}}</a></li>
@@ -105,7 +105,7 @@
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
           <ul id="user-dropdown-mobile" class="nav navbar-nav navbar-right">
             <li><a href="{{ path('homepage') }}" title="Home"><span class="icon-home"></span>&nbsp; Home</a></li>
-            <li><a href="{{ path('adstacy_app_stream') }}"><span class="icon-rss">&nbsp; {{"stream"|trans}}</a></li>
+            <li><a href="{{ path('adstacy_app_stream') }}"><span class="icon-rss"></span>&nbsp; {{"stream"|trans}}</a></li>
             <li><a href="{{ path('adstacy_app_trending') }}" title="Trending"><span class="icon-rocket"></span>&nbsp; Trending</a></li>
             <li><a href="#" title="Trending"><span class="icon-bookmark"></span>&nbsp; Browse Tags Selection</a></li>
             <li><a href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}"><span class="icon-user"></span>&nbsp; {{"profile"|trans}}</a></li>
