@@ -1,4 +1,4 @@
-<div class="panel panel-default" id="search-user-thumb">
+<div class="panel panel-default user">
   <div class="clearfix">
     <h5 class="user-realname text-overflow"><a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">{{ user.realname }}</a></h5>
     <div class="profile-picture"><img src="{{ profile_pic(user) }}" /></div>
@@ -11,14 +11,19 @@
   </div>
 
   <div class="user-score">
-    <a href="{{ path('adstacy_app_user_followers', {username: user.username}) }}" class="user-followers-count">{{ user.followersCount }} Followers</a> &nbsp; &nbsp;
+    <a href="{{ path('adstacy_app_user_followers', {username: user.username}) }}"><span class="user-followers-count">{{ user.followersCount }}</span> Followers</a> &nbsp; &nbsp;
     <a href="{{ path('adstacy_app_user_ads', {username: user.username}) }}">{{ user.adsCount }} Ads</a>
   </div>
 
   {% set loggedInUser = app.user %}
-  {% if user and loggedInUser and user == loggedInUser %}
-    <a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}" class="btn btn-success btn-block follow-user">View Profile</a>
+  {% if loggedInUser %}
+    {% if user == loggedInUser %}
+      <a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}" class="btn btn-success btn-block follow-user">View Profile</a>
+    {% else %}
+      {% include 'AdstacyAppBundle:User:follow_button.html.twig' with {user: user} %}
+    {% endif %}
+  {% else %}
+    <a href="{{ path('adstacy_app_user_follow', {username: user.username}) }}" class="btn btn-primary btn-block">Follow</a>
   {% endif %}
 
-  {% include 'AdstacyAppBundle:User:follow_button.html.twig' with {user: user} %}
 </div>

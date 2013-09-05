@@ -85,6 +85,7 @@ class UserController extends Controller
     }
 
     /**
+     * @Secure(roles="ROLE_USER")
      * Follow User with $username
      *
      * @param string $username
@@ -128,6 +129,7 @@ class UserController extends Controller
     }
 
     /**
+     * @Secure(roles="ROLE_USER")
      * Unfollow User with $username
      *
      * @param string $username

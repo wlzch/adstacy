@@ -14,7 +14,13 @@
         firstSelector: 'a.promote',
         secondSelector: 'a.unpromote'
       },
-      follow_user: {
+      users: {
+        countSelector: '.user-followers-count',
+        jsonField: 'followers_count',
+        firstSelector: 'a.follow-user',
+        secondSelector: 'a.unfollow-user'
+      },
+      follow_single: {
         countSelector: '.user-followers-count',
         jsonField: 'followers_count',
         firstSelector: 'a.follow-user',

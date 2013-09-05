@@ -56,6 +56,7 @@
     $navbarExpandContainer.addClass('hide');
   });
   $('.ad').ajaxlink('ads');
+  $('.user').ajaxlink('users');
   $('[data-toggle=tooltip]').tooltip({
     container: "body"
   });
