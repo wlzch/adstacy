@@ -164,6 +164,9 @@ fos_user:
     change_password:
         form:
             type: adstacy_change_password
+    resetting:
+        form:
+            type: adstacy_resetting
     from_email:
         address: %adstacy.mail.support%
         sender_name: Adstacy Support

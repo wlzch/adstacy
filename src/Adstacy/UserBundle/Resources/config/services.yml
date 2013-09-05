@@ -16,3 +16,9 @@ services:
         arguments: [%fos_user.model.user.class%]
         tags:
             - { name: form.type, alias: adstacy_change_password }
+
+    adstacy.type.resetting:
+        class: Adstacy\UserBundle\Form\Type\ResettingFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: adstacy_resetting }
