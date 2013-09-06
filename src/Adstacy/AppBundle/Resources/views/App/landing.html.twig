@@ -17,14 +17,12 @@
 {% block content %}
   <style>
     body {
-      background-color: #333;
+      background-color: #ddd;
       margin-bottom: 0;
     }
   </style>
-  <section class="jumbotron clearfix">
-    <div class="main-container">
-      <h1 class="text-center">{{"landing.welcome"|trans}}</h1>
-    </div>
+  <section id="main-title" class="jumbotron clearfix">
+    <h1 class="text-center">{{"landing.welcome"|trans}}</h1>
     <div id="form-register-container" class="panel panel-default">
       <div class="panel-heading">
         {% for owner in hwi_oauth_resource_owners() %}
@@ -45,48 +43,58 @@
       {{ form_end(form) }}
     </div>
   </section>
-  <section class="main-section clearfix">
-    <div class="main-container">
+
+  <div id="main-feature" class="main-container clearfix">
+    <!-- inline-block -->
+    <section class="main-section">
       <div class="main-pic">
-        <img src="{{ asset('bundles/adstacyapp/img/ads.png') }}">
+        <span class="icon-ads">@</span>
       </div>
       <div class="main-content">
         <h1>{{"landing.features.ad.heading"|trans}}</h1>
         <p class="lead">{{"landing.features.ad.desc"|trans}}</p>
       </div>
-    </div>
-  </section>
-  <section class="main-section clearfix">
-    <div class="main-container">
+    </section><section class="main-section">
       <div class="main-pic">
-        <img src="{{ asset('bundles/adstacyapp/img/bullhorn.png') }}">
+        <span class="icon-bullhorn"></span>
       </div>
       <div class="main-content">
         <h1>{{"landing.features.social.heading"|trans}}</h1>
         <p class="lead">{{"landing.features.social.desc"|trans}}</p>
       </div>
-    </div>
-  </section>
-  <section class="main-section clearfix">
-    <div class="main-container">
+    </section><section class="main-section">
       <div class="main-pic">
-        <img src="{{ asset('bundles/adstacyapp/img/hash.png') }}">
+        <span class="icon-hastag">#</span>
       </div>
       <div class="main-content">
         <h1>{{"landing.features.hashtag.heading"|trans}}</h1>
         <p class="lead">{{"landing.features.hashtag.desc"|trans}}</p>
       </div>
-    </div>
-  </section>
-  <section class="main-section clearfix">
-    <div class="main-container">
+    </section><section class="main-section">
       <div class="main-pic">
-        <img src="{{ asset('bundles/adstacyapp/img/search.png') }}">
+        <span class="icon-search"></span>
       </div>
       <div class="main-content">
         <h1>{{"landing.features.search.heading"|trans}}</h1>
         <p class="lead">{{"landing.features.search.desc"|trans}}</p>
       </div>
-    </div>
-  </section>
+    </section><section class="main-section">
+      <div class="main-pic">
+        <span class="icon-hastag">#</span>
+      </div>
+      <div class="main-content">
+        <h1>{{"landing.features.hashtag.heading"|trans}}</h1>
+        <p class="lead">{{"landing.features.hashtag.desc"|trans}}</p>
+      </div>
+    </section><section class="main-section">
+      <div class="main-pic">
+        <span class="icon-search"></span>
+      </div>
+      <div class="main-content">
+        <h1>{{"landing.features.search.heading"|trans}}</h1>
+        <p class="lead">{{"landing.features.search.desc"|trans}}</p>
+      </div>
+    </section>
+    <!-- end inline-block -->
+  </div>
 {% endblock %}

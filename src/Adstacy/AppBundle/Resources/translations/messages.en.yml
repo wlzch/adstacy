@@ -113,13 +113,13 @@ landing:
     features:
         ad:
             heading: Fast. Easy. Free.
-            desc: Desc
+            desc: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium, vitae!
         social:
             heading: Ads Have Never Been So Fun
-            desc: Desc
+            desc: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, numquam.
         hashtag:
             heading: Hashtag. Hashtag Everywhere.
-            desc: Desc
+            desc: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, incidunt!
         search:
             heading: Searching Is Your Friend
-            desc: Desc
+            desc: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum, aperiam.
