@@ -96,8 +96,8 @@
         <div class="thumb-container">
           {% for adByUser in adsByUser %}
             <div class="thumb">
-              <img src="{{ vich_uploader_asset(adByUser, 'image')|imagine_filter('mini_thumb')}}"
-                width="{{ mini_thumb_size }}px" height="{{ mini_thumb_size }}px">
+              <a href="{{ path('adstacy_app_ad_show', {id: adByUser.id}) }}"><img src="{{ vich_uploader_asset(adByUser, 'image')|imagine_filter('mini_thumb')}}"
+                width="{{ mini_thumb_size }}px" height="{{ mini_thumb_size }}px"></a>
             </div>
           {% endfor %}
         </div>
