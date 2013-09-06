@@ -4,3 +4,12 @@ services:
         tags:
             - { name: form.type, alias: image}
 
+    adstacy.type.purified_textarea:
+        class: Adstacy\AppBundle\Form\Type\PurifiedTextareaType
+        arguments: [@adstacy.form.transformer.html_purifier]
+        tags:
+            - { name: form.type, alias: purified_textarea }
+
+    adstacy.form.transformer.html_purifier:
+        class: Exercise\HTMLPurifierBundle\Form\HTMLPurifierTransformer
+        arguments: [@exercise_html_purifier.default]

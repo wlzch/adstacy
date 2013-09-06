@@ -22,7 +22,7 @@ class AdType extends AbstractType
                 'placeholder' => 'Adstacy T-Shirt Rp250.000 #branded #tshirt #medan #cool'
             )
         ));
-        $builder->add('content', 'textarea', array(
+        $builder->add('content', 'purified_textarea', array(
             'label' => 'form_ad.content',
             'required' => false,
             'attr' => array(
