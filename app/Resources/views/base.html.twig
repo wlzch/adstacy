@@ -62,7 +62,9 @@
   </head>
   <body>
     {% block body %}
-      {% include '::header.html.twig' %}
+      {% block header %}
+        {% include '::header.html.twig' %}
+      {% endblock %}
       <div class="body clearfix">
         {% set allFlashes = app.session.flashbag.all() %}
         {% if allFlashes|length > 0 %}

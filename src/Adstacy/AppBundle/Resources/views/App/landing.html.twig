@@ -2,6 +2,10 @@
 
 {% form_theme form _self %}
 
+{% block header %}
+  {% include '::header.html.twig' with {register: false}  %}
+{% endblock %}
+
 {% block form_row %}
   <div class="form-group">
     {{ form_label(form, null, { label_attr: { class: 'hide' } }) }}

@@ -78,7 +78,9 @@
               </ul>
             </div>
           {% else %}
-            <a id="register-btn-link" href="{{ path('fos_user_registration_register') }}" class="btn btn-success navbar-btn">{{"register"|trans}}</a>
+            {% if register is defined and register == true %}
+              <a id="register-btn-link" href="{{ path('fos_user_registration_register') }}" class="btn btn-success navbar-btn">{{"register"|trans}}</a>
+            {% endif %}
             <a id="login-btn-link" href="{{ path('fos_user_security_login') }}" class="btn btn-primary">Login</a>
             <div id="login-dropdown" class="btn-group navbar-btn dropdown">
               <button id="dropdown-login-btn" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
