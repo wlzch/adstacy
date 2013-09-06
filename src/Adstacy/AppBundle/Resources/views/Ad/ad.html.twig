@@ -25,7 +25,7 @@
       {% else %}
         <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-default btn-promote"><span aria-hidden="true" data-icon="&#xe007;"></span></a>
       {% endif %}
-      <div class="btn-group dropup">
+      <div class="btn-group">
         <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
           <span aria-hidden="true" class="icon-share"></span>
         </a>
@@ -37,12 +37,12 @@
             {% set twitterUrl = "https://twitter.com/share?url=#{adUrl}&text=#{desc}&hashtags=#{tags}" %}
             {% set facebookUrl = "https://www.facebook.com/sharer/sharer.php?u=#{adUrl}" %}
             <a href="{{ facebookUrl }}" class="facebook-share">
-              <span aria-hidden="true" data-icon="&#xe003;"></span> Facebook
+              <span aria-hidden="true" class="icon-facebook"></span> Facebook
             </a>
           </li>
           <li>
             <a href="{{ twitterUrl }}" class="tweet">
-              <span aria-hidden="true" data-icon="&#xe002;" class="twitter-share"></span> Twitter
+              <span aria-hidden="true" class="icon-twitter twitter-share"></span> Twitter
             </a>
           </li>
         </ul>
