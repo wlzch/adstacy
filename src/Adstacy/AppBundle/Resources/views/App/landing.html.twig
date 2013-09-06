@@ -19,7 +19,7 @@
   </style>
   <section class="jumbotron clearfix">
     <div class="main-container">
-      <h1 class="text-center">Welcome to Adstacy</h1>
+      <h1 class="text-center">{{"landing.welcome"|trans}}</h1>
     </div>
     <div class="panel panel-default" style="width: 300px; float: right; margin-top: 100px;">
       <div class="panel-heading">
@@ -47,25 +47,8 @@
         <img src="{{ asset('bundles/adstacyapp/img/ads.png') }}">
       </div>
       <div class="main-content">
-        <h1>Cepat. Mudah. Gratis.</h1>
-        <p class="lead">
-          Iklan dikonsumsi dan dipromosikan oleh konsumen sendiri. Semakin besar
-          komunitas anda, semakin cepat dan besar pasar Anda, dan Gratis.
-        </p>
-      </div>
-    </div>
-  </section>
-  <section class="main-section clearfix">
-    <div class="main-container">
-      <div class="main-pic">
-        <img src="{{ asset('bundles/adstacyapp/img/hash.png') }}">
-      </div>
-      <div class="main-content">
-        <h1>Memanfaatkan Hashtag.</h1>
-        <p class="lead">
-          Untuk menjelaskan isi lengkap dari iklan, misalnya jenis iklan, lokasi,
-          merek, dan lainnya.
-        </p>
+        <h1>{{"landing.features.ad.heading"|trans}}</h1>
+        <p class="lead">{{"landing.features.ad.desc"|trans}}</p>
       </div>
     </div>
   </section>
@@ -75,11 +58,19 @@
         <img src="{{ asset('bundles/adstacyapp/img/bullhorn.png') }}">
       </div>
       <div class="main-content">
-        <h1>Cara Baru Menikmati Iklan.</h1>
-        <p class="lead">
-          Kini anda mampu beriklan dengan lebih menyenangkan dengan mempromosikan
-          lewat jaringan sosial.
-        </p>
+        <h1>{{"landing.features.social.heading"|trans}}</h1>
+        <p class="lead">{{"landing.features.social.desc"|trans}}</p>
+      </div>
+    </div>
+  </section>
+  <section class="main-section clearfix">
+    <div class="main-container">
+      <div class="main-pic">
+        <img src="{{ asset('bundles/adstacyapp/img/hash.png') }}">
+      </div>
+      <div class="main-content">
+        <h1>{{"landing.features.hashtag.heading"|trans}}</h1>
+        <p class="lead">{{"landing.features.hashtag.desc"|trans}}</p>
       </div>
     </div>
   </section>
@@ -89,27 +80,9 @@
         <img src="{{ asset('bundles/adstacyapp/img/search.png') }}">
       </div>
       <div class="main-content">
-        <h1>Temukan Apapun Kebutuhan Anda.</h1>
-        <p class="lead">
-          Banyaknya jenis iklan, seperti promosi, jual beli, event, hingga lowongan
-          pekerjaan membuat Adstacy sebagai satu-satunya pusat media pencarian yang terlengkap.
-        </p>
+        <h1>{{"landing.features.search.heading"|trans}}</h1>
+        <p class="lead">{{"landing.features.search.desc"|trans}}</p>
       </div>
     </div>
   </section>
-  <section class="main-section clearfix">
-    <div class="main-container">
-      <div class="main-pic">
-        <img src="{{ asset('bundles/adstacyapp/img/share.png') }}">
-      </div>
-      <div class="main-content">
-        <h1>Bagi dan Sebarkan Iklan Anda.</h1>
-        <p class="lead">
-          Sosialkan iklan anda kepada teman-teman anda dan bangunlah komunitas anda
-          di Adstacy.
-        </p>
-      </div>
-    </div>
-  </section>
-
 {% endblock %}

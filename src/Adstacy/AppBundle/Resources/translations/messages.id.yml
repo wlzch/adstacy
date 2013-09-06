@@ -1,0 +1,15 @@
+landing:
+    welcome: Selamat Datang ke Adstacy
+    features:
+        ad:
+            heading: Cepat. Mudah. Gratis.
+            desc: Iklan dikonsumsi dan dipromosikan oleh konsumen sendiri. Semakin besar komunitas anda, semakin cepat dan besar pasar Anda. Dapatkan segala kemudahannya secara GRATIS
+        social:
+            heading: Cara Baru Menikmati Iklan
+            desc: Kini anda mampu beriklan dengan lebih menyenangkan dengan mempromosikan iklan Anda kepada follower Anda
+        hashtag:
+            heading: Hashtag. Hashtag Dimana-mana
+            desc: Jelaskan iklan anda dengan menggunakan hashtag secara kreatif untuk iklan yang lebih baik
+        search:
+            heading: Temukan Apapun Kebutuhan Anda
+            desc: Temukan semua jenis iklan disini. Promosi, Jual Beli, Event, hingga Lowongan Kerja. Apapun itu.

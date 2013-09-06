@@ -107,3 +107,19 @@ flash:
             error_self: You may not unfollow yourself
             error_not_followed: You have not followed %username%
             success: You have successfully unfollowed %username%
+
+landing:
+    welcome: Welcome to Adstacy
+    features:
+        ad:
+            heading: Fast. Easy. Free.
+            desc: Desc
+        social:
+            heading: Ads Have Never Been So Fun
+            desc: Desc
+        hashtag:
+            heading: Hashtag. Hashtag Everywhere.
+            desc: Desc
+        search:
+            heading: Searching Is Your Friend
+            desc: Desc
