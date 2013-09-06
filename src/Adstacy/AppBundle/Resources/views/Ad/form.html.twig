@@ -1,5 +1,14 @@
 {% extends 'AdstacyAppBundle::layout.html.twig' %}
 
+{% block head_scripts %}
+  {{ parent() }}
+  {% javascripts filter='uglifyjs2'
+    '@AdstacyAppBundle/Resources/public/js/FileAPI.min.js'
+  %}
+    <script src="{{ asset_url }}" type="text/javascript"></script>
+  {% endjavascripts %}
+{% endblock %}
+
 {% block content %}
   <div class="panel panel-default" id="create-ad-container">
     <div class="panel-body clearfix">
