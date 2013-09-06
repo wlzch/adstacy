@@ -45,6 +45,39 @@
   }
 }
 
+#form-register-container {
+  width: 300px;
+  float: right;
+  margin-top: 100px;
+}
+
+@media screen and (max-width: @screen-tablet) {
+  .main-container, .main-pic {
+    width: 100%;
+  }
+  .main-section {
+    padding: 10px 20px;
+    .main-pic {
+      width: 100%;
+      text-align: center;
+    }
+    h1 {
+      text-align: center;
+    }
+    .lead {
+      text-align: left;
+    }
+    .main-content {
+      width: 100%;
+    }
+  }
+  #form-register-container {
+    width: 100%;
+    float: none;
+    margin: 20px 0;
+  }
+}
+
 .red {
   background-color: #dc004d;
   // background-color: #e40363;
