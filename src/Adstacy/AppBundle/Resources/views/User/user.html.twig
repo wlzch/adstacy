@@ -3,10 +3,17 @@
     <h5 class="user-realname text-overflow"><a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">{{ user.realname }}</a></h5>
     <div class="profile-picture"><img src="{{ profile_pic(user) }}" /></div>
     <div class="user-ads">
-      <img data-src="holder.js/50x50">
-      <img data-src="holder.js/50x50">
-      <img data-src="holder.js/50x50">
-      <img data-src="holder.js/50x50">
+      {% set ads = user.ads|slice(4) %}
+      {% for i in 0..3 %}
+        <div class="user-mini-ad">
+          {% if ads[i] is defined %}
+            {% set ad = ads[i] %}
+            <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}">
+              <img src="{{ vich_uploader_asset(ad, 'image')|imagine_filter('mini_thumb') }}" width="47" height="50">
+            </a>
+          {% endif %}
+        </div>
+      {% endfor %}
     </div>
   </div>
 
