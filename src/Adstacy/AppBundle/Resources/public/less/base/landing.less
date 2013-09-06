@@ -4,21 +4,29 @@
 }
 
 .main-section {
-  padding: 50px 0;
-  color: #fff;
+  padding: 10px 0;
+  color: #333;
+  background-color: #fff;
 
   h1 {
-    font-size: 40px;
+    font-size: 50px;
+    color: #b00;
   }
 
   .lead {
-    font-size: 18px;
+    font-size: 20px;
+    color: @gray;
   }
 
   .main-pic {
     width: 350px;
     text-align: center;
     float: left;
+
+    img {
+      width: 250px;
+      height: 250px;
+    }
   }
 
   .main-content {
@@ -61,5 +69,17 @@
 }
 
 .jumbotron {
-  color: #333;
+
+  h1 {
+    color: #fff;
+    margin-top: -20px;
+    font-weight: bold;
+    font-size: 80px;
+  }
+
+  .panel {
+    .form-group {
+      margin-bottom: 5px;
+    }
+  }
 }
