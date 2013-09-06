@@ -1,125 +1,120 @@
-<header id="main-header">
-  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="adstacy-container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="{{ path('homepage') }}" title="Adstacy">
-          <img src="{{ asset('bundles/adstacyapp/img/logo.png') }}" alt="Adstacy">
-        </a>
-      </div>
+<header id="site-header" class="navbar navbar-default navbar-fixed-top">
+  <div class="adstacy-container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{{ path('homepage') }}" title="Adstacy">
+        <img src="{{ asset('bundles/adstacyapp/img/logo.png') }}" alt="Adstacy">
+      </a>
+    </div>
 
-      <div class="collapse navbar-collapse navbar-ex1-collapse">
-        <div id="browse-btn" class="btn-group navbar-btn pull-left">
-          <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-            <span class="icon-angle-down icon-angle-up"></span>
-          </button>
-          <div id="browse-dropdown" class="dropdown-menu" role="menu">
-            <ul id="browse-dropdown-menu" class="list-inline list-unstyled">
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+      <div id="site-nav-dropdown" class="btn-group navbar-btn navbar-left">
+        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          <span class="icon-angle-down icon-angle-up"></span>
+        </button>
+        <div id="site-nav-box" class="dropdown-menu">
+          <nav>
+            <ul id="site-nav" class="dropdown-box-header list-inline list-unstyled">
               <li><a href="{{ path('adstacy_app_explore') }}" title="Explore"><span class="icon-home"></span>&nbsp; Explore</a></li>
               <li><a href="{{ path('adstacy_app_stream') }}"><span class="icon-rss"></span>&nbsp; {{"stream"|trans}}</a></li>
               <li><a href="{{ path('adstacy_app_trending') }}" title="Trending"><span class="icon-rocket"></span>&nbsp; Trending</a></li>
             </ul>
-            <ul id="tags-dropdown" class="list-inline list-unstyled">
-              <li><a href="{{ path('adstacy_app_search', {q: 'jual'}) }}" title="Jual">Jual<small>#jual</small></a></li>
-              <li><a href="{{ path('adstacy_app_search', {q: 'beli'}) }}" title="Beli">Beli<small>#beli</small></a></li>
-              <li><a href="{{ path('adstacy_app_search', {q: 'loker'}) }}" title="Lowongan Kerja">Lowongan Kerja<small>#lowker</small></a></li>
-              <li><a href="{{ path('adstacy_app_search', {q: 'promo'}) }}" title="Promo">Promo<small>#promo</small></a></li>
-              <li><a href="{{ path('adstacy_app_search', {q: 'event'}) }}" title="Event">Event<small>#event</small></a></li>
-              <li><a href="{{ path('adstacy_app_search', {q: 'property'}) }}" title="Property">Rumah<small>#property</small></a></li>
-            </ul>
-            <ul id="footer" class="list-inline list-unstyled">
-              <li><a href="{{ path('adstacy_app_page_show', {key: 'about'}) }}">{{"about"|trans}}</a></li>
-              <li><a href="{{ path('adstacy_app_page_show', {key: 'terms'}) }}">{{"terms"|trans}}</a></li>
-              <li><a href="{{ path('adstacy_app_page_show', {key: 'privacy-policy'}) }}">{{"privacy"|trans}}</a></li>
-              <li><a href="{{ path('adstacy_app_contact') }}">{{"contact_us"|trans}}</a></li>
-            </ul>
-          </div>
+          </nav>
+          <ul id="tag-list" class="dropdown-box-body list-inline list-unstyled">
+            <li><a href="{{ path('adstacy_app_search', {q: 'jual'}) }}" title="Jual">Jual<small>#jual</small></a></li>
+            <li><a href="{{ path('adstacy_app_search', {q: 'beli'}) }}" title="Beli">Beli<small>#beli</small></a></li>
+            <li><a href="{{ path('adstacy_app_search', {q: 'loker'}) }}" title="Lowongan Kerja">Lowongan Kerja<small>#lowker</small></a></li>
+            <li><a href="{{ path('adstacy_app_search', {q: 'promo'}) }}" title="Promo">Promo<small>#promo</small></a></li>
+            <li><a href="{{ path('adstacy_app_search', {q: 'event'}) }}" title="Event">Event<small>#event</small></a></li>
+            <li><a href="{{ path('adstacy_app_search', {q: 'property'}) }}" title="Property">Rumah<small>#property</small></a></li>
+          </ul>
+          <ul id="site-info" class="dropdown-box-footer list-inline list-unstyled">
+            <li><a href="{{ path('adstacy_app_page_show', {key: 'about'}) }}">{{"about"|trans}}</a></li>
+            <li><a href="{{ path('adstacy_app_page_show', {key: 'terms'}) }}">{{"terms"|trans}}</a></li>
+            <li><a href="{{ path('adstacy_app_page_show', {key: 'privacy-policy'}) }}">{{"privacy"|trans}}</a></li>
+            <li><a href="{{ path('adstacy_app_contact') }}">{{"contact_us"|trans}}</a></li>
+          </ul>
         </div>
-        <form id="form-search" action="{{ path('adstacy_app_search') }}" class="navbar-form navbar-left" role="search">
-          {% set isSearchUser = app.request.attributes.get('_route') == 'adstacy_app_search' and app.request.query.get('type') == 'users' %}
-          <div id="search-container" class="input-group">
-            <input id="search-box" type="text" class="form-control" placeholder="{{"search"|trans}}" name="q" value="{{ app.request.query.get('q') }}">
-            <input type="hidden" id="search-type" name="type" value="{% if isSearchUser %}users{% else %}ads{% endif %}">
-            <div class="input-group-btn">
-              <button id="search-dropdown-container" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                <span id="search-type-text">{% if isSearchUser %}Users{% else %}Ads{% endif %}</span> <span class="icon-angle-down"></span>
-              </button>
-              <ul class="dropdown-menu pull-right">
-                <li><a data-val="ads">Ads</a></li>
-                <li><a data-val="users">Users</a></li>
-              </ul>
-            </div>
-          </div>
-          <button type="submit" class="btn-icon btn-search">
-            <span aria-hidden="true" class="icon-search"></span>
-          </button>
-        </form>
-
-        <div class="nav navbar-nav navbar-right">
-          {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <a href="{{ path('adstacy_app_ad_create') }}" id="create-ads" class="btn btn-primary navbar-btn" title="{{"ads.create"|trans}}">
-              <span aria-hidden="true" class="icon-plus"></span>
-              <span id="create-ads-label">Create Ads</span>
-            </a>
-            <div id="user-dropdown" class="btn-group navbar-btn">
-              <button type="button" class="btn btn-default btn-user dropdown-toggle" data-toggle="dropdown">
-                <img class="mini-profpic" src="{{ profile_pic(app.user) }}" alt="{{ app.user.username }}">
-                <span class="username-label">{{ app.user.username }}</span>
-              </button>
-              <ul id="user-dropdown-menu" class="dropdown-menu" role="menu">
-                <li><a href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}"><span class="icon-user"></span>&nbsp; {{"profile"|trans}}</a></li>
-                <li><a href="{{ path('fos_user_profile_edit') }}"><span class="icon-gear"></span>&nbsp; {{"settings"|trans}}</a></li>
-                <li><a href="{{ path('fos_user_security_logout') }}"><span class="icon-off"></span>&nbsp; {{"logout"|trans}}</a></li>
-              </ul>
-            </div>
-          {% else %}
-            {% if register is defined and register == true %}
-              <a id="register-btn-link" href="{{ path('fos_user_registration_register') }}" class="btn btn-success navbar-btn">{{"register"|trans}}</a>
-            {% endif %}
-            <a id="login-btn-link" href="{{ path('fos_user_security_login') }}" class="btn btn-primary">Login</a>
-            <div id="login-dropdown" class="btn-group navbar-btn dropdown">
-              <button id="dropdown-login-btn" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                {{"login"|trans}}
-              </button>
-              <ul id="login-dropdown-container" class="dropdown-menu">
-                <li>
-                  {{ form_login() }}
-                </li>
-                <li class="divider"></li>
-                <li>
-                  <p>
-                    {% for owner in hwi_oauth_resource_owners() %}
-                      <a class="btn btn-block btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{"login.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
-                    {% endfor %}
-                  </p>
-                </li>
-                <li class="divider"></li>
-                <li>
-                  <p class="footer-link">
-                    <a href="{{ path('fos_user_resetting_request') }}">{{"forgot_password"|trans}}</a>
-                  </p>
-                </li>
-              </ul>
-            </div>
-          {% endif %}
-        </div>
-        <ul id="user-dropdown-mobile" class="nav navbar-nav navbar-right">
-          <li><a href="{{ path('homepage') }}" title="Home"><span class="icon-home"></span>&nbsp; Home</a></li>
-          <li><a href="{{ path('adstacy_app_trending') }}" title="Trending"><span class="icon-rocket"></span>&nbsp; Trending</a></li>
-          <li><a href="#" title="Trending"><span class="icon-bookmark"></span>&nbsp; Popular Tags</a></li>
-          {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-          <li><a href="{{ path('adstacy_app_stream') }}"><span class="icon-rss"></span>&nbsp; {{"stream"|trans}}</a></li>
-          <li><a href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}"><span class="icon-user"></span>&nbsp; {{"profile"|trans}}</a></li>
-          <li><a href="{{ path('fos_user_profile_edit') }}"><span class="icon-gear"></span>&nbsp; {{"settings"|trans}}</a></li>
-          <li><a href="{{ path('fos_user_security_logout') }}"><span class="icon-off"></span>&nbsp; {{"logout"|trans}}</a></li>
-          {% endif %}
-        </ul>
       </div>
+
+      <form id="search-form" action="{{ path('adstacy_app_search') }}" class="navbar-form navbar-left">
+        {% set isSearchUser = app.request.attributes.get('_route') == 'adstacy_app_search' and app.request.query.get('type') == 'users' %}
+        <div id="search-container" class="input-group">
+          <input id="search-box" type="text" class="form-control" placeholder="{{"search"|trans}}" name="q" value="{{ app.request.query.get('q') }}">
+          <input id="search-type" type="hidden" name="type" value="{% if isSearchUser %}users{% else %}ads{% endif %}">
+          <div class="input-group-btn">
+            <button id="search-type-btn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+              <span id="search-type-text">{% if isSearchUser %}Users{% else %}Ads{% endif %}</span> <span class="icon-angle-down"></span>
+            </button>
+            <ul class="dropdown-menu pull-right">
+              <li><a data-val="ads">Ads</a></li>
+              <li><a data-val="users">Users</a></li>
+            </ul>
+          </div>
+        </div>
+        <button type="submit" class="btn-icon btn-search">
+          <span aria-hidden="true" class="icon-search"></span>
+        </button>
+      </form>
+
+      <div class="navbar-right">
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+          <a href="{{ path('adstacy_app_ad_create') }}" id="create-ads-btn" class="btn btn-primary navbar-btn" title="{{"ads.create"|trans}}">
+            <span aria-hidden="true" class="icon-plus"></span>
+            <span id="mobile-create-ads-label">Create Ads</span>
+          </a>
+          <div id="user-nav-dropdown" class="btn-group navbar-btn">
+            <button type="button" class="btn btn-default btn-user dropdown-toggle" data-toggle="dropdown">
+              <img class="user-profpic" src="{{ profile_pic(app.user) }}" alt="{{ app.user.username }}">
+              <span class="user-username">{{ app.user.username }}</span>
+            </button>
+            <ul id="user-nav" class="dropdown-menu">
+              <li><a href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}"><span class="icon-user"></span>&nbsp; {{"profile"|trans}}</a></li>
+              <li><a href="{{ path('fos_user_profile_edit') }}"><span class="icon-gear"></span>&nbsp; {{"settings"|trans}}</a></li>
+              <li><a href="{{ path('fos_user_security_logout') }}"><span class="icon-off"></span>&nbsp; {{"logout"|trans}}</a></li>
+            </ul>
+          </div>
+        {% else %}
+          {% if register is defined and register == true %}
+            <a id="register-link" href="{{ path('fos_user_registration_register') }}" class="btn btn-success navbar-btn">{{"register"|trans}}</a>
+          {% endif %}
+          <a id="mobile-login-link" href="{{ path('fos_user_security_login') }}" class="btn btn-primary">Login</a>
+          <div id="login-express-dropdown" class="btn-group navbar-btn dropdown">
+            <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+              {{"login"|trans}}
+            </button>
+            <div id="login-express" class="dropdown-menu">
+              <div class="dropdown-box-body">
+                {{ form_login() }}
+                <div>
+                  {% for owner in hwi_oauth_resource_owners() %}
+                    <a class="btn btn-block btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{"login.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
+                  {% endfor %}
+                </div>
+              </div>
+              <div class="dropdown-box-footer">
+                <a href="{{ path('fos_user_resetting_request') }}">{{"forgot_password"|trans}}</a>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+      <ul id="mobile-nav" class="nav navbar-nav navbar-right">
+        <li><a href="{{ path('homepage') }}" title="Home"><span class="icon-home"></span>&nbsp; Home</a></li>
+        <li><a href="{{ path('adstacy_app_trending') }}" title="Trending"><span class="icon-rocket"></span>&nbsp; Trending</a></li>
+        <li><a href="#" title="Trending"><span class="icon-bookmark"></span>&nbsp; Popular Tags</a></li>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <li><a href="{{ path('adstacy_app_stream') }}"><span class="icon-rss"></span>&nbsp; {{"stream"|trans}}</a></li>
+        <li><a href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}"><span class="icon-user"></span>&nbsp; {{"profile"|trans}}</a></li>
+        <li><a href="{{ path('fos_user_profile_edit') }}"><span class="icon-gear"></span>&nbsp; {{"settings"|trans}}</a></li>
+        <li><a href="{{ path('fos_user_security_logout') }}"><span class="icon-off"></span>&nbsp; {{"logout"|trans}}</a></li>
+        {% endif %}
+      </ul>
     </div>
-  </nav>
+  </div>
 </header>
