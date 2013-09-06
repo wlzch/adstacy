@@ -6,6 +6,15 @@
 
 {% block meta_image %}{{ app.request.scheme~"://"~app.request.host~vich_uploader_asset(ad, 'image') }}{% endblock %}
 
+{% block head_scripts %}
+  {{ parent() }}
+  {% javascripts filter='uglifyjs2'
+    '@AdstacyAppBundle/Resources/public/js/jquery.scrolltofixed.min.js'
+  %}
+    <script src="{{ asset_url }}" type="text/javascript"></script>
+  {% endjavascripts %}
+{% endblock %}
+
 {% block content %}
   {% set user = ad.user %}
 
@@ -136,6 +145,9 @@
     $(function() {
       $('#ad-detail-container').ajaxlink('promote_single');
       $('#ad-detail-sidebar').ajaxlink('follow_single');
+      $('#ad-detail-sidebar').scrollToFixed({
+        marginTop: 55 
+      });
     });
   </script>
 {% endblock %}
