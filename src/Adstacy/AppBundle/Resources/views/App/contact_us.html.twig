@@ -2,6 +2,15 @@
 
 {% form_theme form _self %}
 
+{% block stylesheets %}
+  {{ parent() }}
+  {% stylesheets filter='cssrewrite, uglifycss'
+    'bundles/adstacyapp/less/layout/contact.less'
+  %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
+  {% endstylesheets %}
+{% endblock %}
+
 {% block form_row %}
   <div class="form-group">
     {{ form_label(form, label, {label_attr: {class: 'control-label'} }) }}

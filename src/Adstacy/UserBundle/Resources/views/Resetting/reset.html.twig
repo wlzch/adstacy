@@ -2,6 +2,16 @@
 
 {% trans_default_domain 'FOSUserBundle' %}
 
+{% block stylesheets %}
+  {{ parent() }}
+  {% stylesheets filter='cssrewrite, uglifycss'
+    'bundles/adstacyapp/less/layout/reset.less'
+  %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
+  {% endstylesheets %}
+{% endblock %}
+
+
 {% form_theme form _self %}
 
 {% block form_row %}

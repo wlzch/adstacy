@@ -1,5 +1,15 @@
 {% extends 'AdstacyAppBundle::layout.html.twig' %}
 
+{% block stylesheets %}
+  {{ parent() }}
+  {% stylesheets filter='cssrewrite, uglifycss'
+    'bundles/adstacyapp/less/layout/page.less'
+  %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
+  {% endstylesheets %}
+{% endblock %}
+
+
 {% block content %}
   <div id="page" class="panel panel-info">
     <div class="panel-heading">

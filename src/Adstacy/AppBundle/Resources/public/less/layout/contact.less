@@ -1,0 +1,44 @@
+@import "../variables.less";
+
+#contactus-container {
+  margin: 80px auto;
+  width: 750px;
+
+  .control-label, .control-widget {
+    float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .control-label {
+    width: 174px;
+  }
+
+  .control-widget {
+    width: 574px;
+  }
+
+  .offset-control-label {
+    margin-left: 174px;
+  }
+
+  textarea.form-control {
+    resize: vertical;
+  }
+}
+
+@media screen and (max-width: @screen-tablet) {
+  #contactus-container {
+    width: 100%;
+    margin-top: 20px;
+    .control-widget {
+      width: 100%;
+    }
+    .offset-control-label {
+      margin-left: 0;
+    }
+    button {
+      width: 100%;
+    }
+  }
+}
