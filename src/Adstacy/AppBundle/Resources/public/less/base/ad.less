@@ -46,12 +46,16 @@
       border-top: 0;
       border-radius: 0 0 @border-radius-base 0;
     }
-    .btn-default {
+    > .btn-group .btn-default {
       border-right: 0;
     }
     .btn-group:first-child>.btn:last-child,
     .btn-group:first-child>.dropdown-toggle {
       border-bottom-right-radius: @border-radius-base;
+    }
+    .unpromote:hover {
+      background-color: #333;
+      border-color: #333;
     }
   }
 }
@@ -141,7 +145,7 @@
       border-bottom: 0;
     }
   }
-  
+
   .ad-description,
   .user-about {
     color: #555;
