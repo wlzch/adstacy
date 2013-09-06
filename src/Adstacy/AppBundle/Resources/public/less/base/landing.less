@@ -21,7 +21,7 @@
   .main-pic {
     width: 350px;
     text-align: center;
-    float: left;
+    float: right;
 
     img {
       width: 250px;
@@ -32,15 +32,16 @@
   .main-content {
     width: 650px;
     padding: 0 25px;
-    float: left;
+    float: right;
+    text-align: right;
   }
 
   &:nth-of-type(odd) {
     .main-pic, .main-content {
-      float: right;
+      float: left;
     }
     .main-content {
-      text-align: right;
+      text-align: left;
     }
   }
 }
