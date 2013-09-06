@@ -13,6 +13,11 @@ adstacy_app_trending:
     defaults:
         _controller: AdstacyAppBundle:App:trending
 
+adstacy_app_explore:
+    pattern: /explore
+    defaults:
+        _controller: AdstacyAppBundle:App:explore
+
 adstacy_app_contact:
     pattern: /contact-us
     defaults:
