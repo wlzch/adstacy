@@ -62,9 +62,11 @@ class UserRepository extends EntityRepository
     {
         $em = $this->getEntitymanager();
         $query = $em->createQuery('
-            SELECT partial u.{id,username,imagename,realName,about,adsCount,followersCount,profilePicture}
+            SELECT partial u.{id,username,imagename,realName,adsCount,followersCount,profilePicture},
+            partial a.{id,imagename,thumbHeight}
             FROM AdstacyAppBundle:User u
             JOIN u.followings f
+            LEFT JOIN u.ads a
             WHERE f.id = :id
         ');
 
@@ -94,9 +96,11 @@ class UserRepository extends EntityRepository
     {
         $em = $this->getEntitymanager();
         $query = $em->createQuery('
-            SELECT partial u.{id,username,imagename,realName,about,adsCount,followersCount,profilePicture}
+            SELECT partial u.{id,username,imagename,realName,adsCount,followersCount,profilePicture},
+            partial a.{id,imagename,thumbHeight}
             FROM AdstacyAppBundle:User u
             JOIN u.followers f
+            LEFT JOIN u.ads a
             WHERE f.id = :id
         ');
 
