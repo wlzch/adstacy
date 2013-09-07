@@ -19,6 +19,7 @@
 {% endblock %}
 
 {% block content %}
+  {% set data = form.vars.data %}
   <div class="panel panel-default" id="create-ad-container">
     <div class="panel-body clearfix">
       {{ form_start(form) }}
@@ -28,10 +29,13 @@
         </div>
 
         <div class="meta-area">
-          {{ form_row(form.description) }}
+          <div id="create-ad-desc">
+            {{ form_row(form.description) }}
+          </div>
 
-          <div id="create-ad-content">
-          {{ form_row(form.content) }}
+          <a id="long-desc-trigger" href="#" class="btn btn-info btn-block">Click to add long description</a>
+          <div id="create-ad-content" {% if not data.content %}class="hide"{% endif %}>
+            {{ form_row(form.content) }}
           </div>
 
           {{ form_widget(form.save, {attr: {class: 'form-control btn btn-primary'}}) }}
@@ -50,6 +54,12 @@
   {{ parent()  }}
   <script type="text/javascript">
     $(function() {
+      var $trigger = $('#long-desc-trigger');
+      var $content = $('#create-ad-content');
+      $trigger.click(function() {
+        $content.toggleClass('hide');  
+      });
+
       $('#create-ad-container').find('form').submit(function() {
         var $this = $(this);
         var $btn = $this.find('button[type=submit]');

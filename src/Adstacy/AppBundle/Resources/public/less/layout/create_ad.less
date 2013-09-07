@@ -1,45 +1,38 @@
 @import "../variables.less";
 
 #create-ad-container {
-  width: 1024px;
+  width: 800px;
 
   label {
     color: #555;
   }
-  #ad_content {
-    height: 250px;
-  }
   .image-area {
-    float: left;
-    border-right: 1px solid #dfdfdf;
-    margin-right: 30px;
-    min-height: 500px;
     overflow: hidden;
-    padding-right: 29px;
-    width: 260px;
+    width: 100%;
 
     .image-upload {
-      width: 236px; }
+      width: 100%;
+    }
 
     .image-preview {
+      width: 100%;
       display: block;
-      margin-top: 10px;
+      margin: 0 auto;
+      text-align: center;
+      img {
+        max-width: 800px;
+      }
     }
   }
   .meta-area {
-    float: left;
-    width: 690px;
+    width: 100%;
 
-    > div {
-      margin-bottom: 20px;
-    }
-
-    .select2-container {
-      .select2-choice {
-        height: 34px;
-        padding: 3px 12px;
-      }
-    }
+  }
+  #create-ad-desc, #create-ad-content {
+    margin: 10px 0;
+  }
+  .mce-edit-area {
+    height: 200px;
   }
 }
 
@@ -57,7 +50,7 @@
     .image-preview.medium img {
       max-width: 100%;
     }
-    #create-ad-content {
+    #long-desc-trigger, #create-ad-content {
       display: none;
     }
   }
