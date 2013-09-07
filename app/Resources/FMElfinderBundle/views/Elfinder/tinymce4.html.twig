@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    {% stylesheets output='assetic/css/compiled/fmelfinder/main.css'
-    'bundles/fmelfinder/css/*' filter='cssrewrite,?yui_css' %}
+  {% stylesheets output='assetic/css/compiled/fmelfinder/main.css'
+  'bundles/fmelfinder/css/*' filter='cssrewrite,uglifycss' %}
     <link rel="stylesheet" href="{{ asset_url }}" />
-    {% endstylesheets %}
+  {% endstylesheets %}
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" type="text/javascript"></script>
+  {% javascripts output='bundles/fmelfinder/js/main.js' filter='uglifyjs'
+    '@FMElfinderBundle/Resources/public/js/elfinder.min.js'
+  %}
+    <script src="{{ asset_url }}"></script>
+  {% endjavascripts %}
 </head>
 <body>
-{% javascripts output='bundles/fmelfinder/js/main.js' filter='?yui_js'
-'@FMElfinderBundle/Resources/public/js/jquery/jquery-1.8.0.min.js'
-'@FMElfinderBundle/Resources/public/js/jquery/jquery-ui-1.8.23.custom.min.js'
-'@FMElfinderBundle/Resources/public/js/elfinder.min.js'
-'@FMElfinderBundle/Resources/public/js/i18n/*'
-%}
-<script src="{{ asset_url }}"></script>
-{% endjavascripts %}
 <script type="text/javascript" charset="utf-8">
 
     var FileBrowserDialogue = {
