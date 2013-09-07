@@ -77,7 +77,7 @@
     $type.val($(this).find('a').attr('data-val'));
     $searchContainer.find('#search-type-text').text($(this).find('a').text());
   });
-  $('#form-search').submit(function() {
+  $('#search-form').submit(function() {
     var $box = $(this).find('#search-box');
     if ($box.val().length == 0) return false;
   });
