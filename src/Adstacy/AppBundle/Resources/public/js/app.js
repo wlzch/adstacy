@@ -11,9 +11,9 @@
   var $masonry = $('.masonry');
   var $adstacyContainer = $('.adstacy-container');
   var $window = $(window);
-  var $btnNavbarExpand = $('#btn-navbar-expand');
-  var $btnNavbarExpand_span = $('#btn-navbar-expand span');
-  var $navbarExpandContainer = $('#navbar-expand-container');
+  var $btnNavbarExpand = $('#site-nav-dropdown');
+  var $btnNavbarExpand_span = $('#site-nav-dropdown .icon-angle-up');
+  var $navbarExpandContainer = $('#site-nav-box');
   var $searchContainer = $('#search-container');
 
   $masonry.masonry({
