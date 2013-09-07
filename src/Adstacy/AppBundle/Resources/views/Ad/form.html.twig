@@ -45,3 +45,17 @@
     </div>
   </div>
 {% endblock %}
+
+{% block javascripts %}
+  {{ parent()  }}
+  <script type="text/javascript">
+    $(function() {
+      $('#create-ad-container').find('form').submit(function() {
+        var $this = $(this);
+        var $btn = $this.find('button[type=submit]');
+        $btn.attr('disabled', 'disabled');
+        $btn.html('<img src="/bundles/adstacyapp/img/spinner.gif" width="15" height="15"> Submitting...');
+      });
+    });
+  </script>
+{% endblock %}
