@@ -26,11 +26,11 @@
             <div class="promote-action btn-group btn-group-sm">
               {% set promoted = app.user.hasPromote(ad) %}
               <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-primary btn-promote promote {% if promoted %}hide{% endif %}">
-                <span aria-hidden="true" class="icon-bullhorn"></span>
+                <i class="icon-bullhorn"></i>
                 <span class="text">Promote</span>
               </a>
               <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-success btn-promote unpromote {% if not promoted %}hide{% endif %}">
-                <span aria-hidden="true" class="icon-bullhorn"></span>
+                <i class="icon-bullhorn"></i>
                 <span class="text">Promoted</span>
               </a>
               <button type="button" class="btn btn-default promotes-count">
@@ -51,10 +51,10 @@
           {% set facebookUrl = "https://www.facebook.com/sharer/sharer.php?u=#{adUrl}" %}
 
           <a href="{{ twitterUrl }}" class="tweet btn btn-twitter btn-sm">
-            <span aria-hidden="true" class="icon-twitter"></span> Twitter
+            <i class="icon-twitter"></i> Twitter
           </a>
           <a href="{{ facebookUrl }}" class="facebook-share btn btn-facebook btn-sm">
-            <span aria-hidden="true" class="icon-facebook"></span> Facebook
+            <i class="icon-facebook"></i> Facebook
           </a>
           {% if app.user == user %}
             <div class="btn-group btn-group-sm pull-right">
@@ -124,7 +124,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">{{ "ads.delete.confirm_title"|trans }}</h4>
         </div>
         <div class="modal-body">

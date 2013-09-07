@@ -21,20 +21,20 @@
       {% if app.user %}
         {% set promoted = app.user.hasPromote(ad) %}
         <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-primary btn-promote promote {% if promoted %}hide{% endif %}" title="promote">
-          <span aria-hidden="true" class="icon-bullhorn"></span>
+          <i class="icon-bullhorn"></i>
         </a>
         <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-success btn-promote unpromote {% if not promoted %}hide{% endif %}" title="unpromote">
-          <span aria-hidden="true" class="icon-bullhorn"></span>
+          <i class="icon-bullhorn"></i>
         </a>
       {% else %}
         <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-primary btn-promote" title="promote">
-          <span aria-hidden="true" class="icon-bullhorn"></span>
+          <i class="icon-bullhorn"></i>
         </a>
       {% endif %}
 
       <div class="btn-group">
         <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-          <span aria-hidden="true" class="icon-share"></span>
+          <i class="icon-share"></i>
         </a>
         <ul class="ad-social-list dropdown-menu pull-right" role="menu">
           <li>
@@ -44,12 +44,12 @@
             {% set twitterUrl = "https://twitter.com/share?url=#{adUrl}&text=#{desc}&hashtags=#{tags}" %}
             {% set facebookUrl = "https://www.facebook.com/sharer/sharer.php?u=#{adUrl}" %}
             <a href="{{ facebookUrl }}" class="facebook-share">
-              <span aria-hidden="true" class="icon-facebook"></span> Facebook
+              <i class="icon-facebook"></i> Facebook
             </a>
           </li>
           <li>
             <a href="{{ twitterUrl }}" class="tweet">
-              <span aria-hidden="true" class="icon-twitter twitter-share"></span> Twitter
+              <i class="icon-twitter twitter-share"></i> Twitter
             </a>
           </li>
         </ul>
