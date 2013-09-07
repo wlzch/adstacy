@@ -278,7 +278,7 @@ stfalcon_tinymce:
                 - "fullscreen"
                 - "save table contextmenu directionality"
                 - "paste textcolor"
-            toolbar1: "insertfile undo redo | styleselect | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image table | fullscreen"
+            toolbar1: "image | link table | insertfile undo redo | styleselect | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | fullscreen"
             menubar: false
             file_browser_callback: elFinderBrowser
 
