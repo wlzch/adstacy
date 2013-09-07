@@ -226,9 +226,9 @@ vich_uploader:
 liip_imagine:
     filter_sets:
         thumbnail:
-            quality: 75
+            quality: 90
             filters:
-                relative_resize: { widen: %thumb_width% }
+                relative_resize: { widen: 480 }
         mini_thumb:
             quality: 50
             filters:

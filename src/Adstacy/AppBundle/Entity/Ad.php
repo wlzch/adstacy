@@ -67,6 +67,16 @@ class Ad
     private $thumbHeight;
 
     /**
+     * @ORM\Column(name="image_width", type="smallint", nullable=true)
+     */
+    private $imageWidth;
+
+    /**
+     * @ORM\Column(name="image_height", type="smallint", nullable=true)
+     */
+    private $imageHeight;
+
+    /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="ads", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
@@ -325,9 +335,9 @@ class Ad
         if ($image && $this->image != $image) {
             $this->image = $image;
             $size = getimagesize($image);
-            if ($size[0] > 0) {
-                $height = round((236 / $size[0]) * $size[1]);
-                $this->setThumbHeight($height);
+            if ($size[0] > 0 && $size[1] > 0) {
+                $this->setImageWidth($size[0]);
+                $this->setImageHeight($size[1]);
             }
             // hack for VichUploaderBundle because the listener will be called 
             // only if there is any field changes
@@ -430,5 +440,61 @@ class Ad
     public function getPromotees()
     {
         return $this->promotees;
+    }
+
+    /**
+     * Set imageWidth
+     *
+     * @param integer $imageWidth
+     * @return Ad
+     */
+    public function setImageWidth($imageWidth)
+    {
+        $this->imageWidth = $imageWidth;
+    
+        return $this;
+    }
+
+    /**
+     * Get imageWidth
+     *
+     * @return integer 
+     */
+    public function getImageWidth()
+    {
+        return $this->imageWidth;
+    }
+
+    /**
+     * Set imageHeight
+     *
+     * @param integer $imageHeight
+     * @return Ad
+     */
+    public function setImageHeight($imageHeight)
+    {
+        $this->imageHeight = $imageHeight;
+    
+        return $this;
+    }
+
+    /**
+     * Get imageHeight
+     *
+     * @param integer|null
+     *
+     * @return integer 
+     */
+    public function getImageHeight($width = null)
+    {
+        if ($this->imageHeight) {
+            if ($width) {
+                return round(($width / $this->getImageWidth()) * $this->imageHeight);
+            }
+
+            return $this->imageHeight;
+        }
+
+        return $this->getThumbHeight();
     }
 }
