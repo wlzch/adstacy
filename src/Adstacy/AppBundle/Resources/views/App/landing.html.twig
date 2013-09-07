@@ -48,7 +48,7 @@
     <!-- inline-block -->
     <section class="main-section">
       <div class="main-pic">
-        <span class="icon-ads">@</span>
+        <span class="icon-ads"></span>
       </div>
       <div class="main-content">
         <h1>{{"landing.features.ad.heading"|trans}}</h1>
@@ -56,7 +56,7 @@
       </div>
     </section><section class="main-section">
       <div class="main-pic">
-        <span class="icon-bullhorn"></span>
+        <span class="icon-promote"></span>
       </div>
       <div class="main-content">
         <h1>{{"landing.features.social.heading"|trans}}</h1>
@@ -64,7 +64,7 @@
       </div>
     </section><section class="main-section">
       <div class="main-pic">
-        <span class="icon-hastag">#</span>
+        <span class="icon-hash"></span>
       </div>
       <div class="main-content">
         <h1>{{"landing.features.hashtag.heading"|trans}}</h1>
@@ -80,7 +80,7 @@
       </div>
     </section><section class="main-section">
       <div class="main-pic">
-        <span class="icon-hastag">#</span>
+        <span class="icon-hash"></span>
       </div>
       <div class="main-content">
         <h1>{{"landing.features.hashtag.heading"|trans}}</h1>
@@ -97,4 +97,15 @@
     </section>
     <!-- end inline-block -->
   </div>
+
+  <script>
+    (function($) {
+      $.fn.setHeight = function() {
+        return this.height(Math.max.apply(this, $.map(this, function(e) { return $(e).height(); })));
+      };
+    })(jQuery);
+    $(function() {
+      $('.main-section').setHeight();
+    });
+  </script>
 {% endblock %}
