@@ -22,7 +22,7 @@
                   <h2 class="user-info-about">
                     <span class="empty">
                       No Description About User.
-                      {% if app.user %}
+                      {% if app.user and app.user == user %}
                         Go to <a href="{{ path('fos_user_profile_edit') }}">Settings</a> to write.
                       {% endif %}
                     </span>
