@@ -17,34 +17,36 @@
 {% block content %}
   <style>
     body {
-      background-color: #ddd;
+      padding-top: 50px;
       margin-bottom: 0;
     }
   </style>
-  <section id="main-title" class="jumbotron clearfix">
-    <h1 class="text-center">{{"landing.welcome"|trans}}</h1>
-    <div id="form-register-container" class="panel panel-default">
-      <div class="panel-heading">
-        {% for owner in hwi_oauth_resource_owners() %}
-          <a class="btn btn-block btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">Signup with {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
-        {% endfor %}
+  <div id="main-title" class="jumbotron clearfix">
+    <div class="main-container">
+      <h1 class="text-center">{{"landing.welcome"|trans}}</h1>
+      <div id="form-register-container" class="panel panel-default">
+        <div class="panel-heading">
+          {% for owner in hwi_oauth_resource_owners() %}
+            <a class="btn btn-block btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">Signup with {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
+          {% endfor %}
+        </div>
+        {{ form_start(form, {attr: {class: 'panel-body', role: 'form'} }) }}
+          {{ form_errors(form) }}
+
+          {{ form_row(form.email) }}
+          {{ form_row(form.username) }}
+          {{ form_row(form.realName) }}
+          {{ form_row(form.plainPassword) }}
+          <p class="h6">{{ "form_registration.agreement"|trans({'%terms_url%': path('adstacy_app_page_show', {key: 'terms'}),
+            '%privacy_url%': path('adstacy_app_page_show', {key: 'privacy-policy'}) })|raw }}</p>
+          {{ form_widget(form.register, {attr: {class: 'btn btn-primary btn-block'} }) }}
+
+        {{ form_end(form) }}
       </div>
-      {{ form_start(form, {attr: {class: 'panel-body', role: 'form'} }) }}
-        {{ form_errors(form) }}
-
-        {{ form_row(form.email) }}
-        {{ form_row(form.username) }}
-        {{ form_row(form.realName) }}
-        {{ form_row(form.plainPassword) }}
-        <p class="h6">{{ "form_registration.agreement"|trans({'%terms_url%': path('adstacy_app_page_show', {key: 'terms'}),
-          '%privacy_url%': path('adstacy_app_page_show', {key: 'privacy-policy'}) })|raw }}</p>
-        {{ form_widget(form.register, {attr: {class: 'btn btn-primary btn-block'} }) }}
-
-      {{ form_end(form) }}
     </div>
-  </section>
+  </div>
 
-  <div id="main-feature" class="main-container clearfix">
+  <div id="main-feature" class="main-container">
     <!-- inline-block -->
     <section class="main-section">
       <div class="main-pic">
@@ -100,12 +102,15 @@
 
   <script>
     (function($) {
+      // set equal height for inline-block element
       $.fn.setHeight = function() {
         return this.height(Math.max.apply(this, $.map(this, function(e) { return $(e).height(); })));
       };
     })(jQuery);
+
+    var $mainSection = $('.main-section');
     $(function() {
-      $('.main-section').setHeight();
+      $mainSection.setHeight();
     });
   </script>
 {% endblock %}
