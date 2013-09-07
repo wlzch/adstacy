@@ -11,9 +11,6 @@
   var $masonry = $('.masonry');
   var $adstacyContainer = $('.adstacy-container');
   var $window = $(window);
-  var $btnNavbarExpand = $('#site-nav-dropdown');
-  var $btnNavbarExpand_span = $('#site-nav-dropdown .icon-angle-up');
-  var $navbarExpandContainer = $('#site-nav-box');
   var $searchContainer = $('#search-container');
   var windowWidth = $window.width();
   console.log(windowWidth);
@@ -47,19 +44,6 @@
   });
 
   $('img.lazy').lazyload();
-  $btnNavbarExpand.click(function(event) {
-    $btnNavbarExpand_span.toggleClass('icon-angle-down');
-    $navbarExpandContainer.toggleClass('hide');
-
-    event.stopPropagation();
-    event.preventDefault();
-
-    return false;
-  })
-  $('html, dropdown-toggle').click(function() {
-    $btnNavbarExpand_span.addClass('icon-angle-down');
-    $navbarExpandContainer.addClass('hide');
-  });
   $('.unfollow-user').hover(
     function() { $(this).text('Unfollow'); },
     function() { $(this).text('Following'); }

@@ -16,7 +16,6 @@
 
 #site-nav-box {
   width: 600px;
-  display: block;
 }
 
 #site-nav {
@@ -125,22 +124,22 @@
 #search-container {
   width: 360px;
 
-  .form-control {
-    background-color: #fafafa;
-    padding-left: 35px;
-  }
+}
+
+#search-box {
+  background-color: #fafafa;
+  border-width: 1px 0;
 }
 
 #search-type-btn {
   color: #888;
   min-width: 80px;
-  margin-left: -1px;
   padding-right: 24px;
   text-align: left;
 
+  .icon-angle-up,
   .icon-angle-down {
     position: absolute;
-    font-size: 16px;
     line-height: 32px;
     top: 0;
     right: 10px;
@@ -165,7 +164,6 @@
 
   .icon-search {
     color: @input-color-placeholder;
-    font-size: 16px;
   }
 
   &:hover .icon-search,
