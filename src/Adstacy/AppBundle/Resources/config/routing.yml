@@ -18,6 +18,11 @@ adstacy_app_explore:
     defaults:
         _controller: AdstacyAppBundle:App:explore
 
+adstacy_app_tags:
+    pattern: /tags
+    defaults:
+        _controller: AdstacyAppBundle:App:tags
+
 adstacy_app_contact:
     pattern: /contact-us
     defaults:

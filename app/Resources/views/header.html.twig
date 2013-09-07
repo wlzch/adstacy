@@ -107,7 +107,7 @@
       <ul id="mobile-nav" class="nav navbar-nav navbar-right">
         <li><a href="{{ path('homepage') }}" title="Home"><span class="icon-home"></span>&nbsp; Home</a></li>
         <li><a href="{{ path('adstacy_app_trending') }}" title="Trending"><span class="icon-rocket"></span>&nbsp; Trending</a></li>
-        <li><a href="#" title="Trending"><span class="icon-bookmark"></span>&nbsp; Popular Tags</a></li>
+        <li><a href="{{ path('adstacy_app_tags') }}" title="Trending"><span class="icon-bookmark"></span>&nbsp; Popular Tags</a></li>
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <li><a href="{{ path('adstacy_app_stream') }}"><span class="icon-rss"></span>&nbsp; {{"stream"|trans}}</a></li>
         <li><a href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}"><span class="icon-user"></span>&nbsp; {{"profile"|trans}}</a></li>

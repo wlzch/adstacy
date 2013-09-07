@@ -64,6 +64,14 @@ class AppController extends Controller
         ));
     }
 
+    /**
+     * Show tags
+     */
+    public function tagsAction()
+    {
+        return $this->render('AdstacyAppBundle:App:tags.html.twig');
+    }
+
     public function contactUsAction()
     {
         $contact = new Contact();

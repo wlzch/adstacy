@@ -1,0 +1,21 @@
+{% extends 'AdstacyAppBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  {% stylesheets filter='cssrewrite, uglifycss'
+    'bundles/adstacyapp/less/layout/tags.less'
+  %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
+  {% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+  <ul id="browse-tags adstacy-container">
+    <li><a href="{{ path('adstacy_app_search', {q: 'jual'}) }}" title="Jual">Jual<small>#jual</small></a></li>
+    <li><a href="{{ path('adstacy_app_search', {q: 'beli'}) }}" title="Beli">Beli<small>#beli</small></a></li>
+    <li><a href="{{ path('adstacy_app_search', {q: 'loker'}) }}" title="Lowongan Kerja">Lowongan Kerja<small>#lowker</small></a></li>
+    <li><a href="{{ path('adstacy_app_search', {q: 'promo'}) }}" title="Promo">Promo<small>#promo</small></a></li>
+    <li><a href="{{ path('adstacy_app_search', {q: 'event'}) }}" title="Event">Event<small>#event</small></a></li>
+    <li><a href="{{ path('adstacy_app_search', {q: 'property'}) }}" title="Property">Rumah<small>#property</small></a></li>
+  </ul>
+{% endblock %}
