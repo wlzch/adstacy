@@ -281,6 +281,7 @@ stfalcon_tinymce:
             toolbar1: "image | link table | insertfile undo redo | styleselect | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | fullscreen"
             menubar: false
             file_browser_callback: elFinderBrowser
+            height: "300px"
 
 sonata_block:
     default_contexts: [cms]
