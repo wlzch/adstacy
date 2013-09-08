@@ -32,8 +32,14 @@
 
 {% block image_widget %}
 {% set imageExists = obj and obj.image and obj.imagename %}
-<input class="image-upload" type="file" name="{{ full_name }}" {% if not imageExists and image_required %}required=required{% endif %}>
+<input class="image-upload hide" type="file" name="{{ full_name }}" {% if not imageExists and image_required %}required=required{% endif %}>
 
+<div class="input-group">
+  <input type="text" class="form-control image-upload-text image-upload-trigger" placeholder="Click to choose image" />
+  <span class="input-group-btn">
+    <button class="btn btn-default btn-info image-upload-trigger" type="button">Choose Image</button>
+  </span>
+</div>
 <div class="image-preview {{ image_size }}">
   {% if imageExists %}
     <img src="{{ vich_uploader_asset(obj, 'image') }}">
@@ -46,15 +52,21 @@
   $(function() {
     var $upload = $('.image-upload');
     var $preview = $('.image-preview');
+    var $trigger = $('.image-upload-trigger');
+    var $text = $('.image-upload-text');
     $upload.change(function(e) {
       var files = FileAPI.getFiles(e);
       if (files && files[0]) {
         FileAPI.readAsImage(files[0], function(evt) {
           if (evt.type == 'load') {
             $preview.find('img').replaceWith(evt.result);
+            $text.val(files[0].name);
           }
         });
       }
+    });
+    $trigger.click(function() {
+      $upload.trigger('click');
     });
   });
 </script>
