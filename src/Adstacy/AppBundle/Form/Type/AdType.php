@@ -13,21 +13,24 @@ class AdType extends AbstractType
     {
         $builder->add('image', 'image', array(
             'label' => 'form_ad.image',
-            'required' => true
+            'required' => true,
+            'error_bubbling' => true
         ));
         $builder->add('description', 'textarea', array(
             'label' => 'form_ad.description',
             'attr' => array(
                 'class' => 'form-control',
                 'placeholder' => 'Adstacy T-Shirt Rp250.000 #branded #tshirt #medan #cool'
-            )
+            ),
+            'error_bubbling' => true
         ));
         $builder->add('content', 'purified_textarea', array(
             'label' => 'form_ad.content',
             'required' => false,
             'attr' => array(
                 'class' => 'tinymce'
-            )
+            ),
+            'error_bubbling' => true
         ));
         $builder->add('save', 'submit', array(
             'label' => 'form_ad.submit'
