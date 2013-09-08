@@ -10,12 +10,12 @@
 {% endblock %}
 
 {% block content %}
-  <div id="page" class="panel panel-info">
+  <div id="page" class="panel panel-default">
     <div class="panel-heading">
       <h2>{{ page.title }}</h2>
     </div>
     <div id="page-content" class="panel-body">
-      {{ page.content }}
+      {{ page.content|raw }}
     </div>
   </div>
 {% endblock %}
