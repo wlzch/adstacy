@@ -8,6 +8,7 @@ login.with: Login With
 register: Register
 forgot_password: Forgot password?
 cancel: Cancel
+close: Close
 delete: Delete
 edit: Edit
 more: More
@@ -65,6 +66,15 @@ form_ad:
     description: Description
     content: Long description
     submit: Save
+    placeholders:
+        description: Describe your ads creatively to reach your potential market. See examples for reference.
+    example: examples
+    examples:
+        example1: "Rp250.000 #tshirt #brand #jual #medan #pria #indonesia"
+        example2: "Launching #adstacy 9 September 2013 #event #launching"
+        example3: "Job Vacancy for Admin PT.XXX #lowongankerja requirements #s1"
+        example4: "#cucigudang #diskon #promo 50% all item toko xxx"
+        example5: "#rumah 4x18m area #medan #marelan Rp250.000.000 NEGO"
 
 form_contact:
     subject: Subject

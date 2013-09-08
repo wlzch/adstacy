@@ -31,7 +31,12 @@
 
         <div class="meta-area">
           <div id="create-ad-desc">
-            {{ form_row(form.description) }}
+            <div class="clearfix">
+              {{ form_label(form.description) }}
+              <div class="pull-right">
+                <a id="desc-examples" href="#" data-toggle="modal" data-target="#examples-modal">{{ "form_ad.example"|trans }}</a>
+            </div>
+            {{ form_widget(form.description) }}
             <div id="chars-left-box ">
               <span id="chars-left">{{ desc_length - (data.description|length) }}</span>
               characters left
@@ -51,6 +56,28 @@
 
       {{ elfinder_tinymce_init4() }}
       {{ tinymce_init() }}
+    </div>
+  </div>
+  <div class="modal fade" id="examples-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">{{ "form_ad.example"|trans|title }}</h4>
+        </div>
+        <div class="modal-body">
+          <ul>
+            <li>{{ "form_ad.examples.example1"|trans }}</li>
+            <li>{{ "form_ad.examples.example2"|trans }}</li>
+            <li>{{ "form_ad.examples.example3"|trans }}</li>
+            <li>{{ "form_ad.examples.example4"|trans }}</li>
+            <li>{{ "form_ad.examples.example5"|trans }}</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">{{ "close"|trans }}</button>
+        </div>
+      </div>
     </div>
   </div>
 {% endblock %}
