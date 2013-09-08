@@ -96,11 +96,10 @@
             <div id="login-express" class="dropdown-menu">
               <div class="dropdown-box-body">
                 {{ form_login() }}
-                <div>
-                  {% for owner in hwi_oauth_resource_owners() %}
-                    <a class="btn btn-block btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{"login.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
-                  {% endfor %}
-                </div>
+
+                {% for owner in hwi_oauth_resource_owners() %}
+                  <a class="btn btn-block btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{"login.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
+                {% endfor %}
               </div>
               <div class="dropdown-box-footer">
                 <a href="{{ path('fos_user_resetting_request') }}">{{"forgot_password"|trans}}</a>
