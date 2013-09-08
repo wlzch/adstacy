@@ -105,7 +105,6 @@ body {
 }
 
 #main-title {
-  background: #333 url('../img/screenshot.jpg') no-repeat center;
   background-size: cover;
   padding-bottom: 20px;
 
@@ -124,21 +123,9 @@ body {
   }
 }
 
-#main-footer {
-
-}
-
 @media screen and (max-width: @screen-tablet) {
   .main-container, .main-section, .main-content {
     width: 100% !important;
-  }
-
-  .main-section {
-    border-left-width: 0;
-
-    &:nth-child(3n) {
-      border-right-width: 0;
-    }
   }
 
   #form-register-container {
@@ -149,5 +136,20 @@ body {
 
   #main-title h1 {
     margin: 50px 0;
+  }
+  #landing-screenshot, #form-register-container {
+    float: none;
+  }
+  #landing-screenshot {
+    margin-top: 0; 
+    img {
+      width: 100%;
+    }
+  }
+  #main-title {
+    background: #222;
+  }
+  .main-section {
+    float: none;
   }
 }
