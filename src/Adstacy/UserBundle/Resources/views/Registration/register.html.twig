@@ -27,13 +27,13 @@
 
     <div class="panel-body">
       {% for owner in hwi_oauth_resource_owners() %}
-        <a class="btn btn-block btn-lg btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">Signup with {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
+      <a class="btn btn-block btn-lg btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{"register.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
       {% endfor %}
     </div>
 
     <hr>
 
-    {{ form_start(form, {attr: {class: 'panel-body', role: 'form'} }) }}
+    {{ form_start(form, {attr: {class: 'panel-body submit-disable', role: 'form'} }) }}
       {{ form_errors(form) }}
 
       {{ form_row(form.email) }}
@@ -42,7 +42,13 @@
       {{ form_row(form.plainPassword) }}
       <p>{{ "form_registration.agreement"|trans({'%terms_url%': path('adstacy_app_page_show', {key: 'terms'}),
         '%privacy_url%': path('adstacy_app_page_show', {key: 'privacy-policy'}) })|raw }}</p>
-      {{ form_widget(form.register, {attr: {class: 'btn btn-primary btn-lg btn-block'} }) }}
+      {{ form_widget(form.register, {
+          attr: {
+            'class': 'btn btn-primary btn-lg btn-block submit-disable-btn',
+            'data-disable-text': "registering"|trans
+          }
+        })
+      }}
 
     {{ form_end(form) }}
   </div>

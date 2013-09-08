@@ -22,7 +22,7 @@
   {% set data = form.vars.data %}
   <div class="panel panel-default" id="create-ad-container">
     <div class="panel-body clearfix">
-      {{ form_start(form) }}
+      {{ form_start(form, {attr: {class: 'submit-disable'}}) }}
         {{ form_errors(form) }}
         {{ form_label(form.image) }}
         <div class="image-area">
@@ -43,12 +43,18 @@
             </div>
           </div>
 
-          <button id="long-desc-trigger" type="button" class="btn btn-info btn-block">Click to add more images and descriptions</button>
+          <button id="long-desc-trigger" type="button" class="btn btn-info btn-block">{{"form_ad.content_trigger"|trans}}</button>
           <div id="create-ad-content" {% if not data.content %}class="hide"{% endif %}>
             {{ form_widget(form.content) }}
           </div>
 
-          {{ form_widget(form.save, {attr: {class: 'form-control btn btn-primary'}}) }}
+          {{ form_widget(form.save, {
+              attr: {
+                'class': 'form-control btn btn-primary submit-disable-btn',
+                'data-disable-text': "saving"|trans
+              }
+            })
+          }}
 
           {{ form_rest(form) }}
         </div>
@@ -92,13 +98,6 @@
       var $desc = $('#{{ form.description.vars.id }}');
       $trigger.click(function() {
         $content.toggleClass('hide');  
-      });
-
-      $('#create-ad-container').find('form').submit(function() {
-        var $this = $(this);
-        var $btn = $this.find('button[type=submit]');
-        $btn.attr('disabled', 'disabled');
-        $btn.html('<img src="/bundles/adstacyapp/img/spinner.gif" width="15" height="15"> Submitting...');
       });
       var checkCharsLeft = function() {
         var val = $desc.val();

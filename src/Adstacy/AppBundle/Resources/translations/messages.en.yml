@@ -12,6 +12,9 @@ close: Close
 delete: Delete
 edit: Edit
 more: More
+saving: Saving...
+registering: Registering...
+loggingin: Logging in...
 
 #footer
 about: About
@@ -34,7 +37,7 @@ ads:
 user:
     no_followers:
         message: %username% doesn't have any followers yet
-        self_message: You don't have any ads yet
+        self_message: You don't have any followers yet
     no_followings:
         message: Nobody follows %username% yet
 
@@ -67,6 +70,7 @@ form_ad:
     image: Image
     description: Description
     content: Long description
+    content_trigger: Click to add more images and descriptions
     submit: Save
     placeholders:
         description: Describe your ads creatively to reach your potential market. See examples for reference.

@@ -1,23 +1,70 @@
-landing:
-    welcome: Selamat Datang ke Adstacy
-    features:
-        ad:
-            heading: Cepat. Mudah. Gratis.
-            desc: Iklan dikonsumsi dan dipromosikan oleh konsumen sendiri. Semakin besar komunitas anda, semakin cepat dan besar pasar Anda. Dapatkan segala kemudahannya secara GRATIS
-        social:
-            heading: Cara Baru Menikmati Iklan
-            desc: Kini anda mampu beriklan dengan lebih menyenangkan dengan mempromosikan iklan Anda kepada follower Anda
-        hashtag:
-            heading: Hashtag. Hashtag Dimana-mana
-            desc: Jelaskan iklan anda dengan menggunakan hashtag secara kreatif untuk iklan yang lebih baik
-        search:
-            heading: Temukan Apapun Kebutuhan Anda
-            desc: Temukan semua jenis iklan disini. Promosi, Jual Beli, Event, hingga Lowongan Kerja. Apapun itu.
+search: Cari
+stream: My Stream
+profile: Profil
+settings: Pengaturan
+logout: Logout
+login: Login
+login.with: Login dengan
+register.with: Daftar dengan
+register: Daftar
+forgot_password: Lupa password?
+cancel: Batal
+close: Tutup
+delete: Hapus
+edit: Ubah
+more: Lagi
+saving: Menyimpan...
+registering: Mendaftarkan...
+loggingin: Logging in...
+
+#footer
+about: Tentang
+terms: Ketentuan
+privacy: Kebijakan Privasi
+contact_us: Contact Us
+
+ads:
+    create: Tambah iklan
+    delete:
+        confirm_title: Konfirmasi penghapusan
+        confirm_message: Apakah anda yakin ingin menghapus iklan ini?
+        button: HAPUS!
+    no_ads:
+        message: %username% belum mempunyai iklan
+        self_message: Anda belum mempunyai iklan
+        help: Buat iklan anda sekarang
+
+user:
+    no_followers:
+        message: %username% belum mempunyai follower
+        self_message: Anda belum mempunyai follower
+    no_followings:
+        message: Belum ada yang follow Anda
+
+search:
+    no_result:
+        message: Hasil Pencarian Tidak Ditemukan
+        help: Cari dengan kata kunci lainnya
+
+form_profile:
+    profile_picture: Gambar Profil
+    fullname: Nama Lengkap
+    about_me: Tentang Saya
+    submit: Simpan
+    change_password: Ubah password
+    forgot_password: Lupa password?
+    connected: Terhubung dengan %name%
+    not_connected: Belum terhubung
+    connect: Hubungkan dengan %service%
+    disconnect: Putuskan hubungan dengan akun %service%
+    placeholders:
+        about: Informasi tentang anda mulai dari jenis usaha, nomor hp, bbm, ym, lokasi dan lainnya
 
 form_ad:
     image: Gambar
     description: Deskripsi
     content: Deskripsi lengkap
+    content_trigger: Klik untuk menambahkan gambar dan deskripsi lengkap
     submit: Simpan
     placeholders:
         description: Deskripsikan iklan anda secara kreatif sesuai target pasar anda. Lihat contoh untuk referensi.
@@ -29,6 +76,66 @@ form_ad:
         example4: "#cucigudang #diskon 50% semua barang"
         example5: "#rumah 4x18m wilayah #medan #marelan Rp250.000.000 NEGO"
 
-form_profile:
-    placeholders:
-        about: Informasi tentang anda mulai dari jenis usaha, nomor hp, bbm, ym, lokasi dan lainnya
+form_contact:
+    subject: Judul
+    email: Email
+    content: Isi
+    submit: Kirim
+
+form_password:
+    submit: Ubah password
+    title: Ubah password
+
+flash:
+    account:
+        disconnect:
+            success: Anda berhasil memutuskan hubungan dengan akun %service% Anda
+            error: Anda belum terhubung dengan akun %service% Anda
+    ad:
+        create:
+            success: Iklan berhasil dibuat
+        edit:
+            error_diff_user: Anda hanya dapat mengedit iklan Anda sendiri
+            success: Iklan berhasil diedit
+        delete:
+            error_diff_user: Anda hanya dapat menghapus iklan Anda sendiri
+            success: Iklan berhasil dihapus
+        promote:
+            success: Iklan berhasil dipromote
+            error_twice: Anda tidak diperbolehkan promote iklan ini 2 kali
+        unpromote:
+            success: Iklan berhasil di unpromote
+            error_not_promote: Anda belum promote iklan ini
+    contact:
+        success: Kritik/Saran anda telah di-email-kan ke tim support kami. Kami akan segera memberikan tanggapan. Terima Kasih.
+    user:
+        follow:
+            error_self: Tidak boleh follow diri anda sendiri
+            error_followed: %username% telah di follow
+            success: %username% berhasil di follow
+        unfollow:
+            error_self: Tidak boleh unfollow diri anda sendiri
+            error_not_followed: %username% belum di follow
+            success: %username% berhasil di unfollow
+
+landing:
+    welcome: Selamat Datang ke Adstacy
+    features:
+        easy:
+            heading: <b>M</b>udah
+            desc: Masukkan iklan Anda hanya dengan 1 gambar dan deskripsi singkat
+        social:
+            heading: <b>S</b>osial &amp; <b>A</b>sik
+            desc: Promote iklan yang Anda sukai untuk dilihat follower Anda
+        search:
+            heading: <b>P</b>encarian
+            desc: Cari produk, acara, lowongan kerja, atau iklan apapun
+        hashtag:
+            heading: <b>H</b>ashtag
+            desc: Deskripsikan iklan anda secara kreatif sesuai dengan target pasar Anda
+        free:
+            heading: <b>G</b>ratis
+            desc: Iklan di tempat kami GRATIS
+        fast:
+            heading: <b>F</b>ast
+            desc: Fast as you want
