@@ -4,8 +4,9 @@ profile: Profile
 settings: Settings
 logout: Logout
 login: Login
-login.with: Login With
+login.with: Login with
 register: Register
+register.with: Register with
 forgot_password: Forgot password?
 cancel: Cancel
 close: Close
@@ -15,6 +16,9 @@ more: More
 saving: Saving...
 registering: Registering...
 loggingin: Logging in...
+
+users: Users
+ads: Ads
 
 #footer
 about: About
@@ -74,6 +78,7 @@ form_ad:
     submit: Save
     placeholders:
         description: Describe your ads creatively to reach your potential market. See examples for reference.
+    characters_left: '<span id="chars-left">%left%</span> characters left'
     example: examples
     examples:
         example1: "Rp250.000 #tshirt #brand #jual #medan #pria #indonesia"

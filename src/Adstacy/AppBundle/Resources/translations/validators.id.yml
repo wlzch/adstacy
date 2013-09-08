@@ -1,0 +1,28 @@
+ad:
+    image:
+        not_null: Gambar harus diupload
+    description:
+        max: Deskripsi maksimal {{ limit }} karakter
+        not_blank: Deskripsi harus diisi
+
+image:
+    file:
+        mime_types: Gambar harus jpg atau png
+        min_width: Lebar gambar terlalu kecil({{ width }}px). Minimal lebar {{ min_width }}px
+
+user:
+    username:
+        not_blank: Username harus diisi
+        min: Username minimal {{ limit }} karakter 
+        max: Username maksimal {{ limit }} karakter
+        valid: Username hanya boleh berisi a-z0-9._
+    email:
+        not_blank: Email harus diisi
+        email: Email tidak valid
+    realname:
+        not_blank: Nama lengkap harus diisi
+    password:
+        not_blank: Password harus diisi
+        min: Password minimal {{ limit }} karakter
+    about:
+        max: Tentang maksimal {{ limit }} karakter 

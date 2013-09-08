@@ -42,6 +42,7 @@ class Ad
      *  max = "255",
      *  maxMessage = "ad.description.max"
      * )
+     * @Assert\NotBlank(message="ad.description.not_blank")
      * @ORM\COlumn(type="string", length=255)
      */
     private $description;

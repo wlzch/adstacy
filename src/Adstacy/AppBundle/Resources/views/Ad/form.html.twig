@@ -38,8 +38,7 @@
             </div>
             {{ form_widget(form.description) }}
             <div id="chars-left-box">
-              <span id="chars-left">{{ desc_length - (data.description|length) }}</span>
-              characters left
+              {{ "form_ad.characters_left"|trans({'%left%': desc_length - (data.description|length)})|raw }}
             </div>
           </div>
 

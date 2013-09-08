@@ -3,6 +3,7 @@ ad:
         not_null: You must upload an image
     description:
         max: Ad description at most {{ limit }} characters
+        not_blank: Ad description must not be blank
 
 image:
     file:

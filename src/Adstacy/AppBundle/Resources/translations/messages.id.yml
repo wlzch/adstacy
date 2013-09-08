@@ -17,6 +17,9 @@ saving: Menyimpan...
 registering: Mendaftarkan...
 loggingin: Logging in...
 
+users: User
+ads: Iklan
+
 #footer
 about: Tentang
 terms: Ketentuan
@@ -68,6 +71,7 @@ form_ad:
     submit: Simpan
     placeholders:
         description: Deskripsikan iklan anda secara kreatif sesuai target pasar anda. Lihat contoh untuk referensi.
+    characters_left: 'sisa <span id="chars-left">%left%</span> karakter'
     example: contoh
     examples:
         example1: "Rp250.000 #tshirt #brand #jual #medan #pria #indonesia"

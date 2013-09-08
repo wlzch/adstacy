@@ -18,12 +18,12 @@
         <div id="search-container" class="input-group">
           <div class="input-group-btn">
             <button id="search-type-btn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-              <span id="search-type-text">{% if isSearchUser %}Users{% else %}Ads{% endif %}</span>
+              <span id="search-type-text">{% if isSearchUser %}{{"users"|trans}}{% else %}{{"ads"|trans}}{% endif %}</span>
               <i class="icon-angle-up icon-angle-down"></i>
             </button>
             <ul class="dropdown-menu">
-              <li><a data-val="ads">Ads</a></li>
-              <li><a data-val="users">Users</a></li>
+              <li><a data-val="ads">{{"ads"|trans}}</a></li>
+              <li><a data-val="users">{{"users"|trans}}</a></li>
             </ul>
           </div>
           <input id="search-box" type="text" class="form-control" placeholder="{{"search"|trans}}" name="q" value="{{ app.request.query.get('q') }}">
@@ -71,7 +71,7 @@
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
           <a href="{{ path('adstacy_app_ad_create') }}" id="create-ads-btn" class="btn btn-primary navbar-btn" title="{{"ads.create"|trans}}">
             <i class="icon-plus"></i>
-            <span id="mobile-create-ads-label">Create Ads</span>
+            <span id="mobile-create-ads-label">{{"ads.create"|trans}}</span>
           </a>
           <div id="user-nav-dropdown" class="btn-group navbar-btn">
             <button type="button" class="btn btn-default btn-user dropdown-toggle" data-toggle="dropdown">
