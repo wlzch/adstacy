@@ -32,15 +32,15 @@
         <div class="meta-area">
           <div id="create-ad-desc">
             {{ form_row(form.description) }}
-            <p>
+            <div id="chars-left-box ">
               <span id="chars-left">{{ desc_length - (data.description|length) }}</span>
               characters left
-            </p>
+            </div>
           </div>
 
           <button id="long-desc-trigger" type="button" class="btn btn-info btn-block">Click to add more images and descriptions</button>
           <div id="create-ad-content" {% if not data.content %}class="hide"{% endif %}>
-            {{ form_row(form.content) }}
+            {{ form_widget(form.content) }}
           </div>
 
           {{ form_widget(form.save, {attr: {class: 'form-control btn btn-primary'}}) }}
