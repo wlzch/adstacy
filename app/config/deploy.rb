@@ -19,7 +19,7 @@ role :web,        domain                         # Your HTTP server, Apache/etc
 role :app,        domain, :primary => true       # This may be the same as your `Web` server
 
 set  :use_sudo, true # must use sudo because setfacl will fail if not
-set  :keep_releases,  3
+set  :keep_releases, 8
 # cannot use remote_cache because of empty directories causing symlink fails
 # set  :deploy_via, :remote_cache
 
