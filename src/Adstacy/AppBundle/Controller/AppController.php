@@ -14,7 +14,9 @@ class AppController extends Controller
     public function indexAction()
     {
         if (!$this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            $form = $this->createForm(new RegistrationFormType('Adstacy\\AppBundle\\Entity\\User'));
+            /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
+            $formFactory = $this->container->get('fos_user.registration.form.factory');
+            $form = $formFactory->createForm();
 
             return $this->render('AdstacyAppBundle:App:landing.html.twig', array(
                 'form' => $form->createView()
