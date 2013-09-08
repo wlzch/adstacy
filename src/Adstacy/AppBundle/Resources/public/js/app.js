@@ -34,7 +34,7 @@
   var $masonry = $('.masonry');
   var $adstacyContainer = $('.adstacy-container');
   var $window = $(window);
-  var $searchContainer = $('#search-container');
+  var $searchForm = $('#search-form');
   var windowWidth = $window.width();
 
   if (windowWidth >= 480) {
@@ -83,12 +83,12 @@
   $('[data-toggle=tooltip]').tooltip({
     container: "body"
   });
-  $searchContainer.find('.dropdown-menu li').click(function() {
-    var $type = $searchContainer.find('#search-type');
+  $searchForm.find('.dropdown-menu li').click(function() {
+    var $type = $searchForm.find('#search-type');
     $type.val($(this).find('a').attr('data-val'));
-    $searchContainer.find('#search-type-text').text($(this).find('a').text());
+    $searchForm.find('#search-type-text').text($(this).find('a').text());
   });
-  $('#search-form').submit(function() {
+  $searchForm.submit(function() {
     var $box = $(this).find('#search-box');
     if ($box.val().length == 0) return false;
   });
