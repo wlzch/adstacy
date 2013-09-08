@@ -24,15 +24,26 @@ class ProfileFormType extends BaseType
             'label' => 'form_profile.profile_picture',
             'required' => false,
             'image_required' => false,
-            'image_size' => 'small'
+            'image_size' => 'small',
+            'error_bubbling' => true
         ));
-        parent::buildUserForm($builder, $options);
+        $builder->add('username', null, array(
+            'label' => 'form.username',
+            'translation_domain' => 'FOSUserBundle',
+            'error_bubbling' => true
+        ));
+        $builder->add('email', 'email', array(
+            'label' => 'form.email',
+            'translation_domain' => 'FOSUserBundle',
+            'error_bubbling' => true
+        ));
         $builder->add('realName', 'text', array(
             'label' => 'form_profile.fullname',
             'required' => 'required',
             'attr' => array(
                 'placeholder' => 'Adstacy'
-            )
+            ),
+            'error_bubbling' => true
         ));
         $builder->add('about', 'textarea', array(
             'label' => 'form_profile.about_me',
@@ -40,7 +51,8 @@ class ProfileFormType extends BaseType
             'attr' => array(
                 'placeholder' => 'A men fashion enthusiasts. Contact 08XXXXXXXXXX. BB 2BXXXX. Medan.',
                 'rows' => 5
-            )
+            ),
+            'error_bubbling' => true
         ));
         $builder->add('save', 'submit', array(
             'label' => 'form_profile.submit'

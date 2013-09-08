@@ -14,19 +14,10 @@ namespace Adstacy\UserBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use FOS\UserBundle\Form\Type\RegistrationFormType as BaseType;
 
-class RegistrationFormType extends AbstractType
+class RegistrationFormType extends BaseType 
 {
-    private $class;
-
-    /**
-     * @param string $class The User class name
-     */
-    public function __construct($class)
-    {
-        $this->class = $class;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -36,7 +27,8 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'attr' => array(
                     'placeholder' => 'email@example.com'
-                )
+                ),
+                'error_bubbling' => true
             ))
             ->add('username', 'text', array(
                 'label' => 'form.username',
@@ -44,14 +36,16 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'attr' => array(
                     'placeholder' => 'Username'
-                )
+                ),
+                'error_bubbling' => true
             ))
             ->add('realName', 'text', array(
                 'label' => 'form_registration.fullname',
                 'required' => true,
                 'attr' => array(
                     'placeholder' => 'Fullname'
-                )
+                ),
+                'error_bubbling' => true
             ))
             ->add('plainPassword', 'repeated', array(
                 'type' => 'password',
@@ -72,20 +66,13 @@ class RegistrationFormType extends AbstractType
                         'placeholder' => 'Confirm Password'
                     )
                 ),
+                'error_bubbling' => true,
                 'invalid_message' => 'fos_user.password.mismatch',
             ))
             ->add('register', 'submit', array(
                 'label' => 'form_registration.submit',
             ))
         ;
-    }
-
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults(array(
-            'data_class' => $this->class,
-            'intention'  => 'registration',
-        ));
     }
 
     public function getName()

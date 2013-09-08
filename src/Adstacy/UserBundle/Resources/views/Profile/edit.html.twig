@@ -15,6 +15,7 @@
     <div class="panel-heading"><h1>User Info</h1></div>
     <div class="panel-body">
       {{ form_start(form, { attr: { class: 'form-horizontal', role: 'form' } }) }}
+        {{ form_errors(form) }}
         {% set user = form.vars.data %}
 
         <div class="form-group">

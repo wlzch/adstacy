@@ -31,7 +31,7 @@
             <a class="btn btn-block btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">Signup with {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
           {% endfor %}
         </div>
-        {{ form_start(form, {attr: {class: 'panel-body', role: 'form'} }) }}
+        <form action="{{ path('fos_user_registration_register') }}" class="panel-body" method="post" role="form">
           {{ form_errors(form) }}
 
           {{ form_row(form.email) }}

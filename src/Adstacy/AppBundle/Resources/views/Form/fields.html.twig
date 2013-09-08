@@ -17,6 +17,18 @@
 {% endspaceless %}
 {% endblock form_label %}
 
+{% block form_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+    <ul class="form-errors">
+        {% for error in errors %}
+            <li>{{ error.message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+{% endspaceless %}
+{% endblock %}
+
 {% block image_widget %}
 {% set imageExists = obj and obj.image and obj.imagename %}
 <input class="image-upload" type="file" name="{{ full_name }}" {% if not imageExists and image_required %}required=required{% endif %}>
