@@ -4,8 +4,9 @@ profile: Profile
 settings: Settings
 logout: Logout
 login: Login
-login.with: Login With
+login.with: Login with
 register: Register
+register.with: Register with
 forgot_password: Forgot password?
 cancel: Cancel
 close: Close
