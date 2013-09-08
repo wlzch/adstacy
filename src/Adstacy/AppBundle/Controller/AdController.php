@@ -146,6 +146,9 @@ class AdController extends Controller
         $request = $this->getRequest();
         $user = $this->getUser();
         $ad = $this->getRepository('AdstacyAppBundle:Ad')->find($id);
+        if (!$ad) {
+            throw $this->createNotFoundException();
+        }
 
         // user can only promote once
         if (!$user->hasPromote($ad)) {
@@ -180,6 +183,9 @@ class AdController extends Controller
         $request = $this->getRequest();
         $user = $this->getUser();
         $ad = $this->getRepository('AdstacyAppBundle:Ad')->find($id);
+        if (!$ad) {
+            throw $this->createNotFoundException();
+        }
 
         // user can only unpromote if he has promote
         if ($user->hasPromote($ad)) {
