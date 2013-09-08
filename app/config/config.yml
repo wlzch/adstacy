@@ -9,6 +9,7 @@ parameters:
     thumb_width: 234
     mini_thumb_size: 100
     profile_pic_size: 100
+    desc_length: 255
 
     adstacy.mail.support: support@adstacy.com
     adstacy.mail.admin: admin@adstacy.com
@@ -77,6 +78,7 @@ twig:
         profile_pic_size: %profile_pic_size%
         max_ads_per_page: %max_ads_per_page%
         max_users_per_page: %max_users_per_page%
+        desc_length: %desc_length%
         facebook_app_id: %facebook_app_id%
         adstacy_mail_support: %adstacy.mail.support%
         adstacy_mail_admin: %adstacy.mail.admin%
