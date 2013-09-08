@@ -82,6 +82,10 @@
       var checkCharsLeft = function() {
         var val = $desc.val();
         if (val.length > {{ desc_length}} ) {
+          if (val.length == {{ desc_length }} + 1) {
+            return false;
+          }
+
           $desc.val(val.substring(0, {{ desc_length }} - 1));
           return false;
         }
