@@ -23,7 +23,7 @@
   <div class="panel panel-default">
     <div class="panel-heading"><h1>User Info</h1></div>
     <div class="panel-body">
-      {{ form_start(form, { attr: { class: 'form-horizontal', role: 'form' } }) }}
+      {{ form_start(form, { attr: { class: 'form-horizontal submit-disable', role: 'form' } }) }}
         {{ form_errors(form) }}
         {% set user = form.vars.data %}
 
@@ -77,7 +77,13 @@
         <div class="form-group">
           <label class="control-label">&nbsp;</label>
           <div class="form-widget">
-            {{ form_widget(form.save, { attr: { class: 'form-control btn btn-primary' } }) }}
+            {{ form_widget(form.save, {
+                attr: {
+                  'class': 'form-control btn btn-primary submit-disable-btn',
+                  'data-disable-text': "saving"|trans
+                }
+              })
+            }}
           </div>
         </div>
 

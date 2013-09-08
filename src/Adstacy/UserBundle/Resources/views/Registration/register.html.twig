@@ -33,7 +33,7 @@
 
     <hr>
 
-    {{ form_start(form, {attr: {class: 'panel-body', role: 'form'} }) }}
+    {{ form_start(form, {attr: {class: 'panel-body submit-disable', role: 'form'} }) }}
       {{ form_errors(form) }}
 
       {{ form_row(form.email) }}
@@ -42,7 +42,13 @@
       {{ form_row(form.plainPassword) }}
       <p>{{ "form_registration.agreement"|trans({'%terms_url%': path('adstacy_app_page_show', {key: 'terms'}),
         '%privacy_url%': path('adstacy_app_page_show', {key: 'privacy-policy'}) })|raw }}</p>
-      {{ form_widget(form.register, {attr: {class: 'btn btn-primary btn-lg btn-block'} }) }}
+      {{ form_widget(form.register, {
+          attr: {
+            'class': 'btn btn-primary btn-lg btn-block submit-disable-btn',
+            'data-disable-text': "registering"|trans
+          }
+        })
+      }}
 
     {{ form_end(form) }}
   </div>

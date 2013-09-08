@@ -23,7 +23,7 @@
 
     <hr>
 
-    <form class="panel-body" role="form" action="{{ path("fos_user_security_check") }}" method="post">
+    <form class="panel-body submit-disable" role="form" action="{{ path("fos_user_security_check") }}" method="post">
       {% if error %}
         <div class="alert alert-danger">{{ "security.login.failed"|trans({}, 'FOSUserBundle') }}</div>
       {% endif %}
@@ -47,7 +47,7 @@
           </label>
         </div>
         <div class="pull-right">
-          <input type="submit" class="btn btn-primary btn-lg" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}">
+          <input type="submit" class="btn btn-primary btn-lg submit-disable-btn" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" data-disable-text="{{ "logginging"|trans }}">
         </div>
       </div>
 

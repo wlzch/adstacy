@@ -12,6 +12,9 @@ close: Close
 delete: Delete
 edit: Edit
 more: More
+saving: Saving...
+registering: Registering...
+loggingin: Loggin in...
 
 #footer
 about: About
