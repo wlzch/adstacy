@@ -38,7 +38,7 @@
             </p>
           </div>
 
-          <a id="long-desc-trigger" href="#" class="btn btn-info btn-block">Click to add more Pictures and Descriptions</a>
+          <button id="long-desc-trigger" type="button" class="btn btn-info btn-block">Click to add more images and descriptions</button>
           <div id="create-ad-content" {% if not data.content %}class="hide"{% endif %}>
             {{ form_row(form.content) }}
           </div>
