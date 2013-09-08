@@ -32,16 +32,16 @@
 
 {% block image_widget %}
 {% set imageExists = obj and obj.image and obj.imagename %}
-<div class="image-upload-box">
-  <input class="image-upload hide" type="file" name="{{ full_name }}" {% if not imageExists and image_required %}required=required{% endif %}>
+<div class="image-upload-input">
+  <input class="image-upload" type="file" name="{{ full_name }}" {% if not imageExists and image_required %}required=required{% endif %} />
+  <div class="input-group">
+    <input type="text" class="form-control image-upload-text image-upload-trigger" placeholder="Click to choose image" readonly="readonly" />
+    <span class="input-group-btn">
+      <button class="btn btn-default btn-info image-upload-trigger" type="button">Choose Image</button>
+    </span>
+  </div>
 </div>
 
-<div class="input-group">
-  <input type="text" class="form-control image-upload-text image-upload-trigger" placeholder="Click to choose image" readonly="readonly" />
-  <span class="input-group-btn">
-    <button class="btn btn-default btn-info image-upload-trigger" type="button">Choose Image</button>
-  </span>
-</div>
 <div class="image-preview {{ image_size }}">
   {% if imageExists %}
     <img src="{{ vich_uploader_asset(obj, 'image') }}">
