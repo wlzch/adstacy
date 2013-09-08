@@ -22,27 +22,32 @@
     }
   </style>
 
-  <div id="main-title" class="jumbotron clearfix">
+  <div id="main-title" class="jumbotron">
     <div class="main-container">
       <h1 class="text-center">{{"landing.welcome"|trans}}</h1>
-      <div id="form-register-container" class="panel panel-default">
-        <div class="panel-heading">
-          {% for owner in hwi_oauth_resource_owners() %}
-          <a class="btn btn-block btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{"register.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
-          {% endfor %}
+      <div class="clearfix">
+        <div id="landing-screenshot">
+          <img src="{{ asset('bundles/adstacyapp/img/screenshot.png') }}" alt="Adstacy" />
         </div>
-        <form action="{{ path('fos_user_registration_register') }}" class="panel-body" method="post" role="form">
-          {{ form_errors(form) }}
+        <div id="form-register-container" class="panel panel-default">
+          <div class="panel-heading">
+            {% for owner in hwi_oauth_resource_owners() %}
+            <a class="btn btn-block btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{"register.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
+            {% endfor %}
+          </div>
+          <form action="{{ path('fos_user_registration_register') }}" class="panel-body" method="post" role="form">
+            {{ form_errors(form) }}
 
-          {{ form_row(form.email) }}
-          {{ form_row(form.username) }}
-          {{ form_row(form.realName) }}
-          {{ form_row(form.plainPassword) }}
-          <p class="h6">{{ "form_registration.agreement"|trans({'%terms_url%': path('adstacy_app_page_show', {key: 'terms'}),
-            '%privacy_url%': path('adstacy_app_page_show', {key: 'privacy-policy'}) })|raw }}</p>
-          {{ form_widget(form.register, {attr: {class: 'btn btn-primary btn-block'} }) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.username) }}
+            {{ form_row(form.realName) }}
+            {{ form_row(form.plainPassword) }}
+            <p class="h6">{{ "form_registration.agreement"|trans({'%terms_url%': path('adstacy_app_page_show', {key: 'terms'}),
+              '%privacy_url%': path('adstacy_app_page_show', {key: 'privacy-policy'}) })|raw }}</p>
+            {{ form_widget(form.register, {attr: {class: 'btn btn-primary btn-block'} }) }}
 
-        {{ form_end(form) }}
+          {{ form_end(form) }}
+        </div>
       </div>
     </div>
   </div>
