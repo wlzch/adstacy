@@ -43,7 +43,7 @@
             </div>
           </div>
 
-          <button id="long-desc-trigger" type="button" class="btn btn-info btn-block">Click to add more images and descriptions</button>
+          <button id="long-desc-trigger" type="button" class="btn btn-info btn-block">{{"form_ad.content_trigger"|trans}}</button>
           <div id="create-ad-content" {% if not data.content %}class="hide"{% endif %}>
             {{ form_widget(form.content) }}
           </div>
