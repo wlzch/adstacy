@@ -20,7 +20,7 @@ class AdType extends AbstractType
             'label' => 'form_ad.description',
             'attr' => array(
                 'class' => 'form-control',
-                'placeholder' => 'Adstacy T-Shirt Rp250.000 #branded #tshirt #medan #cool'
+                'placeholder' => 'form_ad.placeholders.description'
             ),
             'error_bubbling' => true
         ));
