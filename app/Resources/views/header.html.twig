@@ -13,9 +13,34 @@
     </div>
 
     <div class="collapse navbar-collapse navbar-ex1-collapse">
+      <form id="search-form" action="{{ path('adstacy_app_search') }}" class="navbar-form navbar-left">
+        {% set isSearchUser = app.request.attributes.get('_route') == 'adstacy_app_search' and app.request.query.get('type') == 'users' %}
+        <div id="search-container" class="input-group">
+          <div class="input-group-btn">
+            <button id="search-type-btn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+              <span id="search-type-text">{% if isSearchUser %}Users{% else %}Ads{% endif %}</span>
+              <i class="icon-angle-up icon-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a data-val="ads">Ads</a></li>
+              <li><a data-val="users">Users</a></li>
+            </ul>
+          </div>
+          <input id="search-box" type="text" class="form-control" placeholder="{{"search"|trans}}" name="q" value="{{ app.request.query.get('q') }}">
+          <div class="input-group-btn">
+            <button type="submit" class="btn btn-default">
+              <i class="icon-search"></i>
+            </button>
+          </div>
+        </div>
+        <input id="search-type" type="hidden" name="type" value="{% if isSearchUser %}users{% else %}ads{% endif %}">
+      </form>
+
       <div id="site-nav-dropdown" class="btn-group navbar-btn navbar-left">
         <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-          <i class="icon-angle-up icon-angle-down"></i>
+          <i class="icon-bar"></i>
+          <i class="icon-bar"></i>
+          <i class="icon-bar"></i>
         </button>
         <div id="site-nav-box" class="dropdown-menu">
           <nav>
@@ -42,30 +67,7 @@
         </div>
       </div>
 
-      <form id="search-form" action="{{ path('adstacy_app_search') }}" class="navbar-form navbar-left">
-        {% set isSearchUser = app.request.attributes.get('_route') == 'adstacy_app_search' and app.request.query.get('type') == 'users' %}
-        <div id="search-container" class="input-group">
-          <div class="input-group-btn">
-            <button id="search-type-btn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-              <span id="search-type-text">{% if isSearchUser %}Users{% else %}Ads{% endif %}</span>
-              <i class="icon-angle-up icon-angle-down"></i>
-            </button>
-            <ul class="dropdown-menu">
-              <li><a data-val="ads">Ads</a></li>
-              <li><a data-val="users">Users</a></li>
-            </ul>
-          </div>
-          <input id="search-box" type="text" class="form-control" placeholder="{{"search"|trans}}" name="q" value="{{ app.request.query.get('q') }}">
-          <div class="input-group-btn">
-            <button type="submit" class="btn btn-default">
-              <i class="icon-search"></i>
-            </button>
-          </div>
-        </div>
-        <input id="search-type" type="hidden" name="type" value="{% if isSearchUser %}users{% else %}ads{% endif %}">
-      </form>
-
-      <div class="nav navbar-nav navbar-right">
+      <div class="navbar-right">
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
           <a href="{{ path('adstacy_app_ad_create') }}" id="create-ads-btn" class="btn btn-primary navbar-btn" title="{{"ads.create"|trans}}">
             <i class="icon-plus"></i>
@@ -94,11 +96,10 @@
             <div id="login-express" class="dropdown-menu">
               <div class="dropdown-box-body">
                 {{ form_login() }}
-                <div>
-                  {% for owner in hwi_oauth_resource_owners() %}
-                    <a class="btn btn-block btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{"login.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
-                  {% endfor %}
-                </div>
+
+                {% for owner in hwi_oauth_resource_owners() %}
+                  <a class="btn btn-block btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{"login.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
+                {% endfor %}
               </div>
               <div class="dropdown-box-footer">
                 <a href="{{ path('fos_user_resetting_request') }}">{{"forgot_password"|trans}}</a>
@@ -108,7 +109,7 @@
         {% endif %}
       </div>
       <ul id="mobile-nav" class="nav navbar-nav navbar-right">
-        <li><a href="{{ path('homepage') }}" title="Home"><i class="icon-home"></i>&nbsp; Home</a></li>
+        <li><a href="{{ path('homepage') }}" title="Explore"><i class="icon-home"></i>&nbsp; Explore</a></li>
         <li><a href="{{ path('adstacy_app_trending') }}" title="Trending"><i class="icon-rocket"></i>&nbsp; Trending</a></li>
         <li><a href="{{ path('adstacy_app_tags') }}" title="Trending"><i class="icon-bookmark"></i>&nbsp; Popular Tags</a></li>
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
