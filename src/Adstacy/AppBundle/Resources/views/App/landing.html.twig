@@ -15,13 +15,6 @@
 {% endblock %}
 
 {% block content %}
-  <style>
-    body {
-      padding-top: 50px;
-      margin-bottom: 0;
-    }
-  </style>
-
   <div id="main-title" class="jumbotron">
     <div class="main-container">
       <h1 class="text-center">{{"landing.welcome"|trans}}</h1>
@@ -52,55 +45,59 @@
     </div>
   </div>
 
-  <div id="main-feature" class="main-container">
-    <!-- inline-block -->
+  <div id="main-feature" class="main-container clearfix">
     <section class="main-section">
       <div class="main-pic">
-        <span class="icon-ads"></span>
+        <i class="icon-ads"></i>
       </div>
       <div class="main-content">
         <h1>{{ "landing.features.easy.heading"|trans|raw }}</h1>
         <p class="lead">{{ "landing.features.easy.desc"|trans|raw }}</p>
       </div>
-    </section><section class="main-section">
+    </section>
+    <section class="main-section">
       <div class="main-pic">
-        <span class="icon-bullhorn"></span>
+        <i class="icon-bullhorn"></i>
       </div>
       <div class="main-content">
         <h1>{{ "landing.features.social.heading"|trans|raw }}</h1>
         <p class="lead">{{ "landing.features.social.desc"|trans|raw }}</p>
       </div>
-    </section><section class="main-section">
+    </section>
+    <section class="main-section last">
       <div class="main-pic">
-        <span class="icon-search"></span>
+        <i class="icon-rocket"></i>
+      </div>
+      <div class="main-content">
+        <h1>{{ "landing.features.fast.heading"|trans|raw }}</h1>
+        <p class="lead">{{ "landing.features.fast.desc"|trans|raw }}</p>
+      </div>
+    </section>
+    <section class="main-section">
+      <div class="main-pic">
+        <i class="icon-search"></i>
       </div>
       <div class="main-content">
         <h1>{{ "landing.features.search.heading"|trans|raw }}</h1>
         <p class="lead">{{ "landing.features.search.desc"|trans|raw }}</p>
       </div>
-    </section><section class="main-section">
+    </section>
+    <section class="main-section">
       <div class="main-pic">
-        <span class="icon-hash"></span>
+        <i class="icon-hash"></i>
       </div>
       <div class="main-content">
         <h1>{{ "landing.features.hashtag.heading"|trans|raw }}</h1>
         <p class="lead">{{ "landing.features.hashtag.desc"|trans|raw }}</p>
       </div>
-    </section><section class="main-section">
+    </section>
+    <section class="main-section last">
       <div class="main-pic">
-        <span class="icon-hash"></span>
+        <i class="icon-dollar"></i>
       </div>
       <div class="main-content">
         <h1>{{ "landing.features.free.heading"|trans|raw }}</h1>
         <p class="lead">{{ "landing.features.free.desc"|trans|raw }}</p>
-      </div>
-    </section><section class="main-section">
-      <div class="main-pic">
-        <span class="icon-search"></span>
-      </div>
-      <div class="main-content">
-        <h1>{{ "landing.features.fast.heading"|trans|raw }}</h1>
-        <p class="lead">{{ "landing.features.fast.desc"|trans|raw }}</p>
       </div>
     </section>
     <!-- end inline-block -->
