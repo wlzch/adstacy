@@ -67,7 +67,7 @@
         </div>
       </div>
 
-      <div class="nav navbar-nav navbar-right">
+      <div class="navbar-right">
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
           <a href="{{ path('adstacy_app_ad_create') }}" id="create-ads-btn" class="btn btn-primary navbar-btn" title="{{"ads.create"|trans}}">
             <i class="icon-plus"></i>
@@ -109,7 +109,7 @@
         {% endif %}
       </div>
       <ul id="mobile-nav" class="nav navbar-nav navbar-right">
-        <li><a href="{{ path('homepage') }}" title="Home"><i class="icon-home"></i>&nbsp; Home</a></li>
+        <li><a href="{{ path('homepage') }}" title="Explore"><i class="icon-home"></i>&nbsp; Explore</a></li>
         <li><a href="{{ path('adstacy_app_trending') }}" title="Trending"><i class="icon-rocket"></i>&nbsp; Trending</a></li>
         <li><a href="{{ path('adstacy_app_tags') }}" title="Trending"><i class="icon-bookmark"></i>&nbsp; Popular Tags</a></li>
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
