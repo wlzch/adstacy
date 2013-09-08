@@ -36,7 +36,8 @@ class ResettingFormType extends AbstractType
             'second_options' => array('label' => 'form.new_password_confirmation'),
             'invalid_message' => 'fos_user.password.mismatch',
             'first_name' => 'newPassword',
-            'second_name' => 'newPasswordConfirmation'
+            'second_name' => 'newPasswordConfirmation',
+            'error_bubbling' => true
         ));
     }
 

@@ -18,7 +18,6 @@
     {{ form_label(form, label, {label_attr: {class: 'control-label'} }) }}
     <div class="control-widget">
       {{ form_widget(form, {attr: {class: 'form-control'} }) }}
-      {{ form_errors(form, {attr: {class: 'alert alert-danger'} }) }}
     </div>
   </div>
 {% endblock %}
@@ -32,12 +31,14 @@
   </div>
 
   <form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset form-horizontal panel-body">
+    {{ form_errors(form) }}
     {{ form_row(form.plainPassword) }}
     <div class="form-group">
       <div class="control-widget offset-control-label">
         <input class="btn btn-primary" type="submit" value="{{ 'resetting.reset.submit'|trans }}">
       </div>
     </div>
+    {{ form_rest(form) }}
   </form>
 </div>
 {% endblock %}
