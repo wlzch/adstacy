@@ -20,14 +20,14 @@
     <div class="ad-user-action btn-group">
       {% if app.user %}
         {% set promoted = app.user.hasPromote(ad) %}
-        <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-default btn-promote promote {% if promoted %}hide{% endif %}" title="promote">
+        <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-default btn-promote btn-red promote {% if promoted %}hide{% endif %}" title="promote">
           <i class="icon-bullhorn"></i>
         </a>
-        <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-success unpromote {% if not promoted %}hide{% endif %}" title="unpromote">
+        <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-promote btn-success unpromote {% if not promoted %}hide{% endif %}" title="unpromote">
           <i class="icon-bullhorn"></i>
         </a>
       {% else %}
-        <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-default btn-promote" title="promote">
+        <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-default btn-promote btn-red" title="promote">
           <i class="icon-bullhorn"></i>
         </a>
       {% endif %}
