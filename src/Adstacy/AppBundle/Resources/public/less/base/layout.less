@@ -43,12 +43,22 @@ body {
 .dropdown-menu {
   padding: 0;
 
-  & > li {
+  > li {
     margin-bottom: 0;
   }
-  & > li > a {
+
+  > li > a {
     border-top: 1px solid #ddd;
     padding-top: 10px;
     padding-bottom: 10px;
+  }
+
+  li:first-child a {
+    border-top-width: 0;
+    .border-top-radius(@border-radius-base);
+  }
+
+  li:last-child a {
+    .border-bottom-radius(@border-radius-base);
   }
 }
