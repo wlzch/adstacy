@@ -111,15 +111,21 @@ flash:
 landing:
     welcome: Welcome to Adstacy
     features:
-        ad:
-            heading: Fast. Easy. Free.
-            desc: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium, vitae!
+        easy:
+            heading: <b>E</b>asy
+            desc: Just with an image and short description, your ad is ready to go
         social:
-            heading: Ads Have Never Been So Fun
-            desc: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, numquam.
-        hashtag:
-            heading: Hashtag. Hashtag Everywhere.
-            desc: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, incidunt!
+            heading: <b>S</b>ocial &amp; <b>F</b>un
+            desc: Promote any ads you like to share it to your followers
         search:
-            heading: Searching Is Your Friend
-            desc: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum, aperiam.
+            heading: <b>S</b>earch
+            desc: Find any products, events, jobs, vacancies and many more stuffs
+        hashtag:
+            heading: <b>H</b>ashtag
+            desc: Creatively describe your ad with hashtag to reach your potential market
+        free:
+            heading: <b>F</b>ree
+            desc: Pay nothing to promote your ad with us
+        fast:
+            heading: <b>F</b>ast
+            desc: Fast as you want
