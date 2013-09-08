@@ -60,25 +60,6 @@
   margin-top: 100px;
 }
 
-@media screen and (max-width: @screen-tablet) {
-  .main-container, .main-section, .main-content {
-    width: 100% !important;
-  }
-
-  .main-section {
-    border-left-width: 0;
-
-    &:nth-child(3n) {
-      border-right-width: 0;
-    }
-  }
-  #form-register-container {
-    width: 100%;
-    float: none;
-    margin: 20px 0;
-  }
-}
-
 .red {
   background-color: #dc004d;
   // background-color: #e40363;
@@ -103,18 +84,47 @@
 }
 
 #main-title {
-  background-color: #333;
+  background: #333 url('../img/screenshot.jpg') no-repeat center;
+  background-size: cover;
 
   h1 {
     color: #fff;
-    margin-top: -20px;
+    margin: 20px 0;
     font-weight: bold;
     font-size: 80px;
+    text-shadow: 0 5px 10px #000;
   }
 
   .panel {
     .form-group {
       margin-bottom: 5px;
     }
+  }
+}
+
+#main-footer {
+
+}
+
+@media screen and (max-width: @screen-tablet) {
+  .main-container, .main-section, .main-content {
+    width: 100% !important;
+  }
+
+  .main-section {
+    border-left-width: 0;
+
+    &:nth-child(3n) {
+      border-right-width: 0;
+    }
+  }
+  #form-register-container {
+    width: 100%;
+    float: none;
+    margin: 20px 0;
+  }
+
+  #main-title h1 {
+    margin: 50px 0;
   }
 }
