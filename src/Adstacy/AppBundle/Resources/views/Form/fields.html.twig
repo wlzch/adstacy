@@ -35,7 +35,7 @@
 <input class="image-upload hide" type="file" name="{{ full_name }}" {% if not imageExists and image_required %}required=required{% endif %}>
 
 <div class="input-group">
-  <input type="text" class="form-control image-upload-text image-upload-trigger" placeholder="Click to choose image" />
+  <input type="text" class="form-control image-upload-text image-upload-trigger" placeholder="Click to choose image" readonly="readonly" />
   <span class="input-group-btn">
     <button class="btn btn-default btn-info image-upload-trigger" type="button">Choose Image</button>
   </span>
