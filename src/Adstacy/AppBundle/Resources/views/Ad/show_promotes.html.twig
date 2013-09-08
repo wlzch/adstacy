@@ -1,0 +1,44 @@
+{% extends is_ajax() ? '::ajax.html.twig' : 'AdstacyAppBundle::layout.html.twig' %}
+
+{% block content %}
+  {% if paginator.getCurrentPageResults|length > 0 %}
+    <div class="page-title jumbotron text-center">
+      <h1>Promotes</h1>
+    </div>
+
+    <div class="adstacy-container jscroll">
+      {{ block('ajax_content') }}
+    </div>
+  {% else %}
+    <div class="jumbotron text-center">
+        <h1>{{"ad.no_promotes.message"|trans}}</h1>
+    </div>
+  {% endif %}
+{% endblock %}
+
+{% block ajax_content %}
+  {% for promotee in paginator.getCurrentPageResults %}
+    {% include 'AdstacyAppBundle:User:user.html.twig' with {user: promotee} %}
+  {% endfor %}
+  {% if paginator.hasNextPage %}
+    {% set params = app.request.query.all|merge({id: ad.id, page: paginator.getNextPage}) %}
+    <a href="{{ path('adstacy_app_ad_promotes', params)}}" class="btn btn-default btn-lg btn-block next-page">More</a>
+  {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script type="text/javascript">
+    $(function() {
+      $('.user-thumb').ajaxlink('follow_user');
+      $('.jscroll').jscroll({
+        nextSelector: 'a.next-page',
+        callback: function(a, b) {
+          var $users = $('.jscroll-added:last .user');
+          $masonry = $('.masonry').masonry('appended', $users);
+          $users.find('.ad-social').ajaxlink('follow_user');
+        }
+      });
+    });
+  </script>
+{% endblock %}

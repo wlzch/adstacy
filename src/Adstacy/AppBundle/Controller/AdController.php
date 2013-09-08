@@ -119,6 +119,24 @@ class AdController extends Controller
     }
 
     /**
+     * @param integer ad id
+     */
+    public function showPromotesAction($id)
+    {
+        $ad = $this->getRepository('AdstacyAppBundle:Ad')->find($id);
+        if (!$ad) {
+            throw $this->createNotFoundException();
+        }
+
+        $query = $this->getRepository('AdstacyAppBundle:User')->findPromotesByAd($ad);
+        $paginator = $this->getDoctrinePaginator($query, $this->getParameter('max_users_per_page'));
+
+        return $this->render('AdstacyAppBundle:Ad:show_promotes.html.twig', array(
+            'paginator' => $paginator
+        ));
+    }
+
+    /**
      * @Secure(roles="ROLE_USER")
      *
      * @param integer ad id

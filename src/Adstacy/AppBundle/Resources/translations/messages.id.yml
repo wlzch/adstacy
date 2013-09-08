@@ -36,6 +36,8 @@ ads:
         message: %username% belum mempunyai iklan
         self_message: Anda belum mempunyai iklan
         help: Buat iklan anda sekarang
+    no_promotes:
+        message: Iklan ini belum pernah di promote
 
 user:
     no_followers:

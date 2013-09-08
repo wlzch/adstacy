@@ -37,6 +37,8 @@ ads:
         message: %username% doesn't have any ads yet
         self_message: You don't have any ads yet
         help: Create an ads now
+    no_promotes:
+        message: No promotes on this ad yet
 
 user:
     no_followers:

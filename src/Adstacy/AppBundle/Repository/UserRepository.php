@@ -5,6 +5,7 @@ namespace Adstacy\AppBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\Common\Cache\ApcCache;
 use Adstacy\AppBundle\Entity\User;
+use Adstacy\AppBundle\Entity\Ad;
 
 /**
  * UserRepository
@@ -117,5 +118,28 @@ class UserRepository extends EntityRepository
     public function findFollowingsByUser(User $user)
     {
         return $this->findFollowingsByUserQuery($user)->getResult();
+    }
+
+    /**
+     * Find users who promotes $ad 
+     *
+     * @param integer id
+     *
+     * @return array
+     */
+    public function findPromotesByAd(Ad $ad)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('
+            SELECT partial u.{id,username,imagename,realName,adsCount,followersCount,profilePicture},
+            partial a.{id,imagename,thumbHeight,imageHeight,imageWidth}
+            FROM AdstacyAppBundle:User u
+            JOIN u.promotes up
+            JOIN up.ad ad
+            LEFT JOIN u.ads a
+            WHERE ad.id = :id
+        ');
+
+        return $query->setParameter('id', $ad->getId());
     }
 }

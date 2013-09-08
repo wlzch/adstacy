@@ -12,7 +12,7 @@
   </div>
 
   <div class="ad-section ad-counter text-overflow">
-    <a href="#"><span class="promotes-count">{{ ad.promoteesCount }}</span> Promotes</a>
+    <a href="{{ path('adstacy_app_ad_promotes', {id: ad.id}) }}"><span class="promotes-count">{{ ad.promoteesCount }}</span> Promotes</a>
   </div>
 
   <div class="ad-section ad-user clearfix">
