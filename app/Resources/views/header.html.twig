@@ -53,7 +53,7 @@
           <ul id="tag-list" class="dropdown-box-body list-inline list-unstyled">
             <li><a href="{{ path('adstacy_app_search', {q: 'jual'}) }}" title="Jual">Jual<small>#jual</small></a></li>
             <li><a href="{{ path('adstacy_app_search', {q: 'beli'}) }}" title="Beli">Beli<small>#beli</small></a></li>
-            <li><a href="{{ path('adstacy_app_search', {q: 'loker'}) }}" title="Lowongan Kerja">Lowongan Kerja<small>#lowongankerja</small></a></li>
+            <li><a href="{{ path('adstacy_app_search', {q: 'lowongankerja'}) }}" title="Lowongan Kerja">Lowongan Kerja<small>#lowongankerja</small></a></li>
             <li><a href="{{ path('adstacy_app_search', {q: 'promo'}) }}" title="Promo">Promo<small>#promo</small></a></li>
             <li><a href="{{ path('adstacy_app_search', {q: 'event'}) }}" title="Event">Event<small>#event</small></a></li>
             <li><a href="{{ path('adstacy_app_search', {q: 'property'}) }}" title="Property">Rumah<small>#rumah</small></a></li>
@@ -109,7 +109,7 @@
         {% endif %}
       </div>
       <ul id="mobile-nav" class="nav navbar-nav navbar-right">
-        <li><a href="{{ path('homepage') }}" title="Explore"><i class="icon-home"></i>&nbsp; Explore</a></li>
+        <li><a href="{{ path('adstacy_app_explore') }}" title="Explore"><i class="icon-home"></i>&nbsp; Explore</a></li>
         <li><a href="{{ path('adstacy_app_trending') }}" title="Trending"><i class="icon-rocket"></i>&nbsp; Trending</a></li>
         <li><a href="{{ path('adstacy_app_tags') }}" title="Trending"><i class="icon-bookmark"></i>&nbsp; Popular Tags</a></li>
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
