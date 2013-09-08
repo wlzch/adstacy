@@ -60,6 +60,8 @@ form_profile:
     not_connected: Not Connected
     connect: Connect with %service%
     disconnect: Disconnect %service% Account
+    placeholders:
+        about: Your informations including your business, phone numbers, bbm, ym, location and anything else
 
 form_ad:
     image: Image

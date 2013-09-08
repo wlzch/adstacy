@@ -28,3 +28,7 @@ form_ad:
         example3: "Lowongan administrasi PT.XXX #lowongankerja minimal #s1"
         example4: "#cucigudang #diskon 50% semua barang"
         example5: "#rumah 4x18m wilayah #medan #marelan Rp250.000.000 NEGO"
+
+form_profile:
+    placeholders:
+        about: Informasi tentang anda mulai dari jenis usaha, nomor hp, bbm, ym, lokasi dan lainnya
