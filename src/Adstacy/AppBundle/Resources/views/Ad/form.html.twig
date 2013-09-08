@@ -24,8 +24,15 @@
     <div class="panel-body clearfix">
       {{ form_start(form) }}
         {{ form_errors(form) }}
+        {{ form_label(form.image) }}
         <div class="image-area">
-          {{ form_row(form.image) }}
+          <div class="input-group">
+            <input type="text" class="form-control" />
+            <span class="input-group-btn">
+              <button class="btn btn-default btn-info" type="button"><span class="icon-plus-sign"></span> Add Picture</button>
+            </span>
+          </div>
+          {{ form_widget(form.image) }}
         </div>
 
         <div class="meta-area">
@@ -33,7 +40,7 @@
             {{ form_row(form.description) }}
           </div>
 
-          <a id="long-desc-trigger" href="#" class="btn btn-info btn-block">Click to add long description</a>
+          <a id="long-desc-trigger" href="#" class="btn btn-info btn-block">Click to add more Pictures and Descriptions</a>
           <div id="create-ad-content" {% if not data.content %}class="hide"{% endif %}>
             {{ form_row(form.content) }}
           </div>
