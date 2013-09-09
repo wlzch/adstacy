@@ -17,9 +17,11 @@ user:
         min: Username minimal {{ limit }} karakter 
         max: Username maksimal {{ limit }} karakter
         valid: Username hanya boleh berisi a-z0-9._
+        unique: Username telah dipakai
     email:
         not_blank: Email harus diisi
         email: Email tidak valid
+        unique: Email telah dipakai
     realname:
         not_blank: Nama lengkap harus diisi
     password:

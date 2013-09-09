@@ -17,9 +17,11 @@ user:
         min: Username minimal {{ limit }} characters
         max: Username maximal {{ limit }} characters
         valid: Username can only contains a-z0-9._
+        unique: Username is already used
     email:
         not_blank: Email cannot be blank
         email: Email is not valid
+        unique: Email is already used
     realname:
         not_blank: Fullname cannot be blank
     password:

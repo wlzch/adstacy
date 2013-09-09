@@ -20,8 +20,8 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *   @ORM\Index(name="user_username", columns={"username_canonical"}),
  *   @ORM\Index(name="user_email", columns={"email_canonical"})
  * })
- * @UniqueEntity(fields="emailCanonical", message="Email does not exists", errorPath="email", groups={"Registration", "Profile"})
- * @UniqueEntity(fields="usernameCanonical", message="Username does not exists", errorPath="username", groups={"Registration", "Profile"})
+ * @UniqueEntity(fields="emailCanonical", message="user.email.unique", errorPath="email", groups={"Registration", "Profile"})
+ * @UniqueEntity(fields="usernameCanonical", message="user.username.unique", errorPath="username", groups={"Registration", "Profile"})
  * @Assert\Callback(methods={"isUsernameValid"}, groups={"Registration", "Profile"})
  * @Vich\Uploadable
  */
