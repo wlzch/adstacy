@@ -37,7 +37,7 @@
   var $searchForm = $('#search-form');
   var windowWidth = $window.width();
 
-  // if (windowWidth >= 480) {
+  if (windowWidth > 480) {
     $masonry.masonry({
       columnWidth: 250,
       isFitWidth: true,
@@ -60,10 +60,10 @@
     $(function() {
       resizeCallback();
     });
-  // }
-  $(function() {
-    $().UItoTop({ easingType: 'easeOutQuart' });
-  });
+    $(function() {
+      $().UItoTop({ easingType: 'easeOutQuart' });
+    });
+  }
 
   $('img.lazy').lazyload();
   $('.unfollow-user').hover(
