@@ -15,7 +15,9 @@
     <h3>The page you are looking for is not here. Are you looking for something else?</h3>
     <div class="links">
       <a class="btn btn-success" href="{{ path('homepage') }}">Homepage</a>
+      {% if app.request.headers.get('referer') %}
       <a class="btn btn-success" href="{{ app.request.headers.get('referer') }}">Back to previous page</a>
+      {% endif %}
     </div>
   </div>
 {% endblock %}
