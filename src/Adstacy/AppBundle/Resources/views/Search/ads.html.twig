@@ -1,7 +1,7 @@
 {% extends 'AdstacyAppBundle:Search:search.html.twig' %}
 
 {% block search_content %}
-  {% if paginator.getCurrentPageResults|length > 0 %}
+  {% if paginator.getCurrentPageResults|length > 0 and app.request.query.get('q') != '' %}
     <div class="masonry jscroll">
       {{ block('ajax_content') }}
     </div>

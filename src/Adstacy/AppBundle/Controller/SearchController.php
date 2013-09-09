@@ -36,6 +36,7 @@ class SearchController extends Controller
     {
         $request = $this->getRequest();
         $finder = $this->get('fos_elastica.finder.website.user');
+        $q = $request->query->get('q');
 
         $usersPaginator = $finder->findPaginated($request->query->get('q'));
         $usersPaginator 
