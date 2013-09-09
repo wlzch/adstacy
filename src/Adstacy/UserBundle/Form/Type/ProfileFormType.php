@@ -45,7 +45,7 @@ class ProfileFormType extends BaseType
             ),
             'error_bubbling' => true
         ));
-        $builder->add('about', 'textarea', array(
+        $builder->add('about', 'textarea_purified', array(
             'label' => 'form_profile.about_me',
             'required' => false,
             'attr' => array(

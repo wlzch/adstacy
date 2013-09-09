@@ -16,7 +16,7 @@ class AdType extends AbstractType
             'required' => true,
             'error_bubbling' => true
         ));
-        $builder->add('description', 'textarea', array(
+        $builder->add('description', 'purified_textarea', array(
             'label' => 'form_ad.description',
             'attr' => array(
                 'class' => 'form-control',
