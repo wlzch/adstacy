@@ -301,6 +301,6 @@ sonata_admin:
         edit: AdstacyAppBundle:Admin:edit.html.twig
 
 ornicar_apc:
-    host: http://adstacy.com
+    host: http://www.adstacy.com
     web_dir: %kernel.root_dir%/../web
     mode: curl
