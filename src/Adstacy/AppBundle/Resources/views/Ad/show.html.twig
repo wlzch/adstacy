@@ -94,7 +94,7 @@
         </div>
         {% if user.about %}
         <div class="panel-body user-about">
-          <p>{{ user.about }}</p>
+          <p>{{ parse_url(parse_hashtag(user.about)) }}</p>
         </div>
         {% endif %}
         <div class="thumb-container">

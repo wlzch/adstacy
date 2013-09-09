@@ -50,7 +50,7 @@
               </a>
             </h1>
             {% if user.about %}
-              <h2 class="user-info-about">{{ user.about }}</h2>
+              <h2 class="user-info-about">{{ parse_url(parse_hashtag(user.about)) }}</h2>
             {% else %}
               <h2 class="user-info-about">
                 <span class="empty">
