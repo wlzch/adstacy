@@ -1,3 +1,6 @@
+@import "../variables.less";
+@import "../mixins.less";
+
 .ad {
   width: 236px;
   margin: 14px 7px 0 7px;
@@ -33,6 +36,7 @@
     margin-top: 5px;
     position: relative;
   }
+
   .ad-user-action {
     position: absolute;
     right: 0;
@@ -46,8 +50,15 @@
       border-top: 0;
       border-radius: 0 0 @border-radius-base 0;
     }
-    .btn-red {
-      color: #b00;
+    .btn-primary {
+      background-color: @btn-default-bg;
+      border-color: @btn-default-border;
+      color: @brand-primary;
+
+      &:hover {
+        background-color: #ebebeb;
+        border-color: #adadad;
+      }
     }
     > .btn-group .btn-default {
       border-right: 0;
@@ -60,6 +71,17 @@
       background-color: #333;
       border-color: #333;
     }
+  }
+}
+
+.ad-img {
+  background-image: url('../img/diagonal-line.png');
+  border-radius: @border-radius-base @border-radius-base 0 0;
+  position: relative;
+
+  img {
+    background: url('../img/spinner.gif') no-repeat center center;
+    border-radius: @border-radius-small @border-radius-small 0 0;
   }
 }
 
@@ -91,34 +113,6 @@
   }
 }
 
-.pic {
-  background-image: url('../img/diagonal-line.png');
-  border-radius: @border-radius-base @border-radius-base 0 0;
-  position: relative;
-
-  img {
-    background: url('../img/spinner.gif') no-repeat center center;
-    border-radius: @border-radius-small @border-radius-small 0 0;
-  }
-
-  .promoted-container {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 50px;
-    height: 50px;
-    #gradient > .directional(rgba(0,187,0,1) 50%, rgba(0,187,0,0) 0%, 225deg);
-  }
-
-  .promoted {
-    position: absolute;
-    top: 2px;
-    right: 5px;
-    color: #fff;
-    font-size: 20px;
-  }
-}
-
 @media screen and (max-width: @screen-tablet) {
   #ad-detail, #ad-detail-content {
     width: 100%;
@@ -130,12 +124,10 @@
 
 @media screen and (max-width: 480px) {
   .ad {
-    width: 100%;
-    height: 100%;
+    .img-responsive(block);
     margin: 10px 0;
   }
-  .pic img {
-    width: 100%;
-    height: 100%;
+  .ad-img img {
+    .img-responsive(block);
   }
 }
