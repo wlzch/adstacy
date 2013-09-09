@@ -32,7 +32,7 @@ class AppController extends Controller
         $maxAd = $this->getParameter('max_ads_per_page');
         $ads = $this->getRepository('AdstacyAppBundle:Ad')->findAdsSinceId($request->query->get('id'), $maxAd);
 
-        return $this->render('AdstacyAppBundle:App:index.html.twig', array(
+        return $this->render('AdstacyAppBundle:App:explore.html.twig', array(
             'ads' => $ads
         ));
     }
