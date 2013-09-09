@@ -61,7 +61,7 @@
     {% if app.user %}
       {% set followingsWhoPromoted = app.user.getFollowingsPromoted(ad) %}
       {% if followingsWhoPromoted|length > 0 %}
-        <div class="ad-section">
+        <div class="ad-sect">
           <p class="text-muted">{{"promoted_by"|trans}}
             <a class="link-muted" href="#">
               <b>{{ followingsWhoPromoted|join(',') }}</b>

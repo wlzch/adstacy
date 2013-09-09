@@ -90,7 +90,7 @@
     <div id="ad-detail-sidebar" class="pull-left">
       <div class="panel panel-default">
         <div class="panel-body clearfix">
-          {% include 'AdstacyAppBundle:User:user_mini.html.twig' with { user: user, text: '2 minutes ago' } %}
+          {% include 'AdstacyAppBundle:User:user_mini.html.twig' with { user: user, text: ago(ad.created) } %}
         </div>
         {% if user.about %}
         <div class="panel-body user-about">
