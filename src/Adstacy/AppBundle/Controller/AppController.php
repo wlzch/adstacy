@@ -81,11 +81,12 @@ class AppController extends Controller
         $form->handleRequest($this->getRequest());
 
         if ($form->isValid()) {
+            // temporary hack
             $message = \Swift_Message::newInstance()
                 ->setSubject($contact->getSubject())
-                ->setFrom($contact->getEmail())
+                ->setFrom($this->getParameter('adstacy.mail.support'))
                 ->setTo($this->getParameter('adstacy.mail.support'))
-                ->setBody($contact->getContent())
+                ->setBody($contact->getEmail().$contact->getContent())
             ;
             $this->get('mailer')->send($message);
 
