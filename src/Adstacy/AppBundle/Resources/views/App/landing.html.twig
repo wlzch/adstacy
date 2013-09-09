@@ -24,105 +24,92 @@
 {% endblock %}
 
 {% block content %}
-  <div id="main-title" class="jumbotron">
-    <div class="main-container">
-      <h1 class="text-center">{{"landing.welcome"|trans}}</h1>
-      <div class="clearfix">
-        <div id="landing-screenshot">
-          <img src="{{ asset('bundles/adstacyapp/img/screenshot.png') }}" alt="Adstacy" />
-        </div>
-        <div id="form-register-container" class="panel panel-default">
-          <div class="panel-heading">
-            {% for owner in hwi_oauth_resource_owners() %}
-            <a class="btn btn-block btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{"register.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
-            {% endfor %}
+  <div id="landing">
+    <div id="landing-title" class="jumbotron">
+      <div class="wrapper">
+        <h1>{{"landing.welcome"|trans}}</h1>
+        <div class="clearfix">
+          <div id="landing-screenshot">
+            <img src="{{ asset('bundles/adstacyapp/img/screenshot.png') }}" alt="Adstacy" />
           </div>
-          <form action="{{ path('fos_user_registration_register') }}" class="panel-body" method="post" role="form">
-            {{ form_errors(form) }}
+          <div id="register-form" class="panel panel-default">
+            <div class="panel-heading">
+              {% for owner in hwi_oauth_resource_owners() %}
+                <a class="btn btn-block btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{"register.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
+              {% endfor %}
+            </div>
+            <form action="{{ path('fos_user_registration_register') }}" class="panel-body" method="post" >
+              {{ form_errors(form) }}
 
-            {{ form_row(form.email) }}
-            {{ form_row(form.username) }}
-            {{ form_row(form.realName) }}
-            {{ form_row(form.plainPassword) }}
-            <p class="h6">{{ "form_registration.agreement"|trans({'%terms_url%': path('adstacy_app_page_show', {key: 'terms'}),
-              '%privacy_url%': path('adstacy_app_page_show', {key: 'privacy-policy'}) })|raw }}</p>
-            {{ form_widget(form.register, {attr: {class: 'btn btn-primary btn-block'} }) }}
+              {{ form_row(form.email) }}
+              {{ form_row(form.username) }}
+              {{ form_row(form.realName) }}
+              {{ form_row(form.plainPassword) }}
+              <p class="h6">{{ "form_registration.agreement"|trans({'%terms_url%': path('adstacy_app_page_show', {key: 'terms'}),
+                '%privacy_url%': path('adstacy_app_page_show', {key: 'privacy-policy'}) })|raw }}</p>
+              {{ form_widget(form.register, {attr: {class: 'btn btn-primary btn-block'} }) }}
 
-          {{ form_end(form) }}
+            {{ form_end(form) }}
+          </div>
         </div>
       </div>
     </div>
+
+    <div id="landing-features" class="wrapper clearfix">
+      <section class="section">
+        <div class="section-figure">
+          <i class="icon-ads"></i>
+        </div>
+        <div>
+          <h1 class="section-title">{{ "landing.features.easy.heading"|trans|raw }}</h1>
+          <p class="lead">{{ "landing.features.easy.desc"|trans|raw }}</p>
+        </div>
+      </section>
+      <section class="section">
+        <div class="section-figure">
+          <i class="icon-bullhorn"></i>
+        </div>
+        <div>
+          <h1 class="section-title">{{ "landing.features.social.heading"|trans|raw }}</h1>
+          <p class="lead">{{ "landing.features.social.desc"|trans|raw }}</p>
+        </div>
+      </section>
+      <section class="section last">
+        <div class="section-figure">
+          <i class="icon-rocket"></i>
+        </div>
+        <div>
+          <h1 class="section-title">{{ "landing.features.fast.heading"|trans|raw }}</h1>
+          <p class="lead">{{ "landing.features.fast.desc"|trans|raw }}</p>
+        </div>
+      </section>
+      <section class="section">
+        <div class="section-figure">
+          <i class="icon-search"></i>
+        </div>
+        <div>
+          <h1 class="section-title">{{ "landing.features.search.heading"|trans|raw }}</h1>
+          <p class="lead">{{ "landing.features.search.desc"|trans|raw }}</p>
+        </div>
+      </section>
+      <section class="section">
+        <div class="section-figure">
+          <i class="icon-hash"></i>
+        </div>
+        <div>
+          <h1 class="section-title">{{ "landing.features.hashtag.heading"|trans|raw }}</h1>
+          <p class="lead">{{ "landing.features.hashtag.desc"|trans|raw }}</p>
+        </div>
+      </section>
+      <section class="section">
+        <div class="section-figure">
+          <i class="icon-dollar"></i>
+        </div>
+        <div>
+          <h1 class="section-title">{{ "landing.features.free.heading"|trans|raw }}</h1>
+          <p class="lead">{{ "landing.features.free.desc"|trans|raw }}</p>
+        </div>
+      </section>
+    </div>
   </div>
-
-  <div id="main-feature" class="main-container clearfix">
-    <section class="main-section">
-      <div class="main-pic">
-        <i class="icon-ads"></i>
-      </div>
-      <div class="main-content">
-        <h1>{{ "landing.features.easy.heading"|trans|raw }}</h1>
-        <p class="lead">{{ "landing.features.easy.desc"|trans|raw }}</p>
-      </div>
-    </section>
-    <section class="main-section">
-      <div class="main-pic">
-        <i class="icon-bullhorn"></i>
-      </div>
-      <div class="main-content">
-        <h1>{{ "landing.features.social.heading"|trans|raw }}</h1>
-        <p class="lead">{{ "landing.features.social.desc"|trans|raw }}</p>
-      </div>
-    </section>
-    <section class="main-section last">
-      <div class="main-pic">
-        <i class="icon-rocket"></i>
-      </div>
-      <div class="main-content">
-        <h1>{{ "landing.features.fast.heading"|trans|raw }}</h1>
-        <p class="lead">{{ "landing.features.fast.desc"|trans|raw }}</p>
-      </div>
-    </section>
-    <section class="main-section">
-      <div class="main-pic">
-        <i class="icon-search"></i>
-      </div>
-      <div class="main-content">
-        <h1>{{ "landing.features.search.heading"|trans|raw }}</h1>
-        <p class="lead">{{ "landing.features.search.desc"|trans|raw }}</p>
-      </div>
-    </section>
-    <section class="main-section">
-      <div class="main-pic">
-        <i class="icon-hash"></i>
-      </div>
-      <div class="main-content">
-        <h1>{{ "landing.features.hashtag.heading"|trans|raw }}</h1>
-        <p class="lead">{{ "landing.features.hashtag.desc"|trans|raw }}</p>
-      </div>
-    </section>
-    <section class="main-section last">
-      <div class="main-pic">
-        <i class="icon-dollar"></i>
-      </div>
-      <div class="main-content">
-        <h1>{{ "landing.features.free.heading"|trans|raw }}</h1>
-        <p class="lead">{{ "landing.features.free.desc"|trans|raw }}</p>
-      </div>
-    </section>
-    <!-- end inline-block -->
-  </div>
-
-  <script>
-    (function($) {
-      // set equal height for inline-block element
-      $.fn.setHeight = function() {
-        return this.height(Math.max.apply(this, $.map(this, function(e) { return $(e).height(); })));
-      };
-    })(jQuery);
-
-    var $mainSection = $('.main-section');
-    $(function() {
-      $mainSection.setHeight();
-    });
-  </script>
 {% endblock %}
