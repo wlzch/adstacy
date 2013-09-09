@@ -9,6 +9,7 @@ image:
     file:
         mime_types: Gambar harus jpg atau png
         min_width: Lebar gambar terlalu kecil({{ width }}px). Minimal lebar {{ min_width }}px
+        not_null: Gambar harus diupload
 
 user:
     username:

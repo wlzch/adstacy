@@ -28,6 +28,7 @@ class Ad
      *    mimeTypesMessage = "image.file.mime_types",
      *    minWidthMessage = "image.file.min_width"
      * )
+     * @Assert\NotNull(message="image.file.not_null")
      * @Vich\UploadableField(mapping="ad_image", fileNameProperty="imagename")
      */
     private $image;

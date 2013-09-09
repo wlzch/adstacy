@@ -9,6 +9,7 @@ image:
     file:
         mime_types: Image must be of type png or jpg
         min_width: Image width is too small({{ width }}px). Min width allowed is {{ min_width }}px
+        not_null: Image must be uploaded
 
 user:
     username:
