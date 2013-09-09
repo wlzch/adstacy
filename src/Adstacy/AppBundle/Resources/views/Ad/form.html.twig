@@ -20,49 +20,49 @@
 
 {% block content %}
   {% set data = form.vars.data %}
-  <div class="panel panel-default" id="create-ad-container">
+  <div id="create-ad" class="panel panel-default">
     <div class="panel-body clearfix">
       {{ form_start(form, {attr: {class: 'submit-disable'}}) }}
-        {{ form_errors(form) }}
-        {{ form_label(form.image) }}
-        <div class="image-area">
-          {{ form_widget(form.image) }}
+      {{ form_errors(form) }}
+      {{ form_label(form.image) }}
+      <div id="create-ad-image">
+        {{ form_widget(form.image) }}
+      </div>
+
+      <div id="create-ad-desc">
+        <div class="clearfix">
+          {{ form_label(form.description) }}
+          <div class="pull-right">
+            <a id="desc-examples" href="#" data-toggle="modal" data-target="#examples-modal">{{ "form_ad.example"|trans }}</a>
+          </div>
+          {{ form_widget(form.description) }}
+          <div id="chars-left-box">
+            {{ "form_ad.characters_left"|trans({'%left%': desc_length - (data.description|length)})|raw }}
+          </div>
         </div>
 
-        <div class="meta-area">
-          <div id="create-ad-desc">
-            <div class="clearfix">
-              {{ form_label(form.description) }}
-              <div class="pull-right">
-                <a id="desc-examples" href="#" data-toggle="modal" data-target="#examples-modal">{{ "form_ad.example"|trans }}</a>
-            </div>
-            {{ form_widget(form.description) }}
-            <div id="chars-left-box">
-              {{ "form_ad.characters_left"|trans({'%left%': desc_length - (data.description|length)})|raw }}
-            </div>
-          </div>
-
-          <button id="long-desc-trigger" type="button" class="btn btn-info btn-block">{{"form_ad.content_trigger"|trans}}</button>
-          <div id="create-ad-content" {% if not data.content %}class="hide"{% endif %}>
-            {{ form_widget(form.content) }}
-          </div>
-
-          {{ form_widget(form.save, {
-              attr: {
-                'class': 'form-control btn btn-primary submit-disable-btn',
-                'data-disable-text': "saving"|trans
-              }
-            })
-          }}
-
-          {{ form_rest(form) }}
+        <button id="show-long-desc-btn" type="button" class="btn btn-info btn-block">{{"form_ad.content_trigger"|trans}}</button>
+        <div id="create-ad-content" {% if not data.content %}class="hide"{% endif %}>
+          {{ form_widget(form.content) }}
         </div>
-      {{ form_end(form) }}
 
-      {{ elfinder_tinymce_init4() }}
-      {{ tinymce_init() }}
+        {{ form_widget(form.save, {
+            attr: {
+              'class': 'form-control btn btn-primary submit-disable-btn',
+              'data-disable-text': "saving"|trans
+            }
+          })
+        }}
+
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+
+        {{ elfinder_tinymce_init4() }}
+        {{ tinymce_init() }}
+      </div>
     </div>
   </div>
+
   <div class="modal fade" id="examples-modal">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -91,12 +91,12 @@
   {{ parent()  }}
   <script type="text/javascript">
     $(function() {
-      var $trigger = $('#long-desc-trigger');
+      var $trigger = $('#show-long-desc-btn');
       var $content = $('#create-ad-content');
       var $charsLeft = $('#chars-left');
       var $desc = $('#{{ form.description.vars.id }}');
       $trigger.click(function() {
-        $content.toggleClass('hide');  
+        $content.toggleClass('hide');
       });
       var checkCharsLeft = function() {
         var val = $desc.val();
