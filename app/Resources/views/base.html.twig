@@ -68,6 +68,11 @@
         {% include '::header.html.twig' %}
       {% endblock %}
       <div class="body clearfix">
+        <div class="adstacy-container">
+          <div class="alert alert-info" style="margin-bottom: 0;">
+            <p>{{"beta_info"|trans({'%url%': path('adstacy_app_contact')})|raw}}</p>
+          </div>
+        </div>
         {% set allFlashes = app.session.flashbag.all() %}
         {% if allFlashes|length > 0 %}
           <div class="adstacy-container">
