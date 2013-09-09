@@ -1,5 +1,7 @@
 {% extends is_ajax() ? '::ajax.html.twig' : 'AdstacyAppBundle::layout.html.twig' %}
 
+{% block title %}Explore Latest Ads | Adstacy{% endblock %}
+
 {% block content %}
   <div class="masonry jscroll clearfix">
     {{ block('ajax_content') }}
