@@ -90,3 +90,18 @@
     }
   }
 }
+
+#ad-content {
+  width: 750px;
+  overflow: scroll;
+}
+
+@media screen and (max-width: @screen-tablet) {
+  #show-ad, #show-ad-content, #ad-content {
+    width: 100% !important;
+  }
+  #show-ad-owner {
+    display: none;
+  }
+}
+
