@@ -7,7 +7,7 @@ ad:
 
 image:
     file:
-        max_size: Image maximum size is {{ limit }}
+        max_size: Image is too large ({{ size}}). Maximum size is {{ limit }}
         mime_types: Image must be of type png or jpg
         min_width: Image width is too small({{ width }}px). Min width allowed is {{ min_width }}px
         not_null: Image must be uploaded
