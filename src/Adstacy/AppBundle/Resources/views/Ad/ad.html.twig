@@ -3,7 +3,8 @@
     <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}">
       <img class="lazy" src="{{ asset('bundles/adstacyapp/img/transparent.gif') }}"
         data-original="{{ vich_uploader_asset(ad, 'image')|imagine_filter('thumbnail') }}"
-        width="{{ thumb_width }}px" height="{{ ad.imageHeight(thumb_width) }}px" alt="{{ ad.description }}">
+        width="{{ thumb_width }}px" height="{{ ad.imageHeight(thumb_width) }}px"
+        alt="{{ ad.description }}">
     </a>
   </div>
 
@@ -28,7 +29,7 @@
           <i class="icon-bullhorn"></i>
         </a>
       {% else %}
-        <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-default btn-promote" title="promote">
+        <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-primary btn-promote" title="promote">
           <i class="icon-bullhorn"></i>
         </a>
       {% endif %}
