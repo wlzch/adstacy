@@ -35,33 +35,54 @@
   var $adstacyContainer = $('.adstacy-container');
   var $window = $(window);
   var $searchForm = $('#search-form');
-  var windowWidth = $window.width();
 
-  if (windowWidth >= 480) {
-    $masonry.masonry({
-      columnWidth: 250,
-      isFitWidth: true,
-      isInitLayout: false,
-      transitionDuration: 0,
-      itemSelector: '.masonry-item'
-    });
+  var masonryTriggered = false;
+  var masonryDestroyed = false;
+  var resizeCallback = function() {
+    if ($masonry.length == 0) {
+      $adstacyContainer.css('width', Math.floor($window.width()/250)*250);
+    }
+  };
+  var masonryCheck = function() {
+    var windowWidth = $window.width();
+    console.log(windowWidth);
 
-    $masonry.masonry('on', 'layoutComplete', function(msnryInstance) {
-      $adstacyContainer.css('width', msnryInstance.cols * msnryInstance.columnWidth + 'px');
-    });
-    $masonry.masonry();
+    if (windowWidth > 480) {
+      console.log('desktop/tablet');
+      console.log(masonryTriggered);
+      if (!masonryTriggered || masonryDestroyed) {
+        console.log($masonry);
+        $masonry.masonry({
+          columnWidth: 250,
+          isFitWidth: true,
+          isInitLayout: false,
+          transitionDuration: 0,
+          itemSelector: '.masonry-item'
+        });
 
-    var resizeCallback = function() {
-      if ($masonry.length == 0) {
-        $adstacyContainer.css('width', Math.floor($window.width()/250)*250);
+        $masonry.masonry('on', 'layoutComplete', function(msnryInstance) {
+          $adstacyContainer.css('width', msnryInstance.cols * msnryInstance.columnWidth + 'px');
+        });
+        $window.on('resize orientationChanged', resizeCallback);
+        masonryTriggered = true;
       }
-    };
-    $window.on('resize orientationChanged', resizeCallback);
-    $(function() {
-      resizeCallback();
-    });
+      $masonry.masonry();
+
+      $(function() {
+        resizeCallback();
+      });
+    } else {
+      console.log('mobile');
+      console.log(masonryTriggered);
+      if (masonryTriggered) {
+        $masonry.masonry('destroy');
+        masonryDestroyed = true;
+      }
+    }
   }
   $(function() {
+    $window.on('resize orientationChanged', masonryCheck);
+    masonryCheck();
     $().UItoTop({ easingType: 'easeOutQuart' });
   });
 
