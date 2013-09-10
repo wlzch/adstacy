@@ -18,15 +18,15 @@ registering: Mendaftarkan...
 loggingin: Logging in...
 promoted_by: Juga dipromote oleh
 
-search_users: User
-search_ads: Iklan
+search_users: Users
+search_ads: Ads
 
 #footer
 about: Tentang
 terms: Ketentuan
 privacy: Kebijakan Privasi
 contact_us: Contact Us
-beta_info: Adstacy sedang dalam Beta. Kontak kami <a href="%url">disini</a> jika Anda mempunyai kritik, saran ataupun pertanyaan
+beta_info: Adstacy sedang dalam Beta. Kontak kami <a href="%url%">disini</a> jika Anda mempunyai kritik, saran ataupun pertanyaan
 
 ads:
     create: Tambah iklan
