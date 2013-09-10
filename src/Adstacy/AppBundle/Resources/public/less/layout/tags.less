@@ -1,18 +1,21 @@
 #browse-tags {
   padding-left: 0;
   
-  li {
+  a {
+    display: block;
     border-top: 1px solid #ddd;
-    list-style-type: none;
     padding: 5px 20px;
+    &:hover {
+      text-decoration: none;
+      background: #f2f2f2;
+    }
 
     small {
       color: #ccc;
       font-size:11px;
     }
   }
-
-  li:first-child {
-    border-top: 0;
+  li {
+    list-style-type: none;
   }
 }

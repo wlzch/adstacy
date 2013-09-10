@@ -34,6 +34,7 @@ class ChangePasswordFormType extends AbstractType
             'translation_domain' => 'FOSUserBundle',
             'mapped' => false,
             'constraints' => $constraint,
+            'error_bubbling' => true
         ));
         $builder->add('plainPassword', 'repeated', array(
             'type' => 'password',
@@ -42,7 +43,8 @@ class ChangePasswordFormType extends AbstractType
             'second_options' => array('label' => 'form.new_password_confirmation'),
             'invalid_message' => 'fos_user.password.mismatch',
             'first_name' => 'newPassword',
-            'second_name' => 'newPasswordConfirmation'
+            'second_name' => 'newPasswordConfirmation',
+            'error_bubbling' => true
         ));
         $builder->add('save', 'submit', array(
             'label' => 'form_password.submit'

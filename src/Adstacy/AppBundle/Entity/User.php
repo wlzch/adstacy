@@ -70,8 +70,10 @@ class User implements UserInterface, GroupableInterface
      *    maxSize = "1M",
      *    mimeTypes = {"image/png", "image/jpeg", "image/pjpeg"},
      *    minWidth = 100,
+     *    maxSizeMessage = "image.file.max_size",
      *    mimeTypesMessage = "image.file.mime_types",
-     *    minWidthMessage = "image.file.min_width"
+     *    minWidthMessage = "image.file.min_width",
+     *    groups = {"Profile"}
      * )
      * @Vich\UploadableField(mapping="user_image", fileNameProperty="imagename")
      */

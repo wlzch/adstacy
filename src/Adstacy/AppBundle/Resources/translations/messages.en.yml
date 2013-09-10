@@ -137,7 +137,7 @@ landing:
     welcome: Welcome to Adstacy
     features:
         easy:
-            heading: <b>E</b>asy
+            heading: <b>E</b>asy &amp; <b>F</b>ree
             desc: Just with an image and short description, your ad is ready to go
         social:
             heading: <b>S</b>ocial &amp; <b>F</b>un
@@ -154,3 +154,12 @@ landing:
         fast:
             heading: <b>F</b>ast
             desc: Our promote and follow features will help your ads spread faster
+        trending:
+            heading: <b>T</b>rending
+            desc: Get your ads promoted to reach the Trending page
+        stream:
+            heading: <b>M</b>y <b>S</b>tream
+            desc: Keep up-to-date with your followings activity
+        explore:
+            heading: <b>E</b>xplore
+            desc: Find latest ads from anyone, anywhere
