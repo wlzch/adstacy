@@ -33,7 +33,7 @@ class UserExtension extends \Twig_Extension
     {
         $uploaderHelper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
         $cacheManager = $this->container->get('liip_imagine.cache.manager');
-        if ($user->getImage()) {
+        if ($user->getImage() && $user->getImagename()) {
             return $cacheManager->getBrowserPath($uploaderHelper->asset($user, 'image'), 'profile_pic');
         }
         if ($user->getProfilePicture()) {
