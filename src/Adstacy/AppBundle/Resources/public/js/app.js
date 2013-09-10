@@ -45,13 +45,9 @@
   };
   var masonryCheck = function() {
     var windowWidth = $window.width();
-    console.log(windowWidth);
 
     if (windowWidth > 480) {
-      console.log('desktop/tablet');
-      console.log(masonryTriggered);
       if (!masonryTriggered || masonryDestroyed) {
-        console.log($masonry);
         $masonry.masonry({
           columnWidth: 250,
           isFitWidth: true,
@@ -72,8 +68,6 @@
         resizeCallback();
       });
     } else {
-      console.log('mobile');
-      console.log(masonryTriggered);
       if (masonryTriggered) {
         $masonry.masonry('destroy');
         masonryDestroyed = true;
