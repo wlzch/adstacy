@@ -20,8 +20,9 @@ role :app,        domain, :primary => true       # This may be the same as your 
 
 set  :use_sudo, true # must use sudo because setfacl will fail if not
 set  :keep_releases, 8
-# cannot use remote_cache because of empty directories causing symlink fails
-# set  :deploy_via, :remote_cache
+set  :deploy_via, :remote_cache
+set  :branch, :master
+set  :repository_cache, "cached_copy"
 
 set  :shared_files, ["app/config/parameters.yml"]
 set  :shared_children, ["app/logs", "app/sessions", "web/uploads", "web/media", "web/files", "vendor", "node_modules"]
@@ -52,5 +53,6 @@ namespace :symfony do
     capifony_puts_ok
   end
 end
+
 # Be more verbose by uncommenting the following line
- logger.level = Logger::MAX_LEVEL
+logger.level = Logger::MAX_LEVEL
