@@ -59,12 +59,16 @@
     $upload.change(function(e) {
       var files = FileAPI.getFiles(e);
       if (files && files[0]) {
-        FileAPI.readAsImage(files[0], function(evt) {
-          if (evt.type == 'load') {
-            $preview.find('img').replaceWith(evt.result);
-            $text.val(files[0].name);
-          }
-        });
+        var val = $upload.val();
+        $text.val(val.substring(val.lastIndexOf('\\') + 1, val.length));
+        if (window.FileReader) {
+          FileAPI.readAsImage(files[0], function(evt) {
+            if (evt.type == 'load') {
+              $preview.find('img').replaceWith(evt.result);
+              $text.val(files[0].name);
+            }
+          });
+        }
       }
     });
     $trigger.click(function() {
