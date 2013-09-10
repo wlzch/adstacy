@@ -63,6 +63,7 @@
         masonryTriggered = true;
       }
       $masonry.masonry();
+      $().UItoTop({ easingType: 'easeOutQuart' });
 
       $(function() {
         resizeCallback();
@@ -72,12 +73,12 @@
         $masonry.masonry('destroy');
         masonryDestroyed = true;
       }
+
     }
   }
   $(function() {
     $window.on('resize orientationChanged', masonryCheck);
     masonryCheck();
-    $().UItoTop({ easingType: 'easeOutQuart' });
   });
 
   $('img.lazy').lazyload();
