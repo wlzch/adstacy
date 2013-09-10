@@ -25,6 +25,7 @@ class Ad
      *    maxSize = "2M",
      *    mimeTypes = {"image/png", "image/jpeg", "image/pjpeg"},
      *    minWidth = 480,
+     *    maxSizeMessage = "image.file.max_size",
      *    mimeTypesMessage = "image.file.mime_types",
      *    minWidthMessage = "image.file.min_width"
      * )
