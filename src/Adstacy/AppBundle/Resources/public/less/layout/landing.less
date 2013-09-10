@@ -8,12 +8,12 @@ body {
 }
 
 #landing .wrapper {
-  width: 1000px;
+  width: 999px;
   margin: 0 auto;
 }
 
 #landing-title {
-  background-color: #222;
+  background-color: @gray-darker;
   background-size: cover;
   padding-bottom: 20px;
 
@@ -41,7 +41,6 @@ body {
     width: 333px;
     float: left;
     padding: 20px;
-    color: @gray-dark;
 
     .lead {
       font-size: 18px;
@@ -62,26 +61,25 @@ body {
   }
 
   .section-figure {
-    .img-responsive();
     background-color: @brand-primary;
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    margin: auto;
+    margin: 0 auto;
     text-align: center;
     border: 5px solid #e5e5e5;
-    opacity: 0.7;
-   .transition(all .2s ease-in-out);
+    .opacity(.7);
+    .transition(all .2s ease-in-out);
 
     i[class^="icon"] {
       font-size: 32px;
       line-height: 95px;
       color: #fff;
-     .transition(all .2s ease-in-out);
+      .transition(all .2s ease-in-out);
     }
 
     &:hover{
-      opacity: 1;
+      .opacity(1);
 
       i[class^="icon"] {
         font-size: 50px;
@@ -103,13 +101,18 @@ body {
 
 @media screen and (max-width: @screen-tablet) {
   #landing .wrapper,
-  #landing-features .section {
+  #landing-features .section,
+  #register-form {
     width: 100% !important;
   }
 
-  #register-form {
-    width: 100%;
+  #landing-screenshot,
+  #register-form,
+  #landing-features .section {
     float: none;
+  }
+
+  #register-form {
     margin: 20px 0;
   }
 
@@ -117,28 +120,21 @@ body {
     margin: 50px 0;
   }
 
-  #landing-screenshot, #register-form {
-    float: none;
-  }
-
   #landing-screenshot {
     margin-top: 0;
+
     img {
-      width: 100%;
+      .img-responsive(block);
     }
   }
 
   #landing-title {
-    background: #222;
-  }
-
-  .landing-section {
-    float: none;
+    background: @gray-darker;
   }
 }
 
 @media screen and (min-width: @screen-md-max) {
   #landing-title {
-    background: #222 url('../../img/screenshot.jpg') no-repeat center;
+    background: @gray-darker url('../../img/screenshot.jpg') no-repeat center;
   }
 }
