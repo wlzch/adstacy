@@ -1,0 +1,26 @@
+#feeds-masonry {
+  list-style-type: none;
+  margin: 14px 7px 0px;
+  padding-left: 0;
+  width: 236px;
+  
+  & > li {
+    border-top: 1px solid #ddd;
+    & > a {
+      color: #333;
+      display: block;
+      font-size: 16px;
+      padding: 10px 15px;
+    }
+
+    & > a:hover {
+      background-color: #b00;
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+
+  & > li:first-child {
+    border-top: 0;
+  }
+}

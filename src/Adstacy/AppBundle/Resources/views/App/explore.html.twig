@@ -4,6 +4,7 @@
 
 {% block content %}
   <div class="masonry jscroll clearfix">
+    {% include 'AdstacyAppBundle:App:feeds.html.twig' %}
     {{ block('ajax_content') }}
   </div>
 {% endblock %}
