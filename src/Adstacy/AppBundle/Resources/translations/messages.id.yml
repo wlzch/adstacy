@@ -137,7 +137,7 @@ landing:
             desc: Promote iklan yang Anda sukai untuk dilihat follower Anda
         search:
             heading: <b>P</b>encarian
-            desc: Cari produk, acara, lowongan kerja, atau iklan apapun
+            desc: Cari produk, acara, promo, lowongan kerja, atau iklan apapun
         hashtag:
             heading: <b>H</b>ashtag
             desc: Deskripsikan iklan anda secara kreatif sesuai dengan target pasar Anda
@@ -147,3 +147,12 @@ landing:
         fast:
             heading: <b>C</b>epat
             desc: Dengan adanya fitur promote dan follow, iklan Anda akan tersebar lebih cepat
+        trending:
+            heading: <b>T</b>rending
+            desc: Ajak pengguna lainnya untuk promote iklan anda untuk mencapai halaman Trending
+        stream:
+            heading: <b>M</b>y <b>S</b>tream
+            desc: Ikuti kegiatan pengguna yang Anda follow
+        explore:
+            heading: <b>E</b>xplore
+            desc: Lihat iklan terakhir dari siapapun dimanapun
