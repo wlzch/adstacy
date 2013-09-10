@@ -18,12 +18,12 @@
         <div id="search-container" class="input-group">
           <div class="input-group-btn">
             <button id="search-type-btn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-              <span id="search-type-text">{% if isSearchUser %}{{"users"|trans}}{% else %}{{"ads"|trans}}{% endif %}</span>
+              <span id="search-type-text">{% if isSearchUser %}{{"search_users"|trans}}{% else %}{{"search_ads"|trans}}{% endif %}</span>
               <i class="icon-angle-up icon-angle-down"></i>
             </button>
             <ul class="dropdown-menu">
-              <li><a data-val="ads">{{"ads"|trans}}</a></li>
-              <li><a data-val="users">{{"users"|trans}}</a></li>
+              <li><a data-val="ads">{{"search_ads"|trans}}</a></li>
+              <li><a data-val="users">{{"search_users"|trans}}</a></li>
             </ul>
           </div>
           <input id="search-box" type="text" class="form-control" placeholder="{{"search"|trans}}" name="q" value="{{ app.request.query.get('q') }}">
