@@ -25,7 +25,7 @@
   {% set loggedInUser = app.user %}
   {% if loggedInUser %}
     {% if user == loggedInUser %}
-      <a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}" class="btn btn-success btn-block follow-user">View Profile</a>
+      <a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}" class="btn btn-success btn-block">View Profile</a>
     {% else %}
       {% include 'AdstacyAppBundle:User:follow_button.html.twig' with {user: user} %}
     {% endif %}
