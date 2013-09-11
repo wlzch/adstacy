@@ -18,7 +18,7 @@
 {% block content %}
   {% set user = ad.user %}
 
-  <div id="show-ad-single">
+  <div id="show-ad">
     <div id="show-ad-content">
       <div class="panel panel-default">
         <div id="show-ad-toolbar" class="panel-body">
@@ -149,7 +149,7 @@
   {{ parent() }}
   <script type="text/javascript">
     $(function() {
-      $('#show-ad-single').ajaxlink('promote_single');
+      $('#show-ad').ajaxlink('promote_single');
       $('#show-ad-owner').ajaxlink('follow_single');
       $('#show-ad-owner').scrollToFixed({
         marginTop: 55
