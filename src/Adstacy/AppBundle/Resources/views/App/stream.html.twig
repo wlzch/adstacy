@@ -11,6 +11,9 @@
       {{ block('ajax_content') }}
     </div>
   {% else %}
+    <div class="page-title jumbotron text-center">
+      <h1>My Stream</h1>
+    </div>
     <div class="masonry jscroll clearfix">
       {% include 'AdstacyAppBundle:App:feeds.html.twig' %}
       {{ block('ajax_content') }}

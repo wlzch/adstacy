@@ -3,6 +3,9 @@
 {% block title %}Explore Latest Ads | Adstacy{% endblock %}
 
 {% block content %}
+  <div class="page-title jumbotron text-center">
+    <h1>Explore</h1>
+  </div>
   <div class="masonry jscroll clearfix">
     {% include 'AdstacyAppBundle:App:feeds.html.twig' %}
     {{ block('ajax_content') }}
