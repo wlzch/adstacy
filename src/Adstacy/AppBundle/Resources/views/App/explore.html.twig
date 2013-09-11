@@ -30,7 +30,7 @@
           var $ads = $('.jscroll-added:last .ad');
           $masonry = $('.masonry').masonry('appended', $ads);
           $ads.find('img.lazy').lazyload();
-          $ads.find('.ad-social').ajaxlink('ads');
+          $ads.find('.ad').ajaxlink('ads');
           $ads.find('[data-toggle="tooltip"]').tooltip();
         }
       });

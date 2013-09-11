@@ -48,7 +48,8 @@
         callback: function(a, b) {
           var $users = $('.jscroll-added:last .user');
           $masonry = $('.masonry').masonry('appended', $users);
-          $users.find('.ad-social').ajaxlink('follow_user');
+          $users.find('img.lazy').lazyload();
+          $users.find('.user').ajaxlink('users');
         }
       });
     });
