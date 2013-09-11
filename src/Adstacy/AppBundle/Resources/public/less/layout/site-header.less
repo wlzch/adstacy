@@ -1,3 +1,5 @@
+@import "../mixins.less";
+
 /** Header Layout **/
 #site-header {
   border-bottom: 1px solid #bbb;
@@ -277,4 +279,8 @@
 /* Overrides */
 .navbar-collapse {
   max-height: 500px;
+}
+
+.navbar-collapse.no-transition {
+  .transition(height 0.001s);
 }

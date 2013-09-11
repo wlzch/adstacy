@@ -64,6 +64,7 @@
       }
       $masonry.masonry();
       $().UItoTop({ easingType: 'easeOutQuart' });
+      $('.navbar-collapse').removeClass('no-transition');
 
       $(function() {
         resizeCallback();
@@ -73,7 +74,7 @@
         $masonry.masonry('destroy');
         masonryDestroyed = true;
       }
-
+      $('.navbar-collapse').addClass('no-transition');
     }
   }
   $(function() {
