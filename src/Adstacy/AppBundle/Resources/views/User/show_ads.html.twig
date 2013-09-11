@@ -93,9 +93,9 @@
         nextSelector: 'a.next-page',
         callback: function(a, b) {
           var $ads = $('.jscroll-added:last .ad');
-          $masonry = $('.masonry').masonry('appended', $ads);
+          $('.masonry').masonry('appended', $ads);
           $ads.find('img.lazy').lazyload();
-          $ads.find('.ad').ajaxlink('ads');
+          $ads.ajaxlink('ads');
         }
       });
     });
