@@ -13,6 +13,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\ExecutionContextInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Imagine\Gd\Imagine;
+use Imagine\Filter\Advanced\RelativeResize;
 
 /**
  * @ORM\Entity(repositoryClass="Adstacy\AppBundle\Repository\UserRepository")
@@ -67,7 +69,7 @@ class User implements UserInterface, GroupableInterface
 
     /**
      * @Assert\Image(
-     *    maxSize = "1M",
+     *    maxSize = "5M",
      *    mimeTypes = {"image/png", "image/jpeg", "image/pjpeg"},
      *    minWidth = 100,
      *    maxSizeMessage = "image.file.max_size",
@@ -1372,9 +1374,17 @@ class User implements UserInterface, GroupableInterface
 
     public function setImage(File $image = null)
     {
-        if ($image) {
-            $this->image = $image;
-            // hack for VichUploaderBundle because the listener will be called 
+        if ($image && $this->image != $image) {
+            $originalImage = $image;
+            $imagine = new Imagine();
+            $image = $imagine->open($image);
+            $size = $image->getSize();
+            if ($size->getWidth() > 400) {
+                $relativeResize = new RelativeResize('widen', 400);
+                $image = $relativeResize->apply($image);
+                $image->save($originalImage->getRealPath(), array('format' => $originalImage->guessClientExtension()));
+            }
+            $this->image = $originalImage;
             // only if there is any field changes
             $this->setUpdated(new \Datetime());
         }

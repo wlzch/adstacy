@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Imagine\Gd\Imagine;
+use Imagine\Filter\Advanced\RelativeResize;
 
 /**
  * @ORM\Entity(repositoryClass="Adstacy\AppBundle\Repository\AdRepository")
@@ -22,8 +24,8 @@ class Ad
 
     /**
      * @Assert\Image(
-     *    maxSize = "2M",
-     *    mimeTypes = {"image/png", "image/jpeg", "image/pjpeg"},
+     *    maxSize = "5M",
+     *    mimeTypes = {"image/png", "image/jpg", "image/jpeg", "image/pjpeg"},
      *    minWidth = 480,
      *    maxSizeMessage = "image.file.max_size",
      *    mimeTypesMessage = "image.file.mime_types",
@@ -336,11 +338,20 @@ class Ad
     public function setImage(File $image = null)
     {
         if ($image && $this->image != $image) {
-            $this->image = $image;
-            $size = getimagesize($image);
-            if ($size[0] > 0 && $size[1] > 0) {
-                $this->setImageWidth($size[0]);
-                $this->setImageHeight($size[1]);
+            $originalImage = $image;
+            $imagine = new Imagine();
+            $image = $imagine->open($image);
+            $size = $image->getSize();
+            if ($size->getWidth() > 0 && $size->getHeight() > 0) {
+                if ($size->getWidth() > 1024) {
+                    $relativeResize = new RelativeResize('widen', 1024);
+                    $image = $relativeResize->apply($image);
+                    $image->save($originalImage->getRealPath(), array('format' => $originalImage->guessClientExtension()));
+                    $size = $image->getSize();
+                }
+                $this->image = $originalImage;
+                $this->setImageWidth($size->getWidth());
+                $this->setImageHeight($size->getHeight());
             }
             // hack for VichUploaderBundle because the listener will be called 
             // only if there is any field changes
