@@ -3,6 +3,11 @@ adstacy_app_user_profile:
     defaults:
         _controller: AdstacyAppBundle:User:show
 
+adstacy_app_user_activity:
+    pattern: /{username}/activity
+    defaults:
+        _controller: AdstacyAppBundle:User:showActivity
+
 adstacy_app_user_ads:
     pattern: /{username}/ads
     defaults:
