@@ -18,6 +18,7 @@ class ImageType extends AbstractType
         $view->vars['obj'] = $data;
         $view->vars['image_size'] = $options['image_size'];
         $view->vars['image_required'] = $options['image_required'];
+        $view->vars['additional_fields'] = $options['additional_fields'];
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
@@ -26,7 +27,8 @@ class ImageType extends AbstractType
             'invalid_message' => 'An error occured. please retry',
             'required' => false,
             'image_size' => 'medium',
-            'image_required' => true
+            'image_required' => true,
+            'additional_fields' => array()
         ));
     }
 

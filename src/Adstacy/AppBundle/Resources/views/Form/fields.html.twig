@@ -45,6 +45,12 @@
 <div class="image-preview {{ image_size }}">
   {% if imageExists %}
     <img src="{{ vich_uploader_asset(obj, 'image') }}">
+  {% elseif additional_fields|length > 0 %}
+    {% for field in additional_fields %}
+      {% if attribute(obj, field) is defined and attribute(obj, field) %}
+        <img src="{{ attribute(obj, field) }}">
+      {% endif %}
+    {% endfor %}
   {% else %}
     <img>
   {% endif %}

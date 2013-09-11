@@ -118,8 +118,12 @@ class UserProvider implements UserProviderInterface, OAuthAwareUserProviderInter
             $user->$setter_id($username);
             $user->$setter_username($response->getNickname());
             $user->$setter_real_name($response->getRealName());
+            $user->setProfilePicture($response->getProfilePicture());
         }
 
+        if (!$user->getProfilePicture()) {
+            $user->setProfilePicture($response->getProfilePicture());
+        }
         //update access token
         $user->$setter_token($response->getAccessToken());
         $user->addRole('ROLE_'.strtoupper($service));
@@ -151,6 +155,7 @@ class UserProvider implements UserProviderInterface, OAuthAwareUserProviderInter
             $previousUser->$setter_token(null);
             $previousUser->$setter_username(null);
             $previousUser->$setter_real_name(null);
+            $previousUser->setProfilePicture(null);
             $this->userManager->updateUser($previousUser);
         }
  
@@ -159,6 +164,7 @@ class UserProvider implements UserProviderInterface, OAuthAwareUserProviderInter
         $user->$setter_token($response->getAccessToken());
         $user->$setter_username($response->getNickname());
         $user->$setter_real_name($response->getRealName());
+        $user->setProfilePicture($response->getProfilePicture());
         $user->addRole('ROLE_'.strtoupper($service));
  
         $this->userManager->updateUser($user);

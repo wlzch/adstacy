@@ -25,7 +25,10 @@ class ProfileFormType extends BaseType
             'required' => false,
             'image_required' => false,
             'image_size' => 'small',
-            'error_bubbling' => true
+            'error_bubbling' => true,
+            'additional_fields' => array(
+                'profilePicture'
+            )
         ));
         $builder->add('username', null, array(
             'label' => 'form.username',
