@@ -142,4 +142,23 @@ class UserRepository extends EntityRepository
 
         return $query->setParameter('id', $ad->getId());
     }
+
+    /**
+     * Suggest users
+     *
+     */
+    public function suggestUserQuery(User $user)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('
+            SELECT partial u.{id,username,imagename,realName,adsCount,followersCount,profilePicture},
+            partial a.{id,imagename,thumbHeight,imageHeight,imageWidth}
+            FROM AdstacyAppBundle:User u
+            LEFT JOIN u.ads a
+            WHERE u.id <> :id
+            ORDER BY u.adsCount DESC
+        ');
+
+        return $query->setParameter('id', $user->getId());
+    }
 }

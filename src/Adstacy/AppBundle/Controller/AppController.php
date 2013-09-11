@@ -23,7 +23,7 @@ class AppController extends Controller
             ));
         }
 
-        return $this->exploreAction();
+        return $this->streamAction();
     }
 
     public function exploreAction()
@@ -47,9 +47,16 @@ class AppController extends Controller
         $user = $this->getUser();
         $query = $this->getRepository('AdstacyAppBundle:Ad')->findUserStreamQuery($user);
         $paginator = $this->getDoctrinePaginator($query, $this->getParameter('max_ads_per_page'));
+        $suggestionsPaginator = array();
+        if ($user->getFollowingsCount() <= 0) {
+            $suggestQuery = $this->getRepository('AdstacyAppBundle:User')->suggestUserQuery($user);
+            $suggestionsPaginator = $this->getDoctrinePaginator($suggestQuery, 10);
+        }
 
         return $this->render('AdstacyAppBundle:App:stream.html.twig', array(
-            'paginator' => $paginator
+            'paginator' => $paginator,
+            'suggestionsPaginator' => $suggestionsPaginator,
+            'user' => $user
         ));
     }
 
