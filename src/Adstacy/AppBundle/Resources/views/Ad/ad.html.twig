@@ -15,6 +15,7 @@
 
   <div class="ad-sect ad-counter text-overflow">
     <a href="{{ path('adstacy_app_ad_promotes', {id: ad.id}) }}"><span class="promotes-count">{{ ad.promoteesCount }}</span> Promotes</a>
+    <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}#comments"><span class="comments-count">{{ ad.commentsCount }}</span> Comments</a>
   </div>
 
   <div class="ad-sect ad-user clearfix">
@@ -72,4 +73,10 @@
       {% endif %}
     {% endif %}
   {% endif %}
+  <div class="ad-comment">
+    <form action="{{ path('adstacy_app_ad_comment', {id: ad.id}) }}" method="post">
+      <textarea name="comment[content]" required="required"></textarea>
+      <input type="submit" value="comment">
+    </form>
+  </div>
 </div>

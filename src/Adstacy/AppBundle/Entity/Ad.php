@@ -537,7 +537,7 @@ class Ad
      */
     public function getCommentsCount()
     {
-        return $this->commentsCount;
+        return $this->commentsCount ?: 0;
     }
 
     /**
