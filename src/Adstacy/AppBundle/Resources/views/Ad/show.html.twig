@@ -85,6 +85,29 @@
           </div>
         </div>
       {% endif %}
+
+      <div id="comments-sect" class="panel panel-default">
+        {{ form_start(form) }}
+          <div>{{ form_label(form.content) }}</div>
+          <div>{{ form_widget(form.content) }}</div>
+          <input type="submit" value="{{"comment"|trans}}">
+          {{ form_rest(form) }}
+        {{ form_end(form) }}
+        <div id="comments" href="#comments">
+          {% for comment in comments %}
+            {% set commentUser = comment.user %}
+            <div class="comment clearfix">
+              <div class="comment-user-pic">
+                <img src="{{ profile_pic(commentUser) }}" alt="{{ commentUser.realname }}" width="60" height="60">
+              </div>
+              <div class="comment-desc">
+                <h4 class="comment-user-realname">{{ commentUser.realName }}<span class="comment-created">{{ ago(comment.created) }}</h4>
+                <p class="comment-content">{{ parse_url(parse_hashtag(parse_mention(comment.content))) }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
     </div>
 
     <div id="show-ad-owner">

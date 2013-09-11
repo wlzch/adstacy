@@ -47,7 +47,7 @@ class Ad
      *  maxMessage = "ad.description.max"
      * )
      * @Assert\NotBlank(message="ad.description.not_blank")
-     * @ORM\COlumn(type="string", length=255)
+     * @ORM\Column(type="string", length=255)
      */
     private $description;
 
@@ -98,6 +98,16 @@ class Ad
     private $promoteesCount;
 
     /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="ad", orphanRemoval=true, cascade={"persist", "remove"})
+     */
+    private $comments;
+
+    /**
+     * @ORM\Column(name="comments_count", type="integer", nullable=true)
+     */
+    private $commentsCount;
+
+    /**
      * @ORM\OneToMany(targetEntity="FeaturedAd", mappedBy="ad")
      */
     private $featureds;
@@ -114,6 +124,7 @@ class Ad
     {
         $this->promotees = new \Doctrine\Common\Collections\ArrayCollection();
         $this->promoteesCount = 0;
+        $this->commentsCount = 0;
         $this->created = new \Datetime();
     }
     
@@ -391,12 +402,6 @@ class Ad
         return $this->imagename;
     }
 
-    public function __toString()
-    {
-        return $this->description;
-    }
-
-
     /**
      * Set updated
      *
@@ -511,4 +516,70 @@ class Ad
 
         return $this->getThumbHeight();
     }
+
+    /**
+     * Set commentsCount
+     *
+     * @param integer $commentsCount
+     * @return Ad
+     */
+    public function setCommentsCount($commentsCount)
+    {
+        $this->commentsCount = $commentsCount;
+    
+        return $this;
+    }
+
+    /**
+     * Get commentsCount
+     *
+     * @return integer 
+     */
+    public function getCommentsCount()
+    {
+        return $this->commentsCount;
+    }
+
+    /**
+     * Add comments
+     *
+     * @param \Adstacy\AppBundle\Entity\Comment $comments
+     * @return Ad
+     */
+    public function addComment(\Adstacy\AppBundle\Entity\Comment $comments)
+    {
+        $this->comments[] = $comments;
+        $this->setCommentsCount($this->getCommentsCount() + 1);
+        $comments->setAd($this);
+    
+        return $this;
+    }
+
+    /**
+     * Remove comments
+     *
+     * @param \Adstacy\AppBundle\Entity\Comment $comments
+     */
+    public function removeComment(\Adstacy\AppBundle\Entity\Comment $comments)
+    {
+        $this->comments->removeElement($comments);
+        $this->setCommentsCount($this->getCommentsCount() - 1);
+        $comments->setAd(null);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    public function __toString()
+    {
+        return $this->description;
+    }
+
 }
