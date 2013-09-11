@@ -19,7 +19,7 @@
     {% include 'AdstacyAppBundle:Ad:ad.html.twig' with {ad: ad} %}
   {% endfor %}
   {% if ads|length >= max_ads_per_page %}
-    <a href="{{ path('homepage', {'id': id})}}" class="btn btn-default btn-block next-page">{{ "more"|trans }}</a>
+    <a href="{{ path('adstacy_app_explore', {'id': id})}}" class="btn btn-default btn-block next-page">{{ "more"|trans }}</a>
   {% endif %}
 {% endblock %}
 
