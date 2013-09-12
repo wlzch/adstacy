@@ -69,8 +69,8 @@
       </div>
 
       <div class="navbar-right">
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-          <a href="{{ path('adstacy_app_ad_create') }}" id="create-ads-btn" class="btn btn-primary navbar-btn" title="{{"ads.create"|trans}}">
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+          <a href="{{ path('adstacy_app_ad_create') }}" id="create-ads-btn" class="btn btn-primary navbar-btn" data-toggle="tooltip" data-placement="bottom" title="{{"ads.create"|trans}}">
             <i class="icon-plus"></i>
             <span id="mobile-create-ads-label">{{"ads.create"|trans}}</span>
           </a>
@@ -110,13 +110,13 @@
         {% endif %}
       </div>
       <ul id="mobile-nav" class="nav navbar-nav navbar-right">
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
         <li><a href="{{ path('adstacy_app_stream') }}"><i class="icon-bullhorn"></i>&nbsp; {{"stream"|trans}}</a></li>
         {% endif %}
         <li><a href="{{ path('adstacy_app_explore') }}" title="Explore"><i class="icon-home"></i>&nbsp; Explore</a></li>
         <li><a href="{{ path('adstacy_app_trending') }}" title="Trending"><i class="icon-rocket"></i>&nbsp; Trending</a></li>
         <li><a href="{{ path('adstacy_app_tags') }}" title="Trending"><i class="icon-bookmark"></i>&nbsp; Popular Tags</a></li>
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
         <li><a href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}"><i class="icon-user"></i>&nbsp; {{"profile"|trans}}</a></li>
         <li><a href="{{ path('fos_user_profile_edit') }}"><i class="icon-gear"></i>&nbsp; {{"settings"|trans}}</a></li>
         <li><a href="{{ path('fos_user_security_logout') }}"><i class="icon-off"></i>&nbsp; {{"logout"|trans}}</a></li>

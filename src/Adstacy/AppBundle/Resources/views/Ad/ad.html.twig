@@ -22,14 +22,14 @@
     <div class="ad-user-action btn-group">
       {% if app.user %}
         {% set promoted = app.user.hasPromote(ad) %}
-        <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-primary btn-promote promote {% if promoted %}hide{% endif %}" title="promote">
+        <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-primary btn-promote promote {% if promoted %}hide{% endif %}" data-toggle="tooltip" data-placement="top" title="Promote">
           <i class="icon-bullhorn"></i>
         </a>
-        <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-success btn-promote unpromote {% if not promoted %}hide{% endif %}" title="unpromote">
+        <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-success btn-promote unpromote {% if not promoted %}hide{% endif %}" data-toggle="tooltip" data-placement="top" title="Unpromote">
           <i class="icon-bullhorn"></i>
         </a>
       {% else %}
-        <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-primary btn-promote" title="promote">
+        <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-primary btn-promote" data-toggle="tooltip" data-placement="top" title="Promote">
           <i class="icon-bullhorn"></i>
         </a>
       {% endif %}
