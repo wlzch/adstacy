@@ -19,7 +19,7 @@ class CommentNotificationSaver implements NotificationSaverInterface
     /**
      * @inheritdoc
      */
-    public function save(User $from, User $to, $comment, $flush = true)
+    public function save(User $from, User $to, $comment, $flush = false)
     {
         $notification = new Notification();
         $notification->setFrom($from);

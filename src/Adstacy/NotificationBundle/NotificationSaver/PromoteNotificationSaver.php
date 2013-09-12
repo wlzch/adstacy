@@ -6,8 +6,9 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Adstacy\NotificationBundle\Entity\Notification;
 use Adstacy\AppBundle\Entity\User;
 use Adstacy\AppBundle\Entity\Comment;
+use Adstacy\AppBundle\Entity\Ad;
 
-class FollowNotificationSaver implements NotificationSaverInterface
+class PromoteNotificationSaver implements NotificationSaverInterface
 {
     private $om;
 
@@ -19,12 +20,13 @@ class FollowNotificationSaver implements NotificationSaverInterface
     /**
      * @inheritdoc
      */
-    public function save(User $from, User $to, $noun, $flush = false)
+    public function save(User $from, User $to, $ad, $flush = false)
     {
         $notification = new Notification();
         $notification->setFrom($from);
         $notification->setTo($to);
-        $notification->setType('follow');
+        $notification->setAd($ad);
+        $notification->setType('promote');
         $this->om->persist($notification);
         if ($flush) {
             $this->om->flush();
@@ -36,6 +38,6 @@ class FollowNotificationSaver implements NotificationSaverInterface
      */
     public function support($noun, $key = false)
     {
-        return $key == 'follow';
+        return $noun instanceof Ad && $key == 'promote';
     }
 }

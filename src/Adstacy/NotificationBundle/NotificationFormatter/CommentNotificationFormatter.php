@@ -5,8 +5,6 @@ namespace Adstacy\NotificationBundle\NotificationFormatter;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Translation\Translator;
 use Adstacy\NotificationBundle\Entity\Notification;
-use Adstacy\AppBundle\Entity\User;
-use Adstacy\AppBundle\Entity\Comment;
 
 class CommentNotificationFormatter implements NotificationFormatterInterface
 {
@@ -22,8 +20,8 @@ class CommentNotificationFormatter implements NotificationFormatterInterface
     public function format(Notification $notification)
     {
         return $this->translator->trans('notification.comment', array(
-            '%url_comment%' => $this->router->generate('adstacy_app_ad_show', array(
-                'id' => $notification->getComment()->getId()
+            '%url_ad%' => $this->router->generate('adstacy_app_ad_show', array(
+                'id' => $notification->getAd()->getId()
             )),
             '%url_user%' => $this->router->generate('adstacy_app_user_profile', array(
                 'username' => $notification->getFrom()->getUsername()

@@ -38,7 +38,7 @@ class NotificationManager
      * @param boolean $flush
      * @param mixed anything to identify what notification to call
      */
-    public function save(User $from, User $to, $noun, $flush = true, $key = null)
+    public function save(User $from, User $to, $noun, $flush = false, $key = null)
     {
         // only notify if action is from two different users
         if ($from != $to) {

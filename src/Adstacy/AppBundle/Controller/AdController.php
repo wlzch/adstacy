@@ -164,6 +164,7 @@ class AdController extends Controller
             $ad->addPromotee($promote);
             $user->addPromote($promote);
             $em = $this->getManager();
+            $this->get('adstacy.notification.manager')->save($user, $ad->getUser(), $ad, false, 'promote');
             $em->persist($ad);
             $em->persist($user);
             $em->flush();

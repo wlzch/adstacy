@@ -19,7 +19,7 @@ class MentionNotificationSaver implements NotificationSaverInterface
     /**
      * @inheritdoc
      */
-    public function save(User $from, User $to, $comment, $flush = true)
+    public function save(User $from, User $to, $comment, $flush = false)
     {
         $matches = null;
         preg_match_all('/@(\w+)/', $comment->getContent(), $matches);

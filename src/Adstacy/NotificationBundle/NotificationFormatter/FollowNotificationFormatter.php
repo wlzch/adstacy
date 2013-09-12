@@ -5,8 +5,6 @@ namespace Adstacy\NotificationBundle\NotificationFormatter;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Translation\Translator;
 use Adstacy\NotificationBundle\Entity\Notification;
-use Adstacy\AppBundle\Entity\User;
-use Adstacy\AppBundle\Entity\Comment;
 
 class FollowNotificationFormatter implements NotificationFormatterInterface
 {
