@@ -88,16 +88,7 @@
 
       <div id="show-ad-comment" class="panel panel-default">
         <div class="panel-body">
-          {{ form_start(form) }}
-            <div class="form-group">
-              {{ form_label(form.content) }}
-              {{ form_widget(form.content, { attr: { class: 'comment-box' } }) }}
-            </div>
-            <input type="submit" value="{{"comment"|trans}}" class="hide">
-            {{ form_rest(form) }}
-          {{ form_end(form) }}
-
-          <div id="show-ad-comment-list" href="#comments">
+          <div id="show-ad-comment-list">
             {% for comment in comments %}
               {% set commentUser = comment.user %}
               <div class="media">
@@ -106,13 +97,23 @@
                 </div>
                 <div class="media-body">
                   <h4 class="media-heading">
-                    <a href="{{ path('adstacy_app_user_profile', {username: commentUser.username}) }}">{{ commentUser.realName }}</a> &middot;
+                    <a href="{{ path('adstacy_app_user_profile', {username: commentUser.username}) }}">{{ commentUser.realName }}</a>
                     <small class="text-muted">{{ ago(comment.created) }}</small>
                   </h4>
-                  {{ parse_url(parse_hashtag(parse_mention(comment.content))) }}
+                  <div>{{ parse_url(parse_hashtag(parse_mention(comment.content))) }}</div>
                 </div>
               </div>
             {% endfor %}
+          </div>
+          {# id=comments only used for link anchor #}
+          <div id="comments">
+            {{ form_start(form) }}
+              <div class="form-group">
+                {{ form_widget(form.content, { attr: { class: 'comment-box' } }) }}
+              </div>
+              <input type="submit" value="{{"comment"|trans}}" class="hide" />
+              {{ form_rest(form) }}
+            {{ form_end(form) }}
           </div>
         </div>
       </div>

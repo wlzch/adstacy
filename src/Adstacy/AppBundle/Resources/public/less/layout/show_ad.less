@@ -97,14 +97,35 @@
 }
 
 #show-ad-comment {
+  form {
+    margin-top: 10px;
+  }
+
+  .form-group {
+    margin-bottom: 0;
+  }
+
+  .media-body {
+    font-size: 14px;
+  }
+  .media-heading {
+    a:hover {
+      text-decoration: none;
+    }
+
+    & > small {
+      font-size: 12px;
+    }
+  }
+
   .comment-box {
-    width: 100%;
-    height: 46px;
-    padding: 4px 8px;
     background-color: #f4f4f4;
-    resize: none;
     border: 1px solid @border-color;
     .border-bottom-radius(@border-radius-base);
+    height: 46px;
+    padding: 4px 8px;
+    resize: none;
+    width: 100%;
 
     &:focus {
       outline: none;
