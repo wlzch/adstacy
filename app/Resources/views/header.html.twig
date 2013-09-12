@@ -88,7 +88,7 @@
           {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
             <div id="notif-btn" class="navbar-btn">
               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                <i class="icon-globe"></i>
+                <i class="icon-rss"></i>
               </button>
               {{ render_notification(5, 'top-notifications') }}
             </div>
@@ -125,7 +125,7 @@
         <li><a href="{{ path('adstacy_app_trending') }}" title="Trending"><i class="icon-rocket"></i>&nbsp; Trending</a></li>
         <li><a href="{{ path('adstacy_app_tags') }}" title="Trending"><i class="icon-tags"></i>&nbsp; Popular Tags</a></li>
         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-        <li><a href="{{ path('adstacy_app_notifications') }}"><i class="icon-globe"></i>&nbsp; {{ "Notification"|trans }}</a></li>
+        <li><a href="{{ path('adstacy_app_notifications') }}"><i class="icon-rss"></i>&nbsp; {{ "Notification"|trans }}</a></li>
         <li><a href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}"><i class="icon-user"></i>&nbsp; {{"profile"|trans}}</a></li>
         <li><a href="{{ path('fos_user_profile_edit') }}"><i class="icon-gear"></i>&nbsp; {{"settings"|trans}}</a></li>
         <li><a href="{{ path('fos_user_security_logout') }}"><i class="icon-off"></i>&nbsp; {{"logout"|trans}}</a></li>
