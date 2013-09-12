@@ -9,7 +9,7 @@
 	font-style: normal;
 }
 
-.icon-home, .icon-rocket, .icon-search, .icon-plus, .icon-user, .icon-gear, .icon-off, .icon-angle-up, .icon-angle-down, .icon-facebook, .icon-twitter, .icon-share, .icon-envelope-alt, .icon-edit, .icon-delete, .icon-ads, .icon-bullhorn, .icon-hash, .icon-star, .icon-ok-sign, .icon-globe {
+.icon-home, .icon-rocket, .icon-search, .icon-plus, .icon-user, .icon-gear, .icon-off, .icon-angle-up, .icon-angle-down, .icon-facebook, .icon-twitter, .icon-share, .icon-envelope-alt, .icon-edit, .icon-delete, .icon-ads, .icon-bullhorn, .icon-hash, .icon-star, .icon-ok-sign, .icon-globe, .icon-rss, .icon-tags {
 	font-family: 'adstacy';
 	speak: none;
 	font-style: normal;
@@ -81,4 +81,10 @@
 }
 .icon-globe:before {
 	content: "\e014";
+}
+.icon-rss:before {
+	content: "\e015";
+}
+.icon-tags:before {
+	content: "\e016";
 }
