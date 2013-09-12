@@ -168,3 +168,4 @@ landing:
 
 notification:
     comment: '<div class="notification" data-href="%url_comment%"><a href="%url_user%">%user_from%</a> has commented on your ad: %comment%</div>'
+    mention: '<div class="notification" data-href="%url_comment%"><a href="%url_user%">%user_from%</a> mention you on comment: %comment%</div>'

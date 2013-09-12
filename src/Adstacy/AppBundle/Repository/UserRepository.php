@@ -161,4 +161,23 @@ class UserRepository extends EntityRepository
 
         return $query->setParameter('id', $user->getId());
     }
+
+    /**
+     * Find users by username
+     *
+     * @param array $usernames
+     *
+     * @return array
+     */
+    public function findByUsernames($usernames = array())
+    {
+        $em = $this->getEntityManager();
+        $formatted = strtolower("'".implode("', '", $usernames)."'");
+
+        return $em->createQuery("
+            SELECT partial u.{id}
+            FROM AdstacyAppBundle:User u
+            WHERE u.usernameCanonical IN ($formatted)
+        ")->getResult();
+    }
 }

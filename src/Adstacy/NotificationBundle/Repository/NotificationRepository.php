@@ -25,6 +25,7 @@ class NotificationRepository extends EntityRepository
             LEFT JOIN n.ad a
             LEFT JOIN n.comment c
             WHERE u.id = :id
+            ORDER BY n.created DESC
         ');
 
         return $query->setParameter('id', $user->getId());
