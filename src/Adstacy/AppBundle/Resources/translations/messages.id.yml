@@ -158,3 +158,9 @@ landing:
         explore:
             heading: <b>E</b>xplore
             desc: Lihat iklan terakhir dari siapapun dimanapun
+
+notification:
+    comment: '<div class="notification" data-href="%url_ad%"><a href="%url_user%">%user_from%</a> mengomentari iklan anda: %comment%</div>'
+    mention: '<div class="notification" data-href="%url_ad%"><a href="%url_user%">%user_from%</a> mention anda di komentarnya: %comment%</div>'
+    follow: '<div class="notification" data-href="%url_user%"><a href="%url_user%">%user_from%</a> follow anda</div>'
+    promote: '<div class="notification" data-href="%url_ad%"><a href="%url_user%">%user_from%</a> promote iklan anda</div>'

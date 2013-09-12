@@ -247,9 +247,9 @@ class AdController extends Controller
 
             $em->persist($ad);
             $em->flush();
-            $this->addFlash('success', 'ad.comment.success');
+            $this->addFlash('success', 'ads.comment.success');
         } else {
-            $this->addFlash('warning', 'ad.comment.fail');
+            $this->addFlash('warning', 'ads.comment.fail');
         }
 
         return $this->redirect($this->generateUrl('adstacy_app_ad_show', array('id' => $id)).'#comments');
