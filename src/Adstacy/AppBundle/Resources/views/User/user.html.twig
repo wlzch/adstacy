@@ -1,9 +1,11 @@
 <div class="panel panel-default user">
   <div class="clearfix">
     <h5 class="user-realname text-overflow"><a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">{{ user.realname }}</a></h5>
-    <div class="profile-picture"><img src="{{ profile_pic(user) }}" /></div>
-    <div class="user-ads">
-      {% set ads = user.ads|slice(4) %}
+    <div class="profile-picture">
+      <img src="{{ profile_pic(user) }}" width="105" height="105">
+    </div>
+    <div class="user-ads clearfix">
+      {% set ads = user.ads %}
       {% for i in 0..3 %}
         <div class="user-mini-ad">
           {% if ads[i] is defined %}

@@ -87,6 +87,7 @@ class AdRepository extends EntityRepository
             FROM AdstacyAppBundle:Ad a
             JOIN a.user u
             WHERE u.id = :id
+            ORDER BY a.created DESC
         ');
         $query->setMaxResults($limit);
 

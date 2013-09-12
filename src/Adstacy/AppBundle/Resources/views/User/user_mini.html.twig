@@ -3,10 +3,10 @@
 {% endif %}
 <div class="user-mini">
   <div class="profile-picture">
-    <img class="profile-picture-img" src="{{ profile_pic(user) }}" alt="{{ user.username }}">
+    <img class="profile-picture-img" src="{{ profile_pic(user) }}" alt="{{ user.username }}" width="30" height="30">
   </div>
   <div class="user-desc">
-      <div class="user-realname">
+      <div class="user-realname text-overflow">
         {% if as_link is defined and as_link == false %}
           <span>{{ user.username }}</span>
         {% else %}

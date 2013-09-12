@@ -3,19 +3,37 @@
 {% block title %}Your Ads Stream | Adstacy{% endblock %}
 
 {% block content %}
-  <div class="masonry jscroll clearfix">
-    {% include 'AdstacyAppBundle:App:feeds.html.twig' %}
-    {{ block('ajax_content') }}
-  </div>
+  {% if user.followingsCount <= 0 %}
+    <div class="page-title jumbotron text-center">
+      <h1>User to follows</h1>
+    </div>
+    <div class="adstacy-container">
+      {{ block('ajax_content') }}
+    </div>
+  {% else %}
+    <div class="page-title jumbotron text-center">
+      <h1>My Stream</h1>
+    </div>
+    <div class="masonry jscroll clearfix">
+      {% include 'AdstacyAppBundle:App:feeds.html.twig' %}
+      {{ block('ajax_content') }}
+    </div>
+  {% endif %}
 {% endblock %}
 
 {% block ajax_content %}
-  {% for ad in paginator.getCurrentPageResults %}
-    {% include 'AdstacyAppBundle:Ad:ad.html.twig' with {ad: ad, promotedBy: true} %}
-  {% endfor %}
-  {% if paginator.hasNextPage %}
-    {% set params = app.request.query.all|merge({page: paginator.getNextPage}) %}
-    <a href="{{ path('adstacy_app_stream', params )}}" class="btn btn-lg btn-default btn-block next-page">{{"more"|trans}}</a>
+  {% if user.followingsCount <= 0 %}
+    {% for user in suggestionsPaginator.getCurrentPageResults %}
+      {% include 'AdstacyAppBundle:User:user.html.twig' with {user: user} %}
+    {% endfor %}
+  {% else %}
+    {% for ad in paginator.getCurrentPageResults %}
+      {% include 'AdstacyAppBundle:Ad:ad.html.twig' with {ad: ad, promotedBy: true} %}
+    {% endfor %}
+    {% if paginator.hasNextPage %}
+      {% set params = app.request.query.all|merge({page: paginator.getNextPage}) %}
+      <a href="{{ path('adstacy_app_stream', params )}}" class="btn btn-lg btn-default btn-block next-page">{{"more"|trans}}</a>
+    {% endif %}
   {% endif %}
 {% endblock %}
 
@@ -27,9 +45,9 @@
         nextSelector: 'a.next-page',
         callback: function() {
           var $ads = $('.jscroll-added:last .ad');
-          $masonry = $('.masonry').masonry('appended', $ads);
+          $('.masonry').masonry('appended', $ads);
           $ads.find('img.lazy').lazyload();
-          $ads.find('.ad-social').ajaxlink('ads');
+          $ads.ajaxlink('ads');
         }
       });
     });

@@ -100,8 +100,10 @@
         <div id="user-latest-ads" class="clearfix">
           {% for adByUser in adsByUser %}
             <div class="thumb">
-              <a href="{{ path('adstacy_app_ad_show', {id: adByUser.id}) }}"><img src="{{ vich_uploader_asset(adByUser, 'image')|imagine_filter('mini_thumb')}}"
-                width="{{ mini_thumb_size }}px" height="{{ mini_thumb_size }}px"></a>
+              <a href="{{ path('adstacy_app_ad_show', {id: adByUser.id}) }}">
+                <img src="{{ vich_uploader_asset(adByUser, 'image')|imagine_filter('mini_thumb')}}"
+                  width="{{ mini_thumb_size }}" height="{{ mini_thumb_size }}">
+              </a>
             </div>
           {% endfor %}
         </div>
@@ -147,7 +149,7 @@
   {{ parent() }}
   <script type="text/javascript">
     $(function() {
-      $('#show-ad').ajaxlink('promote_single');
+      $('#show-ad-single').ajaxlink('promote_single');
       $('#show-ad-owner').ajaxlink('follow_single');
       $('#show-ad-owner').scrollToFixed({
         marginTop: 55

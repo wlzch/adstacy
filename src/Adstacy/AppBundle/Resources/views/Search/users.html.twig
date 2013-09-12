@@ -31,6 +31,9 @@
         nextSelector: 'a.next-page',
         callback: function(a, b) {
           var $users = $('.jscroll-added:last .user');
+          $masonry = $('.masonry').masonry('appended', $users);
+          $users.find('img.lazy').lazyload();
+          $users.ajaxlink('users');
         }
       });
     });

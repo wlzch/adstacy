@@ -31,10 +31,9 @@
         nextSelector: 'a.next-page',
         callback: function(a, b) {
           var $ads = $('.jscroll-added:last .ad');
-          $masonry = $('.masonry').masonry('appended', $ads);
+          $('.masonry').masonry('appended', $ads);
           $ads.find('img.lazy').lazyload();
-          $ads.find('.ad-social').ajaxlink('ads');
-          $ads.find('[data-toggle="tooltip"]').tooltip();
+          $ads.ajaxlink('ads');
         }
       });
     });

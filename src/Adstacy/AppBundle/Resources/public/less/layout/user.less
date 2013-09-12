@@ -129,6 +129,7 @@
 @media screen and (max-width: 480px) {
   #user-profile {
     width: 100%;
+
     .user-desc {
       float: none;
       width: 100%;
@@ -145,6 +146,31 @@
     }
     .follow-action {
       position: static;
+    }
+  }
+  .user {
+    width: 100%;
+    padding: 0;
+    margin: 14px 0 0;
+    height: auto;
+    .user-realname, .profile-picture, .user-ads, .user-score {
+      text-align: center;
+    }
+    .profile-picture, .user-ads {
+      float: none;
+    }
+    .user-ads {
+      width: 210px;
+      margin: 0 auto;
+    }
+    .user-score {
+      margin-bottom: 0;
+    }
+    .follow-action {
+      padding: 0;
+      a {
+        border-radius: 0;
+      }
     }
   }
 }

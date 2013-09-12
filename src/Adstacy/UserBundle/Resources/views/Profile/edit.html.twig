@@ -115,16 +115,14 @@
             </p>
           </div>
         </div>
+        {% if not user.facebookId %}
         <div class="form-group">
           <label class="control-label">&nbsp;</label>
           <div class="form-widget">
-            {% if user.facebookId %}
-              <a class="form-widget-a btn btn-facebook" href="{{ path('adstacy_app_user_disconnect', {service: 'facebook'}) }}">{{"form_profile.disconnect"|trans({'%service%': 'Facebook'}) }}</a>
-            {% else %}
               <a class="form-widget-a btn btn-facebook" href="{{ path('hwi_oauth_service_redirect', {service: 'facebook'}) }}">{{"form_profile.connect"|trans({'%service%': 'Facebook'}) }}</a>
-            {% endif %}
           </div>
         </div>
+        {% endif %}
       </div>
     </div>
   </div>
@@ -145,16 +143,14 @@
             </p>
           </div>
         </div>
+        {% if not user.twitterId %}
         <div class="form-group">
           <label class="control-label">&nbsp;</label>
           <div class="form-widget">
-            {% if user.twitterId %}
-              <a class="btn btn-twitter form-widget-a" href="{{ path('adstacy_app_user_disconnect', {service: 'twitter'}) }}">{{"form_profile.disconnect"|trans({'%service%': 'Twitter'}) }}</a>
-            {% else %}
               <a class="btn btn-twitter form-widget-a" href="{{ path('hwi_oauth_service_redirect', {service: 'twitter'}) }}">{{"form_profile.connect"|trans({'%service%': 'Twitter'}) }}</a>
-            {% endif %}
           </div>
         </div>
+        {% endif %}
       </div>
     </div>
   </div>

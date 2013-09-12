@@ -88,7 +88,7 @@ class User implements UserInterface, GroupableInterface
 
     /**
      * @Assert\NotBlank(message="user.realname.not_blank", groups={"Registration", "Profile"})
-     * @ORM\Column(name="real_name", type="string", length=255)
+     * @ORM\Column(name="real_name", type="string", length=100)
      */
     private $realName;
 
@@ -156,17 +156,17 @@ class User implements UserInterface, GroupableInterface
     private $profilePicture;
 
     /**
-     * @ORM\Column(name="facebook_id", type="string", length=255, nullable=true, unique=true)
+     * @ORM\Column(name="facebook_id", type="string", length=75, nullable=true, unique=true)
      */
     private $facebookId;
 
     /**
-     * @ORM\Column(name="facebook_username", type="string", length=255, nullable=true, unique=true)
+     * @ORM\Column(name="facebook_username", type="string", length=75, nullable=true, unique=true)
      */
     private $facebookUsername;
 
     /**
-     * @ORM\Column(name="facebook_real_name", type="string", length=255, nullable=true)
+     * @ORM\Column(name="facebook_real_name", type="string", length=100, nullable=true)
      */
     private $facebookRealName;
 
@@ -176,7 +176,7 @@ class User implements UserInterface, GroupableInterface
     private $facebookAccessToken;
 
     /**
-     * @ORM\Column(name="twitter_id", type="string", length=255, nullable=true, unique=true)
+     * @ORM\Column(name="twitter_id", type="string", length=75, nullable=true, unique=true)
      */
     private $twitterId;
 
@@ -186,12 +186,12 @@ class User implements UserInterface, GroupableInterface
     private $twitterAccessToken;
 
     /**
-     * @ORM\Column(name="twitter_username", type="string", length=255, nullable=true, unique=true)
+     * @ORM\Column(name="twitter_username", type="string", length=75, nullable=true, unique=true)
      */
     private $twitterUsername;
 
     /**
-     * @ORM\Column(name="twitter_real_name", type="string", length=255, nullable=true)
+     * @ORM\Column(name="twitter_real_name", type="string", length=100, nullable=true)
      */
     private $twitterRealName;
 

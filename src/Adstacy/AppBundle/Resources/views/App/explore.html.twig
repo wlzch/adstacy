@@ -3,6 +3,9 @@
 {% block title %}Explore Latest Ads | Adstacy{% endblock %}
 
 {% block content %}
+  <div class="page-title jumbotron text-center">
+    <h1>Explore</h1>
+  </div>
   <div class="masonry jscroll clearfix">
     {% include 'AdstacyAppBundle:App:feeds.html.twig' %}
     {{ block('ajax_content') }}
@@ -16,7 +19,7 @@
     {% include 'AdstacyAppBundle:Ad:ad.html.twig' with {ad: ad} %}
   {% endfor %}
   {% if ads|length >= max_ads_per_page %}
-    <a href="{{ path('homepage', {'id': id})}}" class="btn btn-default btn-block next-page">{{ "more"|trans }}</a>
+    <a href="{{ path('adstacy_app_explore', {'id': id})}}" class="btn btn-default btn-block next-page">{{ "more"|trans }}</a>
   {% endif %}
 {% endblock %}
 
@@ -28,10 +31,9 @@
         nextSelector: 'a.next-page',
         callback: function() {
           var $ads = $('.jscroll-added:last .ad');
-          $masonry = $('.masonry').masonry('appended', $ads);
+          $('.masonry').masonry('appended', $ads);
           $ads.find('img.lazy').lazyload();
-          $ads.find('.ad-social').ajaxlink('ads');
-          $ads.find('[data-toggle="tooltip"]').tooltip();
+          $ads.ajaxlink('ads');
         }
       });
     });

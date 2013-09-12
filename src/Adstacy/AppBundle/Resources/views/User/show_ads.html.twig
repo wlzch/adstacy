@@ -40,7 +40,7 @@
     <div class="panel panel-default">
       <div class="clearfix">
         <div class="profile-picture">
-          <img src="{{ profile_pic(user) }}">
+          <img src="{{ profile_pic(user) }}" width="130" height="130">
         </div>
         <div class="user-desc">
           <div class="user-info">
@@ -93,10 +93,9 @@
         nextSelector: 'a.next-page',
         callback: function(a, b) {
           var $ads = $('.jscroll-added:last .ad');
-          $masonry = $('.masonry').masonry('appended', $ads);
+          $('.masonry').masonry('appended', $ads);
           $ads.find('img.lazy').lazyload();
-          $ads.find('.ad-social').ajaxlink('ads');
-          $ads.find('[data-toggle="tooltip"]').tooltip();
+          $ads.ajaxlink('ads');
         }
       });
     });

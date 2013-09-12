@@ -3,6 +3,9 @@
 {% block title %}Trending ads | Adstacy{% endblock %}
 
 {% block content %}
+    <div class="page-title jumbotron text-center">
+      <h1>Trending</h1>
+    </div>
   <div class="masonry clearfix">
     {% include 'AdstacyAppBundle:App:feeds.html.twig' %}
     {{ block('ajax_content') }}
