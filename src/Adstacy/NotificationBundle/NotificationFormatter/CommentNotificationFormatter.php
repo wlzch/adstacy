@@ -22,7 +22,7 @@ class CommentNotificationFormatter implements NotificationFormatterInterface
         return $this->translator->trans('notification.comment', array(
             '%url_ad%' => $this->router->generate('adstacy_app_ad_show', array(
                 'id' => $notification->getAd()->getId()
-            )),
+            )).'#comments-'.$notification->getComment()->getId(),
             '%url_user%' => $this->router->generate('adstacy_app_user_profile', array(
                 'username' => $notification->getFrom()->getUsername()
             )),
