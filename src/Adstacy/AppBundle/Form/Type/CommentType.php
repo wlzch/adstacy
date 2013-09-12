@@ -16,7 +16,8 @@ class CommentType extends AbstractType
             'required' => true,
             'attr' => array(
                 'placeholder' => 'form_comment.placeholders.content'
-            )
+            ),
+            'error_bubbling' => true
         ));
     }
 

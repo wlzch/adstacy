@@ -91,7 +91,7 @@
           <div id="show-ad-comment-list">
             {% for comment in comments %}
               {% set commentUser = comment.user %}
-              <div class="media">
+              <div class="media" id="comment-{{ comment.id }}">
                 <div class="pull-left">
                   <img src="{{ profile_pic(commentUser) }}" alt="{{ commentUser.realname }}" width="60" height="60" class="media-object">
                 </div>
@@ -107,6 +107,12 @@
           </div>
           {# id=comments only used for link anchor #}
           <div id="comments">
+            {% for flash in app.session.flashbag.get('comment.warning') %}
+              <div class="alert alert-warning">{{ flash }}</div>
+            {% endfor %}
+            {% for flash in app.session.flashbag.get('comment.success') %}
+              <div class="alert alert-warning">{{ flash }}</div>
+            {% endfor %}
             {{ form_start(form) }}
               <div class="form-group">
                 {{ form_widget(form.content, { attr: { class: 'comment-box' } }) }}
