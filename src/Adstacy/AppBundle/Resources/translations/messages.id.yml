@@ -76,6 +76,8 @@ form_ad:
     placeholders:
         description: Deskripsikan iklan anda secara kreatif sesuai target pasar anda. Lihat contoh untuk referensi.
     characters_left: 'sisa <span id="chars-left">%left%</span> karakter'
+    helps:
+        description: 'Gunakan #hashtags agar iklan anda bisa dicari'
     example: contoh
     examples:
         example1: "Rp250.000 #tshirt #brand #jual #medan #pria #indonesia"

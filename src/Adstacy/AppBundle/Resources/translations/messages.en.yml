@@ -76,13 +76,15 @@ form_profile:
 
 form_ad:
     image: Image
-    description: Description
+    description: 'Description'
     content: Long description
     content_trigger: Click to add more images and descriptions
     submit: Save
     placeholders:
         description: Describe your ads creatively to reach your potential market. See examples for reference.
     characters_left: '<span id="chars-left">%left%</span> characters left'
+    helps:
+        description: 'Use #hashtags to make your ads searchable'
     example: examples
     examples:
         example1: "Rp250.000 #tshirt #brand #jual #medan #pria #indonesia"
