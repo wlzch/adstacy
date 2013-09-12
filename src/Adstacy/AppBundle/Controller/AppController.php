@@ -13,7 +13,7 @@ class AppController extends Controller
 {
     public function indexAction()
     {
-        if (!$this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+        if (!$this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
             $formFactory = $this->container->get('fos_user.registration.form.factory');
             $form = $formFactory->createForm();
