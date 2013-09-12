@@ -50,9 +50,7 @@
             }
             $parent.find(settings.firstSelector).toggleClass('hide');
             $parent.find(settings.secondSelector).toggleClass('hide');
-            if ($this.attr('data-toggle') == 'tooltip') {
-              $this.tooltip('hide');
-            }
+            $this.tooltip('hide');
           }
         });
 

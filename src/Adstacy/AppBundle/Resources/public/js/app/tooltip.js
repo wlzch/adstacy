@@ -3,7 +3,7 @@
     container: 'body',
     placement: 'bottom'
   });
-  $('.ad').find('[data-toggle=tooltip]').tooltip({
+  $('.ad').find('.btn-promote').tooltip({
     container: 'body',
     placement: 'top'
   });
