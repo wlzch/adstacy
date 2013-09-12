@@ -165,3 +165,6 @@ landing:
         explore:
             heading: <b>E</b>xplore
             desc: Find latest ads from anyone, anywhere
+
+notification:
+    comment: '<div class="notification" data-href="%url_comment%"><a href="%url_user%">%user_from%</a> has commented on your ad: %comment%</div>'

@@ -1,0 +1,22 @@
+services:
+    adstacy.notification.notification_saver.comment:
+        class: Adstacy\NotificationBundle\NotificationSaver\CommentNotificationSaver
+        arguments: [@doctrine.orm.entity_manager]
+
+    adstacy.notification.notification_formatter.comment:
+        class: Adstacy\NotificationBundle\NotificationFormatter\CommentNotificationFormatter
+        arguments: [@router, @translator]
+
+    adstacy.notification.manager:
+        class: Adstacy\NotificationBundle\NotificationManager
+        arguments:
+            -
+                - @adstacy.notification.notification_saver.comment
+            -
+                - @adstacy.notification.notification_formatter.comment
+
+    adstacy.twig.notification_extension:
+        class: Adstacy\NotificationBundle\Twig\NotificationExtension
+        arguments: [@service_container]
+        tags:
+            - { name: twig.extension }

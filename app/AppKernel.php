@@ -40,6 +40,7 @@ class AppKernel extends Kernel
             new Adstacy\AppBundle\AdstacyAppBundle(),
             new Adstacy\UserBundle\AdstacyUserBundle(),
             new Adstacy\OAuthBundle\AdstacyOAuthBundle(),
+            new Adstacy\NotificationBundle\AdstacyNotificationBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
