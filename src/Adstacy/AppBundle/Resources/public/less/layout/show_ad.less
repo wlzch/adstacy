@@ -113,6 +113,44 @@
   overflow-y: auto;
 }
 
+#show-ad-comment {
+  form {
+    margin-top: 10px;
+  }
+
+  .form-group {
+    margin-bottom: 0;
+  }
+
+  .media-body {
+    font-size: 14px;
+  }
+  .media-heading {
+    a:hover {
+      text-decoration: none;
+    }
+
+    & > small {
+      font-size: 12px;
+    }
+  }
+
+  .comment-box {
+    background-color: #f4f4f4;
+    border: 1px solid @border-color;
+    .border-bottom-radius(@border-radius-base);
+    height: 46px;
+    padding: 4px 8px;
+    resize: none;
+    width: 100%;
+
+    &:focus {
+      outline: none;
+      background-color: #fff;
+    }
+  }
+}
+
 @media screen and (max-width: @screen-tablet) {
   .panel {
     border-radius: 0;

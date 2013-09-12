@@ -85,6 +85,38 @@
           </div>
         </div>
       {% endif %}
+
+      <div id="show-ad-comment" class="panel panel-default">
+        <div class="panel-body">
+          <div id="show-ad-comment-list">
+            {% for comment in comments %}
+              {% set commentUser = comment.user %}
+              <div class="media">
+                <div class="pull-left">
+                  <img src="{{ profile_pic(commentUser) }}" alt="{{ commentUser.realname }}" width="60" height="60" class="media-object">
+                </div>
+                <div class="media-body">
+                  <h4 class="media-heading">
+                    <a href="{{ path('adstacy_app_user_profile', {username: commentUser.username}) }}">{{ commentUser.realName }}</a>
+                    <small class="text-muted">&middot; {{ ago(comment.created) }}</small>
+                  </h4>
+                  <div>{{ parse_url(parse_hashtag(parse_mention(comment.content))) }}</div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+          {# id=comments only used for link anchor #}
+          <div id="comments">
+            {{ form_start(form) }}
+              <div class="form-group">
+                {{ form_widget(form.content, { attr: { class: 'comment-box' } }) }}
+              </div>
+              <input type="submit" value="{{"comment"|trans}}" class="hide" />
+              {{ form_rest(form) }}
+            {{ form_end(form) }}
+          </div>
+        </div>
+      </div>
     </div>
 
     <div id="show-ad-owner">

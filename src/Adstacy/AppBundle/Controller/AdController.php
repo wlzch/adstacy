@@ -3,8 +3,10 @@
 namespace Adstacy\AppBundle\Controller;
 
 use Adstacy\AppBundle\Entity\Ad;
+use Adstacy\AppBundle\Entity\Comment;
 use Adstacy\AppBundle\Entity\PromoteAd;
 use Adstacy\AppBundle\Form\Type\AdType;
+use Adstacy\AppBundle\Form\Type\CommentType;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -21,10 +23,16 @@ class AdController extends Controller
             throw $this->createNotFoundException();
         }
         $adsByUser = $this->getRepository('AdstacyAppBundle:Ad')->findByUser($ad->getUser(), 4);
+        $form = $this->createForm(new CommentType(), new Comment(), array(
+            'action' => $this->generateUrl('adstacy_app_ad_comment', array('id' => $id))
+        ));
+        $comments = $this->getRepository('AdstacyAppBundle:Comment')->findByAd($ad);
 
         return $this->render('AdstacyAppBundle:Ad:show.html.twig', array(
             'ad' => $ad,
-            'adsByUser' => $adsByUser
+            'adsByUser' => $adsByUser,
+            'form' => $form->createView(),
+            'comments' => $comments
         ));
     }
     
@@ -208,5 +216,36 @@ class AdController extends Controller
         }
 
         return $this->redirect($this->generateUrl('adstacy_app_ad_show', array('id' => $id)));
+    }
+
+    /**
+     * @Secure(roles="ROLE_USER")
+     *
+     * @param integer ad id
+     */
+    public function commentAction($id)
+    {
+        $request = $this->getRequest();
+        $user = $this->getUser();
+        $ad = $this->getRepository('AdstacyAppBundle:Ad')->find($id);
+        if (!$ad) {
+            throw $this->createNotFoundException();
+        }
+        $comment = new Comment();
+        $form = $this->createForm(new CommentType(), $comment);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getManager();
+            $ad->addComment($comment);
+            $comment->setUser($user);
+            $em->persist($ad);
+            $em->flush();
+            $this->addFlash('success', 'ad.comment.success');
+        } else {
+            $this->addFlash('warning', 'ad.comment.fail');
+        }
+
+        return $this->redirect($this->generateUrl('adstacy_app_ad_show', array('id' => $id)).'#comments');
     }
 }

@@ -31,6 +31,14 @@ adstacy_app_ad_unpromote:
     requirements:
         id: \d+
 
+adstacy_app_ad_comment:
+    pattern: /ads/{id}/comment
+    defaults:
+        _controller: AdstacyAppBundle:Ad:comment
+    requirements:
+        id: \d+
+    methods: [POST]
+
 adstacy_app_ad_edit:
     pattern: /ads/{id}/edit
     defaults:

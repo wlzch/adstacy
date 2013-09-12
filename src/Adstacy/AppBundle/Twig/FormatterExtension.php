@@ -24,6 +24,7 @@ class FormatterExtension extends \Twig_Extension
             'parse_hashtag' => new \Twig_Function_Method($this, 'parseHashtag', array('is_safe' => array('html'))),
             'remove_hashtag' => new \Twig_Function_Method($this, 'removeHashtag', array('is_safe' => array('html'))),
             'parse_url' => new \Twig_Function_Method($this, 'parseUrl', array('is_safe' => array('html'))),
+            'parse_mention' => new \Twig_Function_Method($this, 'parseMention', array('is_safe' => array('html'))),
             'more' => new \Twig_Function_Method($this, 'more', array('is_safe' => array('html'))),
             'ago' => new \Twig_Function_Method($this, 'ago', array('is_safe' => array('html'))),
         );
@@ -97,6 +98,23 @@ class FormatterExtension extends \Twig_Extension
           }, $text
         );
     }
+
+    /**
+     * Parse mention and add link to it
+     *
+     * @param string text
+     *
+     * @return string parsed text
+     */
+    public function parseMention($text)
+    {
+        return preg_replace_callback('/(@\w+)/', function($matches) {
+            $username = substr($matches[0], 1);
+            $url = $this->router->generate('adstacy_app_user_profile', array('username' => $username));
+            return sprintf(' <a class="mention" href="%s">%s</a>', $url, $matches[0]);
+        }, $text);
+    }
+
 
     /**
      * @link http://css-tricks.com/snippets/php/time-ago-function/
