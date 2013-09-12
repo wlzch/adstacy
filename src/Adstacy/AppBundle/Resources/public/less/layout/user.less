@@ -69,24 +69,25 @@
       height: 130px;
     }
   }
-  .user-desc {
+  .user-profile-desc {
     float: left;
     width: 342px;
   }
-  .user-info {
-    padding: 5px 5px 0 0;
-  }
-  .user-info-realname {
+}
+#user-profile-info {
+  padding: 5px 5px 0 0;
+  .realname {
     color: #b00;
     font-size: 20px;
     margin: 0;
-    margin-bottom: 3px;
+    margin-bottom: 5px;
   }
-  .user-info-about {
+  .about {
     color: #999;
     font-size: 13px;
     line-height: 1.5;
     margin: 0;
+    margin-bottom: 5px;
     min-height: 50px;
     .empty {
       color: #aaa;
@@ -98,39 +99,54 @@
       font-weight: bold;
     }
   }
-  .user-info-menu {
-    background-color: #eee;
-    border-top: 1px solid #dfdfdf;
-    border-radius: 0 0 4px 4px;
-    margin-bottom: 0;
-    padding: 5px 5px 6px 5px;
-    position: relative;
-    a {
-      color: #888;
-      display: inline-block;
-      font-size: 12px;
-      font-weight: bold;
-      margin-left: 20px;
+}
+#user-profile-menu {
+  background-color: #f5f5f5;
+  border-top: 1px solid #dfdfdf;
+  border-radius: 0 0 4px 4px;
+  margin-bottom: 0;
+  padding: 5px 5px 6px 5px;
+  position: relative;
+  .score {
+    color: #888;
+    display: inline-block;
+    font-size: 12px;
+    text-align: center;
+    vertical-align: middle;
+    width: 70px;
+
+    b {
+      color: #333;
+      display: block;
+      font-size: 18px;
     }
-    .follow-action {
-      position: absolute;
-      right: 0;
-      top: -1px;
+  }
+  .score:hover {
+    color: #b00;
+    text-decoration: none;
+    
+    b {
+      color: #b00;
     }
-    .btn-follow {
-      width: 100px;
-      border-radius: 0 0 3px 0;
-      color: #fff;
-      height: 32px;
-    }
+  }
+  .btn {
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 6px;
+  }
+  .btn-follow {
+    color: #fff;
+    vertical-align: middle;
+    width: 80px;
   }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: @screen-phone) {
   #user-profile {
+    margin-left: 0;
+    margin-right: 0;
     width: 100%;
-
-    .user-desc {
+    .user-profile-desc {
       float: none;
       width: 100%;
       text-align: center;
@@ -141,11 +157,18 @@
       text-align: center;
       margin: 10px 0 0;
     }
-    .user-info-realname {
+    #user-profile-info .realname {
       text-align: center;
     }
-    .follow-action {
-      position: static;
+    #user-profile-menu {
+      text-align: center;
+      .pull-right, .pull-left {
+        float: none !important;
+      }
+      .btn {
+        display: block;
+        width: 100%;
+      }
     }
   }
   .user {

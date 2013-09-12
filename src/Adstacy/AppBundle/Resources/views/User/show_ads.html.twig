@@ -36,23 +36,23 @@
 {% endblock %}
 
 {% block profile %}
-  <div class="masonry-item" id="user-profile">
+  <div id="user-profile" class="masonry-item">
     <div class="panel panel-default">
       <div class="clearfix">
         <div class="profile-picture">
           <img src="{{ profile_pic(user) }}" width="130" height="130">
         </div>
-        <div class="user-desc">
-          <div class="user-info">
-            <h1 class="user-info-realname">
+        <div class="user-profile-desc">
+          <div id="user-profile-info">
+            <h1 class="realname">
               <a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">
                 {{ user.realname }}
               </a>
             </h1>
             {% if user.about %}
-              <h2 class="user-info-about">{{ parse_url(parse_hashtag(user.about)) }}</h2>
+              <h2 class="about">{{ parse_url(parse_hashtag(user.about)) }}</h2>
             {% else %}
-              <h2 class="user-info-about">
+              <h2 class="about">
                 <span class="empty">
                   No Description About User.
                   {% if app.user and app.user == user %}
@@ -64,11 +64,14 @@
           </div>
         </div>
       </div>
-      <div class="user-info-menu">
-        <a href="{{ path('adstacy_app_user_ads', {username: user.username}) }}">{{ adsCount }} Ads</a>
-        <a href="{{ path('adstacy_app_user_followers', {username: user.username}) }}"><span class="user-followers-count">{{ followersCount }}</span> Followers</a>
-        <a href="{{ path('adstacy_app_user_followings', {username: user.username}) }}">{{ followingsCount }} Followings</a>
-        <div class="follow-action">
+      <div id="user-profile-menu" class="clearfix">
+        <div class="pull-left">
+          <a class="score" href="{{ path('adstacy_app_user_ads', {username: user.username}) }}">Ads<b>{{ adsCount }}</b></a>
+          <a class="score" href="{{ path('adstacy_app_user_ads', {username: user.username}) }}">Promotes<b>{{ adsCount }}</b></a>
+          <a class="score" href="{{ path('adstacy_app_user_followers', {username: user.username}) }}">Followers<b><span class="user-followers-count">{{ followersCount }}</span></b></a>
+          <a class="score" href="{{ path('adstacy_app_user_followings', {username: user.username}) }}">Followings<b>{{ followingsCount }}</b></a>
+        </div>
+        <div class="pull-right">
           {% if app.user %}
             {% if app.user != user %}
               {% set followed = app.user.hasFollowUser(user) %}
