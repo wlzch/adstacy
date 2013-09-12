@@ -44,7 +44,17 @@
   .promotes-count {
     font-weight: bold;
   }
+
+  .owner-action-label {
+    display: inline-block; 
+    margin-left: 4px;
+  }
+
+  .owner-action {
+    display: inline-block;
+  }
 }
+
 
 #show-ad-img {
   text-align: center;
@@ -101,9 +111,14 @@
 }
 
 @media screen and (max-width: @screen-tablet) {
+  .panel {
+    border-radius: 0;
+  }
+  
   #show-ad-single, #show-ad-content, #ad-content {
     width: 100%;
   }
+
   #show-ad-owner {
     display: none;
   }
@@ -114,5 +129,23 @@
       max-width: 100%;
     }
   }
+
+  #show-ad-toolbar {
+    .social-label, .owner-action-label {
+      display: none;
+    } 
+  }
 }
 
+@media screen and (max-width: 240px) {
+  #show-ad-toolbar {
+    text-align: center;
+    .owner-action {
+      display: block;
+      .btn {
+        margin-top: 5px;
+        width: 45%;
+      }
+    }
+  }
+}

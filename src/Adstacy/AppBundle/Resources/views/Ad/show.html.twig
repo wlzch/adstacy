@@ -55,15 +55,15 @@
           {% set facebookUrl = "https://www.facebook.com/sharer/sharer.php?u=#{adUrl}" %}
 
           <a href="{{ twitterUrl }}" class="tweet btn btn-twitter btn-sm">
-            <i class="icon-twitter"></i> Tweet
+            <i class="icon-twitter"></i> <span class="social-label">Tweet</span>
           </a>
           <a href="{{ facebookUrl }}" class="facebook-share btn btn-facebook btn-sm">
-            <i class="icon-facebook"></i> Share
+            <i class="icon-facebook"></i> <span class="social-label">Share</span>
           </a>
           {% if app.user == user %}
-            <div class="btn-group btn-group-sm pull-right">
-              <a href="{{ path('adstacy_app_ad_edit', {id: ad.id}) }}" class="btn btn-default">{{ "edit"|trans }}</a>
-              <a href="#" data-toggle="modal" data-target="#confirm-modal" class="btn btn-primary">{{ "delete"|trans }}</a>
+            <div class="owner-action btn-group btn-group-sm pull-right">
+              <a href="{{ path('adstacy_app_ad_edit', {id: ad.id}) }}" class="btn btn-default"><i class="icon-edit"></i><span class="owner-action-label">{{ "edit"|trans }}</span></a>
+              <a href="#" data-toggle="modal" data-target="#confirm-modal" class="btn btn-primary"><i class="icon-trash"></i><span class="owner-action-label">{{ "delete"|trans }}</span></a>
             </div>
           {% endif %}
         </div>
