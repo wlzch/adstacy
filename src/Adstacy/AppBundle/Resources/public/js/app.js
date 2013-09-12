@@ -98,8 +98,7 @@
   $('.ad').ajaxlink('ads');
   $('.user').ajaxlink('users');
   $('[data-toggle=tooltip]').tooltip({
-    container: "body",
-    placement: "bottom"
+    container: "body"
   });
   $searchForm.find('.dropdown-menu li').click(function() {
     var $type = $searchForm.find('#search-type');
