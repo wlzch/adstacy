@@ -34,15 +34,16 @@ class NotificationManager
      *
      * @param User $from
      * @param User $to
-     * @param mixed $nount
+     * @param mixed $noun
      * @param boolean $flush
+     * @param mixed anything to identify what notification to call
      */
-    public function save(User $from, User $to, $noun, $flush = true)
+    public function save(User $from, User $to, $noun, $flush = true, $key = null)
     {
         // only notify if action is from two different users
         if ($from != $to) {
             foreach ($this->savers as $saver) {
-                if ($saver->support($noun)) {
+                if ($saver->support($noun, $key)) {
                     $saver->save($from, $to, $noun, $flush);
                 }
             };

@@ -18,12 +18,14 @@ class NotificationRepository extends EntityRepository
         $em = $this->getEntityManager();
         $query = $em->createQuery('
             SELECT n,
-            partial u.{id,username,imagename,realName},
-            partial a.{id,imagename,description,tags,thumbHeight,imageHeight,imageWidth,promoteesCount,created}
+            partial f.{id,username,imagename,realName},
+            partial a.{id,imagename,description,tags,thumbHeight,imageHeight,imageWidth,promoteesCount,created},
+            c
             FROM AdstacyNotificationBundle:Notification n
             JOIN n.to u
-            JOIN n.ad a
-            JOIN n.comment c
+            JOIN n.from f
+            LEFT JOIN n.ad a
+            LEFT JOIN n.comment c
             WHERE u.id = :id AND n.read = FALSE
             ORDER BY n.created DESC
         ');

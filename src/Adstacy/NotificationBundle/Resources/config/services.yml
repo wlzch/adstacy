@@ -7,6 +7,10 @@ services:
         class: Adstacy\NotificationBundle\NotificationSaver\MentionNotificationSaver
         arguments: [@doctrine.orm.entity_manager]
 
+    adstacy.notification.notification_saver.follow:
+        class: Adstacy\NotificationBundle\NotificationSaver\FollowNotificationSaver
+        arguments: [@doctrine.orm.entity_manager]
+
     adstacy.notification.notification_formatter.comment:
         class: Adstacy\NotificationBundle\NotificationFormatter\CommentNotificationFormatter
         arguments: [@router, @translator]
@@ -15,15 +19,21 @@ services:
         class: Adstacy\NotificationBundle\NotificationFormatter\MentionNotificationFormatter
         arguments: [@router, @translator]
 
+    adstacy.notification.notification_formatter.follow:
+        class: Adstacy\NotificationBundle\NotificationFormatter\FollowNotificationFormatter
+        arguments: [@router, @translator]
+
     adstacy.notification.manager:
         class: Adstacy\NotificationBundle\NotificationManager
         arguments:
             -
                 - @adstacy.notification.notification_saver.comment
                 - @adstacy.notification.notification_saver.mention
+                - @adstacy.notification.notification_saver.follow
             -
                 - @adstacy.notification.notification_formatter.comment
                 - @adstacy.notification.notification_formatter.mention
+                - @adstacy.notification.notification_formatter.follow
 
     adstacy.twig.notification_extension:
         class: Adstacy\NotificationBundle\Twig\NotificationExtension

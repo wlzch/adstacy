@@ -7,7 +7,7 @@ use Adstacy\NotificationBundle\Entity\Notification;
 use Adstacy\AppBundle\Entity\User;
 use Adstacy\AppBundle\Entity\Comment;
 
-class CommentNotificationSaver implements NotificationSaverInterface
+class FollowNotificationSaver implements NotificationSaverInterface
 {
     private $om;
 
@@ -19,14 +19,12 @@ class CommentNotificationSaver implements NotificationSaverInterface
     /**
      * @inheritdoc
      */
-    public function save(User $from, User $to, $comment, $flush = true)
+    public function save(User $from, User $to, $noun, $flush = true)
     {
         $notification = new Notification();
         $notification->setFrom($from);
         $notification->setTo($to);
-        $notification->setComment($comment);
-        $notification->setAd($comment->getAd());
-        $notification->setType('comment');
+        $notification->setType('follow');
         $this->om->persist($notification);
         if ($flush) {
             $this->om->flush();
@@ -38,6 +36,6 @@ class CommentNotificationSaver implements NotificationSaverInterface
      */
     public function support($noun, $key = false)
     {
-        return $noun instanceof Comment;
+        return $key == 'follow';
     }
 }

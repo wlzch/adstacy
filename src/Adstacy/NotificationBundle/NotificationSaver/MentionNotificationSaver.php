@@ -47,7 +47,7 @@ class MentionNotificationSaver implements NotificationSaverInterface
     /**
      * @inheritdoc
      */
-    public function support($noun)
+    public function support($noun, $key = false)
     {
         return $noun instanceof Comment;
     }

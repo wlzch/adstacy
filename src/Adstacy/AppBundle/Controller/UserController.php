@@ -114,6 +114,7 @@ class UserController extends Controller
                 $this->addFlash('error', $this->translate('flash.user.follow.error_followed', array('%username%' => $username)));
             } else {
                 $user->addFollower($loggedInUser);
+                $this->get('adstacy.notification.manager')->save($loggedInUser, $user, null, false, 'follow');
                 $em->persist($user);
                 $em->flush();
 
