@@ -79,6 +79,14 @@
               <li><a href="{{ path('fos_user_security_logout') }}"><i class="icon-off"></i>&nbsp; {{"logout"|trans}}</a></li>
             </ul>
           </div>
+          {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <div id="notif-btn" class="navbar-btn">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <i class="icon-globe"></i>
+              </button>
+              {{ render_notification(5, 'top-notifications') }}
+            </div>
+          {% endif %}
         {% else %}
           {% if register is not defined or (register is defined and register == true) %}
             <a id="register-link" href="{{ path('fos_user_registration_register') }}" class="btn btn-success navbar-btn">{{"register"|trans}}</a>
@@ -108,6 +116,7 @@
         <li><a href="{{ path('adstacy_app_trending') }}" title="Trending"><i class="icon-rocket"></i>&nbsp; Trending</a></li>
         <li><a href="{{ path('adstacy_app_tags') }}" title="Trending"><i class="icon-bookmark"></i>&nbsp; Popular Tags</a></li>
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <li><a href="{{ path('adstacy_app_notifications') }}"><i class="icon-globe"></i>&nbsp; {{ "Notification"|trans }}</a></li>
         <li><a href="{{ path('adstacy_app_stream') }}"><i class="icon-rss"></i>&nbsp; {{"stream"|trans}}</a></li>
         <li><a href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}"><i class="icon-user"></i>&nbsp; {{"profile"|trans}}</a></li>
         <li><a href="{{ path('fos_user_profile_edit') }}"><i class="icon-gear"></i>&nbsp; {{"settings"|trans}}</a></li>
@@ -116,7 +125,4 @@
       </ul>
     </div>
   </div>
-  {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-    {{ render_notification(5, 'top-notifications') }}
-  {% endif %}
 </header>

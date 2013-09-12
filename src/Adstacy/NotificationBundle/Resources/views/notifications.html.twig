@@ -1,5 +1,5 @@
-<ul id="{{ id }}">
+<ul id="{{ id }}" class="list-group">
   {% for notification in notifications %}
-    <li>{{ notification|raw }}</li>
+    <li class="list-group-item">{{ notification|raw }}</li>
   {% endfor %}
 </ul>

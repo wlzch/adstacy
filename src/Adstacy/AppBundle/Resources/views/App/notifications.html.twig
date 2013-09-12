@@ -1,14 +1,7 @@
 {% extends 'AdstacyAppBundle::layout.html.twig' %}
 
-{% block stylesheets %}
-  {{ parent() }}
-  {% stylesheets filter='cssrewrite, uglifycss'
-    'bundles/adstacyapp/less/layout/notification.less'
-  %}
-    <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
-  {% endstylesheets %}
-{% endblock %}
-
 {% block content %}
-  {{ render_notification(50, 'notifications') }}
+  <div class="adstacy-container">
+    {{ render_notification(50, 'notifications') }}
+  </div>
 {% endblock %}
