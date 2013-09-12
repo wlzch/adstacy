@@ -105,7 +105,7 @@
       </script>
       {% endif %}
       {% javascripts filter='uglifyjs2'
-        '@AdstacyAppBundle/Resources/public/js/app.js'
+        '@AdstacyAppBundle/Resources/public/js/app/*'
       %}
         <script src="{{ asset_url }}" type="text/javascript"></script>
       {% endjavascripts %}
