@@ -15,7 +15,7 @@ class CommentType extends AbstractType
             'label' => 'form_comment.content',
             'required' => true,
             'attr' => array(
-                'placeholder' => 'Write a comment...'
+                'placeholder' => 'form_comment.placeholders.content'
             )
         ));
     }

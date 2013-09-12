@@ -30,3 +30,8 @@ user:
         min: Password requires at least {{ limit }} characters
     about:
         max: About maximal {{ limit }} characters
+
+comment:
+    content:
+        not_blank: Comment cannot be blank
+        max: Comment maximal {{ limit }} characters

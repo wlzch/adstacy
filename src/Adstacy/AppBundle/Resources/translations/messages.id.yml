@@ -40,6 +40,9 @@ ads:
         help: Buat iklan anda sekarang
     no_promotes:
         message: Iklan ini belum pernah di promote
+    comment:
+        success: Komentar berhasil ditambahkan
+        fail: Komentar gagal ditambahkan
 
 user:
     no_followers:

@@ -41,6 +41,9 @@ ads:
         help: Create an ads now
     no_promotes:
         message: No promotes on this ad yet
+    comment:
+        success: Comment added
+        fail: Comment failed
 
 user:
     no_followers:
@@ -98,6 +101,11 @@ form_contact:
     email: Email
     content: Content
     submit: Submit
+
+form_comment:
+    content: Comment
+    placeholders:
+        content: Write a comment...
 
 form_password:
     submit: Change Password

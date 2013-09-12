@@ -19,10 +19,10 @@ class Comment
     private $id;
 
     /**
-     * @Assert\NotBlank(message="comment.description.not_blank")
+     * @Assert\NotBlank(message="comment.content.not_blank")
      * @Assert\Length(
      *  max = "255",
-     *  maxMessage = "comment.description.max"
+     *  maxMessage = "comment.content.max"
      * )
      * @ORM\Column(type="text", length=255)
      */
