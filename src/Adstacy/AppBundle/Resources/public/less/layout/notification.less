@@ -1,0 +1,39 @@
+@import "../variables.less";
+@import "../mixins.less";
+
+#notif-btn {
+  display: inline-block;
+  position: relative;
+}
+
+.open > #top-notifications {
+  display: block;
+}
+
+#top-notifications {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: @zindex-dropdown;
+  display: none; // none by default, but block on "open" of the menu
+  float: left;
+  min-width: 250px;
+  margin: 2px 0 0; // override default ul
+  list-style: none;
+  font-size: @font-size-base;
+  background-color: @dropdown-bg;
+  border-radius: @border-radius-base;
+  .box-shadow(0 6px 12px rgba(0,0,0,.175));
+  background-clip: padding-box;
+}
+
+#notifications {
+  display: block;
+  margin-top: 20px;
+}
+
+@media screen and (max-width: @screen-tablet) {
+  #notif-btn {
+    display: none;
+  }
+}

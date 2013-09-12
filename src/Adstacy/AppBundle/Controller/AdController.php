@@ -164,6 +164,7 @@ class AdController extends Controller
             $ad->addPromotee($promote);
             $user->addPromote($promote);
             $em = $this->getManager();
+            $this->get('adstacy.notification.manager')->save($user, $ad->getUser(), $ad, false, 'promote');
             $em->persist($ad);
             $em->persist($user);
             $em->flush();
@@ -239,6 +240,11 @@ class AdController extends Controller
             $em = $this->getManager();
             $ad->addComment($comment);
             $comment->setUser($user);
+
+            $adUser = $ad->getUser();
+            $notificationManager = $this->get('adstacy.notification.manager');
+            $notificationManager->save($user, $adUser, $comment, false);
+
             $em->persist($ad);
             $em->flush();
             $this->addFlash('success', 'ad.comment.success');

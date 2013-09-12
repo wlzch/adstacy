@@ -151,6 +151,11 @@ class User implements UserInterface, GroupableInterface
     private $promotesCount;
 
     /**
+     * @ORM\OneToMany(targetEntity="Adstacy\NotificationBundle\Entity\Notification", mappedBy="to")
+     */
+    private $notifications;
+
+    /**
      * @ORM\Column(name="profile_picture", type="string", length=255, nullable=true)
      */
     private $profilePicture;
@@ -1500,5 +1505,38 @@ class User implements UserInterface, GroupableInterface
         }
 
         return $users;
+    }
+
+    /**
+     * Add notifications
+     *
+     * @param \Adstacy\NotificationBundle\Entity\Notification $notifications
+     * @return User
+     */
+    public function addNotification(\Adstacy\NotificationBundle\Entity\Notification $notifications)
+    {
+        $this->notifications[] = $notifications;
+    
+        return $this;
+    }
+
+    /**
+     * Remove notifications
+     *
+     * @param \Adstacy\NotificationBundle\Entity\Notification $notifications
+     */
+    public function removeNotification(\Adstacy\NotificationBundle\Entity\Notification $notifications)
+    {
+        $this->notifications->removeElement($notifications);
+    }
+
+    /**
+     * Get notifications
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNotifications()
+    {
+        return $this->notifications;
     }
 }
