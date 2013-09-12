@@ -101,11 +101,18 @@
 }
 
 @media screen and (max-width: @screen-tablet) {
-  #show-ad, #show-ad-content, #ad-content {
-    width: 100% !important;
+  #show-ad-single, #show-ad-content, #ad-content {
+    width: 100%;
   }
   #show-ad-owner {
     display: none;
+  }
+
+  #ad-content {
+    img {
+      margin-bottom: 10px;
+      max-width: 100%;
+    }
   }
 }
 
