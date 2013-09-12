@@ -75,8 +75,8 @@
   {% endif %}
   <div class="ad-comment">
     <form action="{{ path('adstacy_app_ad_comment', {id: ad.id}) }}" method="post">
-      <textarea name="comment[content]" required="required"></textarea>
-      <input type="submit" value="comment">
+      <textarea name="comment[content]" required="required" class="comment-box" placeholder="Write a comment..."></textarea>
+      <input type="submit" value="{{"comment"|trans}}" class="hide">
     </form>
   </div>
 </div>

@@ -96,18 +96,20 @@
   overflow-y: auto;
 }
 
-#comments-sect {
-  padding: 20px 10px;
-}
+#show-ad-comment {
+  .comment-box {
+    width: 100%;
+    height: 46px;
+    padding: 4px 8px;
+    background-color: #f4f4f4;
+    resize: none;
+    border: 1px solid @border-color;
+    .border-bottom-radius(@border-radius-base);
 
-#comments {
-  .comment-user-pic {
-    float: left; 
-    width: 60px;
-    height: 60px;
-  }
-  .comment-desc {
-    float: left;
+    &:focus {
+      outline: none;
+      background-color: #fff;
+    }
   }
 }
 

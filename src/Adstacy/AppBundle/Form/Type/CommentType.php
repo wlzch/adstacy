@@ -13,7 +13,10 @@ class CommentType extends AbstractType
 
         $builder->add('content', 'purified_textarea', array(
             'label' => 'form_comment.content',
-            'required' => true
+            'required' => true,
+            'attr' => array(
+                'placeholder' => 'Write a comment...'
+            )
         ));
     }
 

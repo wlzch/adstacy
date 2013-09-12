@@ -131,4 +131,12 @@
     $btn.attr('disabled', 'disabled');
     $btn.html('<img src="/bundles/adstacyapp/img/spinner.gif" width="15" height="15"> '+ text);
   });
+  $('.comment-box').keydown(function(event) {
+    if (event.which == 13 && event.shiftKey) {
+      return true;
+    } else if (event.which == 13) {
+      this.form.submit();
+      return false;
+    }
+  });
 })();
