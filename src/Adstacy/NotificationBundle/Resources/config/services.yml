@@ -18,7 +18,7 @@ services:
 
     adstacy.notification.notification_formatter.comment:
         class: Adstacy\NotificationBundle\NotificationFormatter\CommentNotificationFormatter
-        arguments: [@router, @translator]
+        arguments: [@router, @translator, @adstacy.helper.formatter]
 
     adstacy.notification.notification_formatter.mention:
         class: Adstacy\NotificationBundle\NotificationFormatter\MentionNotificationFormatter

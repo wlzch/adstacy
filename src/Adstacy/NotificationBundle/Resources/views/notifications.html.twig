@@ -1,17 +1,11 @@
-<ul id="{{ id }}" class="{% if id == 'top-notifications' %}dropdown-menu{% else %}list-group{% endif %}">
-  {% if notifications|length > 0 %}
-    {% for notification in notifications %}
-    <li class="clearfix{% if id == 'top-notifications' %} list-group-item{% endif %}">
-        <img src="{{ profile_pic(notification.user) }}" class="notif-pic" />
-        {{ notification.content|raw }}
-        <time>{{ ago(notification.created) }}</time>
-      </li>
-    {% endfor %}
-  {% elseif id == 'top-notifications' %}
-    <li id="no-new-notification">{{ 'notif.not_found'|trans }}</li>
-  {% endif %}
-
-  {% if id == 'top-notifications' %}
-    <li id="show-all-notifications" class="list-group-item"><a href="">{{ 'notif.show_all'|trans }}</a></li>
-  {% endif %}
-</ul>
+{% if notifications|length > 0 %}
+  {% for notification in notifications %}
+    <li class="clearfix">
+      <img src="{{ profile_pic(notification.user) }}" class="notif-pic" />
+      {{ notification.content|raw }}
+      <time>{{ ago(notification.created) }}</time>
+    </li>
+  {% endfor %}
+{% else %}
+  <li class="no-new-notifications">{{ 'notif.not_found'|trans }}</li>
+{% endif %}

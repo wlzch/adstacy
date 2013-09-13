@@ -37,7 +37,7 @@
       </form>
 
       <div id="extra-nav-box" class="btn-group navbar-btn navbar-left">
-        <a href="{{ path('adstacy_app_stream') }}" class="btn btn-default extra-nav" title="Stream"><i class="icon-home"></i>&nbsp; {{"stream"|trans}}</a>
+        <a href="{{ path('adstacy_app_stream') }}" class="btn btn-default extra-nav" title="{{"stream"|trans}}"><i class="icon-home"></i>&nbsp; {{"stream"|trans}}</a>
         <a href="{{ path('adstacy_app_explore') }}" class="btn btn-default extra-nav" title="Explore"><i class="icon-globe"></i>&nbsp; Explore</a>
         <a href="{{ path('adstacy_app_trending') }}" class="btn btn-default extra-nav" title="Trending"><i class="icon-rocket"></i>&nbsp; Trending</a>
         <div id="site-nav-dropdown" class="btn-group">
@@ -49,7 +49,7 @@
           <div id="site-nav-box" class="dropdown-menu pull-right">
             <nav>
               <ul id="site-nav" class="dropdown-box-header list-inline list-unstyled">
-                <li><a href="{{ path('adstacy_app_stream') }}" title="Stream"><i class="icon-home"></i>&nbsp; {{"stream"|trans}}</a></li>
+                <li><a href="{{ path('adstacy_app_stream') }}" title="{{"stream"|trans}}"><i class="icon-home"></i>&nbsp; {{"stream"|trans}}</a></li>
                 <li><a href="{{ path('adstacy_app_explore') }}" title="Explore"><i class="icon-globe"></i>&nbsp; Explore</a></li>
                 <li><a href="{{ path('adstacy_app_trending') }}" title="Trending"><i class="icon-rocket"></i>&nbsp; Trending</a></li>
               </ul>
@@ -89,9 +89,9 @@
             <div id="notif-btn" class="navbar-btn">
               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                 <i class="icon-rss"></i>
-                <span id="notif-count" class="label label-primary">5</span>
+                <span id="notif-count" class="label label-primary">{{app.user.notificationsCount}}</span>
               </button>
-              {{ render_notification(5, 'top-notifications') }}
+              {{ render_top_notification(5) }}
             </div>
           {% endif %}
         {% else %}

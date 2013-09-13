@@ -21,24 +21,42 @@
   font-size: 12px;
   width: 400px;
 
-  & > li > div {
-    float: left;
-    width: 300px;
+  & > li {
+    border-top: 1px solid #ddd;
+    padding: 5px;
   }
 
+  & > li:first-child {
+    border-top: 0;
+  }
+  
   & > li:hover {
     background-color: #eee;
     cursor: pointer;
   }
 
+  .notification {
+    float: left;
+    width: 300px;
+  }
+
   time {
-    color: #aaa;
+    color: #bbb;
+    font-size: 11px;
+    float: left;
   }
 
   .notif-pic {
     float: left;
     margin-right: 10px;
     height: 51px;
+  }
+
+  .no-new-notifications {
+    color: #ccc;
+    font-size: 14px;
+    padding: 10px 15px;
+    text-align: center;
   }
 }
 
@@ -59,13 +77,6 @@
   a:hover {
     background-color: #eee;
   }
-}
-
-#no-new-notification {
-  color: #ccc;
-  font-size: 14px;
-  padding: 10px 15px;
-  text-align: center;
 }
 
 @media screen and (max-width: @screen-tablet) {

@@ -1,0 +1,4 @@
+<ul id="top-notifications" class="dropdown-menu notifications">
+  {% include 'AdstacyNotificationBundle::notifications.html.twig' with {notifications: notifications} %}
+  <li id="show-all-notifications" class="list-group-item"><a href="{{ path('adstacy_app_notifications') }}">{{ 'notif.show_all'|trans }}</a></li>
+</ul>

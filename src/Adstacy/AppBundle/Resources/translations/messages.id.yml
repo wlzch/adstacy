@@ -1,5 +1,5 @@
 search: Cari
-stream: My Stream
+stream: Stream
 profile: Profil
 settings: Pengaturan
 logout: Logout
@@ -156,7 +156,7 @@ landing:
             heading: <b>T</b>rending
             desc: Ajak pengguna lainnya untuk promote iklan anda untuk mencapai halaman Trending
         stream:
-            heading: <b>M</b>y <b>S</b>tream
+            heading: <b>S</b>tream
             desc: Ikuti kegiatan pengguna yang Anda follow
         explore:
             heading: <b>E</b>xplore

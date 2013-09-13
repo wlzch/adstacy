@@ -19,24 +19,56 @@ class NotificationExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'render_notification' => new \Twig_Function_Method($this, 'renderNotification', array('is_safe' => array('html'))),
+            'render_top_notification' => new \Twig_Function_Method($this, 'renderTopNotification', array('is_safe' => array('html'))),
+            'render_all_notification' => new \Twig_Function_Method($this, 'renderAllNotification', array('is_safe' => array('html'))),
         );
     }
 
     /**
-     * Render login form
+     * Render top notifications
      *
      * @param integer $limit
-     * @param string css id
      */
-    public function renderNotification($limit, $id)
+    public function renderTopNotification($limit = 5)
+    {
+        $notifications = $this->getNotifications($limit, false);
+
+        return $this->container->get('templating')->render(
+            'AdstacyNotificationBundle::top_notifications.html.twig', array(
+                'notifications' => $notifications
+            )
+        );
+    }
+
+    /**
+     * Render all notifications
+     */
+    public function renderAllNotification()
+    {
+        $notifications = $this->getNotifications($this->container->getParameter('max_notifications'));
+
+        return $this->container->get('templating')->render(
+            'AdstacyNotificationBundle::all_notifications.html.twig', array(
+                'notifications' => $notifications,
+            )
+        );
+    }
+
+    /**
+     * Get notifications
+     *
+     * @param integer $limit
+     * @param false|null get all/only unread notifications
+     *
+     * @return array
+     */
+    private function getNotifications($limit, $read = null)
     {
         $repo = $this->container->get('doctrine')->getRepository('AdstacyNotificationBundle:Notification');
         $user = $this->container->get('security.context')->getToken()->getUser();
         $notifications = array();
-
         if ($user->getNotificationsCount() > 0) {
-            $query = $repo->findNotificationsForUserQuery($user);
+            $query = $repo->findNotificationsForUserQuery($user, $read);
             $adapter = new DoctrineORMAdapter($query);
             $paginator = new Pagerfanta($adapter);
             $paginator->setMaxPerPage($limit);
@@ -53,10 +85,7 @@ class NotificationExtension extends \Twig_Extension
             }
         }
 
-        return $this->container->get('templating')->render('AdstacyNotificationBundle::notifications.html.twig', array(
-            'notifications' => $notifications,
-            'id' => $id
-        ));
+        return $notifications;
     }
 
     public function getName()

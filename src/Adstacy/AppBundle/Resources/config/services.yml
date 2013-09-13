@@ -8,3 +8,6 @@ services:
     adstacy.user.provider:
         class: Adstacy\AppBundle\Security\User\Provider\UserProvider
         arguments: [@fos_user.user_manager, @session, @router]
+    
+    adstacy.helper.formatter:
+        class: Adstacy\AppBundle\Helper\Formatter
