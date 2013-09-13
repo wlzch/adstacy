@@ -36,7 +36,9 @@ class MentionNotificationSaver implements NotificationSaverInterface
                 $notification->setComment($comment);
                 $notification->setAd($comment->getAd());
                 $notification->setType('mention');
+                $user->addNotification($notification);
                 $this->em->persist($notification);
+                $this->em->persist($user);
             }
             if ($flush) {
                 $this->om->flush();

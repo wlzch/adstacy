@@ -156,6 +156,11 @@ class User implements UserInterface, GroupableInterface
     private $notifications;
 
     /**
+     * @ORM\Column(name="notifications_count", type="integer", nullable=true)
+     */
+    private $notificationsCount;
+
+    /**
      * @ORM\Column(name="profile_picture", type="string", length=255, nullable=true)
      */
     private $profilePicture;
@@ -311,6 +316,7 @@ class User implements UserInterface, GroupableInterface
         $this->followersCount = 0;
         $this->followingsCount = 0;
         $this->promotesCount = 0;
+        $this->notificationsCount = 0;
     }
 
     /**
@@ -1516,6 +1522,7 @@ class User implements UserInterface, GroupableInterface
     public function addNotification(\Adstacy\NotificationBundle\Entity\Notification $notifications)
     {
         $this->notifications[] = $notifications;
+        $this->setNotificationsCount($this->getNotificationsCount() + 1);
     
         return $this;
     }
@@ -1528,6 +1535,7 @@ class User implements UserInterface, GroupableInterface
     public function removeNotification(\Adstacy\NotificationBundle\Entity\Notification $notifications)
     {
         $this->notifications->removeElement($notifications);
+        $this->setNotificationsCount($this->getNotificationsCount() - 1);
     }
 
     /**
@@ -1538,5 +1546,28 @@ class User implements UserInterface, GroupableInterface
     public function getNotifications()
     {
         return $this->notifications;
+    }
+
+    /**
+     * Set notificationsCount
+     *
+     * @param integer $notificationsCount
+     * @return User
+     */
+    public function setNotificationsCount($notificationsCount)
+    {
+        $this->notificationsCount = $notificationsCount;
+    
+        return $this;
+    }
+
+    /**
+     * Get notificationsCount
+     *
+     * @return integer 
+     */
+    public function getNotificationsCount()
+    {
+        return $this->notificationsCount ?: 0;
     }
 }

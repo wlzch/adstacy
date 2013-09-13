@@ -25,7 +25,9 @@ class FollowNotificationSaver implements NotificationSaverInterface
         $notification->setFrom($from);
         $notification->setTo($to);
         $notification->setType('follow');
+        $to->addNotification($notification);
         $this->om->persist($notification);
+        $this->om->persist($to);
         if ($flush) {
             $this->om->flush();
         }
