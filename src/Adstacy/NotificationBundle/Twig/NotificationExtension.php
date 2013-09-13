@@ -31,7 +31,12 @@ class NotificationExtension extends \Twig_Extension
      */
     public function renderTopNotification($limit = 5)
     {
-        $notifications = $this->getNotifications($limit, false);
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        $notifications = array();
+
+        if ($user->getNotificationsCount() > 0) {
+            $notifications = $this->getNotifications($limit, false);
+        }
 
         return $this->container->get('templating')->render(
             'AdstacyNotificationBundle::top_notifications.html.twig', array(
@@ -67,22 +72,20 @@ class NotificationExtension extends \Twig_Extension
         $repo = $this->container->get('doctrine')->getRepository('AdstacyNotificationBundle:Notification');
         $user = $this->container->get('security.context')->getToken()->getUser();
         $notifications = array();
-        if ($user->getNotificationsCount() > 0) {
-            $query = $repo->findNotificationsForUserQuery($user, $read);
-            $adapter = new DoctrineORMAdapter($query);
-            $paginator = new Pagerfanta($adapter);
-            $paginator->setMaxPerPage($limit);
-            $paginator->setCurrentPage(1);
+        $query = $repo->findNotificationsForUserQuery($user, $read);
+        $adapter = new DoctrineORMAdapter($query);
+        $paginator = new Pagerfanta($adapter);
+        $paginator->setMaxPerPage($limit);
+        $paginator->setCurrentPage(1);
 
-            $notificationManager = $this->container->get('adstacy.notification.manager');
-            foreach ($paginator->getCurrentPageResults() as $notification) {
-                $notification = array(
-                    'user' => $notification->getFrom(),
-                    'content' => $notificationManager->format($notification),
-                    'created' => $notification->getCreated()
-                );
-                $notifications[] = $notification;
-            }
+        $notificationManager = $this->container->get('adstacy.notification.manager');
+        foreach ($paginator->getCurrentPageResults() as $notification) {
+            $notification = array(
+                'user' => $notification->getFrom(),
+                'content' => $notificationManager->format($notification),
+                'created' => $notification->getCreated()
+            );
+            $notifications[] = $notification;
         }
 
         return $notifications;
