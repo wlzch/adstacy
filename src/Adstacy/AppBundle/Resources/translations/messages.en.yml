@@ -6,6 +6,7 @@ logout: Logout
 login: Login
 login.with: Login with
 register: Register
+no_account_register: No account yet? Register now 
 register.with: Register with
 forgot_password: Forgot password?
 cancel: Cancel
