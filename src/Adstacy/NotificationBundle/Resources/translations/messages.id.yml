@@ -3,3 +3,5 @@ notification:
     mention: '<div class="notification" data-href="%url_ad%"><a href="%url_user%">%user_from%</a> mention anda di komentarnya: %comment%</div>'
     follow: '<div class="notification" data-href="%url_user%"><a href="%url_user%">%user_from%</a> follow anda</div>'
     promote: '<div class="notification" data-href="%url_ad%"><a href="%url_user%">%user_from%</a> promote iklan anda</div>'
+    no_notification: Tidak ada notifikasi
+    show_all: Semua notifikasi

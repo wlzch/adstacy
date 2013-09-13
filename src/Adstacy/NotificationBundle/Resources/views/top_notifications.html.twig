@@ -8,7 +8,7 @@
       </li>
     {% endfor %}
   {% else %}
-    <li class="no-new-notifications">{{ 'notif.not_found'|trans }}</li>
+    <li class="no-new-notifications">{{ 'notification.no_notification'|trans }}</li>
   {% endif %}
-  <li id="show-all-notifications" class="list-group-item"><a href="{{ path('adstacy_notification_show') }}">{{ 'notif.show_all'|trans }}</a></li>
+  <li id="show-all-notifications" class="list-group-item"><a href="{{ path('adstacy_notification_show') }}">{{ 'notification.show_all'|trans }}</a></li>
 </ul>

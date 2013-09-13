@@ -161,8 +161,3 @@ landing:
         explore:
             heading: <b>E</b>xplore
             desc: Lihat iklan terakhir dari siapapun dimanapun
-
-#notification
-notif:
-    not_found: Tidak Ada Notifikasi Baru
-    show_all: Tampilkan Semua Notifikasi
