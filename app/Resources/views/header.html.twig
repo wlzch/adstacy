@@ -89,9 +89,9 @@
             <div id="notif-btn" class="navbar-btn">
               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                 <i class="icon-rss"></i>
-                <span id="notif-count" class="label label-primary">5</span>
+                <span id="notif-count" class="label label-primary">{{app.user.notificationsCount}}</span>
               </button>
-              {{ render_notification(5, 'top-notifications') }}
+              {{ render_top_notification(5) }}
             </div>
           {% endif %}
         {% else %}
