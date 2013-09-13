@@ -48,6 +48,7 @@
               <a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">
                 {{ user.realname }}
               </a>
+              <small>@{{ user.username }}</small>
             </h1>
             {% if user.about %}
               <h2 class="about">{{ parse_url(parse_hashtag(user.about)) }}</h2>
