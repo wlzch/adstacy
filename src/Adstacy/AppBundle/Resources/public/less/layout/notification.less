@@ -5,13 +5,13 @@
   display: inline-block;
   position: relative;
 
+  .notif-count {
+    position: absolute;
+    right: -8px;
+    bottom: -4px;
+  }
 }
 
-#notif-count {
-  position: absolute;
-  right: -8px;
-  bottom: -4px;
-}
 
 .open > #top-notifications {
   display: block;
@@ -79,8 +79,62 @@
   }
 }
 
+#all-notifications {
+  & > li:hover {
+    background-color: #eee;
+    cursor: pointer;
+  }
+  .notification {
+    float: left;
+    width: 300px;
+  }
+
+  time {
+    color: #bbb;
+    font-size: 12px;
+    float: left;
+    margin-right: 10px;
+  }
+
+  .notif-pic {
+    float: left;
+    margin-right: 10px;
+    height: 18px;
+  }
+
+  .no-new-notifications {
+    color: #ccc;
+    font-size: 14px;
+    padding: 10px 15px;
+    text-align: center;
+  }
+}
+
+#mobile-nav {
+  .notif-count {
+    background-color: #333;
+    float: right; 
+    margin-right: 20px;
+  }
+}
+
 @media screen and (max-width: @screen-tablet) {
   #notif-btn {
     display: none;
+  }
+
+  #all-notifications {
+    border-radius: 0;
+    width: 100%;
+
+    > li {
+      border-radius: 0;
+    }
+
+    .notification {
+      display: block;
+      margin-top: 10px;
+      width: 100%;
+    }
   }
 }

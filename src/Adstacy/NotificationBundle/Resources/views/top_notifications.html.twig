@@ -1,4 +1,14 @@
 <ul id="top-notifications" class="dropdown-menu notifications">
-  {% include 'AdstacyNotificationBundle::notifications.html.twig' with {notifications: notifications} %}
+  {% if notifications|length > 0 %}
+    {% for notification in notifications %}
+      <li class="clearfix">
+        <img src="{{ profile_pic(notification.user) }}" class="notif-pic" />
+        {{ notification.content|raw }}
+        <time>{{ ago(notification.created) }}</time>
+      </li>
+    {% endfor %}
+  {% else %}
+    <li class="no-new-notifications">{{ 'notif.not_found'|trans }}</li>
+  {% endif %}
   <li id="show-all-notifications" class="list-group-item"><a href="{{ path('adstacy_app_notifications') }}">{{ 'notif.show_all'|trans }}</a></li>
 </ul>
