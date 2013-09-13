@@ -51,6 +51,33 @@ class AdRepository extends EntityRepository
      *
      * @return Query
      */
+    public function findByPromoteQuery(User $user)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('
+            SELECT partial a.{id,imagename,description,tags,thumbHeight,imageHeight,imageWidth,promoteesCount,commentsCount,created},
+            partial u.{id,username,imagename,realName},
+            partial fi.{id,username,imagename,realName},
+            fip
+            FROM AdstacyAppBundle:Ad a
+            JOIN a.user u
+            LEFT JOIN a.promotees pa
+            LEFT JOIN pa.user pu
+            LEFT JOIN u.followings fi
+            LEFT JOIN fi.promotes fip
+            WHERE pu.id = :id
+        ');
+
+        return $query->setParameter('id', $user->getId());
+    }
+
+    /**
+     * Find all promotes by $user
+     *
+     * @param User $user
+     *
+     * @return Query
+     */
     public function findByUserJoinPromoteQuery(User $user)
     {
         $em = $this->getEntityManager();

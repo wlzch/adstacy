@@ -68,7 +68,7 @@
       <div id="user-profile-menu" class="clearfix">
         <div class="pull-left">
           <a class="score" href="{{ path('adstacy_app_user_ads', {username: user.username}) }}">Ads<b>{{ adsCount }}</b></a>
-          <a class="score" href="{{ path('adstacy_app_user_ads', {username: user.username}) }}">Promotes<b>{{ adsCount }}</b></a>
+          <a class="score" href="{{ path('adstacy_app_user_promotes', {username: user.username}) }}">Promotes<b>{{ promotesCount }}</b></a>
           <a class="score" href="{{ path('adstacy_app_user_followers', {username: user.username}) }}">Followers<b><span class="user-followers-count">{{ followersCount }}</span></b></a>
           <a class="score" href="{{ path('adstacy_app_user_followings', {username: user.username}) }}">Followings<b>{{ followingsCount }}</b></a>
         </div>

@@ -3,10 +3,10 @@ adstacy_app_user_profile:
     defaults:
         _controller: AdstacyAppBundle:User:show
 
-adstacy_app_user_activity:
-    pattern: /{username}/activity
+adstacy_app_user_promotes:
+    pattern: /{username}/promotes
     defaults:
-        _controller: AdstacyAppBundle:User:showActivity
+        _controller: AdstacyAppBundle:User:showPromotes
 
 adstacy_app_user_ads:
     pattern: /{username}/ads
