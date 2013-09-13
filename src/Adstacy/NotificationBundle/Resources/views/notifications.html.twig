@@ -1,7 +1,11 @@
-{% for notification in notifications %}
-  <li class="list-group-item clearfix">
-    <img src="{{ profile_pic(notification.user) }}" class="notif-pic" />
-    {{ notification.content|raw }}
-    <time>{{ ago(notification.created) }}</time>
-  </li>
-{% endfor %}
+{% if notifications|length > 0 %}
+  {% for notification in notifications %}
+    <li class="list-group-item clearfix">
+      <img src="{{ profile_pic(notification.user) }}" class="notif-pic" />
+      {{ notification.content|raw }}
+      <time>{{ ago(notification.created) }}</time>
+    </li>
+  {% endfor %}
+{% else %}
+  <li id="show-all-notifications" class="list-group-item"><a href="">Show All Notifications</a></li>
+{% endif %}
