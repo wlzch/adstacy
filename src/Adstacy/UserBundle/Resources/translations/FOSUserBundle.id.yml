@@ -1,0 +1,84 @@
+# Security
+"Bad credentials": Username/password salah
+
+security:
+    login:
+        username: "Username:"
+        password: "Password:"
+        remember_me: Ingat saya
+        submit: Login
+        failed: "username/email atau password salah"
+
+# Profile
+profile:
+    show:
+        username: Username
+        email: Email
+    edit:
+        submit: Update
+    flash:
+        updated: Profile berhasil diubah
+
+# Password change
+change_password:
+    submit: Ubah password
+    flash:
+        success: Password berhasil diubah
+
+# Registration
+registration:
+    check_email: Email telah dikirim ke %email%. Klik link aktivasi untuk mengaktifkan akun Anda.
+    confirmed: Selama %username%, akun anda berhasil diaktifkan
+    back: Kembali ke halaman
+    submit: Daftar
+    flash:
+        user_created: User berhasil dibuat
+    email:
+        subject: Selamat datang %username%!
+        message: |
+            Halo %username%!
+
+            Untuk mengaktifkan akun Anda kunjungi %confirmationUrl%
+
+            Terima Kasih,
+            Adstacy.
+
+# Password resetting
+resetting:
+    password_already_requested: Password untuk user ini telah diminta dalam waktu 24 jam terakhir.
+    check_email: Email telah dikirimkan ke %email%. Anda harus klik link tersebut untuk mereset password.
+    request:
+        invalid_username: Username/email tidak ada
+        username: "Username or email:"
+        submit: Reset password
+    reset:
+        submit: Ubah password
+    flash:
+        success: Password berhasil diubah
+    email:
+        subject: Reset Password
+        message: |
+            Halo %username%!
+
+            Untuk mereset password Anda kunjungi %confirmationUrl%
+
+            Terima Kasih,
+            the Team.
+
+# Global strings
+layout:
+    logout: Logout
+    login: Login
+    register: Daftar
+    logged_in_as: Logged in as %username%
+
+# Form field labels
+form:
+    group_name: "Group name"
+    username: "Username"
+    email: "Email"
+    current_password: "Password saat ini"
+    password: "Password"
+    password_confirmation: "Ulangi password"
+    new_password: "Password baru"
+    new_password_confirmation: "Ulangi password"
