@@ -9,7 +9,7 @@ class UserController extends Controller
 {
     public function showAction($username)
     {
-        return $this->showActivityAction($username);
+        return $this->showAdsAction($username);
     }
 
     /**
@@ -28,13 +28,13 @@ class UserController extends Controller
         return $this->render('AdstacyAppBundle:User:show_ads.html.twig', $params);
     }
 
-    public function showActivityAction($username)
+    public function showPromotesAction($username)
     {
         $params = $this->getParams($username);
-        $params['tab'] = 'activity';
-        $query = $this->getRepository('AdstacyAppBundle:Ad')->findByUserJoinPromoteQuery($params['user']);
+        $params['tab'] = 'promotes';
+        $query = $this->getRepository('AdstacyAppBundle:Ad')->findByPromoteQuery($params['user']);
         $params['paginator'] = $this->getDoctrinePaginator($query, $this->getParameter('max_ads_per_page'));
-        $params['route'] = 'adstacy_app_user_activity';
+        $params['route'] = 'adstacy_app_user_promotes';
 
         return $this->render('AdstacyAppBundle:User:show_ads.html.twig', $params);
     }
