@@ -96,7 +96,7 @@
       $('.jscroll').jscroll({
         nextSelector: 'a.next-page',
         callback: function(a, b) {
-          var $ads = $('.jscroll-added:last .ad');
+          var $ads = $('.jscroll-added:last .advert');
           $('.masonry').masonry('appended', $ads);
           $ads.find('img.lazy').lazyload();
           $ads.ajaxlink('ads');

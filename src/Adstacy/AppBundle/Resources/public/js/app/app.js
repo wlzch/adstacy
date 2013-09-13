@@ -1,6 +1,6 @@
 (function() {
   $('img.lazy').lazyload();
-  $('.ad').ajaxlink('ads');
+  $('.advert').ajaxlink('ads');
   $('.user').ajaxlink('users');
   $('.comment-box').keydown(function(event) {
     if (event.which == 13 && event.shiftKey) {
