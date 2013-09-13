@@ -68,7 +68,7 @@
           {% endif %}
         </div>
 
-        <div class="panel-body ad-desc">
+        <div class="panel-body show-ad-desc">
           <p>{{ parse_url(parse_hashtag(ad.description)) }}</p>
         </div>
 
@@ -79,7 +79,7 @@
       </div>
 
       {% if ad.content %}
-        <div id="ad-content" class="panel panel-default">
+        <div id="show-ad-long-desc" class="panel panel-default">
           <div class="panel-body">
             {{ ad.content|raw }}
           </div>
