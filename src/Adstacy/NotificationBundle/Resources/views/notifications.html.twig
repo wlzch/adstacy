@@ -8,10 +8,10 @@
       </li>
     {% endfor %}
   {% elseif id == 'top-notifications' %}
-    <li id="no-new-notification">No New Notification</li>
+    <li id="no-new-notification">{{ 'notif.not_found'|trans }}</li>
   {% endif %}
 
   {% if id == 'top-notifications' %}
-    <li id="show-all-notifications" class="list-group-item"><a href="">Show All Notifications</a></li>
+    <li id="show-all-notifications" class="list-group-item"><a href="">{{ 'notif.show_all'|trans }}</a></li>
   {% endif %}
 </ul>

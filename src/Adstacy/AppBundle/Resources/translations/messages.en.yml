@@ -173,3 +173,8 @@ landing:
         explore:
             heading: <b>E</b>xplore
             desc: Find latest ads from anyone, anywhere
+
+#notification:
+notif:
+    not_found: No New Notification
+    show_all: Show All Notifications
