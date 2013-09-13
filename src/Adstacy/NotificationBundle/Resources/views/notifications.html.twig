@@ -1,5 +1,6 @@
 <ul id="{{ id }}" class="list-group">
   {% for notification in notifications %}
+    <li class="list-group-item"><img src="{{ profile_pic(notification.user) }}"></li>
     <li class="list-group-item">{{ notification.content|raw }}</li>
     <li class="list-group-item">{{ ago(notification.created) }}</li>
   {% endfor %}
