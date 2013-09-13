@@ -6,14 +6,20 @@
   var masonryDestroyed = false;
 
   var resizeCallback = function() {
-    if ($masonry.length == 0) {
+    var windowWidth = $window.width();
+    if ($masonry.length == 0 || windowWidth > 480) {
       $adstacyContainer.css('width', Math.floor($window.width()/250)*250);
     }
+    if (windowWidth <= 480) {
+      $adstacyContainer.css('width', '100%');
+    }
   };
+  // masonry will be triggered only when it's in device with width > 480
   var masonryCheck = function() {
     var windowWidth = $window.width();
 
     if (windowWidth > 480) {
+      // initialize masonry only when it's not initialized already or it has been destroyed
       if (!masonryTriggered || masonryDestroyed) {
         $masonry.masonry({
           columnWidth: 250,
@@ -33,9 +39,7 @@
       $().UItoTop({ easingType: 'easeOutQuart' });
       $('.navbar-collapse').removeClass('no-transition');
 
-      $(function() {
-        resizeCallback();
-      });
+      resizeCallback();
     } else {
       if (masonryTriggered) {
         $masonry.masonry('destroy');
