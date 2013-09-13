@@ -13,23 +13,36 @@ use Adstacy\AppBundle\Entity\User;
  */
 class NotificationRepository extends EntityRepository
 {
-    public function findNotificationsForUserQuery(User $user)
+    /**
+     * Find notifications for $user
+     *
+     * @param User $user
+     * @param null|false get all/only unread notifications
+     *
+     * @return array
+     */
+    public function findNotificationsForUserQuery(User $user, $read = null)
     {
         $em = $this->getEntityManager();
-        $query = $em->createQuery('
-            SELECT n,
-            partial f.{id,username,imagename,realName},
-            partial a.{id,imagename,description,tags,thumbHeight,imageHeight,imageWidth,promoteesCount,created},
-            c
-            FROM AdstacyNotificationBundle:Notification n
-            JOIN n.to u
-            JOIN n.from f
-            LEFT JOIN n.ad a
-            LEFT JOIN n.comment c
-            WHERE u.id = :id AND n.read = FALSE
-            ORDER BY n.created DESC
-        ');
+        $qb = $em->createQueryBuilder()
+            ->select(array(
+                'n',
+                'partial f.{id,username,imagename,realName}',
+                'partial a.{id,imagename,description,created}',
+                'c'
+            ))
+            ->from('AdstacyNotificationBundle:Notification', 'n')
+            ->innerJoin('n.to', 'u')
+            ->innerJoin('n.from', 'f')
+            ->leftJoin('n.ad', 'a')
+            ->leftJoin('n.comment', 'c')
+            ->where('u.id = :id')
+            ->orderBy('n.created', 'DESC')
+        ;
+        if ($read === false) {
+            $qb->andWhere('n.read = FALSE');
+        }
 
-        return $query->setParameter('id', $user->getId());
+        return $qb->setParameter('id', $user->getId())->getQuery();
     }
 }
