@@ -6,6 +6,10 @@ adstacy_app:
     resource: "@AdstacyAppBundle/Resources/config/routing.yml"
     prefix:   /
 
+adstacy_notification:
+    resource: "@AdstacyNotificationBundle/Resources/config/routing.yml"
+    prefix:   /
+
 hwi_oauth_login:
     resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
     prefix: /auth/

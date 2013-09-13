@@ -81,14 +81,6 @@ class AppController extends Controller
         return $this->render('AdstacyAppBundle:App:tags.html.twig');
     }
 
-    /**
-     * Show notifications
-     */
-    public function notificationsAction()
-    {
-        return $this->render('AdstacyAppBundle:App:notifications.html.twig');
-    }
-
     public function contactUsAction()
     {
         $contact = new Contact();
