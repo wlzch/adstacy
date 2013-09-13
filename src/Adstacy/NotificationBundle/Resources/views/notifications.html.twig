@@ -1,5 +1,12 @@
-<ul id="{{ id }}" class="list-group">
+<ul id="{{ id }}" class="{% if id == 'top-notifications' %}dropdown-menu{% else %}list-group{% endif %}">
   {% for notification in notifications %}
-    <li class="list-group-item">{{ notification|raw }}</li>
+    <li class="list-group-item clearfix">
+      <img src="{{ asset('bundles/adstacyapp/img/nophoto.gif') }}" class="notif-pic" />
+      {{ notification|raw }}
+    </li>
   {% endfor %}
+
+  {% if id == 'top-notifications' %}
+    <li id="show-all-notifications" class="list-group-item"><a href="">Show All Notifications</a></li>
+  {% endif %}
 </ul>

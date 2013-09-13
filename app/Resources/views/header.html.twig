@@ -89,6 +89,7 @@
             <div id="notif-btn" class="navbar-btn">
               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                 <i class="icon-rss"></i>
+                <span id="notif-count" class="label label-primary">5</span>
               </button>
               {{ render_notification(5, 'top-notifications') }}
             </div>
@@ -117,6 +118,7 @@
           </div>
         {% endif %}
       </div>
+
       <ul id="mobile-nav" class="nav navbar-nav navbar-right">
         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
         <li><a href="{{ path('adstacy_app_stream') }}"><i class="icon-home"></i>&nbsp; {{"stream"|trans}}</a></li>

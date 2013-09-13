@@ -4,6 +4,13 @@
 #notif-btn {
   display: inline-block;
   position: relative;
+
+}
+
+#notif-count {
+  position: absolute;
+  right: -8px;
+  bottom: -4px;
 }
 
 .open > #top-notifications {
@@ -11,25 +18,49 @@
 }
 
 #top-notifications {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  z-index: @zindex-dropdown;
-  display: none; // none by default, but block on "open" of the menu
-  float: left;
-  min-width: 250px;
-  margin: 2px 0 0; // override default ul
-  list-style: none;
-  font-size: @font-size-base;
-  background-color: @dropdown-bg;
-  border-radius: @border-radius-base;
-  .box-shadow(0 6px 12px rgba(0,0,0,.175));
-  background-clip: padding-box;
+  width: 400px;
+
+  & > li {
+    font-size: 12px;
+
+    & > div {
+      float: left;
+      width: 300px;
+    }
+
+  }
+
+  & > li:hover {
+    background-color: #eee;
+    cursor: pointer;
+  }
+
+
+  .notif-pic {
+    float: left;
+    margin-right: 10px;
+    height: 51px;
+  }
 }
 
 #notifications {
   display: block;
   margin-top: 20px;
+}
+
+#show-all-notifications {
+  background-color: #f5f5f5;
+  font-size: 14px;
+  text-align: center;
+  a {
+    color: #999;
+    font-weight: bold;
+    padding: 0;
+    border: 0;
+  }
+  a:hover {
+    background-color: #eee;
+  }
 }
 
 @media screen and (max-width: @screen-tablet) {
