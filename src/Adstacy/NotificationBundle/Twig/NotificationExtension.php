@@ -33,16 +33,24 @@ class NotificationExtension extends \Twig_Extension
     {
         $repo = $this->container->get('doctrine')->getRepository('AdstacyNotificationBundle:Notification');
         $user = $this->container->get('security.context')->getToken()->getUser();
-        $query = $repo->findNotificationsForUserQuery($user);
-        $adapter = new DoctrineORMAdapter($query);
-        $paginator = new Pagerfanta($adapter);
-        $paginator->setMaxPerPage($limit);
-        $paginator->setCurrentPage(1);
-
-        $notificationManager = $this->container->get('adstacy.notification.manager');
         $notifications = array();
-        foreach ($paginator->getCurrentPageResults() as $notification) {
-            $notifications[] = $notificationManager->format($notification);
+
+        if ($user->getNotificationsCount() > 0) {
+            $query = $repo->findNotificationsForUserQuery($user);
+            $adapter = new DoctrineORMAdapter($query);
+            $paginator = new Pagerfanta($adapter);
+            $paginator->setMaxPerPage($limit);
+            $paginator->setCurrentPage(1);
+
+            $notificationManager = $this->container->get('adstacy.notification.manager');
+            foreach ($paginator->getCurrentPageResults() as $notification) {
+                $notification = array(
+                    'user' => $notification->getFrom(),
+                    'content' => $notificationManager->format($notification),
+                    'created' => $notification->getCreated()
+                );
+                $notifications[] = $notification;
+            }
         }
 
         return $this->container->get('templating')->render('AdstacyNotificationBundle::notifications.html.twig', array(

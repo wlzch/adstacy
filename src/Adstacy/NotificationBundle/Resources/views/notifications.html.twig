@@ -1,8 +1,9 @@
 <ul id="{{ id }}" class="{% if id == 'top-notifications' %}dropdown-menu{% else %}list-group{% endif %}">
   {% for notification in notifications %}
     <li class="list-group-item clearfix">
-      <img src="{{ asset('bundles/adstacyapp/img/nophoto.gif') }}" class="notif-pic" />
-      {{ notification|raw }}
+      <img src="{{ profile_pic(notification.user) }}" class="notif-pic" />
+      {{ notification.content|raw }}
+      <time>{{ ago(notification.created) }}</time>
     </li>
   {% endfor %}
 

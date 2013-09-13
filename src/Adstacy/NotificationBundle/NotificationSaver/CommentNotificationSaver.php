@@ -27,7 +27,9 @@ class CommentNotificationSaver implements NotificationSaverInterface
         $notification->setComment($comment);
         $notification->setAd($comment->getAd());
         $notification->setType('comment');
+        $to->addNotification($notification);
         $this->om->persist($notification);
+        $this->om->persist($to);
         if ($flush) {
             $this->om->flush();
         }

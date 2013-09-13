@@ -27,7 +27,9 @@ class PromoteNotificationSaver implements NotificationSaverInterface
         $notification->setTo($to);
         $notification->setAd($ad);
         $notification->setType('promote');
+        $to->addNotification($notification);
         $this->om->persist($notification);
+        $this->om->persist($to);
         if ($flush) {
             $this->om->flush();
         }
