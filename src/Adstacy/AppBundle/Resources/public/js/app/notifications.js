@@ -7,7 +7,7 @@
     }
   });
   var $notifBtn = $('#notif-btn');
-  var $notifCount = $('#notif-count');
+  var $notifCount = $('.notif-count');
   $notifBtn.find('button.dropdown-toggle').click(function() {
     var $this = $(this);
     var href = $this.attr('data-href');
