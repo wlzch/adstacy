@@ -133,7 +133,7 @@ flash:
             success: %username% berhasil di unfollow
 
 landing:
-    welcome: Selamat Datang ke Adstacy
+    welcome: Selamat Datang di Adstacy
     features:
         easy:
             heading: <b>M</b>udah
