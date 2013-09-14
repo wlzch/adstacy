@@ -22,7 +22,7 @@ class MentionNotificationSaver implements NotificationSaverInterface
     public function save(User $from, User $to, $comment, $flush = false)
     {
         $matches = null;
-        preg_match_all('/@(\w+)/', $comment->getContent(), $matches);
+        preg_match_all('/@([^@ ]+)/', $comment->getContent(), $matches);
         $usernames = array_unique($matches[1]);
         if (count($usernames) > 0) {
             $usernames = array_filter($usernames, function($username) use (&$from) {

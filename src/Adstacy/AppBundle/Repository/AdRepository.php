@@ -160,7 +160,7 @@ class AdRepository extends EntityRepository
             WHERE u.id = :id OR pu.id = :id OR fe.id = :id OR apu.id = :id
             ORDER BY a.created DESC
         ');
-        $query->useResultCache(true, 300, 'AdFindUserStreamQuery');
+        $query->useResultCache(true, 1800, 'AdFindUserStreamQuery');
 
         return $query->setParameter('id', $user->getId());
     }

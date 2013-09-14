@@ -59,20 +59,6 @@
       </div>
     </div>
   </div>
-  {% if promotedBy is defined and promotedBy == true %}
-    {% if app.user %}
-      {% set followingsWhoPromoted = app.user.getFollowingsPromoted(ad) %}
-      {% if followingsWhoPromoted|length > 0 %}
-        <div class="advert-sect">
-          <p class="text-muted">{{"promoted_by"|trans}}
-            <a class="link-muted" href="#">
-              <b>{{ followingsWhoPromoted|join(', ') }}</b>
-            </a>
-          </p>
-        </div>
-      {% endif %}
-    {% endif %}
-  {% endif %}
   <div class="advert-comment">
     <form action="{{ path('adstacy_app_ad_comment', {id: ad.id}) }}" method="post">
       <textarea name="comment[content]" required="required" class="comment-box" placeholder="{{"form_comment.placeholders.content"|trans}}"></textarea>
