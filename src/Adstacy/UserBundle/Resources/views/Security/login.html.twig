@@ -50,14 +50,12 @@
           <input type="submit" class="btn btn-primary btn-lg submit-disable-btn" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" data-disable-text="{{ "logginging"|trans }}">
         </div>
       </div>
-
     </form>
 
     <div class="panel-footer">
-      <div>
-        <a style="margin-right: 25px" href="{{ path('fos_user_registration_register') }}">{{ "no_account_register"|trans }}</a>
-        <a href="{{ path('fos_user_resetting_request') }}">{{ "forgot_password"|trans }}</a>
-      </div>
+      <a href="{{ path('fos_user_registration_register') }}">{{ "no_account_register"|trans }}</a>
+      <br>
+      <a href="{{ path('fos_user_resetting_request') }}">{{ "forgot_password"|trans }}</a>
     </div>
   </div>
 {% endblock %}
