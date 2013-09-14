@@ -99,7 +99,6 @@ class Ad
 
     /**
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="ad", orphanRemoval=true, cascade={"persist", "remove"})
-     * @ORM\OrderBy({"created" = "DESC"})
      */
     private $comments;
 

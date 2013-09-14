@@ -23,6 +23,7 @@ class CommentRepository extends EntityRepository
             JOIN c.ad a
             JOIN c.user u
             WHERE a.id = :id
+            ORDER BY c.created ASC
         ');
 
         return $query->setParameter('id', $ad->getId())->getResult();
