@@ -23,6 +23,10 @@
   .icon-bar {
     background-color: #b00;
   }
+
+  .navbar-toggle {
+    margin-right: 0;
+  }
 }
 
 #login-express {
@@ -144,13 +148,21 @@
 }
 
 .navbar-brand {
-  width: 120px;
+  width: 112px;
   height: 50px;
   background: url("../img/logo.png") no-repeat center;
 }
 
 #create-ads-btn {
   margin-right: 5px;
+}
+
+#create-ads-mobile-btn {
+  display: none;
+}
+
+#notif-mobile-btn {
+  display: none;
 }
 
 /** Hide header mobile components **/
@@ -238,6 +250,25 @@
   }
 }
 
+@media screen and (max-width: 767px) {
+  #create-ads-mobile-btn,
+  #notif-mobile-btn {
+    position: relative;
+    display: inline;
+    float: right;
+  }
+  #create-ads-mobile-btn {
+    margin-right: 10px;
+  }
+  #notif-mobile-btn {
+    margin-right: 15px;
+  }
+  #create-ads-btn,
+  #notif-btn {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 320px) {
   body {
     padding-top: 0 !important;
@@ -247,6 +278,10 @@
   }
   #site-header {
     position: static;
+
+    .adstacy-container {
+      padding: 0 10px;
+    }
   }
 }
 
