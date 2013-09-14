@@ -70,13 +70,6 @@
         {% include '::header.html.twig' %}
       {% endblock %}
       <div class="body clearfix">
-        {% block beta_info %}
-        <div class="adstacy-container">
-          <div class="alert alert-info" style="margin-bottom: 0;">
-            <p>{{"beta_info"|trans({'%url%': path('adstacy_app_contact')})|raw}}</p>
-          </div>
-        </div>
-        {% endblock %}
         {% set allFlashes = {success: app.session.flashbag.get('success')} %}
         {% set allFlashes = allFlashes|merge({warning: app.session.flashbag.get('warning')}) %}
         {% set allFlashes = allFlashes|merge({error: app.session.flashbag.get('error')}) %}
