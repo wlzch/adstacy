@@ -68,8 +68,14 @@ body {
 
 a.url, a.mention {
   color: #428bca;
+
   &:hover {
-    color: darken(#428bca, 20);
+    color: darken(#428bca, 20%);
+  }
+}
+
+a.mention {
+  &:hover {
     text-decoration: none;
   }
 }
