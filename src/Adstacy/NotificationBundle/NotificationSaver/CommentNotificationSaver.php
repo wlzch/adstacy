@@ -21,17 +21,19 @@ class CommentNotificationSaver implements NotificationSaverInterface
      */
     public function save(User $from, User $to, $comment, $flush = false)
     {
-        $notification = new Notification();
-        $notification->setFrom($from);
-        $notification->setTo($to);
-        $notification->setComment($comment);
-        $notification->setAd($comment->getAd());
-        $notification->setType('comment');
-        $to->addNotification($notification);
-        $this->om->persist($notification);
-        $this->om->persist($to);
-        if ($flush) {
-            $this->om->flush();
+        if ($from != $to) {
+            $notification = new Notification();
+            $notification->setFrom($from);
+            $notification->setTo($to);
+            $notification->setComment($comment);
+            $notification->setAd($comment->getAd());
+            $notification->setType('comment');
+            $to->addNotification($notification);
+            $this->om->persist($notification);
+            $this->om->persist($to);
+            if ($flush) {
+                $this->om->flush();
+            }
         }
     }
 

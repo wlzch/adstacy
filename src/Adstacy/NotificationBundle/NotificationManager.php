@@ -40,14 +40,11 @@ class NotificationManager
      */
     public function save(User $from, User $to, $noun, $flush = false, $key = null)
     {
-        // only notify if action is from two different users
-        if ($from != $to) {
-            foreach ($this->savers as $saver) {
-                if ($saver->support($noun, $key)) {
-                    $saver->save($from, $to, $noun, $flush);
-                }
-            };
-        }
+        foreach ($this->savers as $saver) {
+            if ($saver->support($noun, $key)) {
+                $saver->save($from, $to, $noun, $flush);
+            }
+        };
     }
 
     /**

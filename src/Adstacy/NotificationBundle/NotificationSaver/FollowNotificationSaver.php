@@ -21,15 +21,17 @@ class FollowNotificationSaver implements NotificationSaverInterface
      */
     public function save(User $from, User $to, $noun, $flush = false)
     {
-        $notification = new Notification();
-        $notification->setFrom($from);
-        $notification->setTo($to);
-        $notification->setType('follow');
-        $to->addNotification($notification);
-        $this->om->persist($notification);
-        $this->om->persist($to);
-        if ($flush) {
-            $this->om->flush();
+        if ($from != $to) {
+            $notification = new Notification();
+            $notification->setFrom($from);
+            $notification->setTo($to);
+            $notification->setType('follow');
+            $to->addNotification($notification);
+            $this->om->persist($notification);
+            $this->om->persist($to);
+            if ($flush) {
+                $this->om->flush();
+            }
         }
     }
 

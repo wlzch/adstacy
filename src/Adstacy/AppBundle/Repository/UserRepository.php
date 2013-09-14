@@ -176,7 +176,7 @@ class UserRepository extends EntityRepository
         $formatted = strtolower("'".implode("', '", $usernames)."'");
 
         return $em->createQuery("
-            SELECT partial u.{id,username,imagename,realName,adsCount,followersCount,profilePicture}
+            SELECT partial u.{id,username,imagename,realName,adsCount,followersCount,notificationsCount,profilePicture}
             FROM AdstacyAppBundle:User u
             WHERE u.usernameCanonical IN ($formatted)
         ")->getResult();

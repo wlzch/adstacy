@@ -22,16 +22,18 @@ class PromoteNotificationSaver implements NotificationSaverInterface
      */
     public function save(User $from, User $to, $ad, $flush = false)
     {
-        $notification = new Notification();
-        $notification->setFrom($from);
-        $notification->setTo($to);
-        $notification->setAd($ad);
-        $notification->setType('promote');
-        $to->addNotification($notification);
-        $this->om->persist($notification);
-        $this->om->persist($to);
-        if ($flush) {
-            $this->om->flush();
+        if ($from != $to ) {
+            $notification = new Notification();
+            $notification->setFrom($from);
+            $notification->setTo($to);
+            $notification->setAd($ad);
+            $notification->setType('promote');
+            $to->addNotification($notification);
+            $this->om->persist($notification);
+            $this->om->persist($to);
+            if ($flush) {
+                $this->om->flush();
+            }
         }
     }
 
