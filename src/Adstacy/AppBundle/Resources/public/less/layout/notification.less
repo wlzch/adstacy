@@ -4,14 +4,16 @@
 #notif-btn {
   display: inline-block;
   position: relative;
+}
 
+#notif-btn,
+#notif-mobile-btn {
   .notif-count {
     position: absolute;
     right: -8px;
     bottom: -4px;
   }
 }
-
 
 .open > #top-notifications {
   display: block;
@@ -29,7 +31,7 @@
   & > li:first-child {
     border-top: 0;
   }
-  
+
   & > li:hover {
     background-color: #eee;
     cursor: pointer;
@@ -112,7 +114,7 @@
 #mobile-nav {
   .notif-count {
     background-color: #333;
-    float: right; 
+    float: right;
     margin-right: 20px;
   }
 }
