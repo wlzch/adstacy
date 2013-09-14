@@ -66,8 +66,12 @@ body {
   }
 }
 
-a.url {
+a.url, a.mention {
   color: #428bca;
+  &:hover {
+    color: darken(#428bca, 20);
+    text-decoration: none;
+  }
 }
 
 @media screen and (max-width: @screen-phone) {
