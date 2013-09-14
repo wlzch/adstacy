@@ -1,5 +1,8 @@
 (function() {
-  $('img.lazy').lazyload();
+  $('img.lazy').lazyload({
+    threshold: 1500,
+    effect: 'fadeIn'
+  });
   $('.advert').ajaxlink('ads');
   $('.user').ajaxlink('users');
   $('.comment-box').keydown(function(event) {
