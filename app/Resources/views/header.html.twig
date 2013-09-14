@@ -34,7 +34,7 @@
         </a>
         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
           <a id="notif-mobile-btn" href="{{ path('adstacy_notification_show') }}" class="btn btn-default navbar-btn">
-            <i class="icon-rss"></i>
+            <i class="icon-bell"></i>
             <span class="notif-count label label-primary">{{ app.user.notificationsCount }}</span>
           </a>
         {% endif %}
@@ -86,7 +86,7 @@
           {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
           <div id="notif-btn" class="navbar-btn">
               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-href="{{ path('adstacy_notification_readall') }}">
-                <i class="icon-rss"></i>
+                <i class="icon-bell"></i>
                 <span class="notif-count label label-primary">{{app.user.notificationsCount}}</span>
               </button>
               {{ render_top_notification(5) }}

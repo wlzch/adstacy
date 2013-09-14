@@ -9,7 +9,7 @@
 	font-style: normal;
 }
 
-.icon-home, .icon-rocket, .icon-search, .icon-plus, .icon-user, .icon-gear, .icon-off, .icon-angle-up, .icon-angle-down, .icon-facebook, .icon-twitter, .icon-share, .icon-envelope-alt, .icon-edit, .icon-delete, .icon-ads, .icon-bullhorn, .icon-hash, .icon-star, .icon-ok-sign, .icon-globe, .icon-rss, .icon-tags {
+.icon-home, .icon-rss, .icon-rocket, .icon-search, .icon-plus, .icon-user, .icon-gear, .icon-off, .icon-angle-up, .icon-angle-down, .icon-facebook, .icon-twitter, .icon-share, .icon-envelope-alt, .icon-edit, .icon-delete, .icon-ads, .icon-bullhorn, .icon-hash, .icon-star, .icon-ok-sign, .icon-bell, .icon-globe, .icon-tags {
 	font-family: 'adstacy';
 	speak: none;
 	font-style: normal;
@@ -22,69 +22,72 @@
 .icon-home:before {
 	content: "\e000";
 }
-.icon-rocket:before {
+.icon-rss:before {
 	content: "\e001";
 }
-.icon-search:before {
+.icon-rocket:before {
 	content: "\e002";
 }
-.icon-plus:before {
+.icon-search:before {
 	content: "\e003";
 }
-.icon-user:before {
+.icon-plus:before {
 	content: "\e004";
 }
-.icon-gear:before {
+.icon-user:before {
 	content: "\e005";
 }
-.icon-off:before {
+.icon-gear:before {
 	content: "\e006";
 }
-.icon-angle-up:before {
+.icon-off:before {
 	content: "\e007";
 }
-.icon-angle-down:before {
+.icon-angle-up:before {
 	content: "\e008";
 }
-.icon-facebook:before {
+.icon-angle-down:before {
 	content: "\e009";
 }
-.icon-twitter:before {
+.icon-facebook:before {
 	content: "\e00a";
 }
-.icon-share:before {
+.icon-twitter:before {
 	content: "\e00b";
 }
-.icon-envelope-alt:before {
+.icon-share:before {
 	content: "\e00c";
 }
-.icon-edit:before {
+.icon-envelope-alt:before {
 	content: "\e00d";
 }
-.icon-delete:before {
+.icon-edit:before {
 	content: "\e00e";
 }
-.icon-ads:before {
+.icon-delete:before {
 	content: "\e00f";
 }
-.icon-bullhorn:before {
+.icon-ads:before {
 	content: "\e010";
 }
-.icon-hash:before {
+.icon-bullhorn:before {
 	content: "\e011";
 }
-.icon-star:before {
+.icon-hash:before {
 	content: "\e012";
 }
-.icon-ok-sign:before {
+.icon-star:before {
 	content: "\e013";
 }
-.icon-globe:before {
+.icon-ok-sign:before {
 	content: "\e014";
 }
-.icon-rss:before {
+.icon-bell:before {
 	content: "\e015";
 }
-.icon-tags:before {
+.icon-globe:before {
 	content: "\e016";
+}
+.icon-tags:before {
+	content: "\e017";
 }
