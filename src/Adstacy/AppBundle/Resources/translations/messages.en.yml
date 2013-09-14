@@ -6,7 +6,7 @@ logout: Logout
 login: Login
 login.with: Login with
 register: Register
-no_account_register: No account yet? Register now 
+no_account_register: No account yet? Register now
 register.with: Register with
 forgot_password: Forgot password?
 cancel: Cancel
@@ -18,6 +18,7 @@ saving: Saving...
 registering: Registering...
 loggingin: Logging in...
 promoted_by: Also promoted by
+continue_to_explore: Continue to Explore
 
 search_users: Users
 search_ads: Ads

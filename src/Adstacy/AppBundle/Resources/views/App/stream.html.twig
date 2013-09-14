@@ -23,9 +23,14 @@
 
 {% block ajax_content %}
   {% if user.followingsCount <= 0 %}
-    {% for user in suggestionsPaginator.getCurrentPageResults %}
-      {% include 'AdstacyAppBundle:User:user.html.twig' with {user: user} %}
-    {% endfor %}
+    <div class="clearfix">
+      {% for user in suggestionsPaginator.getCurrentPageResults %}
+        {% include 'AdstacyAppBundle:User:user.html.twig' with {user: user} %}
+      {% endfor %}
+    </div>
+    <div style="margin: 20px 7px 0;">
+      <a href="{{ path('adstacy_app_explore') }}" class="btn btn-success btn-block">{{ "continue_to_explore"|trans }}</a>
+    </div>
   {% else %}
     {% for ad in paginator.getCurrentPageResults %}
       {% include 'AdstacyAppBundle:Ad:ad.html.twig' with {ad: ad, promotedBy: true} %}
