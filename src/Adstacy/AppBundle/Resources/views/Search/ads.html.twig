@@ -3,6 +3,7 @@
 {% block search_content %}
   {% if paginator.getCurrentPageResults|length > 0 and app.request.query.get('q') != '' %}
     <div class="masonry jscroll">
+      {% include 'AdstacyAppBundle:App:feeds.html.twig' %}
       {{ block('ajax_content') }}
     </div>
   {% else %}
