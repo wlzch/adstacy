@@ -158,6 +158,7 @@ class UserRepository extends EntityRepository
             WHERE u.id <> :id
             ORDER BY u.adsCount DESC
         ');
+        $query->useResultCache(true, 7200, 'UserSuggestUserQuery');
 
         return $query->setParameter('id', $user->getId());
     }
