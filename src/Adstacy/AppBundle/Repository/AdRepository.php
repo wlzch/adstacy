@@ -56,15 +56,11 @@ class AdRepository extends EntityRepository
         $em = $this->getEntityManager();
         $query = $em->createQuery('
             SELECT partial a.{id,imagename,description,tags,thumbHeight,imageHeight,imageWidth,promoteesCount,commentsCount,created},
-            partial u.{id,username,imagename,realName},
-            partial fi.{id,username,imagename,realName},
-            fip
+            partial u.{id,username,imagename,realName}
             FROM AdstacyAppBundle:Ad a
             JOIN a.user u
             LEFT JOIN a.promotees pa
             LEFT JOIN pa.user pu
-            LEFT JOIN u.followings fi
-            LEFT JOIN fi.promotes fip
             WHERE pu.id = :id
         ');
 
@@ -83,15 +79,11 @@ class AdRepository extends EntityRepository
         $em = $this->getEntityManager();
         $query = $em->createQuery('
             SELECT partial a.{id,imagename,description,tags,thumbHeight,imageHeight,imageWidth,promoteesCount,commentsCount,created},
-            partial u.{id,username,imagename,realName},
-            partial fi.{id,username,imagename,realName},
-            fip
+            partial u.{id,username,imagename,realName}
             FROM AdstacyAppBundle:Ad a
             JOIN a.user u
             LEFT JOIN a.promotees pa
             LEFT JOIN pa.user pu
-            LEFT JOIN u.followings fi
-            LEFT JOIN fi.promotes fip
             WHERE u.id = :id OR pu.id = :id
         ');
 
@@ -146,18 +138,13 @@ class AdRepository extends EntityRepository
         $em = $this->getEntityManager();
         $query = $em->createQuery('
             SELECT partial a.{id,imagename,description,tags,thumbHeight,imageHeight,imageWidth,promoteesCount,commentsCount,created},
-            partial u.{id,username,imagename,realName},
-            partial fi.{id,username,imagename,realName},
-            fip
+            partial u.{id,username,imagename,realName}
             FROM AdstacyAppBundle:Ad a
             JOIN a.user u
-            LEFT JOIN u.followers fe
-            LEFT JOIN u.followings fi
+            JOIN u.followers fe
             LEFT JOIN a.promotees ap
             LEFT JOIN ap.user apu
-            LEFT JOIN fi.promotes fip
-            LEFT JOIN fip.user pu
-            WHERE u.id = :id OR pu.id = :id OR fe.id = :id OR apu.id = :id
+            WHERE u.id = :id OR fe.id = :id OR apu.id = :id
             ORDER BY a.created DESC
         ');
         $query->useResultCache(true, 1800, 'AdFindUserStreamQuery');
