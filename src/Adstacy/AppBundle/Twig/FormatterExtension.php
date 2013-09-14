@@ -96,9 +96,10 @@ class FormatterExtension extends \Twig_Extension
      */
     public function parseMention($text)
     {
-        return preg_replace_callback('/(@\w+)/', function($matches) {
+        $router = $this->router;
+        return preg_replace_callback('/(@\w+)/', function($matches) use (&$router) {
             $username = substr($matches[0], 1);
-            $url = $this->router->generate('adstacy_app_user_profile', array('username' => $username));
+            $url = $router->generate('adstacy_app_user_profile', array('username' => $username));
             return sprintf(' <a class="mention" href="%s">%s</a>', $url, $matches[0]);
         }, $text);
     }
