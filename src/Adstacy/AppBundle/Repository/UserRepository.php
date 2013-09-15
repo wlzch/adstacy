@@ -156,7 +156,7 @@ class UserRepository extends EntityRepository
             FROM AdstacyAppBundle:User u
             LEFT JOIN u.ads a
             WHERE u.id <> :id
-            ORDER BY u.adsCount DESC
+            ORDER BY u.followersCount DESC
         ');
         $query->useResultCache(true, 7200, 'UserSuggestUserQuery');
 
