@@ -1,6 +1,7 @@
 (function() {
   $('img.lazy').lazyload({
     threshold: 1500,
+    failure_limit: 5,
     effect: 'fadeIn'
   });
   $('.advert').ajaxlink('ads');

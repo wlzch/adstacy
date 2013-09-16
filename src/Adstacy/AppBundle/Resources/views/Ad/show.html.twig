@@ -74,7 +74,7 @@
 
         <div id="show-advert-img">
           {% set src = vich_uploader_asset(ad, 'image') %}
-          <img src="{{ src }}" alt="{{ ad.description }}">
+          <img src="{{ src }}" alt="{{ ad.description }}" width="{{ ad.imageWidth }}" height="{{ ad.imageHeight }}">
         </div>
       </div>
 
