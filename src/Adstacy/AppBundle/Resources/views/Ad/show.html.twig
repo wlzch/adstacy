@@ -98,7 +98,8 @@
                 <div class="media-body">
                   <h4 class="media-heading">
                     <a href="{{ path('adstacy_app_user_profile', {username: commentUser.username}) }}">{{ commentUser.realName }}</a>
-                    <small class="text-muted">&middot; {{ ago(comment.created) }}</small>
+                    <small>@{{ commentUser.userName }}</small>
+                    <time>~ {{ ago(comment.created) }}</time>
                   </h4>
                   <div>{{ parse_url(parse_hashtag(parse_mention(comment.content))) }}</div>
                 </div>
