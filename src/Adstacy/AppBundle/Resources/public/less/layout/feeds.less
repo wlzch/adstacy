@@ -3,25 +3,36 @@
   margin: 14px 7px 0px;
   padding-left: 0;
   width: 236px;
-  
-  & > li {
+
+  > li {
     border-top: 1px solid #ddd;
-    & > a {
-      color: #333;
+
+    &:first-child {
+      border-top: 0;
+
+      > a {
+        .border-top-radius(@border-radius-small);
+      }
+    }
+
+    &:last-child {
+      > a {
+        .border-bottom-radius(@border-radius-small);
+      }
+    }
+
+    > a {
+      color: @gray-dark;
       display: block;
       font-size: 14px;
       padding: 10px 15px;
-    }
 
-    & > a:hover {
-      background-color: #b00;
-      color: #fff;
-      text-decoration: none;
+      &:hover {
+        background-color: @brand-primary;
+        color: #fff;
+        text-decoration: none;
+      }
     }
-  }
-
-  & > li:first-child {
-    border-top: 0;
   }
 
   small {
