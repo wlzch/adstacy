@@ -29,11 +29,18 @@ body {
 @-o-viewport        { width: device-width; }
 @viewport           { width: device-width; }
 
-.next-page {
+.load-next {
   position: absolute;
+  left: 0;
   bottom: -50px;
+  width: 100%;
   border-bottom: 0;
   .border-bottom-radius(0);
+  line-height: 23px;
+
+  img {
+    vertical-align: bottom;
+  }
 }
 
 .follow-action .btn-success:hover,
