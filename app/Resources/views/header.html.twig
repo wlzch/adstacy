@@ -29,7 +29,7 @@
         <i class="icon-bar"></i>
       </button>
       {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-        <a id="create-ads-mobile-btn" href="{{ path('adstacy_app_ad_create') }}" class="btn btn-primary navbar-btn" data-toggle="tooltip" data-placement="bottom" title="{{"ads.create"|trans}}">
+        <a id="create-advert-mobile-btn" href="{{ path('adstacy_app_ad_create') }}" class="btn btn-primary navbar-btn" data-toggle="tooltip" data-placement="bottom" title="{{"ads.create"|trans}}">
           <i class="icon-plus"></i>
         </a>
         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
@@ -68,9 +68,9 @@
 
       <div class="navbar-right">
         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-          <a href="{{ path('adstacy_app_ad_create') }}" id="create-ads-btn" class="btn btn-primary navbar-btn" data-toggle="tooltip" data-placement="bottom" title="{{"ads.create"|trans}}">
+          <a href="{{ path('adstacy_app_ad_create') }}" id="create-advert-btn" class="btn btn-primary navbar-btn" data-toggle="tooltip" data-placement="bottom" title="{{"ads.create"|trans}}">
             <i class="icon-plus"></i>
-            <span id="mobile-create-ads-label">{{"ads.create"|trans}}</span>
+            <span id="create-advert-mobile-label">{{"ads.create"|trans}}</span>
           </a>
           <div id="user-nav-dropdown" class="btn-group navbar-btn">
             <button type="button" class="btn btn-default btn-user dropdown-toggle" data-toggle="dropdown">

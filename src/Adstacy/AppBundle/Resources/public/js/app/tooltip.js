@@ -1,5 +1,5 @@
 (function() {
-  $('#create-ads-btn').tooltip({
+  $('#create-advert-btn').tooltip({
     container: 'body',
     placement: 'bottom'
   });

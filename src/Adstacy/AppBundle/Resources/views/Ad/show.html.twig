@@ -137,7 +137,7 @@
           <p>{{ parse_url(parse_hashtag(user.about)) }}</p>
         </div>
         {% endif %}
-        <div id="user-latest-ads" class="clearfix">
+        <div id="user-latest-adverts" class="clearfix">
           {% for adByUser in adsByUser %}
             <div class="thumb">
               <a href="{{ path('adstacy_app_ad_show', {id: adByUser.id}) }}">
