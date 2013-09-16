@@ -270,7 +270,8 @@ class AdController extends Controller
         }
         $user = $this->getUser();
         $request = $this->getRequest();
-        if ($user != $comment->getUser() && $user != $comment->getAd()->getUser()) {
+        $ad = $comment->getAd();
+        if ($user != $comment->getUser() && $user != $ad->getUser()) {
             if ($request->isXmlHttpRequest()) {
                 return new JsonResponse(json_encode(array('status' => 'error', 'message' => $this->translate('ads.comment.delete.fail'))));
             }
@@ -280,7 +281,9 @@ class AdController extends Controller
         }
 
         $em = $this->getManager();
+        $ad->removeComment($comment);
         $em->remove($comment);
+        $em->persist($ad);
         $em->flush();
 
         if ($request->isXmlHttpRequest()) {
