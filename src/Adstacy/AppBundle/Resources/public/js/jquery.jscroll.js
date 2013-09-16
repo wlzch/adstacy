@@ -19,9 +19,9 @@
         defaults: {
             debug: false,
             autoTrigger: true,
-            loadingHtml: '<small>Loading...</small>',
+            loadingHtml: '<a class="btn btn-default btn-block load-next"><img src="/bundles/adstacyapp/img/spinner.gif"></a>',
             padding: 0,
-            nextSelector: 'a:last',
+            nextSelector: 'a.next-page',
             contentSelector: '',
     		pagingSelector: ''
         }

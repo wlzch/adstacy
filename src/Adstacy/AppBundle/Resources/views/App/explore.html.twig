@@ -28,8 +28,6 @@
   <script type="text/javascript">
     $(function() {
       $('.jscroll').jscroll({
-        loadingHtml: '<a class="btn btn-default btn-block load-next"><img src="{{ asset('bundles/adstacyapp/img/spinner.gif') }}"> {{ "more"|trans }}</a>',
-        nextSelector: 'a.next-page',
         callback: function() {
           var $ads = $('.jscroll-added:last .advert');
           $('.masonry').masonry('appended', $ads);

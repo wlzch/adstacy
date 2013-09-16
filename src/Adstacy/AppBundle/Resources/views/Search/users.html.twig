@@ -19,7 +19,7 @@
   {% endfor %}
   {% if paginator.hasNextPage %}
     {% set params = app.request.query.all|merge({page: paginator.getNextPage}) %}
-    <a href="{{ path('adstacy_app_search', params )}}" class="btn btn-default btn-lg btn-block next-page">More</a>
+    <a href="{{ path('adstacy_app_search', params )}}" class="btn btn-default btn-lg btn-block load-next next-page">More</a>
   {% endif %}
 {% endblock %}
 
@@ -28,7 +28,6 @@
   <script type="text/javascript">
     $(function() {
       $('.jscroll').jscroll({
-        nextSelector: 'a.next-page',
         callback: function(a, b) {
           var $users = $('.jscroll-added:last .user');
           $masonry = $('.masonry').masonry('appended', $users);

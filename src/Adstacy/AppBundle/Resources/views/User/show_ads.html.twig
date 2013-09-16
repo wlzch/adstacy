@@ -31,7 +31,7 @@
   {% endfor %}
   {% if paginator.hasNextPage %}
     {% set params = app.request.query.all|merge({username: user.username, page: paginator.getNextPage}) %}
-    <a href="{{ path(route, params )}}" class="btn btn-lg btn-default btn-block next-page">{{"more"|trans}}</a>
+    <a href="{{ path(route, params )}}" class="btn btn-lg btn-default btn-block load-next next-page">{{"more"|trans}}</a>
   {% endif %}
 {% endblock %}
 
@@ -94,7 +94,6 @@
     $(function() {
       $('#user-profile').ajaxlink('follow_single');
       $('.jscroll').jscroll({
-        nextSelector: 'a.next-page',
         callback: function(a, b) {
           var $ads = $('.jscroll-added:last .advert');
           $('.masonry').masonry('appended', $ads);

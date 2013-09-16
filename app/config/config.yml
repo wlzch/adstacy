@@ -4,7 +4,7 @@ imports:
 
 parameters:
     elfinder.loader: Adstacy\AppBundle\Loader\FMElfinderLoader
-    max_ads_per_page: 40
+    max_ads_per_page: 30
     max_users_per_page: 15
     max_notifications: 50
     thumb_width: 234
