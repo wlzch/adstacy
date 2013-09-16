@@ -54,5 +54,14 @@ namespace :symfony do
   end
 end
 
+namespace :adstacy do
+    desc "Populate redis data"
+    task :populate_redis do
+        capifony_pretty_print "--> Populating redis data"
+        run "#{try_sudo} sh -c 'cd #{latest_release} && #{php_bin} #{symfony_console} adstacy:redis:populate"
+        capifony_puts_ok
+    end
+end
+
 # Be more verbose by uncommenting the following line
 logger.level = Logger::MAX_LEVEL

@@ -36,7 +36,9 @@
         "sonata-project/admin-bundle": "dev-master",
         "sonata-project/doctrine-orm-admin-bundle": "dev-master",
         "ornicar/apc-bundle": "dev-master",
-        "exercise/htmlpurifier-bundle": "dev-master"
+        "exercise/htmlpurifier-bundle": "dev-master",
+        "snc/redis-bundle": "1.1.6",
+        "predis/predis": "0.8.4"
     },
     "scripts": {
         "post-install-cmd": [
