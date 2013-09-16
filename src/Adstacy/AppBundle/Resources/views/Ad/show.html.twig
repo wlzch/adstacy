@@ -18,10 +18,10 @@
 {% block content %}
   {% set user = ad.user %}
 
-  <div id="show-ad">
-    <div id="show-ad-content">
+  <div id="show-advert">
+    <div id="show-advert-content">
       <div class="panel panel-default">
-        <div id="show-ad-toolbar" class="panel-body">
+        <div id="show-advert-toolbar" class="panel-body">
           {% if app.user %}
             <div class="promote-action btn-group btn-group-sm">
               {% set promoted = app.user.hasPromote(ad) %}
@@ -68,27 +68,27 @@
           {% endif %}
         </div>
 
-        <div class="panel-body show-ad-desc">
+        <div class="panel-body show-advert-desc">
           <p>{{ parse_url(parse_hashtag(ad.description)) }}</p>
         </div>
 
-        <div id="show-ad-img">
+        <div id="show-advert-img">
           {% set src = vich_uploader_asset(ad, 'image') %}
           <img src="{{ src }}" alt="{{ ad.description }}">
         </div>
       </div>
 
       {% if ad.content %}
-        <div id="show-ad-long-desc" class="panel panel-default">
+        <div id="show-advert-long-desc" class="panel panel-default">
           <div class="panel-body">
             {{ ad.content|raw }}
           </div>
         </div>
       {% endif %}
 
-      <div id="show-ad-comment" class="panel panel-default">
+      <div id="show-advert-comment" class="panel panel-default">
         <div class="panel-body">
-          <div id="show-ad-comment-list">
+          <div id="show-advert-comment-list">
             {% set adOwner = app.user == ad.user %}
             {% for comment in comments %}
               {% set commentUser = comment.user %}
@@ -127,7 +127,7 @@
       </div>
     </div>
 
-    <div id="show-ad-owner">
+    <div id="show-advert-owner">
       <div class="panel panel-default">
         <div class="panel-body clearfix">
           {% include 'AdstacyAppBundle:User:user_mini.html.twig' with { user: user, text: ago(ad.created) } %}
@@ -204,5 +204,9 @@
 
 {% block javascripts %}
   {{ parent() }}
-  <script type="text/javascript" src="{{ asset('bundles/adstacyapp/js/app/show_ad.js') }}"></script>
+  {% javascripts filter='uglifyjs2'
+    '@AdstacyAppBundle/Resources/public/js/page/show_ad.js'
+  %}
+    <script src="{{ asset_url }}" type="text/javascript"></script>
+  {% endjavascripts %}
 {% endblock %}

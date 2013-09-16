@@ -1,7 +1,7 @@
 $(function() {
-  $('#show-ad').ajaxlink('promote_single');
-  $('#show-ad-owner').ajaxlink('follow_single');
-  $('#show-ad-owner').scrollToFixed({
+  $('#show-advert').ajaxlink('promote_single');
+  $('#show-advert-owner').ajaxlink('follow_single');
+  $('#show-advert-owner').scrollToFixed({
     marginTop: 90
   });
   var $deleteBtn = $('#delete-comment-btn');
@@ -21,4 +21,4 @@ $(function() {
     $deleteBtn.attr('data-href', $link.attr('data-href'));
     $deleteBtn.attr('data-comment-id', $comment.attr('id'));
   });
-})();
+});
