@@ -97,6 +97,9 @@
                   <img src="{{ profile_pic(commentUser) }}" alt="{{ commentUser.realname }}" width="60" height="60" class="media-object">
                 </div>
                 <div class="media-body">
+                  {% if adOwner or commentUser == app.user %}
+                    <a href="#" data-href="{{ path('adstacy_app_ad_comment_delete', {id: comment.id}) }}" data-toggle="modal" data-target="#delete-comment-modal" class="close">×</a>
+                  {% endif %}
                   <h4 class="media-heading">
                     <a href="{{ path('adstacy_app_user_profile', {username: commentUser.username}) }}">{{ commentUser.realName }}</a>
                     <small>@{{ commentUser.userName }}</small>
@@ -104,9 +107,6 @@
                   </h4>
                   <div>{{ parse_url(parse_hashtag(parse_mention(comment.content))) }}</div>
                 </div>
-                {% if adOwner or commentUser == app.user %}
-                  <a href="#" data-href="{{ path('adstacy_app_ad_comment_delete', {id: comment.id}) }}" data-toggle="modal" data-target="#delete-comment-modal">x</a>
-                {% endif %}
               </div>
             {% endfor %}
           </div>
@@ -119,7 +119,7 @@
               <div class="form-group">
                 {{ form_widget(form.content, { attr: { class: 'comment-box' } }) }}
               </div>
-              <input type="submit" value="{{"comment"|trans}}" class="hide" />
+              <input type="submit" value="{{"comment"|trans}}" class="hide">
               {{ form_rest(form) }}
             {{ form_end(form) }}
           </div>
