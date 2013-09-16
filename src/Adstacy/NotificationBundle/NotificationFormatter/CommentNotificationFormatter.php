@@ -6,18 +6,21 @@ use Symfony\Component\Routing\Router;
 use Symfony\Component\Translation\Translator;
 use Adstacy\NotificationBundle\Entity\Notification;
 use Adstacy\AppBundle\Helper\Formatter;
+use Adstacy\AppBundle\Helper\UserHelper;
 
 class CommentNotificationFormatter implements NotificationFormatterInterface
 {
     private $router;
     private $translator;
     private $formatter;
+    private $userHelper;
 
-    public function __construct(Router $router, Translator $translator, Formatter $formatter)
+    public function __construct(Router $router, Translator $translator, Formatter $formatter, UserHelper $userHelper)
     {
         $this->router = $router;
         $this->translator = $translator;
         $this->formatter = $formatter;
+        $this->userHelper = $userHelper;
     }
 
     public function format(Notification $notification)
@@ -26,6 +29,8 @@ class CommentNotificationFormatter implements NotificationFormatterInterface
             '%url_ad%' => $this->router->generate('adstacy_app_ad_show', array(
                 'id' => $notification->getAd()->getId()
             )).'#comments-'.$notification->getComment()->getId(),
+            '%profile_pic%' => $this->userHelper->getProfilePicture($notification->getFrom()),
+            '%time%' => $this->formatter->ago($notification->getCreated()),
             '%url_user%' => $this->router->generate('adstacy_app_user_profile', array(
                 'username' => $notification->getFrom()->getUsername()
             )),

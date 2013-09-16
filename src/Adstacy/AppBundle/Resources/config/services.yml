@@ -11,3 +11,7 @@ services:
     
     adstacy.helper.formatter:
         class: Adstacy\AppBundle\Helper\Formatter
+
+    adstacy.helper.user:
+        class: Adstacy\AppBundle\Helper\UserHelper
+        arguments: [@service_container]

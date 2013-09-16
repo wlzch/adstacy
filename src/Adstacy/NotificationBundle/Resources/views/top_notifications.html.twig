@@ -2,9 +2,7 @@
   {% if notifications|length > 0 %}
     {% for notification in notifications %}
       <li class="clearfix">
-        <img src="{{ profile_pic(notification.user) }}" class="notif-pic" />
-        {{ notification.content|raw }}
-        <time>{{ ago(notification.created) }}</time>
+        {{ notification|raw }}
       </li>
     {% endfor %}
   {% else %}

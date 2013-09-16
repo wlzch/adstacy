@@ -80,12 +80,7 @@ class NotificationExtension extends \Twig_Extension
 
         $notificationManager = $this->container->get('adstacy.notification.manager');
         foreach ($paginator->getCurrentPageResults() as $notification) {
-            $notification = array(
-                'user' => $notification->getFrom(),
-                'content' => $notificationManager->format($notification),
-                'created' => $notification->getCreated()
-            );
-            $notifications[] = $notification;
+            $notifications[] = $notificationManager->format($notification);
         }
 
         return $notifications;

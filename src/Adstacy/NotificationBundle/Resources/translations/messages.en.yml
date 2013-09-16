@@ -1,8 +1,8 @@
 notification:
     title: Notification
-    comment: '<div class="notification" data-href="%url_ad%"><a href="%url_user%">%user_from%</a> has commented on your ad: "%comment%"</div>'
-    mention: '<div class="notification" data-href="%url_ad%"><a href="%url_user%">%user_from%</a> mention you on comment: %comment%</div>'
-    follow: '<div class="notification" data-href="%url_user%"><a href="%url_user%">%user_from%</a> has followed you</div>'
-    promote: '<div class="notification" data-href="%url_ad%"><a href="%url_user%">%user_from%</a> promoted your ad</div>'
+    comment: '<a class="notification clearfix" href="%url_ad%"><img src="%profile_pic%" class="notif-pic"><span class="time">%time%</span><div class="pull-left"><span class="username">%user_from%</span> has commented on your ad: <span class="notif-comment">"%comment%"</span></div></a>'
+    mention: '<a class="notification clearfix" href="%url_ad%"><img src="%profile_pic%" class="notif-pic"><span class="time">%time%</span><div class="pull-left"><span class="username">%user_from%</span> mention you on comment: <span class="notif-comment">"%comment%"</span></div></a>'
+    follow: '<a class="notification clearfix" href="%url_user%"><img src="%profile_pic%" class="notif-pic"><span class="time">%time%</span><span class="username">%user_from%</span> has followed you</a>'
+    promote: '<a class="notification" href="%url_ad%"><img src="%profile_pic%" class="notif-pic"><span class="time">%time%</span><span class="username">%user_from%</span> promoted your ad</a>'
     no_notification: No new notification
     show_all: Show all notifications

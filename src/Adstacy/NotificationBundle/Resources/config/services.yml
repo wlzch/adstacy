@@ -18,19 +18,19 @@ services:
 
     adstacy.notification.notification_formatter.comment:
         class: Adstacy\NotificationBundle\NotificationFormatter\CommentNotificationFormatter
-        arguments: [@router, @translator, @adstacy.helper.formatter]
+        arguments: [@router, @translator, @adstacy.helper.formatter, @adstacy.helper.user]
 
     adstacy.notification.notification_formatter.mention:
         class: Adstacy\NotificationBundle\NotificationFormatter\MentionNotificationFormatter
-        arguments: [@router, @translator]
+        arguments: [@router, @translator, @adstacy.helper.formatter, @adstacy.helper.user]
 
     adstacy.notification.notification_formatter.follow:
         class: Adstacy\NotificationBundle\NotificationFormatter\FollowNotificationFormatter
-        arguments: [@router, @translator]
+        arguments: [@router, @translator, @adstacy.helper.formatter, @adstacy.helper.user]
 
     adstacy.notification.notification_formatter.promote:
         class: Adstacy\NotificationBundle\NotificationFormatter\PromoteNotificationFormatter
-        arguments: [@router, @translator]
+        arguments: [@router, @translator, @adstacy.helper.formatter, @adstacy.helper.user]
 
     adstacy.notification.manager:
         class: Adstacy\NotificationBundle\NotificationManager
