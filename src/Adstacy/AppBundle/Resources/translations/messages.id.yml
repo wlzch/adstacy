@@ -34,7 +34,7 @@ ads:
     create: Tambah iklan
     delete:
         confirm_title: Konfirmasi penghapusan
-        confirm_message: Apakah anda yakin ingin menghapus iklan ini?
+        confirm_message: Apakah Anda yakin ingin menghapus iklan ini?
         button: HAPUS!
     no_ads:
         message: %username% belum mempunyai iklan
@@ -45,6 +45,12 @@ ads:
     comment:
         success: Komentar berhasil ditambahkan
         fail: Komentar gagal ditambahkan
+        delete:
+            confirm_title: Konfirmasi penghapusan komentar
+            confirm_message: Apakah Anda yakin ingin menghapus komentar ini?
+            button: HAPUS!
+            success: Komentar terhapus
+            fail: Komentar tidak dapat dihapus
 
 user:
     no_followers:

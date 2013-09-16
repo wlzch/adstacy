@@ -98,7 +98,7 @@
                 </div>
                 <div class="media-body">
                   {% if adOwner or commentUser == app.user %}
-                    <a href="#" data-href="{{ path('adstacy_app_ad_comment_delete', {id: comment.id}) }}" data-toggle="modal" data-target="#delete-comment-modal" class="close">×</a>
+                  <a href="#" data-href="{{ path('adstacy_app_ad_comment_delete', {id: comment.id}) }}" data-toggle="modal" data-target="#delete-comment-modal" class="close" title="{{"delete"|trans}}">×</a>
                   {% endif %}
                   <h4 class="media-heading">
                     <a href="{{ path('adstacy_app_user_profile', {username: commentUser.username}) }}">{{ commentUser.realName }}</a>
