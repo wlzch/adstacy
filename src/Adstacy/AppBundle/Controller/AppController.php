@@ -83,30 +83,34 @@ class AppController extends Controller
     }
 
     /**
-     * Username autocomplete
+     * Username autocomplete.
+     * Use redis to store cache.
      *
      * @param string $q username to query
      */
     public function usernamesAction($q)
     {
         $request = $this->getRequest();
-        if ($request->isXmlHttpRequest()) {
             $redis = $this->get('snc_redis.default');
-            $rank = $redis->zrank('usernames', $q);
-            $availables = $redis->zrange('usernames', $rank + 1, 50);
             $results = array();
-            foreach ($availables as $x) {
-                if (strpos($x, $q) === false) {
-                    break;
+            if ($redis->exists("username_q_res:$q")) {
+                $results = $redis->smembers("username_q_res:$q");
+            } else {
+                $rank = $redis->zrank('usernames', $q);
+                $availables = $redis->zrange('usernames', $rank + 1, 50);
+                foreach ($availables as $x) {
+                    if (strpos($x, $q) === false) {
+                        break;
+                    }
+                    $len = strlen($x);
+                    if ($x[$len - 1] == '*') {
+                        $results[] = substr($x, 0, $len - 1);
+                    }
                 }
-                $len = strlen($x);
-                if ($x[$len - 1] == '*') {
-                    $results[] = substr($x, 0, $len - 1);
-                }
+                $redis->sadd("username_q_res:$q", implode(' ', $results));
             }
 
             return new JsonResponse(json_encode($results));
-        }
 
         return new Response("Don't access this url directly");
     }
