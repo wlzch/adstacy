@@ -23,6 +23,11 @@ adstacy_app_tags:
     defaults:
         _controller: AdstacyAppBundle:App:tags
 
+adstacy_app_usernames:
+    pattern: /usernames/{q}
+    defaults:
+        _controller: AdstacyAppBundle:App:usernames
+
 adstacy_app_contact:
     pattern: /contact-us
     defaults:

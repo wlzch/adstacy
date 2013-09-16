@@ -3,6 +3,7 @@
 namespace Adstacy\AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use JMS\Serializer\SerializationContext;
 use Adstacy\AppBundle\Model\Contact;
 use Adstacy\AppBundle\Form\Type\ContactType;
@@ -79,6 +80,35 @@ class AppController extends Controller
     public function tagsAction()
     {
         return $this->render('AdstacyAppBundle:App:tags.html.twig');
+    }
+
+    /**
+     * Username autocomplete
+     *
+     * @param string $q username to query
+     */
+    public function usernamesAction($q)
+    {
+        $request = $this->getRequest();
+        if ($request->isXmlHttpRequest()) {
+            $redis = $this->get('snc_redis.default');
+            $rank = $redis->zrank('usernames', $q);
+            $availables = $redis->zrange('usernames', $rank + 1, 50);
+            $results = array();
+            foreach ($availables as $x) {
+                if (strpos($x, $q) === false) {
+                    break;
+                }
+                $len = strlen($x);
+                if ($x[$len - 1] == '*') {
+                    $results[] = substr($x, 0, $len - 1);
+                }
+            }
+
+            return new JsonResponse(json_encode($results));
+        }
+
+        return new Response("Don't access this url directly");
     }
 
     public function contactUsAction()
