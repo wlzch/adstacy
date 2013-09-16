@@ -13,12 +13,14 @@ class PromoteAd
     /**
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Ad", inversedBy="promotees")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $ad;
 
     /**
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="User", inversedBy="promotes")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $user;
 
