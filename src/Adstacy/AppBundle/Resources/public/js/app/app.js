@@ -4,6 +4,7 @@
     failure_limit: 5,
     effect: 'fadeIn'
   });
+  $().UItoTop({ easingType: 'easeOutQuart' });
   $('.advert').ajaxlink('ads');
   $('.user').ajaxlink('users');
   $('.comment-box').keydown(function(event) {

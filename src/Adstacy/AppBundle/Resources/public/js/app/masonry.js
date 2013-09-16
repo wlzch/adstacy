@@ -36,7 +36,6 @@
         masonryTriggered = true;
       }
       $masonry.masonry();
-      $().UItoTop({ easingType: 'easeOutQuart' });
       $('.navbar-collapse').removeClass('no-transition');
 
       resizeCallback();
