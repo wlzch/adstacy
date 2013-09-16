@@ -256,4 +256,39 @@ class AdController extends Controller
 
         return $this->redirect($this->generateUrl('adstacy_app_ad_show', array('id' => $id)).'#comments');
     }
+
+    /**
+     * @Secure(roles="ROLE_USER")
+     *
+     * @param integer comment id
+     */
+    public function deleteCommentAction($id)
+    {
+        $comment = $this->getRepository('AdstacyAppBundle:Comment')->find($id);
+        if (!$comment) {
+            throw $this->createNotFoundException();
+        }
+        $user = $this->getUser();
+        $request = $this->getRequest();
+        if ($user != $comment->getUser() && $user != $comment->getAd()->getUser()) {
+            if ($request->isXmlHttpRequest()) {
+                return new JsonResponse(json_encode(array('status' => 'error', 'message' => $this->translate('ads.comment.delete.fail'))));
+            }
+            $this->addFlash('error', $this->translate('ads.comment.delete.fail'));
+
+            return $this->redirect($this->generateUrl('adstacy_app_ad_show', array('id' => $comment->getAd()->getId())));
+        }
+
+        $em = $this->getManager();
+        $em->remove($comment);
+        $em->flush();
+
+        if ($request->isXmlHttpRequest()) {
+            return new JsonResponse(json_encode(array('status' => 'ok', 'message' => $this->translate('ads.comment.delete.success'))));
+        }
+
+        $this->addFlash('success', $this->translate('ads.comment.delete.success'));
+
+        return $this->redirect($this->generateUrl('adstacy_app_ad_show', array('id' => $comment->getAd()->getId())));
+    }
 }

@@ -39,6 +39,14 @@ adstacy_app_ad_comment:
         id: \d+
     methods: [POST]
 
+adstacy_app_ad_comment_delete:
+    pattern: /comments/{id}/delete
+    defaults:
+        _controller: AdstacyAppBundle:Ad:deleteComment
+    requirements:
+        id: \d+
+    methods: [POST]
+
 adstacy_app_ad_edit:
     pattern: /ads/{id}/edit
     defaults:

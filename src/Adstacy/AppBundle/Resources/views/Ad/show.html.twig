@@ -89,9 +89,10 @@
       <div id="show-ad-comment" class="panel panel-default">
         <div class="panel-body">
           <div id="show-ad-comment-list">
+            {% set adOwner = app.user == ad.user %}
             {% for comment in comments %}
               {% set commentUser = comment.user %}
-              <div class="media" id="comments-{{ comment.id }}">
+              <div class="media comment" id="comments-{{ comment.id }}">
                 <div class="pull-left">
                   <img src="{{ profile_pic(commentUser) }}" alt="{{ commentUser.realname }}" width="60" height="60" class="media-object">
                 </div>
@@ -103,6 +104,9 @@
                   </h4>
                   <div>{{ parse_url(parse_hashtag(parse_mention(comment.content))) }}</div>
                 </div>
+                {% if adOwner or commentUser == app.user %}
+                  <a href="#" data-href="{{ path('adstacy_app_ad_comment_delete', {id: comment.id}) }}" data-toggle="modal" data-target="#delete-comment-modal">x</a>
+                {% endif %}
               </div>
             {% endfor %}
           </div>
@@ -179,17 +183,26 @@
       </div>
     </div>
   </div>
+  <div class="modal fade" id="delete-comment-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">{{ "ads.comment.delete.confirm_title"|trans }}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{{ "ads.comment.delete.confirm_message"|trans }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">{{ "cancel"|trans }}</button>
+          <button id="delete-comment-btn" class="btn btn-primary">{{ "ads.comment.delete.button"|trans }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
 
 {% block javascripts %}
   {{ parent() }}
-  <script type="text/javascript">
-    $(function() {
-      $('#show-ad').ajaxlink('promote_single');
-      $('#show-ad-owner').ajaxlink('follow_single');
-      $('#show-ad-owner').scrollToFixed({
-        marginTop: 90
-      });
-    });
-  </script>
+  <script type="text/javascript" src="{{ asset('bundles/adstacyapp/js/app/show_ad.js') }}"></script>
 {% endblock %}

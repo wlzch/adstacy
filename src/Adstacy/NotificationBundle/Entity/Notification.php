@@ -23,23 +23,25 @@ class Notification
 
     /**
      * @ORM\ManyToOne(targetEntity="Adstacy\AppBundle\Entity\User")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $from;
 
     /**
      * @ORM\ManyToOne(targetEntity="Adstacy\AppBundle\Entity\User", inversedBy="notifications")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $to;
 
     /**
      * @ORM\ManyToOne(targetEntity="Adstacy\AppBundle\Entity\Comment")
-     * @ORM\JoinColumn(name="comment", nullable=true)
+     * @ORM\JoinColumn(name="comment", nullable=true, onDelete="CASCADE")
      */
     private $comment;
 
     /**
      * @ORM\ManyToOne(targetEntity="Adstacy\AppBundle\Entity\Ad")
-     * @ORM\JoinColumn(name="ad", nullable=true)
+     * @ORM\JoinColumn(name="ad", nullable=true, onDelete="CASCADE")
      */
     private $ad;
 
