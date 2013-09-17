@@ -35,7 +35,7 @@ class MentionNotificationFormatter implements NotificationFormatterInterface
             '%profile_pic%' => $this->userHelper->getProfilePicture($notification->getFrom()),
             '%time%' => $this->formatter->ago($notification->getCreated()),
             '%user_from%' => $notification->getFrom()->getUsername(),
-            '%comment%' => $notification->getComment()->getContent()
+            '%comment%' => $this->formatter->more($notification->getComment()->getContent(), 50)
         ));
     }
 
