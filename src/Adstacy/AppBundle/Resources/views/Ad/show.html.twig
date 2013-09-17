@@ -134,7 +134,7 @@
         </div>
         {% if user.about %}
         <div id="user-about" class="panel-body">
-          <p>{{ parse_url(parse_hashtag(user.about)) }}</p>
+          <p class="break-word">{{ parse_url(parse_hashtag(user.about)) }}</p>
         </div>
         {% endif %}
         <div id="user-latest-adverts" class="clearfix">
