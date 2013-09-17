@@ -24,7 +24,7 @@ class PopulateRedisCommand extends ContainerAwareCommand
         $redis = $this->getContainer()->get('snc_redis.default');
 
         $users = $em->createQuery('
-            SELECT u.username
+            SELECT u.username, u.realName
             FROM AdstacyAppBundle:User u
         ')->getScalarResult();
 
@@ -39,6 +39,8 @@ class PopulateRedisCommand extends ContainerAwareCommand
                 $cnt++;
             }
             $redis->zadd('usernames', 0, $username.'*');
+            $redis->hmset("user:$username", 'name', $user['realName'], 'username', $user['username']);
+            $cnt++;
         }
 
         $output->writeln($cnt.' data populated');

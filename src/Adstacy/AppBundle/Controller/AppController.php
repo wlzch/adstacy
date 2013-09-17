@@ -91,26 +91,30 @@ class AppController extends Controller
     public function usernamesAction($q)
     {
         $request = $this->getRequest();
+        if ($request->isXmlHttpRequest()) {
+            if (strlen($q) <= 2) {
+                return new JsonResponse(json_encode(array()));    
+            }
             $redis = $this->get('snc_redis.default');
+            $usernames = array();
             $results = array();
-            if ($redis->exists("username_q_res:$q")) {
-                $results = $redis->smembers("username_q_res:$q");
-            } else {
-                $rank = $redis->zrank('usernames', $q);
-                $availables = $redis->zrange('usernames', $rank + 1, 50);
-                foreach ($availables as $x) {
-                    if (strpos($x, $q) === false) {
-                        break;
-                    }
-                    $len = strlen($x);
-                    if ($x[$len - 1] == '*') {
-                        $results[] = substr($x, 0, $len - 1);
-                    }
+            $rank = $redis->zrank('usernames', $q);
+            $availables = $redis->zrange('usernames', $rank + 1, 50);
+            foreach ($availables as $x) {
+                if (strpos($x, $q) === false) {
+                    break;
                 }
-                $redis->sadd("username_q_res:$q", implode(' ', $results));
+                $len = strlen($x);
+                if ($x[$len - 1] == '*') {
+                    $usernames[] = substr($x, 0, $len - 1);
+                }
+            }
+            foreach ($usernames as $username) {
+                $results[] = $redis->hgetall("user:$username");
             }
 
             return new JsonResponse(json_encode($results));
+        }
 
         return new Response("Don't access this url directly");
     }
