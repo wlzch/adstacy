@@ -68,10 +68,6 @@
           {% endif %}
         </div>
 
-        <div class="panel-body show-advert-desc">
-          <p>{{ parse_url(parse_hashtag(ad.description)) }}</p>
-        </div>
-
         <div id="show-advert-img">
           {% set src = vich_uploader_asset(ad, 'image') %}
           <img src="{{ src }}" alt="{{ ad.description }}" width="{{ ad.imageWidth }}" height="{{ ad.imageHeight }}">
@@ -89,6 +85,19 @@
       <div id="show-advert-comment" class="panel panel-default">
         <div class="panel-body">
           <div id="show-advert-comment-list">
+            <div class="media comment" id="show-advert-desc">
+              <div class="pull-left">
+                <img src="{{ profile_pic(app.user) }}" alt="{{ app.user.realname }}" width="60" height="60" class="media-object">
+              </div>
+              <div class="media-body">
+                <h4 class="media-heading">
+                  <a href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}">{{ app.user.realName }}</a>
+                  <small>@{{ app.user.userName }}</small>
+                  <time>~ {{ ago(ad.created) }}</time>
+                </h4>
+                <div>{{ parse_url(parse_hashtag(ad.description)) }}</div>
+              </div>
+            </div>
             {% set adOwner = app.user == ad.user %}
             {% for comment in comments %}
               {% set commentUser = comment.user %}
