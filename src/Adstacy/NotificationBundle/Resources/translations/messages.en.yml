@@ -1,8 +1,8 @@
 notification:
     title: Notification
-    comment: '<a class="notification clearfix" href="%url_ad%"><img src="%profile_pic%" class="notif-pic"><span class="time">%time%</span><div class="pull-left"><span class="username">%user_from%</span> has commented on your ad: <span class="notif-comment">"%comment%"</span></div></a>'
-    mention: '<a class="notification clearfix" href="%url_ad%"><img src="%profile_pic%" class="notif-pic"><span class="time">%time%</span><div class="pull-left"><span class="username">%user_from%</span> mention you on comment: <span class="notif-comment">"%comment%"</span></div></a>'
-    follow: '<a class="notification clearfix" href="%url_user%"><img src="%profile_pic%" class="notif-pic"><span class="time">%time%</span><span class="username">%user_from%</span> has followed you</a>'
-    promote: '<a class="notification" href="%url_ad%"><img src="%profile_pic%" class="notif-pic"><span class="time">%time%</span><span class="username">%user_from%</span> promoted your ad</a>'
+    comment: '<a class="media notification" href="%url_ad%"><div class="pull-left"><img src="%profile_pic%" class="media-object notif-pic"></div><div class="media-body"><div class="time">%time%</div><div><span class="username">%user_from%</span> has commented on your ad: <span class="notif-comment">"%comment%"</span></div></div></a>'
+    mention: '<a class="media notification" href="%url_ad%"><div class="pull-left"><img src="%profile_pic%" class="media-object notif-pic"></div><div class="media-body"><div class="time">%time%</div><div><span class="username">%user_from%</span> mention you on comment: <span class="notif-comment">"%comment%"</span></div></div></a>'
+    follow: '<a class="media notification" href="%url_user%"><div class="pull-left"><img src="%profile_pic%" class="media-object notif-pic"></div><div class="media-body"><div class="time">%time%</div><span class="username">%user_from%</span> has followed you</div></a>'
+    promote: '<a class="media notification" href="%url_ad%"><div class="pull-left"><img src="%profile_pic%" class="media-object notif-pic"></div><div class="media-body"><div class="time">%time%</div><span class="username">%user_from%</span> promoted your ad</div></a>'
     no_notification: No new notification
     show_all: Show all notifications

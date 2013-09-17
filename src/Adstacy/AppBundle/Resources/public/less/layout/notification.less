@@ -45,8 +45,9 @@
 .notification {
   display: block;
   text-decoration: none;
-  padding: 10px 5px;
+  padding: 10px;
   color: #999;
+
   &:hover {
     text-decoration: none;
     color: #333;
@@ -55,14 +56,9 @@
   .username, .notif-comment {
     color: #444;
   }
-  .notif-pic {
-    float: left;
-    margin-right: 10px;
-  }
-  span.time {
+  .time {
     color: #bbb;
     font-size: 11px;
-    float: left;
   }
 }
 
@@ -72,6 +68,10 @@
 
   .notif-pic {
     height: 51px;
+  }
+
+  .notification {
+    white-space: normal;
   }
 }
 
@@ -85,7 +85,8 @@
 }
 
 #all-notifications {
-  span.time {
+  .time {
+    float: left;
     font-size: 12px;
     margin-right: 10px;
   }
