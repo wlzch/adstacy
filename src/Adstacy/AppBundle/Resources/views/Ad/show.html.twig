@@ -87,12 +87,12 @@
           <div id="show-advert-comment-list">
             <div class="media comment" id="show-advert-desc">
               <div class="pull-left">
-                <img src="{{ profile_pic(app.user) }}" alt="{{ app.user.realname }}" width="60" height="60" class="media-object">
+                <img src="{{ profile_pic(ad.user) }}" alt="{{ ad.user.realname }}" width="60" height="60" class="media-object">
               </div>
               <div class="media-body">
                 <h4 class="media-heading">
-                  <a href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}">{{ app.user.realName }}</a>
-                  <small>@{{ app.user.userName }}</small>
+                  <a href="{{ path('adstacy_app_user_profile', {username: ad.user.username}) }}">{{ ad.user.realName }}</a>
+                  <small>@{{ ad.user.userName }}</small>
                   <time>~ {{ ago(ad.created) }}</time>
                 </h4>
                 <p>{{ parse_url(parse_hashtag(ad.description)) }}</p>
