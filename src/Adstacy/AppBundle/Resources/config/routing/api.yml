@@ -1,0 +1,4 @@
+adstacy_app_api_users:
+    pattern: /users.json
+    defaults:
+        _controller: AdstacyAppBundle:Api:users

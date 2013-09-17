@@ -38,3 +38,7 @@ AdstacyAppBundle_search:
 
 AdstacyAppBundle_ads:
     resource: "@AdstacyAppBundle/Resources/config/routing/ads.yml"
+
+AdstacyAppBundle_api:
+    resource: "@AdstacyAppBundle/Resources/config/routing/api.yml"
+    prefix: /api

@@ -3,6 +3,7 @@
 namespace Adstacy\AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use JMS\Serializer\SerializationContext;
 use Adstacy\AppBundle\Model\Contact;
 use Adstacy\AppBundle\Form\Type\ContactType;
