@@ -1,10 +1,8 @@
 <ul id="top-notifications" class="dropdown-menu notifications">
   {% if notifications|length > 0 %}
     {% for notification in notifications %}
-      <li class="clearfix">
-        <img src="{{ profile_pic(notification.user) }}" class="notif-pic" />
-        {{ notification.content|raw }}
-        <time>{{ ago(notification.created) }}</time>
+      <li>
+        {{ notification|raw }}
       </li>
     {% endfor %}
   {% else %}

@@ -14,3 +14,7 @@ services:
 
     adstacy.mobile_detect:
         class: Mobile_Detect
+
+    adstacy.helper.user:
+        class: Adstacy\AppBundle\Helper\UserHelper
+        arguments: [@service_container]

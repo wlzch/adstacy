@@ -1,8 +1,8 @@
 notification:
-    title: Notification
-    comment: '<div class="notification" data-href="%url_ad%"><a href="%url_user%">%user_from%</a> mengomentari iklan anda: "%comment%"</div>'
-    mention: '<div class="notification" data-href="%url_ad%"><a href="%url_user%">%user_from%</a> mention anda di komentarnya: %comment%</div>'
-    follow: '<div class="notification" data-href="%url_user%"><a href="%url_user%">%user_from%</a> follow anda</div>'
-    promote: '<div class="notification" data-href="%url_ad%"><a href="%url_user%">%user_from%</a> promote iklan anda</div>'
+    title: Notifikasi
+    comment: '<a class="media notification" href="%url_ad%"><div class="pull-left"><img src="%profile_pic%" class="media-object notif-pic"></div><div class="media-body"><div class="time">%time%</div><div><span class="username">%user_from%</span> mengomentari ad anda: <span class="notif-comment">"%comment%"</span></div></div></a>'
+    mention: '<a class="media notification" href="%url_ad%"><div class="pull-left"><img src="%profile_pic%" class="media-object notif-pic"></div><div class="media-body"><div class="time">%time%</div><div><span class="username">%user_from%</span> mention anda di komentar: <span class="notif-comment">"%comment%"</span></div></div></a>'
+    follow: '<a class="media notification" href="%url_user%"><div class="pull-left"><img src="%profile_pic%" class="media-object notif-pic"></div><div class="media-body"><div class="time">%time%</div><span class="username">%user_from%</span> follow anda </div></a>'
+    promote: '<a class="media notification" href="%url_ad%"><div class="pull-left"><img src="%profile_pic%" class="media-object notif-pic"></div><div class="media-body"><div class="time">%time%</div><span class="username">%user_from%</span> promtote ad anda</div></a>'
     no_notification: Tidak ada notifikasi
     show_all: Semua notifikasi
