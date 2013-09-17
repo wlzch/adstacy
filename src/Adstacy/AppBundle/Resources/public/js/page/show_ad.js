@@ -2,13 +2,9 @@ $(function() {
   var $window = $(window);
   $('#show-advert').ajaxlink('promote_single');
   $('#show-advert-owner').ajaxlink('follow_single');
-  var resizeCallback = function() {
-    if ($window.width() > 768) {
-      $('#show-advert-owner').scrollToFixed({
-        marginTop: 90
-      });
-    }
-  }
+  $('#show-advert-owner').scrollToFixed({
+    marginTop: 90
+  });
   var $deleteBtn = $('#delete-comment-btn');
   var $deleteModal = $('#delete-comment-modal');
   $deleteBtn.click(function() {
@@ -26,6 +22,4 @@ $(function() {
     $deleteBtn.attr('data-href', $link.attr('data-href'));
     $deleteBtn.attr('data-comment-id', $comment.attr('id'));
   });
-  $window.on('resize orientationchanged', resizeCallback);
-  resizeCallback();
 });
