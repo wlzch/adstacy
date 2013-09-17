@@ -92,25 +92,31 @@ class AppController extends Controller
     {
         $request = $this->getRequest();
         if ($request->isXmlHttpRequest()) {
-            if (strlen($q) <= 2) {
+            if (strlen($q) < 2) {
                 return new JsonResponse(json_encode(array()));    
             }
             $redis = $this->get('snc_redis.default');
             $usernames = array();
             $results = array();
-            $rank = $redis->zrank('usernames', $q);
-            $availables = $redis->zrange('usernames', $rank + 1, 50);
-            foreach ($availables as $x) {
-                if (strpos($x, $q) === false) {
-                    break;
+            if ($redis->hexists("user_q:$q", "name")) {
+                $results = $redis->hgetall("user_q:$q");
+            } else {
+                $rank = $redis->zrank('usernames', $q);
+                $availables = $redis->zrange('usernames', $rank + 1, 50);
+                foreach ($availables as $x) {
+                    if (strpos($x, $q) === false) {
+                        break;
+                    }
+                    $len = strlen($x);
+                    if ($x[$len - 1] == '*') {
+                        $usernames[] = substr($x, 0, $len - 1);
+                    }
                 }
-                $len = strlen($x);
-                if ($x[$len - 1] == '*') {
-                    $usernames[] = substr($x, 0, $len - 1);
+                foreach ($usernames as $username) {
+                    $result = $redis->hgetall("user:$username");
+                    $redis->hmset("user_q:$q", 'name', $result['name'], 'username', $result['username']);
+                    $results[] = $result;
                 }
-            }
-            foreach ($usernames as $username) {
-                $results[] = $redis->hgetall("user:$username");
             }
 
             return new JsonResponse(json_encode($results));
