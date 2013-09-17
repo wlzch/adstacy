@@ -19,10 +19,12 @@ class SearchController extends Controller
     {
         $request = $this->getRequest();
         $finder = $this->get('fos_elastica.finder.website.ad');
+        $limit = $this->getParameter('max_ads_per_page');
+        if ($this->isMobile()) $limit = $limit / 2;
 
         $adsPaginator = $finder->findPaginated($request->query->get('q'));
         $adsPaginator
-            ->setMaxPerPage($this->getParameter('max_ads_per_page'))
+            ->setMaxPerPage($limit)
             ->setCurrentPage($request->query->get('page') ?: 1)
         ;
 
@@ -37,10 +39,12 @@ class SearchController extends Controller
         $request = $this->getRequest();
         $finder = $this->get('fos_elastica.finder.website.user');
         $q = $request->query->get('q');
+        $limit = $this->getParameter('max_users_per_page');
+        if ($this->isMobile()) $limit = $limit / 2;
 
         $usersPaginator = $finder->findPaginated($request->query->get('q'));
         $usersPaginator 
-            ->setMaxPerPage($this->getParameter('max_users_per_page'))
+            ->setMaxPerPage($limit)
             ->setCurrentPage($request->query->get('page') ?: 1)
         ;
 

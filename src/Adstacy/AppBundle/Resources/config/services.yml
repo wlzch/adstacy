@@ -11,3 +11,6 @@ services:
     
     adstacy.helper.formatter:
         class: Adstacy\AppBundle\Helper\Formatter
+
+    adstacy.mobile_detect:
+        class: Mobile_Detect

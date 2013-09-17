@@ -98,4 +98,14 @@ class Controller extends BaseController
     {
         return $this->get('translator')->trans($keyword, $replacements);
     }
+
+    /**
+     * Check if request is from mobile
+     *
+     * @return boolean
+     */
+    public function isMobile()
+    {
+        return $this->get('adstacy.mobile_detect')->isMobile();
+    }
 }

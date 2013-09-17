@@ -29,8 +29,9 @@ class AppController extends Controller
     public function exploreAction()
     {
         $request = $this->getRequest();
-        $maxAd = $this->getParameter('max_ads_per_page');
-        $ads = $this->getRepository('AdstacyAppBundle:Ad')->findAdsSinceId($request->query->get('id'), $maxAd);
+        $limit = $this->getParameter('max_ads_per_page');
+        if ($this->isMobile()) $limit = $limit / 2;
+        $ads = $this->getRepository('AdstacyAppBundle:Ad')->findAdsSinceId($request->query->get('id'), $limit);
 
         return $this->render('AdstacyAppBundle:App:explore.html.twig', array(
             'ads' => $ads
@@ -46,7 +47,10 @@ class AppController extends Controller
     {
         $user = $this->getUser();
         $query = $this->getRepository('AdstacyAppBundle:Ad')->findUserStreamQuery($user);
-        $paginator = $this->getDoctrinePaginator($query, $this->getParameter('max_ads_per_page'));
+        $limit = $this->getParameter('max_ads_per_page');
+        if ($this->isMobile()) $limit = $limit / 2;
+
+        $paginator = $this->getDoctrinePaginator($query, $limit);
         $suggestionsPaginator = array();
         if ($user->getFollowingsCount() <= 0) {
             $suggestQuery = $this->getRepository('AdstacyAppBundle:User')->suggestUserQuery($user);

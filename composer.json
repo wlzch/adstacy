@@ -36,7 +36,8 @@
         "sonata-project/admin-bundle": "dev-master",
         "sonata-project/doctrine-orm-admin-bundle": "dev-master",
         "ornicar/apc-bundle": "dev-master",
-        "exercise/htmlpurifier-bundle": "dev-master"
+        "exercise/htmlpurifier-bundle": "dev-master",
+        "mobiledetect/mobiledetectlib": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [
