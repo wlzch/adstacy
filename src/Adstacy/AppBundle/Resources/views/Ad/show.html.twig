@@ -95,7 +95,7 @@
                   <small>@{{ app.user.userName }}</small>
                   <time>~ {{ ago(ad.created) }}</time>
                 </h4>
-                <div>{{ parse_url(parse_hashtag(ad.description)) }}</div>
+                <p>{{ parse_url(parse_hashtag(ad.description)) }}</p>
               </div>
             </div>
             {% set adOwner = app.user == ad.user %}
@@ -114,7 +114,7 @@
                     <small>@{{ commentUser.userName }}</small>
                     <time>~ {{ ago(comment.created) }}</time>
                   </h4>
-                  <div>{{ parse_url(parse_hashtag(parse_mention(comment.content))) }}</div>
+                  <p>{{ parse_url(parse_hashtag(parse_mention(comment.content))) }}</p>
                 </div>
               </div>
             {% endfor %}

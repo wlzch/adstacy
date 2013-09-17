@@ -176,10 +176,34 @@
       max-width: 100%;
     }
   }
-
   #show-advert-toolbar {
     .social-label, .owner-action-label {
       display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .comment {
+    img {
+      width: 30px;
+      height: 30px;
+    }
+    .media-heading {
+      line-height: 0;
+      margin: 0;
+    }
+    .media-heading a {
+      font-size: 13px;
+    }
+    .media-heading small {
+      font-size: 12px;
+    }
+    span.time {
+      font-size: 11px;
+    }
+    p {
+      font-size: 12px;
     }
   }
 }
