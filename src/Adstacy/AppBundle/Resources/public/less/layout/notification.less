@@ -78,6 +78,7 @@
 #show-all-notifications {
   background-color: #f5f5f5;
   text-align: center;
+
   .notification {
     display: block;
     padding: 5px;
@@ -85,6 +86,14 @@
 }
 
 #all-notifications {
+  .list-group-item:first-child a {
+    .border-top-radius(@border-radius-base);
+  }
+
+  .list-group-item:last-child a {
+    .border-bottom-radius(@border-radius-base);
+  }
+
   .time {
     float: left;
     font-size: 12px;
