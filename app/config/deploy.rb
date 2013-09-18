@@ -55,10 +55,15 @@ namespace :symfony do
 end
 
 namespace :adstacy do
-    desc "Populate redis data"
     task :populate_redis do
         capifony_pretty_print "--> Populating redis data"
         run "#{try_sudo} sh -c 'cd #{latest_release} && #{php_bin} #{symfony_console} adstacy:redis:populate"
+        capifony_puts_ok
+    end
+
+    task :clean_notification do
+        capifony_pretty_print "--> Cleaning notification"
+        run "#{try_sudo} sh -c 'cd #{latest_release} && #{php_bin} #{symfony_console} adstacy:notification:clean"
         capifony_puts_ok
     end
 end
