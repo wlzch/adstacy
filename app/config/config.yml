@@ -27,6 +27,7 @@ parameters:
         ad:
             mappings:
                 tags: { boost: 5 }
+                created: { type: date }
             persistence:
                 driver: orm
                 model: Adstacy\AppBundle\Entity\Ad

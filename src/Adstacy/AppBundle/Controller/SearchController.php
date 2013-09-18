@@ -22,7 +22,15 @@ class SearchController extends Controller
         $limit = $this->getParameter('max_ads_per_page');
         if ($this->isMobile()) $limit = $limit / 2;
 
-        $adsPaginator = $finder->findPaginated($request->query->get('q'));
+        $boolQuery = new \Elastica\Query\Bool();
+
+        $stringQuery = new \Elastica\Query\QueryString($request->query->get('q'));
+        $boolQuery->addMust($stringQuery);
+
+        $finalQuery = new \Elastica\Query($boolQuery);
+        $finalQuery->setSort(array('created' => array('order' => 'desc')));
+
+        $adsPaginator = $finder->findPaginated($finalQuery);
         $adsPaginator
             ->setMaxPerPage($limit)
             ->setCurrentPage($request->query->get('page') ?: 1)
