@@ -152,6 +152,21 @@ class AdRepository extends EntityRepository
         return $query->setParameter('id', $user->getId());
     }
 
+    public function findTrendingPromotes($limit = 50)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('
+            SELECT a, u
+            FROM AdstacyAppBundle:Ad a
+            JOIN a.user u
+            ORDER BY a.promoteesCount DESC
+        ');
+        $query->setMaxResults($limit);
+        $query->useResultCache(true, 3600, 'AdFindTrendingPromotes');
+
+        return $query->getResult();
+    }
+
     /**
      * Find all ads with most promote since $since
      *

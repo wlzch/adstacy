@@ -71,7 +71,7 @@ class AppController extends Controller
     public function trendingAction()
     {
         $since = date('Y-m-d', strtotime('-7 day', time())); // 7 days ago
-        $ads = $this->getRepository('AdstacyAppBundle:Ad')->findTrendingSince($since);
+        $ads = $this->getRepository('AdstacyAppBundle:Ad')->findTrendingPromotes();
 
         return $this->render('AdstacyAppBundle:App:trending.html.twig', array(
             'ads' => $ads
