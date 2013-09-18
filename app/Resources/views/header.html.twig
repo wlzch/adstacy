@@ -2,7 +2,9 @@
   <div id="extra-nav-box">
     <div class="adstacy-container">
       <div class="btn-group">
-        <a href="{{ path('adstacy_app_stream') }}" class="btn extra-nav" title="{{"stream"|trans}}"><i class="icon-home"></i>&nbsp; {{"stream"|trans|upper}}</a>
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        <a href="{{ path('homepage') }}" class="btn extra-nav" title="{{"stream"|trans}}"><i class="icon-home"></i>&nbsp; {{"stream"|trans|upper}}</a>
+        {% endif %}
         <a href="{{ path('adstacy_app_explore') }}" class="btn extra-nav" title="Explore"><i class="icon-globe"></i>&nbsp; EXPLORE</a>
         <a href="{{ path('adstacy_app_trending') }}" class="btn extra-nav" title="Trending"><i class="icon-rocket"></i>&nbsp; TRENDING</a>
       </div>
@@ -119,7 +121,7 @@
 
       <ul id="mobile-nav" class="nav navbar-nav navbar-right">
         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-        <li><a href="{{ path('adstacy_app_stream') }}"><i class="icon-home"></i>&nbsp; {{"stream"|trans}}</a></li>
+        <li><a href="{{ path('homepage') }}"><i class="icon-home"></i>&nbsp; {{"stream"|trans}}</a></li>
         {% endif %}
         <li><a href="{{ path('adstacy_app_explore') }}" title="Explore"><i class="icon-globe"></i>&nbsp; Explore</a></li>
         <li><a href="{{ path('adstacy_app_trending') }}" title="Trending"><i class="icon-rocket"></i>&nbsp; Trending</a></li>
