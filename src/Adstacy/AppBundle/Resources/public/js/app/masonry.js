@@ -48,7 +48,11 @@
     }
   }
   $(function() {
-    $window.on('resize orientationChanged', masonryCheck);
     masonryCheck();
+    $('body').removeClass('body-loading');
   });
-})();
+
+  $window.on('resize orientationChanged', masonryCheck);
+}());
+
+

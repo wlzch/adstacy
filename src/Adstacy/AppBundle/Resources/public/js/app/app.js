@@ -2,7 +2,8 @@
   $('img.lazy').lazyload({
     threshold: 1500,
     failure_limit: 5,
-    effect: 'fadeIn'
+    effect: 'fadeIn',
+    skip_invisible: false
   });
   $().UItoTop({ easingType: 'easeOutQuart' });
   $('.advert').ajaxlink('ads');
