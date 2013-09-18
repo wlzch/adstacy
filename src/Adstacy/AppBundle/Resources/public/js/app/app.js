@@ -45,7 +45,7 @@
   }
   if (Modernizr.localstorage) {
     users = localStorage.getItem('users');
-    if (users) {
+    if ($.isArray(users)) {
       mention(JSON.parse(users));
     } else {
       getUsers();

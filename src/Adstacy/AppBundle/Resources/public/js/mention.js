@@ -1,9 +1,7 @@
 // Copyright (c) 2013 Jacob Kelley
 // Copyright (C) 2013 Bijan Ebrahimi <bijanebrahimi@lavabit.com>
-//      overriding delimiter
-//      optional key/name/image object variable name 
-//      removed already mentions objects from emptyQuery result
-//      fixed unclosed mention menu bug
+//      added optional delimiter value for each item
+//      added kre, name instead of 'username'/'user'
 // 
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -30,13 +28,13 @@
             this.opts = {
                 users: [],
                 delimiter: '@',
-                delimiters: '',
                 sensitive: true,
                 emptyQuery: false,
                 key: 'username',
                 name: 'name',
                 image: 'image',
                 queryBy: [],
+                
                 typeaheadOpts: {}
             };
 
@@ -53,7 +51,8 @@
                     return true;
                 },
                 _extractCurrentQuery = function(query, caratPos) {
-                    for (var i = caratPos; i >= 0; i--) {
+                    var i;
+                    for (i = caratPos; i >= 0; i--) {
                         if (query[i] == settings.delimiter) {
                             break;
                         }
@@ -61,46 +60,33 @@
                     return query.substring(i, caratPos);
                 },
                 _matcher = function(itemProps) {
-                    // default value for queryBy is [settings.key], 
-                    if(settings.queryBy.length == 0)
-                        settings.queryBy = [settings.key]
-                    
-                    // local variable
-                    var current_delimiter = (itemProps['delimiter'] ? itemProps['delimiter'] : settings.delimiter),
-                        itemKey = itemProps[settings.key].toLowerCase(),
-                        q = (this.query.toLowerCase()),
-                        caratPos = this.$element[0].selectionStart,
-                        lastChar = q.slice(caratPos-1,caratPos);
-                    
-                    // list all the usernames already in text (in lower case)
-                    var usernames = (q.toLowerCase().match(new RegExp(current_delimiter + '\\w+', "g"))||[]).map(function(b){ return b.toLowerCase(); })
-
-                    // query only the word between cursor and the first space/delimiter behind it
-                    var q = (q.substring(0, caratPos).match(new RegExp('([^ '+settings.delimiters+']+)$')) || [''])[0]
-                    
-                    // in emptyQuery, try to list all but those already selected
+                    var i;
                     if(settings.emptyQuery){
+	                    var q = (this.query.toLowerCase()),
+	                    	caratPos = this.$element[0].selectionStart,
+	                    	lastChar = q.slice(caratPos-1,caratPos),
+                            current_delimiter = (itemProps['delimiter'] ? itemProps['delimiter'] : settings.delimiter);
                         if(lastChar==current_delimiter){
-		                    if (usernames.indexOf(current_delimiter+itemKey)==-1)
-                                return true
+		                    if(!q.match(new RegExp(current_delimiter + itemProps[settings.key], 'g')))
+                                return true;
 	                    }
                     }
                     
-                    // at this moment, don't bother to search empty query
-                    if(q == '') return false
-                    
-                    // list possible answers
-                    for (var i in settings.queryBy) {
+                    if(!settings.queryBy.length)
+                        settings.queryBy = [settings.key]
+                    for (i in settings.queryBy) {
                         if (itemProps[settings.queryBy[i]]) {
-                            var item = itemProps[settings.queryBy[i]].toLowerCase()
-                            if(q.trim().toLowerCase().substring(1)==itemProps[settings.key].toLowerCase())
-                                return false
-                            for (var j = 0; j < usernames.length; j++) {
-                                var username = (usernames[j].substring(1)).toLowerCase(),
-                                    re = new RegExp(current_delimiter + item, "g"),
-                                    used = ((q.toLowerCase()).match(re));
-                                if (item.indexOf(username) != -1 && used === null && usernames.indexOf(current_delimiter+itemProps[settings.key].toLowerCase()) == -1) {
-                                    return true;
+                            var item = itemProps[settings.queryBy[i]].toLowerCase(),
+                                usernames = (this.query.toLowerCase()).match(new RegExp((itemProps['delimiter'] ? itemProps['delimiter'] : settings.delimiter) + '\\w+', "g")),
+                                j;
+                            if ( !! usernames) {
+                                for (j = 0; j < usernames.length; j++) {
+                                    var username = (usernames[j].substring(1)).toLowerCase(),
+                                        re = new RegExp((itemProps['delimiter'] ? itemProps['delimiter'] : settings.delimiter) + item, "g"),
+                                        used = ((this.query.toLowerCase()).match(re));
+                                    if (item.indexOf(username) != -1 && used === null) {
+                                        return true;
+                                    }
                                 }
                             }
                         }
@@ -187,16 +173,6 @@
                     this.$menu.html(items);
                     return this;
                 };
-
-            // fill settings.delimiters if empty
-            if(settings.delimiters.length==0){
-                settings.delimiters = settings.delimiter
-                for(var i=0; i<settings.users.length; i++){
-                    if(settings.users[i].delimiter)
-                        if(settings.delimiters.indexOf(settings.users[i].delimiter)==-1)
-                            settings.delimiters += settings.users[i].delimiter
-                }
-            }
 
             $.fn.typeahead.Constructor.prototype.render = _render;
             $.fn.typeahead.Constructor.prototype.select = function () {
