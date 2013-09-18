@@ -1,14 +1,3 @@
 <ul id="feeds-masonry" class="masonry-item panel panel-default">
-  <li><a href="{{ path('adstacy_app_search', {q: 'kuliner'}) }}" title="Stream">Kuliner <small>#kuliner</small></a></li>
-  <li><a href="{{ path('adstacy_app_search', {q: 'fashion'}) }}" title="Stream">Fashion <small>#fashion</small></a></li>
-  <li><a href="{{ path('adstacy_app_search', {q: 'event'}) }}" title="Stream">Event <small>#event</small></a></li>
-  <li><a href="{{ path('adstacy_app_search', {q: 'game'}) }}" title="Stream">Game <small>#game</small></a></li>
-  <li><a href="{{ path('adstacy_app_search', {q: 'lowongan'}) }}" title="Stream">Lowongan <small>#lowongan</small></a></li>
-  <li><a href="{{ path('adstacy_app_search', {q: 'carijodoh'}) }}" title="Stream">Cari Jodoh <small>#carijodoh</small></a></li>
-  <li><a href="{{ path('adstacy_app_search', {q: 'movie'}) }}" title="Stream">Movie <small>#movie</small></a></li>
-  <li><a href="{{ path('adstacy_app_search', {q: 'diskon'}) }}" title="Stream">Diskon <small>#diskon</small></a></li>
-  <li><a href="{{ path('adstacy_app_search', {q: 'gadget'}) }}" title="Stream">Gadget <small>#gadget</small></a></li>
-  <li><a href="{{ path('adstacy_app_search', {q: 'medan'}) }}" title="Stream">Medan <small>#medan</small></a></li>
-  <li><a href="{{ path('adstacy_app_search', {q: 'jakarta'}) }}" title="Stream">Jakarta <small>#jakarta</small></a></li>
-  <li><a href="{{ path('adstacy_app_search', {q: 'indonesia'}) }}" title="Stream">Indonesia <small>#indonesia</small></a></li>
+  {% include 'AdstacyAppBundle:App:tag_list.html.twig' %}
 </ul>
