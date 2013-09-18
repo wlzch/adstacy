@@ -119,19 +119,21 @@
               </div>
             {% endfor %}
           </div>
-          {# id=comments only used for link anchor #}
-          <div id="comments">
-            {% for flash in app.session.flashbag.get('comment.warning') %}
-              <div class="alert alert-warning">{{ flash }}</div>
-            {% endfor %}
-            {{ form_start(form) }}
-              <div class="form-group">
-                {{ form_widget(form.content, { attr: { class: 'comment-box' } }) }}
-              </div>
-              <input type="submit" value="{{"comment"|trans}}" class="hide">
-              {{ form_rest(form) }}
-            {{ form_end(form) }}
-          </div>
+          {% if app.user %}
+            {# id=comments only used for link anchor #}
+            <div id="comments">
+              {% for flash in app.session.flashbag.get('comment.warning') %}
+                <div class="alert alert-warning">{{ flash }}</div>
+              {% endfor %}
+              {{ form_start(form) }}
+                <div class="form-group">
+                  {{ form_widget(form.content, { attr: { class: 'comment-box' } }) }}
+                </div>
+                <input type="submit" value="{{"comment"|trans}}" class="hide">
+                {{ form_rest(form) }}
+              {{ form_end(form) }}
+            </div>
+          {% endif %}
         </div>
       </div>
     </div>

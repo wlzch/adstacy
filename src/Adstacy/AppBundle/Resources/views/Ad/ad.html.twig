@@ -58,10 +58,12 @@
       </div>
     </div>
   </div>
+  {% if app.user %}
   <div class="advert-comment">
     <form action="{{ path('adstacy_app_ad_comment', {id: ad.id}) }}" method="post">
       <textarea name="comment[content]" required="required" class="comment-box" placeholder="{{"form_comment.placeholders.content"|trans}}"></textarea>
       <input type="submit" value="{{"comment"|trans}}" class="hide">
     </form>
   </div>
+  {% endif %}
 </div>
