@@ -87,6 +87,20 @@ a.mention {
   }
 }
 
+#comments {
+  .form-group {
+    position: relative;
+  }
+}
+
+.advert-comment form {
+  position: relative;
+}
+
+.typeahead.dropdown-menu {
+  min-width: 234px;
+}
+
 @media screen and (max-width: 499px) {
   #toTop {
     display: none !important;
@@ -95,6 +109,11 @@ a.mention {
   .panel {
     border-radius: 0;
   }
+
+  .typeahead.dropdown-menu {
+    min-width: 100%;
+  }
+
   body {
     margin-bottom: 200px;
   }
