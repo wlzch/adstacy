@@ -94,10 +94,10 @@ form_ad:
     content_trigger: Click to add more images and descriptions
     submit: Save
     placeholders:
-        description: Describe your ads creatively to reach your potential market. See examples for reference.
+        description: Describe your ads creatively. See examples for reference.
     characters_left: '<span id="chars-left">%left%</span> characters left'
     helps:
-        description: 'Use #hashtags to make your ads searchable'
+        description: 'Use #hashtags to categorize your ads'
     example: examples
     examples:
         example1: "Rp250.000 #tshirt #brand #jual #medan #pria #indonesia"

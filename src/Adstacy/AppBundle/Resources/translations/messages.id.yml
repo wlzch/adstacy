@@ -87,10 +87,10 @@ form_ad:
     content_trigger: Klik untuk menambahkan gambar dan deskripsi lengkap
     submit: Simpan
     placeholders:
-        description: Deskripsikan iklan anda secara kreatif sesuai target pasar anda. Lihat contoh untuk referensi.
+        description: Deskripsikan iklan anda secara kreatif. Lihat contoh untuk referensi.
     characters_left: 'sisa <span id="chars-left">%left%</span> karakter'
     helps:
-        description: 'Gunakan #hashtags agar iklan anda bisa dicari'
+        description: 'Gunakan #hashtags untuk mengkategorikan iklan Anda'
     example: contoh
     examples:
         example1: "Rp250.000 #tshirt #brand #jual #medan #pria #indonesia"
