@@ -82,7 +82,7 @@ class FormatterExtension extends \Twig_Extension
         return preg_replace_callback(
           "#((http|https|ftp)://(\S*?\.\S*?))(\s|\;|\)|\]|\[|\{|\}|,|\"|'|:|\<|$|\.\s)#i",
           function($matches) {
-              return sprintf('<a class="url" href="%s" target="_blank">%s</a>', $matches[1], $matches[3]);
+              return sprintf('<a class="url" href="%s" target="_blank">%s</a> ', $matches[1], $matches[3]);
           }, $text
         );
     }
