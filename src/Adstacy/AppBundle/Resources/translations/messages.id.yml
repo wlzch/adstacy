@@ -142,7 +142,9 @@ flash:
             success: %username% berhasil di unfollow
 
 landing:
-    welcome: Selamat Datang di Adstacy
+    welcome: Cari dan Berbagi Berbagai Promosi di Adstacy
+    desc: event, lowongan kerja, kuliner, fashion, dll.
+    explore: Explore Sekarang
     features:
         easy:
             heading: <b>M</b>udah

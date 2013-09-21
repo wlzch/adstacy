@@ -154,7 +154,9 @@ flash:
             success: You have successfully unfollowed %username%
 
 landing:
-    welcome: Welcome to Adstacy
+    welcome: Find and Share Various Promotions at Adstacy
+    desc: event, job vacancy, culinary, fashion, etc.
+    explore: Explore Now
     features:
         easy:
             heading: <b>E</b>asy &amp; <b>F</b>ree
