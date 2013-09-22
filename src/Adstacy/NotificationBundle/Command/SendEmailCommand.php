@@ -22,6 +22,9 @@ class SendEmailCommand extends ContainerAwareCommand
     {
         $container = $this->getContainer();
         $em = $container->get('doctrine')->getManager();
+        $context = $container->get('router')->getContext();
+        $context->setHost('www.adstacy.com');
+        $context->setScheme('http');
 
         $output->writeln('Sending notification email...');
 

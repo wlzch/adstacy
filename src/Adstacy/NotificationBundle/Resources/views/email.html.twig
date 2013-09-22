@@ -72,9 +72,9 @@
       <table cellpadding="0" cellspacing="0" border="0" width="600" align="center">
         {% for notification in notifications %}
         <tr>
-          <td width="200" valign="top">{{ notification.from.realName }}</td>
-          <td width="200" valign="top"></td>
-          <td width="200" valign="top"></td>
+          <td><img src="{{ notification.profile_pic }}"></td>
+          <td><a href="{{ notification.url  }}" target="_blank">{{ notification.username }} {{ notification.text }}</a></td>
+          <td>{{ notification.time }}</td>
         </tr>
         {% endfor %}
       </table>

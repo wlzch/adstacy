@@ -31,6 +31,9 @@ monolog:
 assetic:
     use_controller: false
 
+swiftmailer:
+    disable_delivery: true
+
 ornicar_apc:
     host: http://adstacy.dev
     web_dir: %kernel.root_dir%/../web
