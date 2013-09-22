@@ -23,16 +23,31 @@ class FollowNotificationFormatter implements NotificationFormatterInterface
         $this->userHelper = $userHelper;
     }
 
-    public function format(Notification $notification)
+    public function getImage(Notification $notification)
     {
-        return $this->translator->trans('notification.follow', array(
-            '%url_user%' => $this->router->generate('adstacy_app_user_profile', array(
-                'username' => $notification->getFrom()->getUsername()
-            )),
-            '%profile_pic%' => $this->userHelper->getProfilePicture($notification->getFrom()),
-            '%time%' => $this->formatter->ago($notification->getCreated()),
-            '%user_from%' => $notification->getFrom()->getUsername(),
+        return $this->userHelper->getProfilePicture($notification->getFrom());
+    }
+
+    public function getTime(Notification $notification)
+    {
+        return $this->formatter->ago($notification->getCreated());
+    }
+
+    public function getName(Notification $notification)
+    {
+        return $notification->getFrom()->getUsername();
+    }
+
+    public function getUrl(Notification $notification)
+    {
+        return $this->router->generate('adstacy_app_user_profile', array(
+            'username' => $notification->getFrom()->getUsername()
         ));
+    }
+
+    public function getText(Notification $notification)
+    {
+        return $this->translator->trans('notification.follow');
     }
 
     public function support(Notification $notification)

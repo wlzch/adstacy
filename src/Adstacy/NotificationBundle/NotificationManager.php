@@ -52,13 +52,20 @@ class NotificationManager
      *
      * @param Notification $notification
      *
-     * @return string|false
+     * @return array
      */
     public function format(Notification $notification)
     {
         foreach ($this->formatters as $formatter) {
             if ($formatter->support($notification)) {
-                return $formatter->format($notification);
+                $notif = array();
+                $notif['image'] = $formatter->getImage($notification);
+                $notif['time'] = $formatter->getTime($notification);
+                $notif['name'] = $formatter->getName($notification);
+                $notif['url'] = $formatter->getUrl($notification);
+                $notif['text'] = $formatter->getText($notification);
+
+                return $notif;
             }
         }
 

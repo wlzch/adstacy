@@ -23,19 +23,31 @@ class PromoteNotificationFormatter implements NotificationFormatterInterface
         $this->userHelper = $userHelper;
     }
 
-    public function format(Notification $notification)
+    public function getImage(Notification $notification)
     {
-        return $this->translator->trans('notification.promote', array(
-            '%url_ad%' => $this->router->generate('adstacy_app_ad_show', array(
-                'id' => $notification->getAd()->getId()
-            )),
-            '%profile_pic%' => $this->userHelper->getProfilePicture($notification->getFrom()),
-            '%time%' => $this->formatter->ago($notification->getCreated()),
-            '%url_user%' => $this->router->generate('adstacy_app_user_profile', array(
-                'username' => $notification->getFrom()->getUsername()
-            )),
-            '%user_from%' => $notification->getFrom()->getUsername()
+        return $this->userHelper->getProfilePicture($notification->getFrom());
+    }
+
+    public function getTime(Notification $notification)
+    {
+        return $this->formatter->ago($notification->getCreated());
+    }
+
+    public function getName(Notification $notification)
+    {
+        return $notification->getFrom()->getUsername();
+    }
+
+    public function getUrl(Notification $notification)
+    {
+        return $this->router->generate('adstacy_app_ad_show', array(
+            'id' => $notification->getAd()->getId()
         ));
+    }
+
+    public function getText(Notification $notification)
+    {
+        return $this->translator->trans('notification.promote');
     }
 
     public function support(Notification $notification)

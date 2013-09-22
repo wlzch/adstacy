@@ -23,20 +23,32 @@ class CommentNotificationFormatter implements NotificationFormatterInterface
         $this->userHelper = $userHelper;
     }
 
-    public function format(Notification $notification)
+    public function getImage(Notification $notification)
     {
-        return $this->translator->trans('notification.comment', array(
-            '%url_ad%' => $this->router->generate('adstacy_app_ad_show', array(
-                'id' => $notification->getAd()->getId()
-            )).'#comments-'.$notification->getComment()->getId(),
-            '%profile_pic%' => $this->userHelper->getProfilePicture($notification->getFrom()),
-            '%time%' => $this->formatter->ago($notification->getCreated()),
-            '%url_user%' => $this->router->generate('adstacy_app_user_profile', array(
-                'username' => $notification->getFrom()->getUsername()
-            )),
-            '%user_from%' => $notification->getFrom()->getUsername(),
-            '%comment%' => $this->formatter->more($notification->getComment()->getContent(), 50)
+        return $this->userHelper->getProfilePicture($notification->getFrom());
+    }
+
+    public function getTime(Notification $notification)
+    {
+        return $this->formatter->ago($notification->getCreated());
+    }
+
+    public function getName(Notification $notification)
+    {
+        return $notification->getFrom()->getUsername();
+    }
+
+    public function getUrl(Notification $notification)
+    {
+        return $this->router->generate('adstacy_app_ad_show', array(
+            'id' => $notification->getAd()->getId()
         ));
+    }
+
+    public function getText(Notification $notification)
+    {
+        $comment = $this->formatter->more($notification->getComment()->getContent(), 50);
+        return $this->translator->trans('notification.comment'). ' "' . $comment . '"';
     }
 
     public function support(Notification $notification)
