@@ -30,9 +30,16 @@ class SendEmailCommand extends ContainerAwareCommand
 
         $since = date('Y-m-d', strtotime('-12 hours', time()));
         $notifications = $em->createQuery('
-            SELECT n
+            SELECT n,
+            partial f.{id,username,imagename,realName},
+            partial a.{id,imagename,description,created},
+            c
             FROM AdstacyNotificationBundle:Notification n
-            WHERE n.created >= :since
+            JOIN n.to u
+            JOIN n.from f
+            LEFT JOIN n.ad a
+            LEFT JOIN n.comment c
+            WHERE n.created >= :since AND n.read = FALSE
         ')->setParameter('since', $since)->getResult();
 
         $mailer = $container->get('mailer');

@@ -56,3 +56,4 @@ services:
         class: Adstacy\NotificationBundle\EmailManager
         arguments:
             - @service_container
+            - @adstacy.notification.manager
