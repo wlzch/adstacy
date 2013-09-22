@@ -34,6 +34,7 @@
         });
         $window.on('resize orientationChanged', resizeCallback);
         masonryTriggered = true;
+        masonryDestroyed = false;
       }
       $masonry.masonry();
       $('.navbar-collapse').removeClass('no-transition');
@@ -43,6 +44,7 @@
       if (masonryTriggered) {
         $masonry.masonry('destroy');
         masonryDestroyed = true;
+        masonryTriggered = false;
       }
       $('.navbar-collapse').addClass('no-transition');
     }
