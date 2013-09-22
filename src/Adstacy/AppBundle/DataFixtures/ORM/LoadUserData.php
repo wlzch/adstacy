@@ -50,12 +50,32 @@ class LoadUserData extends DataFixture
         $manager->persist($welly);
         $manager->persist($erwin);
         $manager->persist($admin);
-        $manager->flush();
 
         $this->addReference('user-suwandi', $suwandi);
         $this->addReference('user-welly', $welly);
         $this->addReference('user-erwin', $erwin);
         $this->addReference('user-admin', $admin);
+
+        $users = array('andy', 'ricky', 'robert', 'wilson', 'dennis', 'hendra', 'david', 'rudy',
+            'tony', 'jimmy', 'rita', 'fanny', 'dewi', 'kartika', 'angela', 'yenny', 'lisa', 'jenny',
+            'erlika', 'tina', 'louis', 'sally', 'chistine', 'beny', 'yurica', 'melisa', 'anita',
+            'wendy', 'susanti', 'albert', 'hendy', 'fendy', 'stanley', 'siska', 'cindy', 'catherine',
+            'antonio', 'steven', 'novita', 'cynthia', 'andika', 'putra', 'putri', 'lusi', 'linda',
+            'sanny', 'erna', 'halim', 'rani', 'dicky', 'july', 'donita', 'mega', 'mentari', 'mika');
+        foreach ($users as $user) {
+            $tmp = new User();
+            $tmp->setUsername($user);
+            $tmp->setRealname($user);
+            $tmp->setEmail($user.'@gmail.com');
+            $tmp->setAbout('IU fans\' items online seller, #IU \'s #album, #poster, #fashion and many more stuffs. Location for #Medan, #Indonesia. YM: wandi.lin@yahoo.com Hangout: wandi.lin13@gmail.com BB Pin: 25fa9088 HP: 0877 9399 5355');
+            $encoder = $this->get('security.encoder_factory')->getEncoder($tmp);
+            $password = $encoder->encodePassword($user, $tmp->getSalt());
+            $tmp->setPassword($password);
+
+            $manager->persist($tmp);
+            $this->addReference('user-'.$user, $tmp);
+        }
+        $manager->flush();
     }
 
     public function getOrder()

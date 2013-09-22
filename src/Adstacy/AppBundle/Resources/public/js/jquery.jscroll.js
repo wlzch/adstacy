@@ -19,7 +19,7 @@
         defaults: {
             debug: false,
             autoTrigger: true,
-            loadingHtml: '<a class="btn btn-default btn-block load-next"><img src="/bundles/adstacyapp/img/spinner.gif"></a>',
+            loadingHtml: '<a class="btn btn-default btn-lg btn-block load-next"><img src="/bundles/adstacyapp/img/spinner.gif"></a>',
             padding: 0,
             nextSelector: 'a.next-page',
             contentSelector: '',
