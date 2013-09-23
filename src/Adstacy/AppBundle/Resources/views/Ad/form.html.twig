@@ -13,6 +13,7 @@
   {{ parent() }}
   {% javascripts filter='uglifyjs2'
     '@AdstacyAppBundle/Resources/public/js/FileAPI.min.js'
+    '@AdstacyAppBundle/Resources/public/js/FileAPI.exif.js'
   %}
     <script src="{{ asset_url }}" type="text/javascript"></script>
   {% endjavascripts %}
