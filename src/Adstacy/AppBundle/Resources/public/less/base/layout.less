@@ -2,7 +2,7 @@ body {
   color: #333;
   font-size: 13px;
   padding-top: 82px;
-  background-color: #dfdfdf;
+  background: #dfdfdf url("../img/noise.png");
   margin-bottom: 50px;
   visibility: visible;
 }
@@ -103,6 +103,13 @@ a.mention {
   min-width: 234px;
 }
 
+.loader-img {
+  width: 32px;
+  height: 32px;
+  margin: 0 auto 20px;
+  background-image: url(@loader-img);
+}
+
 @media screen and (max-width: 499px) {
   #toTop {
     display: none !important;
@@ -124,7 +131,7 @@ a.mention {
 
 @media screen and (min-width: 500px) {
   .body-loader {
-    background: #dfdfdf url("data:image/gif;base64,@{loader-img}") no-repeat center fixed;
+    background: #dfdfdf url(@loader-img) no-repeat center fixed;
   }
   .body-content {
     visibility: hidden;
