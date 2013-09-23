@@ -51,18 +51,19 @@ class NotificationManager
      * Format notification
      *
      * @param Notification $notification
+     * @param boolean $absolute
      *
      * @return array
      */
-    public function format(Notification $notification)
+    public function format(Notification $notification, $absolute = false)
     {
         foreach ($this->formatters as $formatter) {
             if ($formatter->support($notification)) {
                 $notif = array();
-                $notif['image'] = $formatter->getImage($notification);
+                $notif['image'] = $formatter->getImage($notification, $absolute);
                 $notif['time'] = $formatter->getTime($notification);
                 $notif['name'] = $formatter->getName($notification);
-                $notif['url'] = $formatter->getUrl($notification);
+                $notif['url'] = $formatter->getUrl($notification, $absolute);
                 $notif['text'] = $formatter->getText($notification);
 
                 return $notif;

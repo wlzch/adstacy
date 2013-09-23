@@ -19,8 +19,9 @@ class EmailManager
     {
         $filteredNotifications = array();
         foreach ($notifications as $notification) {
-            $filteredNotifications[] = $this->notificationManager->format($notification);
+            $filteredNotifications[] = $this->notificationManager->format($notification, true);
         }
+
         $html = $this->container->get('templating')->render(
             'AdstacyNotificationBundle::email.html.twig', array(
                 'notifications' => $filteredNotifications

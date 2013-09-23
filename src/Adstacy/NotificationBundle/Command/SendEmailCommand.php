@@ -59,8 +59,8 @@ class SendEmailCommand extends ContainerAwareCommand
         foreach ($groupedNotifications as $notifications) {
             $html = $emailManager->renderEmails($notifications);
             $message = \Swift_Message::newInstance()
-                ->setSubject('Notifications')
-                ->setFrom($container->getParameter('adstacy.mail.updates'))
+                ->setSubject('[Adstacy] Notifications')
+                ->setFrom($container->getParameter('adstacy.mail.info'))
                 ->setTo($notification->getTo()->getEmail())
                 ->setBody($html, 'text/html')
             ;

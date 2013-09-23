@@ -23,9 +23,9 @@ class FollowNotificationFormatter implements NotificationFormatterInterface
         $this->userHelper = $userHelper;
     }
 
-    public function getImage(Notification $notification)
+    public function getImage(Notification $notification, $absolute = false)
     {
-        return $this->userHelper->getProfilePicture($notification->getFrom());
+        return $this->userHelper->getProfilePicture($notification->getFrom(), $absolute);
     }
 
     public function getTime(Notification $notification)
@@ -38,11 +38,11 @@ class FollowNotificationFormatter implements NotificationFormatterInterface
         return $notification->getFrom()->getUsername();
     }
 
-    public function getUrl(Notification $notification)
+    public function getUrl(Notification $notification, $absolute = false)
     {
         return $this->router->generate('adstacy_app_user_profile', array(
-            'username' => $notification->getFrom()->getUsername()
-        ));
+            'username' => $notification->getFrom()->getUsername(),
+        ), $absolute);
     }
 
     public function getText(Notification $notification)
