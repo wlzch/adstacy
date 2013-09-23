@@ -26,7 +26,7 @@ class Ad
      * @Assert\Image(
      *    maxSize = "5M",
      *    mimeTypes = {"image/png", "image/jpg", "image/jpeg", "image/pjpeg"},
-     *    minWidth = 480,
+     *    minWidth = 320,
      *    maxSizeMessage = "image.file.max_size",
      *    mimeTypesMessage = "image.file.mime_types",
      *    minWidthMessage = "image.file.min_width"
