@@ -57,6 +57,11 @@ class ProfileFormType extends BaseType
             ),
             'error_bubbling' => true
         ));
+        $builder->add('subscription', 'checkbox', array(
+            'label' => 'form_profile.subscription',
+            'required' => false,
+            'error_bubbling' => true
+        ));
         $builder->add('save', 'submit', array(
             'label' => 'form_profile.submit'
         ));

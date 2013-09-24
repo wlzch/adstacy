@@ -31,6 +31,7 @@ terms: Terms
 privacy: Privacy Policy
 contact_us: Contact Us
 beta_info: We are currently on Beta. Feel free to contact us if you have any suggestions or questions <a href="%url%">here</a>
+subscription_notice: We will send your unread notifications to email twice a day
 
 #ads
 ads:
@@ -77,6 +78,7 @@ form_profile:
     profile_picture: Profile picture
     fullname: Fullname
     about_me: About me
+    subscription: Email subscription
     submit: Save
     change_password: change password
     forgot_password: forgot your password?

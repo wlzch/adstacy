@@ -31,6 +31,7 @@ class SendEmailCommand extends ContainerAwareCommand
         $since = date('Y-m-d', strtotime('-12 hours', time()));
         $notifications = $em->createQuery('
             SELECT n,
+            partial u.{id,username,imagename,realName},
             partial f.{id,username,imagename,realName},
             partial a.{id,imagename,description,created},
             c
@@ -39,7 +40,7 @@ class SendEmailCommand extends ContainerAwareCommand
             JOIN n.from f
             LEFT JOIN n.ad a
             LEFT JOIN n.comment c
-            WHERE n.created >= :since AND n.read = FALSE
+            WHERE n.created >= :since AND n.read = FALSE AND u.subscription = TRUE
         ')->setParameter('since', $since)->getResult();
 
         $mailer = $container->get('mailer');

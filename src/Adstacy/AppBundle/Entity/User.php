@@ -244,6 +244,11 @@ class User implements UserInterface, GroupableInterface
     private $plainPassword;
 
     /**
+     * @ORM\Column(name="subscription", type="boolean", nullable=true)
+     */
+    private $subscription;
+
+    /**
      * @var \DateTime
      * @ORM\Column(name="last_login", type="datetime", nullable=true)
      */
@@ -1569,5 +1574,38 @@ class User implements UserInterface, GroupableInterface
     public function getNotificationsCount()
     {
         return $this->notificationsCount ?: 0;
+    }
+
+    /**
+     * Set subscription
+     *
+     * @param boolean $subscription
+     * @return User
+     */
+    public function setSubscription($subscription)
+    {
+        $this->subscription = $subscription;
+    
+        return $this;
+    }
+
+    /**
+     * Get subscription
+     *
+     * @return boolean 
+     */
+    public function getSubscription()
+    {
+        return $this->subscription;
+    }
+
+    /**
+     * Is subscribed
+     *
+     * @return $boolean
+     */
+    public function isSubscribed()
+    {
+        return $this->subscription == true;
     }
 }

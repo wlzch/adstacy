@@ -31,6 +31,7 @@ terms: Ketentuan
 privacy: Kebijakan Privasi
 contact_us: Kontak Kami
 beta_info: Adstacy sedang dalam Beta. Kontak kami <a href="%url%">disini</a> jika Anda mempunyai kritik, saran ataupun pertanyaan
+subscription_notice: Kami akan mengirimkan notifikasi yang belum terbaca ke email 2 kali dalam 1 hari
 
 ads:
     create: Tambah iklan
@@ -67,9 +68,10 @@ search:
         help: Cari dengan kata kunci lainnya
 
 form_profile:
-    profile_picture: Gambar Profil
-    fullname: Nama Lengkap
+    profile_picture: Gambar profil
+    fullname: Nama lengkap
     about_me: Tentang Saya
+    subcription: Subskripsi email
     submit: Simpan
     change_password: Ubah password
     forgot_password: Lupa password?
