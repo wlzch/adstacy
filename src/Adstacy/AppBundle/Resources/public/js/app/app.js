@@ -14,16 +14,17 @@
       event.preventDefault();
       return false;
     }
-    var keyCode = event.keyCode ? event.keyCode : event.which;
 
     var $parent = $this.parent();
     var $typeahead = $parent.find('.typeahead');
     if ($typeahead.length == 0 || ($typeahead.length > 0 && $typeahead.is(':hidden'))) {
-      if (keyCode == 13 && event.shiftKey) {
+      if (event.which == 13 && event.shiftKey) {
         event.preventDefault();
         return false;
-      } else if (keyCode == 13) {
+      } else if (event.which == 13) {
+        this.blur();
         this.form.submit();
+        this.disabled = true;
       }
     }
   });
