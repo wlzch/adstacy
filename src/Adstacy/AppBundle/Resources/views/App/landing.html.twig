@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block header %}
-  {% include '::header.html.twig' with {register: false}  %}
+  {% include '::header.html.twig' with {register: false, include_extra_nav: false}  %}
 {% endblock %}
 
 {% block form_row %}
@@ -39,7 +39,7 @@
           <div id="register-form" class="panel panel-default">
             <div class="panel-heading">
               {% for owner in hwi_oauth_resource_owners() %}
-                <a class="btn btn-block btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{"register.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
+                <a class="btn btn-block btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{"login.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
               {% endfor %}
             </div>
             <form action="{{ path('fos_user_registration_register') }}" class="panel-body" method="post" >

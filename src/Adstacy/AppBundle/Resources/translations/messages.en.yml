@@ -154,8 +154,8 @@ flash:
             success: You have successfully unfollowed %username%
 
 landing:
-    welcome: Find and Share Various Promotions at Adstacy
-    desc: event, job vacancy, culinary, fashion, etc.
+    welcome: Find and Share Various Ads
+    desc: '#kuliner #lowongan #fashion #acara #game etc'
     explore: Explore Now
     features:
         easy:

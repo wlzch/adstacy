@@ -16,20 +16,19 @@ body {
   background-color: @gray-darker;
   background-size: cover;
   margin-bottom: 0;
+  padding-top: 10px;
 
   h1 {
     color: #fff;
     margin: 40px 0 10px;
     font-weight: bold;
     font-size: 48px;
-    text-shadow: 0 5px 10px #000;
     text-align: center;
   }
 
   h2 {
     font-size: 24px;
     color: #fff;
-    text-shadow: 0 5px 10px #000;
     text-align: center;
     margin: 0 0 40px;
   }
@@ -43,6 +42,9 @@ body {
 
 #landing-heading {
   text-align: center;
+  .btn {
+    padding: 12px 40px;
+  }
 }
 
 #landing-screenshot {
@@ -120,7 +122,6 @@ body {
 
 @media screen and (min-width: @screen-md-max) {
   #landing-title {
-    background: @gray-darker url('../../img/screenshot.jpg') no-repeat center;
     background-size: cover;
   }
 }
