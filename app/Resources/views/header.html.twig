@@ -1,4 +1,5 @@
 <header id="site-header" class="navbar navbar-default navbar-fixed-top">
+  {% if include_extra_nav is not defined or (include_extra_nav is defined and include_extra_nav == true) %}
   <div id="extra-nav-box">
     <div class="adstacy-container">
       <div class="btn-group">
@@ -20,6 +21,7 @@
       </div>
     </div>
   </div>
+  {% endif %}
   <div class="adstacy-container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">

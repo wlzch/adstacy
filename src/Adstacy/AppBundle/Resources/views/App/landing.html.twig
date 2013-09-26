@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block header %}
-  {% include '::header.html.twig' with {register: false}  %}
+  {% include '::header.html.twig' with {register: false, include_extra_nav: false}  %}
 {% endblock %}
 
 {% block form_row %}
@@ -27,7 +27,11 @@
   <div id="landing">
     <div id="landing-title" class="jumbotron">
       <div class="wrapper">
-        <h1>{{"landing.welcome"|trans}}</h1>
+        <div id="landing-heading">
+          <h1>{{ "landing.welcome"|trans }}</h1>
+          <h2>{{ "landing.desc"|trans }}</h2>
+          <a href="{{ path('adstacy_app_explore') }}" title="explore" class="btn btn-success btn-lg">{{ "landing.explore"|trans }}</a>
+        </div>
         <div class="clearfix">
           <div id="landing-screenshot">
             <img src="{{ asset('bundles/adstacyapp/img/screenshot.png') }}" alt="Adstacy" />
@@ -35,7 +39,7 @@
           <div id="register-form" class="panel panel-default">
             <div class="panel-heading">
               {% for owner in hwi_oauth_resource_owners() %}
-                <a class="btn btn-block btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{"register.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
+                <a class="btn btn-block btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{"login.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
               {% endfor %}
             </div>
             <form action="{{ path('fos_user_registration_register') }}" class="panel-body" method="post" >
@@ -53,64 +57,14 @@
           </div>
         </div>
       </div>
-    </div>
-
-    <div id="landing-features" class="wrapper">
-      <div class="clearfix">
-        <section class="section">
-          <div class="section-figure">
-            <i class="icon-ads"></i>
-          </div>
-          <h1 class="section-title">{{ "landing.features.easy.heading"|trans|raw }}</h1>
-          <p class="lead">{{ "landing.features.easy.desc"|trans|raw }}</p>
-        </section>
-        <section class="section">
-          <div class="section-figure">
-            <i class="icon-hash"></i>
-          </div>
-          <h1 class="section-title">{{ "landing.features.hashtag.heading"|trans|raw }}</h1>
-          <p class="lead">{{ "landing.features.hashtag.desc"|trans|raw }}</p>
-        </section>
-        <section class="section">
-          <div class="section-figure">
-            <i class="icon-search"></i>
-          </div>
-          <h1 class="section-title">{{ "landing.features.search.heading"|trans|raw }}</h1>
-          <p class="lead">{{ "landing.features.search.desc"|trans|raw }}</p>
-        </section>
+      <div id="landing-social" class="wrapper">
+        <a href="https://www.facebook.com/adstacycom" class="btn btn-facebook btn-lg">
+          <span class="icon-facebook"></span> Like us on Facebook
+        </a>
+        <a href="https://www.twitter.com/adstacycom" class="btn btn-twitter btn-lg">
+          <span class="icon-twitter"></span> Follow us on Twitter
+        </a>
       </div>
-      <div class="clearfix">
-        <section class="section">
-          <div class="section-figure">
-            <i class="icon-rocket"></i>
-          </div>
-          <h1 class="section-title">{{ "landing.features.trending.heading"|trans|raw }}</h1>
-          <p class="lead">{{ "landing.features.trending.desc"|trans|raw }}</p>
-        </section>
-        <section class="section">
-          <div class="section-figure">
-            <i class="icon-home"></i>
-          </div>
-          <h1 class="section-title">{{ "landing.features.stream.heading"|trans|raw }}</h1>
-          <p class="lead">{{ "landing.features.stream.desc"|trans|raw }}</p>
-        </section>
-        <section class="section">
-          <div class="section-figure">
-            <i class="icon-globe"></i>
-          </div>
-          <h1 class="section-title">{{ "landing.features.explore.heading"|trans|raw }}</h1>
-          <p class="lead">{{ "landing.features.explore.desc"|trans|raw }}</p>
-        </section>
-      </div>
-    </div>
-
-    <div id="landing-social" class="wrapper">
-      <a href="https://www.facebook.com/adstacycom" class="btn btn-facebook btn-lg">
-        <span class="icon-facebook"></span> Like us on Facebook
-      </a>
-      <a href="https://www.twitter.com/adstacycom" class="btn btn-twitter btn-lg">
-        <span class="icon-twitter"></span> Follow us on Twitter
-      </a>
     </div>
   </div>
 {% endblock %}
