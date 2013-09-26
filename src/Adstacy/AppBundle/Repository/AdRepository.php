@@ -28,7 +28,7 @@ class AdRepository extends EntityRepository
         $builder = $em->createQueryBuilder()
             ->select(array(
               'partial p.{id,imagename,description,tags,thumbHeight,imageWidth,imageHeight,promoteesCount,commentsCount,created}',
-              'partial u.{id,username,imagename,realName}'
+              'partial u.{id,username,imagename,realName,profilePicture}'
             ))
             ->from('AdstacyAppBundle:Ad', 'p')
             ->innerJoin('p.user', 'u')
@@ -56,7 +56,7 @@ class AdRepository extends EntityRepository
         $em = $this->getEntityManager();
         $query = $em->createQuery('
             SELECT partial a.{id,imagename,description,tags,thumbHeight,imageHeight,imageWidth,promoteesCount,commentsCount,created},
-            partial u.{id,username,imagename,realName}
+            partial u.{id,username,imagename,realName,profilePicture}
             FROM AdstacyAppBundle:Ad a
             JOIN a.user u
             LEFT JOIN a.promotees pa
@@ -79,7 +79,7 @@ class AdRepository extends EntityRepository
         $em = $this->getEntityManager();
         $query = $em->createQuery('
             SELECT partial a.{id,imagename,description,tags,thumbHeight,imageHeight,imageWidth,promoteesCount,commentsCount,created},
-            partial u.{id,username,imagename,realName}
+            partial u.{id,username,imagename,realName,profilePicture}
             FROM AdstacyAppBundle:Ad a
             JOIN a.user u
             LEFT JOIN a.promotees pa
@@ -138,7 +138,7 @@ class AdRepository extends EntityRepository
         $em = $this->getEntityManager();
         $query = $em->createQuery('
             SELECT partial a.{id,imagename,description,tags,thumbHeight,imageHeight,imageWidth,promoteesCount,commentsCount,created},
-            partial u.{id,username,imagename,realName}
+            partial u.{id,username,imagename,realName,profilePicture}
             FROM AdstacyAppBundle:Ad a
             JOIN a.user u
             JOIN u.followers fe
