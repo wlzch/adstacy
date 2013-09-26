@@ -15,6 +15,7 @@ parameters:
     adstacy.mail.support: support@adstacy.com
     adstacy.mail.admin: admin@adstacy.com
     adstacy.mail.updates: updates@adstacy.com
+    adstacy.mail.info: info@adstacy.com
 
     facebook_app_id: '476946822391252'
     facebook_app_secret: '10af83878f15f4963c5a0a22fdc0e28b'

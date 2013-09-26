@@ -51,3 +51,9 @@ services:
         arguments: [@service_container]
         tags:
             - { name: twig.extension }
+
+    adstacy.notification.email_manager:
+        class: Adstacy\NotificationBundle\EmailManager
+        arguments:
+            - @service_container
+            - @adstacy.notification.manager

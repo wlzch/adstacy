@@ -16,6 +16,8 @@ parameters:
 
     redis_dsn: redis://localhost
 
+    adstacy.host: "http://www.adstacy.com"
+
     node_path:         "/usr/local/bin/node"
     node_modules_path: "/usr/local/lib/node_modules"
 

@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class NotificationController extends Controller
 {
     /**
+     * @Secure(roles="ROLE_USER")
      * Show notifications
      */
     public function showNotificationsAction()

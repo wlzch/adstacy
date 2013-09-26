@@ -1,0 +1,11 @@
+<a class="media notification" href="{{ notification.url }}">
+  <div class="pull-left">
+    <img src="{{ notification.image }}" class="media-object notif-pic">
+  </div>
+  <div class="media-body">
+    <div class="time">{{ notification.time }}</div>
+    <div>
+      <span class="username">{{ notification.name }}</span> {{ notification.text }}
+    </div>
+  </div>
+</a>
