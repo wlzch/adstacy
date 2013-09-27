@@ -4,6 +4,8 @@
   {{ parent() }}
   {% stylesheets filter='cssrewrite, uglifycss'
     'bundles/adstacyapp/less/layout/create_ad.less'
+    'bundles/adstacyapp/css/jquery.fileupload.css'
+    'bundles/adstacyapp/css/jquery.fileupload-ui.css'
   %}
     <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
   {% endstylesheets %}
@@ -12,8 +14,13 @@
 {% block head_scripts %}
   {{ parent() }}
   {% javascripts filter='uglifyjs2'
-    '@AdstacyAppBundle/Resources/public/js/FileAPI.min.js'
-    '@AdstacyAppBundle/Resources/public/js/FileAPI.exif.js'
+    '@AdstacyAppBundle/Resources/public/js/jquery.ui.widget.js'
+    '@AdstacyAppBundle/Resources/public/js/load-image.min.js'
+    '@AdstacyAppBundle/Resources/public/js/canvas-to-blob.min.js'
+    '@AdstacyAppBundle/Resources/public/js/jquery-fileupload/jquery.iframe-transport.js'
+    '@AdstacyAppBundle/Resources/public/js/jquery-fileupload/jquery.fileupload.js'
+    '@AdstacyAppBundle/Resources/public/js/jquery-fileupload/jquery.fileupload-process.js'
+    '@AdstacyAppBundle/Resources/public/js/jquery-fileupload/jquery.fileupload-image.js'
   %}
     <script src="{{ asset_url }}" type="text/javascript"></script>
   {% endjavascripts %}
@@ -27,7 +34,13 @@
       {{ form_errors(form) }}
       {{ form_label(form.image) }}
       <div id="create-advert-image">
-        {{ form_widget(form.image) }}
+        <input id="fileupload" type="file" name="images[image]">
+      </div>
+      <div id="progress" class="progress">
+        <div class="progress-bar progress-bar-success"></div>
+      </div>
+      <div class="image-preview medium">
+        <img id="image-preview-img">
       </div>
 
       <div id="create-advert-desc">
@@ -93,6 +106,30 @@
   {{ parent()  }}
   <script type="text/javascript">
     $(function() {
+      $('#fileupload').fileupload({
+        url: "{{ path('adstacy_app_upload') }}",
+        dataType: 'json',
+        done: function(e, data) {
+          if (data.result.status == 'ok') {
+            $.each(data.result.files, function(index, file) {
+              console.log(file);
+              console.log($('.image-preview img'));
+              $('.image-preview img').attr('src', file.src);
+            });
+          } else {
+            console.log('error');
+            console.log(data.result.error);
+          }
+        },
+        progressall: function(e, data) {
+          var progress = parseInt(data.loaded / data.total * 100, 10);
+          $('#progress .progress-bar').css({
+            'width': progress + '%',
+            'height': '20px'
+          });
+        }
+      }).prop('disabled', !$.support.fileInput)
+      .parent().addClass($.support.fileInput ? undefined : 'disabled')
       var $trigger = $('#show-long-desc-btn');
       var $content = $('#create-advert-content');
       var $charsLeft = $('#chars-left');

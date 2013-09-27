@@ -18,3 +18,7 @@ services:
     adstacy.helper.user:
         class: Adstacy\AppBundle\Helper\UserHelper
         arguments: [@service_container]
+
+    adstacy.helper.asset:
+        class: Adstacy\AppBundle\Helper\AssetHelper
+        arguments: [@router]

@@ -22,3 +22,9 @@ services:
         arguments: [@service_container]
         tags:
             - { name: twig.extension }
+
+    adstacy.twig.asset_helper:
+        class: Adstacy\AppBundle\Twig\AssetExtension
+        arguments: [@adstacy.helper.asset]
+        tags:
+            - { name: twig.extension }

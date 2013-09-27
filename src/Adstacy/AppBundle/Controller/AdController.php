@@ -5,7 +5,9 @@ namespace Adstacy\AppBundle\Controller;
 use Adstacy\AppBundle\Entity\Ad;
 use Adstacy\AppBundle\Entity\Comment;
 use Adstacy\AppBundle\Entity\PromoteAd;
+use Adstacy\AppBundle\Entity\TempAdImage;
 use Adstacy\AppBundle\Form\Type\AdType;
+use Adstacy\AppBundle\Form\Type\TempAdImageType;
 use Adstacy\AppBundle\Form\Type\CommentType;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -295,5 +297,43 @@ class AdController extends Controller
         $this->addFlash('success', $this->translate('ads.comment.delete.success'));
 
         return $this->redirect($this->generateUrl('adstacy_app_ad_show', array('id' => $comment->getAd()->getId())));
+    }
+
+    /**
+     * Upload image
+     *
+     * @return JsonResponse
+     */
+    public function uploadImageAction()
+    {
+        $request = $this->getRequest();
+        $image = new TempAdImage();
+        $form = $this->createForm(new TempAdImageType(), $image);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getManager();
+            $em->persist($image);
+            $em->flush();
+
+            $assetHelper = $this->get('adstacy.helper.asset');
+            $uploaderHelper = $this->get('vich_uploader.templating.helper.uploader_helper');
+
+            return new JsonResponse(array(
+                'status' => 'ok',
+                'files' => array(
+                    array (
+                        'name' => $image->getImagename(),
+                        'src' => $assetHelper->assetUrl($uploaderHelper->asset($image, 'image'))
+                    )
+                )
+            ));
+        }
+        $errors = array();
+        foreach ($form->getErrors() as $error) {
+            $errors[] = $error->getMessage();
+        }
+
+        return new JsonResponse(array('status' => 'error', 'errors' => $errors));
     }
 }
