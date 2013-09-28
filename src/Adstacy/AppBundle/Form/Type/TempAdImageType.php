@@ -29,6 +29,6 @@ class TempAdImageType extends AbstractType
 
     public function getName()
     {
-        return 'images';
+        return 'ad';
     }
 }

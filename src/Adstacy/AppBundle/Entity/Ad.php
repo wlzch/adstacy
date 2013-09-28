@@ -5,12 +5,14 @@ namespace Adstacy\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\ExecutionContextInterface;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Imagine\Gd\Imagine;
 use Imagine\Filter\Advanced\RelativeResize;
 
 /**
  * @ORM\Entity(repositoryClass="Adstacy\AppBundle\Repository\AdRepository")
+ * @Assert\Callback(methods={"isImageUploaded"})
  * @Vich\Uploadable
  */
 class Ad
@@ -31,7 +33,6 @@ class Ad
      *    mimeTypesMessage = "image.file.mime_types",
      *    minWidthMessage = "image.file.min_width"
      * )
-     * @Assert\NotNull(message="image.file.not_null")
      * @Vich\UploadableField(mapping="ad_image", fileNameProperty="imagename")
      */
     private $image;
@@ -576,6 +577,14 @@ class Ad
     {
         return $this->comments;
     }
+
+    public function isImageUploaded(ExecutionContextInterface $context)
+    {
+        if (!$this->imagename && !$this->image) {
+            $context->addViolationAt('image', 'image.file.not_null');
+        }
+    }
+
 
     public function __toString()
     {

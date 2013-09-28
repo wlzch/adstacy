@@ -10,7 +10,7 @@ use Imagine\Gd\Imagine;
 use Imagine\Filter\Advanced\RelativeResize;
 
 /**
- * @ORM\Entity(repositoryClass="Adstacy\AppBundle\TempAdImageRepository")
+ * @ORM\Entity(repositoryClass="Adstacy\AppBundle\Repository\TempAdImageRepository")
  * @ORM\Table(name="temp_ad_image")
  * @Vich\Uploadable
  */
@@ -43,6 +43,11 @@ class TempAdImage
     private $imagename;
 
     /**
+     * @ORM\ManyToOne(targetEntity="User")
+     */
+    private $user;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -52,10 +57,20 @@ class TempAdImage
         return $this->id;
     }
 
-    public function setImage(File $image = null)
+    public function setImage(File $image)
     {
-        if ($image && $this->image != $image) {
-            $this->image = $image;
+        $originalImage = $image;
+        $imagine = new Imagine();
+        $image = $imagine->open($image);
+        $size = $image->getSize();
+        if ($size->getWidth() > 0 && $size->getHeight() > 0) {
+            if ($size->getWidth() > 1024) {
+                $relativeResize = new RelativeResize('widen', 1024);
+                $image = $relativeResize->apply($image);
+                $image->save($originalImage->getRealPath(), array('format' => $originalImage->guessClientExtension()));
+                $size = $image->getSize();
+            }
+            $this->image = $originalImage;
         }
     
         return $this;
@@ -74,9 +89,7 @@ class TempAdImage
      */
     public function setImagename($imagename)
     {
-        if ($imagename) {
-            $this->imagename = $imagename;
-        }
+        $this->imagename = $imagename;
     
         return $this;
     }
@@ -89,5 +102,28 @@ class TempAdImage
     public function getImagename()
     {
         return $this->imagename;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Adstacy\AppBundle\Entity\User $user
+     * @return TempAdImage
+     */
+    public function setUser(\Adstacy\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+    
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Adstacy\AppBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }
