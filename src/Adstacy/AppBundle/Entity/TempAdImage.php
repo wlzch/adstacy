@@ -68,7 +68,6 @@ class TempAdImage
                 $relativeResize = new RelativeResize('widen', 1024);
                 $image = $relativeResize->apply($image);
                 $image->save($originalImage->getRealPath(), array('format' => $originalImage->guessClientExtension()));
-                $size = $image->getSize();
             }
             $this->image = $originalImage;
         }

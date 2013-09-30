@@ -349,7 +349,7 @@ class Ad
 
     public function setImage(File $image = null)
     {
-        if ($image && $this->image != $image) {
+        if ($image && $this->image !== $image) { 
             $originalImage = $image;
             $imagine = new Imagine();
             $image = $imagine->open($image);
