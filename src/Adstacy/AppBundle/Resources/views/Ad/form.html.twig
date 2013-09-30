@@ -4,6 +4,7 @@
   {{ parent() }}
   {% stylesheets filter='cssrewrite, uglifycss'
     'bundles/adstacyapp/less/layout/create_ad.less'
+    'bundles/adstacyapp/less/bootstrap-tagsinput.less'
   %}
     <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
   {% endstylesheets %}
@@ -33,13 +34,15 @@
       <div id="create-advert-desc">
         <div class="clearfix">
           {{ form_label(form.description) }}
-          <span class="help">({{"form_ad.helps.description"|trans}})</span>
-          <div class="pull-right">
-            <a id="desc-examples" href="#" data-toggle="modal" data-target="#examples-modal">{{ "form_ad.example"|trans }}</a>
-          </div>
           {{ form_widget(form.description) }}
           <div id="chars-left-box">
             {{ "form_ad.characters_left"|trans({'%left%': desc_length - (data.description|length)})|raw }}
+          </div>
+        </div>
+        <div class="clearfix">
+          {{ form_label(form.tags) }}
+          <div>
+            {{ form_widget(form.tags) }}
           </div>
         </div>
 
@@ -64,35 +67,26 @@
       </div>
     </div>
   </div>
-
-  <div class="modal fade" id="examples-modal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">{{ "form_ad.example"|trans|title }}</h4>
-        </div>
-        <div class="modal-body">
-          <ul>
-            <li>{{ "form_ad.examples.example1"|trans }}</li>
-            <li>{{ "form_ad.examples.example2"|trans }}</li>
-            <li>{{ "form_ad.examples.example3"|trans }}</li>
-            <li>{{ "form_ad.examples.example4"|trans }}</li>
-            <li>{{ "form_ad.examples.example5"|trans }}</li>
-          </ul>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">{{ "close"|trans }}</button>
-        </div>
-      </div>
-    </div>
-  </div>
 {% endblock %}
 
 {% block javascripts %}
   {{ parent()  }}
+  {% javascripts filter='uglifyjs2'
+    '@AdstacyAppBundle/Resources/public/js/bootstrap-tagsinput.js'
+  %}
+    <script src="{{ asset_url }}" type="text/javascript"></script>
+  {% endjavascripts %}
   <script type="text/javascript">
     $(function() {
+      $('#{{ form.tags.vars.id }}').tagsinput({
+        itemText: function(item) {
+          if (item && item.length > 0) {
+            if (item[0] != '#') return '#'+item;
+            return item;
+          }
+          return false;
+        }
+      });
       var $trigger = $('#show-long-desc-btn');
       var $content = $('#create-advert-content');
       var $charsLeft = $('#chars-left');

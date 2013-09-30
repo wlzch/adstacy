@@ -16,12 +16,11 @@ class HashtagToArrayTransformer implements DataTransformerInterface
      */
     public function transform($tags = array())
     {
-        $_tags = array();
-        foreach ($tags as $tag) {
-            $_tags[] = '#'.$tag;
+        if ($tags && is_array($tags)) {
+            return implode(',', $tags); 
         }
 
-        return implode(' ', $_tags); 
+        return array();
     }
 
     /**
@@ -33,9 +32,10 @@ class HashtagToArrayTransformer implements DataTransformerInterface
      */
     public function reverseTransform($hashtags)
     {
-        $matches = null;
-        preg_match_all('/#(\w+)/', $hashtags, $matches);
+        if ($hashtags) {
+            return explode(',', $hashtags);
+        }
 
-        return $matches[1];
+        return array();
     }
 }

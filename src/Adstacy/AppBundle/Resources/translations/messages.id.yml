@@ -88,18 +88,10 @@ form_ad:
     content: Deskripsi lengkap
     content_trigger: Klik untuk menambahkan gambar dan deskripsi lengkap
     submit: Simpan
+    hashtags: hashtags
     placeholders:
-        description: Deskripsikan iklan anda secara kreatif. Lihat contoh untuk referensi.
+        description: Tulis deskripsi iklan Anda.
     characters_left: 'sisa <span id="chars-left">%left%</span> karakter'
-    helps:
-        description: 'Gunakan #hashtags untuk mengkategorikan iklan Anda'
-    example: contoh
-    examples:
-        example1: "Rp250.000 #tshirt #brand #jual #medan #pria #indonesia"
-        example2: "Launching #adstacy 9 September 2013 #event #launching"
-        example3: "Lowongan administrasi PT.XXX #lowongankerja minimal #s1"
-        example4: "#cucigudang #diskon 50% semua barang"
-        example5: "#rumah 4x18m wilayah #medan #marelan Rp250.000.000 NEGO"
 
 form_contact:
     subject: Judul
