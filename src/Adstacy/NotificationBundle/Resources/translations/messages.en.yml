@@ -4,6 +4,8 @@ notification:
     mention: 'mentioned you on comment: ' 
     follow: 'is following you'
     promote: 'promoted your ad'
+    block_ad: 'blocked your ad'
+    unblock_ad: 'unblocked your ad'
 
     no_notification: No new notification
     show_all: Show all notifications

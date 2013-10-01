@@ -54,6 +54,7 @@ ads:
             button: HAPUS!
             success: Komentar terhapus
             fail: Komentar tidak dapat dihapus
+    blocked: Iklan ini telah diblock. Silahkan edit berdasarkan <a href="%url%">ketentuan</a> kami
 
 user:
     no_followers:

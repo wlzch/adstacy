@@ -55,6 +55,7 @@ ads:
             button: DELETE!
             success: Comment deleted
             fail: Comment cannot be deleted
+    blocked: This ads have been blocked. Please edit it according to our <a href="%url%">terms</a>.
 
 user:
     no_followers:

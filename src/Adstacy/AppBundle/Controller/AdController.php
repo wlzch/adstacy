@@ -19,7 +19,7 @@ class AdController extends Controller
     public function showAction($id)
     {
         $ad = $this->getRepository('AdstacyAppBundle:Ad')->find($id);
-        if (!$ad) {
+        if (!$ad || ($ad && $ad->getUser() != $this->getUser() && $ad->getActive() == false)) {
             throw $this->createNotFoundException();
         }
         $adsByUser = $this->getRepository('AdstacyAppBundle:Ad')->findByUser($ad->getUser(), 4);

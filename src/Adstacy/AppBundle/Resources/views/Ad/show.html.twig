@@ -18,6 +18,12 @@
 {% block content %}
   {% set user = ad.user %}
 
+  {% if not ad.active %}
+  <div class="adstacy-container">
+    <div class="alert alert-danger">{{"ads.blocked"|trans({'%url%': path('adstacy_app_page_show', {key: 'page'})})|raw }}</div>
+  </div>
+  {% endif %}
+
   <div id="show-advert">
     <div id="show-advert-content">
       <div class="panel panel-default">

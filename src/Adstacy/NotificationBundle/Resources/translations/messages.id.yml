@@ -4,6 +4,8 @@ notification:
     mention: 'mention anda di komentar: '
     follow: 'follow anda'
     promote: 'promote ad anda'
+    block_ad: 'block iklan anda'
+    unblock_ad: 'unblock iklan anda'
 
     no_notification: Tidak ada notifikasi
     show_all: Semua notifikasi

@@ -15,6 +15,14 @@ services:
         class: Adstacy\NotificationBundle\NotificationSaver\PromoteNotificationSaver
         arguments: [@doctrine.orm.entity_manager]
 
+    adstacy.notification.notification_saver.block_ad:
+        class: Adstacy\NotificationBundle\NotificationSaver\BlockAdNotificationSaver
+        arguments: [@doctrine.orm.entity_manager]
+
+    adstacy.notification.notification_saver.unblock_ad:
+        class: Adstacy\NotificationBundle\NotificationSaver\UnblockAdNotificationSaver
+        arguments: [@doctrine.orm.entity_manager]
+
 
     adstacy.notification.notification_formatter.comment:
         class: Adstacy\NotificationBundle\NotificationFormatter\CommentNotificationFormatter
@@ -32,6 +40,14 @@ services:
         class: Adstacy\NotificationBundle\NotificationFormatter\PromoteNotificationFormatter
         arguments: [@router, @translator, @adstacy.helper.formatter, @adstacy.helper.user]
 
+    adstacy.notification.notification_formatter.block_ad:
+        class: Adstacy\NotificationBundle\NotificationFormatter\BlockAdNotificationFormatter
+        arguments: [@router, @translator, @adstacy.helper.formatter, @adstacy.helper.user]
+
+    adstacy.notification.notification_formatter.unblock_ad:
+        class: Adstacy\NotificationBundle\NotificationFormatter\UnblockAdNotificationFormatter
+        arguments: [@router, @translator, @adstacy.helper.formatter, @adstacy.helper.user]
+
     adstacy.notification.manager:
         class: Adstacy\NotificationBundle\NotificationManager
         arguments:
@@ -40,11 +56,15 @@ services:
                 - @adstacy.notification.notification_saver.mention
                 - @adstacy.notification.notification_saver.follow
                 - @adstacy.notification.notification_saver.promote
+                - @adstacy.notification.notification_saver.block_ad
+                - @adstacy.notification.notification_saver.unblock_ad
             -
                 - @adstacy.notification.notification_formatter.comment
                 - @adstacy.notification.notification_formatter.mention
                 - @adstacy.notification.notification_formatter.follow
                 - @adstacy.notification.notification_formatter.promote
+                - @adstacy.notification.notification_formatter.block_ad
+                - @adstacy.notification.notification_formatter.unblock_ad
 
     adstacy.twig.notification_extension:
         class: Adstacy\NotificationBundle\Twig\NotificationExtension
