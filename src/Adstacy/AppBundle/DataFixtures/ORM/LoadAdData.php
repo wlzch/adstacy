@@ -35,6 +35,7 @@ class LoadAdData extends DataFixture
             if ($this->faker->randomNumber(1, 5) % 2 == 0) {
                 $ad->setContent($this->faker->paragraph($this->faker->randomNumber(4, 30)));
             }
+            $ad->setCreated($this->faker->dateTimeThisMonth);
             $ads[] = $ad;
             $manager->persist($ad);
             $this->addReference('ad-'.$i, $ad);
@@ -44,6 +45,6 @@ class LoadAdData extends DataFixture
 
     public function getOrder()
     {
-        return 3;
+        return 2;
     }
 }

@@ -21,14 +21,24 @@ class SearchController extends Controller
         $finder = $this->get('fos_elastica.finder.website.ad');
         $limit = $this->getParameter('max_ads_per_page');
         if ($this->isMobile()) $limit = $limit / 2;
+        $q = $request->query->get('q');
+        $tags = explode(' ', $q);
 
-        $boolQuery = new \Elastica\Query\Bool();
+        $tagsFilter = new \Elastica\Filter\Terms('tags', $tags);
 
-        $stringQuery = new \Elastica\Query\QueryString($request->query->get('q'));
-        $boolQuery->addMust($stringQuery);
+        $constantQuery = new \Elastica\Query\ConstantScore($tagsFilter);
+        $constantQuery->setBoost(1);
 
-        $finalQuery = new \Elastica\Query($boolQuery);
-        $finalQuery->setSort(array('created' => array('order' => 'desc')));
+        $existsFilter = new \Elastica\Filter\Exists('created');
+        $finalQuery = new \Elastica\Query\CustomFiltersScore($constantQuery);
+        foreach ($tags as $tag) {
+            $termFilter = new \Elastica\Filter\Term(array('tags' => $tag));
+            $finalQuery->addFilter($termFilter, 1.5);
+        }
+        $finalQuery->addFilterScript($existsFilter, 
+            "(doc['created'].date.getMillis() / 1000000) * (1 / 10000000)"
+        );
+        $finalQuery->setScoreMode('total');
 
         $adsPaginator = $finder->findPaginated($finalQuery);
         $adsPaginator
