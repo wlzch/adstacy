@@ -13,13 +13,20 @@ class PopulateRedisCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('adstacy:redis:populate-user')
-            ->setDescription('Populate redis user data')
+            ->setName('adstacy:redis:populate')
+            ->setDescription('Populate redis data')
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        //$this->populateUserData($input, $output);
+        $this->populateTagData($input, $output);
+    }
+
+    private function populateUserData(InputInterface $input, OutputInterface $output)
+    {
+        $output->writeln('Populating user data...');
         $em = $this->getContainer()->get('doctrine')->getManager();
         $redis = $this->getContainer()->get('snc_redis.default');
         $userHelper = $this->getContainer()->get('adstacy.helper.user');
@@ -29,7 +36,6 @@ class PopulateRedisCommand extends ContainerAwareCommand
             FROM AdstacyAppBundle:User u
         ')->getResult();
 
-        $output->writeln('Populating redis data...');
         $cnt = 0;
         foreach ($users as $user) {
             $username = $user->getUsername();
@@ -49,6 +55,40 @@ class PopulateRedisCommand extends ContainerAwareCommand
             $cnt++;
         }
 
-        $output->writeln($cnt.' data populated');
+        $output->writeln($cnt.' user data populated');
+    }
+
+    private function populateTagData(InputInterface $input, OutputInterface $output)
+    {
+        $output->writeln('Populating tag data...');
+        $em = $this->getContainer()->get('doctrine')->getManager();
+        $redis = $this->getContainer()->get('snc_redis.default');
+
+        $ads = $em->createQuery('
+            SELECT partial a.{id,tags}
+            FROM AdstacyAppBundle:Ad a
+        ')->getResult();
+        $tags = array();
+
+        $cnt = 0;
+        foreach ($ads as $ad) {
+            $adTags = $ad->getTags();
+            foreach ($adTags as $tag) {
+              $tags[$tag] = 1;
+            }
+        }
+
+        foreach ($tags as $tag => $value) {
+            $input = substr($tag, 0, 1);
+            for ($i = 1, $len = strlen($tag); $i < $len; $i++) {
+                $input .= $tag[$i];
+                $redis->zadd('tags', 0, $input);
+                $cnt++;
+            }
+            $redis->zadd('tags', 0, $tag.'*');
+            $cnt++;
+        }
+
+        $output->writeln($cnt.' tags data populated');
     }
 }

@@ -5,6 +5,7 @@
   {% stylesheets filter='cssrewrite, uglifycss'
     'bundles/adstacyapp/less/layout/create_ad.less'
     'bundles/adstacyapp/less/bootstrap-tagsinput.less'
+    'bundles/adstacyapp/less/typeahead-bootstrap.less'
   %}
     <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
   {% endstylesheets %}
@@ -13,8 +14,7 @@
 {% block head_scripts %}
   {{ parent() }}
   {% javascripts filter='uglifyjs2'
-    '@AdstacyAppBundle/Resources/public/js/FileAPI.min.js'
-    '@AdstacyAppBundle/Resources/public/js/FileAPI.exif.js'
+    '@AdstacyAppBundle/Resources/public/js/typeahead.js'
   %}
     <script src="{{ asset_url }}" type="text/javascript"></script>
   {% endjavascripts %}
@@ -35,7 +35,7 @@
         <div class="clearfix">
           {{ form_label(form.description) }}
           {{ form_widget(form.description) }}
-          <div id="chars-left-box">
+          <div id="chars-left-box" data-desc-length="{{ desc_length }}">
             {{ "form_ad.characters_left"|trans({'%left%': desc_length - (data.description|length)})|raw }}
           </div>
         </div>
@@ -73,41 +73,8 @@
   {{ parent()  }}
   {% javascripts filter='uglifyjs2'
     '@AdstacyAppBundle/Resources/public/js/bootstrap-tagsinput.js'
+    '@AdstacyAppBundle/Resources/public/js/page/create_ad.js'
   %}
     <script src="{{ asset_url }}" type="text/javascript"></script>
   {% endjavascripts %}
-  <script type="text/javascript">
-    $(function() {
-      $('#{{ form.tags.vars.id }}').tagsinput({
-        itemText: function(item) {
-          if (item && item.length > 0) {
-            if (item[0] != '#') return '#'+item;
-            return item;
-          }
-          return false;
-        }
-      });
-      var $trigger = $('#show-long-desc-btn');
-      var $content = $('#create-advert-content');
-      var $charsLeft = $('#chars-left');
-      var $desc = $('#{{ form.description.vars.id }}');
-      $trigger.click(function() {
-        $content.toggleClass('hide');
-      });
-      var checkCharsLeft = function() {
-        var val = $desc.val();
-        if (val.length > {{ desc_length}} ) {
-          if (val.length == {{ desc_length }} + 1) {
-            return false;
-          }
-
-          $desc.val(val.substring(0, {{ desc_length }} - 1));
-          return false;
-        }
-        $charsLeft.text({{ desc_length }} - val.length);
-      }
-      $desc.keyup(checkCharsLeft);
-      //$desc.keypress(checkCharsLeft);
-    });
-  </script>
 {% endblock %}
