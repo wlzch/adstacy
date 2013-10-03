@@ -37,7 +37,10 @@ class ApiController extends Controller
             $results[] = $result;
           }
         }
-        $response = new JsonResponse(json_encode($results));
+        $response = new JsonResponse();
+        $response->setData($results);
+        $response->setMaxAge(86400);
+        $response->setSharedMaxAge(86400);
 
         return $response;
     }

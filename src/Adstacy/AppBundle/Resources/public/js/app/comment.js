@@ -26,7 +26,6 @@
   $comment.mentionsInput({
     onDataRequest: function (mode, query, triggerChar, callback) {
       $.getJSON(Routing.generate('adstacy_app_api_users', {q: query}), function(data) {
-        data = JSON.parse(data);
         data = _.filter(data, function(item) { return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 });
 
         callback.call(this, data);
