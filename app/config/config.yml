@@ -27,8 +27,8 @@ parameters:
     elastica_website_types:
         ad:
             mappings:
-                tags: { boost: 5 }
-                created: { type: date }
+                tags: { boost: 1.5, index: not_analyzed, analyzer: tags_analyzer }
+                created: { type: date, index: not_analyzed }
             persistence:
                 driver: orm
                 model: Adstacy\AppBundle\Entity\Ad
@@ -251,6 +251,14 @@ fos_elastica:
     serializer: ~
     indexes:
         website:
+            settings:
+                index:
+                    analysis:
+                        analyzer:
+                            tags_analyzer:
+                                type: custom
+                                tokenizer: keyword
+                                filter: [lowercase, asciifolding]
             client: default
             index_name: website
             finder: ~

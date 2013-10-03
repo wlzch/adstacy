@@ -13,8 +13,8 @@ class PopulateRedisCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('adstacy:redis:populate')
-            ->setDescription('Populate redis data')
+            ->setName('adstacy:redis:populate-user')
+            ->setDescription('Populate redis user data')
         ;
     }
 
@@ -22,16 +22,17 @@ class PopulateRedisCommand extends ContainerAwareCommand
     {
         $em = $this->getContainer()->get('doctrine')->getManager();
         $redis = $this->getContainer()->get('snc_redis.default');
+        $userHelper = $this->getContainer()->get('adstacy.helper.user');
 
         $users = $em->createQuery('
-            SELECT u.username, u.realName
+            SELECT partial u.{id,username,realName,imagename,profilePicture}
             FROM AdstacyAppBundle:User u
-        ')->getScalarResult();
+        ')->getResult();
 
         $output->writeln('Populating redis data...');
         $cnt = 0;
         foreach ($users as $user) {
-            $username = $user['username'];
+            $username = $user->getUsername();
             $input = substr($username, 0, 1);
             for ($i = 1, $len = strlen($username); $i < $len; $i++) {
                 $input .= $username[$i];
@@ -39,7 +40,12 @@ class PopulateRedisCommand extends ContainerAwareCommand
                 $cnt++;
             }
             $redis->zadd('usernames', 0, $username.'*');
-            $redis->hmset("user:$username", 'name', $user['realName'], 'username', $user['username']);
+            $redis->hmset("user:$username", 
+                'id', $user->getId(),
+                'name', $user->getRealName(),
+                'avatar', $userHelper->getProfilePicture($user, false),
+                'value', '@'.$user->getUsername()
+            );
             $cnt++;
         }
 

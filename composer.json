@@ -9,7 +9,8 @@
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "2.3.*",
-        "doctrine/orm": ">=2.2.3,<2.4-dev",
+        "doctrine/orm": "2.3.*",
+        "doctrine/common": "2.3.*",
         "doctrine/doctrine-bundle": "1.2.*",
         "twig/extensions": "1.0.*",
         "symfony/assetic-bundle": "2.3.*",
@@ -37,7 +38,10 @@
         "sonata-project/doctrine-orm-admin-bundle": "dev-master",
         "ornicar/apc-bundle": "dev-master",
         "exercise/htmlpurifier-bundle": "dev-master",
-        "mobiledetect/mobiledetectlib": "dev-master"
+        "mobiledetect/mobiledetectlib": "dev-master",
+        "friendsofsymfony/jsrouting-bundle": "1.2.*",
+        "snc/redis-bundle": "1.1.*",
+        "predis/predis": "0.8.*"
     },
     "scripts": {
         "post-install-cmd": [

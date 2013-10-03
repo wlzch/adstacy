@@ -15,22 +15,30 @@ class ApiController extends Controller
     public function usersAction()
     {
         $request = $this->getRequest();
-        if ($request->isXmlHttpRequest()) {
-            $em = $this->getManager();
-            $query = $em->createQuery('
-                SELECT u.realName as name, u.username
-                FROM AdstacyAppBundle:User u
-            ');
-            $query->useResultCache(true, 3600, 'FindAllUsersForAutocomplete');
-            $results = $query->getScalarResult();
+        $results = array();
+        $q = $request->query->get('q');
+        $response = null;
+        $redis = $this->get('snc_redis.default');
 
-            $response = new JsonResponse(json_encode($results));
-            $response->setMaxAge(3600);
-            $response->setSharedMaxAge(3600);
-
-            return $response;
+        if ($q && strlen($q) >= 2) {
+          $rank = $redis->zrank('usernames', $q);
+          $possibilities = $redis->zrange('usernames', $rank + 1, $rank + 50);
+          $usernames = array();
+          foreach ($possibilities as $possibility) {
+            if (strpos($possibility, $q) === false) break;
+            $len = strlen($possibility);
+            if ($possibility[$len - 1] == '*') {
+              $usernames[] = substr($possibility, 0, $len - 1);
+            }
+          }
+          foreach ($usernames as $username) {
+            $result = $redis->hgetall("user:$username");
+            $result['type'] = 'user';
+            $results[] = $result;
+          }
         }
+        $response = new JsonResponse(json_encode($results));
 
-        return new Response("Don't access this url directly");
+        return $response;
     }
 }

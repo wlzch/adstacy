@@ -4,6 +4,9 @@ imports:
 parameters:
     facebook_app_id: '138676862997429'
     facebook_app_secret: '09a25b9562d2927df1e49e8d5dfee8b5'
+    router.request_context.host: adstacy.dev
+    router.request_context.scheme: http
+    adstacy.host: http://adstacy.dev
 
 framework:
     router:

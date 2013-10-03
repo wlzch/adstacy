@@ -32,6 +32,7 @@ class AdRepository extends EntityRepository
             ))
             ->from('AdstacyAppBundle:Ad', 'p')
             ->innerJoin('p.user', 'u')
+            ->andWhere('p.active = TRUE')
             ->setMaxResults($limit)
             ->orderBy('p.id', 'DESC')
         ;
@@ -61,7 +62,7 @@ class AdRepository extends EntityRepository
             JOIN a.user u
             LEFT JOIN a.promotees pa
             LEFT JOIN pa.user pu
-            WHERE pu.id = :id
+            WHERE pu.id = :id AND a.active = TRUE
         ');
 
         return $query->setParameter('id', $user->getId());
@@ -84,7 +85,7 @@ class AdRepository extends EntityRepository
             JOIN a.user u
             LEFT JOIN a.promotees pa
             LEFT JOIN pa.user pu
-            WHERE u.id = :id OR pu.id = :id
+            WHERE u.id = :id OR pu.id = :id AND a.active = TRUE
         ');
 
         return $query->setParameter('id', $user->getId());
@@ -105,7 +106,7 @@ class AdRepository extends EntityRepository
             SELECT partial a.{id,imagename,description,tags,thumbHeight,imageWidth,imageHeight,promoteesCount,commentsCount,created}
             FROM AdstacyAppBundle:Ad a
             JOIN a.user u
-            WHERE u.id = :id
+            WHERE u.id = :id AND a.active = TRUE
             ORDER BY a.created DESC
         ');
         $query->setMaxResults($limit);
@@ -144,7 +145,7 @@ class AdRepository extends EntityRepository
             JOIN u.followers fe
             LEFT JOIN a.promotees ap
             LEFT JOIN ap.user apu
-            WHERE u.id = :id OR fe.id = :id OR apu.id = :id
+            WHERE u.id = :id OR fe.id = :id OR apu.id = :id AND a.active = TRUE
             ORDER BY a.created DESC
         ');
         $query->useResultCache(true, 1800, 'AdFindUserStreamQuery');
@@ -159,6 +160,7 @@ class AdRepository extends EntityRepository
             SELECT a, u
             FROM AdstacyAppBundle:Ad a
             JOIN a.user u
+            WHERE a.active = TRUE
             ORDER BY a.promoteesCount DESC
         ');
         $query->setMaxResults($limit);
@@ -183,7 +185,7 @@ class AdRepository extends EntityRepository
             FROM AdstacyAppBundle:Ad a
             JOIN a.user u
             JOIN a.promotees ap
-            WHERE ap.created >= :since
+            WHERE ap.created >= :since AND a.active = TRUE
             GROUP BY a.id, u.id
             ORDER BY cnt DESC
         ');

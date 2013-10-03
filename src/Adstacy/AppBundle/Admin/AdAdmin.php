@@ -47,6 +47,13 @@ class AdAdmin extends Admin
             ->add('description')
             ->add('user.username', null, array('label' => 'Username'))
             ->add('promoteesCount')
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                    'block' => array(
+                        'template' => 'AdstacyAppBundle:Admin:block_action.html.twig' 
+                    ) 
+                )
+            ))
         ;
     }
 }

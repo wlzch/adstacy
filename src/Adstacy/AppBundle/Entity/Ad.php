@@ -113,6 +113,11 @@ class Ad
     private $featureds;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $active;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     protected $updated;
@@ -126,6 +131,7 @@ class Ad
         $this->promoteesCount = 0;
         $this->commentsCount = 0;
         $this->created = new \Datetime();
+        $this->active = true;
     }
     
     /**
@@ -569,4 +575,27 @@ class Ad
         return $this->description;
     }
 
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     * @return Ad
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+    
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean 
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
 }

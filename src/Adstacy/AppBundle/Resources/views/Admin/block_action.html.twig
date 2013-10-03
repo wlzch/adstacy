@@ -1,0 +1,7 @@
+{% if is_granted('ROLE_SUPER_ADMIN') %}
+  {% if object.active %}
+    <a href="{{ path('adstacy_admin_ad_block', {id: object.id}) }}">Block</a>
+  {% else %}
+    <a href="{{ path('adstacy_admin_ad_unblock', {id: object.id}) }}">Unblock</a>
+  {% endif %}
+{% endif %}
