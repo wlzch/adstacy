@@ -50,27 +50,9 @@
     }
   }
   $(function() {
-    WebFontConfig = {
-      google: { families: [ 'Open+Sans:400,300,700:latin' ] },
-      timeout: 2000,
-      active: function() {
-        masonryCheck();
-        $('body').removeClass('body-loader');
-        $('.body-content').removeClass('body-content');
-      },
-      inactive: function() {
-        masonryCheck();
-        $('body').removeClass('body-loader');
-        $('.body-content').removeClass('body-content');
-      }
-    };
-    var wf = document.createElement('script');
-    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-    wf.type = 'text/javascript';
-    wf.async = 'true';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(wf, s);
+    masonryCheck();
+    $('body').removeClass('body-loader');
+    $('.body-content').removeClass('body-content');
   });
 
   $window.on('resize orientationChanged', masonryCheck);
