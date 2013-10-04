@@ -2,7 +2,12 @@ services:
     adstacy.type.image:
         class: Adstacy\AppBundle\Form\Type\ImageType
         tags:
-            - { name: form.type, alias: image}
+            - { name: form.type, alias: image }
+
+    adstacy.type.hashtags:
+        class: Adstacy\AppBundle\Form\Type\HashtagsType
+        tags:
+            - { name: form.type, alias: hashtags }
 
     adstacy.type.purified_textarea:
         class: Adstacy\AppBundle\Form\Type\PurifiedTextareaType

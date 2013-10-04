@@ -4,3 +4,10 @@ adstacy_app_api_users:
         _controller: AdstacyAppBundle:Api:users
     options:
       expose: true
+
+adstacy_app_api_tags:
+    pattern: /tags.json
+    defaults:
+        _controller: AdstacyAppBundle:Api:tags
+    options:
+      expose: true

@@ -153,7 +153,6 @@ class Ad
     public function setDescription($description)
     {
         $this->description = $description;
-        $this->generateTags();
     
         return $this;
     }
@@ -192,26 +191,14 @@ class Ad
     }
 
     /**
-     * Generate tags from description
-     */
-    public function generateTags()
-    {
-        $matches = null;
-        preg_match_all('/#(\w+)/', $this->description, $matches);
-        // TODO: make tags unique
-        $tags = $matches[1];
-        $this->setTags($tags);
-    }
-
-    /**
      * Set tags
      *
      * @param array $tags
      * @return Ad
      */
-    public function setTags($tags)
+    public function setTags($tags = array())
     {
-        $this->tags = $tags;
+        $this->tags = preg_replace('/[^A-Za-z0-9 ]/', '', $tags);
     
         return $this;
     }

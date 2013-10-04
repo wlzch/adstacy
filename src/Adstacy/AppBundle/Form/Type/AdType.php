@@ -24,6 +24,10 @@ class AdType extends AbstractType
             ),
             'error_bubbling' => true
         ));
+        $builder->add('tags', 'hashtags', array(
+            'label' => 'form_ad.hashtags',
+            'error_bubbling' => true
+        ));
         $builder->add('content', 'purified_textarea', array(
             'label' => 'form_ad.content',
             'required' => false,
