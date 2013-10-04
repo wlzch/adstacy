@@ -56,6 +56,8 @@ ads:
             success: Comment deleted
             fail: Comment cannot be deleted
     blocked: This ads have been blocked. Please edit it according to our <a href="%url%">terms</a>.
+    report:
+        success: Ads have been reported. We will look into this soon.
 
 user:
     no_followers:

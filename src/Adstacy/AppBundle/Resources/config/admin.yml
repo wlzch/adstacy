@@ -34,3 +34,12 @@ services:
             - ~
             - Adstacy\AppBundle\Entity\FeaturedAd
             - 'SonataAdminBundle:CRUD'
+
+    adstacy.admin.report_ad:
+        class: Adstacy\AppBundle\Admin\ReportAdAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm,group: app, label: "Reported Ads" }
+        arguments:
+            - ~
+            - Adstacy\AppBundle\Entity\ReportAd
+            - 'SonataAdminBundle:CRUD'

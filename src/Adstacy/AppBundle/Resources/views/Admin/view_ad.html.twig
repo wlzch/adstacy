@@ -1,0 +1,3 @@
+{% if is_granted('ROLE_SUPER_ADMIN') %}
+  <a href="{{ path('adstacy_app_ad_show', {id: object.ad.id}) }}">View</a>
+{% endif %}

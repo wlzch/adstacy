@@ -60,3 +60,10 @@ adstacy_app_ad_delete:
         _controller: AdstacyAppBundle:Ad:delete
     requirements:
         id: \d+
+
+adstacy_app_ad_report:
+    pattern: /ads/{id}/report
+    defaults:
+        _controller: AdstacyAppBundle:Ad:report
+    requirements:
+        id: \d+

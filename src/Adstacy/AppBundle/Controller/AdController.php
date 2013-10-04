@@ -5,6 +5,7 @@ namespace Adstacy\AppBundle\Controller;
 use Adstacy\AppBundle\Entity\Ad;
 use Adstacy\AppBundle\Entity\Comment;
 use Adstacy\AppBundle\Entity\PromoteAd;
+use Adstacy\AppBundle\Entity\ReportAd;
 use Adstacy\AppBundle\Form\Type\AdType;
 use Adstacy\AppBundle\Form\Type\CommentType;
 use JMS\SecurityExtraBundle\Annotation\Secure;
@@ -19,7 +20,8 @@ class AdController extends Controller
     public function showAction($id)
     {
         $ad = $this->getRepository('AdstacyAppBundle:Ad')->find($id);
-        if (!$ad || ($ad && $ad->getUser() != $this->getUser() && $ad->getActive() == false)) {
+        $securityContext = $this->get('security.context');
+        if (!$ad || ($ad && $ad->getUser() != $this->getUser() && $ad->getActive() == false) && !$securityContext->isGranted('ROLE_SUPER_ADMIN')) {
             throw $this->createNotFoundException();
         }
         $adsByUser = $this->getRepository('AdstacyAppBundle:Ad')->findByUser($ad->getUser(), 4);
@@ -296,4 +298,31 @@ class AdController extends Controller
 
         return $this->redirect($this->generateUrl('adstacy_app_ad_show', array('id' => $comment->getAd()->getId())));
     }
+
+    /**
+     * @Secure(roles="ROLE_USER")
+     *
+     * @param integer ad id
+     */
+    public function reportAction($id)
+    {
+        $ad = $this->getRepository('AdstacyAppBundle:Ad')->find($id);
+        if (!$ad) {
+            throw $this->createNotFoundException();
+        }
+        $report = new ReportAd();
+        $report->setAd($ad);
+        $report->setUser($this->getUser());
+        $em = $this->getManager();
+        $em->persist($report);
+        $em->flush();
+
+        if ($this->getRequest()->isXmlHttpRequest()) {
+            return new JsonResponse(array('status' => 'ok', 'message' => $this->translate('ads.report.success')));
+        }
+
+        $this->addFlash('success', $this->translate('ads.report.success'));
+        return $this->redirect($this->generateUrl('adstacy_app_ad_show', array('id' => $id)));
+    }
+
 }

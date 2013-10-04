@@ -66,6 +66,10 @@
           <a href="{{ facebookUrl }}" class="facebook-share btn btn-facebook btn-sm">
             <i class="icon-facebook"></i> <span class="social-label">Share</span>
           </a>
+          <a href="{{ path('adstacy_app_ad_report', {id: ad.id}) }}" class="btn btn-info btn-sm">
+            <i class="icon-info"></i> <span class="social-label">Report</span>
+          </a>
+          {% include 'AdstacyAppBundle:Admin:block_action.html.twig' with {object: ad} %}
           {% if app.user == user %}
             <div class="owner-action btn-group btn-group-sm pull-right">
               <a href="{{ path('adstacy_app_ad_edit', {id: ad.id}) }}" class="btn btn-success"><i class="icon-edit"></i><span class="owner-action-label">{{ "edit"|trans }}</span></a>

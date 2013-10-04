@@ -55,6 +55,8 @@ ads:
             success: Komentar terhapus
             fail: Komentar tidak dapat dihapus
     blocked: Iklan ini telah diblock. Silahkan edit berdasarkan <a href="%url%">ketentuan</a> kami
+    report:
+        success: Iklan telah dilaporkan. Kami akan melihatnya segera.
 
 user:
     no_followers:
