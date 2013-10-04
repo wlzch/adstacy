@@ -2,6 +2,8 @@ adstacy_app_user_profile:
     pattern: /{username}
     defaults:
         _controller: AdstacyAppBundle:User:show
+    options:
+        expose: true
 
 adstacy_app_user_promotes:
     pattern: /{username}/promotes

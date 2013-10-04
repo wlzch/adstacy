@@ -99,35 +99,19 @@
 
 #search-container {
   width: 350px;
-}
-
-#search-box {
-  background-color: #fafafa;
-  border-width: 1px 0;
-}
-
-#search-type-btn {
-  color: #555;
-  min-width: 80px;
-  padding-right: 24px;
-  text-align: left;
-
-  .icon-angle-up,
-  .icon-angle-down {
-    position: absolute;
-    line-height: 32px;
-    top: 0;
-    right: 10px;
+  .typeahead, .tt-query, .tt-hint {
+    width: 310px;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
   }
-
-  + .dropdown-menu {
-    min-width: 80px;
-
-    > li > a {
-      cursor: pointer;
-      padding-left: 12px;
-      padding-right: 24px;
-    }
+  .tt-dropdown-menu {
+    width: 350px;
+  }
+  .tt-dropdown-header {
+    margin: 0 20px 5px 20px;
+    padding: 3px 0;
+    border-bottom: 1px solid #ccc;
+    font-weight: bold;
   }
 }
 

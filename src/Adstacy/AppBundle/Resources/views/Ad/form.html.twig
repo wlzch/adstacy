@@ -5,19 +5,9 @@
   {% stylesheets filter='cssrewrite, uglifycss'
     'bundles/adstacyapp/less/layout/create_ad.less'
     'bundles/adstacyapp/less/bootstrap-tagsinput.less'
-    'bundles/adstacyapp/less/typeahead-bootstrap.less'
   %}
     <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
   {% endstylesheets %}
-{% endblock %}
-
-{% block head_scripts %}
-  {{ parent() }}
-  {% javascripts filter='uglifyjs2'
-    '@AdstacyAppBundle/Resources/public/js/typeahead.js'
-  %}
-    <script src="{{ asset_url }}" type="text/javascript"></script>
-  {% endjavascripts %}
 {% endblock %}
 
 {% block content %}

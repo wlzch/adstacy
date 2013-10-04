@@ -46,26 +46,14 @@
 
     <div class="collapse navbar-collapse navbar-ex1-collapse">
       <form id="search-form" action="{{ path('adstacy_app_search') }}" class="navbar-form navbar-left">
-        {% set isSearchUser = app.request.attributes.get('_route') == 'adstacy_app_search' and app.request.query.get('type') == 'users' %}
         <div id="search-container" class="input-group">
-          <div class="input-group-btn">
-            <button id="search-type-btn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-              <span id="search-type-text">{% if isSearchUser %}{{"search_users"|trans}}{% else %}{{"search_ads"|trans}}{% endif %}</span>
-              <i class="icon-angle-up icon-angle-down"></i>
-            </button>
-            <ul class="dropdown-menu">
-              <li><a data-val="ads">{{"search_ads"|trans}}</a></li>
-              <li><a data-val="users">{{"search_users"|trans}}</a></li>
-            </ul>
-          </div>
-          <input id="search-box" type="text" class="form-control" placeholder="{{"search"|trans}}" name="q" value="{{ app.request.query.get('q') }}">
+          <input id="search-box" type="text" class="form-control typeahead" placeholder="{{"search"|trans}}" name="q" value="{{ app.request.query.get('q') }}">
           <div class="input-group-btn">
             <button type="submit" class="btn btn-default">
               <i class="icon-search"></i>
             </button>
           </div>
         </div>
-        <input id="search-type" type="hidden" name="type" value="{% if isSearchUser %}users{% else %}ads{% endif %}">
       </form>
 
       <div class="navbar-right">

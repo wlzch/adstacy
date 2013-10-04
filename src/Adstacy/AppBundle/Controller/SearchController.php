@@ -9,8 +9,9 @@ class SearchController extends Controller
 {
     public function searchAction()
     {
-        if ($this->getRequest()->query->get('type') == 'users') {
-            return $this->searchUsersAction();
+        $q = $this->getRequest()->query->get('q');
+        if ($q && strlen($q) > 1 && $q[0] == '@') {
+            return $this->searchUsers(substr($q, 1));
         }
         return $this->searchAdsAction();
     }
@@ -55,12 +56,18 @@ class SearchController extends Controller
     public function searchUsersAction()
     {
         $request = $this->getRequest();
+
+        return $this->searchUsers($request->query->get('q'));
+    }
+
+    private function searchUsers($username)
+    {
+        $request = $this->getRequest();
         $finder = $this->get('fos_elastica.finder.website.user');
-        $q = $request->query->get('q');
         $limit = $this->getParameter('max_users_per_page');
         if ($this->isMobile()) $limit = $limit / 2;
 
-        $usersPaginator = $finder->findPaginated($request->query->get('q'));
+        $usersPaginator = $finder->findPaginated($username);
         $usersPaginator 
             ->setMaxPerPage($limit)
             ->setCurrentPage($request->query->get('page') ?: 1)
@@ -71,4 +78,5 @@ class SearchController extends Controller
             'search' => 'users'
         ));
     }
+
 }

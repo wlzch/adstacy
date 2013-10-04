@@ -17,6 +17,7 @@ class ApiController extends Controller
         $request = $this->getRequest();
         $results = array();
         $q = $request->query->get('q');
+        $withoutMention = $request->query->get('cond') == 'noment';
         $response = null;
         $redis = $this->get('snc_redis.default');
 
@@ -34,6 +35,7 @@ class ApiController extends Controller
           foreach ($usernames as $username) {
             $result = $redis->hgetall("user:$username");
             $result['type'] = 'user';
+            if ($withoutMention) $result['value'] = substr($result['value'], 1);
             $results[] = $result;
           }
         }

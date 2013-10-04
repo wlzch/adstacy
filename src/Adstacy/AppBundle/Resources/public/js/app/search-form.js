@@ -1,13 +1,32 @@
 (function() {
   var $searchForm = $('#search-form');
-
-  $searchForm.find('.dropdown-menu li').click(function() {
-    var $type = $searchForm.find('#search-type');
-    $type.val($(this).find('a').attr('data-val'));
-    $searchForm.find('#search-type-text').text($(this).find('a').text());
-  });
-  $searchForm.submit(function() {
-    var $box = $(this).find('#search-box');
-    if ($box.val().length == 0) return false;
+  var $searchBox = $('#search-box');
+  $searchBox.typeahead([
+    {
+      name: 'tags',
+      remote: {
+        url: Routing.generate('adstacy_app_api_tags', {q: '_QUERY_'}),
+        wildcard: '_QUERY_'
+      },
+      header: '<h3 class="tt-dropdown-header">Tags</h3>'
+    },
+    {
+      name: 'users',
+      remote: {
+        url: Routing.generate('adstacy_app_api_users', {q: '_QUERY_', cond: 'noment'}),
+        wildcard: '_QUERY_'
+      },
+      header: '<h3 class="tt-dropdown-header">Users</h3>',
+      template: '<p><img src="{{ avatar }}" width="35" height="35"> <strong class="real-name">{{ name }}</strong> (<span class="username">{{ username }}</span>)</p>',
+      engine: Hogan
+    }
+  ]);
+  $searchBox.on('typeahead:selected', function(e, datum, name) {
+    $searchBox.prop('disabled', true);
+    if (name == 'users') {
+      window.location.href = Routing.generate('adstacy_app_user_profile', {username: datum.username});
+    } else if (name == 'tags') {
+      window.location.href = Routing.generate('adstacy_app_search', {q: datum.value});
+    }
   });
 })();
