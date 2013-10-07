@@ -115,8 +115,24 @@ class AppController extends Controller
     /**
      * @Secure(roles="ROLE_USER")
      */
-    public function findFriendsAction()
+    public function whoToFollowAction()
     {
-        $facebook = $this->get('facebook');
+        $user = $this->getUser();
+        $redis = $this->get('snc_redis.default');
+        $request = $this->getRequest();
+        $page = $request->query->get('page') ?: 1;
+        $max = $this->getParameter('max_who_to_follow');
+        $start = ($page - 1) * $max;
+        $end = $start + ($max - 1);
+
+        $ids = $redis->zrevrange('recommendation:'.$user->getUsername(), $start, $end);
+        $users = array();
+        if (count($ids) > 0) {
+            $users = $this->getRepository('AdstacyAppBundle:User')->findById($ids);
+        }
+
+        return $this->render('AdstacyAppBundle:App:who_to_follow.html.twig', array(
+            'users' => $users
+        ));
     }
 }

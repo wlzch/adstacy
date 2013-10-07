@@ -7,6 +7,8 @@ parameters:
     max_ads_per_page: 30
     max_users_per_page: 15
     max_notifications: 50
+    max_who_to_follow: 20
+
     thumb_width: 234
     mini_thumb_size: 100
     profile_pic_size: 100

@@ -1,0 +1,24 @@
+{% extends 'AdstacyAppBundle::layout.html.twig' %}
+
+{% block content %}
+  {% if users|length > 0 %}
+    <div class="page-title jumbotron text-center">
+      <h1>User to follow</h1>
+    </div>
+    <div class="adstacy-container">
+      {{ block('ajax_content') }}
+    </div>
+  {% else %}
+    <div class="page-title jumbotron text-center">
+      <h1></h1>
+    </div>
+  {% endif %}
+{% endblock %}
+
+{% block ajax_content %}
+  <div class="clearfix">
+    {% for user in users %}
+      {% include 'AdstacyAppBundle:User:user.html.twig' with {user: user} %}
+    {% endfor %}
+  </div>
+{% endblock %}
