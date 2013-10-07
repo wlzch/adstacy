@@ -135,4 +135,58 @@ class AppController extends Controller
             'users' => $users
         ));
     }
+
+    /**
+     * @Secure(roles="ROLE_USER")
+     */
+    public function whoToFollowFacebookAction()
+    {
+        $facebook = $this->get('facebook');
+        $user = $this->getUser();
+        $request = $this->getRequest();
+        $repo = $this->getRepository('AdstacyAppBundle:User');
+
+        $loginUrl = $facebook->getLoginUrl(array(
+            'redirect_uri' => $this->generateUrl('adstacy_app_who_to_follow_facebook', array(), true),
+            'scope' => 'read_friendlists'
+        ));
+
+        if ($request->query->has('code')) {
+            $accessToken = $facebook->getAccessToken();
+            $user->setFacebookAccessToken($accessToken);
+            $em = $this->getManager();
+            $em->persist($user);
+            $em->flush();
+        }
+
+        if ($user->getFacebookAccessToken()) {
+            try {
+                $facebook->setAccessToken($user->getFacebookAccessToken());
+                $result = $facebook->api('/me/friends');
+                $friends = $result['data'];
+                $facebookIds = array();
+                foreach ($friends as $friend) {
+                    $facebookIds[] = $friend['id'];
+                }
+
+                $users = $repo->findByFacebookId($facebookIds);
+                $followings = $user->getFollowings()->toArray();
+
+                $usersToSuggest = array();
+                foreach ($users as $user) {
+                    if (!in_array($user, $followings, true)) {
+                        $usersToSuggest[] = $user;
+                    }
+                }
+
+                return $this->render('AdstacyAppBundle:App:who_to_follow.html.twig', array(
+                    'users' => $usersToSuggest
+                ));
+            } catch (\FacebookApiException $exception) {
+                return $this->redirect($loginUrl);
+            }
+        }
+
+        return $this->redirect($loginUrl);
+    }
 }
