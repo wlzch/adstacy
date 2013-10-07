@@ -28,6 +28,11 @@ adstacy_app_contact:
     defaults:
         _controller: AdstacyAppBundle:App:contactUs
 
+adstacy_app_find_friends:
+    pattern: /find-friends
+    defaults:
+        _controller: AdstacyAppBundle:App:findFriends
+
 adstacy_app_page_show:
     pattern: /pages/{key}
     defaults:

@@ -18,3 +18,10 @@ services:
     adstacy.helper.user:
         class: Adstacy\AppBundle\Helper\UserHelper
         arguments: [@service_container]
+    
+    facebook:
+        class: Facebook
+        arguments:
+            -
+                appId: %facebook_app_id%
+                secret: %facebook_app_secret%

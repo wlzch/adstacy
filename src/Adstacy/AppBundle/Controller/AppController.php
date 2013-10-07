@@ -111,4 +111,12 @@ class AppController extends Controller
             'form' => $form->createView()
         ));
     }
+
+    /**
+     * @Secure(roles="ROLE_USER")
+     */
+    public function findFriendsAction()
+    {
+        $facebook = $this->get('facebook');
+    }
 }

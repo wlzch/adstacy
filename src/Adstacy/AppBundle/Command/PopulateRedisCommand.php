@@ -15,13 +15,29 @@ class PopulateRedisCommand extends ContainerAwareCommand
         $this
             ->setName('adstacy:redis:populate')
             ->setDescription('Populate redis data')
+            ->addArgument('what', InputArgument::REQUIRED, 'what to populate (available: all, user, tag, recommendation)')
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        //$this->populateUserData($input, $output);
-        $this->populateTagData($input, $output);
+        $what = $input->getArgument('what');
+        $whats = explode(',', $what);
+        if (in_array('all', $whats)) {
+            $this->populateUserData($input, $output);
+            $this->populateTagData($input, $output);
+            $this->populateRecommendation($input, $output);
+        } else {
+            if (in_array('user', $whats)) {
+                $this->populateUserData($input, $output);
+            }
+            if (in_array('tag', $whats)) {
+                $this->populateTagData($input, $output);
+            }
+            if (in_array('recommendation', $whats)) {
+                $this->populateRecommendation($input, $output);
+            }
+        }
     }
 
     private function populateUserData(InputInterface $input, OutputInterface $output)
@@ -90,5 +106,66 @@ class PopulateRedisCommand extends ContainerAwareCommand
         }
 
         $output->writeln($cnt.' tags data populated');
+    }
+
+    private function populateRecommendation(InputInterface $input, OutputInterface $output)
+    {
+        $output->writeln('Populating recommendation data');
+        $container = $this->getContainer();
+        $repo = $container->get('doctrine')->getRepository('AdstacyAppBundle:User');
+        $em = $container->get('doctrine')->getManager();
+        $redis = $this->getContainer()->get('snc_redis.default');
+    
+        $query = $em->createQuery('
+            SELECT partial u.{id,username}, partial f.{id}
+            FROM AdstacyAppBundle:User u
+            JOIN u.followings f
+        ');
+        $users = $query->getResult();
+        $popularUsers = $em->createQuery('
+            SELECT partial u.{id}
+            FROM AdstacyAppBundle:User u
+            ORDER BY u.followersCount DESC
+        ')->setMaxResults(25)->getResult();
+        $recommendations = array();
+        // recommend the most common followings
+        $cnt = 0;
+        foreach ($users as $user) {
+            if ($user->getUsername()) {
+                $recommendation = array();
+                $followings = $user->getFollowings();
+                $followings = $user->getFollowings();
+                $idFollowings = array();
+                foreach ($followings as $following) {
+                    $idFollowings[] = $following->getId();
+                }
+                foreach ($followings as $following) {
+                    foreach ($following->getFollowings() as $followingsFollowing) {
+                        $followingsFollowingId = $followingsFollowing->getId();
+                        if (!in_array($followingsFollowingId, $idFollowings)) {
+                            if (isset($recommendation[$followingsFollowingId])) {
+                                $recommendation[$followingsFollowingId]++;
+                            } else {
+                                $recommendation[$followingsFollowingId] = 1;
+                            }
+                        }
+                    }
+                }
+                foreach ($popularUsers as $popularUser) {
+                    if (!isset($recommendaton[$popularUser->getId()])) {
+                        $recommendation[$popularUser->getId()] = 0;
+                    }
+                }
+                $recommendations[$user->getUsername()] = $recommendation;
+
+                $redisKey = 'recommendation:'.$user->getUsername();
+                $redis->del($redisKey);
+                $cmd = $redis->createCommand('zadd');
+                $cmd->setArguments(array($redisKey, $recommendation));
+                $redis->executeCommand($cmd);
+                $cnt++;
+            }
+        }
+        $output->writeln("$cnt data populated");
     }
 }
