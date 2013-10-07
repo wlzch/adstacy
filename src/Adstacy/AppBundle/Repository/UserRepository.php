@@ -181,4 +181,22 @@ class UserRepository extends EntityRepository
             WHERE u.usernameCanonical IN ($formatted)
         ")->getResult();
     }
+
+    /**
+     * Find popular users
+     *
+     * @param integer $limit
+     */
+    public function findPopularUsers($limit = 25)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('
+            SELECT partial u.{id}
+            FROM AdstacyAppBundle:User u
+            ORDER BY u.followersCount DESC
+        ')->setMaxResults($limit);
+        $query->useResultCache(true, 86400, 'UserFindPopularUsersQuery');
+        
+        return $query->getResult();
+    }
 }

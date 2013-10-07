@@ -9,6 +9,10 @@ services:
         class: Adstacy\AppBundle\Security\User\Provider\UserProvider
         arguments: [@fos_user.user_manager, @session, @router]
     
+    adstacy.manager.user:
+        class: Adstacy\AppBundle\Manager\UserManager
+        arguments: [@service_container]
+
     adstacy.helper.formatter:
         class: Adstacy\AppBundle\Helper\Formatter
 

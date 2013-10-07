@@ -140,6 +140,7 @@ class UserController extends Controller
                 $this->get('adstacy.notification.manager')->save($loggedInUser, $user, null, false, 'follow');
                 $em->persist($user);
                 $em->flush();
+                $this->get('adstacy.manager.user')->suggestFollow($loggedInUser);
 
                 if ($request->isXmlHttpRequest()) {
                     return new JsonResponse(json_encode(array('username' => $username, 'followers_count' => $user->getFollowersCount())));
