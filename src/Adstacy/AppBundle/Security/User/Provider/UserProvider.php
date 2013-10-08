@@ -190,29 +190,16 @@ class UserProvider implements UserProviderInterface, OAuthAwareUserProviderInter
     private function setFriend($service, User $user, UserResponseInterface $response)
     {
         if ($service == 'facebook') {
-            $facebook = $this->container->get('facebook');
-            $facebook->setAccessToken($response->getAccessToken());
-            $result = $facebook->api('/me/friends');
-            $friends = $result['data'];
-            $facebookIds = array();
-            foreach ($friends as $friend) {
-                $facebookIds[] = $friend['id'];
-            }
+            $facebookAPI = $this->container->get('adstacy.oauth.facebook_api');
+            $facebookIds = $facebookAPI->getFriends($response->getAccessToken());
             $user->getDetail()->setFacebookFriends($facebookIds);
         } else if ($service == 'twitter') {
-            $twitter = $this->container->get('twitter'); 
-            $qs = '?user_id='.$response->getUsername().'&stringify_ids=true';
-            $res = $twitter->setGetField($qs)
-                    ->buildOauth(Twitter::FRIENDS_URL, 'GET')
-                    ->performRequest();
-            $res = json_decode($res);
-            $user->getDetail()->setTwitterFriends($res->ids);
+            $twitterAPI = $this->container->get('adstacy.oauth.twitter_api'); 
+            $followingIds = $twitterAPI->getFollowings($response->getUsername());
+            $user->getDetail()->setTwitterFriends($followingIds);
 
-            $res = $twitter->setGetField($qs)
-                    ->buildOauth(Twitter::FOLLOWERS_URL, 'GET')
-                    ->performRequest();
-            $res = json_decode($res);
-            $user->getDetail()->setTwitterFollowers($res->ids);
+            $followerIds = $twitterAPI->getFollowers($response->getUsername());
+            $user->getDetail()->setTwitterFollowers($followerIds);
         }
     }
 

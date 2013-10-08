@@ -162,13 +162,8 @@ class AppController extends Controller
 
         if ($user->getFacebookAccessToken()) {
             try {
-                $facebook->setAccessToken($user->getFacebookAccessToken());
-                $result = $facebook->api('/me/friends');
-                $friends = $result['data'];
-                $facebookIds = array();
-                foreach ($friends as $friend) {
-                    $facebookIds[] = $friend['id'];
-                }
+                $facebookAPI = $this->get('adstacy.oauth.facebook_api');
+                $facebookIds = $facebookAPI->getFriends($user->getFacebookAccessToken());
 
                 $users = $repo->findByFacebookId($facebookIds);
                 $followings = $user->getFollowings()->toArray();
@@ -197,14 +192,9 @@ class AppController extends Controller
     public function whoToFollowTwitterAction()
     {
         $user = $this->getUser();
-        $request = $this->getRequest();
-        $twitter = $this->get('twitter'); 
-        $qs = '?user_id='.$user->getTwitterId().'&stringify_ids=true';
-        $res = $twitter->setGetField($qs)
-                ->buildOauth(Twitter::FRIENDS_URL, 'GET')
-                ->performRequest();
-        $res = json_decode($res);
-        $users = $this->getRepository('AdstacyAppBundle:User')->findByTwitterId($res->ids);
+        $twitterAPI = $this->get('adstacy.oauth.twitter_api');
+        $followingIds = $twitterAPI->getFollowings($user->getTwitterId());
+        $users = $this->getRepository('AdstacyAppBundle:User')->findByTwitterId($followingIds);
 
         $usersToSuggest = array();
         $followings = $user->getFollowings()->toArray();
