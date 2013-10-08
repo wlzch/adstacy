@@ -93,6 +93,11 @@ class User implements UserInterface, GroupableInterface
     private $realName;
 
     /**
+     * @ORM\OneToOne(targetEntity="UserDetail", mappedBy="user", cascade={"persist"})
+     */
+    private $detail;
+
+    /**
      * @ORM\OneToMany(targetEntity="Ad", mappedBy="user")
      */
     private $ads;
@@ -322,6 +327,7 @@ class User implements UserInterface, GroupableInterface
         $this->followingsCount = 0;
         $this->promotesCount = 0;
         $this->notificationsCount = 0;
+        $this->setDetail(new UserDetail());
     }
 
     /**
@@ -1607,5 +1613,33 @@ class User implements UserInterface, GroupableInterface
     public function isSubscribed()
     {
         return $this->subscription == true;
+    }
+
+    /**
+     * Set detail
+     *
+     * @param \Adstacy\AppBundle\Entity\UserDetail $detail
+     * @return User
+     */
+    public function setDetail(\Adstacy\AppBundle\Entity\UserDetail $detail = null)
+    {
+        $this->detail = $detail;
+        $this->detail->setUser($this);
+    
+        return $this;
+    }
+
+    /**
+     * Get detail
+     *
+     * @return \Adstacy\AppBundle\Entity\UserDetail 
+     */
+    public function getDetail()
+    {
+        if (!$this->detail) {
+            $this->setDetail(new UserDetail());
+        }
+
+        return $this->detail;
     }
 }

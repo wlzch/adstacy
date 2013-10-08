@@ -8,11 +8,13 @@ use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Router;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\Exception\AccountNotLinkedException;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use Adstacy\AppBundle\Entity\User;
+use Adstacy\AppBundle\Helper\Twitter;
 
 /**
  * Bridging FOSUser dengan HWIOAuth
@@ -41,16 +43,22 @@ class UserProvider implements UserProviderInterface, OAuthAwareUserProviderInter
     protected $router;
 
     /**
+     * @var ContainerInterface
+     */
+    protected $container;
+
+    /**
      * Constructor.
      *
      * @param UserManagerInterface $userManager FOSUB user provider.
      */
-    public function __construct(UserManagerInterface $userManager, Session $session, Router $router)
+    public function __construct(UserManagerInterface $userManager, Session $session, Router $router, ContainerInterface $container)
     {
         $this->userManager = $userManager;
         $this->session = $session;
         $this->router = $router;
         $this->properties  = array('facebook' => 'facebookId', 'twitter' => 'twitterId');
+        $this->container = $container;
     }
 
     public function loadUserByUsername($username)
@@ -119,6 +127,7 @@ class UserProvider implements UserProviderInterface, OAuthAwareUserProviderInter
             $user->$setter_username($response->getNickname());
             $user->$setter_real_name($response->getRealName());
             $user->setProfilePicture($response->getProfilePicture());
+            $this->setFriend($service, $user, $response);
         }
 
         if (!$user->getProfilePicture()) {
@@ -165,9 +174,40 @@ class UserProvider implements UserProviderInterface, OAuthAwareUserProviderInter
         $user->$setter_username($response->getNickname());
         $user->$setter_real_name($response->getRealName());
         $user->setProfilePicture($response->getProfilePicture());
+        $this->setFriend($service, $user, $response);
         $user->addRole('ROLE_'.strtoupper($service));
  
         $this->userManager->updateUser($user);
+    }
+
+    /**
+     * Get facebook/twitter friends and save it to database
+     *
+     * @param string $service facebook|twitter
+     * @param User $user
+     * @param UserResponseInterface $response
+     */
+    private function setFriend($service, User $user, UserResponseInterface $response)
+    {
+        if ($service == 'facebook') {
+            $facebook = $this->container->get('facebook');
+            $facebook->setAccessToken($response->getAccessToken());
+            $result = $facebook->api('/me/friends');
+            $friends = $result['data'];
+            $facebookIds = array();
+            foreach ($friends as $friend) {
+                $facebookIds[] = $friend['id'];
+            }
+            $user->getDetail()->setFacebookFriends($facebookIds);
+        } else if ($service == 'twitter') {
+            $twitter = $this->container->get('twitter'); 
+            $qs = '?user_id='.$response->getUsername().'&stringify_ids=true';
+            $res = $twitter->setGetField($qs)
+                    ->buildOauth(Twitter::FRIENDS_URL, 'GET')
+                    ->performRequest();
+            $res = json_decode($res);
+            $user->getDetail()->setTwitterFriends($res->ids);
+        }
     }
 
     /**
