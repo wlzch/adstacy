@@ -38,6 +38,11 @@ adstacy_app_who_to_follow_facebook:
     defaults:
         _controller: AdstacyAppBundle:App:whoToFollowFacebook
 
+adstacy_app_who_to_follow_twitter:
+    pattern: /who-to-follow/twitter
+    defaults:
+        _controller: AdstacyAppBundle:App:whoToFollowTwitter
+
 adstacy_app_page_show:
     pattern: /pages/{key}
     defaults:

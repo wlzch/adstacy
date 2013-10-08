@@ -23,6 +23,8 @@ parameters:
     facebook_app_secret: '10af83878f15f4963c5a0a22fdc0e28b'
     twitter_client_id: 'VNgnUYWcvjnmLiVHzYNEg'
     twitter_client_secret: 'RF4WbIdC86hRMLQHj8OIRHDx5nApXRKhj5B4Ah5Rg'
+    twitter_access_token: '99203298-jKDPmWmMtGSAzgEnH754yvc10t8MFAxPiavf7VOYo'
+    twitter_access_token_secret: 'fWhvviE1LmeSNOV4Zt6BBQDyCHL0Dwkog1U1ludcNc'
 
     web_dir: %kernel.root_dir%/../web
     no_profpic_img: /bundles/adstacyapp/img/nophoto.gif

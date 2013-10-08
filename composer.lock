@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "404e5759a9cfa65533cab366cfbc37e4",
+    "hash": "93df738f01891e05f39f63e9a209f55c",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1320,6 +1320,45 @@
                 "parameters management"
             ],
             "time": "2013-04-06 17:15:44"
+        },
+        {
+            "name": "j7mbo/twitter-api-php",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/J7mbo/twitter-api-php.git",
+                "reference": "ab76f1c1e6bf83f0a257216cbaf9932b7cc19a3f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/J7mbo/twitter-api-php/zipball/ab76f1c1e6bf83f0a257216cbaf9932b7cc19a3f",
+                "reference": "ab76f1c1e6bf83f0a257216cbaf9932b7cc19a3f",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "TwitterAPIExchange.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GNU Public License"
+            ],
+            "authors": [
+                {
+                    "name": "James Mallison",
+                    "homepage": "https://github.com/j7mbo/twitter-api-php"
+                }
+            ],
+            "description": "Simple PHP Wrapper for Twitter API v1.1 calls",
+            "homepage": "https://github.com/j7mbo/twitter-api-php",
+            "keywords": [
+                "api",
+                "php",
+                "twitter"
+            ],
+            "time": "2013-10-03 10:04:59"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -4393,6 +4432,7 @@
         "ornicar/apc-bundle": 20,
         "exercise/htmlpurifier-bundle": 20,
         "mobiledetect/mobiledetectlib": 20,
+        "j7mbo/twitter-api-php": 20,
         "behat/symfony2-extension": 20,
         "behat/mink-extension": 20,
         "behat/mink-browserkit-driver": 20,

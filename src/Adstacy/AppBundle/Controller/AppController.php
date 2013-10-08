@@ -5,10 +5,11 @@ namespace Adstacy\AppBundle\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use JMS\Serializer\SerializationContext;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 use Adstacy\AppBundle\Model\Contact;
 use Adstacy\AppBundle\Form\Type\ContactType;
 use Adstacy\UserBundle\Form\Type\RegistrationFormType;
-use JMS\SecurityExtraBundle\Annotation\Secure;
+use Adstacy\AppBundle\Helper\Twitter;
 
 class AppController extends Controller
 {
@@ -188,5 +189,33 @@ class AppController extends Controller
         }
 
         return $this->redirect($loginUrl);
+    }
+
+    /**
+     * @Secure(roles="ROLE_USER")
+     */
+    public function whoToFollowTwitterAction()
+    {
+        $user = $this->getUser();
+        $request = $this->getRequest();
+        $twitter = $this->get('twitter'); 
+        $qs = '?user_id='.$user->getTwitterId().'&stringify_ids=true';
+        $res = $twitter->setGetField($qs)
+                ->buildOauth(Twitter::FRIENDS_URL, 'GET')
+                ->performRequest();
+        $res = json_decode($res);
+        $users = $this->getRepository('AdstacyAppBundle:User')->findByTwitterId($res->ids);
+
+        $usersToSuggest = array();
+        $followings = $user->getFollowings()->toArray();
+        foreach ($users as $user) {
+            if (!in_array($user, $followings, true)) {
+                $usersToSuggest[] = $user;
+            }
+        }
+
+        return $this->render('AdstacyAppBundle:App:who_to_follow.html.twig', array(
+            'users' => $usersToSuggest
+        ));
     }
 }
