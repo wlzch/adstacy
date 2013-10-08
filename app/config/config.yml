@@ -196,6 +196,8 @@ hwi_oauth:
             type: twitter
             client_id: %twitter_client_id%
             client_secret: %twitter_client_secret%
+            paths:
+                profilepicture: profile_image_url
     fosub:
         username_iterations: 30
         properties:
