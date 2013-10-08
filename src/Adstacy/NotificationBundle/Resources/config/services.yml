@@ -23,6 +23,14 @@ services:
         class: Adstacy\NotificationBundle\NotificationSaver\UnblockAdNotificationSaver
         arguments: [@doctrine.orm.entity_manager]
 
+    adstacy.notification.notification_saver.facebook_friend_join:
+        class: Adstacy\NotificationBundle\NotificationSaver\FacebookFriendJoinNotificationSaver
+        arguments: [@doctrine.orm.entity_manager]
+
+    adstacy.notification.notification_saver.twitter_friend_join:
+        class: Adstacy\NotificationBundle\NotificationSaver\TwitterFriendJoinNotificationSaver
+        arguments: [@doctrine.orm.entity_manager]
+
 
     adstacy.notification.notification_formatter.comment:
         class: Adstacy\NotificationBundle\NotificationFormatter\CommentNotificationFormatter
@@ -48,6 +56,14 @@ services:
         class: Adstacy\NotificationBundle\NotificationFormatter\UnblockAdNotificationFormatter
         arguments: [@router, @translator, @adstacy.helper.formatter, @adstacy.helper.user]
 
+    adstacy.notification.notification_formatter.facebook_friend_join:
+        class: Adstacy\NotificationBundle\NotificationFormatter\FacebookFriendJoinNotificationFormatter
+        arguments: [@router, @translator, @adstacy.helper.formatter, @adstacy.helper.user]
+
+    adstacy.notification.notification_formatter.twitter_friend_join:
+        class: Adstacy\NotificationBundle\NotificationFormatter\TwitterFriendJoinNotificationFormatter
+        arguments: [@router, @translator, @adstacy.helper.formatter, @adstacy.helper.user]
+
     adstacy.notification.manager:
         class: Adstacy\NotificationBundle\NotificationManager
         arguments:
@@ -58,6 +74,8 @@ services:
                 - @adstacy.notification.notification_saver.promote
                 - @adstacy.notification.notification_saver.block_ad
                 - @adstacy.notification.notification_saver.unblock_ad
+                - @adstacy.notification.notification_saver.facebook_friend_join
+                - @adstacy.notification.notification_saver.twitter_friend_join
             -
                 - @adstacy.notification.notification_formatter.comment
                 - @adstacy.notification.notification_formatter.mention
@@ -65,6 +83,8 @@ services:
                 - @adstacy.notification.notification_formatter.promote
                 - @adstacy.notification.notification_formatter.block_ad
                 - @adstacy.notification.notification_formatter.unblock_ad
+                - @adstacy.notification.notification_formatter.facebook_friend_join
+                - @adstacy.notification.notification_formatter.twitter_friend_join
 
     adstacy.twig.notification_extension:
         class: Adstacy\NotificationBundle\Twig\NotificationExtension

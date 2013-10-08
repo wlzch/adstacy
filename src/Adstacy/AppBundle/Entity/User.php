@@ -156,7 +156,7 @@ class User implements UserInterface, GroupableInterface
     private $promotesCount;
 
     /**
-     * @ORM\OneToMany(targetEntity="Adstacy\NotificationBundle\Entity\Notification", mappedBy="to")
+     * @ORM\OneToMany(targetEntity="Adstacy\NotificationBundle\Entity\Notification", mappedBy="to", cascade={"persist"})
      */
     private $notifications;
 

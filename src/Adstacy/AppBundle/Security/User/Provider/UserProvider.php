@@ -122,12 +122,12 @@ class UserProvider implements UserProviderInterface, OAuthAwareUserProviderInter
                 // redirect to settings if new user
                 $path = $this->router->getRouteCollection()->get('fos_user_profile_edit')->getPattern();
                 $this->session->set('_security.main.target_path', $path);
+                $this->notifyFriends($service, $user, $response);
             }
             $user->$setter_id($username);
             $user->$setter_username($response->getNickname());
             $user->$setter_real_name($response->getRealName());
             $user->setProfilePicture($response->getProfilePicture());
-            $this->setFriend($service, $user, $response);
         }
 
         if (!$user->getProfilePicture()) {
@@ -174,32 +174,35 @@ class UserProvider implements UserProviderInterface, OAuthAwareUserProviderInter
         $user->$setter_username($response->getNickname());
         $user->$setter_real_name($response->getRealName());
         $user->setProfilePicture($response->getProfilePicture());
-        $this->setFriend($service, $user, $response);
         $user->addRole('ROLE_'.strtoupper($service));
  
         $this->userManager->updateUser($user);
     }
 
     /**
-     * Get facebook/twitter friends and save it to database
+     * Notify friends that $user has joined Adstacy!
      *
      * @param string $service facebook|twitter
      * @param User $user
      * @param UserResponseInterface $response
      */
-    private function setFriend($service, User $user, UserResponseInterface $response)
+    private function notifyFriends($service, User $user, UserResponseInterface $response)
     {
+        $friends = array();
+        $repo = $this->container->get('doctrine')->getRepository('AdstacyAppBundle:User');
         if ($service == 'facebook') {
             $facebookAPI = $this->container->get('adstacy.oauth.facebook_api');
             $facebookIds = $facebookAPI->getFriends($response->getAccessToken());
-            $user->getDetail()->setFacebookFriends($facebookIds);
+            $friends = $repo->findByFacebookId($facebookIds);
         } else if ($service == 'twitter') {
             $twitterAPI = $this->container->get('adstacy.oauth.twitter_api'); 
-            $followingIds = $twitterAPI->getFollowings($response->getUsername());
-            $user->getDetail()->setTwitterFriends($followingIds);
-
             $followerIds = $twitterAPI->getFollowers($response->getUsername());
-            $user->getDetail()->setTwitterFollowers($followerIds);
+            $friends = $repo->findByTwitterId($followerIds);
+        }
+
+        $notificationManager = $this->container->get('adstacy.notification.manager');
+        foreach ($friends as $friend) {
+            $notificationManager->save($user, $friend, null, false, $service.'_friend_join');
         }
     }
 

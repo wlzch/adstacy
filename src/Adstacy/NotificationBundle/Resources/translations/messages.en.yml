@@ -6,6 +6,8 @@ notification:
     promote: 'promoted your ad'
     block_ad: 'blocked your ad'
     unblock_ad: 'unblocked your ad'
+    facebook_friend_join: '(your facebook friend) joined Adstacy. See what he/she is up to'
+    twitter_friend_join: '(your twitter friend) joined Adstacy. See what he/she is up to'
 
     no_notification: No new notification
     show_all: Show all notifications
