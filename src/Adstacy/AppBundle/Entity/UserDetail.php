@@ -28,6 +28,11 @@ class UserDetail
     private $twitterFriends;
 
     /**
+     * @ORM\Column(type="simple_array", name="twitter_followers", nullable=true)
+     */
+    private $twitterFollowers;
+
+    /**
      * Set user
      *
      * @param \Adstacy\AppBundle\Entity\User $user
@@ -94,5 +99,28 @@ class UserDetail
     public function getTwitterFriends()
     {
         return $this->twitterFriends;
+    }
+
+    /**
+     * Set twitterFollowers
+     *
+     * @param array $twitterFollowers
+     * @return UserDetail
+     */
+    public function setTwitterFollowers($twitterFollowers)
+    {
+        $this->twitterFollowers = $twitterFollowers;
+    
+        return $this;
+    }
+
+    /**
+     * Get twitterFollowers
+     *
+     * @return array 
+     */
+    public function getTwitterFollowers()
+    {
+        return $this->twitterFollowers;
     }
 }

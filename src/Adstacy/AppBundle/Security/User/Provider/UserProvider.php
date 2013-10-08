@@ -207,6 +207,12 @@ class UserProvider implements UserProviderInterface, OAuthAwareUserProviderInter
                     ->performRequest();
             $res = json_decode($res);
             $user->getDetail()->setTwitterFriends($res->ids);
+
+            $res = $twitter->setGetField($qs)
+                    ->buildOauth(Twitter::FOLLOWERS_URL, 'GET')
+                    ->performRequest();
+            $res = json_decode($res);
+            $user->getDetail()->setTwitterFollowers($res->ids);
         }
     }
 
