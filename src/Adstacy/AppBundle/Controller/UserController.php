@@ -123,7 +123,7 @@ class UserController extends Controller
         }
 
         $loggedInUser = $this->getUser();
-        if ($loggedInUser == $user) {
+        if ($loggedInUser === $user) {
             if ($request->isXmlHttpRequest()) {
                 return new JsonResponse(json_encode(array('error' => $this->translate('flash.user.follow.error_self'))));
             }
@@ -169,7 +169,7 @@ class UserController extends Controller
         }
 
         $loggedInUser = $this->getUser();
-        if ($loggedInUser == $user) {
+        if ($loggedInUser === $user) {
             if ($request->isXmlHttpRequest()) {
                 return new JsonResponse(json_encode(array('error' => $this->translate('flash.user.unfollow.error_self'))));
             }

@@ -21,7 +21,7 @@ class AdController extends Controller
     {
         $ad = $this->getRepository('AdstacyAppBundle:Ad')->find($id);
         $securityContext = $this->get('security.context');
-        if (!$ad || ($ad && $ad->getUser() != $this->getUser() && $ad->getActive() == false) && !$securityContext->isGranted('ROLE_SUPER_ADMIN')) {
+        if (!$ad || ($ad && $ad->getUser() !== $this->getUser() && $ad->getActive() == false) && !$securityContext->isGranted('ROLE_SUPER_ADMIN')) {
             throw $this->createNotFoundException();
         }
         $adsByUser = $this->getRepository('AdstacyAppBundle:Ad')->findByUser($ad->getUser(), 4);
@@ -79,7 +79,7 @@ class AdController extends Controller
         $user = $this->getUser();
         $request = $this->getRequest();
 
-        if ($ad->getUser() != $user) {
+        if ($ad->getUser() !== $user) {
             $this->addFlash('error', $this->translate('flash.ad.edit.error_diff_user'));
             return $this->redirect($this->generateUrl('adstacy_app_ad_show', array('id' => $ad->getId())));
         }
@@ -114,7 +114,7 @@ class AdController extends Controller
         }
         $adUser = $ad->getUser();
         $user = $this->getUser();
-        if ($adUser != $user) {
+        if ($adUser !== $user) {
             $this->addFlash('error', $this->translate('flash.ad.delete.error_diff_user'));
             return $this->redirect($this->generateUrl('adstacy_app_ad_show', array('id' => $ad->getId())));
         }
@@ -275,7 +275,7 @@ class AdController extends Controller
         $user = $this->getUser();
         $request = $this->getRequest();
         $ad = $comment->getAd();
-        if ($user != $comment->getUser() && $user != $ad->getUser()) {
+        if ($user !== $comment->getUser() && $user !== $ad->getUser()) {
             if ($request->isXmlHttpRequest()) {
                 return new JsonResponse(json_encode(array('status' => 'error', 'message' => $this->translate('ads.comment.delete.fail'))));
             }

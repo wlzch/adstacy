@@ -21,7 +21,7 @@ class FollowNotificationSaver implements NotificationSaverInterface
      */
     public function save(User $from, User $to, $noun, $flush = false)
     {
-        if ($from != $to) {
+        if ($from !== $to) {
             $notification = new Notification();
             $notification->setFrom($from);
             $notification->setTo($to);

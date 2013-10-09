@@ -1292,7 +1292,7 @@ class User implements UserInterface, GroupableInterface
     {
         // will be lazyloaded
         foreach ($this->getPromotes() as $promote) {
-            if ($promote->getAd() == $ad) {
+            if ($promote->getAd() === $ad) {
                 return true;
             }
         }
