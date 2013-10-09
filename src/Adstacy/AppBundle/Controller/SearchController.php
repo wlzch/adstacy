@@ -24,6 +24,7 @@ class SearchController extends Controller
         if ($this->isMobile()) $limit = $limit / 2;
         $q = $request->query->get('q');
         $tags = explode(' ', $q);
+        $tags = preg_replace('/[^A-Za-z0-9]/', '', $tags);
 
         $tagsFilter = new \Elastica\Filter\Terms('tags', $tags);
 
