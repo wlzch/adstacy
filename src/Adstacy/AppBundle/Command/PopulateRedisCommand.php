@@ -121,10 +121,10 @@ class PopulateRedisCommand extends ContainerAwareCommand
             FROM AdstacyAppBundle:User u
             JOIN u.followings f
         ');
-        $recommendations = array();
+
         // recommend the most common followings
         $cnt = 0;
-        foreach ($users as $user) {
+        foreach ($query->getResult() as $user) {
             if ($user->getUsername()) {
                 $userManager->suggestFollow($user);
                 $cnt++;
