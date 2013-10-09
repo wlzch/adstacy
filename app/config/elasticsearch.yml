@@ -16,6 +16,7 @@ parameters:
             mappings:
                 username: { boost: 5 }
                 realname: { boost: 4 }
+                suggestions: { type: completion, preserve_separators: true }
             persistence:
                 driver: orm
                 model: Adstacy\AppBundle\Entity\User

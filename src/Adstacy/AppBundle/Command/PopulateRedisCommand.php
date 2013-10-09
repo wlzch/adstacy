@@ -55,13 +55,6 @@ class PopulateRedisCommand extends ContainerAwareCommand
         $cnt = 0;
         foreach ($users as $user) {
             $username = $user->getUsername();
-            $input = substr($username, 0, 1);
-            for ($i = 1, $len = strlen($username); $i < $len; $i++) {
-                $input .= $username[$i];
-                $redis->zadd('usernames', 0, $input);
-                $cnt++;
-            }
-            $redis->zadd('usernames', 0, $username.'*');
             $redis->hmset("user:$username", 
                 'id', $user->getId(),
                 'name', $user->getRealName(),

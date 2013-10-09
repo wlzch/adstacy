@@ -309,6 +309,11 @@ class User implements UserInterface, GroupableInterface
      */
     private $credentialsExpireAt;
 
+    /**
+     * Used in elasticsearch auto complete feature
+     */
+    private $suggestions;
+
     public function __construct()
     {
         $this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
@@ -322,6 +327,7 @@ class User implements UserInterface, GroupableInterface
         $this->followingsCount = 0;
         $this->promotesCount = 0;
         $this->notificationsCount = 0;
+        $this->suggestions = array();
     }
 
     /**
@@ -1607,5 +1613,20 @@ class User implements UserInterface, GroupableInterface
     public function isSubscribed()
     {
         return $this->subscription == true;
+    }
+
+    /**
+     * Suggestions is returned as array of username and real name
+     *
+     * @return array
+     */
+    public function getSuggestions()
+    {
+      return array(
+        'input' => array(
+          $this->getUsername(), $this->getRealName()
+        ),
+        'output' => $this->getUsername()
+      );
     }
 }

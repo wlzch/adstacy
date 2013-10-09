@@ -22,15 +22,18 @@ class ApiController extends Controller
         $redis = $this->get('snc_redis.default');
 
         if ($q && strlen($q) >= 2) {
-          $rank = $redis->zrank('usernames', $q);
-          $possibilities = $redis->zrange('usernames', $rank + 1, $rank + 50);
+          $index = $this->get('fos_elastica.index.website');
+          $res = $index->request('_suggest', 'POST', array(
+              'user' => array(
+                  'text' => $q,
+                  'completion' => array(
+                      'field' => 'suggestions'
+                  )
+              )
+          ));
           $usernames = array();
-          foreach ($possibilities as $possibility) {
-            if (strpos($possibility, $q) === false) break;
-            $len = strlen($possibility);
-            if ($possibility[$len - 1] == '*') {
-              $usernames[] = substr($possibility, 0, $len - 1);
-            }
+          foreach ($res->getData()['user'][0]['options'] as $option) {
+            $usernames[] = $option['text'];
           }
           foreach ($usernames as $username) {
             $result = $redis->hgetall("user:$username");
