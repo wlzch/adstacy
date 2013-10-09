@@ -1,12 +1,12 @@
 adstacy_admin_ad_block:
-    pattern: /ad/{id}/block
+    path: /ad/{id}/block
     defaults:
         _controller: AdstacyAppBundle:Admin:blockAd
     requirements:
         id: \d+
 
 adstacy_admin_ad_unblock:
-    pattern: /ad/{id}/unblock
+    path: /ad/{id}/unblock
     defaults:
         _controller: AdstacyAppBundle:Admin:unblockAd
     requirements:

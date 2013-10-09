@@ -1,38 +1,38 @@
 adstacy_app_ad_create:
-    pattern: /ads/create
+    path: /ads/create
     defaults:
         _controller: AdstacyAppBundle:Ad:create
 
 adstacy_app_ad_show:
-    pattern: /ads/{id}
+    path: /ads/{id}
     defaults:
         _controller: AdstacyAppBundle:Ad:show
     requirements:
         id: \d+
 
 adstacy_app_ad_promotes:
-    pattern: /ads/{id}/promotes
+    path: /ads/{id}/promotes
     defaults:
         _controller: AdstacyAppBundle:Ad:showPromotes
     requirements:
         id: \d+
 
 adstacy_app_ad_promote:
-    pattern: /ads/{id}/promote
+    path: /ads/{id}/promote
     defaults:
         _controller: AdstacyAppBundle:Ad:promote
     requirements:
         id: \d+
 
 adstacy_app_ad_unpromote:
-    pattern: /ads/{id}/unpromote
+    path: /ads/{id}/unpromote
     defaults:
         _controller: AdstacyAppBundle:Ad:unpromote
     requirements:
         id: \d+
 
 adstacy_app_ad_comment:
-    pattern: /ads/{id}/comment
+    path: /ads/{id}/comment
     defaults:
         _controller: AdstacyAppBundle:Ad:comment
     requirements:
@@ -40,7 +40,7 @@ adstacy_app_ad_comment:
     methods: [POST]
 
 adstacy_app_ad_comment_delete:
-    pattern: /comments/{id}/delete
+    path: /comments/{id}/delete
     defaults:
         _controller: AdstacyAppBundle:Ad:deleteComment
     requirements:
@@ -48,21 +48,21 @@ adstacy_app_ad_comment_delete:
     methods: [POST]
 
 adstacy_app_ad_edit:
-    pattern: /ads/{id}/edit
+    path: /ads/{id}/edit
     defaults:
         _controller: AdstacyAppBundle:Ad:edit
     requirements:
         id: \d+
 
 adstacy_app_ad_delete:
-    pattern: /ads/{id}/delete
+    path: /ads/{id}/delete
     defaults:
         _controller: AdstacyAppBundle:Ad:delete
     requirements:
         id: \d+
 
 adstacy_app_ad_report:
-    pattern: /ads/{id}/report
+    path: /ads/{id}/report
     defaults:
         _controller: AdstacyAppBundle:Ad:report
     requirements:

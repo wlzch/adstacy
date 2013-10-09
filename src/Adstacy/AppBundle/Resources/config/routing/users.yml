@@ -1,36 +1,36 @@
 adstacy_app_user_profile:
-    pattern: /{username}
+    path: /{username}
     defaults:
         _controller: AdstacyAppBundle:User:show
     options:
         expose: true
 
 adstacy_app_user_promotes:
-    pattern: /{username}/promotes
+    path: /{username}/promotes
     defaults:
         _controller: AdstacyAppBundle:User:showPromotes
 
 adstacy_app_user_ads:
-    pattern: /{username}/ads
+    path: /{username}/ads
     defaults:
         _controller: AdstacyAppBundle:User:showAds
 
 adstacy_app_user_followers:
-    pattern: /{username}/followers
+    path: /{username}/followers
     defaults:
         _controller: AdstacyAppBundle:User:showFollowers
 
 adstacy_app_user_followings:
-    pattern: /{username}/followings
+    path: /{username}/followings
     defaults:
         _controller: AdstacyAppBundle:User:showFollowings
 
 adstacy_app_user_follow:
-    pattern: /{username}/follow
+    path: /{username}/follow
     defaults:
         _controller: AdstacyAppBundle:User:follow
 
 adstacy_app_user_unfollow:
-    pattern: /{username}/unfollow
+    path: /{username}/unfollow
     defaults:
         _controller: AdstacyAppBundle:User:unfollow

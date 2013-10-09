@@ -1,12 +1,12 @@
 adstacy_app_search:
-    pattern: /search
+    path: /search
     defaults:
         _controller: AdstacyAppBundle:Search:search
     options:
         expose: true
 
 adstacy_app_search_users:
-    pattern: /search/users
+    path: /search/users
     defaults:
         _controller: AdstacyAppBundle:Search:searchUsers
     options:

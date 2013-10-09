@@ -57,7 +57,7 @@ fos_user_register:
     prefix: /register
 
 fos_user_registration_confirmed: # hack
-    pattern: /settings
+    path: /settings
     defaults:
         _controller: FOSUserBundle:Profile:show
 

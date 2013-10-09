@@ -1,50 +1,50 @@
 homepage:
-    pattern:  /
+    path:  /
     defaults:
         _controller: AdstacyAppBundle:App:index
 
 adstacy_app_stream:
-    pattern: /stream
+    path: /stream
     defaults:
         _controller: AdstacyAppBundle:App:stream
 
 adstacy_app_trending:
-    pattern: /trending
+    path: /trending
     defaults:
         _controller: AdstacyAppBundle:App:trending
 
 adstacy_app_explore:
-    pattern: /explore
+    path: /explore
     defaults:
         _controller: AdstacyAppBundle:App:explore
 
 adstacy_app_tags:
-    pattern: /tags
+    path: /tags
     defaults:
         _controller: AdstacyAppBundle:App:tags
 
 adstacy_app_contact:
-    pattern: /contact-us
+    path: /contact-us
     defaults:
         _controller: AdstacyAppBundle:App:contactUs
 
 adstacy_app_who_to_follow:
-    pattern: /who-to-follow
+    path: /who-to-follow
     defaults:
         _controller: AdstacyAppBundle:App:whoToFollow
 
 adstacy_app_who_to_follow_facebook:
-    pattern: /who-to-follow/facebook
+    path: /who-to-follow/facebook
     defaults:
         _controller: AdstacyAppBundle:App:whoToFollowFacebook
 
 adstacy_app_who_to_follow_twitter:
-    pattern: /who-to-follow/twitter
+    path: /who-to-follow/twitter
     defaults:
         _controller: AdstacyAppBundle:App:whoToFollowTwitter
 
 adstacy_app_page_show:
-    pattern: /pages/{key}
+    path: /pages/{key}
     defaults:
         _controller: AdstacyAppBundle:Page:show
 

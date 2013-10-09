@@ -1,10 +1,10 @@
 adstacy_notification_show:
-    pattern: /notifications
+    path: /notifications
     defaults:
         _controller: AdstacyNotificationBundle:Notification:showNotifications
 
 adstacy_notification_readall:
-    pattern: /notifications/read-all
+    path: /notifications/read-all
     defaults:
         _controller: AdstacyNotificationBundle:Notification:readAll
 

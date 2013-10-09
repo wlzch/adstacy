@@ -1,12 +1,12 @@
 adstacy_app_api_users:
-    pattern: /users.json
+    path: /users.json
     defaults:
         _controller: AdstacyAppBundle:Api:users
     options:
       expose: true
 
 adstacy_app_api_tags:
-    pattern: /tags.json
+    path: /tags.json
     defaults:
         _controller: AdstacyAppBundle:Api:tags
     options:
