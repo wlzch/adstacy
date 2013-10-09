@@ -51,7 +51,7 @@ class ApiController extends Controller
     }
 
     /**
-     * Get tags
+     * Return tag suggestions.
      */
     public function tagsAction()
     {
@@ -60,6 +60,10 @@ class ApiController extends Controller
         $q = $request->query->get('q');
         $response = null;
         $redis = $this->get('snc_redis.default');
+        $tags = explode(' ', $q);
+        $cnt = count($tags);
+        $prevTags = implode(' ', array_slice($tags, 0, $cnt - 1));
+        $q = $tags[$cnt - 1];
 
         if ($q && strlen($q) >= 2) {
           $rank = $redis->zrank('tags', $q);
@@ -70,7 +74,7 @@ class ApiController extends Controller
             $len = strlen($possibility);
             if ($possibility[$len - 1] == '*') {
               $tag = substr($possibility, 0, $len - 1);
-              $results[] = array('value' => $tag, 'tokens' => array($tag));
+              $results[] = array('value' => $prevTags.' '.$tag, 'tokens' => array($tag));
             }
           }
         }
