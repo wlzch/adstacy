@@ -42,6 +42,9 @@ class SearchController extends Controller
         );
         $finalQuery->setScoreMode('total');
 
+        $activeFilter = new \Elastica\Filter\Term(array('active' => true));
+        $finalQuery->addFilter($activeFilter, 1.5);
+
         $adsPaginator = $finder->findPaginated($finalQuery);
         $adsPaginator
             ->setMaxPerPage($limit)

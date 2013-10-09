@@ -4,6 +4,7 @@ parameters:
             mappings:
                 tags: { boost: 1.5, index: not_analyzed, analyzer: tags_analyzer }
                 created: { type: date, index: not_analyzed }
+                active: ~
             persistence:
                 driver: orm
                 model: Adstacy\AppBundle\Entity\Ad
