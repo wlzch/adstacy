@@ -21,13 +21,17 @@ class TwitterAPI
      */
     public function getFollowings($userid)
     {
-        $qs = '?user_id='.$userid.'&stringify_ids=true';
-        $res = $this->twitter->setGetField($qs)
-                ->buildOauth(TwitterHelper::FRIENDS_URL, 'GET')
-                ->performRequest();
-        $res = json_decode($res);
+        try {
+            $qs = '?user_id='.$userid.'&stringify_ids=true';
+            $res = $this->twitter->setGetField($qs)
+                    ->buildOauth(TwitterHelper::FRIENDS_URL, 'GET')
+                    ->performRequest();
+            $res = json_decode($res);
 
-        return $res->ids;
+            return $res->ids;
+        } catch (\Exception $e) {
+            return array();
+        }
     }
 
     /**
@@ -37,12 +41,16 @@ class TwitterAPI
      */
     public function getFollowers($userid)
     {
-        $qs = '?user_id='.$userid.'&stringify_ids=true';
-        $res = $this->twitter->setGetField($qs)
-                ->buildOauth(TwitterHelper::FOLLOWERS_URL, 'GET')
-                ->performRequest();
-        $res = json_decode($res);
+        try {
+            $qs = '?user_id='.$userid.'&stringify_ids=true';
+            $res = $this->twitter->setGetField($qs)
+                    ->buildOauth(TwitterHelper::FOLLOWERS_URL, 'GET')
+                    ->performRequest();
+            $res = json_decode($res);
 
-        return $res->ids;
+            return $res->ids;
+        } catch (\Exception $e) {
+            return array();
+        }
     }
 }

@@ -188,21 +188,26 @@ class UserProvider implements UserProviderInterface, OAuthAwareUserProviderInter
      */
     private function notifyFriends($service, User $user, UserResponseInterface $response)
     {
-        $friends = array();
-        $repo = $this->container->get('doctrine')->getRepository('AdstacyAppBundle:User');
-        if ($service == 'facebook') {
-            $facebookAPI = $this->container->get('adstacy.oauth.facebook_api');
-            $facebookIds = $facebookAPI->getFriends($response->getAccessToken());
-            $friends = $repo->findByFacebookId($facebookIds);
-        } else if ($service == 'twitter') {
-            $twitterAPI = $this->container->get('adstacy.oauth.twitter_api'); 
-            $followerIds = $twitterAPI->getFollowers($response->getUsername());
-            $friends = $repo->findByTwitterId($followerIds);
-        }
+        // do nothing if there are errors from facebook/twitter
+        try {
+            $friends = array();
+            $repo = $this->container->get('doctrine')->getRepository('AdstacyAppBundle:User');
+            if ($service == 'facebook') {
+                $facebookAPI = $this->container->get('adstacy.oauth.facebook_api');
+                $facebookIds = $facebookAPI->getFriends($response->getAccessToken());
+                $friends = $repo->findByFacebookId($facebookIds);
+            } else if ($service == 'twitter') {
+                $twitterAPI = $this->container->get('adstacy.oauth.twitter_api'); 
+                $followerIds = $twitterAPI->getFollowers($response->getUsername());
+                $friends = $repo->findByTwitterId($followerIds);
+            }
 
-        $notificationManager = $this->container->get('adstacy.notification.manager');
-        foreach ($friends as $friend) {
-            $notificationManager->save($user, $friend, null, false, $service.'_friend_join');
+            $notificationManager = $this->container->get('adstacy.notification.manager');
+            foreach ($friends as $friend) {
+                $notificationManager->save($user, $friend, null, false, $service.'_friend_join');
+            }
+        } catch (\Exception $e) {
+            return;
         }
     }
 
