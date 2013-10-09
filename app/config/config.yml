@@ -1,6 +1,10 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: oauth.yml }
+    - { resource: liip_imagine.yml }
+    - { resource: elasticsearch.yml }
+    - { resource: uploader.yml }
 
 parameters:
     elfinder.loader: Adstacy\AppBundle\Loader\FMElfinderLoader
@@ -28,31 +32,6 @@ parameters:
 
     web_dir: %kernel.root_dir%/../web
     no_profpic_img: /bundles/adstacyapp/img/nophoto.gif
-    elastica_website_types:
-        ad:
-            mappings:
-                tags: { boost: 1.5, index: not_analyzed, analyzer: tags_analyzer }
-                created: { type: date, index: not_analyzed }
-            persistence:
-                driver: orm
-                model: Adstacy\AppBundle\Entity\Ad
-                provider: ~
-                finder: ~
-                listener: ~
-                elastica_to_model_transformer:
-                    ignore_missing: true
-        user:
-            mappings:
-                username: { boost: 5 }
-                realname: { boost: 4 }
-            persistence:
-                driver: orm
-                model: Adstacy\AppBundle\Entity\User
-                provider: ~
-                finder: ~
-                listener: ~
-                elastica_to_model_transformer:
-                    ignore_missing: true
 
 framework:
     #esi:             ~
@@ -179,96 +158,6 @@ fos_user:
     from_email:
         address: %adstacy.mail.support%
         sender_name: Adstacy Support
-
-hwi_oauth:
-    firewall_name: main
-    resource_owners:
-        facebook:
-            type: facebook
-            client_id: %facebook_app_id%
-            client_secret: %facebook_app_secret%
-            scope: "email"
-            infos_url:     "https://graph.facebook.com/me?fields=username,name,email,picture.type(square).width(130).height(130)"
-            paths:
-                email: email
-                profilepicture: picture.data.url
-        twitter:
-            type: twitter
-            client_id: %twitter_client_id%
-            client_secret: %twitter_client_secret%
-            paths:
-                profilepicture: profile_image_url
-    fosub:
-        username_iterations: 30
-        properties:
-            facebook: facebookId
-            twitter: twitterId
-    connect:
-        account_connector: adstacy.user.provider
-    http_client:
-        timeout: 15
-        verify_peer: false
-
-knp_gaufrette:
-    stream_wrapper: ~
-    adapters:
-        image_adapter:
-            local:
-                directory: %kernel.root_dir%/../web/uploads
-
-    filesystems:
-        image_fs:
-            adapter: image_adapter
-
-vich_uploader:
-    db_driver: orm
-    gaufrette: true
-    storage: vich_uploader.storage.gaufrette
-    mappings:
-        ad_image:
-            uri_prefix: /uploads
-            upload_destination: image_fs
-            namer: vich_uploader.namer_uniqid
-        user_image:
-            uri_prefix: /uploads
-            upload_destination: image_fs
-            namer: vich_uploader.namer_uniqid
-
-liip_imagine:
-    filter_sets:
-        thumbnail:
-            quality: 90
-            filters:
-                relative_resize: { widen: 480 }
-        mini_thumb:
-            quality: 50
-            filters:
-                thumbnail: { size: [%mini_thumb_size%, %mini_thumb_size%], mode: outbound }
-        profile_pic:
-            quality: 75
-            filters:
-                thumbnail: { size: [%profile_pic_size%, %profile_pic_size%], mode: outbound }
-
-fos_elastica:
-    clients:
-        default:
-            host: localhost
-            port: 9200
-    serializer: ~
-    indexes:
-        website:
-            settings:
-                index:
-                    analysis:
-                        analyzer:
-                            tags_analyzer:
-                                type: custom
-                                tokenizer: keyword
-                                filter: [lowercase, asciifolding]
-            client: default
-            index_name: website
-            finder: ~
-            types: %elastica_website_types%
 
 fm_elfinder:
     locale: %locale%

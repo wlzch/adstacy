@@ -1,0 +1,28 @@
+hwi_oauth:
+    firewall_name: main
+    resource_owners:
+        facebook:
+            type: facebook
+            client_id: %facebook_app_id%
+            client_secret: %facebook_app_secret%
+            scope: "email"
+            infos_url:     "https://graph.facebook.com/me?fields=username,name,email,picture.type(square).width(130).height(130)"
+            paths:
+                email: email
+                profilepicture: picture.data.url
+        twitter:
+            type: twitter
+            client_id: %twitter_client_id%
+            client_secret: %twitter_client_secret%
+            paths:
+                profilepicture: profile_image_url
+    fosub:
+        username_iterations: 30
+        properties:
+            facebook: facebookId
+            twitter: twitterId
+    connect:
+        account_connector: adstacy.user.provider
+    http_client:
+        timeout: 15
+        verify_peer: false
