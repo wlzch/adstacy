@@ -15,13 +15,8 @@ $(function() {
       }
     }
   });
-  var $trigger = $('#show-long-desc-btn');
-  var $content = $('#create-advert-content');
   var $charsLeft = $('#chars-left');
   var $desc = $('#ad_description');
-  $trigger.click(function() {
-    $content.toggleClass('hide');
-  });
   var descLength = parseInt($('#chars-left-box').attr('data-desc-length'));
   var checkCharsLeft = function() {
     var val = $desc.val();
@@ -37,4 +32,8 @@ $(function() {
   };
   $desc.keyup(checkCharsLeft);
   //$desc.keypress(checkCharsLeft);
+  var editor = new wysihtml5.Editor('ad_content', {
+    toolbar: 'wysihtml5-editor-toolbar',
+    parserRules: wysihtml5ParserRules
+  });
 });

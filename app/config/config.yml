@@ -159,39 +159,6 @@ fos_user:
         address: %adstacy.mail.support%
         sender_name: Adstacy Support
 
-fm_elfinder:
-    locale: %locale%
-    editor: tinymce4
-    tinymce_popup_path: "asset[bundles/stafalcontinymce/vendor/tiny_mce/tiny_mce_popup.js]"
-    showhidden: false # defaults to false
-    fullscreen: true # defaults true, applies to simple and ckeditor editors
-    connector:
-        debug: false # defaults to false
-        roots:       # at least one root must be defined
-            uploads:
-                driver: LocalFileSystem
-                path: files
-                upload_allow: ['image/png', 'image/jpg', 'image/jpeg']
-                upload_deny: ['all']
-                upload_max_size: 2M
-
-stfalcon_tinymce:
-    include_jquery: false
-    language: %locale%
-    selector: '.tinymce'
-    theme:
-        simple:
-            plugins:
-                - "advlist autolink lists link image charmap anchor"
-                - "fullscreen"
-                - "save table contextmenu directionality"
-                - "paste textcolor"
-            toolbar1: "image | bullist numlist outdent indent | link table | fullscreen"
-            toolbar2: "insertfile undo redo | styleselect | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify"
-            menubar: false
-            file_browser_callback: elFinderBrowser
-            height: "300px"
-
 sonata_block:
     default_contexts: [cms]
     blocks:

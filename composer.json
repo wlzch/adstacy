@@ -38,8 +38,6 @@
         "jms/serializer-bundle": "0.12.0",
         "pagerfanta/pagerfanta": "v1.0.1",
         "jms/security-extra-bundle": "1.5.1",
-        "helios-ag/fm-elfinder-bundle": "1.4",
-        "stfalcon/tinymce-bundle": "v0.3.2",
         "sonata-project/admin-bundle": "2.2.5",
         "sonata-project/doctrine-orm-admin-bundle": "2.2.4",
         "ornicar/apc-bundle": "dev-master",

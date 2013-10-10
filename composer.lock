@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "564ca9a1c5793af60949b2f8c2fbd22b",
+    "hash": "7d11d8166882945a5ab3a6b7777f60c4",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -766,13 +766,13 @@
             "target-dir": "FOS/ElasticaBundle",
             "source": {
                 "type": "git",
-                "url": "https://github.com/FriendsOfSymfony/FOSElasticaBundle.git",
-                "reference": "7b1fe89627209bcb7623e2479b0dbb2884f6ad42"
+                "url": "https://github.com/wlzch/FOSElasticaBundle.git",
+                "reference": "93e1932d85788cdd26a0789de10e6c06b2165291"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSElasticaBundle/zipball/7b1fe89627209bcb7623e2479b0dbb2884f6ad42",
-                "reference": "7b1fe89627209bcb7623e2479b0dbb2884f6ad42",
+                "url": "https://api.github.com/repos/wlzch/FOSElasticaBundle/zipball/93e1932d85788cdd26a0789de10e6c06b2165291",
+                "reference": "93e1932d85788cdd26a0789de10e6c06b2165291",
                 "shasum": ""
             },
             "require": {
@@ -809,24 +809,21 @@
                     "FOS\\ElasticaBundle": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "authors": [
                 {
                     "name": "Thibault Duplessis",
-                    "email": "thibault.duplessis@gmail.com",
-                    "homepage": "http://ornicar.github.com"
-                },
-                {
-                    "name": "Jeremy Mikola",
-                    "email": "jmikola@gmail.com",
-                    "homepage": "http://jmikola.net"
+                    "email": "thibault.duplessis@gmail.com"
                 },
                 {
                     "name": "Richard Miller",
                     "email": "richard.miller@limethinking.co.uk"
+                },
+                {
+                    "name": "Jeremy Mikola",
+                    "email": "jmikola@gmail.com"
                 }
             ],
             "description": "Elasticsearch PHP integration for your Symfony2 project using Elastica",
@@ -839,7 +836,10 @@
                 "propel",
                 "search"
             ],
-            "time": "2013-10-08 23:09:20"
+            "support": {
+                "source": "https://github.com/wlzch/FOSElasticaBundle/tree/master"
+            },
+            "time": "2013-10-09 08:37:17"
         },
         {
             "name": "friendsofsymfony/jsrouting-bundle",
@@ -902,12 +902,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "5e236332c3934fbc16b79eff3cf6ee9ee21b7519"
+                "reference": "f9ea1de0698e3055c9916e88c19f42e28844ef61"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/5e236332c3934fbc16b79eff3cf6ee9ee21b7519",
-                "reference": "5e236332c3934fbc16b79eff3cf6ee9ee21b7519",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/f9ea1de0698e3055c9916e88c19f42e28844ef61",
+                "reference": "f9ea1de0698e3055c9916e88c19f42e28844ef61",
                 "shasum": ""
             },
             "require": {
@@ -962,7 +962,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2013-10-02 23:38:05"
+            "time": "2013-10-09 22:58:46"
         },
         {
             "name": "fzaninotto/faker",
@@ -1009,109 +1009,6 @@
                 "fixtures"
             ],
             "time": "2013-06-09 18:05:57"
-        },
-        {
-            "name": "helios-ag/fm-elfinder-bundle",
-            "version": "1.4",
-            "target-dir": "FM/ElfinderBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/helios-ag/FMElfinderBundle.git",
-                "reference": "96a8b42a1396fa4319551368b6d19673078f101b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/helios-ag/FMElfinderBundle/zipball/96a8b42a1396fa4319551368b6d19673078f101b",
-                "reference": "96a8b42a1396fa4319551368b6d19673078f101b",
-                "shasum": ""
-            },
-            "require": {
-                "helios-ag/fm-elfinder-php-connector": "1.1.1",
-                "php": ">=5.3.3",
-                "sensio/framework-extra-bundle": "*@dev",
-                "symfony/symfony": "*@stable",
-                "symfony/twig-bundle": "~2.0"
-            },
-            "suggest": {
-                "Trsteel/ckeditor-bundle": "CKEditor WYSIWYG Editor Bundlefor Symfony2 Project by Trsteel",
-                "stfalcon/tinymce-bundle": "TinyMCE WYSIWYG Editor Bundle by Stfalcon"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-0": {
-                    "FM\\ElfinderBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Al Ganiev",
-                    "email": "helios.ag@gmail.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://github.com/helios-ag/FMElfinderBundle/contributors"
-                }
-            ],
-            "description": "ElFinder bundle, add ElFinder file manager to your Symfony2 project",
-            "homepage": "https://github.com/helios-ag/FMElfinderBundle",
-            "keywords": [
-                "elfinder",
-                "file manager"
-            ],
-            "time": "2013-10-03 16:18:13"
-        },
-        {
-            "name": "helios-ag/fm-elfinder-php-connector",
-            "version": "1.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/helios-ag/ElFinderPHP.git",
-                "reference": "fa24c5ce710ec2c9eab899786c93dfac1a232386"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/helios-ag/ElFinderPHP/zipball/fa24c5ce710ec2c9eab899786c93dfac1a232386",
-                "reference": "fa24c5ce710ec2c9eab899786c93dfac1a232386",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "FM\\ElFinderPHP": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3 Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Al Ganiev",
-                    "email": "helios.ag@gmail.com"
-                },
-                {
-                    "name": "ElFinder authors",
-                    "homepage": "https://github.com/Studio-42/elFinder"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://github.com/helios-ag/ElFinderPHP/contributors"
-                }
-            ],
-            "description": "ElFinder PHP backend, 5.3 compliant",
-            "homepage": "http://github.com/helios-ag/ElFinderPHP",
-            "keywords": [
-                "elfinder",
-                "filemanager"
-            ],
-            "time": "2013-08-06 17:02:04"
         },
         {
             "name": "hwi/oauth-bundle",
@@ -3262,64 +3159,6 @@
                 "sonata"
             ],
             "time": "2013-03-01 17:24:02"
-        },
-        {
-            "name": "stfalcon/tinymce-bundle",
-            "version": "v0.3.2",
-            "target-dir": "Stfalcon/Bundle/TinymceBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/stfalcon/TinymceBundle.git",
-                "reference": "58f61296f6b141ad0a7d101ff1f160d3f7b4c946"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/stfalcon/TinymceBundle/zipball/58f61296f6b141ad0a7d101ff1f160d3f7b4c946",
-                "reference": "58f61296f6b141ad0a7d101ff1f160d3f7b4c946",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0",
-                "symfony/symfony": ">=2.1"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.3.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Stfalcon\\Bundle\\TinymceBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Stepan Tanasiychuk",
-                    "email": "ceo@stfalcon.com",
-                    "homepage": "http://blog.stfalcon.com"
-                },
-                {
-                    "name": "Igor Negrutsa",
-                    "email": "progi2007@gmail.com",
-                    "homepage": "http://igor-negrutsa.info"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://github.com/stfalcon/TinymceBundle/contributors"
-                }
-            ],
-            "description": "This Bundle integrates TinyMCE WYSIWYG editor into a Symfony2 project.",
-            "keywords": [
-                "editor",
-                "tinymce",
-                "wysiwyg"
-            ],
-            "time": "2013-10-03 08:01:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

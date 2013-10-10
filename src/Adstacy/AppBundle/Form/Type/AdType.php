@@ -28,11 +28,11 @@ class AdType extends AbstractType
             'label' => 'form_ad.hashtags',
             'error_bubbling' => true
         ));
-        $builder->add('content', 'purified_textarea', array(
+        $builder->add('content', 'wysihtml5', array(
             'label' => 'form_ad.content',
             'required' => false,
             'attr' => array(
-                'class' => 'tinymce'
+                'placeholder' => 'Description'
             ),
             'error_bubbling' => true
         ));

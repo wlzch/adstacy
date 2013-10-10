@@ -15,6 +15,12 @@ services:
         tags:
             - { name: form.type, alias: purified_textarea }
 
+    adstacy.type.wysihtml5:
+        class: Adstacy\AppBundle\Form\Type\Wysihtml5Type
+        arguments: [@adstacy.form.transformer.html_purifier]
+        tags:
+            - { name: form.type, alias: wysihtml5 }
+
     adstacy.form.transformer.html_purifier:
         class: Exercise\HTMLPurifierBundle\Form\HTMLPurifierTransformer
         arguments: [@exercise_html_purifier.default]

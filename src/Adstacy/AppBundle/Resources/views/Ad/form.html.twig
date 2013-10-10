@@ -5,6 +5,7 @@
   {% stylesheets filter='cssrewrite, uglifycss'
     'bundles/adstacyapp/less/layout/create_ad.less'
     'bundles/adstacyapp/less/bootstrap-tagsinput.less'
+    'bundles/adstacyapp/less/module/wysihtml5.less'
   %}
     <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
   {% endstylesheets %}
@@ -36,8 +37,7 @@
           </div>
         </div>
 
-        <button id="show-long-desc-btn" type="button" class="btn btn-info btn-block">{{"form_ad.content_trigger"|trans}}</button>
-        <div id="create-advert-content" {% if not data.content %}class="hide"{% endif %}>
+        <div id="create-advert-content">
           {{ form_widget(form.content) }}
         </div>
 
@@ -51,9 +51,6 @@
 
         {{ form_rest(form) }}
         {{ form_end(form) }}
-
-        {{ elfinder_tinymce_init4() }}
-        {{ tinymce_init() }}
       </div>
     </div>
   </div>
@@ -63,6 +60,8 @@
   {{ parent()  }}
   {% javascripts filter='uglifyjs2'
     '@AdstacyAppBundle/Resources/public/js/bootstrap-tagsinput.js'
+    '@AdstacyAppBundle/Resources/public/js/wysihtml5_parser_rules_advanced.js'
+    '@AdstacyAppBundle/Resources/public/js/wysihtml5.js'
     '@AdstacyAppBundle/Resources/public/js/page/create_ad.js'
   %}
     <script src="{{ asset_url }}" type="text/javascript"></script>
