@@ -104,6 +104,11 @@ class Ad
     private $commentsCount;
 
     /**
+     * @ORM\OneToMany(targetEntity="Image", mappedBy="ad", orphanRemoval=true, cascade={"persist", "remove"})
+     */
+    private $images;
+
+    /**
      * @ORM\OneToMany(targetEntity="FeaturedAd", mappedBy="ad")
      */
     private $featureds;
@@ -578,5 +583,38 @@ class Ad
     public function getActive()
     {
         return $this->active;
+    }
+
+    /**
+     * Add images
+     *
+     * @param \Adstacy\AppBundle\Entity\Image $images
+     * @return Ad
+     */
+    public function addImage(\Adstacy\AppBundle\Entity\Image $images)
+    {
+        $this->images[] = $images;
+    
+        return $this;
+    }
+
+    /**
+     * Remove images
+     *
+     * @param \Adstacy\AppBundle\Entity\Image $images
+     */
+    public function removeImage(\Adstacy\AppBundle\Entity\Image $images)
+    {
+        $this->images->removeElement($images);
+    }
+
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getImages()
+    {
+        return $this->images;
     }
 }

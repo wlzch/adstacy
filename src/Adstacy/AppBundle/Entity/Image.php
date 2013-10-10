@@ -9,11 +9,11 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Adstacy\AppBundle\Helper\ImageHelper;
 
 /**
- * @ORM\Entity(repositoryClass="Adstacy\AppBundle\Repository\TempAdImageRepository")
- * @ORM\Table(name="temp_ad_image")
+ * @ORM\Entity(repositoryClass="Adstacy\AppBundle\Repository\ImageRepository")
+ * @ORM\Table(name="image")
  * @Vich\Uploadable
  */
-class TempAdImage
+class Image
 {
     /**
      * @ORM\Id
@@ -42,9 +42,19 @@ class TempAdImage
     private $imagename;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="Ad")
      */
-    private $user;
+    private $ad;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+
+    public function __construct()
+    {
+        $this->created = new \DateTime();
+    }
 
     /**
      * Get id
@@ -92,25 +102,48 @@ class TempAdImage
     }
 
     /**
-     * Set user
-     *
-     * @param \Adstacy\AppBundle\Entity\User $user
-     * @return TempAdImage
+     * Get created
+     * 
+     * @return \DateTime
      */
-    public function setUser(\Adstacy\AppBundle\Entity\User $user = null)
+    public function getCreated()
     {
-        $this->user = $user;
+        return $this->created;
+    }
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     * @return Image
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
     
         return $this;
     }
 
     /**
-     * Get user
+     * Set ad
      *
-     * @return \Adstacy\AppBundle\Entity\User 
+     * @param \Adstacy\AppBundle\Entity\Ad $ad
+     * @return Image
      */
-    public function getUser()
+    public function setAd(\Adstacy\AppBundle\Entity\Ad $ad = null)
     {
-        return $this->user;
+        $this->ad = $ad;
+    
+        return $this;
+    }
+
+    /**
+     * Get ad
+     *
+     * @return \Adstacy\AppBundle\Entity\Ad 
+     */
+    public function getAd()
+    {
+        return $this->ad;
     }
 }
