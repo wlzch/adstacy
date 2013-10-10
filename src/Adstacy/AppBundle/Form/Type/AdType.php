@@ -11,10 +11,13 @@ class AdType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options = array())
     {
-        $builder->add('image', 'image', array(
+        $builder->add('image', 'file', array(
             'label' => 'form_ad.image',
-            'required' => true,
+            'required' => false,
             'error_bubbling' => true
+        ));
+        $builder->add('imagename', 'hidden', array(
+            'required' => false
         ));
         $builder->add('description', 'purified_textarea', array(
             'label' => 'form_ad.description',

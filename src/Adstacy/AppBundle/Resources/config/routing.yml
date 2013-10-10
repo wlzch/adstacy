@@ -18,6 +18,13 @@ adstacy_app_explore:
     defaults:
         _controller: AdstacyAppBundle:App:explore
 
+adstacy_app_upload:
+    pattern: /upload
+    defaults:
+        _controller: AdstacyAppBundle:Ad:uploadImage
+    options:
+        expose: true
+
 adstacy_app_tags:
     path: /tags
     defaults:

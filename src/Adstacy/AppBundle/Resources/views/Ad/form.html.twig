@@ -6,6 +6,9 @@
     'bundles/adstacyapp/less/layout/create_ad.less'
     'bundles/adstacyapp/less/bootstrap-tagsinput.less'
     'bundles/adstacyapp/less/module/wysihtml5.less'
+    'bundles/adstacyapp/css/jquery.fileupload.css'
+    'bundles/adstacyapp/css/jquery.fileupload-ui.css'
+    'bundles/adstacyapp/css/jquery-ui.css'
   %}
     <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
   {% endstylesheets %}
@@ -17,9 +20,17 @@
     <div class="panel-body clearfix">
       {{ form_start(form, {attr: {class: 'submit-disable'}}) }}
       {{ form_errors(form) }}
-      {{ form_label(form.image) }}
       <div id="create-advert-image">
-        {{ form_widget(form.image) }}
+        <span class="btn btn-success fileinput-button">
+          <span>Choose Image</span>
+          {{ form_widget(form.image) }}
+          {{ form_widget(form.imagename) }}
+        </span>
+      </div>
+      <div id="progressbar">
+      </div>
+      <div class="image-preview medium">
+        <img id="image-preview-img" {% if data.image %}src="{{ vich_uploader_asset(data, 'image') }}"{% endif %}>
       </div>
 
       <div id="create-advert-desc">
@@ -63,6 +74,13 @@
     '@AdstacyAppBundle/Resources/public/js/wysihtml5_parser_rules_advanced.js'
     '@AdstacyAppBundle/Resources/public/js/wysihtml5.js'
     '@AdstacyAppBundle/Resources/public/js/page/create_ad.js'
+    '@AdstacyAppBundle/Resources/public/js/jquery-ui.js'
+    '@AdstacyAppBundle/Resources/public/js/load-image.min.js'
+    '@AdstacyAppBundle/Resources/public/js/canvas-to-blob.min.js'
+    '@AdstacyAppBundle/Resources/public/js/jquery-fileupload/jquery.iframe-transport.js'
+    '@AdstacyAppBundle/Resources/public/js/jquery-fileupload/jquery.fileupload.js'
+    '@AdstacyAppBundle/Resources/public/js/jquery-fileupload/jquery.fileupload-process.js'
+    '@AdstacyAppBundle/Resources/public/js/jquery-fileupload/jquery.fileupload-image.js'
   %}
     <script src="{{ asset_url }}" type="text/javascript"></script>
   {% endjavascripts %}

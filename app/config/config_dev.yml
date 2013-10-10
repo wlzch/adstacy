@@ -41,3 +41,6 @@ ornicar_apc:
     host: http://adstacy.dev
     web_dir: %kernel.root_dir%/../web
     mode: curl
+
+fos_js_routing:
+    request_context_base_url: '/app_dev.php'
