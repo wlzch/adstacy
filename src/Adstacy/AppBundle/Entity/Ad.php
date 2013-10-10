@@ -104,7 +104,7 @@ class Ad
     private $commentsCount;
 
     /**
-     * @ORM\OneToMany(targetEntity="Image", mappedBy="ad", orphanRemoval=true, cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="AdImage", mappedBy="ad", orphanRemoval=true, cascade={"persist", "remove"})
      */
     private $images;
 

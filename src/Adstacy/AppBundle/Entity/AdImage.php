@@ -9,11 +9,11 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Adstacy\AppBundle\Helper\ImageHelper;
 
 /**
- * @ORM\Entity(repositoryClass="Adstacy\AppBundle\Repository\ImageRepository")
- * @ORM\Table(name="image")
+ * @ORM\Entity(repositoryClass="Adstacy\AppBundle\Repository\AdImageRepository")
+ * @ORM\Table(name="ad_image")
  * @Vich\Uploadable
  */
-class Image
+class AdImage
 {
     /**
      * @ORM\Id
