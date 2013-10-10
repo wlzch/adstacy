@@ -34,24 +34,8 @@
       </div>
 
       <div id="create-advert-desc">
-        <div class="clearfix">
-          {{ form_label(form.description) }}
-          {{ form_widget(form.description) }}
-          <div id="chars-left-box" data-desc-length="{{ desc_length }}">
-            {{ "form_ad.characters_left"|trans({'%left%': desc_length - (data.description|length)})|raw }}
-          </div>
-        </div>
-        <div class="clearfix">
-          {{ form_label(form.tags) }}
-          <div>
-            {{ form_widget(form.tags) }}
-          </div>
-        </div>
-
-        <div id="create-advert-content">
-          {{ form_widget(form.content) }}
-        </div>
-
+        {{ form_widget(form.description) }}
+        {{ form_widget(form.tags) }}
         {{ form_widget(form.save, {
             attr: {
               'class': 'form-control btn btn-primary submit-disable-btn',
@@ -59,7 +43,6 @@
             }
           })
         }}
-
         {{ form_rest(form) }}
         {{ form_end(form) }}
       </div>

@@ -53,11 +53,6 @@ class Ad
     private $description;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $content;
-
-    /**
      * @ORM\Column(type="simple_array", nullable=true)
      */
     private $tags;
@@ -166,29 +161,6 @@ class Ad
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * Set content
-     *
-     * @param string $content
-     * @return Ad
-     */
-    public function setContent($content)
-    {
-        $this->content = $content;
-    
-        return $this;
-    }
-
-    /**
-     * Get content
-     *
-     * @return string 
-     */
-    public function getContent()
-    {
-        return $this->content;
     }
 
     /**

@@ -19,24 +19,15 @@ class AdType extends AbstractType
         $builder->add('imagename', 'hidden', array(
             'required' => false
         ));
-        $builder->add('description', 'purified_textarea', array(
+        $builder->add('description', 'wysihtml5', array(
             'label' => 'form_ad.description',
             'attr' => array(
-                'class' => 'form-control',
                 'placeholder' => 'form_ad.placeholders.description'
             ),
             'error_bubbling' => true
         ));
         $builder->add('tags', 'hashtags', array(
             'label' => 'form_ad.hashtags',
-            'error_bubbling' => true
-        ));
-        $builder->add('content', 'wysihtml5', array(
-            'label' => 'form_ad.content',
-            'required' => false,
-            'attr' => array(
-                'placeholder' => 'Description'
-            ),
             'error_bubbling' => true
         ));
         $builder->add('save', 'submit', array(
