@@ -4,6 +4,8 @@ ad:
     description:
         max: Deskripsi maksimal {{ limit }} karakter
         not_blank: Deskripsi harus diisi
+    images:
+        max_count: Anda hanya dapat mengupload maksimal {{ limit }} gambar
 
 image:
     file:

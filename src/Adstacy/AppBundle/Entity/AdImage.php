@@ -42,7 +42,7 @@ class AdImage
     private $imagename;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Ad")
+     * @ORM\ManyToOne(targetEntity="Ad", inversedBy="images")
      */
     private $ad;
 
@@ -68,7 +68,7 @@ class AdImage
 
     public function setImage(File $image)
     {
-        $this->image = ImageHelper::resizeImage($image);
+        $this->image = ImageHelper::resizeImage($image, 768);
     
         return $this;
     }

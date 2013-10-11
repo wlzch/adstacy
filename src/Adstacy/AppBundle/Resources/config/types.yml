@@ -33,4 +33,4 @@ services:
 
     adstacy.form.transformer.images_to_ids_transformer:
         class: Adstacy\AppBundle\Form\DataTransformer\ImagesToIdsTransformer
-        arguments: [@doctrine.orm.entity_manager]
+        arguments: [@doctrine.orm.entity_manager, @security.context]

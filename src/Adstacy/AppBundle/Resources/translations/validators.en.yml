@@ -4,6 +4,8 @@ ad:
     description:
         max: Ad description at most {{ limit }} characters
         not_blank: Ad description must not be blank
+    images:
+        max_count: You can only upload max {{ limit }} images
 
 image:
     file:

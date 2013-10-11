@@ -4,6 +4,7 @@ namespace Adstacy\AppBundle\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
+use Symfony\Component\Security\Core\SecurityContext;
 use Doctrine\Common\Persistence\ObjectManager;
 use Adstacy\AppBundle\Entity\TempAdImage;
 use Adstacy\AppBundle\Entity\AdImage;
@@ -11,10 +12,12 @@ use Adstacy\AppBundle\Entity\AdImage;
 class ImagesToIdsTransformer implements DataTransformerInterface
 {
     private $om;
+    private $securityContext;
 
-    public function __construct(ObjectManager $om)
+    public function __construct(ObjectManager $om, SecurityContext $securityContext)
     {
         $this->om = $om;
+        $this->securityContext = $securityContext;
     }
 
     /**
@@ -45,6 +48,7 @@ class ImagesToIdsTransformer implements DataTransformerInterface
      */
     public function reverseTransform($ids)
     {
+        $user = $this->securityContext->getToken()->getUser();
         $parts = explode(';', $ids);
         $imageIds = array();
         $tempIds = array();
@@ -54,15 +58,21 @@ class ImagesToIdsTransformer implements DataTransformerInterface
             $tempIds = array_filter(explode(',', $parts[1]), 'is_numeric');
         }
         if (count($imageIds) > 0) {
-            $images = $this->om->getRepository('AdstacyAppBundle:AdImage')->findById($imageIds);
+            foreach ($this->om->getRepository('AdstacyAppBundle:AdImage')->findById($imageIds) as $image) {
+                if ($image->getAd()->getUser() === $user) {
+                    $images[] = $image;
+                }
+            }
         }
         if (count($tempIds) > 0) {
             $tempImages = $this->om->getRepository('AdstacyAppBundle:TempAdImage')->findById($tempIds);
             foreach ($tempImages as $image) {
-                $adImage = new AdImage();
-                $adImage->setImage($image->getImage());
-                $adImage->setImagename($image->getImagename());
-                $images[] = $adImage;
+                if ($image->getUser() === $user) {
+                    $adImage = new AdImage();
+                    $adImage->setImage($image->getImage());
+                    $adImage->setImagename($image->getImagename());
+                    $images[] = $adImage;
+                }
             }
         }
 

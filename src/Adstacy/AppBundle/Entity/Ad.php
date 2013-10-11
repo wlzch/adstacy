@@ -104,6 +104,10 @@ class Ad
     private $commentsCount;
 
     /**
+     * @Assert\Count(
+     *  max="5",
+     *  maxMessage = "ad.images.max_count"
+     * )
      * @ORM\OneToMany(targetEntity="AdImage", mappedBy="ad", orphanRemoval=true, cascade={"persist", "remove"})
      */
     private $images;

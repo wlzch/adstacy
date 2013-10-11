@@ -8,15 +8,15 @@ use Imagine\Filter\Advanced\RelativeResize;
 
 class ImageHelper
 {
-    static public function resizeImage(File $image)
+    static public function resizeImage(File $image, $width = 1024)
     {
         $originalImage = $image;
         $imagine = new Imagine();
         $image = $imagine->open($image);
         $size = $image->getSize();
         if ($size->getWidth() > 0 && $size->getHeight() > 0) {
-            if ($size->getWidth() > 1024) {
-                $relativeResize = new RelativeResize('widen', 1024);
+            if ($size->getWidth() > $width) {
+                $relativeResize = new RelativeResize('widen', $width);
                 $image = $relativeResize->apply($image);
                 $image->save($originalImage->getRealPath(), array(
                         'format' => $originalImage->guessClientExtension()
