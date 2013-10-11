@@ -21,6 +21,16 @@ services:
         tags:
             - { name: form.type, alias: wysihtml5 }
 
+    adstacy.type.ad_images:
+        class: Adstacy\AppBundle\Form\Type\AdImageCollectionType
+        arguments: [@adstacy.form.transformer.images_to_ids_transformer]
+        tags:
+            - { name: form.type, alias: ad_images }
+
     adstacy.form.transformer.html_purifier:
         class: Exercise\HTMLPurifierBundle\Form\HTMLPurifierTransformer
         arguments: [@exercise_html_purifier.default]
+
+    adstacy.form.transformer.images_to_ids_transformer:
+        class: Adstacy\AppBundle\Form\DataTransformer\ImagesToIdsTransformer
+        arguments: [@doctrine.orm.entity_manager]

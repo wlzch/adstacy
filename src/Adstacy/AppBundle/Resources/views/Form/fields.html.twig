@@ -119,3 +119,63 @@
     <textarea id="{{ id }}" name="{{ full_name }}" {{ block('widget_attributes') }}>{{ value }}</textarea>
   </div>
 {% endblock %}
+
+{% block ad_images_widget %}
+  {% set images = obj.images %}
+  {% set ids = [] %}
+  {% for image in images %}
+    {% set ids = ids|merge([image.id]) %}
+  {% endfor %}
+  <input type="hidden" id="{{ id }}" name="{{ full_name }}" value="{{ ids|join(',') }}">
+  <span class="btn btn-success fileinput-button">
+    <span>Add image</span>
+    <input type="file" id="{{ id }}_file" name="ad[image]">
+  </span>
+  <div id="{{ id }}_widget">
+    <ul>
+      {% for image in images %}
+        <li><img src="{{ vich_uploader_asset(image, 'image') }}"></li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <script type="text/javascript">
+    $(function() {
+      var $list = $('#{{ id }}_widget ul');
+      var $ids = $('#{{ id }}');
+      $('#{{ id }}_file').fileupload({
+        url: Routing.generate('adstacy_app_upload'),
+        dataType: 'json',
+        imageOrientation: true,
+        disableImageResize: /Android(?!.*Chrome)|Opera/.test(window.navigator && navigator.userAgent),
+        imageMaxWidth: 1024,
+        done: function(e, data) {
+          console.log(data.result);
+          if (data.result.status == 'ok') {
+            $.each(data.result.files, function(index, file) {
+              var val = $ids.val();
+              if (val.indexOf(';') == -1) {
+                val = val + ';';
+              }
+              val = val + file.id + ',';
+              $ids.val(val);
+            });
+          } else {
+            // display error
+          }
+          $('#progressbar').progressbar('destroy');
+        },
+        fail: function(e, data) {
+          $('#progressbar').progressbar('destroy');
+        },
+        progressall: function(e, data) {
+          var progress = parseInt(data.loaded / data.total * 100, 10);
+          $('#progressbar').progressbar({
+            value: progress
+          });
+        }
+      }).prop('disabled', !$.support.fileInput)
+      .parent().addClass($.support.fileInput ? undefined : 'disabled')
+    });
+  </script>
+{% endblock %}

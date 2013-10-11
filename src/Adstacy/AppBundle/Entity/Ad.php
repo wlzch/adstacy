@@ -588,12 +588,13 @@ class Ad
     /**
      * Add images
      *
-     * @param \Adstacy\AppBundle\Entity\Image $images
+     * @param \Adstacy\AppBundle\Entity\AdImage $images
      * @return Ad
      */
-    public function addImage(\Adstacy\AppBundle\Entity\Image $images)
+    public function addImage(\Adstacy\AppBundle\Entity\AdImage $images)
     {
         $this->images[] = $images;
+        $images->setAd($this);
     
         return $this;
     }
@@ -601,11 +602,12 @@ class Ad
     /**
      * Remove images
      *
-     * @param \Adstacy\AppBundle\Entity\Image $images
+     * @param \Adstacy\AppBundle\Entity\AdImage $images
      */
-    public function removeImage(\Adstacy\AppBundle\Entity\Image $images)
+    public function removeImage(\Adstacy\AppBundle\Entity\AdImage $images)
     {
         $this->images->removeElement($images);
+        $images->setAd(null);
     }
 
     /**

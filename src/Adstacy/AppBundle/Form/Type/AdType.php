@@ -19,6 +19,11 @@ class AdType extends AbstractType
         $builder->add('imagename', 'hidden', array(
             'required' => false
         ));
+        $builder->add('images', 'ad_images', array(
+            'label' => 'form_ad.images',
+            'required' => false,
+            'error_bubbling' => true
+        ));
         $builder->add('description', 'wysihtml5', array(
             'label' => 'form_ad.description',
             'attr' => array(
