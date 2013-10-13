@@ -27,7 +27,7 @@ class AdRepository extends EntityRepository
         $em = $this->getEntityManager();
         $builder = $em->createQueryBuilder()
             ->select(array(
-              'partial p.{id,imagename,description,tags,thumbHeight,imageWidth,imageHeight,promoteesCount,commentsCount,created}',
+              'p',
               'partial u.{id,username,imagename,realName,profilePicture}'
             ))
             ->from('AdstacyAppBundle:Ad', 'p')
@@ -56,7 +56,7 @@ class AdRepository extends EntityRepository
     {
         $em = $this->getEntityManager();
         $query = $em->createQuery('
-            SELECT partial a.{id,imagename,description,tags,thumbHeight,imageHeight,imageWidth,promoteesCount,commentsCount,created},
+            SELECT a,
             partial u.{id,username,imagename,realName,profilePicture}
             FROM AdstacyAppBundle:Ad a
             JOIN a.user u
@@ -79,7 +79,7 @@ class AdRepository extends EntityRepository
     {
         $em = $this->getEntityManager();
         $query = $em->createQuery('
-            SELECT partial a.{id,imagename,description,tags,thumbHeight,imageHeight,imageWidth,promoteesCount,commentsCount,created},
+            SELECT a,
             partial u.{id,username,imagename,realName,profilePicture}
             FROM AdstacyAppBundle:Ad a
             JOIN a.user u
@@ -103,7 +103,7 @@ class AdRepository extends EntityRepository
     {
         $em = $this->getEntityManager();
         $query = $em->createQuery('
-            SELECT partial a.{id,imagename,description,tags,thumbHeight,imageWidth,imageHeight,promoteesCount,commentsCount,created}
+            SELECT a
             FROM AdstacyAppBundle:Ad a
             JOIN a.user u
             WHERE u.id = :id AND a.active = TRUE
@@ -138,7 +138,7 @@ class AdRepository extends EntityRepository
     {
         $em = $this->getEntityManager();
         $query = $em->createQuery('
-            SELECT partial a.{id,imagename,description,tags,thumbHeight,imageHeight,imageWidth,promoteesCount,commentsCount,created},
+            SELECT a,
             partial u.{id,username,imagename,realName,profilePicture}
             FROM AdstacyAppBundle:Ad a
             JOIN a.user u

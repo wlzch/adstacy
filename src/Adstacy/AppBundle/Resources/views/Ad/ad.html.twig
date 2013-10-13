@@ -1,12 +1,16 @@
 <div class="advert masonry-item">
-  <div class="advert-image">
-    <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}">
-      <img class="lazy" src="{{ asset('bundles/adstacyapp/img/transparent.gif') }}"
-        data-original="{{ vich_uploader_asset(ad, 'image')|imagine_filter('thumbnail') }}"
-        width="{{ thumb_width }}" height="{{ ad.imageHeight(thumb_width) }}"
-        alt="{{ ad.description }}">
-    </a>
-  </div>
+  {% if ad.type == 'image' %}
+    <div class="advert-image">
+      <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}">
+        <img class="lazy" src="{{ asset('bundles/adstacyapp/img/transparent.gif') }}"
+          data-original="{{ vich_uploader_asset(ad, 'image')|imagine_filter('thumbnail') }}"
+          width="{{ thumb_width }}" height="{{ ad.imageHeight(thumb_width) }}"
+          alt="{{ ad.description }}">
+      </a>
+    </div>
+  {% elseif ad.type == 'text' %}
+    <h3>{{ ad.title }}</h3>
+  {% endif %}
 
   <div class="advert-sect break-word">
     <p>{{ parse_url(parse_hashtag(ad.description)) }}</p>
@@ -57,6 +61,7 @@
           <li>
             <a href="{{ path('adstacy_app_ad_report', {id: ad.id}) }}" class="report">
               <i class="icon-info"></i> Report
+            </a>
           </li>
         </ul>
       </div>

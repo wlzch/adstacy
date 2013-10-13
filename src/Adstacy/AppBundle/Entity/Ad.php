@@ -12,7 +12,7 @@ use Imagine\Filter\Advanced\RelativeResize;
 
 /**
  * @ORM\Entity(repositoryClass="Adstacy\AppBundle\Repository\AdRepository")
- * @Assert\Callback(methods={"isImageUploaded"})
+ * @Assert\Callback(methods={"isAdValid"})
  * @Vich\Uploadable
  */
 class Ad
@@ -25,34 +25,35 @@ class Ad
     private $id;
 
     /**
-     * @Assert\Image(
-     *    maxSize = "5M",
-     *    mimeTypes = {"image/png", "image/jpg", "image/jpeg", "image/pjpeg"},
-     *    minWidth = 320,
-     *    maxSizeMessage = "image.file.max_size",
-     *    mimeTypesMessage = "image.file.mime_types",
-     *    minWidthMessage = "image.file.min_width"
-     * )
+     * @ORM\Column(type="string", length=25, nullable=true)
+     */
+    private $type;
+
+    /**
      * @Vich\UploadableField(mapping="ad_image", fileNameProperty="imagename")
      */
     private $image;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $imagename;
 
     /**
-     * @Assert\Length(
-     *  max = "255",
-     *  maxMessage = "ad.description.max"
-     * )
-     * @Assert\NotBlank(message="ad.description.not_blank")
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $title;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
     /**
+     * @Assert\Count(
+     *  min="1",
+     *  minMessage= "ad.tags.min_count"
+     * )
      * @ORM\Column(type="simple_array", nullable=true)
      */
     private $tags;
@@ -136,6 +137,7 @@ class Ad
         $this->promoteesCount = 0;
         $this->commentsCount = 0;
         $this->created = new \Datetime();
+        $this->updated = new \Datetime();
         $this->active = true;
     }
     
@@ -552,10 +554,34 @@ class Ad
         return $this->comments;
     }
 
-    public function isImageUploaded(ExecutionContextInterface $context)
+    public function isAdValid(ExecutionContextInterface $context)
     {
-        if (!$this->imagename && !$this->image) {
-            $context->addViolationAt('image', 'image.file.not_null');
+        if (!$this->type) {
+            $context->addViolationAt('type', 'ad.type.not_blank');
+        } else {
+            if ($this->type == 'image') {
+                if (!$this->imagename && !$this->image) {
+                    $context->addViolationAt('image', 'image.file.not_null');
+                } else {
+                    $context->validateValue($this->image, new Assert\Image(array(
+                        'maxSize' => '5M',
+                        'mimeTypes' => array('image/png', 'image/jpg', 'image/jpeg', 'image/pjpeg'),
+                        'minWidth' => 320,
+                        'maxSizeMessage' => 'image.file.max_size',
+                        'mimeTypesMessage' => 'image.file.mime_types',
+                        'minWidthMessage' => 'image.file.min_width'
+                    )));
+                }
+            } else if ($this->type == 'text') {
+                if (!$this->title) {
+                    $context->addViolationAt('title', 'ad.title.not_blank');
+                }
+                if (!$this->description) {
+                    $context->addViolationAt('description', 'ad.description.not_blank');
+                }
+            } else {
+                $context->addViolation('ad.type.not_supported');
+            }
         }
     }
 
@@ -622,5 +648,51 @@ class Ad
     public function getImages()
     {
         return $this->images;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     * @return Ad
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string 
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return Ad
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 }

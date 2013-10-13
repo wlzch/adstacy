@@ -20,12 +20,19 @@
     <div class="panel-body clearfix">
       {{ form_start(form, {attr: {class: 'submit-disable'}}) }}
       {{ form_errors(form) }}
+      <div id="create-advert-toolbar">
+        <a href="#">image</a>
+        <a href="#">text</a>
+      </div>
       <div id="create-advert-image">
         <span class="btn btn-success fileinput-button">
           <span>Choose Image</span>
           {{ form_widget(form.image) }}
           {{ form_widget(form.imagename) }}
         </span>
+      </div>
+      <div id="create-advert-text">
+        {{ form_widget(form.title) }}
       </div>
       <div id="progressbar">
       </div>

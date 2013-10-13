@@ -34,9 +34,7 @@ class LoadAdData extends DataFixture
             $ad->setDescription($description);
             $ad->setTags($tags);
             $ad->setUser($user);
-            if ($this->faker->randomNumber(1, 5) % 2 == 0) {
-                $ad->setContent($this->faker->paragraph($this->faker->randomNumber(4, 30)));
-            }
+            $ad->setType('image');
             $ad->setCreated($this->faker->dateTimeThisMonth);
             $ads[] = $ad;
             $manager->persist($ad);

@@ -16,6 +16,11 @@ class AdType extends AbstractType
             'required' => false,
             'error_bubbling' => true
         ));
+        $builder->add('title', 'text', array(
+            'label' => 'form_ad.title',
+            'required' => false,
+            'error_bubbling' => true
+        ));
         $builder->add('imagename', 'hidden', array(
             'required' => false
         ));
@@ -26,6 +31,7 @@ class AdType extends AbstractType
         ));
         $builder->add('description', 'wysihtml5', array(
             'label' => 'form_ad.description',
+            'required' => false,
             'attr' => array(
                 'placeholder' => 'form_ad.placeholders.description'
             ),
@@ -33,6 +39,10 @@ class AdType extends AbstractType
         ));
         $builder->add('tags', 'hashtags', array(
             'label' => 'form_ad.hashtags',
+            'error_bubbling' => true
+        ));
+        $builder->add('type', 'hidden', array(
+            'required' => false,
             'error_bubbling' => true
         ));
         $builder->add('save', 'submit', array(
