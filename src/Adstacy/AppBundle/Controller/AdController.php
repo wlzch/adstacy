@@ -10,6 +10,7 @@ use Adstacy\AppBundle\Entity\TempAdImage;
 use Adstacy\AppBundle\Form\Type\AdType;
 use Adstacy\AppBundle\Form\Type\TempAdImageType;
 use Adstacy\AppBundle\Form\Type\CommentType;
+use Adstacy\AppBundle\Helper\ImageHelper;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -390,5 +391,56 @@ class AdController extends Controller
         }
 
         return new JsonResponse(array('status' => 'error', 'errors' => $errors));
+    }
+
+    /**
+     * Upload image with url
+     *
+     * @Secure(roles="ROLE_USER")
+     */
+    public function uploadImageFromUrlAction()
+    {
+        $request = $this->getRequest();
+        $url = $request->query->get('url');
+        if (!$url) {
+            return new JsonResponse(array('status' => 'error', 'message' => $this->translate('upload_image.url_required')));
+        }
+        $file = ImageHelper::downloadImage($url);
+
+        if ($file === false) {
+            return new JsonResponse(array('status' => 'error', 'message' => $this->translate('upload_image.url_not_valid')));
+        }
+
+        $image = new TempAdImage();
+        $image->setImage($file);
+        $image->setImagename($file->getFilename());
+        $image->setUser($this->getUser());
+
+        $validator = $this->get('validator');
+        $errors = $validator->validate($image);
+        if (count($errors) > 0) {
+            $_errors = array();
+            foreach ($errors as $error) {
+                $_errors[] = $error->getMessage();
+            }
+            return new JsonResponse(array('status' => 'error', 'errors' => $_errors));
+        }
+
+        $em = $this->getManager();
+        $em->persist($image);
+        $em->flush();
+
+        $assetHelper = $this->get('adstacy.helper.asset');
+        $uploaderHelper = $this->get('vich_uploader.templating.helper.uploader_helper');
+        return new JsonResponse(array(
+            'status' => 'ok',
+            'files' => array(
+                array (
+                    'name' => $image->getImagename(),
+                    'src' => $assetHelper->assetUrl($uploaderHelper->asset($image, 'image')),
+                    'id' => $image->getId()
+                )
+            )
+        ));
     }
 }

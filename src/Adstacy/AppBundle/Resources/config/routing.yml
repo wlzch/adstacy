@@ -25,6 +25,13 @@ adstacy_app_upload:
     options:
         expose: true
 
+adstacy_app_upload_url:
+    pattern: /upload-url
+    defaults:
+        _controller: AdstacyAppBundle:Ad:uploadImageFromUrl
+    options:
+        expose: true
+
 adstacy_app_tags:
     path: /tags
     defaults:
