@@ -18,11 +18,9 @@
 	text-transform: none;
 	line-height: 1;
 	-webkit-font-smoothing: antialiased;
-	text-align: right;
 }
 .icon:before {
   margin: 0 8px;
-  float: right;
 }
 .icon-home:before {
 	content: "\e000";
