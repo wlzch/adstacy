@@ -166,6 +166,11 @@ class User implements UserInterface, GroupableInterface
     private $profilePicture;
 
     /**
+     * @ORM\Column(name="favourite_tags", type="simple_array", nullable=true)
+     */
+    private $favouriteTags;
+
+    /**
      * @ORM\Column(name="facebook_id", type="string", length=75, nullable=true, unique=true)
      */
     private $facebookId;
@@ -1628,5 +1633,52 @@ class User implements UserInterface, GroupableInterface
         ),
         'output' => $this->getUsername()
       );
+    }
+
+    /**
+     * Set favouriteTags
+     *
+     * @param array $favouriteTags
+     * @return User
+     */
+    public function setFavouriteTags($favouriteTags)
+    {
+        $this->favouriteTags = array_unique($favouriteTags);
+    
+        return $this;
+    }
+
+    /**
+     * Add favourite tag
+     *
+     * @param string $favouriteTag
+     */
+    public function addFavouriteTag($favouriteTag)
+    {
+        if (!in_array($favouriteTag, $this->favouriteTags)) {
+            $this->favouriteTags[] = $favouriteTag;
+        }
+    }
+
+    /**
+     * Remove favourite tag
+     *
+     * @param string $favouriteTag
+     */
+    public function removeFavouriteTag($favouriteTag)
+    {
+        if (($key = array_search($favouriteTag, $this->favouriteTags)) !== false) {
+            unset($this->favouriteTags[$key]);
+        }
+    }
+
+    /**
+     * Get favouriteTags
+     *
+     * @return array 
+     */
+    public function getFavouriteTags()
+    {
+        return $this->favouriteTags;
     }
 }

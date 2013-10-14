@@ -196,4 +196,25 @@ class UserController extends Controller
 
         return $this->redirect($this->generateUrl('adstacy_app_user_profile', array('username' => $username)));
     }
+
+    /**
+     * Add favourite tags
+     *
+     * @Secure(roles="ROLE_USER")
+     */
+    public function addFavouriteTagsAction()
+    {
+        $request = $this->getRequest();
+        $tag = $request->query->get('tag');
+        if (!$tag) {
+            return new JsonResponse(array('status' => 'error', 'message' => $this->translate('add_favourite_tags.required'))); 
+        }
+        $user = $this->getUser();
+        $user->addFavouriteTag($tag);
+        $em = $this->getManager();
+        $em->persist($user);
+        $em->flush();
+
+        return new JsonResponse(array('status' => 'ok', 'result' => array('tag' => $tag)));
+    }
 }
