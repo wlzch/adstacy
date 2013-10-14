@@ -9,7 +9,7 @@
 	font-style: normal;
 }
 
-.icon-home, .icon-rss, .icon-rocket, .icon-search, .icon-plus, .icon-user, .icon-gear, .icon-off, .icon-angle-up, .icon-angle-down, .icon-facebook, .icon-twitter, .icon-share, .icon-envelope-alt, .icon-edit, .icon-delete, .icon-ads, .icon-bullhorn, .icon-hash, .icon-star, .icon-ok-sign, .icon-bell, .icon-globe, .icon-tags {
+.icon, .icon-home, .icon-rss, .icon-rocket, .icon-search, .icon-plus, .icon-user, .icon-gear, .icon-off, .icon-angle-up, .icon-angle-down, .icon-facebook, .icon-twitter, .icon-share, .icon-envelope-alt, .icon-edit, .icon-delete, .icon-ads, .icon-bullhorn, .icon-hash, .icon-star, .icon-ok-sign, .icon-bell, .icon-globe, .icon-tags {
 	font-family: 'adstacy';
 	speak: none;
 	font-style: normal;
@@ -18,6 +18,9 @@
 	text-transform: none;
 	line-height: 1;
 	-webkit-font-smoothing: antialiased;
+}
+.icon:before {
+	margin: 0 8px;
 }
 .icon-home:before {
 	content: "\e000";

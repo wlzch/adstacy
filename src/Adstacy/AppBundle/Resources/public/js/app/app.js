@@ -1,9 +1,22 @@
+$(function(){
+  $('#site-menu-inner').slimScroll({
+    width: '240px',
+    height: '100%',
+    size: '8px'
+  });
+});
+
 (function() {
+  var $window = $(window);
+  var $siteContainer = $('#site-container');
+
+  $('#site-menu-toggle').click(function() {
+    $siteContainer.toggleClass('open');
+  });
+
   $('img.lazy').lazyload({
-    threshold: 2000,
-    failure_limit: 5,
-    effect: 'fadeIn',
-    skip_invisible: false
+    container: $('.site-adverts'),
+    effect: 'fadeIn'
   });
   $().UItoTop({ easingType: 'easeOutQuart' });
   $('.advert').ajaxlink('ads');

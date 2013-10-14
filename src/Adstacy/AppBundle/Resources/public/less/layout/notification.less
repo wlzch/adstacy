@@ -1,18 +1,11 @@
 @import "../variables.less";
 @import "../mixins.less";
 
-#notif-btn {
-  display: inline-block;
-  position: relative;
-}
-
-#notif-btn,
-#notif-mobile-btn {
-  .notif-count {
-    position: absolute;
-    right: -8px;
-    bottom: -4px;
-  }
+.notif-count {
+  position: absolute;
+  right: -8px;
+  bottom: -4px;
+  z-index: 2000;
 }
 
 .open > #top-notifications {
@@ -112,10 +105,6 @@
 }
 
 @media screen and (max-width: @screen-tablet) {
-  #notif-btn {
-    display: none;
-  }
-
   #all-notifications {
     border-radius: 0;
     width: 100%;

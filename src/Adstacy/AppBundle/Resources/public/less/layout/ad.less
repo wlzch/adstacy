@@ -2,80 +2,96 @@
 @import "../mixins.less";
 
 .advert {
-  width: 450px;
-  height: auto;
-  margin: 15px 15px 0;
-  background-color: #fff;
+  width: 100%;
+  background: #fff;
+  margin: 15px auto 0;
   border: 1px solid @border-color;
-  border-bottom-width: 0;
-  border-radius: @border-radius-base;
   .box-shadow(0 1px 1px @gray-light);
 
-  .advert-sect {
-    border-top: 1px solid @border-color;
-    padding: @padding-small-vertical @padding-small-horizontal;
-
-    > p {
-      margin: 0;
-    }
-  }
-
-  .advert-counter {
-    border-top: 0;
-
-    a {
-      color: #888;
-      display: inline-block;
-      font-size: 11px;
-      font-weight: bold;
-      margin-right: 10px;
-    }
-  }
-
-  .advert-user {
-    border-top: 1px solid @border-color;
-    border-radius: 0 0 @border-radius-base @border-radius-base;
-    margin-top: 5px;
-    position: relative;
-  }
-
-  .advert-user-action {
-    position: absolute;
-    right: 0;
-    top: 0;
-    .btn {
-      height: 40px;
-      padding: 12px;
-    }
-    .btn-default, .btn-primary {
-      border-bottom: 0;
-      border-top: 0;
-      border-radius: 0;
-    }
-    > .btn-group .btn-default {
-      border-right: 0;
-    }
-    .btn-group:first-child>.btn:last-child,
-    .btn-group:first-child>.dropdown-toggle {
-      // border-bottom-right-radius: @border-radius-base;
-    }
-    .unpromote:hover {
-      background-color: @gray-dark;
-      border-color: @gray-dark;
-    }
+  &:first-child {
+    margin-top: 0;
   }
 }
 
-.advert-image {
+.advert-img {
   background-image: url('../img/noise.png');
   position: relative;
 
   img {
     background: url(@loader-img) no-repeat center;
-    .img-responsive(block);
+    .img-responsive();
   }
 }
 
+.advert-tags {
+  background: @gray-dark;
+  padding: 10px 15px;
+  .text-overflow();
+}
+
+.advert-detail {
+  padding: 10px 15px;
+}
+
+.advert-desc {
+  margin: 10px 0 0;
+  .hyphens();
+}
+
+.advert-counter {
+  padding: 0 15px 10px;
+
+  a {
+    font-weight: bold;
+    font-size: 12px;
+    color: #aaa;
+  }
+}
+
+.advert-action {
+  border-top: 1px solid @border-color;
+
+  .btn-default {
+    &:first-child {
+      border: 0;
+    }
+    border: 0;
+    border-left: 1px solid @border-color;
+  }
+
+  a span {
+    display: block;
+    margin-top: 10px;
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 481px) {
+  .advert {
+    width: 450px;
+  }
+
+  .advert-action a span {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 600px) {
+  .advert {
+    width: 100%;
+  }
+}
+
+@media (min-width: 720px) {
+  .advert {
+    width: 450px;
+  }
+  .advert-action a span {
+    display: inline;
+  }
+}
+
+// OLD
 .advert-comment {
   .comment-box {
     width: 100%;

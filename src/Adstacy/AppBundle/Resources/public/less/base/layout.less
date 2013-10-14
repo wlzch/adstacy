@@ -1,22 +1,10 @@
 body {
   color: #333;
-  font-size: 13px;
-  padding-top: 82px;
-  background: #dfdfdf url("../img/noise.png");
-  margin-bottom: 50px;
-  visibility: visible;
-}
-
-::-webkit-scrollbar {
-  width: 0;
+  overflow: hidden;
+  background: @body-bg url("../img/noise.png");
 }
 
 /** Class components **/
-.masonry, .adstacy-container {
-  margin: 0 auto;
-  position: relative;
-}
-
 .follow-container {
   padding: 0 10px 10px;
 }
@@ -33,10 +21,8 @@ body {
 @viewport           { width: device-width; }
 
 .load-next {
-  position: absolute;
-  left: 0;
-  bottom: -64px;
-  width: 100%;
+  position: relative;
+  bottom: -30px;
   border-bottom: 0;
   .border-bottom-radius(0);
   line-height: 23px;
