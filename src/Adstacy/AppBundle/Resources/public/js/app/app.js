@@ -1,4 +1,5 @@
 (function() {
+  var $body = $('body');
   $('img.lazy').lazyload({
     threshold: 2000,
     failure_limit: 5,

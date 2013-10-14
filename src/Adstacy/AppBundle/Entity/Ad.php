@@ -45,6 +45,11 @@ class Ad
     private $title;
 
     /**
+     * @ORM\Column(type="string", length=25, nullable=true)
+     */
+    private $youtubeId;
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
@@ -579,6 +584,10 @@ class Ad
                 if (!$this->description) {
                     $context->addViolationAt('description', 'ad.description.not_blank');
                 }
+            } else if ($this->type == 'youtube') {
+                if (!$this->youtubeId) {
+                    $context->addViolationAt('youtubeId', 'ad.youtubeId.not_blank');
+                }
             } else {
                 $context->addViolation('ad.type.not_supported');
             }
@@ -694,5 +703,28 @@ class Ad
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Set youtubeId
+     *
+     * @param string $youtubeId
+     * @return Ad
+     */
+    public function setYoutubeId($youtubeId)
+    {
+        $this->youtubeId = $youtubeId;
+    
+        return $this;
+    }
+
+    /**
+     * Get youtubeId
+     *
+     * @return string 
+     */
+    public function getYoutubeId()
+    {
+        return $this->youtubeId;
     }
 }

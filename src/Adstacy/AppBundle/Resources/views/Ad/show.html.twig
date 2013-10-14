@@ -4,7 +4,11 @@
 
 {% block meta_keywords %}{{ ad.tags|join(',') }}{% endblock %}
 
-{% block meta_image %}{{ app.request.scheme~"://"~app.request.host~vich_uploader_asset(ad, 'image') }}{% endblock %}
+{% block meta_image %}
+  {% if ad.image %}
+    {{ app.request.scheme~"://"~app.request.host~vich_uploader_asset(ad, 'image') }}
+  {% endif %}
+{% endblock %}
 
 {% block head_scripts %}
   {{ parent() }}
@@ -78,10 +82,24 @@
           {% endif %}
         </div>
 
+        {% if ad.type == 'image' %}
         <div id="show-advert-img">
           {% set src = vich_uploader_asset(ad, 'image') %}
           <img src="{{ src }}" alt="{{ ad.description }}" width="{{ ad.imageWidth }}" height="{{ ad.imageHeight }}">
         </div>
+        {% elseif ad.type == 'text' %}
+          <h2>{{ ad.title }}</h2>
+        {% elseif ad.type == 'youtube' %}
+          <div class="advert-video" data-youtube-id="{{ ad.youtubeId }}">
+            <a href="#">
+              <img class="lazy" src="{{ asset('bundles/adstacyapp/img/transparent.gif') }}"
+                data-original="http://img.youtube.com/vi/{{ ad.youtubeId }}/0.jpg"
+                width="{{ thumb_width }}" height="{{ thumb_width }}"
+              >
+            </a>
+            <div class="yt-player"></div>
+          </div>
+        {% endif %}
       </div>
 
       <div id="show-advert-comment" class="panel panel-default">
@@ -150,16 +168,6 @@
           <p class="break-word">{{ parse_url(parse_hashtag(user.about)) }}</p>
         </div>
         {% endif %}
-        <div id="user-latest-adverts" class="clearfix">
-          {% for adByUser in adsByUser %}
-            <div class="thumb">
-              <a href="{{ path('adstacy_app_ad_show', {id: adByUser.id}) }}">
-                <img src="{{ vich_uploader_asset(adByUser, 'image')|imagine_filter('mini_thumb')}}"
-                  width="{{ mini_thumb_size }}" height="{{ mini_thumb_size }}">
-              </a>
-            </div>
-          {% endfor %}
-        </div>
 
         <div class="panel-body">
           <a href="{{ path('adstacy_app_user_ads', {username: user.username}) }}" class="btn btn-default btn-block" style="margin-bottom: 10px;">{{"more_ads"|trans}}</a>

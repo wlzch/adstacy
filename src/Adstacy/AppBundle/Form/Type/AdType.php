@@ -21,8 +21,10 @@ class AdType extends AbstractType
             'required' => false,
             'error_bubbling' => true
         ));
-        $builder->add('imagename', 'hidden', array(
-            'required' => false
+        $builder->add('youtubeId', 'text', array(
+            'label' => 'form_ad.youtube',
+            'required' => false,
+            'error_bubbling' => true
         ));
         $builder->add('images', 'ad_images', array(
             'label' => 'form_ad.images',
@@ -40,6 +42,9 @@ class AdType extends AbstractType
         $builder->add('tags', 'hashtags', array(
             'label' => 'form_ad.hashtags',
             'error_bubbling' => true
+        ));
+        $builder->add('imagename', 'hidden', array(
+            'required' => false
         ));
         $builder->add('type', 'hidden', array(
             'required' => false,

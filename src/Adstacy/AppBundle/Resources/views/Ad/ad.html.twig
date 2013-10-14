@@ -10,6 +10,16 @@
     </div>
   {% elseif ad.type == 'text' %}
     <h3>{{ ad.title }}</h3>
+  {% elseif ad.type == 'youtube' %}
+    <div class="advert-video" data-youtube-id="{{ ad.youtubeId }}">
+      <a href="#">
+        <img class="lazy" src="{{ asset('bundles/adstacyapp/img/transparent.gif') }}"
+          data-original="http://img.youtube.com/vi/{{ ad.youtubeId }}/0.jpg"
+          width="{{ thumb_width }}" height="{{ thumb_width }}"
+        >
+      </a>
+      <div class="yt-player"></div>
+    </div>
   {% endif %}
 
   <div class="advert-sect break-word">
