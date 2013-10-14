@@ -1,4 +1,4 @@
-<header class="site-header navbar navbar-inverse navbar-fixed-top">
+<header id="site-header" class="site-header navbar navbar-inverse navbar-fixed-top">
   <nav class="site-wrapper">
     <div class="navbar-header navbar-left">
       <a id="site-menu-toggle" href="#" class="navbar-toggle">
@@ -10,7 +10,7 @@
       <a class="navbar-brand" href="{{ path('homepage') }}" title="Adstacy"><span>ADS</span>tacy</a>
     </div>
 
-    <form id="search-form" action="{{ path('adstacy_app_search') }}" class="navbar-form navbar-left" style="width: 300px;">
+    <!-- <form id="search-form" action="{{ path('adstacy_app_search') }}" class="navbar-form navbar-left" style="width: 300px;">
       {% set isSearchUser = app.request.attributes.get('_route') == 'adstacy_app_search' and app.request.query.get('type') == 'users' %}
       <div id="search-container" class="input-group">
         <div class="input-group-btn">
@@ -31,16 +31,23 @@
         </div>
       </div>
       <input id="search-type" type="hidden" name="type" value="{% if isSearchUser %}users{% else %}ads{% endif %}">
+    </form> -->
+
+    <form id="search-form" action="{{ path('adstacy_app_search') }}">
+      <input type="text" class="form-control" placeholder="{{ "search"|trans }}" name="q" value="{{ app.request.query.get('q') }}">
+      <button id="search-dismiss" type="button" class="close">&times;</button>
+      <input type="submit" class="hide">
+      <input id="search-type" type="hidden" name="type" value="{% if isSearchUser %}users{% else %}ads{% endif %}">
     </form>
 
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#" class="icon icon-search"></a></li>
+      <li><a id="btn-search" href="#Search" class="icon icon-search"><span>Search</span></a></li>
       {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
         <li><a href="{{ path('adstacy_app_ad_create') }}" id="create-advert-btn" class="icon icon-plus" title="{{ "ads.create"|trans }}"><span>{{ "ads.create"|trans }}</span></a></li>
         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
           <li>
-            <a href="#" class="icon icon-bell dropdown-toggle" id="notif-btn" data-toggle="dropdown" data-href="{{ path('adstacy_notification_readall') }}"><span>Notification</span></a>
-            <span class="notif-count label label-primary">{{ app.user.notificationsCount }}</span>
+            <a href="#Notification" class="icon icon-bell dropdown-toggle" id="notif-btn" data-toggle="dropdown" data-href="{{ path('adstacy_notification_readall') }}"><span>Notification</span></a>
+            <span class="notif-count label label-danger">{{ app.user.notificationsCount }}</span>
             {{ render_top_notification(5) }}
           </li>
         {% endif %}

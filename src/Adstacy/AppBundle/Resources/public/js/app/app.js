@@ -9,10 +9,22 @@ $(function(){
 (function() {
   var $window = $(window);
   var $siteContainer = $('#site-container');
+  var $siteHeader = $('#site-header');
+  var $searchDismiss = $('#search-dismiss');
+  var $searchInput = $('#search-form input[type=text]');
 
   $('#site-menu-toggle').click(function() {
     $siteContainer.toggleClass('open');
   });
+
+  $('#btn-search').click(function() {
+    $siteHeader.addClass('focus');
+  });
+
+  $('#search-dismiss').click(function() {
+    $searchInput.val("");
+    $siteHeader.removeClass('focus');
+  })
 
   $('img.lazy').lazyload({
     container: $('.site-adverts'),
