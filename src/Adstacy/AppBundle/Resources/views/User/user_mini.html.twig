@@ -6,13 +6,13 @@
     <img class="profile-picture-img" src="{{ profile_pic(user) }}" alt="{{ user.username }}" width="30" height="30">
   </div>
   <div class="user-desc">
-      <div class="user-realname text-overflow">
-        {% if as_link is defined and as_link == false %}
-          <span>{{ user.username }}</span>
-        {% else %}
-          <a class="user-realname-a" href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">{{ user.username }}</a>
-        {% endif %}
-      </div>
-      <div class="user-label">{{ text }}</div>
+    <div class="user-realname text-overflow">
+      {% if as_link is defined and as_link == false %}
+        <span>{{ user.username }}</span>
+      {% else %}
+        <a class="user-realname-a" href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">{{ user.username }}</a>
+      {% endif %}
+    </div>
+    <div class="user-label">{{ text }}</div>
   </div>
 </div>
