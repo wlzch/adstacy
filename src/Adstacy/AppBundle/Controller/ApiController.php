@@ -39,6 +39,7 @@ class ApiController extends Controller
             $result = $redis->hgetall("user:$username");
             $result['type'] = 'user';
             if ($withoutMention) $result['value'] = substr($result['value'], 1);
+            $result['url'] = $this->generateUrl('adstacy_app_user_profile', array('username' => $username));
             $results[] = $result;
           }
         }
@@ -62,7 +63,9 @@ class ApiController extends Controller
         $redis = $this->get('snc_redis.default');
         $tags = explode(' ', $q);
         $cnt = count($tags);
-        $prevTags = implode(' ', array_slice($tags, 0, $cnt - 1));
+        $prevTags = array_slice($tags, 0, $cnt - 1);
+        $cntPrevTags = count($prevTags);
+        $prevTags = implode(' ', $prevTags);
         $q = $tags[$cnt - 1];
 
         if ($q && strlen($q) >= 2) {
@@ -74,7 +77,16 @@ class ApiController extends Controller
             $len = strlen($possibility);
             if ($possibility[$len - 1] == '*') {
               $tag = substr($possibility, 0, $len - 1);
-              $results[] = array('value' => $prevTags.' '.$tag, 'tokens' => array($tag));
+              if ($cntPrevTags > 0) {
+                  $completeTag = $prevTags.' '.$tag;
+              } else {
+                  $completeTag = $tag;
+              }
+              $results[] = array(
+                  'value' => $completeTag,
+                  'tokens' => array($tag),
+                  'url' => $this->generateUrl('adstacy_app_search', array('q' => $completeTag))
+              );
             }
           }
         }

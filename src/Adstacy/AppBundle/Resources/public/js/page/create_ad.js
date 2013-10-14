@@ -43,6 +43,9 @@ $(function() {
       }
     }
   });
+  $('.tt-query').blur(function() {
+    $(this).val('');
+  });
   var editor = new wysihtml5.Editor('ad_description', {
     toolbar: 'wysihtml5-editor-toolbar',
     parserRules: wysihtml5ParserRules

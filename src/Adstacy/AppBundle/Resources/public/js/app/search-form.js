@@ -8,7 +8,9 @@
         url: Routing.generate('adstacy_app_api_tags', {q: '_QUERY_'}),
         wildcard: '_QUERY_'
       },
-      header: '<h3 class="tt-dropdown-header">Tags</h3>'
+      template: '<a href="{{ url }}">{{ value }}</a>',
+      header: '<h3 class="tt-dropdown-header">Tags</h3>',
+      engine: Hogan
     },
     {
       name: 'users',
@@ -17,11 +19,12 @@
         wildcard: '_QUERY_'
       },
       header: '<h3 class="tt-dropdown-header">Users</h3>',
-      template: '<p><img src="{{ avatar }}" width="35" height="35"> <strong class="real-name">{{ name }}</strong> (<span class="username">{{ username }}</span>)</p>',
+      template: '<a href="{{ url }}"><img src="{{ avatar }}" width="35" height="35"> <strong class="real-name">{{ name }}</strong> (<span class="username">{{ username }}</span>)</a>',
       engine: Hogan
     }
   ]);
   $searchBox.on('typeahead:selected', function(e, datum, name) {
+    console.log(e);
     $searchBox.prop('disabled', true);
     if (name == 'users') {
       window.location.href = Routing.generate('adstacy_app_user_profile', {username: datum.username});
