@@ -5,6 +5,13 @@ adstacy_app_api_users:
     options:
       expose: true
 
+adstacy_app_api_network:
+    path: /network.json
+    defaults:
+        _controller: AdstacyAppBundle:Api:network
+    options:
+        expose: true
+
 adstacy_app_api_tags:
     path: /tags.json
     defaults:

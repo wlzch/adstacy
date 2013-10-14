@@ -22,7 +22,7 @@ class CleanTempAdImageCommand extends ContainerAwareCommand
     {
         $container = $this->getContainer();
         $em = $container->get('doctrine')->getManager();
-        $since = date('Y-m-d', strtotime('-1 day', time())); // 7 days ago
+        $since = date('Y-m-d', strtotime('-1 day', time()));
         $ads = $em->createQuery('
             SELECT a, i
             FROM AdstacyAppBundle:Ad a

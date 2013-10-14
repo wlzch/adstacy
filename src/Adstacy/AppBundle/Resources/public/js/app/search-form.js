@@ -14,6 +14,7 @@
     },
     {
       name: 'users',
+      prefetch: Routing.generate('adstacy_app_api_network', {cond: 'noment'}),
       remote: {
         url: Routing.generate('adstacy_app_api_users', {q: '_QUERY_', cond: 'noment'}),
         wildcard: '_QUERY_'

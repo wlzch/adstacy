@@ -52,6 +52,50 @@ class ApiController extends Controller
     }
 
     /**
+     * Return follower's and followings
+     *
+     * @Secure(roles="ROLE_USER")
+     */
+    public function networkAction()
+    {
+        $request = $this->getRequest();
+        $withoutMention = $request->query->get('cond') == 'noment';
+
+        $authUser = $this->getUser();
+        $followers = $authUser->getFollowers();
+        $followings = $authUser->getFollowings();
+        $users = array();
+        foreach ($followers as $follower) {
+            $users[] = $follower;
+        }
+        foreach ($followings as $following) {
+            $users[] = $following;
+        }
+        $userHelper = $this->get('adstacy.helper.user');
+
+        $results = array();
+        foreach ($users as $user) {
+            $result = array(
+                'id' => $user->getId(),
+                'name' => $user->getRealName(),
+                'avatar' => $userHelper->getProfilePicture($user, false),
+                'value' => '@'.$user->getUsername(),
+                'type' => 'user',
+                'username' => $user->getUsername(),
+                'url' => $this->generateUrl('adstacy_app_user_profile', array('username' => $user->getUsername()))
+            );
+            if ($withoutMention) {
+                $result['value'] = substr($result['value'], 1);
+            }
+            $results[] = $result;
+        }
+
+        $response = new JsonResponse($results);
+        $response->setMaxAge(86400);
+        $response->setSharedMaxAge(86400);
+    }
+
+    /**
      * Return tag suggestions.
      */
     public function tagsAction()
@@ -97,4 +141,5 @@ class ApiController extends Controller
 
         return $response;
     }
+
 }
