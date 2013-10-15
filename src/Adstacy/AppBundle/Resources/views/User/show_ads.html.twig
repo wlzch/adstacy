@@ -2,24 +2,21 @@
 
 {% block show_content %}
   {% if paginator.getCurrentPageResults|length > 0 %}
-    <div class="masonry jscroll">
+    <div class="jscroll">
       {{ block('profile') }}
       {{ block('ajax_content') }}
     </div>
   {% else %}
-    <div class="masonry">
+    <div>
       {{ block('profile') }}
     </div>
     <div class="jumbotron text-center">
       {% if app.user and app.user == user %}
-        <h1>{{"ads.no_ads.self_message"|trans}}</h1>
-      <p class="lead">{{"ads.no_ads.help"|trans}}</p>
-      <a href="{{ path('adstacy_app_ad_create') }}" class="btn-group btn-group-lg">
-        <span class="btn btn-success"><i class="icon-plus"></i></span>
-        <span class="btn btn-success">{{"ads.create"|trans}}</span>
-      </a>
+        <h1>{{ "ads.no_ads.self_message"|trans }}</h1>
+        <p class="lead">{{ "ads.no_ads.help"|trans }}</p>
+        <a href="{{ path('adstacy_app_ad_create') }}" class="btn btn-success btn-lg">{{ "ads.create"|trans }}<i class="icon icon-plus"></i></a>
       {% else %}
-        <h1>{{"ads.no_ads.message"|trans({'%username%': user.username})}}</h1>
+        <h1>{{ "ads.no_ads.message"|trans({'%username%': user.username}) }}</h1>
       {% endif %}
     </div>
   {% endif %}

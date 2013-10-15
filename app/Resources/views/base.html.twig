@@ -92,14 +92,14 @@
           <nav id="site-menu-inner" class="site-menu-inner">
             <ul class="site-main-menu">
               <li><h3>MAIN MENU</h3></li>
-              <li><a href="{{ path('homepage') }}" class="icon icon-home" title="{{ "home"|trans }}">{{ "home"|trans }}</a></li>
-              <li><a href="{{ path('adstacy_app_explore') }}" class="icon icon-globe" title="Explore">Explore</a></li>
-              <li><a href="{{ path('adstacy_app_trending') }}" class="icon icon-rocket" title="Trending">Trending</a></li>
+              <li><a href="{{ path('homepage') }}" title="{{ "home"|trans }}">{{ "home"|trans }}<i class="icon icon-home"></i></a></li>
+              <li><a href="{{ path('adstacy_app_explore') }}" title="Explore">Explore<i class="icon icon-globe"></i></a></li>
+              <li><a href="{{ path('adstacy_app_trending') }}" title="Trending">Trending<i class="icon icon-rocket"></i></a></li>
 
               {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                <li><a href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}" class="icon icon-user" title="{{ "profile"|trans }}">{{ "profile"|trans }}</a></li>
-                <li><a href="{{ path('fos_user_profile_edit') }}" class="icon icon-gear" title="{{ "settings"|trans }}">{{ "settings"|trans }}</a></li>
-                <li><a href="{{ path('fos_user_security_logout') }}" class="icon icon-off" title="{{ "logout"|trans }}">{{ "logout"|trans }}</a></li>
+                <li><a href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}" title="{{ "profile"|trans }}">{{ "profile"|trans }}<i class="icon icon-user"></i></a></li>
+                <li><a href="{{ path('fos_user_profile_edit') }}" title="{{ "settings"|trans }}">{{ "settings"|trans }}<i class="icon icon-gear"></i></a></li>
+                <li><a href="{{ path('fos_user_security_logout') }}" title="{{ "logout"|trans }}">{{ "logout"|trans }}<i class="icon icon-off"></i></a></li>
               {% endif %}
             </ul>
             <ul>

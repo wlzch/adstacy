@@ -41,12 +41,12 @@
     </form>
 
     <ul class="nav navbar-nav navbar-right">
-      <li><a id="btn-search" href="#Search" class="icon icon-search" title="Search"><span>Search</span></a></li>
+      <li><a id="btn-search" title="Search"><span>Search</span><i class="icon icon-search"></i></a></li>
       {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-        <li><a href="{{ path('adstacy_app_ad_create') }}" id="create-advert-btn" class="icon icon-plus" title="{{ "ads.create"|trans }}"><span>{{ "ads.create"|trans }}</span></a></li>
+        <li><a href="{{ path('adstacy_app_ad_create') }}" id="create-advert-btn" title="{{ "ads.create"|trans }}"><span>{{ "ads.create"|trans }}</span><i class="icon icon-plus"></i></a></li>
         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
           <li>
-            <a href="#Notification" class="icon icon-bell dropdown-toggle" id="notif-btn" title="Notification" data-toggle="dropdown" data-href="{{ path('adstacy_notification_readall') }}"><span>Notification</span></a>
+            <a class="dropdown-toggle" id="notif-btn" title="Notification" data-toggle="dropdown" data-href="{{ path('adstacy_notification_readall') }}"><span>Notification</span><i class="icon icon-bell"></i></a>
             <span class="notif-count label label-danger">{{ app.user.notificationsCount }}</span>
             {{ render_top_notification(5) }}
           </li>
