@@ -107,15 +107,15 @@
               {% include 'AdstacyAppBundle:App:tag_list.html.twig' %}
             </ul>
             <ul>
-              <li><h3>TRENDING TAG</h3></li>
+              <li><h3>TRENDING TAGS</h3></li>
               {% include 'AdstacyAppBundle:App:tag_list.html.twig' %}
             </ul>
             <ul>
               <li><h3>SITE INFO</h3></li>
-              <li><a href="{{ path('adstacy_app_page_show', {key: 'about'}) }}">{{ "about"|trans }}</a></li>
-              <li><a href="{{ path('adstacy_app_page_show', {key: 'terms'}) }}">{{ "terms"|trans }}</a></li>
-              <li><a href="{{ path('adstacy_app_page_show', {key: 'privacy-policy'}) }}">{{ "privacy"|trans }}</a></li>
-              <li><a href="{{ path('adstacy_app_contact') }}">{{ "contact_us"|trans }}</a></li>
+              <li><a href="{{ path('adstacy_app_page_show', {key: 'about'}) }}" title="{{ "about"|trans }}">{{ "about"|trans }}</a></li>
+              <li><a href="{{ path('adstacy_app_page_show', {key: 'terms'}) }}" title="{{ "terms"|trans }}">{{ "terms"|trans }}</a></li>
+              <li><a href="{{ path('adstacy_app_page_show', {key: 'privacy-policy'}) }}" title="{{ "privacy"|trans }}">{{ "privacy"|trans }}</a></li>
+              <li><a href="{{ path('adstacy_app_contact') }}" title="{{ "contact_us"|trans }}">{{ "contact_us"|trans }}</a></li>
             </ul>
           </nav>
         </div>
