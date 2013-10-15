@@ -44,10 +44,7 @@ $(function(){
     tab.find('.advert-share').hide();
   });
 
-  $('img.lazy').lazyload({
-    container: $('.site-adverts'),
-    effect: 'fadeIn'
-  });
+  $('img.lazy').lazyload();
   $().UItoTop({ easingType: 'easeOutQuart' });
   $('.advert').ajaxlink('ads');
   $('.user').ajaxlink('users');
@@ -60,7 +57,7 @@ $(function(){
 
     var $parent = $this.parent();
     var $typeahead = $parent.find('.typeahead');
-    if ($typeahead.length == 0 || ($typeahead.length > 0 && $typeahead.is(':hidden'))) {
+    if ($typeahead.length === 0 || ($typeahead.length > 0 && $typeahead.is(':hidden'))) {
       if (event.which == 13 && event.shiftKey) {
         event.preventDefault();
         return false;
@@ -87,7 +84,7 @@ $(function(){
         localStorage.setItem('users', JSON.stringify(users));
       }
     });
-  }
+  };
   if (Modernizr.localstorage) {
     users = localStorage.getItem('users');
     if ($.isArray(users)) {

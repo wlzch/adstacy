@@ -40,14 +40,10 @@
   {{ parent() }}
   <script type="text/javascript">
     $(function() {
-      var $siteAdverts = $('.site-adverts');
       $('.jscroll').jscroll({
         callback: function() {
           var $ads = $('.jscroll-added:last .advert');
-          $ads.find('img.lazy').lazyload({
-            container: $siteAdverts,
-            effect: 'fadeIn'
-          });
+          $ads.find('img.lazy').lazyload();
           $ads.ajaxlink('ads');
         }
       });

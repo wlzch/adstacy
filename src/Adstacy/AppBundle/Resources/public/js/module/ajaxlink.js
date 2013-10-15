@@ -50,7 +50,6 @@
             }
             $parent.find(settings.firstSelector).toggleClass('hide');
             $parent.find(settings.secondSelector).toggleClass('hide');
-            $this.tooltip('hide');
           }
         });
 
