@@ -19,12 +19,30 @@ $(function(){
 
   $('#btn-search').click(function() {
     $siteHeader.addClass('focus');
+    $searchInput.focus();
   });
 
   $('#search-dismiss').click(function() {
     $searchInput.val("");
     $siteHeader.removeClass('focus');
-  })
+  });
+
+  $searchInput.blur(function() {
+    $searchInput.val("");
+    $siteHeader.removeClass('focus');
+  });
+
+  $('.btn-share').click(function() {
+    var tab = $(this).parent().next();
+    tab.find('.advert-share').toggle();
+    tab.find('.advert-comment').hide();
+  });
+
+  $('.btn-comment').click(function() {
+    var tab = $(this).parent().next();
+    tab.find('.advert-comment').toggle();
+    tab.find('.advert-share').hide();
+  });
 
   $('img.lazy').lazyload({
     container: $('.site-adverts'),

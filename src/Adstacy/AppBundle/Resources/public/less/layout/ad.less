@@ -6,11 +6,15 @@
   background: #fff;
   margin: 15px auto 0;
   border: 1px solid @border-color;
-  .box-shadow(0 1px 1px @gray-light);
+  // .box-shadow(0 1px 1px @gray-light);
 
   &:first-child {
     margin-top: 0;
   }
+}
+
+.jscroll-added .advert:first-child {
+  margin-top: 15px;
 }
 
 .advert-img {
@@ -51,7 +55,7 @@
 .advert-action {
   border-top: 1px solid @border-color;
 
-  .btn-default {
+  .btn {
     &:first-child {
       border: 0;
     }
@@ -61,8 +65,18 @@
 
   a span {
     display: block;
-    margin-top: 10px;
     font-size: 10px;
+  }
+}
+
+.advert-action-content {
+  .advert-share {
+    display: none;
+  }
+
+  .advert-share, .advert-comment {
+    padding: 10px 15px;
+    border-top: 1px solid @border-color;
   }
 }
 
@@ -100,7 +114,7 @@
     background-color: #eee;
     resize: none;
     border: solid @border-color;
-    border-width: 1px 0 0 0;
+    border-width: 1px;
     .border-bottom-radius(@border-radius-base);
 
     &:focus {
