@@ -1,4 +1,4 @@
-<div class="advert">
+<div class="advert item">
   <div class="advert-img">
     <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}">
       <img class="lazy" src="{{ asset('bundles/adstacyapp/img/transparent.gif') }}"
@@ -49,11 +49,11 @@
       </a>
     {% endif %}
 
-    <a href="#Comment" class="btn btn-default btn-comment">
+    <a class="btn btn-default btn-comment">
       <i class="icon icon-envelope-alt"></i>
       <span>COMMENT</span>
     </a>
-    <a href="#Share" class="btn btn-default btn-share">
+    <a class="btn btn-default btn-share">
       <i class="icon icon-share"></i>
       <span>SHARE</span>
     </a>

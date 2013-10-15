@@ -101,30 +101,37 @@ a.mention {
   background-image: url(@loader-img);
 }
 
-@media screen and (max-width: 499px) {
+.item {
+  margin: 0 auto;
+  border: 1px solid @border-color;
+  .box-shadow(0 0 1px @border-color);
+  width: 100%;
+}
+
+@media (min-width: 481px) {
+  .item {
+    width: 450px;
+  }
+}
+
+@media (min-width: 600px) {
+  .item {
+    width: 100%;
+  }
+}
+
+@media (min-width: 720px) {
+  .item {
+    width: 450px;
+  }
+}
+
+@media (max-width: 480px) {
   #toTop {
     display: none !important;
   }
 
-  .panel {
-    border-radius: 0;
-  }
-
   .typeahead.dropdown-menu {
     min-width: 100%;
-  }
-
-  body {
-    margin-bottom: 200px;
-  }
-}
-
-
-@media screen and (min-width: 500px) {
-  .body-loader {
-    background: #dfdfdf url(@loader-img) no-repeat center fixed;
-  }
-  .body-content {
-    visibility: hidden;
   }
 }
