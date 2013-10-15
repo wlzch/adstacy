@@ -40,15 +40,17 @@
   {{ parent() }}
   <script type="text/javascript">
     $(function() {
-      $('.jscroll').jscroll();
-      // $('.jscroll').jscroll({
-      //   callback: function() {
-      //     var $ads = $('.jscroll-added:last .advert');
-      //     $('.jscroll-inner').append($ads);
-      //     $ads.find('img.lazy').lazyload();
-      //     $ads.ajaxlink('ads');
-      //   }
-      // });
+      var $siteAdverts = $('.site-adverts');
+      $('.jscroll').jscroll({
+        callback: function() {
+          var $ads = $('.jscroll-added:last .advert');
+          $ads.find('img.lazy').lazyload({
+            container: $siteAdverts,
+            effect: 'fadeIn'
+          });
+          $ads.ajaxlink('ads');
+        }
+      });
     });
   </script>
 {% endblock %}
