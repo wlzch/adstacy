@@ -72,7 +72,7 @@
       </script>
     {% endif %}
   </head>
-  <body class="body-loader">
+  <body class="body-loader{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %} logged-in {% endif %}">
     <div class="body-content">
       {% block body %}
         {% block header %}
