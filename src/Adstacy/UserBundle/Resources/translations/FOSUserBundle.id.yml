@@ -8,6 +8,7 @@ security:
         remember_me: Ingat saya
         submit: Login
         failed: "username/email atau password salah"
+        locked: "Akun Anda telah kami block. Silahkan kontak kami jika Anda tidak melanggar ketentuan kami."
 
 # Profile
 profile:

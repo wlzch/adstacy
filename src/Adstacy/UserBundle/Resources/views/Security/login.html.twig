@@ -25,7 +25,11 @@
 
     <form class="panel-body submit-disable" role="form" action="{{ path("fos_user_security_check") }}" method="post">
       {% if error %}
-        <div class="alert alert-danger">{{ "security.login.failed"|trans({}, 'FOSUserBundle') }}</div>
+        {% if error == 'User account is locked.' %}
+          <div class="alert alert-danger">{{ "security.login.locked"|trans({}, 'FOSUserBundle') }}</div>
+        {% else %}
+          <div class="alert alert-danger">{{ "security.login.failed"|trans({}, 'FOSUserBundle') }}</div>
+        {% endif %}
       {% endif %}
       <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
 

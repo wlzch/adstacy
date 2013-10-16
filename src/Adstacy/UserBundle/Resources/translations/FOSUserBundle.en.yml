@@ -21,6 +21,7 @@ security:
         remember_me: Remember me
         submit: Login
         failed: "Invalid username/email or password"
+        locked: "Your account is locked. Please contact us if you don't think you are violating our terms."
 
 # Profile
 profile:
