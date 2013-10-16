@@ -60,4 +60,16 @@ class Formatter
         return $difference.' '.$periods[$j].' ago';
     }
 
+    /**
+     * Format php array to sql array
+     *
+     * @param array $arr
+     * 
+     * @return string sql array
+     */
+    static public function arrayToSql($arr = array())
+    {
+        $arrString = strtolower(implode("', '", $arr));
+        return "('$arrString')";
+    }
 }

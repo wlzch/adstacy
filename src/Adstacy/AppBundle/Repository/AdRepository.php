@@ -3,7 +3,9 @@
 namespace Adstacy\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\ResultSetMapping;
 use Adstacy\AppBundle\Entity\User;
+use Adstacy\AppBundle\Helper\Formatter;
 
 /**
  * AdRepository
@@ -22,27 +24,73 @@ class AdRepository extends EntityRepository
      *
      * @return array
      */
-    public function findAdsSinceId($since, $limit = 30)
+    public function findAdsSinceId($since, $limit = 10)
     {
+        if ($since == null) {
+            $since = 2000000000; // if no id, set it to a very high id
+        }
         $em = $this->getEntityManager();
-        $builder = $em->createQueryBuilder()
-            ->select(array(
-              'p',
-              'partial u.{id,username,imagename,realName,profilePicture}'
-            ))
-            ->from('AdstacyAppBundle:Ad', 'p')
-            ->innerJoin('p.user', 'u')
-            ->andWhere('p.active = TRUE')
-            ->setMaxResults($limit)
-            ->orderBy('p.id', 'DESC')
-        ;
-        if ($since) {
-            $builder->andWhere('p.id < :id')
-                ->setParameter('id', $since)
-            ;
+        $idsQuery = $em->createQuery("
+            SELECT a
+            FROM AdstacyAppBundle:Ad a
+            WHERE a.id < :id
+        ");
+        $idsQuery->setMaxResults($limit)->setParameter('id', $since);
+        $ids = array();
+        foreach ($idsQuery->getResult() as $ad) {
+            $ids[] = $ad->getId();
         }
 
-        return $builder->getQuery()->getResult();
+        $rsm = new ResultSetMapping();
+        $rsm->addEntityResult('Adstacy\AppBundle\Entity\Ad', 'a');
+        $rsm->addFieldResult('a', 'id', 'id');
+        $rsm->addFieldResult('a', 'type', 'type');
+        $rsm->addFieldResult('a', 'imagename', 'imagename');
+        $rsm->addFieldResult('a', 'title', 'title');
+        $rsm->addFieldResult('a', 'youtubeId', 'youtubeId');
+        $rsm->addFieldResult('a', 'description', 'description');
+        $rsm->addFieldResult('a', 'tags', 'tags');
+        $rsm->addFieldResult('a', 'thumb_height', 'thumbHeight');
+        $rsm->addFieldResult('a', 'image_width', 'imageWidth');
+        $rsm->addFieldResult('a', 'image_height', 'imageHeight');
+        $rsm->addFieldResult('a', 'promotees_count', 'promoteesCount');
+        $rsm->addFieldResult('a', 'active', 'active');
+        $rsm->addFieldResult('a', 'created', 'created');
+        $rsm->addFieldResult('a', 'updated', 'updated');
+        $rsm->addJoinedEntityResult('Adstacy\AppBundle\Entity\User', 'u', 'a', 'user');
+        $rsm->addFieldResult('u', 'u_id', 'id');
+        $rsm->addFieldResult('u', 'u_username', 'username');
+        $rsm->addFieldResult('u', 'u_imagename', 'imagename');
+        $rsm->addFieldResult('u', 'u_real_name', 'realName');
+        $rsm->addFieldResult('u', 'u_profile_picture', 'profilePicture');
+        $rsm->addJoinedEntityResult('Adstacy\AppBundle\Entity\Comment', 'c', 'a', 'comments');
+        $rsm->addFieldResult('c', 'c_id', 'id');
+        $rsm->addFieldResult('c', 'c_content', 'content');
+        $rsm->addFieldResult('c', 'c_created', 'created');
+
+        if (count($ids) <= 0) {
+            return array();
+        }
+        $ids = Formatter::arrayToSql($ids);
+        $query = $em->createNativeQuery("
+            SELECT a.*,
+                u.id as u_id, u.username as u_username, u.imagename as u_imagename, u.real_name as u_real_name,
+                u.profile_picture as u_profile_picture,
+                c.id as c_id, c.content as c_content, c.created as c_created
+            FROM ad a
+            INNER JOIN users u ON u.id = a.user_id
+            LEFT JOIN (
+                SELECT c.*
+                FROM ad_comment c
+                ORDER BY c.created DESC
+                LIMIT 2
+            ) c ON c.ad_id = a.id
+            WHERE a.id IN $ids
+            ORDER BY a.id DESC
+        ", $rsm);
+        $ads = $query->getResult();
+
+        return $ads;
     }
 
     /**
