@@ -14,11 +14,6 @@ class AdAdmin extends Admin
     {
         $formMapper
             ->add('description', 'textarea')
-            ->add('content', 'textarea', array(
-                'attr' => array(
-                    'class' => 'tinymce'
-                )
-            ))
         ;
     }
 
