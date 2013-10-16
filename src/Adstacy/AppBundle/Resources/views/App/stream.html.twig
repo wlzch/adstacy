@@ -32,12 +32,13 @@
       <a href="{{ path('adstacy_app_explore') }}" class="btn btn-success btn-block">{{ "continue_to_explore"|trans }}</a>
     </div>
   {% else %}
-    {% for ad in paginator.getCurrentPageResults %}
+    {% set id = null %}
+    {% for ad in ads %}
+      {% set id = ad.id %}
       {% include 'AdstacyAppBundle:Ad:ad.html.twig' with {ad: ad, promotedBy: true} %}
     {% endfor %}
-    {% if paginator.hasNextPage %}
-      {% set params = app.request.query.all|merge({page: paginator.getNextPage}) %}
-      <a href="{{ path('adstacy_app_stream', params )}}" class="btn btn-default btn-lg btn-block load-next next-page">{{"more"|trans}}</a>
+    {% if ads|length >= max_ads_per_page %}
+      <a href="{{ path('adstacy_app_stream', {id: id})}}" class="btn btn-default btn-lg btn-block load-next next-page">{{"more"|trans}}</a>
     {% endif %}
   {% endif %}
 {% endblock %}

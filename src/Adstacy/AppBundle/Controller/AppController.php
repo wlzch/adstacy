@@ -47,10 +47,10 @@ class AppController extends Controller
     public function streamAction()
     {
         $user = $this->getUser();
-        $query = $this->getRepository('AdstacyAppBundle:Ad')->findUserStreamQuery($user);
+        $id = $this->getRequest()->query->get('id');
         $limit = $this->getParameter('max_ads_per_page');
+        $ads = $this->getRepository('AdstacyAppBundle:Ad')->findUserStream($user, $id, $limit);
 
-        $paginator = $this->getDoctrinePaginator($query, $limit);
         $suggestionsPaginator = array();
         if ($user->getFollowingsCount() <= 0) {
             $suggestQuery = $this->getRepository('AdstacyAppBundle:User')->suggestUserQuery($user);
@@ -58,7 +58,7 @@ class AppController extends Controller
         }
 
         return $this->render('AdstacyAppBundle:App:stream.html.twig', array(
-            'paginator' => $paginator,
+            'ads' => $ads,
             'suggestionsPaginator' => $suggestionsPaginator,
             'user' => $user
         ));

@@ -149,26 +149,46 @@ class AdRepository extends EntityRepository
      * Find user's stream Query
      *
      * @param User $user
+     * @param integer since id
      *
      * @return Query
      */
-    public function findUserStreamQuery(User $user)
+    public function findUserStream(User $user, $since = null, $limit = 10)
     {
         $em = $this->getEntityManager();
-        $query = $em->createQuery('
-            SELECT a,
-            partial u.{id,username,imagename,realName,profilePicture}
+        if ($since == null) {
+            $since = 2000000000;
+        }
+        $filterQuery = $em->createQuery('
+            SELECT partial a.{id}
             FROM AdstacyAppBundle:Ad a
             JOIN a.user u
-            JOIN u.followers fe
+            JOIN u.followers f
             LEFT JOIN a.promotees ap
             LEFT JOIN ap.user apu
-            WHERE u.id = :id OR fe.id = :id OR apu.id = :id AND a.active = TRUE
-            ORDER BY a.created DESC
+            WHERE a.id < :since AND (u.id = :id OR f.id = :id OR apu.id = :id AND a.active = TRUE)
+            ORDER BY a.id DESC
         ');
+        $filterQuery->setParameter('id', $user->getId())->setParameter('since', $since)->setMaxResults($limit);
+        $ids = array();
+        foreach ($filterQuery->getArrayResult() as $ad) {
+            $ids[] = $ad['id'];
+        }
+        $rsm = $this->getNativeSqlMapping();
+        $selectSql = $this->getAdSelectSql();
+        $filterSql = $this->getCommentFilterSql();
+        $ids = Formatter::arrayToSql($ids);
+        $query = $em->createNativeQuery("
+            $selectSql
+            FROM ad a
+            INNER JOIN users u ON a.user_id = u.id 
+            LEFT JOIN ad_comment c ON c.ad_id = a.id
+            WHERE a.id IN $ids AND ($filterSql)
+            ORDER BY a.id DESC
+        ", $rsm);
         $query->useResultCache(true, 1800, 'AdFindUserStreamQuery');
 
-        return $query->setParameter('id', $user->getId());
+        return $query->setParameter('id', $user->getId())->getResult();
     }
 
     public function findTrendingPromotes($limit = 50)
