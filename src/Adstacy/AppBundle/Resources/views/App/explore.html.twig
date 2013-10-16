@@ -3,7 +3,7 @@
 {% block title %}Explore Latest Ads | Adstacy{% endblock %}
 
 {% block content %}
-  <div class="jscroll">
+  <div class="site-body jscroll">
     {{ block('ajax_content') }}
   </div>
 {% endblock %}
@@ -17,6 +17,27 @@
   {% if ads|length >= max_ads_per_page %}
     <a href="{{ path('adstacy_app_explore', {'id': id}) }}" class="btn btn-default btn-lg btn-block load-next next-page">{{ "more"|trans }}</a>
   {% endif %}
+{% endblock %}
+
+{% block sidebar %}
+  <div class="site-sidebar">
+    <div class="site-aside">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo, quo, ipsam,
+        temporibus, nulla voluptate vero numquam porro necessitatibus libero molestias
+        natus alias repellat aliquid neque asperiores vitae beatae voluptates nobis
+        excepturi aut labore quia fugiat eaque corrupti rem velit deserunt.
+      </p>
+    </div>
+    <div class="site-aside">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo, quo, ipsam,
+        temporibus, nulla voluptate vero numquam porro necessitatibus libero molestias
+        natus alias repellat aliquid neque asperiores vitae beatae voluptates nobis
+        excepturi aut labore quia fugiat eaque corrupti rem velit deserunt.
+      </p>
+    </div>
+  </div>
 {% endblock %}
 
 {% block javascripts %}

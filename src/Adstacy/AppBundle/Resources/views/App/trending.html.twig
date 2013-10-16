@@ -3,11 +3,34 @@
 {% block title %}Trending ads | Adstacy{% endblock %}
 
 {% block content %}
-  {{ block('ajax_content') }}
+  <div class="site-body">
+    {{ block('ajax_content') }}
+  </div>
 {% endblock %}
 
 {% block ajax_content %}
   {% for ad in ads %}
     {% include 'AdstacyAppBundle:Ad:ad.html.twig' with {ad: ad} %}
   {% endfor %}
+{% endblock %}
+
+{% block sidebar %}
+  <div class="site-sidebar">
+    <div class="site-aside">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo, quo, ipsam,
+        temporibus, nulla voluptate vero numquam porro necessitatibus libero molestias
+        natus alias repellat aliquid neque asperiores vitae beatae voluptates nobis
+        excepturi aut labore quia fugiat eaque corrupti rem velit deserunt.
+      </p>
+    </div>
+    <div class="site-aside">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo, quo, ipsam,
+        temporibus, nulla voluptate vero numquam porro necessitatibus libero molestias
+        natus alias repellat aliquid neque asperiores vitae beatae voluptates nobis
+        excepturi aut labore quia fugiat eaque corrupti rem velit deserunt.
+      </p>
+    </div>
+  </div>
 {% endblock %}

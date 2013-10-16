@@ -3,16 +3,18 @@
 {% block title %}Your Ads Stream | Adstacy{% endblock %}
 
 {% block content %}
-  {% if user.followingsCount <= 0 %}
-    <div class="page-title jumbotron text-center">
-      <h1>User to follows</h1>
-    </div>
-    {{ block('ajax_content') }}
-  {% else %}
-    <div class="jscroll">
+  <div class="site-body">
+    {% if user.followingsCount <= 0 %}
+      <div class="page-title jumbotron text-center">
+        <h1>User to follows</h1>
+      </div>
       {{ block('ajax_content') }}
-    </div>
-  {% endif %}
+    {% else %}
+      <div class="jscroll">
+        {{ block('ajax_content') }}
+      </div>
+    {% endif %}
+  </div>
 {% endblock %}
 
 {% block ajax_content %}
@@ -34,6 +36,27 @@
       <a href="{{ path('adstacy_app_stream', params )}}" class="btn btn-default btn-lg btn-block load-next next-page">{{"more"|trans}}</a>
     {% endif %}
   {% endif %}
+{% endblock %}
+
+{% block sidebar %}
+  <div class="site-sidebar">
+    <div class="site-aside">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo, quo, ipsam,
+        temporibus, nulla voluptate vero numquam porro necessitatibus libero molestias
+        natus alias repellat aliquid neque asperiores vitae beatae voluptates nobis
+        excepturi aut labore quia fugiat eaque corrupti rem velit deserunt.
+      </p>
+    </div>
+    <div class="site-aside">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo, quo, ipsam,
+        temporibus, nulla voluptate vero numquam porro necessitatibus libero molestias
+        natus alias repellat aliquid neque asperiores vitae beatae voluptates nobis
+        excepturi aut labore quia fugiat eaque corrupti rem velit deserunt.
+      </p>
+    </div>
+  </div>
 {% endblock %}
 
 {% block javascripts %}
