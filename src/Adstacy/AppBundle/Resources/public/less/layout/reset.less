@@ -1,37 +1,35 @@
 @import "../variables.less";
 
-#reset-password {
-  width: 500px;
-  margin: 150px auto;
-}
-
 #reset-verification {
-  width: 750px;
-  margin: 100px auto;
-
-  .control-label, .control-widget {
-    float: left;
-    padding-left: 15px;
-    padding-right: 15px;
+  .form-group,
+  .form-widget,
+  .form-text {
+    overflow: hidden;
+    zoom: 1;
   }
 
-  .control-label {
-    width: 174px;
+  .form-group {
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+
+    > .pull-left {
+      text-align: right;
+      width: 150px;
+      line-height: 34px;
+      margin: 0 15px 0 0;
+    }
   }
 
-  .control-widget {
-    width: 574px;
+  .form-text {
+    line-height: 34px;
   }
 
-  .offset-control-label {
-    margin-left: 174px;
+  .offset-label {
+    margin-left: 165px;
   }
-}
 
-@media screen and (max-width: @screen-tablet) {
-  #reset-password, #reset-verification {
-    width: 100%;
-    margin-top: 20px;
-    margin-bottom: 20px;
+  textarea.form-control {
+    resize: vertical;
   }
 }

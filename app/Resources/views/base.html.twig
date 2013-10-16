@@ -121,22 +121,19 @@
         </div>
 
         <div class="site-content">
-          <div id="site-content-inner" class="site-content-inner">
-
+          <div class="site-content-inner clearfix">
             {% set allFlashes = {success: app.session.flashbag.get('success')} %}
             {% set allFlashes = allFlashes|merge({warning: app.session.flashbag.get('warning')}) %}
             {% set allFlashes = allFlashes|merge({error: app.session.flashbag.get('error')}) %}
             {% if allFlashes|length > 0 %}
-              <div>
-                {% for key,flashes in allFlashes %}
-                  {% for flash in flashes %}
-                    <div class="alert alert-{{ key }}">{{ flash }}</div>
-                  {% endfor %}
+              {% for key,flashes in allFlashes %}
+                {% for flash in flashes %}
+                  <div class="alert alert-{{ key }}">{{ flash }}</div>
                 {% endfor %}
-              </div>
+              {% endfor %}
             {% endif %}
 
-            <div class="site-adverts">
+            <div class="site-body">
               {% block content %}{% endblock %}
             </div>
 

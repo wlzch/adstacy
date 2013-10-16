@@ -15,8 +15,8 @@
 
 {% block form_row %}
   <div class="form-group">
-    {{ form_label(form, label, {label_attr: {class: 'control-label'} }) }}
-    <div class="control-widget">
+    {{ form_label(form, label, {label_attr: {class: 'pull-left'} }) }}
+    <div class="form-widget">
       {{ form_widget(form, {attr: {class: 'form-control'} }) }}
     </div>
   </div>
@@ -25,16 +25,16 @@
 {% block content %}
 {% trans_default_domain 'FOSUserBundle' %}
 
-<div id="reset-verification" class="panel panel-default">
+<div id="reset-verification" class="item panel panel-default">
   <div class="panel-heading">
     <h1>Reset Verification</h1>
   </div>
 
-  <form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset form-horizontal panel-body">
+  <form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset panel-body">
     {{ form_errors(form) }}
     {{ form_row(form.plainPassword) }}
     <div class="form-group">
-      <div class="control-widget offset-control-label">
+      <div class="form-widget offset-label">
         <input class="btn btn-primary" type="submit" value="{{ 'resetting.reset.submit'|trans }}">
       </div>
     </div>

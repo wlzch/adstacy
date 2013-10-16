@@ -1,41 +1,35 @@
 @import "../variables.less";
 
 #settings {
+  .form-group,
+  .form-widget,
+  .form-text {
+    overflow: hidden;
+    zoom: 1;
+  }
+
   .form-group {
-    margin-left: 0;
-    margin-right: 0;
-
-    .control-label {
-      color: #555;
-      float: left;
-      font-size: 13px;
-      margin-right: 40px;
-      width: 180px;
+    &:last-of-type {
+      margin-bottom: 0;
     }
 
-    .form-widget {
-      float: left;
-      width: 480px;
+    > .pull-left {
+      text-align: right;
+      width: 150px;
+      line-height: 34px;
+      margin: 0 15px 0 0;
     }
+  }
 
-    .form-widget-a,
-    .form-widget-p {
-      display: block;
-      height: 34px;
-      padding: 6px 2px;
-    }
+  .form-text {
+    line-height: 34px;
+  }
+
+  .offset-label {
+    margin-left: 165px;
   }
 
   textarea.form-control {
     resize: vertical;
-  }
-}
-
-@media screen and (max-width: @screen-tablet) {
-  #settings {
-    width: 100%;
-  }
-  #settings .form-group .form-widget {
-    width: 100%;
   }
 }

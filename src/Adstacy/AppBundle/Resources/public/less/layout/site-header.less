@@ -88,9 +88,8 @@ body {
   .transition(margin-left ease .5s);
 }
 
-.site-adverts {
-  width: 100%;
-  padding: 30px 15px;
+.site-content-inner {
+  margin: 30px auto;
 }
 
 .site-container {
@@ -103,12 +102,14 @@ body {
   margin: 0 auto;
 }
 
+.site-body {
+  margin: 0 15px;
+}
+
 .site-sidebar {
   display: none;
-  position: absolute;
-  top: 30px;
-  right: 15px;
-  width: 225px;
+  float: left;
+  width: 240px;
 }
 
 .site-aside {
@@ -150,10 +151,6 @@ body {
 }
 
 @media (min-width: 600px) {
-  .navbar-brand {
-    width: 240px;
-  }
-
   #search-form {
     margin-left: 240px;
   }
@@ -185,12 +182,19 @@ body {
 }
 
 @media (min-width: 960px) {
-  .site-adverts {
-    margin-right: 240px;
+  // .site-adverts {
+  //   margin-right: 240px;
+  // }
+
+  .site-content-inner {
+    width: 720px;
+  }
+
+  .site-body {
+    float: left;
   }
 
   .site-sidebar {
-    width: 225px;
     display: block;
   }
 }
