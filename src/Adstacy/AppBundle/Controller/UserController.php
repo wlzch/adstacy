@@ -22,7 +22,6 @@ class UserController extends Controller
         $params = $this->getParams($username);
         $params['tab'] = 'ads';
         $limit = $this->getParameter('max_ads_per_page');
-        if ($this->isMobile()) $limit = $limit / 2;
 
         $query = $this->getRepository('AdstacyAppBundle:Ad')->findByUserQuery($params['user']);
         $params['paginator'] = $this->getDoctrinePaginator($query, $limit);
@@ -36,7 +35,6 @@ class UserController extends Controller
         $params = $this->getParams($username);
         $params['tab'] = 'promotes';
         $limit = $this->getParameter('max_ads_per_page');
-        if ($this->isMobile()) $limit = $limit / 2;
 
         $query = $this->getRepository('AdstacyAppBundle:Ad')->findByPromoteQuery($params['user']);
         $params['paginator'] = $this->getDoctrinePaginator($query, $limit);
@@ -55,7 +53,6 @@ class UserController extends Controller
         $params = $this->getParams($username);
         $params['tab'] = 'followers';
         $limit = $this->getParameter('max_users_per_page');
-        if ($this->isMobile()) $limit = $limit / 2;
 
         $query = $this->getRepository('AdstacyAppBundle:User')->findFollowersByUserQuery($params['user']);
         $params['paginator'] = $this->getDoctrinePaginator($query, $limit);
@@ -74,7 +71,6 @@ class UserController extends Controller
         $params = $this->getParams($username);
         $params['tab'] = 'followings';
         $limit = $this->getParameter('max_users_per_page');
-        if ($this->isMobile()) $limit = $limit / 2;
 
         $query = $this->getRepository('AdstacyAppBundle:User')->findFollowingsByUserQuery($params['user']);
         $params['paginator'] = $this->getDoctrinePaginator($query, $limit);

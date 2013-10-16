@@ -32,7 +32,6 @@ class AppController extends Controller
     {
         $request = $this->getRequest();
         $limit = $this->getParameter('max_ads_per_page');
-        if ($this->isMobile()) $limit = $limit / 2;
         $ads = $this->getRepository('AdstacyAppBundle:Ad')->findAdsSinceId($request->query->get('id'), $limit);
 
         return $this->render('AdstacyAppBundle:App:explore.html.twig', array(
@@ -50,7 +49,6 @@ class AppController extends Controller
         $user = $this->getUser();
         $query = $this->getRepository('AdstacyAppBundle:Ad')->findUserStreamQuery($user);
         $limit = $this->getParameter('max_ads_per_page');
-        if ($this->isMobile()) $limit = $limit / 2;
 
         $paginator = $this->getDoctrinePaginator($query, $limit);
         $suggestionsPaginator = array();

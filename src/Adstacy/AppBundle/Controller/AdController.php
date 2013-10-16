@@ -165,7 +165,6 @@ class AdController extends Controller
         }
 
         $limit = $this->getParameter('max_users_per_page');
-        if ($this->isMobile()) $limit = $limit / 2;
         $query = $this->getRepository('AdstacyAppBundle:User')->findPromotesByAd($ad);
         $paginator = $this->getDoctrinePaginator($query, $limit);
 
