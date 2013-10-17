@@ -42,25 +42,7 @@ class AdRepository extends EntityRepository
             $ids[] = $ad->getId();
         }
 
-        $rsm = $this->getNativeSqlMapping();
-
-        if (count($ids) <= 0) {
-            return array();
-        }
-        $ids = Formatter::arrayToSql($ids);
-        $selectSql = $this->getAdSelectSql();
-        $filterSql = $this->getCommentFilterSql();
-        $query = $em->createNativeQuery("
-            $selectSql
-            FROM ad a
-            INNER JOIN users u ON u.id = a.user_id
-            LEFT JOIN ad_comment c ON c.ad_id = a.id
-            WHERE a.id IN $ids AND ($filterSql)
-            ORDER BY a.id DESC
-        ", $rsm);
-        $ads = $query->getResult();
-
-        return $ads;
+        return $this->getAdsAndCommentsIn($ids);
     }
 
     /**
@@ -91,23 +73,8 @@ class AdRepository extends EntityRepository
         foreach ($filterQuery->setParameter('since', $since)->setParameter('id', $user->getId())->getArrayResult() as $ad) {
             $ids[] = $ad['id'];
         }
-        if (count($ids) <= 0) {
-            return array();
-        }
-        $rsm = $this->getNativeSqlMapping();
-        $selectSql = $this->getAdSelectSql();
-        $filterSql = $this->getCommentFilterSql();
-        $ids = Formatter::arrayToSql($ids);
-        $query = $em->createNativeQuery("
-            $selectSql
-            FROM ad a
-            INNER JOIN users u ON a.user_id = u.id 
-            LEFT JOIN ad_comment c ON c.ad_id = a.id
-            WHERE a.id IN $ids AND ($filterSql)
-            ORDER BY a.id DESC
-        ", $rsm);
 
-        return $query->getResult();
+        return $this->getAdsAndCommentsIn($ids);
     }
 
     /**
@@ -158,23 +125,8 @@ class AdRepository extends EntityRepository
         foreach ($filterQuery->setParameter('since', $since)->setParameter('id', $user->getId())->getArrayResult() as $ad) {
             $ids[] = $ad['id'];
         }
-        if (count($ids) <= 0) {
-            return array();
-        }
-        $rsm = $this->getNativeSqlMapping();
-        $selectSql = $this->getAdSelectSql();
-        $filterSql = $this->getCommentFilterSql();
-        $ids = Formatter::arrayToSql($ids);
-        $query = $em->createNativeQuery("
-            $selectSql
-            FROM ad a
-            INNER JOIN users u ON a.user_id = u.id 
-            LEFT JOIN ad_comment c ON c.ad_id = a.id
-            WHERE a.id IN $ids AND ($filterSql)
-            ORDER BY a.id DESC
-        ", $rsm);
 
-        return $query->getResult();
+        return $this->getAdsAndCommentsIn($ids);
     }
 
     /**
@@ -206,21 +158,8 @@ class AdRepository extends EntityRepository
         foreach ($filterQuery->getArrayResult() as $ad) {
             $ids[] = $ad['id'];
         }
-        $rsm = $this->getNativeSqlMapping();
-        $selectSql = $this->getAdSelectSql();
-        $filterSql = $this->getCommentFilterSql();
-        $ids = Formatter::arrayToSql($ids);
-        $query = $em->createNativeQuery("
-            $selectSql
-            FROM ad a
-            INNER JOIN users u ON a.user_id = u.id 
-            LEFT JOIN ad_comment c ON c.ad_id = a.id
-            WHERE a.id IN $ids AND ($filterSql)
-            ORDER BY a.id DESC
-        ", $rsm);
-        $query->useResultCache(true, 1800, 'AdFindUserStreamQuery');
 
-        return $query->setParameter('id', $user->getId())->getResult();
+        return $this->getAdsAndCommentsIn($ids);
     }
 
     public function findTrendingPromotes($limit = 50)
@@ -322,5 +261,34 @@ class AdRepository extends EntityRepository
                )
             )
         ';
+    }
+
+    /**
+     * Get ads with 2 comments which have id in $ids
+     *
+     * @param array $ids
+     *
+     * @return array
+     */
+    private function getAdsAndCommentsIn($ids = array())
+    {
+        if (count($ids) <= 0) {
+            return array();
+        }
+        $em = $this->getEntityManager();
+        $rsm = $this->getNativeSqlMapping();
+        $selectSql = $this->getAdSelectSql();
+        $filterSql = $this->getCommentFilterSql();
+        $ids = Formatter::arrayToSql($ids);
+        $query = $em->createNativeQuery("
+            $selectSql
+            FROM ad a
+            INNER JOIN users u ON a.user_id = u.id 
+            LEFT JOIN ad_comment c ON c.ad_id = a.id
+            WHERE a.id IN $ids AND ($filterSql)
+            ORDER BY a.id DESC
+        ", $rsm);
+
+        return $query->getResult();
     }
 }
