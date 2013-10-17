@@ -170,7 +170,7 @@ class ApiController extends Controller
                 'url_followers' => $this->generateUrl('adstacy_app_api_user_followers', array('username' => $username)),
                 'url_followings' => $this->generateUrl('adstacy_app_api_user_followings', array('username' => $username)),
                 'url_promotes' => $this->generateUrl('adstacy_app_api_user_promotes', array('username' => $username)),
-                'next_ads' => $this->generateUrl('adstacy_app_api_user_ads', array('username' => $username))
+                'next' => $this->generateUrl('adstacy_app_api_user_ads', array('username' => $username))
             )
         );
 
@@ -201,7 +201,7 @@ class ApiController extends Controller
                 'ads' => $ads
             ),
             'meta' => array(
-                'next_ads' => $this->generateUrl('adstacy_app_api_user_ads', array('username' => $username, 'id' => $lastId))
+                'next' => $this->generateUrl('adstacy_app_api_user_ads', array('username' => $username, 'id' => $lastId))
             )
         );
         $serializer = $this->get('serializer');
@@ -233,7 +233,7 @@ class ApiController extends Controller
                 'ads' => $ads
             ),
             'meta' => array(
-                'next_ads' => $this->generateUrl('adstacy_app_api_user_promotes', array('username' => $username, 'id' => $lastId))
+                'next' => $this->generateUrl('adstacy_app_api_user_promotes', array('username' => $username, 'id' => $lastId))
             )
         );
         $serializer = $this->get('serializer');
