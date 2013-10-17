@@ -3,6 +3,7 @@
 namespace Adstacy\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Adstacy\AppBundle\Entity\User;
 use Adstacy\AppBundle\Helper\Formatter;
@@ -26,23 +27,15 @@ class AdRepository extends EntityRepository
      */
     public function findAdsSinceId($since, $limit = 10)
     {
-        if ($since == null) {
-            $since = 2000000000; // if no id, set it to a very high id
-        }
         $em = $this->getEntityManager();
-        $idsQuery = $em->createQuery("
-            SELECT a
+        $query = $em->createQuery('
+            SELECT partial a.{id}
             FROM AdstacyAppBundle:Ad a
-            WHERE a.id < :id
+            WHERE a.id < :since
             ORDER BY a.id DESC
-        ");
-        $idsQuery->setMaxResults($limit)->setParameter('id', $since);
-        $ids = array();
-        foreach ($idsQuery->getResult() as $ad) {
-            $ids[] = $ad->getId();
-        }
+        ');
 
-        return $this->getAdsAndCommentsIn($ids);
+        return $this->getAdsAndCommentsIn($query, $since, $limit);
     }
 
     /**
@@ -56,11 +49,8 @@ class AdRepository extends EntityRepository
      */
     public function findByPromote(User $user, $since = null, $limit = 10)
     {
-        if ($since == null) {
-            $since = 2000000000;
-        }
         $em = $this->getEntityManager();
-        $filterQuery = $em->createQuery('
+        $query = $em->createQuery('
             SELECT partial a.{id}
             FROM AdstacyAppBundle:Ad a
             JOIN a.user u
@@ -69,12 +59,8 @@ class AdRepository extends EntityRepository
             WHERE a.id < :since AND pu.id = :id AND a.active = TRUE
             ORDER BY a.id DESC
         ');
-        $ids = array();
-        foreach ($filterQuery->setParameter('since', $since)->setParameter('id', $user->getId())->getArrayResult() as $ad) {
-            $ids[] = $ad['id'];
-        }
 
-        return $this->getAdsAndCommentsIn($ids);
+        return $this->getAdsAndCommentsIn($query->setParameter('id', $user->getId()), $since, $limit);
     }
 
     /**
@@ -108,25 +94,18 @@ class AdRepository extends EntityRepository
      *
      * @return array
      */
-    public function findByUser(User $user, $since = null, $limit = 20)
+    public function findByUser(User $user, $since = null, $limit = 10)
     {
-        if ($since == null) {
-            $since = 2000000000;
-        }
         $em = $this->getEntityManager();
-        $filterQuery = $em->createQuery('
+        $query = $em->createQuery('
             SELECT partial a.{id}
             FROM AdstacyAppBundle:Ad a
             JOIN a.user u
             WHERE a.id < :since AND u.id = :id AND a.active = TRUE
             ORDER BY a.id DESC
         ');
-        $ids = array();
-        foreach ($filterQuery->setParameter('since', $since)->setParameter('id', $user->getId())->getArrayResult() as $ad) {
-            $ids[] = $ad['id'];
-        }
 
-        return $this->getAdsAndCommentsIn($ids);
+        return $this->getAdsAndCommentsIn($query->setParameter('id', $user->getId()), $since, $limit);
     }
 
     /**
@@ -140,10 +119,7 @@ class AdRepository extends EntityRepository
     public function findUserStream(User $user, $since = null, $limit = 10)
     {
         $em = $this->getEntityManager();
-        if ($since == null) {
-            $since = 2000000000;
-        }
-        $filterQuery = $em->createQuery('
+        $query = $em->createQuery('
             SELECT partial a.{id}
             FROM AdstacyAppBundle:Ad a
             JOIN a.user u
@@ -153,13 +129,8 @@ class AdRepository extends EntityRepository
             WHERE a.id < :since AND (u.id = :id OR f.id = :id OR apu.id = :id AND a.active = TRUE)
             ORDER BY a.id DESC
         ');
-        $filterQuery->setParameter('id', $user->getId())->setParameter('since', $since)->setMaxResults($limit);
-        $ids = array();
-        foreach ($filterQuery->getArrayResult() as $ad) {
-            $ids[] = $ad['id'];
-        }
 
-        return $this->getAdsAndCommentsIn($ids);
+        return $this->getAdsAndCommentsIn($query->setParameter('id', $user->getId()), $since, $limit);
     }
 
     public function findTrendingPromotes($limit = 50)
@@ -266,12 +237,23 @@ class AdRepository extends EntityRepository
     /**
      * Get ads with 2 comments which have id in $ids
      *
-     * @param array $ids
+     * @param Query $filterQuery
+     * @param integer $since
+     * @param integer $limit
      *
      * @return array
      */
-    private function getAdsAndCommentsIn($ids = array())
+    private function getAdsAndCommentsIn(Query $filterQuery, $since = null, $limit = 10)
     {
+        $em = $this->getEntityManager();
+        if ($since == null) {
+            $since = 2000000000; // set to a very high last id if not present
+        }
+        $filterQuery->setParameter('since', $since)->setMaxResults($limit);
+        $ids = array();
+        foreach ($filterQuery->getArrayResult() as $ad) {
+            $ids[] = $ad['id'];
+        }
         if (count($ids) <= 0) {
             return array();
         }
