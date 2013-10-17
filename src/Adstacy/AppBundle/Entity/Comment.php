@@ -4,10 +4,12 @@ namespace Adstacy\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity(repositoryClass="Adstacy\AppBundle\Repository\CommentRepository")
  * @ORM\Table(name="ad_comment")
+ * @JMS\ExclusionPolicy("none")
  */
 class Comment
 {
@@ -15,6 +17,7 @@ class Comment
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @JMS\Groups({"ad_list"})
      */
     private $id;
 
@@ -25,22 +28,26 @@ class Comment
      *  maxMessage = "comment.content.max"
      * )
      * @ORM\Column(type="text", length=255)
+     * @JMS\Groups({"ad_list"})
      */
     private $content;
 
     /**
      * @ORM\Column(type="datetime")
+     * @JMS\Groups({"ad_list"})
      */
     private $created;
 
     /**
      * @ORM\ManyToOne(targetEntity="User")
+     * @JMS\Groups({"ad_list"})
      */
     private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="Ad", inversedBy="comments")
      * @ORM\JoinColumn(onDelete="CASCADE")
+     * @JMS\Exclude
      */
     private $ad;
 

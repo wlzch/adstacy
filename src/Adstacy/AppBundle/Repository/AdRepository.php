@@ -108,41 +108,49 @@ class AdRepository extends EntityRepository
 
         return $query->setParameter('id', $user->getId());
     }
-
     /**
-     * Find $limit ads by $user
+     * Find $limit ads by $user since last id $since
      *
      * @param User $user
-     * @param integer limit
-     *
-     * @return Query
-     */
-    public function findByUserQuery(User $user, $limit = 20)
-    {
-        $em = $this->getEntityManager();
-        $query = $em->createQuery('
-            SELECT a
-            FROM AdstacyAppBundle:Ad a
-            JOIN a.user u
-            WHERE u.id = :id AND a.active = TRUE
-            ORDER BY a.created DESC
-        ');
-        $query->setMaxResults($limit);
-
-        return $query->setParameter('id', $user->getId());
-    }
-
-    /**
-     * Find $limit ads by $user
-     *
-     * @param User $user
+     * @param integer $since
      * @param integer limit
      *
      * @return array
      */
-    public function findByUser(User $user, $limit = 20)
+    public function findByUser(User $user, $since = null, $limit = 20)
     {
-        return $this->findByUserQuery($user, $limit)->getResult();
+        if ($since == null) {
+            $since = 2000000000;
+        }
+        $em = $this->getEntityManager();
+        $filterQuery = $em->createQuery('
+            SELECT partial a.{id}
+            FROM AdstacyAppBundle:Ad a
+            JOIN a.user u
+            WHERE a.id < :since AND u.id = :id AND a.active = TRUE
+            ORDER BY a.id DESC
+        ');
+        $ids = array();
+        foreach ($filterQuery->setParameter('since', $since)->setParameter('id', $user->getId())->getArrayResult() as $ad) {
+            $ids[] = $ad['id'];
+        }
+        if (count($ids) <= 0) {
+            return array();
+        }
+        $rsm = $this->getNativeSqlMapping();
+        $selectSql = $this->getAdSelectSql();
+        $filterSql = $this->getCommentFilterSql();
+        $ids = Formatter::arrayToSql($ids);
+        $query = $em->createNativeQuery("
+            $selectSql
+            FROM ad a
+            INNER JOIN users u ON a.user_id = u.id 
+            LEFT JOIN ad_comment c ON c.ad_id = a.id
+            WHERE a.id IN $ids AND ($filterSql)
+            ORDER BY a.id DESC
+        ", $rsm);
+
+        return $query->getResult();
     }
 
     /**
