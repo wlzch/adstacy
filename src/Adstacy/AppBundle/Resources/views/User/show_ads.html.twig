@@ -1,7 +1,7 @@
 {% extends is_ajax() ? '::ajax.html.twig' : 'AdstacyAppBundle:User:show.html.twig' %}
 
 {% block show_content %}
-  {% if paginator.getCurrentPageResults|length > 0 %}
+  {% if ads|length > 0 %}
     <div class="masonry jscroll">
       {{ block('profile') }}
       {{ block('ajax_content') }}
@@ -26,11 +26,13 @@
 {% endblock %}
 
 {% block ajax_content %}
-  {% for ad in paginator.getCurrentPageResults %}
+  {% set id = null %}
+  {% for ad in ads %}
+    {% set id = ad.id %}
     {% include 'AdstacyAppBundle:Ad:ad.html.twig' with {ad: ad, user: user, promotedBy: true} %}
   {% endfor %}
-  {% if paginator.hasNextPage %}
-    {% set params = app.request.query.all|merge({username: user.username, page: paginator.getNextPage}) %}
+  {% if ads|length >= max_ads_per_page %}
+    {% set params = app.request.query.all|merge({username: user.username, id: id}) %}
     <a href="{{ path(route, params )}}" class="btn btn-lg btn-default btn-block load-next next-page">{{"more"|trans}}</a>
   {% endif %}
 {% endblock %}

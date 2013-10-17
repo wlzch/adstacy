@@ -23,8 +23,9 @@ class UserController extends Controller
         $params['tab'] = 'ads';
         $limit = $this->getParameter('max_ads_per_page');
 
-        $query = $this->getRepository('AdstacyAppBundle:Ad')->findByUserQuery($params['user']);
-        $params['paginator'] = $this->getDoctrinePaginator($query, $limit);
+        $id = $this->getRequest()->query->get('id');
+        $ads = $this->getRepository('AdstacyAppBundle:Ad')->findByUser($params['user'], $id, $limit);
+        $params['ads'] = $ads;
         $params['route'] = 'adstacy_app_user_ads';
 
         return $this->render('AdstacyAppBundle:User:show_ads.html.twig', $params);
