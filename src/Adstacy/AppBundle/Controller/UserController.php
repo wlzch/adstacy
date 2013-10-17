@@ -22,8 +22,8 @@ class UserController extends Controller
         $params = $this->getParams($username);
         $params['tab'] = 'ads';
         $limit = $this->getParameter('max_ads_per_page');
-
         $id = $this->getRequest()->query->get('id');
+
         $ads = $this->getRepository('AdstacyAppBundle:Ad')->findByUser($params['user'], $id, $limit);
         $params['ads'] = $ads;
         $params['route'] = 'adstacy_app_user_ads';
@@ -36,9 +36,10 @@ class UserController extends Controller
         $params = $this->getParams($username);
         $params['tab'] = 'promotes';
         $limit = $this->getParameter('max_ads_per_page');
+        $id = $this->getRequest()->query->get('id');
 
-        $query = $this->getRepository('AdstacyAppBundle:Ad')->findByPromoteQuery($params['user']);
-        $params['paginator'] = $this->getDoctrinePaginator($query, $limit);
+        $ads = $this->getRepository('AdstacyAppBundle:Ad')->findByPromote($params['user'], $id, $limit);
+        $params['ads'] = $ads;
         $params['route'] = 'adstacy_app_user_promotes';
 
         return $this->render('AdstacyAppBundle:User:show_ads.html.twig', $params);

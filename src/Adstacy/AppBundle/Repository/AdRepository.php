@@ -64,26 +64,50 @@ class AdRepository extends EntityRepository
     }
 
     /**
-     * Find all by $user query join promotees
+     * Find ads $user promoted
      *
      * @param User $user
+     * @param integer $since
+     * @param integer $limit
      *
-     * @return Query
+     * @return array
      */
-    public function findByPromoteQuery(User $user)
+    public function findByPromote(User $user, $since = null, $limit = 10)
     {
+        if ($since == null) {
+            $since = 2000000000;
+        }
         $em = $this->getEntityManager();
-        $query = $em->createQuery('
-            SELECT a,
-            partial u.{id,username,imagename,realName,profilePicture}
+        $filterQuery = $em->createQuery('
+            SELECT partial a.{id}
             FROM AdstacyAppBundle:Ad a
             JOIN a.user u
             LEFT JOIN a.promotees pa
             LEFT JOIN pa.user pu
-            WHERE pu.id = :id AND a.active = TRUE
+            WHERE a.id < :since AND pu.id = :id AND a.active = TRUE
+            ORDER BY a.id DESC
         ');
+        $ids = array();
+        foreach ($filterQuery->setParameter('since', $since)->setParameter('id', $user->getId())->getArrayResult() as $ad) {
+            $ids[] = $ad['id'];
+        }
+        if (count($ids) <= 0) {
+            return array();
+        }
+        $rsm = $this->getNativeSqlMapping();
+        $selectSql = $this->getAdSelectSql();
+        $filterSql = $this->getCommentFilterSql();
+        $ids = Formatter::arrayToSql($ids);
+        $query = $em->createNativeQuery("
+            $selectSql
+            FROM ad a
+            INNER JOIN users u ON a.user_id = u.id 
+            LEFT JOIN ad_comment c ON c.ad_id = a.id
+            WHERE a.id IN $ids AND ($filterSql)
+            ORDER BY a.id DESC
+        ", $rsm);
 
-        return $query->setParameter('id', $user->getId());
+        return $query->getResult();
     }
 
     /**
