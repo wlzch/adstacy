@@ -209,4 +209,36 @@ class ApiController extends Controller
         return new Response($serializer->serialize($res, 'json', SerializationContext::create()->setGroups(array('ad_list'))));
     }
 
+    /**
+     * Return promotes by $username
+     *
+     * @param string $username
+     */
+    public function listPromotesAction($username)
+    {
+        $request = $this->getRequest();
+        $id = $request->query->get('id');
+        if (($user = $this->getRepository('AdstacyAppBundle:User')->findOneByUsername($username)) == false) {
+            throw $this->createNotFoundException();
+        };
+        $limit = $this->getParameter('max_ads_per_page');
+        $ads = $this->getRepository('AdstacyAppBundle:Ad')->findByPromote($user, $id, $limit);
+        if (count($ads) <= 0) {
+            return new JsonResponse(array('data' => array()));
+        }
+        $lastId = $ads[count($ads) - 1]->getId();
+
+        $res = array(
+            'data' => array(
+                'ads' => $ads
+            ),
+            'meta' => array(
+                'next_ads' => $this->generateUrl('adstacy_app_api_user_promotes', array('username' => $username, 'id' => $lastId))
+            )
+        );
+        $serializer = $this->get('serializer');
+
+        return new Response($serializer->serialize($res, 'json', SerializationContext::create()->setGroups(array('ad_list'))));
+    }
+
 }
