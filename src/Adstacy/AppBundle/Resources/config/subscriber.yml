@@ -1,0 +1,6 @@
+services:
+    adstacy.subscriber.image_serializer:
+        class: Adstacy\AppBundle\EventSubscriber\ImageSerializerSubscriber
+        arguments: [@service_container]
+        tags:
+            - { name: jms_serializer.event_subscriber, event: serializer.post_serialize, method: onPostSerialize } 

@@ -9,11 +9,13 @@ use Symfony\Component\Validator\ExecutionContextInterface;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Imagine\Gd\Imagine;
 use Imagine\Filter\Advanced\RelativeResize;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity(repositoryClass="Adstacy\AppBundle\Repository\AdRepository")
  * @Assert\Callback(methods={"isAdValid"})
  * @Vich\Uploadable
+ * @JMS\ExclusionPolicy("none")
  */
 class Ad
 {
@@ -21,36 +23,43 @@ class Ad
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @JMS\Groups({"user_show"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=25, nullable=true)
+     * @JMS\Groups({"user_show"})
      */
     private $type;
 
     /**
      * @Vich\UploadableField(mapping="ad_image", fileNameProperty="imagename")
+     * @JMS\Exclude
      */
     private $image;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @JMS\Exclude
      */
     private $imagename;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
+     * @JMS\Groups({"user_show"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=25, nullable=true)
+     * @JMS\Groups({"user_show"})
      */
     private $youtubeId;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @JMS\Groups({"user_show"})
      */
     private $description;
 
@@ -60,52 +69,62 @@ class Ad
      *  minMessage= "ad.tags.min_count"
      * )
      * @ORM\Column(type="simple_array", nullable=true)
+     * @JMS\Groups({"user_show"})
      */
     private $tags;
 
     /**
      * @ORM\Column(type="datetime")
+     * @JMS\Groups({"user_show"})
      */
     private $created;
 
     /**
      * @ORM\Column(name="thumb_height", type="smallint", nullable=true)
+     * @JMS\Groups({"user_show"})
      */
     private $thumbHeight;
 
     /**
      * @ORM\Column(name="image_width", type="smallint", nullable=true)
+     * @JMS\Groups({"user_show"})
      */
     private $imageWidth;
 
     /**
      * @ORM\Column(name="image_height", type="smallint", nullable=true)
+     * @JMS\Groups({"user_show"})
      */
     private $imageHeight;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="ads", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
+     * @JMS\Groups({"detail"})
      */
     private $user;
 
     /**
      * @ORM\OneToMany(targetEntity="PromoteAd", mappedBy="ad", orphanRemoval=true, cascade={"persist","remove"})
+     * @JMS\Exclude
      */
     private $promotees;
 
     /**
      * @ORM\Column(name="promotees_count", type="integer")
+     * @JMS\Groups({"user_show"})
      */
     private $promoteesCount;
 
     /**
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="ad", orphanRemoval=true, cascade={"persist", "remove"})
+     * @JMS\Exclude
      */
     private $comments;
 
     /**
      * @ORM\Column(name="comments_count", type="integer", nullable=true)
+     * @JMS\Groups({"user_show"})
      */
     private $commentsCount;
 
@@ -115,21 +134,25 @@ class Ad
      *  maxMessage = "ad.images.max_count"
      * )
      * @ORM\OneToMany(targetEntity="AdImage", mappedBy="ad", orphanRemoval=true, cascade={"persist", "remove"})
+     * @JMS\Exclude
      */
     private $images;
 
     /**
      * @ORM\OneToMany(targetEntity="FeaturedAd", mappedBy="ad")
+     * @JMS\Exclude
      */
     private $featureds;
 
     /**
      * @ORM\Column(type="boolean")
+     * @JMS\Groups({"user_show"})
      */
     private $active;
 
     /**
      * @ORM\Column(type="datetime")
+     * @JMS\Exclude
      */
     protected $updated;
 

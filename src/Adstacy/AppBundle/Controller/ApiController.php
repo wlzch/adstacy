@@ -5,6 +5,7 @@ namespace Adstacy\AppBundle\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use JMS\SecurityExtraBundle\Annotation\Secure;
+use JMS\Serializer\SerializationContext;
 
 class ApiController extends Controller
 {
@@ -142,6 +143,39 @@ class ApiController extends Controller
         $response->setSharedMaxAge(86400);
 
         return $response;
+    }
+
+    /**
+     * Return informations about user
+     *
+     * @param string username
+     */
+    public function showUserAction($username)
+    {
+        $request = $this->getRequest();
+        $id = $request->query->get('id');
+        $limit = $this->getParameter('max_ads_per_page');
+
+        if (($user = $this->getRepository('AdstacyAppBundle:User')->findOneByUsername($username)) == false) {
+            throw $this->createNotFoundException();
+        };
+        $serializer = $this->get('serializer');
+
+        $ads = $user->getAds()->slice(0, $limit);
+        $res = array(
+            'data' => array(
+                'user' => $user,
+                'ads' => $ads
+            ),
+            'meta' => array(
+                'url_followers' => $this->generateUrl('adstacy_app_api_user_followers', array('username' => $username)),
+                'url_followings' => $this->generateUrl('adstacy_app_api_user_followings', array('username' => $username)),
+                'url_promotes' => $this->generateUrl('adstacy_app_api_user_promotes', array('username' => $username)),
+                'next_ads' => $this->generateUrl('adstacy_app_api_user_ads', array('username' => $username))
+            )
+        );
+
+        return new Response($serializer->serialize($res, 'json', SerializationContext::create()->setGroups(array('user_show'))));
     }
 
 }

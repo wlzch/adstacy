@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Imagine\Gd\Imagine;
 use Imagine\Filter\Advanced\RelativeResize;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity(repositoryClass="Adstacy\AppBundle\Repository\UserRepository")
@@ -26,6 +27,7 @@ use Imagine\Filter\Advanced\RelativeResize;
  * @UniqueEntity(fields="usernameCanonical", message="user.username.unique", errorPath="username", groups={"Registration", "Profile"})
  * @Assert\Callback(methods={"isUsernameValid"}, groups={"Registration", "Profile"})
  * @Vich\Uploadable
+ * @JMS\ExclusionPolicy("all")
  */
 class User implements UserInterface, GroupableInterface
 {
@@ -33,6 +35,8 @@ class User implements UserInterface, GroupableInterface
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @JMS\Expose
+     * @JMS\Groups({"user_show", "list"})
      */
     private $id;
 
@@ -46,6 +50,8 @@ class User implements UserInterface, GroupableInterface
      *    groups = {"Registration", "Profile"}
      *  )
      * @ORM\Column(type="string", length=100, nullable=false)
+     * @JMS\Expose
+     * @JMS\Groups({"user_show", "list"})
      */
     private $username;
 
@@ -89,6 +95,8 @@ class User implements UserInterface, GroupableInterface
     /**
      * @Assert\NotBlank(message="user.realname.not_blank", groups={"Registration", "Profile"})
      * @ORM\Column(name="real_name", type="string", length=100)
+     * @JMS\Expose
+     * @JMS\Groups({"user_show", "list"})
      */
     private $realName;
 
@@ -99,6 +107,8 @@ class User implements UserInterface, GroupableInterface
 
     /**
      * @ORM\Column(name="ads_count", type="integer")
+     * @JMS\Expose
+     * @JMS\Groups({"user_show", "list"})
      */
     private $adsCount;
 
@@ -109,6 +119,8 @@ class User implements UserInterface, GroupableInterface
 
     /**
      * @ORM\Column(name="followers_count", type="integer")
+     * @JMS\Expose
+     * @JMS\Groups({"user_show", "list"})
      */
     private $followersCount;
 
@@ -127,6 +139,8 @@ class User implements UserInterface, GroupableInterface
 
     /**
      * @ORM\Column(name="following_counts", type="integer")
+     * @JMS\Expose
+     * @JMS\Groups({"user_show", "list"})
      */
     private $followingsCount;
 
@@ -137,6 +151,8 @@ class User implements UserInterface, GroupableInterface
      *    groups = {"Profile"}
      *  )
      * @ORM\Column(name="about", type="string", length=255, nullable=true)
+     * @JMS\Expose
+     * @JMS\Groups({"user_show", "list"})
      */
     private $about;
 
@@ -147,6 +163,8 @@ class User implements UserInterface, GroupableInterface
 
     /**
      * @ORM\Column(name="promotes_count", type="integer")
+     * @JMS\Expose
+     * @JMS\Groups({"user_show", "list"})
      */
     private $promotesCount;
 
