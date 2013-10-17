@@ -241,4 +241,66 @@ class ApiController extends Controller
         return new Response($serializer->serialize($res, 'json', SerializationContext::create()->setGroups(array('ad_list'))));
     }
 
+    /**
+     * Return $username's followers
+     *
+     * @param string $username
+     */
+    public function listFollowersAction($username)
+    {
+        $request = $this->getRequest();
+        $id = $request->query->get('id');
+        if (($user = $this->getRepository('AdstacyAppBundle:User')->findOneByUsername($username)) == false) {
+            throw $this->createNotFoundException();
+        };
+        $limit = $this->getParameter('max_users_per_page');
+
+        $query = $this->getRepository('AdstacyAppBundle:User')->findFollowersByUserQuery($user);
+        $paginator = $this->getDoctrinePaginator($query, $limit);
+        if ($paginator->getNbPages() <= 0) {
+            return new JsonResponse(array('data' => array()));
+        }
+
+        $res = array(
+            'data' => array(
+                'users' => $paginator->getCurrentPageResults()->getArrayCopy()
+            ),
+            'meta' => array()
+        );
+        if ($paginator->haveToPaginate()) {
+            $res['meta']['next'] = $this->generateUrl('adstacy_app_api_user_followers', array('username' => $username, 'page' => $paginator->getNextPage()));
+        }
+        $serializer = $this->get('serializer');
+
+        return new Response($serializer->serialize($res, 'json', SerializationContext::create()->setGroups(array('user_list'))));
+    }
+
+    public function listFollowingsAction($username)
+    {
+        $request = $this->getRequest();
+        $id = $request->query->get('id');
+        if (($user = $this->getRepository('AdstacyAppBundle:User')->findOneByUsername($username)) == false) {
+            throw $this->createNotFoundException();
+        };
+        $limit = $this->getParameter('max_users_per_page');
+
+        $query = $this->getRepository('AdstacyAppBundle:User')->findFollowingsByUserQuery($user);
+        $paginator = $this->getDoctrinePaginator($query, $limit);
+        if ($paginator->getNbPages() <= 0) {
+            return new JsonResponse(array('data' => array()));
+        }
+
+        $res = array(
+            'data' => array(
+                'users' => $paginator->getCurrentPageResults()->getArrayCopy()
+            ),
+            'meta' => array()
+        );
+        if ($paginator->haveToPaginate()) {
+            $res['meta']['next'] = $this->generateUrl('adstacy_app_api_user_followings', array('username' => $username, 'page' => $paginator->getNextPage()));
+        }
+        $serializer = $this->get('serializer');
+
+        return new Response($serializer->serialize($res, 'json', SerializationContext::create()->setGroups(array('user_list'))));
+    }
 }

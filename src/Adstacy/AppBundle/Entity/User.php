@@ -36,7 +36,7 @@ class User implements UserInterface, GroupableInterface
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      * @JMS\Expose
-     * @JMS\Groups({"user_show", "ad_list"})
+     * @JMS\Groups({"user_show", "user_list", "ad_list"})
      */
     private $id;
 
@@ -51,7 +51,7 @@ class User implements UserInterface, GroupableInterface
      *  )
      * @ORM\Column(type="string", length=100, nullable=false)
      * @JMS\Expose
-     * @JMS\Groups({"user_show", "ad_list"})
+     * @JMS\Groups({"user_show", "user_list", "ad_list"})
      */
     private $username;
 
@@ -96,7 +96,7 @@ class User implements UserInterface, GroupableInterface
      * @Assert\NotBlank(message="user.realname.not_blank", groups={"Registration", "Profile"})
      * @ORM\Column(name="real_name", type="string", length=100)
      * @JMS\Expose
-     * @JMS\Groups({"user_show", "ad_list"})
+     * @JMS\Groups({"user_show", "user_list", "ad_list"})
      */
     private $realName;
 
@@ -109,7 +109,7 @@ class User implements UserInterface, GroupableInterface
     /**
      * @ORM\Column(name="ads_count", type="integer")
      * @JMS\Expose
-     * @JMS\Groups({"user_show", "ad_list"})
+     * @JMS\Groups({"user_show", "user_list", "ad_list"})
      */
     private $adsCount;
 
@@ -121,7 +121,7 @@ class User implements UserInterface, GroupableInterface
     /**
      * @ORM\Column(name="followers_count", type="integer")
      * @JMS\Expose
-     * @JMS\Groups({"user_show", "ad_list"})
+     * @JMS\Groups({"user_show", "user_list", "ad_list"})
      */
     private $followersCount;
 
@@ -141,7 +141,7 @@ class User implements UserInterface, GroupableInterface
     /**
      * @ORM\Column(name="following_counts", type="integer")
      * @JMS\Expose
-     * @JMS\Groups({"user_show", "ad_list"})
+     * @JMS\Groups({"user_show", "user_list", "ad_list"})
      */
     private $followingsCount;
 
@@ -153,7 +153,7 @@ class User implements UserInterface, GroupableInterface
      *  )
      * @ORM\Column(name="about", type="string", length=255, nullable=true)
      * @JMS\Expose
-     * @JMS\Groups({"user_show", "ad_list"})
+     * @JMS\Groups({"user_show", "user_list", "ad_list"})
      */
     private $about;
 
@@ -165,7 +165,7 @@ class User implements UserInterface, GroupableInterface
     /**
      * @ORM\Column(name="promotes_count", type="integer")
      * @JMS\Expose
-     * @JMS\Groups({"user_show", "ad_list"})
+     * @JMS\Groups({"user_show", "user_list", "ad_list"})
      */
     private $promotesCount;
 
