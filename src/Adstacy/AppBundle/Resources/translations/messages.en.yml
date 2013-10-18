@@ -66,6 +66,9 @@ user:
     no_followings:
         message: Nobody follows %username% yet
 
+comment:
+    load_more: load more comments
+
 search:
     no_result:
         message: No Results Found

@@ -38,6 +38,6 @@ class CommentRepository extends EntityRepository
             ORDER BY c.id DESC
         ');
 
-        return $query->setParameter('until', $until)->setParameter('id', $ad->getId())->setMaxResults($limit)->getResult();
+        return array_reverse($query->setParameter('until', $until)->setParameter('id', $ad->getId())->setMaxResults($limit)->getResult());
     }
 }

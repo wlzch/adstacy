@@ -78,7 +78,7 @@
     </div>
   </div>
   {% if ad.commentsCount > ad.comments|length %}
-    <a href="#">load more comments</a>
+    <a href="#">{{"comment.load_more"|trans}}</a>
   {% endif %}
   {% for comment in ad.comments %}
     <div class="advert-comment">

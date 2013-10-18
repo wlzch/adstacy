@@ -65,6 +65,9 @@ user:
     no_followings:
         message: Belum ada yang follow Anda
 
+comment:
+    load_more: komentar sebelumnya
+
 search:
     no_result:
         message: Hasil Pencarian Tidak Ditemukan

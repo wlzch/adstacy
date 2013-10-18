@@ -118,6 +118,9 @@
                 <p>{{ parse_url(parse_hashtag(ad.description)) }}</p>
               </div>
             </div>
+            {% if ad.commentsCount > comments|length %}
+              <a href="#">{{"comment.load_more"|trans}}</a>
+            {% endif %}
             {% set adOwner = app.user == ad.user %}
             {% for comment in comments %}
               {% set commentUser = comment.user %}
