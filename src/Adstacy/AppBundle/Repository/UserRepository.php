@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\Common\Cache\ApcCache;
 use Adstacy\AppBundle\Entity\User;
 use Adstacy\AppBundle\Entity\Ad;
+use Adstacy\AppBundle\Helper\Formatter;
 
 /**
  * UserRepository
@@ -153,7 +154,7 @@ class UserRepository extends EntityRepository
     public function findByUsernames($usernames = array())
     {
         $em = $this->getEntityManager();
-        $formatted = strtolower("'".implode("', '", $usernames)."'");
+        $usernames = Formatter::arrayToSql($usernames);
 
         return $em->createQuery("
             SELECT partial u.{id,username,imagename,realName,adsCount,followersCount,notificationsCount,profilePicture}

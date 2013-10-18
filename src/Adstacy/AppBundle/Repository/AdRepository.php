@@ -212,29 +212,6 @@ class AdRepository extends EntityRepository
         return $rsm;
     }
 
-    private function getAdSelectSql()
-    {
-        return 'SELECT a.*,
-            u.id as u_id, u.username as u_username, u.imagename as u_imagename, u.real_name as u_real_name,
-            u.profile_picture as u_profile_picture,
-            c.id as c_id, c.content as c_content, c.created as c_created
-        ';
-    }
-
-    private function getCommentFilterSql()
-    {
-        return 'a.comments_count = 0 OR (
-                   a.comments_count > 0 AND c.id IN (
-                       SELECT c0.id
-                       FROM ad_comment c0
-                       WHERE c0.ad_id = a.id
-                       ORDER BY c0.created DESC
-                       LIMIT 2
-               )
-            )
-        ';
-    }
-
     /**
      * Get ads with 2 comments which have id in $ids
      *
@@ -260,15 +237,26 @@ class AdRepository extends EntityRepository
         }
         $em = $this->getEntityManager();
         $rsm = $this->getNativeSqlMapping();
-        $selectSql = $this->getAdSelectSql();
-        $filterSql = $this->getCommentFilterSql();
         $ids = Formatter::arrayToSql($ids);
         $query = $em->createNativeQuery("
-            $selectSql
+            SELECT a.*,
+                u.id as u_id, u.username as u_username, u.imagename as u_imagename, u.real_name as u_real_name,
+                u.profile_picture as u_profile_picture,
+                c.id as c_id, c.content as c_content, c.created as c_created
             FROM ad a
             INNER JOIN users u ON a.user_id = u.id 
             LEFT JOIN ad_comment c ON c.ad_id = a.id
-            WHERE a.id IN $ids AND ($filterSql)
+            WHERE a.id IN $ids AND (
+                a.comments_count = 0 OR (
+                   a.comments_count > 0 AND c.id IN (
+                       SELECT c0.id
+                       FROM ad_comment c0
+                       WHERE c0.ad_id = a.id
+                       ORDER BY c0.created DESC
+                       LIMIT 2
+                   )
+                )
+            )
             ORDER BY a.id DESC
         ", $rsm);
 
