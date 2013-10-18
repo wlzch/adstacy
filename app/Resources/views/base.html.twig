@@ -13,6 +13,20 @@
     <meta property="og:image" content="{% block meta_image %}{{ asset('bundles/adstacyapp/img/screenshot.png') }}{% endblock %}">
     <title>{% block title %}Adstacy.com - Ads have never been so fun{% endblock %}</title>
 
+    <script>
+      WebFontConfig = {
+        google: { families: [ 'Open+Sans:400,300,700:latin' ] },
+        timeout: 2000
+      };
+      var wf = document.createElement('script');
+      wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+        '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+      wf.type = 'text/javascript';
+      wf.async = 'true';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(wf, s);
+    </script>
+
     <link rel="icon shortcut" type="image/ico" href="{{ asset('favicon.ico') }}">
     <link rel="apple-touch-icon" sizes="114×114" href="{{ asset('apple-touch-icon-114x114.png') }}" />
     <link rel="apple-touch-icon" sizes="72×72" href="{{ asset('apple-touch-icon-72x72.png') }}" />
@@ -34,22 +48,24 @@
     {% block head_scripts %}
       {% if not app.debug %}
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" type="text/javascript"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/masonry/3.1.1/masonry.pkgd.min.js" type="text/javascript"></script>
       {% else %}
         {% javascripts filter='uglifyjs2'
           '@AdstacyAppBundle/Resources/public/js/jquery.min.js'
+          '@AdstacyAppBundle/Resources/public/js/jquery-ui.js'
           '@AdstacyAppBundle/Resources/public/js/bootstrap.min.js'
-          '@AdstacyAppBundle/Resources/public/js/masonry.pkgd.min.js'
         %}
           <script src="{{ asset_url }}" type="text/javascript"></script>
         {% endjavascripts %}
       {% endif %}
+
       {% javascripts filter='uglifyjs2'
         '@AdstacyAppBundle/Resources/public/js/modernizr.min.js'
         '@AdstacyAppBundle/Resources/public/js/underscore-min.js'
         '@AdstacyAppBundle/Resources/public/js/jquery.elastic.source.js'
         '@AdstacyAppBundle/Resources/public/js/jquery.mentionsInput.js'
+        '@AdstacyAppBundle/Resources/public/js/jquery.slimscroll.min.js'
         '@AdstacyAppBundle/Resources/public/js/easing.js'
         '@AdstacyAppBundle/Resources/public/js/jquery.ui.totop.min.js'
         '@AdstacyAppBundle/Resources/public/js/jquery.lazyload.min.js'
@@ -72,30 +88,65 @@
       </script>
     {% endif %}
   </head>
-  <body class="body-loader{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %} logged-in {% endif %}">
-    <div class="body-content">
-      {% block body %}
-        {% block header %}
-          {% include '::header.html.twig' %}
-        {% endblock %}
-        <div class="body clearfix">
-          {% set allFlashes = {success: app.session.flashbag.get('success')} %}
-          {% set allFlashes = allFlashes|merge({warning: app.session.flashbag.get('warning')}) %}
-          {% set allFlashes = allFlashes|merge({error: app.session.flashbag.get('error')}) %}
-          {% if allFlashes|length > 0 %}
-            <div class="adstacy-container">
+
+  <body class="{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %} logged-in {% endif %}">
+    {% block body %}
+      {% block header %}
+        {% include '::header.html.twig' %}
+      {% endblock %}
+
+      <div id="site-container" class="site-container site-wrapper">
+        <div class="site-menu">
+          <nav id="site-menu-inner" class="site-menu-inner">
+            <ul class="site-main-menu">
+              <li><h3>MAIN MENU</h3></li>
+              <li><a href="{{ path('homepage') }}" title="{{ "home"|trans }}">{{ "home"|trans }}<i class="icon icon-home"></i></a></li>
+              <li><a href="{{ path('adstacy_app_explore') }}" title="Explore">Explore<i class="icon icon-globe"></i></a></li>
+              <li><a href="{{ path('adstacy_app_trending') }}" title="Trending">Trending<i class="icon icon-rocket"></i></a></li>
+
+              {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                <li><a href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}" title="{{ "profile"|trans }}">{{ "profile"|trans }}<i class="icon icon-user"></i></a></li>
+                <li><a href="{{ path('fos_user_profile_edit') }}" title="{{ "settings"|trans }}">{{ "settings"|trans }}<i class="icon icon-gear"></i></a></li>
+                <li><a href="{{ path('fos_user_security_logout') }}" title="{{ "logout"|trans }}">{{ "logout"|trans }}<i class="icon icon-off"></i></a></li>
+              {% endif %}
+            </ul>
+            <ul>
+              <li><h3>FAVORITE TAGS</h3></li>
+              {% include 'AdstacyAppBundle:App:tag_list.html.twig' %}
+            </ul>
+            <ul>
+              <li><h3>TRENDING TAGS</h3></li>
+              {% include 'AdstacyAppBundle:App:tag_list.html.twig' %}
+            </ul>
+            <ul>
+              <li><h3>SITE INFO</h3></li>
+              <li><a href="{{ path('adstacy_app_page_show', {key: 'about'}) }}" title="{{ "about"|trans }}">{{ "about"|trans }}</a></li>
+              <li><a href="{{ path('adstacy_app_page_show', {key: 'terms'}) }}" title="{{ "terms"|trans }}">{{ "terms"|trans }}</a></li>
+              <li><a href="{{ path('adstacy_app_page_show', {key: 'privacy-policy'}) }}" title="{{ "privacy"|trans }}">{{ "privacy"|trans }}</a></li>
+              <li><a href="{{ path('adstacy_app_contact') }}" title="{{ "contact_us"|trans }}">{{ "contact_us"|trans }}</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="site-content">
+          <div class="site-content-inner clearfix">
+            {% set allFlashes = {success: app.session.flashbag.get('success')} %}
+            {% set allFlashes = allFlashes|merge({warning: app.session.flashbag.get('warning')}) %}
+            {% set allFlashes = allFlashes|merge({error: app.session.flashbag.get('error')}) %}
+            {% if allFlashes|length > 0 %}
               {% for key,flashes in allFlashes %}
                 {% for flash in flashes %}
                   <div class="alert alert-{{ key }}">{{ flash }}</div>
                 {% endfor %}
               {% endfor %}
-            </div>
-          {% endif %}
+            {% endif %}
 
-          {% block content %}{% endblock %}
+            {% block content %}{% endblock %}
+            {% block sidebar %}{% endblock %}
+          </div>
         </div>
-      {% endblock %}
-    </div>
+      </div>
+    {% endblock %}
 
     {% block javascripts %}
       {% if not app.debug %}

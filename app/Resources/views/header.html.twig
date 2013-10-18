@@ -1,123 +1,55 @@
-<header id="site-header" class="navbar navbar-default navbar-fixed-top">
-  {% if include_extra_nav is not defined or (include_extra_nav is defined and include_extra_nav == true) %}
-  <div id="extra-nav-box">
-    <div class="adstacy-container">
-      <div class="btn-group">
-        <a href="{{ path('homepage') }}" class="btn extra-nav" title="{{"home"|trans}}"><i class="icon-home"></i>&nbsp; {{"home"|trans|upper}}</a>
-        <a href="{{ path('adstacy_app_explore') }}" class="btn extra-nav" title="Explore"><i class="icon-globe"></i>&nbsp; EXPLORE</a>
-        <a href="{{ path('adstacy_app_trending') }}" class="btn extra-nav" title="Trending"><i class="icon-rocket"></i>&nbsp; TRENDING</a>
-      </div>
-      <div class="btn-group pull-right">
-        <a class="btn dropdown-toggle" data-toggle="dropdown">
-          SITE INFO
-          <i class="icon-angle-down"></i>
-        </a>
-        <ul class="dropdown-menu pull-right">
-          <li><a href="{{ path('adstacy_app_page_show', {key: 'about'}) }}">{{"about"|trans}}</a></li>
-          <li><a href="{{ path('adstacy_app_page_show', {key: 'terms'}) }}">{{"terms"|trans}}</a></li>
-          <li><a href="{{ path('adstacy_app_page_show', {key: 'privacy-policy'}) }}">{{"privacy"|trans}}</a></li>
-          <li><a href="{{ path('adstacy_app_contact') }}">{{"contact_us"|trans}}</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  {% endif %}
-  <div class="adstacy-container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+<header id="site-header" class="site-header navbar navbar-inverse navbar-fixed-top">
+  <nav class="site-wrapper">
+    <div class="navbar-header navbar-left">
+      <a id="site-menu-toggle" href="#" class="navbar-toggle">
         <span class="sr-only">Toggle navigation</span>
         <i class="icon-bar"></i>
         <i class="icon-bar"></i>
         <i class="icon-bar"></i>
-      </button>
+      </a>
+      <a class="navbar-brand" href="{{ path('homepage') }}" title="Adstacy"><span>ADS</span>tacy</a>
+    </div>
+
+    <form id="search-form" action="{{ path('adstacy_app_search') }}">
+      <input id="search-box" type="text" class="form-control typeahead" placeholder="{{ "search"|trans }}" name="q" value="{{ app.request.query.get('q') }}">
+      <button id="search-dismiss" type="button" class="close">&times;</button>
+      <input type="submit" class="hide">
+    </form>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li><a id="btn-search" title="Search"><span>Search</span><i class="icon icon-search"></i></a></li>
       {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-        <a id="create-advert-mobile-btn" href="{{ path('adstacy_app_ad_create') }}" class="btn btn-primary navbar-btn" data-toggle="tooltip" data-placement="bottom" title="{{"ads.create"|trans}}">
-          <i class="icon-plus"></i>
-        </a>
+        <li><a href="{{ path('adstacy_app_ad_create') }}" id="create-advert-btn" title="{{ "ads.create"|trans }}"><span>{{ "ads.create"|trans }}</span><i class="icon icon-plus"></i></a></li>
         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-          <a id="notif-mobile-btn" href="{{ path('adstacy_notification_show') }}" class="btn btn-default navbar-btn">
-            <i class="icon-bell"></i>
-            <span class="notif-count label label-primary">{{ app.user.notificationsCount }}</span>
-          </a>
+          <li>
+            <a class="dropdown-toggle" id="notif-btn" title="Notification" data-toggle="dropdown" data-href="{{ path('adstacy_notification_readall') }}"><span>Notification</span><i class="icon icon-bell"></i></a>
+            <span class="notif-count label label-danger">{{ app.user.notificationsCount }}</span>
+            {{ render_top_notification(5) }}
+          </li>
         {% endif %}
+      {% else %}
+        {% if register is not defined or (register is defined and register == true) %}
+          <li><a id="register-link" href="{{ path('fos_user_registration_register') }}">{{ "register"|trans }}</a></li>
+        {% endif %}
+
+        <li><a id="mobile-login-link" href="{{ path('fos_user_security_login') }}">Login</a></li>
+        <li id="login-express-dropdown" class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ "login"|trans }}</a>
+          <div id="login-express" class="dropdown-menu">
+            <div class="dropdown-box-body">
+              {{ form_login() }}
+
+              {% for owner in hwi_oauth_resource_owners() %}
+                <a class="btn btn-block btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{"login.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
+              {% endfor %}
+            </div>
+            <div class="dropdown-box-footer">
+              <a href="{{ path('fos_user_resetting_request') }}">{{ "forgot_password"|trans }}</a>
+            </div>
+          </div>
+        </li>
+
       {% endif %}
-      <a class="navbar-brand" href="{{ path('homepage') }}" title="Adstacy"></a>
-    </div>
-
-    <div class="collapse navbar-collapse navbar-ex1-collapse">
-      <form id="search-form" action="{{ path('adstacy_app_search') }}" class="navbar-form navbar-left">
-        <div id="search-container" class="input-group">
-          <input id="search-box" type="text" class="form-control typeahead" placeholder="{{"search"|trans}}" name="q" value="{{ app.request.query.get('q') }}">
-          <div class="input-group-btn">
-            <button type="submit" class="btn btn-default">
-              <i class="icon-search"></i>
-            </button>
-          </div>
-        </div>
-      </form>
-
-      <div class="navbar-right">
-        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-          <a href="{{ path('adstacy_app_ad_create') }}" id="create-advert-btn" class="btn btn-primary navbar-btn" data-toggle="tooltip" data-placement="bottom" title="{{"ads.create"|trans}}">
-            <i class="icon-plus"></i>
-            <span id="create-advert-mobile-label">{{"ads.create"|trans}}</span>
-          </a>
-          <div id="user-nav-dropdown" class="btn-group navbar-btn">
-            <button type="button" class="btn btn-default btn-user dropdown-toggle" data-toggle="dropdown">
-              <img class="user-profpic" src="{{ profile_pic(app.user) }}" alt="{{ app.user.username }}">
-              <span class="user-username text-overflow">{{ app.user.username }}</span>
-            </button>
-            <ul id="user-nav" class="dropdown-menu">
-              <li><a href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}"><i class="icon-user"></i>&nbsp; {{"profile"|trans}}</a></li>
-              <li><a href="{{ path('fos_user_profile_edit') }}"><i class="icon-gear"></i>&nbsp; {{"settings"|trans}}</a></li>
-              <li><a href="{{ path('fos_user_security_logout') }}"><i class="icon-off"></i>&nbsp; {{"logout"|trans}}</a></li>
-            </ul>
-          </div>
-          {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-          <div id="notif-btn" class="navbar-btn">
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-href="{{ path('adstacy_notification_readall') }}">
-                <i class="icon-bell"></i>
-                <span class="notif-count label label-primary">{{app.user.notificationsCount}}</span>
-              </button>
-              {{ render_top_notification(5) }}
-            </div>
-          {% endif %}
-        {% else %}
-          {% if register is not defined or (register is defined and register == true) %}
-            <a id="register-link" href="{{ path('fos_user_registration_register') }}" class="btn btn-success navbar-btn">{{"register"|trans}}</a>
-          {% endif %}
-          <a id="mobile-login-link" href="{{ path('fos_user_security_login') }}" class="btn btn-primary">Login</a>
-          <div id="login-express-dropdown" class="btn-group navbar-btn dropdown">
-            <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-              {{"login"|trans}}
-            </button>
-            <div id="login-express" class="dropdown-menu">
-              <div class="dropdown-box-body">
-                {{ form_login() }}
-
-                {% for owner in hwi_oauth_resource_owners() %}
-                  <a class="btn btn-block btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{"login.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
-                {% endfor %}
-              </div>
-              <div class="dropdown-box-footer">
-                <a href="{{ path('fos_user_resetting_request') }}">{{"forgot_password"|trans}}</a>
-              </div>
-            </div>
-          </div>
-        {% endif %}
-      </div>
-
-      <ul id="mobile-nav" class="nav navbar-nav navbar-right">
-        <li><a href="{{ path('homepage') }}"><i class="icon-home"></i>&nbsp; {{"home"|trans}}</a></li>
-        <li><a href="{{ path('adstacy_app_explore') }}" title="Explore"><i class="icon-globe"></i>&nbsp; Explore</a></li>
-        <li><a href="{{ path('adstacy_app_trending') }}" title="Trending"><i class="icon-rocket"></i>&nbsp; Trending</a></li>
-        <li><a href="{{ path('adstacy_app_tags') }}" title="Trending"><i class="icon-tags"></i>&nbsp; Popular Tags</a></li>
-        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-        <li><a href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}"><i class="icon-user"></i>&nbsp; {{"profile"|trans}}</a></li>
-        <li><a href="{{ path('fos_user_profile_edit') }}"><i class="icon-gear"></i>&nbsp; {{"settings"|trans}}</a></li>
-        <li><a href="{{ path('fos_user_security_logout') }}"><i class="icon-off"></i>&nbsp; {{"logout"|trans}}</a></li>
-        {% endif %}
-      </ul>
-    </div>
-  </div>
+    </ul>
+  </nav>
 </header>

@@ -3,11 +3,7 @@
 {% block title %}Trending ads | Adstacy{% endblock %}
 
 {% block content %}
-    <div class="page-title jumbotron text-center">
-      <h1>Trending</h1>
-    </div>
-  <div class="masonry clearfix">
-    {% include 'AdstacyAppBundle:App:feeds.html.twig' %}
+  <div class="site-body">
     {{ block('ajax_content') }}
   </div>
 {% endblock %}
@@ -16,4 +12,25 @@
   {% for ad in ads %}
     {% include 'AdstacyAppBundle:Ad:ad.html.twig' with {ad: ad} %}
   {% endfor %}
+{% endblock %}
+
+{% block sidebar %}
+  <div class="site-sidebar">
+    <div class="site-aside">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo, quo, ipsam,
+        temporibus, nulla voluptate vero numquam porro necessitatibus libero molestias
+        natus alias repellat aliquid neque asperiores vitae beatae voluptates nobis
+        excepturi aut labore quia fugiat eaque corrupti rem velit deserunt.
+      </p>
+    </div>
+    <div class="site-aside">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo, quo, ipsam,
+        temporibus, nulla voluptate vero numquam porro necessitatibus libero molestias
+        natus alias repellat aliquid neque asperiores vitae beatae voluptates nobis
+        excepturi aut labore quia fugiat eaque corrupti rem velit deserunt.
+      </p>
+    </div>
+  </div>
 {% endblock %}

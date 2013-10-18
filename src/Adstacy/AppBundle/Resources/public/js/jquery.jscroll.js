@@ -17,7 +17,7 @@
     // Define the jscroll namespace and default settings
     $.jscroll = {
         defaults: {
-            debug: false,
+            debug: true,
             autoTrigger: true,
             loadingHtml: '<div class="load-next"><div class="loader-img"></div></div>',
             padding: 0,

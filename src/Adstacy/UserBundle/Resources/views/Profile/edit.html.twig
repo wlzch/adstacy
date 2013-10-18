@@ -1,5 +1,7 @@
 {% extends 'AdstacyAppBundle::layout.html.twig' %}
 
+{% form_theme form _self %}
+
 {% block stylesheets %}
   {{ parent() }}
   {% stylesheets filter='cssrewrite, uglifycss'
@@ -19,145 +21,115 @@
   {% endjavascripts %}
 {% endblock %}
 
+{% block form_row %}
+  <div class="form-group">
+    {{ form_label(form, label, {label_attr: {class: 'pull-left'} }) }}
+    <div class="form-widget">
+      {{ form_widget(form, {attr: {class: 'form-control'} }) }}
+      {{ form_errors(form, {attr: {class: 'alert alert-danger'} }) }}
+    </div>
+  </div>
+{% endblock %}
+
 {% block content %}
-<div id="settings">
-  <div class="panel panel-default">
-    <div class="panel-heading"><h1>User Info</h1></div>
-    <div class="panel-body">
-      {{ form_start(form, { attr: { class: 'form-horizontal submit-disable', role: 'form' } }) }}
-        {{ form_errors(form) }}
-        {% set user = form.vars.data %}
+  <div id="settings">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h1>Settings</h1></div>
+      <div class="panel-body">
+        {{ form_start(form, { attr: { class: 'submit-disable', role: 'form' } }) }}
+          {{ form_errors(form) }}
+          {% set user = form.vars.data %}
 
-        <div class="form-group">
-          {{ form_label(form.image, label|default(null), { label_attr: { class: 'control-label' } }) }}
-          <div class="form-widget">
-            {{ form_widget(form.image, { attr: { class: 'form-control' } }) }}
+          {{ form_row(form.image) }}
+          {{ form_row(form.username) }}
+
+          <div class="form-group">
+            <label class="pull-left">Password</label>
+            <div class="form-text">
+              <a href="{{ path('fos_user_change_password') }}">{{"form_profile.change_password"|trans}}</a>
+            </div>
           </div>
-        </div>
 
-        <div class="form-group">
-          {{ form_label(form.username, label|default(null), { label_attr: { class: 'control-label' } }) }}
-          <div class="form-widget">
-            {{ form_widget(form.username, { attr: { class: 'form-control' } }) }}
+          {{ form_row(form.email) }}
+          {{ form_row(form.realName) }}
+          {{ form_row(form.about) }}
+
+          <div class="form-group">
+            {{ form_label(form.subscription, label|default, { label_attr: { class: 'pull-left' } }) }}
+            <div class="form-text">
+              {{ form_widget(form.subscription, { attr: { class: '' } }) }}
+              <span class="help">{{ "subscription_notice"|trans }}</span>
+            </div>
           </div>
-        </div>
 
-        <div class="form-group">
-          <label class="control-label">Password</label>
-          <div class="form-widget">
-            <a class="form-widget-a" href="{{ path('fos_user_change_password') }}">{{"form_profile.change_password"|trans}}</a>
+          <div class="form-group">
+            <div class="form-widget offset-label">
+              {{ form_widget(form.save, { attr: {
+                    'class': 'form-control btn btn-primary submit-disable-btn',
+                    'data-disable-text': "saving"|trans
+                  }
+                })
+              }}
+            </div>
           </div>
-        </div>
 
-        <div class="form-group">
-          {{ form_label(form.email, label|default(null), { label_attr: { class: 'control-label' } }) }}
-          <div class="form-widget">
-            {{ form_widget(form.email, { attr: { class: 'form-control' } }) }}
+          <div class="form-group">
+            <div class="form-text offset-label">
+              <a href="{{ path('fos_user_resetting_request') }}">{{ "form_profile.forgot_password"|trans }}</a>
+            </div>
           </div>
-        </div>
 
-        <div class="form-group">
-          {{ form_label(form.realName, label|default(null), { label_attr: { class: 'control-label' } }) }}
-          <div class="form-widget">
-            {{ form_widget(form.realName, { attr: { class: 'form-control' } }) }}
-          </div>
-        </div>
-
-        <div class="form-group">
-          {{ form_label(form.about, label|default(null), { label_attr: { class: 'control-label' } }) }}
-          <div class="form-widget">
-            {{ form_widget(form.about, { attr: { class: 'form-control' } }) }}
-          </div>
-        </div>
-
-        <div class="form-group">
-          {{ form_label(form.subscription, label|default(null), { label_attr: { class: 'control-label' } }) }}
-          <div class="form-widget">
-            {{ form_widget(form.subscription, { attr: { class: '' } }) }}
-            <span class="help">{{"subscription_notice"|trans}}</span>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="control-label">&nbsp;</label>
-          <div class="form-widget">
-            {{ form_widget(form.save, {
-                attr: {
-                  'class': 'form-control btn btn-primary submit-disable-btn',
-                  'data-disable-text': "saving"|trans
-                }
-              })
-            }}
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="control-label">&nbsp;</label>
-          <div class="form-widget">
-            <a href="{{ path('fos_user_resetting_request') }}">{{"form_profile.forgot_password"|trans}}</a>
-          </div>
-        </div>
-
-        {{ form_rest(form) }}
-
-      {{ form_end(form) }}
+          {{ form_rest(form) }}
+        {{ form_end(form) }}
+      </div>
     </div>
-  </div>
 
-  <div class="panel panel-default">
-    <div class="panel-heading"><h1>Facebook Connect</h1></div>
-    <div class="panel-body">
-      <div class="form-horizontal">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h1>Facebook Connect</h1></div>
+      <div class="panel-body">
         <div class="form-group">
-          <label class="control-label">Status</label>
-          <div class="form-widget">
-            <p class="form-widget-p">
-              {% if user.facebookId %}
-                {{"form_profile.connected"|trans({'%name%': user.facebookRealName})}}
-              {% else %}
-                {{"form_profile.not_connected"|trans}}
-              {% endif %}
-            </p>
+          <label class="pull-left">Status</label>
+          <div class="form-text">
+            {% if user.facebookId %}
+              {{ "form_profile.connected"|trans({'%name%': user.facebookRealName}) }}
+            {% else %}
+              {{ "form_profile.not_connected"|trans }}
+            {% endif %}
           </div>
         </div>
+
         {% if not user.facebookId %}
-        <div class="form-group">
-          <label class="control-label">&nbsp;</label>
-          <div class="form-widget">
-              <a class="form-widget-a btn btn-facebook" href="{{ path('hwi_oauth_service_redirect', {service: 'facebook'}) }}">{{"form_profile.connect"|trans({'%service%': 'Facebook'}) }}</a>
+          <div class="form-group">
+            <div class="form-widget offset-label">
+              <a class="btn btn-facebook btn-block" href="{{ path('hwi_oauth_service_redirect', {service: 'facebook'}) }}">{{ "form_profile.connect"|trans({'%service%': 'Facebook'}) }}</a>
+            </div>
           </div>
-        </div>
         {% endif %}
       </div>
     </div>
-  </div>
 
-  <div class="panel panel-default">
-    <div class="panel-heading"><h1 class="title">Twitter Connect</h1></div>
-    <div class="panel-body">
-      <div class="form-horizontal">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h1>Twitter Connect</h1></div>
+      <div class="panel-body">
         <div class="form-group">
-          <label class="control-label">Status</label>
-          <div class="form-widget">
-            <p class="form-widget-p">
-              {% if user.twitterId %}
-                {{"form_profile.connected"|trans({'%name%': user.twitterRealName}) }}
-              {% else %}
-                {{"form_profile.not_connected"|trans}}
-              {% endif %}
-            </p>
+          <label class="pull-left">Status</label>
+          <div class="form-text">
+            {% if user.twitterId %}
+              {{ "form_profile.connected"|trans({'%name%': user.twitterRealName}) }}
+            {% else %}
+              {{ "form_profile.not_connected"|trans }}
+            {% endif %}
           </div>
         </div>
+
         {% if not user.twitterId %}
-        <div class="form-group">
-          <label class="control-label">&nbsp;</label>
-          <div class="form-widget">
-              <a class="btn btn-twitter form-widget-a" href="{{ path('hwi_oauth_service_redirect', {service: 'twitter'}) }}">{{"form_profile.connect"|trans({'%service%': 'Twitter'}) }}</a>
+          <div class="form-group">
+            <div class="form-widget offset-label">
+              <a class="btn btn-twitter btn-block" href="{{ path('hwi_oauth_service_redirect', {service: 'twitter'}) }}">{{ "form_profile.connect"|trans({'%service%': 'Twitter'}) }}</a>
+            </div>
           </div>
-        </div>
         {% endif %}
       </div>
     </div>
   </div>
-</div>
 {% endblock %}

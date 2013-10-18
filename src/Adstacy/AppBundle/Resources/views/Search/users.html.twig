@@ -2,7 +2,7 @@
 
 {% block search_content %}
   {% if paginator.getCurrentPageResults|length > 0 and app.request.query.get('q') != '' %}
-    <div class="adstacy-container jscroll">
+    <div class="jscroll">
       {{ block('ajax_content') }}
     </div>
   {% else %}
@@ -28,9 +28,8 @@
   <script type="text/javascript">
     $(function() {
       $('.jscroll').jscroll({
-        callback: function(a, b) {
+        callback: function() {
           var $users = $('.jscroll-added:last .user');
-          $masonry = $('.masonry').masonry('appended', $users);
           $users.find('img.lazy').lazyload();
           $users.ajaxlink('users');
         }

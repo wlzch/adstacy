@@ -3,11 +3,7 @@
 {% block title %}Explore Latest Ads | Adstacy{% endblock %}
 
 {% block content %}
-  <div class="page-title jumbotron text-center">
-    <h1>Explore</h1>
-  </div>
-  <div class="masonry jscroll clearfix">
-    {% include 'AdstacyAppBundle:App:feeds.html.twig' %}
+  <div class="site-body jscroll">
     {{ block('ajax_content') }}
   </div>
 {% endblock %}
@@ -23,6 +19,27 @@
   {% endif %}
 {% endblock %}
 
+{% block sidebar %}
+  <div class="site-sidebar">
+    <div class="site-aside">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo, quo, ipsam,
+        temporibus, nulla voluptate vero numquam porro necessitatibus libero molestias
+        natus alias repellat aliquid neque asperiores vitae beatae voluptates nobis
+        excepturi aut labore quia fugiat eaque corrupti rem velit deserunt.
+      </p>
+    </div>
+    <div class="site-aside">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo, quo, ipsam,
+        temporibus, nulla voluptate vero numquam porro necessitatibus libero molestias
+        natus alias repellat aliquid neque asperiores vitae beatae voluptates nobis
+        excepturi aut labore quia fugiat eaque corrupti rem velit deserunt.
+      </p>
+    </div>
+  </div>
+{% endblock %}
+
 {% block javascripts %}
   {{ parent() }}
   <script type="text/javascript">
@@ -30,7 +47,6 @@
       $('.jscroll').jscroll({
         callback: function() {
           var $ads = $('.jscroll-added:last .advert');
-          $('.masonry').masonry('appended', $ads);
           $ads.find('img.lazy').lazyload();
           $ads.ajaxlink('ads');
         }

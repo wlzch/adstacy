@@ -20,36 +20,38 @@
 {% endblock %}
 
 {% block content %}
-  <div id="register" class="panel panel-default">
-    <div class="panel-heading">
-      <h1>{{ "form_registration.title"|trans }}</h1>
+  <div id="register">
+    <div class="item panel panel-default">
+      <div class="panel-heading">
+        <h1>{{ "form_registration.title"|trans }}</h1>
+      </div>
+
+      <div class="panel-body">
+        {% for owner in hwi_oauth_resource_owners() %}
+          <a class="btn btn-block btn-lg btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{"register.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
+        {% endfor %}
+      </div>
+
+      <hr>
+
+      {{ form_start(form, {attr: {class: 'panel-body submit-disable', role: 'form'} }) }}
+        {{ form_errors(form) }}
+
+        {{ form_row(form.email) }}
+        {{ form_row(form.username) }}
+        {{ form_row(form.realName) }}
+        {{ form_row(form.plainPassword) }}
+        <p>{{ "form_registration.agreement"|trans({'%terms_url%': path('adstacy_app_page_show', {key: 'terms'}),
+          '%privacy_url%': path('adstacy_app_page_show', {key: 'privacy-policy'}) })|raw }}</p>
+        {{ form_widget(form.register, {
+            attr: {
+              'class': 'btn btn-primary btn-lg btn-block submit-disable-btn',
+              'data-disable-text': "registering"|trans
+            }
+          })
+        }}
+
+      {{ form_end(form) }}
     </div>
-
-    <div class="panel-body">
-      {% for owner in hwi_oauth_resource_owners() %}
-      <a class="btn btn-block btn-lg btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{"register.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
-      {% endfor %}
-    </div>
-
-    <hr>
-
-    {{ form_start(form, {attr: {class: 'panel-body submit-disable', role: 'form'} }) }}
-      {{ form_errors(form) }}
-
-      {{ form_row(form.email) }}
-      {{ form_row(form.username) }}
-      {{ form_row(form.realName) }}
-      {{ form_row(form.plainPassword) }}
-      <p>{{ "form_registration.agreement"|trans({'%terms_url%': path('adstacy_app_page_show', {key: 'terms'}),
-        '%privacy_url%': path('adstacy_app_page_show', {key: 'privacy-policy'}) })|raw }}</p>
-      {{ form_widget(form.register, {
-          attr: {
-            'class': 'btn btn-primary btn-lg btn-block submit-disable-btn',
-            'data-disable-text': "registering"|trans
-          }
-        })
-      }}
-
-    {{ form_end(form) }}
   </div>
 {% endblock %}

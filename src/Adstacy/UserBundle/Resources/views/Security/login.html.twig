@@ -10,56 +10,56 @@
 {% endblock %}
 
 {% block content %}
-  <div id="login" class="panel panel-default">
-    <div class="panel-heading">
-      <h1>Login</h1>
-    </div>
+  <div id="login">
+    <div class="item panel panel-default">
+      <div class="panel-heading"><h1>Login</h1></div>
 
-    <div class="panel-body">
-      {% for owner in hwi_oauth_resource_owners() %}
-        <a class="btn btn-block btn-lg btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">Login with {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
-      {% endfor %}
-    </div>
+      <div class="panel-body">
+        {% for owner in hwi_oauth_resource_owners() %}
+          <a class="btn btn-block btn-lg btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">Login with {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
+        {% endfor %}
+      </div>
 
-    <hr>
+      <hr>
 
-    <form class="panel-body submit-disable" role="form" action="{{ path("fos_user_security_check") }}" method="post">
-      {% if error %}
-        {% if error == 'User account is locked.' %}
-          <div class="alert alert-danger">{{ "security.login.locked"|trans({}, 'FOSUserBundle') }}</div>
-        {% else %}
-          <div class="alert alert-danger">{{ "security.login.failed"|trans({}, 'FOSUserBundle') }}</div>
+      <form class="panel-body submit-disable" role="form" action="{{ path("fos_user_security_check") }}" method="post">
+        {% if error %}
+          {% if error == 'User account is locked.' %}
+            <div class="alert alert-danger">{{ "security.login.locked"|trans({}, 'FOSUserBundle') }}</div>
+          {% else %}
+            <div class="alert alert-danger">{{ "security.login.failed"|trans({}, 'FOSUserBundle') }}</div>
+          {% endif %}
         {% endif %}
-      {% endif %}
-      <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
 
-      <div class="form-group">
-        <label for="_username" class="hide">{{ 'security.login.username'|trans }}</label>
-        <input type="text" class="form-control input-lg" id="_username" name="_username" value="{{ last_username }}" required="required" placeholder="Username">
-      </div>
-
-      <div class="form-group">
-        <label for="password" class="hide">{{ 'security.login.password'|trans }}</label>
-        <input type="password" class="form-control input-lg" id="_password" name="_password" required="required" placeholder="Password">
-      </div>
-
-      <div class="form-group clearfix">
-        <div class="checkbox pull-left">
-          <label for="_remember_me">
-            <input type="checkbox" id="_remember_me" name="_remember_me" value="on" checked="checked">
-            {{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}
-          </label>
+        <div class="form-group">
+          <label for="_username" class="hide">{{ 'security.login.username'|trans }}</label>
+          <input type="text" class="form-control input-lg" id="_username" name="_username" value="{{ last_username }}" required="required" placeholder="Username">
         </div>
-        <div class="pull-right">
-          <input type="submit" class="btn btn-primary btn-lg submit-disable-btn" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" data-disable-text="{{ "logginging"|trans }}">
-        </div>
-      </div>
-    </form>
 
-    <div class="panel-footer">
-      <a href="{{ path('fos_user_registration_register') }}">{{ "no_account_register"|trans }}</a>
-      <br>
-      <a href="{{ path('fos_user_resetting_request') }}">{{ "forgot_password"|trans }}</a>
+        <div class="form-group">
+          <label for="password" class="hide">{{ 'security.login.password'|trans }}</label>
+          <input type="password" class="form-control input-lg" id="_password" name="_password" required="required" placeholder="Password">
+        </div>
+
+        <div class="form-group clearfix">
+          <div class="checkbox pull-left">
+            <label for="_remember_me">
+              <input type="checkbox" id="_remember_me" name="_remember_me" value="on" checked="checked">
+              {{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}
+            </label>
+          </div>
+          <div class="pull-right">
+            <input type="submit" class="btn btn-primary btn-lg submit-disable-btn" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" data-disable-text="{{ "logginging"|trans }}">
+          </div>
+        </div>
+      </form>
+
+      <div class="panel-footer">
+        <a href="{{ path('fos_user_registration_register') }}">{{ "no_account_register"|trans }}</a>
+        <br>
+        <a href="{{ path('fos_user_resetting_request') }}">{{ "forgot_password"|trans }}</a>
+      </div>
     </div>
   </div>
 {% endblock %}

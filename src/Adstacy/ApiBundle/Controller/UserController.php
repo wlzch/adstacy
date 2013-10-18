@@ -33,7 +33,8 @@ class UserController extends ApiController
               )
           ));
           $usernames = array();
-          foreach ($res->getData()['user'][0]['options'] as $option) {
+          $data = $res->getData();
+          foreach ($data['user'][0]['options'] as $option) {
             $usernames[] = $option['text'];
           }
           foreach ($usernames as $username) {

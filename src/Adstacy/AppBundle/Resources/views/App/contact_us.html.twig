@@ -13,8 +13,8 @@
 
 {% block form_row %}
   <div class="form-group">
-    {{ form_label(form, label, {label_attr: {class: 'control-label'} }) }}
-    <div class="control-widget">
+    {{ form_label(form, label, {label_attr: {class: 'pull-left'} }) }}
+    <div class="form-widget">
       {{ form_widget(form, {attr: {class: 'form-control'} }) }}
       {{ form_errors(form, {attr: {class: 'alert alert-danger'} }) }}
     </div>
@@ -24,13 +24,10 @@
 {% block content %}
   <div id="contactus-container" class="panel panel-default">
     <div class="panel-heading">
-      <h1>
-        <i class="icon-envelope-alt"></i>
-        Contact Us
-      </h1>
+      <h1>Contact Us<i class="icon icon-envelope-alt"></i></h1>
     </div>
 
-    {{ form_start(form, {attr: {class: 'form-horizontal panel-body', role: 'form'} }) }}
+    {{ form_start(form, {attr: {class: 'panel-body', role: 'form'} }) }}
       {{ form_errors(form) }}
 
       {{ form_row(form.subject) }}
@@ -38,11 +35,10 @@
       {{ form_row(form.content) }}
 
       <div class="form-group">
-        <div class="control-widget offset-control-label">
+        <div class="form-widget offset-label">
           {{ form_widget(form.submit, {attr: {class: 'btn btn-primary'} }) }}
         </div>
       </div>
-
     {{ form_end(form) }}
   </div>
 {% endblock %}

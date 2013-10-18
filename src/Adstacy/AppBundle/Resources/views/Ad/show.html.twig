@@ -168,13 +168,13 @@
         </div>
         {% if user.about %}
         <div id="user-about" class="panel-body">
-          <p class="break-word">{{ parse_url(parse_hashtag(user.about)) }}</p>
+          <p class="hyphens">{{ parse_url(parse_hashtag(user.about)) }}</p>
         </div>
         {% endif %}
 
         <div class="panel-body">
           <a href="{{ path('adstacy_app_user_ads', {username: user.username}) }}" class="btn btn-default btn-block" style="margin-bottom: 10px;">{{"more_ads"|trans}}</a>
-            <div class="follow-action">
+            <div class="user-action">
               {% if app.user %}
                 {% if app.user != user %}
                   {% set hasFollow = app.user.hasFollowUser(user) %}
