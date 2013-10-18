@@ -51,7 +51,8 @@
   }
 }
 
-.advert-action {
+.advert-action,
+.owner-action {
   border-top: 1px solid @border-color;
 
   .btn {
@@ -80,8 +81,11 @@
 }
 
 @media (min-width: 481px) {
-  .advert-action a span {
-    font-size: 14px;
+  .advert-action,
+  .owner-action {
+    a span {
+      font-size: 14px;
+    }
   }
 }
 
@@ -89,8 +93,11 @@
 }
 
 @media (min-width: 720px) {
-  .advert-action a span {
-    display: inline;
+  .advert-action,
+  .owner-action {
+    a span {
+      display: inline;
+    }
   }
 }
 

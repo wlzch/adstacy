@@ -1,5 +1,5 @@
 body {
-  color: #333;
+  color: @gray-dark;
   background: @body-bg url("../img/noise.png");
 }
 
@@ -7,21 +7,28 @@ a {
   cursor: pointer;
 }
 
-/** Class components **/
-.follow-container {
-  padding: 0 10px 10px;
+a.url, a.mention {
+  color: #428bca;
+
+  &:hover {
+    color: darken(#428bca, 20%);
+  }
 }
 
-.btn-follow + .btn-block {
-  margin-top: 0;
+a.mention:hover {
+  text-decoration: none;
 }
 
-/** hack to support windows phone 8 and IE 10 for media queries */
+// hack to support windows phone 8 and IE 10 for media queries
 @-webkit-viewport   { width: device-width; }
 @-moz-viewport      { width: device-width; }
 @-ms-viewport       { width: device-width; }
 @-o-viewport        { width: device-width; }
 @viewport           { width: device-width; }
+
+.btn-follow + .btn-block {
+  margin-top: 0;
+}
 
 .load-next {
   position: relative;
@@ -35,8 +42,6 @@ a {
   }
 }
 
-.follow-action .btn-success:hover,
-.promote-action .btn-success:hover,
 .advert-action .btn-success:hover,
 .user-action .btn-success:hover {
   background-color: #333;
@@ -66,39 +71,8 @@ a {
   }
 }
 
-a.url, a.mention {
-  color: #428bca;
-
-  &:hover {
-    color: darken(#428bca, 20%);
-  }
-}
-
-a.mention {
-  &:hover {
-    text-decoration: none;
-  }
-}
-
-#comments {
-  .form-group {
-    position: relative;
-  }
-}
-
-.advert-comment form {
-  position: relative;
-}
-
 .typeahead.dropdown-menu {
   min-width: 234px;
-}
-
-.loader-img {
-  width: 32px;
-  height: 32px;
-  margin: 0 auto 20px;
-  background-image: url(@loader-img);
 }
 
 .item {
@@ -107,6 +81,13 @@ a.mention {
   .box-shadow(0 0 1px @border-color);
   width: 100%;
 }
+
+// .loader-img {
+//   width: 32px;
+//   height: 32px;
+//   margin: 0 auto 20px;
+//   background-image: url(@loader-img);
+// }
 
 @media (min-width: 481px) {
   .item {
