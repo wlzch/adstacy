@@ -77,6 +77,14 @@
       </div>
     </div>
   </div>
+  {% if ad.commentsCount > ad.comments|length %}
+    <a href="#">load more comments</a>
+  {% endif %}
+  {% for comment in ad.comments %}
+    <div class="advert-comment">
+      <p>{{ comment.content }}</p>
+    </div>
+  {% endfor %}
   {% if app.user %}
   <div class="advert-comment">
     <form action="{{ path('adstacy_app_ad_comment', {id: ad.id}) }}" method="post">

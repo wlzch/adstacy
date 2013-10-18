@@ -194,6 +194,7 @@ class AdRepository extends EntityRepository
         $rsm->addFieldResult('a', 'image_width', 'imageWidth');
         $rsm->addFieldResult('a', 'image_height', 'imageHeight');
         $rsm->addFieldResult('a', 'promotees_count', 'promoteesCount');
+        $rsm->addFieldResult('a', 'comments_count', 'commentsCount');
         $rsm->addFieldResult('a', 'active', 'active');
         $rsm->addFieldResult('a', 'created', 'created');
         $rsm->addFieldResult('a', 'updated', 'updated');
