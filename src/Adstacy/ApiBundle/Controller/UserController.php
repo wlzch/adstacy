@@ -112,7 +112,6 @@ class UserController extends ApiController
         if (($user = $this->getRepository('AdstacyAppBundle:User')->findOneByUsername($username)) == false) {
             throw $this->createNotFoundException();
         };
-        $serializer = $this->get('serializer');
 
         $ads = $user->getAds()->slice(0, $limit);
         $res = array(
@@ -128,7 +127,7 @@ class UserController extends ApiController
             )
         );
 
-        return new Response($serializer->serialize($res, 'json', SerializationContext::create()->setGroups(array('user_show'))));
+        return $this->response($res, 'user_show');
     }
 
     /**
@@ -138,29 +137,7 @@ class UserController extends ApiController
      */
     public function listAdsAction($username)
     {
-        $request = $this->getRequest();
-        $id = $request->query->get('id');
-        if (($user = $this->getRepository('AdstacyAppBundle:User')->findOneByUsername($username)) == false) {
-            throw $this->createNotFoundException();
-        };
-        $limit = $this->getParameter('max_ads_per_page');
-        $ads = $this->getRepository('AdstacyAppBundle:Ad')->findByUser($user, $id, $limit);
-        if (count($ads) <= 0) {
-            return new JsonResponse(array('data' => array()));
-        }
-        $lastId = $ads[count($ads) - 1]->getId();
-
-        $res = array(
-            'data' => array(
-                'ads' => $ads
-            ),
-            'meta' => array(
-                'next' => $this->generateUrl('adstacy_api_user_ads', array('username' => $username, 'id' => $lastId))
-            )
-        );
-        $serializer = $this->get('serializer');
-
-        return new Response($serializer->serialize($res, 'json', SerializationContext::create()->setGroups(array('ad_list'))));
+        return $this->listAds($username, 'ads');
     }
 
     /**
@@ -170,15 +147,25 @@ class UserController extends ApiController
      */
     public function listPromotesAction($username)
     {
+        return $this->listAds($username, 'promotes');
+    }
+
+    private function listAds($username, $action)
+    {
         $request = $this->getRequest();
         $id = $request->query->get('id');
         if (($user = $this->getRepository('AdstacyAppBundle:User')->findOneByUsername($username)) == false) {
             throw $this->createNotFoundException();
         };
         $limit = $this->getParameter('max_ads_per_page');
-        $ads = $this->getRepository('AdstacyAppBundle:Ad')->findByPromote($user, $id, $limit);
+
+        if ($action == 'ads') {
+            $ads = $this->getRepository('AdstacyAppBundle:Ad')->findByUser($user, $id, $limit);
+        } elseif ($action == 'promotes') {
+            $ads = $this->getRepository('AdstacyAppBundle:Ad')->findByPromote($user, $id, $limit);
+        }
         if (count($ads) <= 0) {
-            return new JsonResponse(array('data' => array()));
+            return $this->noResult();
         }
         $lastId = $ads[count($ads) - 1]->getId();
 
@@ -187,12 +174,11 @@ class UserController extends ApiController
                 'ads' => $ads
             ),
             'meta' => array(
-                'next' => $this->generateUrl('adstacy_api_user_promotes', array('username' => $username, 'id' => $lastId))
+                'next' => $this->generateUrl("adstacy_api_user_$action", array('username' => $username, 'id' => $lastId))
             )
         );
-        $serializer = $this->get('serializer');
 
-        return new Response($serializer->serialize($res, 'json', SerializationContext::create()->setGroups(array('ad_list'))));
+        return $this->response($res, 'ad_list');
     }
 
     /**
@@ -202,31 +188,7 @@ class UserController extends ApiController
      */
     public function listFollowersAction($username)
     {
-        $request = $this->getRequest();
-        $id = $request->query->get('id');
-        if (($user = $this->getRepository('AdstacyAppBundle:User')->findOneByUsername($username)) == false) {
-            throw $this->createNotFoundException();
-        };
-        $limit = $this->getParameter('max_users_per_page');
-
-        $query = $this->getRepository('AdstacyAppBundle:User')->findFollowersByUserQuery($user);
-        $paginator = $this->getDoctrinePaginator($query, $limit);
-        if ($paginator->getNbPages() <= 0) {
-            return new JsonResponse(array('data' => array()));
-        }
-
-        $res = array(
-            'data' => array(
-                'users' => $paginator->getCurrentPageResults()->getArrayCopy()
-            ),
-            'meta' => array()
-        );
-        if ($paginator->haveToPaginate()) {
-            $res['meta']['next'] = $this->generateUrl('adstacy_api_user_followers', array('username' => $username, 'page' => $paginator->getNextPage()));
-        }
-        $serializer = $this->get('serializer');
-
-        return new Response($serializer->serialize($res, 'json', SerializationContext::create()->setGroups(array('user_list'))));
+        return $this->listUsers($username, 'followers');
     }
 
     /**
@@ -236,6 +198,11 @@ class UserController extends ApiController
      */
     public function listFollowingsAction($username)
     {
+        return $this->listUsers($username, 'followings');
+    }
+
+    private function listUsers($username, $action)
+    {
         $request = $this->getRequest();
         $id = $request->query->get('id');
         if (($user = $this->getRepository('AdstacyAppBundle:User')->findOneByUsername($username)) == false) {
@@ -243,10 +210,14 @@ class UserController extends ApiController
         };
         $limit = $this->getParameter('max_users_per_page');
 
-        $query = $this->getRepository('AdstacyAppBundle:User')->findFollowingsByUserQuery($user);
+        if ($action == 'followers') {
+            $query = $this->getRepository('AdstacyAppBundle:User')->findFollowersByUserQuery($user);
+        } elseif ($action == 'followings') {
+            $query = $this->getRepository('AdstacyAppBundle:User')->findFollowingsByUserQuery($user);
+        }
         $paginator = $this->getDoctrinePaginator($query, $limit);
         if ($paginator->getNbPages() <= 0) {
-            return new JsonResponse(array('data' => array()));
+            return $this->noResult();
         }
 
         $res = array(
@@ -256,10 +227,9 @@ class UserController extends ApiController
             'meta' => array()
         );
         if ($paginator->haveToPaginate()) {
-            $res['meta']['next'] = $this->generateUrl('adstacy_api_user_followings', array('username' => $username, 'page' => $paginator->getNextPage()));
+            $res['meta']['next'] = $this->generateUrl("adstacy_api_user_$action", array('username' => $username, 'page' => $paginator->getNextPage()));
         }
-        $serializer = $this->get('serializer');
 
-        return new Response($serializer->serialize($res, 'json', SerializationContext::create()->setGroups(array('user_list'))));
+        return $this->response($res, 'user_list');
     }
 }

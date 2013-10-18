@@ -28,9 +28,7 @@ class AdController extends ApiController
             )
         );
 
-        $serializer = $this->get('serializer');
-
-        return new Response($serializer->serialize($res, 'json', SerializationContext::create()->setGroups(array('ad_show'))));
+        return $this->response($res, 'ad_show');
     }
 
     /**
@@ -49,7 +47,7 @@ class AdController extends ApiController
         $comments = $this->getRepository('AdstacyAppBundle:Comment')->findByAd($ad, $until, $limit);
 
         if (count($comments) <= 0) {
-            return new JsonResponse(array('data' => array()));
+            return $this->noResult();
         }
 
         $next = $comments[count($comments)-1]->getId();
@@ -62,8 +60,6 @@ class AdController extends ApiController
             )
         );
 
-        $serializer = $this->get('serializer');
-
-        return new Response($serializer->serialize($res, 'json', SerializationContext::create()->setGroups(array('comment_list'))));
+        return $this->response($res, 'comment_list');
     }
 }
