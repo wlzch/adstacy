@@ -51,7 +51,7 @@ class User implements UserInterface, GroupableInterface
      *  )
      * @ORM\Column(type="string", length=100, nullable=false)
      * @JMS\Expose
-     * @JMS\Groups({"user_show", "user_list", "ad_list", "ad_show"})
+     * @JMS\Groups({"user_show", "user_list", "ad_list", "ad_show", "comment_list"})
      */
     private $username;
 
@@ -96,7 +96,7 @@ class User implements UserInterface, GroupableInterface
      * @Assert\NotBlank(message="user.realname.not_blank", groups={"Registration", "Profile"})
      * @ORM\Column(name="real_name", type="string", length=100)
      * @JMS\Expose
-     * @JMS\Groups({"user_show", "user_list", "ad_list", "ad_show"})
+     * @JMS\Groups({"user_show", "user_list", "ad_list", "ad_show", "comment_list"})
      */
     private $realName;
 

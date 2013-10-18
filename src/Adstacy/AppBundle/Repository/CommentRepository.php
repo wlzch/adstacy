@@ -13,8 +13,20 @@ use Adstacy\AppBundle\Entity\Ad;
  */
 class CommentRepository extends EntityRepository
 {
-    public function findByAd(Ad $ad)
+    /**
+     * Find $limit comments by $ad which is older than $until
+     *
+     * @param Ad $ad
+     * @param integer|null $until
+     * @param integer $limit
+     *
+     * @return array
+     */
+    public function findByAd(Ad $ad, $until = null, $limit = 10)
     {
+        if ($until == null) {
+            $until = 2000000000;
+        }
         $em = $this->getEntityManager();
         $query = $em->createQuery('
             SELECT c,
@@ -22,10 +34,10 @@ class CommentRepository extends EntityRepository
             FROM AdstacyAppBundle:Comment c
             JOIN c.ad a
             JOIN c.user u
-            WHERE a.id = :id
-            ORDER BY c.created ASC
+            WHERE c.id < :until AND a.id = :id
+            ORDER BY c.id DESC
         ');
 
-        return $query->setParameter('id', $ad->getId())->getResult();
+        return $query->setParameter('until', $until)->setParameter('id', $ad->getId())->setMaxResults($limit)->getResult();
     }
 }

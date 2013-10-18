@@ -327,4 +327,38 @@ class ApiController extends Controller
 
         return new Response($serializer->serialize($res, 'json', SerializationContext::create()->setGroups(array('ad_show'))));
     }
+
+    /**
+     * Return ad's comments
+     *
+     * @param integer $id
+     */
+    public function listAdCommentsAction($id)
+    {
+        if (($ad = $this->getRepository('AdstacyAppBundle:Ad')->find($id)) == false) {
+            throw $this->createNotFoundException();
+        }
+
+        $until = $this->getRequest()->query->get('until');
+        $limit = $this->getParameter('max_comments_per_page');
+        $comments = $this->getRepository('AdstacyAppBundle:Comment')->findByAd($ad, $until, $limit);
+
+        if (count($comments) <= 0) {
+            return new JsonResponse(array('data' => array()));
+        }
+
+        $next = $comments[count($comments)-1]->getId();
+        $res = array(
+            'data' => array(
+                'comments' => array_reverse($comments)
+            ),
+            'meta' => array(
+                'prev' => $this->generateUrl('adstacy_app_api_ad_comments', array('id' => $id, 'until' => $next))
+            )
+        );
+
+        $serializer = $this->get('serializer');
+
+        return new Response($serializer->serialize($res, 'json', SerializationContext::create()->setGroups(array('comment_list'))));
+    }
 }
