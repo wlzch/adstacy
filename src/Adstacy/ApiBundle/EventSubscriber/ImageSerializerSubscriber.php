@@ -1,6 +1,6 @@
 <?php
 
-namespace Adstacy\AppBundle\EventSubscriber;
+namespace Adstacy\ApiBundle\EventSubscriber;
 
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;

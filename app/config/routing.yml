@@ -6,6 +6,10 @@ adstacy_app:
     resource: "@AdstacyAppBundle/Resources/config/routing.yml"
     prefix:   /
 
+adstacy_api:
+    resource: "@AdstacyApiBundle/Resources/config/routing.yml"
+    prefix:   /api
+
 adstacy_notification:
     resource: "@AdstacyNotificationBundle/Resources/config/routing.yml"
     prefix:   /

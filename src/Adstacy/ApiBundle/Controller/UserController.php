@@ -1,16 +1,16 @@
 <?php
 
-namespace Adstacy\AppBundle\Controller;
+namespace Adstacy\ApiBundle\Controller;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use JMS\Serializer\SerializationContext;
 
-class ApiController extends Controller
+class UserController extends ApiController
 {
     /**
-     * Get users
+     * Search users
      * Use redis to store cache.
      */
     public function usersAction()
@@ -53,7 +53,8 @@ class ApiController extends Controller
     }
 
     /**
-     * Return follower's and followings
+     * Return follower's and followings.
+     * Used in user autocomplete prefetching
      *
      * @Secure(roles="ROLE_USER")
      */
@@ -99,58 +100,11 @@ class ApiController extends Controller
     }
 
     /**
-     * Return tag suggestions.
-     */
-    public function tagsAction()
-    {
-        $request = $this->getRequest();
-        $results = array();
-        $q = $request->query->get('q');
-        $response = null;
-        $redis = $this->get('snc_redis.default');
-        $tags = explode(' ', $q);
-        $cnt = count($tags);
-        $prevTags = array_slice($tags, 0, $cnt - 1);
-        $cntPrevTags = count($prevTags);
-        $prevTags = implode(' ', $prevTags);
-        $q = $tags[$cnt - 1];
-
-        if ($q && strlen($q) >= 2) {
-          $rank = $redis->zrank('tags', $q);
-          $possibilities = $redis->zrange('tags', $rank + 1, $rank + 50);
-          $tags = array();
-          foreach ($possibilities as $possibility) {
-            if (strpos($possibility, $q) === false) break;
-            $len = strlen($possibility);
-            if ($possibility[$len - 1] == '*') {
-              $tag = substr($possibility, 0, $len - 1);
-              if ($cntPrevTags > 0) {
-                  $completeTag = $prevTags.' '.$tag;
-              } else {
-                  $completeTag = $tag;
-              }
-              $results[] = array(
-                  'value' => $completeTag,
-                  'tokens' => array($tag),
-                  'url' => $this->generateUrl('adstacy_app_search', array('q' => $completeTag))
-              );
-            }
-          }
-        }
-        $response = new JsonResponse();
-        $response->setData($results);
-        $response->setMaxAge(86400);
-        $response->setSharedMaxAge(86400);
-
-        return $response;
-    }
-
-    /**
      * Return informations about user
      *
      * @param string username
      */
-    public function showUserAction($username)
+    public function showAction($username)
     {
         $request = $this->getRequest();
         $limit = $this->getParameter('max_ads_per_page');
@@ -167,10 +121,10 @@ class ApiController extends Controller
                 'ads' => $ads
             ),
             'meta' => array(
-                'url_followers' => $this->generateUrl('adstacy_app_api_user_followers', array('username' => $username)),
-                'url_followings' => $this->generateUrl('adstacy_app_api_user_followings', array('username' => $username)),
-                'url_promotes' => $this->generateUrl('adstacy_app_api_user_promotes', array('username' => $username)),
-                'next' => $this->generateUrl('adstacy_app_api_user_ads', array('username' => $username))
+                'url_followers' => $this->generateUrl('adstacy_api_user_followers', array('username' => $username)),
+                'url_followings' => $this->generateUrl('adstacy_api_user_followings', array('username' => $username)),
+                'url_promotes' => $this->generateUrl('adstacy_api_user_promotes', array('username' => $username)),
+                'next' => $this->generateUrl('adstacy_api_user_ads', array('username' => $username))
             )
         );
 
@@ -201,7 +155,7 @@ class ApiController extends Controller
                 'ads' => $ads
             ),
             'meta' => array(
-                'next' => $this->generateUrl('adstacy_app_api_user_ads', array('username' => $username, 'id' => $lastId))
+                'next' => $this->generateUrl('adstacy_api_user_ads', array('username' => $username, 'id' => $lastId))
             )
         );
         $serializer = $this->get('serializer');
@@ -233,7 +187,7 @@ class ApiController extends Controller
                 'ads' => $ads
             ),
             'meta' => array(
-                'next' => $this->generateUrl('adstacy_app_api_user_promotes', array('username' => $username, 'id' => $lastId))
+                'next' => $this->generateUrl('adstacy_api_user_promotes', array('username' => $username, 'id' => $lastId))
             )
         );
         $serializer = $this->get('serializer');
@@ -268,13 +222,18 @@ class ApiController extends Controller
             'meta' => array()
         );
         if ($paginator->haveToPaginate()) {
-            $res['meta']['next'] = $this->generateUrl('adstacy_app_api_user_followers', array('username' => $username, 'page' => $paginator->getNextPage()));
+            $res['meta']['next'] = $this->generateUrl('adstacy_api_user_followers', array('username' => $username, 'page' => $paginator->getNextPage()));
         }
         $serializer = $this->get('serializer');
 
         return new Response($serializer->serialize($res, 'json', SerializationContext::create()->setGroups(array('user_list'))));
     }
 
+    /**
+     * Return $username's followings
+     *
+     * @param string $username
+     */
     public function listFollowingsAction($username)
     {
         $request = $this->getRequest();
@@ -297,68 +256,10 @@ class ApiController extends Controller
             'meta' => array()
         );
         if ($paginator->haveToPaginate()) {
-            $res['meta']['next'] = $this->generateUrl('adstacy_app_api_user_followings', array('username' => $username, 'page' => $paginator->getNextPage()));
+            $res['meta']['next'] = $this->generateUrl('adstacy_api_user_followings', array('username' => $username, 'page' => $paginator->getNextPage()));
         }
         $serializer = $this->get('serializer');
 
         return new Response($serializer->serialize($res, 'json', SerializationContext::create()->setGroups(array('user_list'))));
-    }
-
-    /**
-     * Return ad information
-     *
-     * @param integer id
-     */
-    public function showAdAction($id)
-    {
-        if (($ad = $this->getRepository('AdstacyAppBundle:Ad')->find($id)) == false) {
-            throw $this->createNotFoundException();
-        }
-
-        $res = array(
-            'data' => array(
-                'ad' => $ad
-            ),
-            'meta' => array(
-            )
-        );
-
-        $serializer = $this->get('serializer');
-
-        return new Response($serializer->serialize($res, 'json', SerializationContext::create()->setGroups(array('ad_show'))));
-    }
-
-    /**
-     * Return ad's comments
-     *
-     * @param integer $id
-     */
-    public function listAdCommentsAction($id)
-    {
-        if (($ad = $this->getRepository('AdstacyAppBundle:Ad')->find($id)) == false) {
-            throw $this->createNotFoundException();
-        }
-
-        $until = $this->getRequest()->query->get('until');
-        $limit = $this->getParameter('max_comments_per_page');
-        $comments = $this->getRepository('AdstacyAppBundle:Comment')->findByAd($ad, $until, $limit);
-
-        if (count($comments) <= 0) {
-            return new JsonResponse(array('data' => array()));
-        }
-
-        $next = $comments[count($comments)-1]->getId();
-        $res = array(
-            'data' => array(
-                'comments' => array_reverse($comments)
-            ),
-            'meta' => array(
-                'prev' => $this->generateUrl('adstacy_app_api_ad_comments', array('id' => $id, 'until' => $next))
-            )
-        );
-
-        $serializer = $this->get('serializer');
-
-        return new Response($serializer->serialize($res, 'json', SerializationContext::create()->setGroups(array('comment_list'))));
     }
 }

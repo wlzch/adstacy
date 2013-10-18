@@ -17,7 +17,7 @@ class Comment
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @JMS\Groups({"ad_list", "comment_list"})
+     * @JMS\Groups({"ad_list", "comment_list", "ad_show"})
      */
     private $id;
 
@@ -28,19 +28,19 @@ class Comment
      *  maxMessage = "comment.content.max"
      * )
      * @ORM\Column(type="text", length=255)
-     * @JMS\Groups({"ad_list", "comment_list"})
+     * @JMS\Groups({"ad_list", "comment_list", "ad_show"})
      */
     private $content;
 
     /**
      * @ORM\Column(type="datetime")
-     * @JMS\Groups({"ad_list", "comment_list"})
+     * @JMS\Groups({"ad_list", "comment_list", "ad_show"})
      */
     private $created;
 
     /**
      * @ORM\ManyToOne(targetEntity="User")
-     * @JMS\Groups({"ad_list", "comment_list"})
+     * @JMS\Groups({"ad_list", "comment_list", "ad_show"})
      */
     private $user;
 

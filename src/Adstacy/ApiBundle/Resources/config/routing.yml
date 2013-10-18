@@ -1,0 +1,28 @@
+adstacy_api_users:
+    path: /users.json
+    defaults:
+        _controller: AdstacyApiBundle:User:users
+    options:
+      expose: true
+
+adstacy_api_network:
+    path: /me/network.json
+    defaults:
+        _controller: AdstacyApiBundle:User:network
+    options:
+        expose: true
+
+adstacy_api_tags:
+    path: /tags.json
+    defaults:
+        _controller: AdstacyApiBundle:Tag:search
+    options:
+      expose: true
+
+AdstacyApiBundle_users:
+    resource: "@AdstacyApiBundle/Resources/config/routing/users.yml"
+    prefix: /users
+
+AdstacyApiBundle_ads:
+    resource: "@AdstacyApiBundle/Resources/config/routing/ads.yml"
+    prefix: /ads

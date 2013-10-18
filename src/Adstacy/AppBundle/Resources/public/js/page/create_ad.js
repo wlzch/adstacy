@@ -38,7 +38,7 @@ $(function() {
     typeahead: {
       name: 'tags',
       remote: {
-        url: Routing.generate('adstacy_app_api_tags', {q: '_QUERY_'}),
+        url: Routing.generate('adstacy_api_tags', {q: '_QUERY_'}),
         wildcard: '_QUERY_'
       }
     }

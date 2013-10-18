@@ -1,0 +1,17 @@
+adstacy_api_ad_show:
+    path: /{id}
+    defaults:
+        _controller: AdstacyApiBundle:Ad:show
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+adstacy_api_ad_comments:
+    path: /{id}/comments
+    defaults:
+        _controller: AdstacyApiBundle:Ad:listComments
+    requirements:
+        id: \d+
+    options:
+        expose: true

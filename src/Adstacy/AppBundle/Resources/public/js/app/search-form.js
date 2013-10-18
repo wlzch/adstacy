@@ -4,7 +4,7 @@
   var tagsOption = {
       name: 'tags',
       remote: {
-        url: Routing.generate('adstacy_app_api_tags', {q: '_QUERY_'}),
+        url: Routing.generate('adstacy_api_tags', {q: '_QUERY_'}),
         wildcard: '_QUERY_'
       },
       template: '<a href="{{ url }}">{{ value }}</a>',
@@ -14,7 +14,7 @@
   var usersOption = {
       name: 'users',
       remote: {
-        url: Routing.generate('adstacy_app_api_users', {q: '_QUERY_', cond: 'noment'}),
+        url: Routing.generate('adstacy_api_users', {q: '_QUERY_', cond: 'noment'}),
         wildcard: '_QUERY_'
       },
       header: '<h3 class="tt-dropdown-header">Users</h3>',
@@ -22,7 +22,7 @@
       engine: Hogan
   };
   if ($('body').hasClass('logged-in')) {
-      usersOption['prefetch'] = Routing.generate('adstacy_app_api_network', {cond: 'noment'});
+      usersOption['prefetch'] = Routing.generate('adstacy_api_network', {cond: 'noment'});
   }
   $searchBox.typeahead([tagsOption, usersOption]);
   $searchBox.on('typeahead:selected', function(e, datum, name) {

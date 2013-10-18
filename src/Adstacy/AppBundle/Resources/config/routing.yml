@@ -78,7 +78,3 @@ AdstacyAppBundle_ads:
 AdstacyAppBundle_admin:
     resource: "@AdstacyAppBundle/Resources/config/routing/admin.yml"
     prefix: /admin
-
-AdstacyAppBundle_api:
-    resource: "@AdstacyAppBundle/Resources/config/routing/api.yml"
-    prefix: /api
