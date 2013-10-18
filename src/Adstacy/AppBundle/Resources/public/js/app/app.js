@@ -33,15 +33,7 @@ $(function(){
   });
 
   $('.btn-share').click(function() {
-    var tab = $(this).parent().next();
-    tab.find('.advert-share').toggle();
-    tab.find('.advert-comment').hide();
-  });
-
-  $('.btn-comment').click(function() {
-    var tab = $(this).parent().next();
-    tab.find('.advert-comment').toggle();
-    tab.find('.advert-share').hide();
+    $(this).parent().parent().next().find('.advert-share').toggle();
   });
 
   $('img.lazy').lazyload();

@@ -27,38 +27,31 @@
 }
 
 .advert-tags {
-  background: @gray-dark;
-  padding: 10px 15px;
-  .text-overflow();
+  // .text-overflow();
 }
 
 .advert-detail {
+  border-top: 1px solid @border-color;
   padding: 10px 15px;
 }
 
 .advert-desc {
-  margin: 10px 0 0;
+  margin: 10px 0;
   .hyphens();
-}
-
-.advert-counter {
-  padding: 0 15px 10px;
-
-  a {
-    font-weight: bold;
-    font-size: 12px;
-    color: #aaa;
-  }
 }
 
 .advert-action,
 .owner-action {
-  border-top: 1px solid @border-color;
-
   .btn {
-    &:first-child {
-      border: 0;
-    }
+    height: 46px;
+  }
+
+  .pull-left .btn {
+    border: 0;
+    border-right: 1px solid @border-color;
+  }
+
+  .pull-right .btn {
     border: 0;
     border-left: 1px solid @border-color;
   }
@@ -70,8 +63,16 @@
 }
 
 .advert-action-content {
+  position: relative;
+
   .advert-share {
     display: none;
+    z-index: @zindex-dropdown;
+    .box-shadow(0 6px 12px rgba(0,0,0,.175));
+    background-clip: padding-box;
+    position: absolute;
+    top: 0;
+    background-color: #fff;
   }
 
   .advert-share, .advert-comment {
@@ -80,25 +81,24 @@
   }
 }
 
+.advert-comment {
+  padding: 10px 15px;
+  border-top: 1px solid @border-color;
+}
+
+.btn-comments-count {
+  border-width: 1px 0 0;
+}
+
 @media (min-width: 481px) {
-  .advert-action,
-  .owner-action {
-    a span {
-      font-size: 14px;
-    }
-  }
+
 }
 
 @media (min-width: 600px) {
 }
 
 @media (min-width: 720px) {
-  .advert-action,
-  .owner-action {
-    a span {
-      display: inline;
-    }
-  }
+
 }
 
 // OLD
