@@ -23,13 +23,13 @@ class Ad
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @JMS\Groups({"user_show", "ad_list"})
+     * @JMS\Groups({"user_show", "ad_list", "ad_show"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=25, nullable=true)
-     * @JMS\Groups({"user_show", "ad_list"})
+     * @JMS\Groups({"user_show", "ad_list", "ad_show"})
      */
     private $type;
 
@@ -47,19 +47,19 @@ class Ad
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
-     * @JMS\Groups({"user_show", "ad_list"})
+     * @JMS\Groups({"user_show", "ad_list", "ad_show"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=25, nullable=true)
-     * @JMS\Groups({"user_show", "ad_list"})
+     * @JMS\Groups({"user_show", "ad_list", "ad_show"})
      */
     private $youtubeId;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @JMS\Groups({"user_show", "ad_list"})
+     * @JMS\Groups({"user_show", "ad_list", "ad_show"})
      */
     private $description;
 
@@ -69,38 +69,38 @@ class Ad
      *  minMessage= "ad.tags.min_count"
      * )
      * @ORM\Column(type="simple_array", nullable=true)
-     * @JMS\Groups({"user_show", "ad_list"})
+     * @JMS\Groups({"user_show", "ad_list", "ad_show"})
      */
     private $tags;
 
     /**
      * @ORM\Column(type="datetime")
-     * @JMS\Groups({"user_show", "ad_list"})
+     * @JMS\Groups({"user_show", "ad_list", "ad_show"})
      */
     private $created;
 
     /**
      * @ORM\Column(name="thumb_height", type="smallint", nullable=true)
-     * @JMS\Groups({"user_show", "ad_list"})
+     * @JMS\Groups({"user_show", "ad_list", "ad_show"})
      */
     private $thumbHeight;
 
     /**
      * @ORM\Column(name="image_width", type="smallint", nullable=true)
-     * @JMS\Groups({"user_show", "ad_list"})
+     * @JMS\Groups({"user_show", "ad_list", "ad_show"})
      */
     private $imageWidth;
 
     /**
      * @ORM\Column(name="image_height", type="smallint", nullable=true)
-     * @JMS\Groups({"user_show", "ad_list"})
+     * @JMS\Groups({"user_show", "ad_list", "ad_show"})
      */
     private $imageHeight;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="ads", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
-     * @JMS\Groups({"user_show", "ad_list"})
+     * @JMS\Groups({"user_show", "ad_list", "ad_show"})
      */
     private $user;
 
@@ -112,19 +112,19 @@ class Ad
 
     /**
      * @ORM\Column(name="promotees_count", type="integer")
-     * @JMS\Groups({"user_show", "ad_list"})
+     * @JMS\Groups({"user_show", "ad_list", "ad_show"})
      */
     private $promoteesCount;
 
     /**
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="ad", orphanRemoval=true, cascade={"persist", "remove"})
-     * @JMS\Groups({"ad_list"})
+     * @JMS\Groups({"ad_list", "ad_show"})
      */
     private $comments;
 
     /**
      * @ORM\Column(name="comments_count", type="integer", nullable=true)
-     * @JMS\Groups({"user_show", "ad_list"})
+     * @JMS\Groups({"user_show", "ad_list", "ad_show"})
      */
     private $commentsCount;
 
@@ -146,7 +146,7 @@ class Ad
 
     /**
      * @ORM\Column(type="boolean")
-     * @JMS\Groups({"user_show", "ad_list"})
+     * @JMS\Groups({"user_show", "ad_list", "ad_show"})
      */
     private $active;
 

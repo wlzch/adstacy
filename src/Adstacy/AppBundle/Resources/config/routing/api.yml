@@ -53,3 +53,10 @@ adstacy_app_api_user_promotes:
         _controller: AdstacyAppBundle:Api:listPromotes
     options:
         expose: true
+
+adstacy_app_api_ad_show:
+    path: /ads/{id}
+    defaults:
+        _controller: AdstacyAppBundle:Api:showAd
+    options:
+        expose: true

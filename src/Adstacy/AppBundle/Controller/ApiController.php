@@ -303,4 +303,28 @@ class ApiController extends Controller
 
         return new Response($serializer->serialize($res, 'json', SerializationContext::create()->setGroups(array('user_list'))));
     }
+
+    /**
+     * Return ad information
+     *
+     * @param integer id
+     */
+    public function showAdAction($id)
+    {
+        if (($ad = $this->getRepository('AdstacyAppBundle:Ad')->find($id)) == false) {
+            throw $this->createNotFoundException();
+        }
+
+        $res = array(
+            'data' => array(
+                'ad' => $ad
+            ),
+            'meta' => array(
+            )
+        );
+
+        $serializer = $this->get('serializer');
+
+        return new Response($serializer->serialize($res, 'json', SerializationContext::create()->setGroups(array('ad_show'))));
+    }
 }
