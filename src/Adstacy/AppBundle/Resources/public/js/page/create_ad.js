@@ -78,7 +78,8 @@ $(function() {
   });
   var editor = new wysihtml5.Editor('ad_description', {
     toolbar: 'wysihtml5-editor-toolbar',
-    parserRules: wysihtml5ParserRules
+    parserRules: wysihtml5ParserRules,
+    stylesheets: "/bundles/adstacyapp/css/wysiwyg-styles.css"
   });
   $('iframe.wysihtml5-sandbox').wysihtml5_size_matters();
 });
