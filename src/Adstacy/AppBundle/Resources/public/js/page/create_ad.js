@@ -8,6 +8,11 @@ $(function() {
   var $advertImages = $('#create-advert-images');
   var $advertImageTrigger = $('#create-advert-image-trigger');
   var $advertType = $('#ad_type');
+  var $uploadImageContainer = $('#upload-image-container');
+  var $progress = $('#progressbar');
+  var $imagePreview = $('.image-preview');
+  var $modal = $('#create-advert-image-modal');
+
   $chooseImage.click(function() {
     $advertImage.removeClass('hide');
     $advertImageTrigger.removeClass('hide');
@@ -29,6 +34,14 @@ $(function() {
     $advertVideo.removeClass('hide');
     $advertType.val('video');
   });
+  var previewImage = function(src) {
+    var $img = $imagePreview.find('img');
+    if ($img.length == 0) {
+      $imagePreview.append($('<img>').attr('src', src));
+    } else {
+      $img.attr('src', src);
+    }
+  };
   $('#ad_image').fileupload({
     url: Routing.generate('adstacy_app_upload'),
     dataType: 'json',
@@ -38,22 +51,27 @@ $(function() {
     done: function(e, data) {
       if (data.result.status == 'ok') {
         $.each(data.result.files, function(index, file) {
-          $('.image-preview img').attr('src', file.src);
+          previewImage(file.src);
           $('#ad_imagename').val(file.name);
         });
       } else {
         // display error
       }
-      $('#progressbar').progressbar('destroy');
+      $progress.progressbar('destroy');
+      $modal.modal('hide');
     },
     fail: function(e, data) {
-      $('#progressbar').progressbar('destroy');
+      $progress.progressbar('destroy');
+      $uploadImageContainer.hide();
     },
     progressall: function(e, data) {
       var progress = parseInt(data.loaded / data.total * 100, 10);
-      $('#progressbar').progressbar({
+      $progress.progressbar({
         value: progress
       });
+    },
+    start: function(e) {
+      $uploadImageContainer.hide();    
     }
   }).prop('disabled', !$.support.fileInput)
   .parent().addClass($.support.fileInput ? undefined : 'disabled')
@@ -82,4 +100,7 @@ $(function() {
     stylesheets: "/bundles/adstacyapp/css/wysiwyg-styles.css"
   });
   $('iframe.wysihtml5-sandbox').wysihtml5_size_matters();
+  $modal.on('show.bs.modal', function() {
+    $uploadImageContainer.show();
+  });
 });
