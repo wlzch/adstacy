@@ -80,4 +80,5 @@ $(function() {
     toolbar: 'wysihtml5-editor-toolbar',
     parserRules: wysihtml5ParserRules
   });
+  $('iframe.wysihtml5-sandbox').wysihtml5_size_matters();
 });
