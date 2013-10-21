@@ -1,15 +1,14 @@
 @font-face {
 	font-family: 'adstacy';
-	src:url('../font/adstacy.eot');
-	src:url('../font/adstacy.eot?#iefix') format('embedded-opentype'),
-		url('../font/adstacy.woff') format('woff'),
-		url('../font/adstacy.ttf') format('truetype'),
-		url('../font/adstacy.svg#adstacy') format('svg');
+	src:url('../font/adstacy.eot?-phk9vu');
+	src:url('../font/adstacy.eot?#iefix-phk9vu') format('embedded-opentype'),
+		url('../font/adstacy.ttf?-phk9vu') format('truetype'),
+		url('../font/adstacy.woff?-phk9vu') format('woff'),
+		url('../font/adstacy.svg?-phk9vu#adstacy') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
-
-.icon, .icon-home, .icon-rss, .icon-rocket, .icon-search, .icon-plus, .icon-user, .icon-gear, .icon-off, .icon-angle-up, .icon-angle-down, .icon-facebook, .icon-twitter, .icon-share, .icon-envelope-alt, .icon-edit, .icon-delete, .icon-ads, .icon-bullhorn, .icon-hash, .icon-star, .icon-ok-sign, .icon-bell, .icon-globe, .icon-tags {
+.icon {
 	font-family: 'adstacy';
 	speak: none;
 	font-style: normal;
@@ -17,7 +16,10 @@
 	font-variant: normal;
 	text-transform: none;
 	line-height: 1;
+
+	/* Better Font Rendering =========== */
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 .icon:before {
   margin: 0 8px;
@@ -93,4 +95,103 @@
 }
 .icon-tags:before {
 	content: "\e017";
+}
+.icon-align-left:before {
+	content: "\e600";
+}
+.icon-align-center:before {
+	content: "\e601";
+}
+.icon-align-right:before {
+	content: "\e602";
+}
+.icon-align-justify:before {
+	content: "\e603";
+}
+.icon-indent-left:before {
+	content: "\e604";
+}
+.icon-indent-right:before {
+	content: "\e605";
+}
+.icon-bold:before {
+	content: "\e606";
+}
+.icon-italic:before {
+	content: "\e607";
+}
+.icon-underline:before {
+	content: "\e608";
+}
+.icon-strikethrough:before {
+	content: "\e609";
+}
+.icon-list-ul:before {
+	content: "\e60a";
+}
+.icon-list-ol:before {
+	content: "\e60b";
+}
+.icon-save:before {
+	content: "\e60c";
+}
+.icon-copy:before {
+	content: "\e60d";
+}
+.icon-cut:before {
+	content: "\e60e";
+}
+.icon-paste:before {
+	content: "\e60f";
+}
+.icon-paper-clip:before {
+	content: "\e610";
+}
+.icon-unlink:before {
+	content: "\e611";
+}
+.icon-undo:before {
+	content: "\e612";
+}
+.icon-repeat:before {
+	content: "\e613";
+}
+.icon-quote-left:before {
+	content: "\e614";
+}
+.icon-file:before {
+	content: "\e615";
+}
+.icon-font:before {
+	content: "\e616";
+}
+.icon-resize-full:before {
+	content: "\e617";
+}
+.icon-resize-small:before {
+	content: "\e618";
+}
+.icon-th:before {
+	content: "\e619";
+}
+.icon-th-list:before {
+	content: "\e61a";
+}
+.icon-th-large:before {
+	content: "\e61b";
+}
+.icon-text-height:before {
+	content: "\e61c";
+}
+.icon-text-width:before {
+	content: "\e61d";
+}
+.icon-list:before {
+	content: "\e61e";
+}
+.icon-camera:before {
+	content: "\e61f";
+}
+.icon-bubbles:before {
+	content: "\e620";
 }
