@@ -10,6 +10,13 @@
   &:first-child {
     margin-top: 0;
   }
+
+  .dropdown-menu {
+    border-right: 0;
+    min-width: initial;
+    text-align: center;
+    text-transform: uppercase;
+  }
 }
 
 .jscroll-added .advert:first-child {
@@ -40,8 +47,9 @@
   .hyphens();
 }
 
-.advert-action,
-.owner-action {
+.advert-action {
+  border-top: 1px solid @border-color;
+
   .btn {
     height: 46px;
   }
@@ -56,9 +64,17 @@
     border-left: 1px solid @border-color;
   }
 
-  a span {
-    display: block;
+  a {
+    text-transform: uppercase;
     font-size: 10px;
+
+    .icon {
+      font-size: 16px;
+    }
+
+    span {
+      display: block;
+    }
   }
 }
 

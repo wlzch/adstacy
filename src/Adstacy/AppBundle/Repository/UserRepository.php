@@ -102,7 +102,7 @@ class UserRepository extends EntityRepository
     }
 
     /**
-     * Find users who promotes $ad 
+     * Find users who promotes $ad
      *
      * @param integer id
      *
@@ -159,7 +159,7 @@ class UserRepository extends EntityRepository
         return $em->createQuery("
             SELECT partial u.{id,username,imagename,realName,adsCount,followersCount,notificationsCount,profilePicture}
             FROM AdstacyAppBundle:User u
-            WHERE u.usernameCanonical IN ($formatted)
+            WHERE u.usernameCanonical IN $usernames
         ")->getResult();
     }
 
@@ -177,7 +177,7 @@ class UserRepository extends EntityRepository
             ORDER BY u.followersCount DESC
         ')->setMaxResults($limit);
         $query->useResultCache(true, 86400, 'UserFindPopularUsersQuery');
-        
+
         return $query->getResult();
     }
 }

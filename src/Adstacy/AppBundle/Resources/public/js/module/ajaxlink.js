@@ -35,7 +35,7 @@
       var settings = types[type];
       var $parent = $(this);
       var size = settings.image_size || options.image_size;
-      var loading = 'Loading...';
+      var loading = '<div style="line-height: 34px;">loading...</div>';
 
       $parent.find(settings.firstSelector+','+settings.secondSelector).click(function(event) {
         var $this = $(this);
