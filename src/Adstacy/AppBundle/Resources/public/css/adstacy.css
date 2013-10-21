@@ -195,3 +195,6 @@
 .icon-bubbles:before {
 	content: "\e620";
 }
+.icon-flag:before {
+	content: "\e621";
+}
