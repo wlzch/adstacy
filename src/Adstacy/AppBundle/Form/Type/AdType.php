@@ -19,12 +19,18 @@ class AdType extends AbstractType
         $builder->add('title', 'text', array(
             'label' => 'form_ad.title',
             'required' => false,
-            'error_bubbling' => true
+            'error_bubbling' => true,
+            'attr' => array(
+                'placeholder' => 'form_ad.placeholders.title'
+            )
         ));
         $builder->add('youtubeId', 'text', array(
             'label' => 'form_ad.youtube',
             'required' => false,
-            'error_bubbling' => true
+            'error_bubbling' => true,
+            'attr' => array(
+                'placeholder' => 'form_ad.placeholders.youtube_id'
+            )
         ));
         $builder->add('images', 'ad_images', array(
             'label' => 'form_ad.images',

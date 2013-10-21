@@ -1,4 +1,34 @@
 $(function() {
+  var $chooseImage = $('#choose-advert-image');
+  var $chooseText = $('#choose-advert-text');
+  var $chooseVideo = $('#choose-advert-video');
+  var $advertImage = $('#create-advert-image');
+  var $advertText = $('#create-advert-text');
+  var $advertVideo = $('#create-advert-video');
+  var $advertImages = $('#create-advert-images');
+  var $advertImageTrigger = $('#create-advert-image-trigger');
+  var $advertType = $('#ad_type');
+  $chooseImage.click(function() {
+    $advertImage.removeClass('hide');
+    $advertImageTrigger.removeClass('hide');
+    $advertText.addClass('hide');
+    $advertVideo.addClass('hide');
+    $advertType.val('image');
+  });
+  $chooseText.click(function() {
+    $advertImage.addClass('hide');
+    $advertImageTrigger.addClass('hide');
+    $advertText.removeClass('hide');
+    $advertVideo.addClass('hide');
+    $advertType.val('text');
+  });
+  $chooseVideo.click(function() {
+    $advertImage.addClass('hide');
+    $advertImageTrigger.addClass('hide');
+    $advertText.addClass('hide');
+    $advertVideo.removeClass('hide');
+    $advertType.val('video');
+  });
   $('#ad_image').fileupload({
     url: Routing.generate('adstacy_app_upload'),
     dataType: 'json',

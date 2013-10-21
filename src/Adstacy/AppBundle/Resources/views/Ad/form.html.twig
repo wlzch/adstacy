@@ -14,53 +14,87 @@
   {% endstylesheets %}
 {% endblock %}
 
+{% block navbar %}{% endblock %}
+
 {% block content %}
   {% set data = form.vars.data %}
   <div id="create-advert" class="panel panel-default">
     <div class="panel-body clearfix">
+      <div id="create-advert-toolbar">
+        <a class="btn btn-default" id="choose-advert-image" href="#"><i class="icon-picture"></i> image</a>
+        <a class="btn btn-default" id="choose-advert-text" href="#"><i class="icon-edit"></i> text</a>
+        <a class="btn btn-default" id="choose-advert-video" href="#"><i class="icon-youtube-play"></i> video</a>
+      </div>
       {{ form_start(form, {attr: {class: 'submit-disable'}}) }}
       {{ form_errors(form) }}
-      <div id="create-advert-toolbar">
-        <a href="#">image</a>
-        <a href="#">text</a>
-      </div>
-      <div id="create-advert-image">
-        <span class="btn btn-success fileinput-button">
-          <span>Choose Image</span>
-          {{ form_widget(form.image) }}
-          {{ form_widget(form.imagename) }}
-        </span>
-      </div>
-      <div id="create-advert-text">
-        {{ form_widget(form.title) }}
-      </div>
-      <div id="create-advert-youtube">
-        {{ form_widget(form.youtubeId) }}
+      <div class="form-content-container">
+        <a id="create-advert-image-trigger" data-toggle="modal" data-target="#create-advert-image-modal">
+          {{"form_ad.image_trigger"|trans}}
+        </a>
+        <div id="create-advert-text" class="hide">
+          {{ form_widget(form.title, {attr: {class: 'form-control'}}) }}
+        </div>
+        <div id="create-advert-video" class="hide">
+          {{ form_widget(form.youtubeId, {attr: {class: 'form-control'}}) }}
+          <div id="ytplayer">
 
-        <div id="ytplayer">
+          </div>
+        </div>
+        <div id="progressbar">
+        </div>
+        <div class="image-preview medium">
+          {% if data.image %}
+            <img id="image-preview-img" src="{{ vich_uploader_asset(data, 'image') }}">
+          {% endif %}
+        </div>
+        <div id="create-advert-images" class="hide">
+          {{ form_widget(form.images) }}
+        </div>
 
+        <div id="create-advert-desc">
+          {{ form_widget(form.description) }}
+          <div class="clearfix">
+            <div id="create-advert-tags" class="pull-left">
+              <i class="icon-tags"></i>
+            </div>
+            {{ form_widget(form.tags) }}
+          </div>
+          {{ form_widget(form.images) }}
+        </div>
+
+        <div class="modal fade" id="create-advert-image-modal" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">{{"form_ad.upload_image_title"|trans}}</h>
+              </div>
+              <div class="modal-body">
+                <div id="create-advert-image">
+                    {{ form_widget(form.image) }}
+                    {{ form_widget(form.imagename) }}
+                  </span>
+                </div>
+                <p class="big-center-text">{{"or"|trans}}</p>
+                <input type="url" class="form-control" id="create-advert-url" placeholder="{{'form_ad.placeholders.url'|trans}}">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{"cancel"|trans}}</button>
+                <button type="button" class="btn btn-primary">OK</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div id="progressbar">
-      </div>
-      <div class="image-preview medium">
-        <img id="image-preview-img" {% if data.image %}src="{{ vich_uploader_asset(data, 'image') }}"{% endif %}>
-      </div>
-
-      <div id="create-advert-desc">
-        {{ form_widget(form.description) }}
-        {{ form_widget(form.tags) }}
-        {{ form_widget(form.save, {
-            attr: {
-              'class': 'form-control btn btn-primary submit-disable-btn',
-              'data-disable-text': "saving"|trans
-            }
-          })
-        }}
-        {{ form_widget(form.images) }}
-        {{ form_rest(form) }}
-        {{ form_end(form) }}
-      </div>
+      {{ form_widget(form.save, {
+          attr: {
+            'class': 'pull-right btn btn-primary submit-disable-btn',
+            'data-disable-text': "saving"|trans
+          }
+        })
+      }}
+      {{ form_rest(form) }}
+      {{ form_end(form) }}
     </div>
   </div>
 {% endblock %}

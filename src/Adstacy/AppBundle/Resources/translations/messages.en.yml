@@ -20,6 +20,7 @@ registering: Registering...
 loggingin: Logging in...
 promoted_by: Also promoted by
 continue_to_explore: Continue to Explore
+or: OR
 
 search_users: Users
 search_ads: Ads
@@ -102,8 +103,13 @@ form_ad:
     content_trigger: Click to add more images and descriptions
     submit: Save
     hashtags: Hashtags
+    image_trigger: Click to upload image
+    upload_image_title: Upload from computer or paste url
     placeholders:
-        description: Write your ads description
+        description: Description
+        url: http://
+        title: Title
+        youtube_id: Insert a Youtube ID
     characters_left: '<span id="chars-left">%left%</span> characters left'
 
 form_contact:
