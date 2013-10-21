@@ -21,9 +21,9 @@
   <div id="create-advert" class="panel panel-default">
     <div class="panel-body clearfix">
       <div id="create-advert-toolbar">
-        <a class="btn btn-default" id="choose-advert-image" href="#"><i class="icon-picture"></i> image</a>
-        <a class="btn btn-default" id="choose-advert-text" href="#"><i class="icon-edit"></i> text</a>
-        <a class="btn btn-default" id="choose-advert-video" href="#"><i class="icon-youtube-play"></i> video</a>
+        <a class="btn btn-default" id="choose-advert-image" href="#"><i class="icon icon-picture"></i> image</a>
+        <a class="btn btn-default" id="choose-advert-text" href="#"><i class="icon icon-edit"></i> text</a>
+        <a class="btn btn-default" id="choose-advert-video" href="#"><i class="icon icon-youtube-play"></i> video</a>
       </div>
       {{ form_start(form, {attr: {class: 'submit-disable'}}) }}
       {{ form_errors(form) }}
@@ -55,7 +55,7 @@
           {{ form_widget(form.description) }}
           <div class="clearfix">
             <div id="create-advert-tags" class="pull-left">
-              <i class="icon-tags"></i>
+              <i class="icon icon-tags"></i>
             </div>
             {{ form_widget(form.tags) }}
           </div>
