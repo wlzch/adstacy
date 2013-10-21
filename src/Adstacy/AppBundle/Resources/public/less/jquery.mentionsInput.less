@@ -19,31 +19,33 @@
   position: relative;
   background: @white;
 
-  textarea{
+  .comment-box {
     width: 100%;
     display: block;
-    height: 18px;
-    padding: 9px;
-    border: 1px solid #dcdcdc;
-    border-radius:3px;
-    overflow: hidden;
-    background: transparent;
-    position: relative;
-    outline: 0;
+    height: 32px;
+    padding: 2px 4px;
+    background-color: #eee;
     resize: none;
+    border: 1px solid @border-color;
+    .border-bottom-radius(@border-radius-base);
+    overflow: hidden;
+    position: relative;
 
-    -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
+    &:focus {
+      outline: 0;
+      background-color: #fff;
+    }
   }
 
   .mentions{
     position: absolute;
-    left: 1px;
+    left: 0;
     right: 0;
-    top: 1px;
+    top: 0;
     bottom: 0;
-    padding: 9px;
+    height: 32px;
+    border: 1px solid transparent;
+    padding: 2px 4px;
     color: @white;
     overflow: hidden;
 

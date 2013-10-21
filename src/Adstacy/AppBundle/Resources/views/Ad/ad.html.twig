@@ -91,21 +91,49 @@
     </div>
   </div>
 
-  <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}#comments" class="btn-comments-count btn btn-default btn-block"><span class="comments-count">{{ ad.commentsCount }}</span> Comments</a>
   {% if ad.commentsCount > ad.comments|length %}
-    <a href="#">{{"comment.load_more"|trans}}</a>
+    <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}#comments" class="btn-comments-count btn btn-default btn-block">
+      <span class="comments-count">{{ ad.commentsCount }}</span> Comments &middot; {{"comment.load_more"|trans}}
+    </a>
   {% endif %}
 
   {% if app.user %}
     <div class="advert-comment">
       {% for comment in ad.comments %}
-        <p>{{ comment.content }}</p>
+        <div class="media">
+          <div class="pull-left">
+            <img src="" alt="" width="32" height="32" class="media-object">
+          </div>
+          <div class="media-body">
+            {# <p class="media-heading">
+              <a href="{{ path('adstacy_app_user_profile', {username: comment.user.username}) }}">{{ comment.user.realName }}</a>
+              <small>@{{ comment.user.userName }}</small>
+              <time>~ {{ ago(comment.created) }}</time>
+            </p> #}
+            <p class="media-heading">
+              <a><strong>Erwin Zhang</strong></a>
+              <span class="text-muted">
+                @<span>rwinz</span>
+                <time>~ 2 weeks ago</time>
+              </span>
+            </p>
+            <p>{{ comment.content }}</p>
+          </div>
+        </div>
       {% endfor %}
 
-      <form action="{{ path('adstacy_app_ad_comment', {id: ad.id}) }}" method="post">
-        <textarea name="comment[content]" required="required" class="comment-box" placeholder="{{"form_comment.placeholders.content"|trans}}"></textarea>
-        <input type="submit" value="{{"comment"|trans}}" class="hide">
-      </form>
+      <div class="media">
+        <div class="pull-left">
+          <img src="" alt="" width="32" height="32" class="media-object">
+        </div>
+        <div class="media-body">
+          <form action="{{ path('adstacy_app_ad_comment', {id: ad.id}) }}" method="post">
+            <textarea name="comment[content]" required="required" class="comment-box" placeholder="{{"form_comment.placeholders.content"|trans}}"></textarea>
+            <input type="submit" value="{{"comment"|trans}}" class="hide">
+          </form>
+        </div>
+      </div>
     </div>
   {% endif %}
 </div>
+
