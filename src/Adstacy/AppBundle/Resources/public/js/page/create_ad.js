@@ -11,6 +11,7 @@ $(function() {
   var $advertImageTrigger = $('#create-advert-image-trigger');
   var $advertType = $('#ad_type');
   var $uploadImageContainer = $('#upload-image-container');
+  var $adImagesContainer = $('#ad-images-container');
   var $progress = $('#progressbar');
   var $imagePreview = $('.image-preview');
   var $modal = $('#create-advert-image-modal');
@@ -19,6 +20,7 @@ $(function() {
 
   $chooseImage.click(function() {
     $advertImage.removeClass('hide');
+    $adImagesContainer.removeClass('hide');
     $advertImageTrigger.removeClass('hide');
     $advertText.addClass('hide');
     $advertVideo.addClass('hide');
@@ -27,6 +29,7 @@ $(function() {
   });
   $chooseText.click(function() {
     $advertImage.addClass('hide');
+    $adImagesContainer.addClass('hide');
     $advertImageTrigger.addClass('hide');
     $advertText.removeClass('hide');
     $advertVideo.addClass('hide');
@@ -35,10 +38,11 @@ $(function() {
   });
   $chooseVideo.click(function() {
     $advertImage.addClass('hide');
+    $adImagesContainer.addClass('hide');
     $advertImageTrigger.addClass('hide');
     $advertText.addClass('hide');
     $advertVideo.removeClass('hide');
-    $advertType.val('video');
+    $advertType.val('youtube');
     $imagePreview.hide();
   });
   var previewImage = function(file) {

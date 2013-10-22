@@ -28,24 +28,25 @@
       {{ form_start(form, {attr: {class: 'submit-disable'}}) }}
       {{ form_errors(form) }}
       <div class="form-content-container">
-        <a id="create-advert-image-trigger" data-toggle="modal" data-target="#create-advert-image-modal">
+        <a id="create-advert-image-trigger" data-toggle="modal" data-target="#create-advert-image-modal" class="{% if data.type != 'image' %}hide{% endif %}">
           {{"form_ad.image_trigger"|trans}}
         </a>
-        <div id="create-advert-text" class="hide">
+        <div id="create-advert-text" class="{% if data.type != 'text' %}hide{% endif %}">
           {{ form_widget(form.title, {attr: {class: 'form-control'}}) }}
         </div>
-        <div id="create-advert-video" class="hide">
+        <div id="create-advert-video" class="{% if data.type != 'youtube' %}hide{% endif %}">
           {{ form_widget(form.youtubeId, {attr: {class: 'form-control'}}) }}
           <div id="ytplayer">
 
           </div>
         </div>
-        <div class="image-preview medium">
+        <div class="image-preview medium {% if data.type != 'image' %}hide{% endif %}">
           {% if data.image %}
             <img id="image-preview-img" src="{{ vich_uploader_asset(data, 'image') }}">
           {% endif %}
         </div>
-        <div id="create-advert-images" class="hide">
+        {% set images = data.images %}
+        <div id="create-advert-images" class="{% if data.type != 'image' or (data.type == 'image' and images|length <= 0) %}hide{% endif %}">
           {{ form_widget(form.images) }}
         </div>
 

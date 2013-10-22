@@ -6,6 +6,8 @@ ad:
         not_blank: Ad description must not be blank
     images:
         max_count: You can only upload max {{ limit }} images
+    tags:
+        min_count: You must add at least {{ limit }} tag
 
 image:
     file:

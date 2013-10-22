@@ -6,6 +6,8 @@ ad:
         not_blank: Deskripsi harus diisi
     images:
         max_count: Anda hanya dapat mengupload maksimal {{ limit }} gambar
+    tags:
+        min_count: Anda harus memasukkan minimal {{ limit }} tag
 
 image:
     file:

@@ -13,6 +13,7 @@ use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity(repositoryClass="Adstacy\AppBundle\Repository\AdRepository")
+ * @ORM\HasLifecycleCallbacks()
  * @Assert\Callback(methods={"isAdValid"})
  * @Vich\Uploadable
  * @JMS\ExclusionPolicy("none")
@@ -372,6 +373,8 @@ class Ad
             // hack for VichUploaderBundle because the listener will be called 
             // only if there is any field changes
             $this->setUpdated(new \Datetime());
+        } else {
+            $this->image = $image;
         }
     
         return $this;
@@ -390,9 +393,7 @@ class Ad
      */
     public function setImagename($imagename)
     {
-        if ($imagename) {
-            $this->imagename = $imagename;
-        }
+        $this->imagename = $imagename;
     
         return $this;
     }
@@ -701,7 +702,7 @@ class Ad
      */
     public function getType()
     {
-        return $this->type;
+        return $this->type ?: 'image';
     }
 
     /**
@@ -748,5 +749,25 @@ class Ad
     public function getYoutubeId()
     {
         return $this->youtubeId;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     * @ORM\PrePersist
+     */
+    public function ensureType()
+    {
+        if ($this->type == 'image') {
+            $this->setTitle(null);
+            $this->setYoutubeID(null);
+        } elseif ($this->type == 'text') {
+            $this->setImage(null);
+            $this->setImagename(null);
+            $this->setYoutubeId(null);
+        } elseif ($this->type == 'youtube') {
+            $this->setImage(null);
+            $this->setImagename(null);
+            $this->setTitle(null);
+        }
     }
 }
