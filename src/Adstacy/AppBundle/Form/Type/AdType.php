@@ -24,12 +24,12 @@ class AdType extends AbstractType
                 'placeholder' => 'form_ad.placeholders.title'
             )
         ));
-        $builder->add('youtubeId', 'text', array(
+        $builder->add('youtubeUrl', 'text', array(
             'label' => 'form_ad.youtube',
             'required' => false,
             'error_bubbling' => true,
             'attr' => array(
-                'placeholder' => 'form_ad.placeholders.youtube_id'
+                'placeholder' => 'form_ad.placeholders.youtube_url'
             )
         ));
         $builder->add('images', 'ad_images', array(

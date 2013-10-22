@@ -53,10 +53,10 @@ class Ad
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=25, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @JMS\Groups({"user_show", "ad_list", "ad_show"})
      */
-    private $youtubeId;
+    private $youtubeUrl;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -609,8 +609,14 @@ class Ad
                 $context->addViolationAt('description', 'ad.description.not_blank');
             }
         } else if ($this->type == 'youtube') {
-            if (!$this->youtubeId) {
-                $context->addViolationAt('youtubeId', 'ad.youtubeId.not_blank');
+            if (!$this->youtubeUrl) {
+                $context->addViolationAt('youtubeUrl', 'ad.youtube_url.not_blank');
+            } else {
+                $matches = null;
+                preg_match_all('/https?:\/\/(?:[0-9A-Z-]+\.)?(?:youtu\.be\/|youtube\.com\S*[^\w\-\s])([\w\-]{11})(?=[^\w\-]|$)(?![?=&+%\w.-]*(?:[\'"][^<>]*>|<\/a>))[?=&+%\w.-]*/i', $this->youtubeUrl, $matches);
+                if (!$matches || count($matches[1]) <= 0) {
+                    $context->addViolationAt('youtubeUrl', 'ad.youtube_url.not_valid');
+                }
             }
         } else {
             $context->addViolation('ad.type.not_supported');
@@ -729,26 +735,16 @@ class Ad
     }
 
     /**
-     * Set youtubeId
-     *
-     * @param string $youtubeId
-     * @return Ad
-     */
-    public function setYoutubeId($youtubeId)
-    {
-        $this->youtubeId = $youtubeId;
-    
-        return $this;
-    }
-
-    /**
      * Get youtubeId
      *
      * @return string 
      */
     public function getYoutubeId()
     {
-        return $this->youtubeId;
+        $matches = null;
+        preg_match_all('/https?:\/\/(?:[0-9A-Z-]+\.)?(?:youtu\.be\/|youtube\.com\S*[^\w\-\s])([\w\-]{11})(?=[^\w\-]|$)(?![?=&+%\w.-]*(?:[\'"][^<>]*>|<\/a>))[?=&+%\w.-]*/i', $this->youtubeUrl, $matches);
+
+        return isset($matches[1][0]) ? $matches[1][0] : null;
     }
 
     /**
@@ -759,15 +755,38 @@ class Ad
     {
         if ($this->type == 'image') {
             $this->setTitle(null);
-            $this->setYoutubeID(null);
+            $this->setYoutubeUrl(null);
         } elseif ($this->type == 'text') {
             $this->setImage(null);
             $this->setImagename(null);
-            $this->setYoutubeId(null);
+            $this->setYoutubeUrl(null);
         } elseif ($this->type == 'youtube') {
             $this->setImage(null);
             $this->setImagename(null);
             $this->setTitle(null);
         }
+    }
+
+    /**
+     * Set youtubeUrl
+     *
+     * @param string $youtubeUrl
+     * @return Ad
+     */
+    public function setYoutubeUrl($youtubeUrl)
+    {
+        $this->youtubeUrl = $youtubeUrl;
+    
+        return $this;
+    }
+
+    /**
+     * Get youtubeUrl
+     *
+     * @return string 
+     */
+    public function getYoutubeUrl()
+    {
+        return $this->youtubeUrl;
     }
 }

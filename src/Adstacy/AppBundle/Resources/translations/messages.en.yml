@@ -109,7 +109,7 @@ form_ad:
         description: Description
         url: http://
         title: Title
-        youtube_id: Insert a Youtube ID
+        youtube_url: Paste youtube video url here
     characters_left: '<span id="chars-left">%left%</span> characters left'
     help:
         upload_from_computer: Upload from computer (supports jpg and png)

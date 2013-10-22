@@ -17,6 +17,8 @@ $(function() {
   var $modal = $('#create-advert-image-modal');
   var $modalHeader = $modal.find('.modal-header');
   var $modalBody = $modal.find('.modal-body');
+  var $inputVideo = $('#ad_youtubeUrl');
+  var $youtube = $('#ytplayer');
 
   $chooseImage.click(function() {
     $advertImage.removeClass('hide');
@@ -110,7 +112,9 @@ $(function() {
     parserRules: wysihtml5ParserRules,
     stylesheets: "/bundles/adstacyapp/css/wysiwyg-styles.css"
   });
-  $('iframe.wysihtml5-sandbox').wysihtml5_size_matters();
+  editor.on('load', function() {
+    $(editor.composer.iframe).wysihtml5_size_matters();
+  });
   $modal.on('show.bs.modal', function() {
     $uploadImageContainer.show();
     $advertUrl.val('');
@@ -144,4 +148,32 @@ $(function() {
   $advertUrlOk.click(function() {
     uploadFromUrl();
   });
+  (function() {
+    var insertImage = function(id) {
+      if ($youtube.find('img').length > 0) {
+        $youtube.find('img').attr('src', 'http://img.youtube.com/vi/'+id+'/0.jpg');
+      } else {
+        $youtube.append($('<img>').attr('src', 'http://img.youtube.com/vi/'+id+'/0.jpg'));
+      }
+    };
+    var lastVal = $inputVideo.val();
+    var player, matches, val, yt;
+    yt = $youtube[0];
+    if (lastVal != '') {
+      matches = /https?:\/\/(?:[0-9A-Z-]+\.)?(?:youtu\.be\/|youtube\.com\S*[^\w\-\s])([\w\-]{11})(?=[^\w\-]|$)(?![?=&+%\w.-]*(?:['"][^<>]*>|<\/a>))[?=&+%\w.-]*/ig.exec(lastVal);
+      insertImage(matches[1]);
+    }
+    $inputVideo.keyup(function(e) {
+      if (!e.ctrlKey && !e.altKey) {
+        val = $(this).val();
+        if (lastVal != val) {
+          lastVal = val;
+          matches = /https?:\/\/(?:[0-9A-Z-]+\.)?(?:youtu\.be\/|youtube\.com\S*[^\w\-\s])([\w\-]{11})(?=[^\w\-]|$)(?![?=&+%\w.-]*(?:['"][^<>]*>|<\/a>))[?=&+%\w.-]*/ig.exec(val);
+          if (matches) {
+            insertImage(matches[1]);
+          }
+        }
+      }
+    });
+  })();
 });

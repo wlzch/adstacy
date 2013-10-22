@@ -102,7 +102,7 @@ form_ad:
         description: Tulis deskripsi iklan Anda.
         url: http://
         title: Judul
-        youtube_id: Masukkan Youtube ID
+        youtube_url: Paste url video youtube
     characters_left: 'sisa <span id="chars-left">%left%</span> karakter'
     help:
         upload_from_computer: Upload dari komputer (mendukung jpg dan png)

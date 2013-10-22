@@ -8,6 +8,9 @@ ad:
         max_count: You can only upload max {{ limit }} images
     tags:
         min_count: You must add at least {{ limit }} tag
+    youtube_url:
+        not_valid: Youtube url is not valid
+        not_blank: Youtube url cannot be blank
 
 image:
     file:

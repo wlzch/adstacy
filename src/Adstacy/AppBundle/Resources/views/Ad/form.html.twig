@@ -35,7 +35,7 @@
           {{ form_widget(form.title, {attr: {class: 'form-control'}}) }}
         </div>
         <div id="create-advert-video" class="{% if data.type != 'youtube' %}hide{% endif %}">
-          {{ form_widget(form.youtubeId, {attr: {class: 'form-control'}}) }}
+          {{ form_widget(form.youtubeUrl, {attr: {class: 'form-control'}}) }}
           <div id="ytplayer">
 
           </div>
@@ -110,7 +110,6 @@
     '@AdstacyAppBundle/Resources/public/js/wysihtml5.js'
     '@AdstacyAppBundle/Resources/public/js/jquery.wysihtml5_size_matters.js'
     '@AdstacyAppBundle/Resources/public/js/page/create_ad.js'
-    '@AdstacyAppBundle/Resources/public/js/jquery-ui.js'
     '@AdstacyAppBundle/Resources/public/js/load-image.min.js'
     '@AdstacyAppBundle/Resources/public/js/canvas-to-blob.min.js'
     '@AdstacyAppBundle/Resources/public/js/jquery-fileupload/jquery.iframe-transport.js'
