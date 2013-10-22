@@ -1,23 +1,6 @@
-//Variables
-@white: #fff;
-
-//Mixins
-.border-radius(@radius: 5px) {
-  -webkit-border-radius: @radius;
-     -moz-border-radius: @radius;
-          border-radius: @radius;
-}
-
-.opacity(@opacity: 100) {
-  filter: e(%("alpha(opacity=%d)", @opacity));
-    -moz-opacity: @opacity / 100;
-         opacity: @opacity / 100;
-}
-
-//Styles
 .mentions-input-box {
   position: relative;
-  background: @white;
+  background: #fff;
 
   .comment-box {
     width: 100%;
@@ -46,14 +29,14 @@
     height: 32px;
     border: 1px solid transparent;
     padding: 2px 4px;
-    color: @white;
+    color: #fff;
     overflow: hidden;
 
     white-space: pre-wrap;
     word-wrap: break-word;
 
     & > div{
-      color: @white;
+      color: #fff;
       white-space: pre-wrap;
       width: 100%;
 
@@ -71,7 +54,7 @@
 
 .mentions-input-box .mentions-autocomplete-list {
   display: none;
-  background: @white;
+  background: #fff;
   border: 1px solid #b2b2b2;
   position: absolute;
   left: 0;
@@ -79,13 +62,8 @@
   z-index: 10000;
   margin-top: -2px;
 
-  .border-radius();
-  border-top-right-radius:0;
-  border-top-left-radius:0;
-
-  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.148438);
-     -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.148438);
-          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.148438);
+  .border-bottom-radius(@border-radius-base);
+  .box-shadow(0 2px 5px rgba(0, 0, 0, 0.148438));
 
   ul{
     margin: 0;
@@ -93,7 +71,7 @@
   }
 
   li{
-    background-color: @white;
+    background-color: #fff;
     padding: 0 5px;
     margin: 0;
     width: auto;
@@ -106,7 +84,7 @@
     white-space: nowrap;
 
     &:last-child{
-      .border-radius();
+      border-radius: @border-radius-base;
     }
 
     & > img,
@@ -118,7 +96,7 @@
       margin-right: 5px;
       -moz-background-origin:3px;
 
-      .border-radius(3px);
+      border-radius: @border-radius-base;
     }
 
     em{
