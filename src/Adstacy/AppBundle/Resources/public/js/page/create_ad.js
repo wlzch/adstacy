@@ -6,12 +6,16 @@ $(function() {
   var $advertText = $('#create-advert-text');
   var $advertVideo = $('#create-advert-video');
   var $advertImages = $('#create-advert-images');
+  var $advertUrl = $('#create-advert-url');
+  var $advertUrlOk = $('#create-advert-url-ok');
   var $advertImageTrigger = $('#create-advert-image-trigger');
   var $advertType = $('#ad_type');
   var $uploadImageContainer = $('#upload-image-container');
   var $progress = $('#progressbar');
   var $imagePreview = $('.image-preview');
   var $modal = $('#create-advert-image-modal');
+  var $modalHeader = $modal.find('.modal-header');
+  var $modalBody = $modal.find('.modal-body');
 
   $chooseImage.click(function() {
     $advertImage.removeClass('hide');
@@ -19,6 +23,7 @@ $(function() {
     $advertText.addClass('hide');
     $advertVideo.addClass('hide');
     $advertType.val('image');
+    $imagePreview.show();
   });
   $chooseText.click(function() {
     $advertImage.addClass('hide');
@@ -26,6 +31,7 @@ $(function() {
     $advertText.removeClass('hide');
     $advertVideo.addClass('hide');
     $advertType.val('text');
+    $imagePreview.hide();
   });
   $chooseVideo.click(function() {
     $advertImage.addClass('hide');
@@ -33,14 +39,17 @@ $(function() {
     $advertText.addClass('hide');
     $advertVideo.removeClass('hide');
     $advertType.val('video');
+    $imagePreview.hide();
   });
-  var previewImage = function(src) {
+  var previewImage = function(file) {
     var $img = $imagePreview.find('img');
     if ($img.length == 0) {
-      $imagePreview.append($('<img>').attr('src', src));
+      $imagePreview.append($('<img>').attr('src', file.src));
     } else {
-      $img.attr('src', src);
+      $img.attr('src', file.src);
     }
+    $('#ad_imagename').val(file.name);
+    $modal.modal('hide');
   };
   $('#ad_image').fileupload({
     url: Routing.generate('adstacy_app_upload'),
@@ -51,14 +60,12 @@ $(function() {
     done: function(e, data) {
       if (data.result.status == 'ok') {
         $.each(data.result.files, function(index, file) {
-          previewImage(file.src);
-          $('#ad_imagename').val(file.name);
+          previewImage(file);
         });
       } else {
         // display error
       }
       $progress.progressbar('destroy');
-      $modal.modal('hide');
     },
     fail: function(e, data) {
       $progress.progressbar('destroy');
@@ -102,5 +109,21 @@ $(function() {
   $('iframe.wysihtml5-sandbox').wysihtml5_size_matters();
   $modal.on('show.bs.modal', function() {
     $uploadImageContainer.show();
+    $advertUrl.val('');
+  });
+  $advertUrlOk.click(function() {
+    $uploadImageContainer.hide();
+    var modalBody = $modalBody[0];
+    var url = $advertUrl.val();
+    var spinner = new Spinner({className: 'spinner spinner-margin'}).spin(modalBody);
+    $.getJSON(Routing.generate('adstacy_app_upload_url', {url: url}), function(data) {
+      if (data.status == 'ok' && data.files.length > 0) {
+        previewImage(data.files[0]);
+      } else {
+        // show error here
+        $uploadImageContainer.show();
+      }
+      spinner.stop();
+    });
   });
 });

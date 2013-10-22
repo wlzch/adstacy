@@ -104,13 +104,16 @@ form_ad:
     submit: Save
     hashtags: Hashtags
     image_trigger: Click to upload image
-    upload_image_title: Upload from computer or paste url
+    upload_image_title: Upload Image
     placeholders:
         description: Description
         url: http://
         title: Title
         youtube_id: Insert a Youtube ID
     characters_left: '<span id="chars-left">%left%</span> characters left'
+    help:
+        upload_from_computer: Upload from computer (supports jpg and png)
+        upload_from_url: Paste url of image (supports jpg and png)
 
 form_contact:
     subject: Subject

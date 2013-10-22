@@ -585,35 +585,34 @@ class Ad
     public function isAdValid(ExecutionContextInterface $context)
     {
         if (!$this->type) {
-            $context->addViolationAt('type', 'ad.type.not_blank');
-        } else {
-            if ($this->type == 'image') {
-                if (!$this->imagename && !$this->image) {
-                    $context->addViolationAt('image', 'image.file.not_null');
-                } else {
-                    $context->validateValue($this->image, new Assert\Image(array(
-                        'maxSize' => '5M',
-                        'mimeTypes' => array('image/png', 'image/jpg', 'image/jpeg', 'image/pjpeg'),
-                        'minWidth' => 320,
-                        'maxSizeMessage' => 'image.file.max_size',
-                        'mimeTypesMessage' => 'image.file.mime_types',
-                        'minWidthMessage' => 'image.file.min_width'
-                    )));
-                }
-            } else if ($this->type == 'text') {
-                if (!$this->title) {
-                    $context->addViolationAt('title', 'ad.title.not_blank');
-                }
-                if (!$this->description) {
-                    $context->addViolationAt('description', 'ad.description.not_blank');
-                }
-            } else if ($this->type == 'youtube') {
-                if (!$this->youtubeId) {
-                    $context->addViolationAt('youtubeId', 'ad.youtubeId.not_blank');
-                }
+            $this->type = 'image';
+        }
+        if ($this->type == 'image') {
+            if (!$this->imagename && !$this->image) {
+                $context->addViolationAt('image', 'image.file.not_null');
             } else {
-                $context->addViolation('ad.type.not_supported');
+                $context->validateValue($this->image, new Assert\Image(array(
+                    'maxSize' => '5M',
+                    'mimeTypes' => array('image/png', 'image/jpg', 'image/jpeg', 'image/pjpeg'),
+                    'minWidth' => 320,
+                    'maxSizeMessage' => 'image.file.max_size',
+                    'mimeTypesMessage' => 'image.file.mime_types',
+                    'minWidthMessage' => 'image.file.min_width'
+                )));
             }
+        } else if ($this->type == 'text') {
+            if (!$this->title) {
+                $context->addViolationAt('title', 'ad.title.not_blank');
+            }
+            if (!$this->description) {
+                $context->addViolationAt('description', 'ad.description.not_blank');
+            }
+        } else if ($this->type == 'youtube') {
+            if (!$this->youtubeId) {
+                $context->addViolationAt('youtubeId', 'ad.youtubeId.not_blank');
+            }
+        } else {
+            $context->addViolation('ad.type.not_supported');
         }
     }
 
