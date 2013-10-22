@@ -111,7 +111,7 @@ $(function() {
     $uploadImageContainer.show();
     $advertUrl.val('');
   });
-  $advertUrlOk.click(function() {
+  var uploadFromUrl = function() {
     $uploadImageContainer.hide();
     var modalBody = $modalBody[0];
     var url = $advertUrl.val();
@@ -124,6 +124,20 @@ $(function() {
         $uploadImageContainer.show();
       }
       spinner.stop();
+
+      return false;
     });
+
+    return false;
+  };
+  $advertUrl.keydown(function(e) {
+    if (e.which == 13) {
+      uploadFromUrl();
+      e.preventDefault();
+      return false;
+    }
+  });
+  $advertUrlOk.click(function() {
+    uploadFromUrl();
   });
 });

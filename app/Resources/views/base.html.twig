@@ -13,6 +13,7 @@
     <meta property="og:image" content="{% block meta_image %}{{ asset('bundles/adstacyapp/img/screenshot.png') }}{% endblock %}">
     <title>{% block title %}Adstacy.com - Ads have never been so fun{% endblock %}</title>
 
+    {% if not app.debug %}
     <script>
       WebFontConfig = {
         google: { families: [ 'Open+Sans:400,300,700:latin' ] },
@@ -26,6 +27,7 @@
       var s = document.getElementsByTagName('script')[0];
       s.parentNode.insertBefore(wf, s);
     </script>
+    {% endif %}
 
     <link rel="icon shortcut" type="image/ico" href="{{ asset('favicon.ico') }}">
     <link rel="apple-touch-icon" sizes="114×114" href="{{ asset('apple-touch-icon-114x114.png') }}" />
