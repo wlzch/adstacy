@@ -83,7 +83,7 @@
         <img class="profile-picture-img" src="{{ profile_pic(user) }}" alt="{{ user.username }}" width="48" height="48">
       </div>
       <div class="user-desc">
-        <a class="user-realname" href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">{{ user.realName }} <span class="username">@{{ user.username }}</span></a>
+        <a class="realname" href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">{{ user.realName }} <span class="username">@{{ user.username }}</span></a>
       </div>
       <div class="advert-date">
         <span class="date">&middot; {{ ago(ad.created) }}</span>
@@ -108,20 +108,13 @@
       {% for comment in ad.comments %}
         <div class="media">
           <div class="pull-left">
-            <img src="" alt="" width="32" height="32" class="media-object">
+            <img src="{{ profile_pic(comment.user) }}" alt="" width="32" height="32" class="media-object">
           </div>
           <div class="media-body">
-            {# <p class="media-heading">
-              <a href="{{ path('adstacy_app_user_profile', {username: comment.user.username}) }}">{{ comment.user.realName }}</a>
-              <small>@{{ comment.user.userName }}</small>
-              <time>~ {{ ago(comment.created) }}</time>
-            </p> #}
             <p class="media-heading">
-              <a><strong>Erwin Zhang</strong></a>
-              <span class="text-muted">
-                @<span>rwinz</span>
-                <time>~ 2 weeks ago</time>
-              </span>
+              <a class="realname" href="{{ path('adstacy_app_user_profile', {username: comment.user.username}) }}">{{ comment.user.realName }}</a>
+              <span class="username">@{{ comment.user.userName }}</small>
+              <time>~ {{ ago(comment.created) }}</time>
             </p>
             <p>{{ comment.content }}</p>
           </div>
@@ -130,7 +123,7 @@
 
       <div class="media">
         <div class="pull-left">
-          <img src="" alt="" width="32" height="32" class="media-object">
+          <img src="{{ profile_pic(app.user) }}" alt="" width="32" height="32" class="media-object">
         </div>
         <div class="media-body">
           <form action="{{ path('adstacy_app_ad_comment', {id: ad.id}) }}" method="post">

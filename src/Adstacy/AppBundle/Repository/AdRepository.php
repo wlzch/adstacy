@@ -219,6 +219,12 @@ class AdRepository extends EntityRepository
         $rsm->addFieldResult('c', 'c_id', 'id');
         $rsm->addFieldResult('c', 'c_content', 'content');
         $rsm->addFieldResult('c', 'c_created', 'created');
+        $rsm->addJoinedEntityResult('Adstacy\AppBundle\Entity\User', 'cu', 'c', 'user');
+        $rsm->addFieldResult('cu', 'cu_id', 'id');
+        $rsm->addFieldResult('cu', 'cu_username', 'username');
+        $rsm->addFieldResult('cu', 'cu_imagename', 'imagename');
+        $rsm->addFieldResult('cu', 'cu_real_name', 'realName');
+        $rsm->addFieldResult('cu', 'cu_profile_picture', 'profilePicture');
 
         return $rsm;
     }
@@ -253,10 +259,13 @@ class AdRepository extends EntityRepository
             SELECT a.*,
                 u.id as u_id, u.username as u_username, u.imagename as u_imagename, u.real_name as u_real_name,
                 u.profile_picture as u_profile_picture,
-                c.id as c_id, c.content as c_content, c.created as c_created
+                c.id as c_id, c.content as c_content, c.created as c_created,
+                cu.id as cu_id, cu.username as cu_username, cu.imagename as cu_imagename, cu.real_name as cu_real_name,
+                cu.profile_picture as cu_profile_picture
             FROM ad a
             INNER JOIN users u ON a.user_id = u.id 
             LEFT JOIN ad_comment c ON c.ad_id = a.id
+            LEFT JOIN users cu ON c.user_id = cu.id
             WHERE a.id IN $ids AND (
                 a.comments_count = 0 OR (
                    a.comments_count > 0 AND c.id IN (

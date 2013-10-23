@@ -276,10 +276,20 @@ class AdController extends Controller
 
             $em->persist($ad);
             $em->flush();
+            if ($request->isXmlHttpRequest()) {
+                return new JsonResponse(array('status' => 'ok', 'data' => $comment));
+            }
             $this->addFlash('comment.success', $this->translate('ads.comment.success'));
         } else {
+            $errors = array();
             foreach ($form->getErrors() as $error) {
-                $this->addFlash('comment.warning', $error->getMessage());
+                $errors[] = $error->getMessage();
+            }
+            if ($request->isXmlHttpRequest()) {
+                return new JsonResponse(array('status' => 'error', 'errors' => $errors));
+            }
+            foreach ($errors as $error) {
+                $this->addFlash('comment.warning', $error);
             }
         }
 

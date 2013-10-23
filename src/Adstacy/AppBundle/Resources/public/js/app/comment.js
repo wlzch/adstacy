@@ -3,6 +3,7 @@
   // must bind enter keydown checking first before mentionsInput because ordering matters.
   $comment.keydown(function(event) {
     var $this = $(this);
+    var $form = $this.closest('form');
     if ($.trim($this.val()).length <= 0) {
       return ;
     }
@@ -15,10 +16,13 @@
         return;
       } else {
         this.blur();
-        this.form.submit();
+        $.post($form.attr('action'), $form.serialize(), function(data) {
+          console.log(data);
+          this.disabled = false;
+        });
         this.disabled = true;
 
-        return true;
+        return;
       }
     }
     return;
