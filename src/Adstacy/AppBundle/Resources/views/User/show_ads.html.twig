@@ -1,13 +1,13 @@
 {% extends is_ajax() ? '::ajax.html.twig' : 'AdstacyAppBundle:User:show.html.twig' %}
 
 {% block show_content %}
+  {% include 'AdstacyAppBundle:User:user_profile.html.twig' %}
+
   {% if ads|length > 0 %}
     <div class="jscroll">
-      {{ block('profile') }}
       {{ block('ajax_content') }}
     </div>
   {% else %}
-    {{ block('profile') }}
     <div class="jumbotron text-center">
       {% if app.user and app.user == user %}
         <h1>{{ "ads.no_ads.self_message"|trans }}</h1>
@@ -30,50 +30,6 @@
     {% set params = app.request.query.all|merge({username: user.username, id: id}) %}
     <a href="{{ path(route, params )}}" class="btn btn-lg btn-default btn-block load-next next-page">{{"more"|trans}}</a>
   {% endif %}
-{% endblock %}
-
-{% block profile %}
-  <div id="user-profile" class="item panel panel-default">
-    <div class="media">
-      <div class="pull-left">
-        <img src="{{ profile_pic(user) }}" class="media-object" width="120" height="120">
-      </div>
-      <div class="media-body">
-        <h4 class="media-heading">
-          <a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">{{ user.realname }}</a>
-          <small>@{{ user.username }}</small>
-        </h4>
-        <div>
-          {% if user.about %}
-            {{ parse_url(parse_hashtag(user.about)) }}
-          {% else %}
-            <i>
-              No Description About User.
-              {% if app.user and app.user == user %}
-                Go to <a href="{{ path('fos_user_profile_edit') }}">Settings</a> to write.
-              {% endif %}
-            </i>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-
-    <div class="user-action btn-group btn-group-justified">
-      <a href="{{ path('adstacy_app_user_ads', {username: user.username}) }}" class="btn btn-default">Ads<div><b>{{ adsCount }}</b></div></a>
-      <a href="{{ path('adstacy_app_user_promotes', {username: user.username}) }}" class="btn btn-default">Broadcast<div><b>{{ promotesCount }}</b></div></a>
-      <a href="{{ path('adstacy_app_user_followers', {username: user.username}) }}" class="btn btn-default">Followers<div><b>{{ followersCount }}</b></div></a>
-      <a href="{{ path('adstacy_app_user_followings', {username: user.username}) }}" class="btn btn-default">Followings<div><b>{{ followingsCount }}</b></div></a>
-      {% if app.user %}
-        {% if app.user != user %}
-          {% set followed = app.user.hasFollowUser(user) %}
-          <a href="{{ path('adstacy_app_user_follow', {username: user.username}) }}" class="btn btn-primary btn-follow follow-user {% if followed %}hide{% endif %}">Follow</a>
-          <a href="{{ path('adstacy_app_user_unfollow', {username: user.username}) }}" class="btn btn-success btn-follow unfollow-user {% if not followed %}hide{% endif %}">Following</a>
-        {% endif %}
-      {% else %}
-        <a href="{{ path('adstacy_app_user_follow', {username: user.username}) }}" class="btn btn-primary btn-follow">Follow</a>
-      {% endif %}
-    </div>
-  </div>
 {% endblock %}
 
 {% block javascripts %}

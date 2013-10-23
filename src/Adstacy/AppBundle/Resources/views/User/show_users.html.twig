@@ -1,6 +1,8 @@
 {% extends is_ajax() ? '::ajax.html.twig' : 'AdstacyAppBundle:User:show.html.twig' %}
 
 {% block show_content %}
+  {% include 'AdstacyAppBundle:User:user_profile.html.twig' %}
+
   {% if paginator.getCurrentPageResults|length > 0 %}
     <div class="page-title jumbotron text-center">
       <h1>{{ tab|title }}</h1>
