@@ -39,7 +39,7 @@
           <div id="register-form" class="panel panel-default">
             <div class="panel-heading">
               {% for owner in hwi_oauth_resource_owners() %}
-                <a class="btn btn-block btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{"login.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
+                <a class="btn btn-{{ owner }} btn-block btn-social" href="{{ hwi_oauth_login_url(owner) }}"><i class="icon icon-{{ owner }}"></i>{{"login.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
               {% endfor %}
             </div>
             <form action="{{ path('fos_user_registration_register') }}" class="panel-body" method="post" >
@@ -58,11 +58,11 @@
         </div>
       </div>
       <div id="landing-social" class="wrapper">
-        <a href="https://www.facebook.com/adstacycom" class="btn btn-facebook btn-lg">
-          <i class="icon icon-facebook"></i> Like us on Facebook
+        <a href="https://www.facebook.com/adstacycom" class="btn btn-facebook btn-lg btn-social">
+          <i class="icon icon-facebook"></i>Like us on Facebook
         </a>
-        <a href="https://www.twitter.com/adstacycom" class="btn btn-twitter btn-lg">
-          <i class="icon icon-twitter"></i> Follow us on Twitter
+        <a href="https://www.twitter.com/adstacycom" class="btn btn-twitter btn-lg btn-social">
+          <i class="icon icon-twitter"></i>Follow us on Twitter
         </a>
       </div>
     </div>

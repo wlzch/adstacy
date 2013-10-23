@@ -40,7 +40,7 @@
               {{ form_login() }}
 
               {% for owner in hwi_oauth_resource_owners() %}
-                <a class="btn btn-block btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{"login.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
+                <a class="btn btn-{{ owner }} btn-block btn-social" href="{{ hwi_oauth_login_url(owner) }}"><i class="icon icon-{{ owner }}"></i>{{"login.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
               {% endfor %}
             </div>
             <div class="dropdown-box-footer">

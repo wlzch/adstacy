@@ -28,7 +28,7 @@
 
       <div class="panel-body">
         {% for owner in hwi_oauth_resource_owners() %}
-          <a class="btn btn-block btn-lg btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{"register.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
+          <a class="btn btn-{{ owner }} btn-lg btn-block btn-social" href="{{ hwi_oauth_login_url(owner) }}"><i class="icon icon-{{ owner }}"></i>{{"register.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
         {% endfor %}
       </div>
 
