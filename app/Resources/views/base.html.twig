@@ -103,23 +103,19 @@
         <div class="site-menu">
           <nav id="site-menu-inner" class="site-menu-inner">
             <ul class="site-main-menu">
-              <li><h3>MAIN MENU</h3></li>
-              <li><a href="{{ path('homepage') }}" title="{{ "home"|trans }}">{{ "home"|trans }}<i class="icon icon-home"></i></a></li>
-              <li><a href="{{ path('adstacy_app_explore') }}" title="Explore">Explore<i class="icon icon-globe"></i></a></li>
-              <li><a href="{{ path('adstacy_app_trending') }}" title="Trending">Trending<i class="icon icon-rocket"></i></a></li>
+              <li><h3>NAVIGATION</h3></li>
+              <li><a href="{{ path('homepage') }}" title="{{ "home"|trans }}"><i class="icon icon-home"></i> {{ "home"|trans }}</a></li>
+              <li><a href="{{ path('adstacy_app_explore') }}" title="Explore"><i class="icon icon-globe"></i> Explore</a></li>
+              <li><a href="{{ path('adstacy_app_trending') }}" title="Trending"><i class="icon icon-rocket"></i> Trending</a></li>
 
               {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                <li><a href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}" title="{{ "profile"|trans }}">{{ "profile"|trans }}<i class="icon icon-user"></i></a></li>
-                <li><a href="{{ path('fos_user_profile_edit') }}" title="{{ "settings"|trans }}">{{ "settings"|trans }}<i class="icon icon-gear"></i></a></li>
-                <li><a href="{{ path('fos_user_security_logout') }}" title="{{ "logout"|trans }}">{{ "logout"|trans }}<i class="icon icon-off"></i></a></li>
+                <li><a href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}" title="{{ "profile"|trans }}"><i class="icon icon-user"></i> {{ "profile"|trans }}</a></li>
+                <li><a href="{{ path('fos_user_profile_edit') }}" title="{{ "settings"|trans }}"><i class="icon icon-gear"></i> {{ "settings"|trans }}</a></li>
+                <li><a href="{{ path('fos_user_security_logout') }}" title="{{ "logout"|trans }}"><i class="icon icon-off"></i> {{ "logout"|trans }}</a></li>
               {% endif %}
             </ul>
             <ul>
-              <li><h3>FAVORITE TAGS</h3></li>
-              {% include 'AdstacyAppBundle:App:tag_list.html.twig' %}
-            </ul>
-            <ul>
-              <li><h3>TRENDING TAGS</h3></li>
+              <li><h3>FAVOURITES</h3></li>
               {% include 'AdstacyAppBundle:App:tag_list.html.twig' %}
             </ul>
             <ul>
