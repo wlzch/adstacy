@@ -53,7 +53,7 @@ class Ad
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(name="youtube_url", type="string", length=255, nullable=true)
      * @JMS\Groups({"user_show", "ad_list", "ad_show"})
      */
     private $youtubeUrl;
