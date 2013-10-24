@@ -131,9 +131,10 @@
           </div>
           <div class="media-body">
             <p class="media-heading">
-              <a class="realname" href="{{ path('adstacy_app_user_profile', {username: comment.user.username}) }}">{{ comment.user.realName }}</a>
-              <span class="username">@{{ comment.user.userName }}</small>
-              ~ <time class="timeago" datetime="{{ comment.created|date('c') }}">{{ comment.created|date('F j, Y') }}</time>
+              <a class="realname" href="{{ path('adstacy_app_user_profile', {username: comment.user.username}) }}">{{ comment.user.realName }}
+                <span class="username">@{{ comment.user.userName }}</span>
+              </a>
+              &middot; <time class="timeago" datetime="{{ comment.created|date('c') }}">{{ comment.created|date('F j, Y') }}</time>
             </p>
             <p>{{ comment.content }}</p>
           </div>

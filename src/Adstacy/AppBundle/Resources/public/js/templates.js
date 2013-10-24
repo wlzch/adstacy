@@ -7,9 +7,10 @@
         </div>
         <div class="media-body">
           <p class="media-heading">
-            <a class="realname" href="/{{ username }}">{{ real_name }}</a>
-            <span class="username">@{{ username }}</small>
-            ~ <time class="timeago" datetime="{{ time }}">{{ strtime }}</time>
+            <a class="realname" href="/{{ username }}">{{ real_name }}
+              <span class="username">@{{ username }}</small>
+            </a>
+            &middot; <time class="timeago" datetime="{{ time }}">{{ strtime }}</time>
           </p>
           <p>{{ content }}</p>
         </div>
