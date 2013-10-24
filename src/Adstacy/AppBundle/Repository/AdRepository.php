@@ -205,7 +205,6 @@ class AdRepository extends EntityRepository
         $rsm->addFieldResult('a', 'youtube_url', 'youtubeUrl');
         $rsm->addFieldResult('a', 'description', 'description');
         $rsm->addFieldResult('a', 'tags', 'tags');
-        $rsm->addFieldResult('a', 'thumb_height', 'thumbHeight');
         $rsm->addFieldResult('a', 'image_width', 'imageWidth');
         $rsm->addFieldResult('a', 'image_height', 'imageHeight');
         $rsm->addFieldResult('a', 'promotees_count', 'promoteesCount');

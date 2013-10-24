@@ -9,11 +9,20 @@
 <div class="advert item">
   {% if ad.type == 'image' %}
     <div class="advert-img">
+      {% set thumbnail, original = null, null %}
+      {% set original = vich_uploader_asset(ad, 'image') %}
+      {% set width = ad.imageWidth %}
+      {% if ad.imageWidth >= thumb_width %}
+        {% set thumbnail = original|imagine_filter('thumbnail') %}
+        {% set width = thumb_width %}
+      {% else %}
+        {% set thumbnail = original %}
+      {% endif %}
       <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}">
         <img class="lazy" src="{{ asset('bundles/adstacyapp/img/transparent.gif') }}"
-          data-original="{{ vich_uploader_asset(ad, 'image')|imagine_filter('thumbnail') }}"
-          data-high-res="{{ vich_uploader_asset(ad, 'image') }}"
-          width="450" height="450">
+          data-original="{{ thumbnail }}"
+          data-high-res="{{ original }}"
+          width="{{ width }}" height="{{ ad.imageHeight(width) }}">
       </a>
     </div>
   {% elseif ad.type == 'text' %}

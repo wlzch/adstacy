@@ -81,12 +81,6 @@ class Ad
     private $created;
 
     /**
-     * @ORM\Column(name="thumb_height", type="smallint", nullable=true)
-     * @JMS\Groups({"user_show", "ad_list", "ad_show"})
-     */
-    private $thumbHeight;
-
-    /**
      * @ORM\Column(name="image_width", type="smallint", nullable=true)
      * @JMS\Groups({"user_show", "ad_list", "ad_show"})
      */
@@ -512,15 +506,11 @@ class Ad
      */
     public function getImageHeight($width = null)
     {
-        if ($this->imageHeight) {
-            if ($width) {
-                return round(($width / $this->getImageWidth()) * $this->imageHeight);
-            }
-
-            return $this->imageHeight;
+        if ($width) {
+            return round(($width / $this->getImageWidth()) * $this->imageHeight);
         }
 
-        return $this->getThumbHeight();
+        return $this->imageHeight;
     }
 
     /**
