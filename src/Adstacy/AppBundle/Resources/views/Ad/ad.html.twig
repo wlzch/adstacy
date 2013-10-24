@@ -1,11 +1,17 @@
+{% set _comments = [] %}
+{% if comments is defined %}
+  {% set _comments = comments %}
+{% else %}
+  {% set _comments = ad.comments %}
+{% endif %}
 <div class="advert item">
   {% if ad.type == 'image' %}
     <div class="advert-img">
       <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}">
         <img class="lazy" src="{{ asset('bundles/adstacyapp/img/transparent.gif') }}"
           data-original="{{ vich_uploader_asset(ad, 'image')|imagine_filter('thumbnail') }}"
-          width="450" height="450"
-          alt="{{ ad.description }}">
+          data-high-res="{{ vich_uploader_asset(ad, 'image') }}"
+          width="450" height="450">
       </a>
     </div>
   {% elseif ad.type == 'text' %}
@@ -53,10 +59,20 @@
           <span>more</span>
         </a>
         <ul class="dropdown-menu pull-right">
+          {% if view is not defined or (view is defined and view == true) %}
+          <li><a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}"><i class="icon icon-eye"></i><span>{{"view"|trans}}</span></a></li>
+          {% endif %}
           <li><a href="{{ path('adstacy_app_ad_report', {id: ad.id}) }}" class="report"><i class="icon icon-flag"></i><span>report</span></a></li>
           {% if app.user == ad.user %}
             <li><a href="{{ path('adstacy_app_ad_edit', {id: ad.id}) }}"><i class="icon icon-edit"></i><span class="owner-action-label">{{ "edit"|trans }}</span></a></li>
             <li><a data-toggle="modal" data-target="#confirm-modal"><i class="icon icon-delete"></i><span class="owner-action-label">{{ "delete"|trans }}</span></a></li>
+          {% endif %}
+          {% if is_granted('ROLE_SUPER_ADMIN') %}
+            {% if ad.active %}
+              <a href="{{ path('adstacy_admin_ad_block', {id: ad.id}) }}">Block</a>
+            {% else %}
+              <a href="{{ path('adstacy_admin_ad_unblock', {id: ad.id}) }}">Unblock</a>
+            {% endif %}
           {% endif %}
         </ul>
       </div>
@@ -97,7 +113,7 @@
     </div>
   </div>
 
-  {% if ad.commentsCount > ad.comments|length %}
+  {% if ad.commentsCount > _comments|length %}
     <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}#comments" class="btn-comments-count btn btn-default btn-block">
       <span class="comments-count">{{ ad.commentsCount }}</span> Comments &middot; {{"comment.load_more"|trans}}
     </a>
@@ -105,7 +121,7 @@
 
   {% if app.user %}
     <div class="advert-comments">
-      {% for comment in ad.comments %}
+      {% for comment in _comments %}
         <div class="media">
           <div class="pull-left">
             <img src="{{ profile_pic(comment.user) }}" alt="" width="32" height="32" class="media-object">

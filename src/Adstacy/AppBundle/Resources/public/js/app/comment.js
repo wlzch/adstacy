@@ -9,9 +9,7 @@
       return;
     }
 
-    if (event.which == 13 && event.shiftKey) {
-      return;
-    } else if (event.which == 13) {
+    if (event.which == 13) {
       var $mentions = $('.mentions-autocomplete-list');
       if (!$mentions.is(':hidden')) {
         return;
@@ -23,10 +21,11 @@
           time: 'just now',
           content: $this.val()
         })).insertBefore($this.closest('.media'));
-        $.post($form.attr('action'), $form.serialize(), function(data) {
+        var serialized = $form.serialize();
+        $this.val(''); //bug
+        $.post($form.attr('action'), serialized, function(data) {
           // do nothing
         });
-        $this.val('');
 
         return;
       }

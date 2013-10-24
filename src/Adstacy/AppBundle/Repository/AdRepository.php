@@ -276,7 +276,7 @@ class AdRepository extends EntityRepository
                        LIMIT 2
                    )
                 )
-            )
+            ) AND a.active = TRUE
             ORDER BY a.id DESC
         ", $rsm);
 
