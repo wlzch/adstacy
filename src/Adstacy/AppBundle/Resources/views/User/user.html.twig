@@ -8,7 +8,7 @@
       <a href="{{ path('adstacy_app_user_followers', {username: user.username}) }}"><span class="user-followers-count">{{ user.followersCount }}</span> Followers</a>
       <a href="{{ path('adstacy_app_user_ads', {username: user.username}) }}">{{ user.adsCount }} Ads</a>
     </div>
-    <p>{{ user.about }}</p>
+    <p>{{ parse_url(parse_hashtag(user.about)) }}</p>
   </div>
   <div class="user-actions">
     {% if app.user and user != app.user %}

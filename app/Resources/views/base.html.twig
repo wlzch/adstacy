@@ -106,9 +106,9 @@
 
               {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 <li><a href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}" title="{{ "profile"|trans }}"><i class="icon icon-user"></i> {{ "profile"|trans }}</a></li>
+                <li><a href="{{ path('adstacy_app_who_to_follow') }}" title="{{ "find_friends"|trans }}"><i class="icon icon-frined"></i> {{ "find_friends"|trans }}</a></li>
                 <li><a href="{{ path('fos_user_profile_edit') }}" title="{{ "settings"|trans }}"><i class="icon icon-gear"></i> {{ "settings"|trans }}</a></li>
                 <li><a href="{{ path('fos_user_security_logout') }}" title="{{ "logout"|trans }}"><i class="icon icon-off"></i> {{ "logout"|trans }}</a></li>
-                <li><a href="{{ path('adstacy_app_who_to_follow') }}" title="{{ "find_friends"|trans }}"><i class="icon icon-frined"></i> {{ "find_friends"|trans }}</a></li>
               {% endif %}
             </ul>
             <ul>
