@@ -102,7 +102,7 @@
         <a class="realname" href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">{{ user.realName }} <span class="username">@{{ user.username }}</span></a>
       </div>
       <div class="advert-date">
-        <span class="date">&middot; {{ ago(ad.created) }}</span>
+        &middot; <time class="timeago" datetime="{{ ad.created|date('c') }}">{{ ad.created|date('F j, Y') }}</span>
       </div>
     </div>
     <p class="advert-desc">{{ parse_url(ad.description) }}</p>
@@ -130,7 +130,7 @@
             <p class="media-heading">
               <a class="realname" href="{{ path('adstacy_app_user_profile', {username: comment.user.username}) }}">{{ comment.user.realName }}</a>
               <span class="username">@{{ comment.user.userName }}</small>
-              <time>~ {{ ago(comment.created) }}</time>
+              ~ <time class="timeago" datetime="{{ comment.created|date('c') }}">{{ comment.created|date('F j, Y') }}</time>
             </p>
             <p>{{ comment.content }}</p>
           </div>

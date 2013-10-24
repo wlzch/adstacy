@@ -9,7 +9,7 @@
           <p class="media-heading">
             <a class="realname" href="/{{ username }}">{{ real_name }}</a>
             <span class="username">@{{ username }}</small>
-            <time>~ {{ time }}</time>
+            ~ <time class="timeago" datetime="{{ time }}">{{ strtime }}</time>
           </p>
           <p>{{ content }}</p>
         </div>

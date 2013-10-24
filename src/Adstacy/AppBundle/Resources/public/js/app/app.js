@@ -32,6 +32,7 @@ $(function(){
     $siteHeader.removeClass('focus');
   });
 
+  $('.timeago').timeago();
   $('.btn-share').click(function() {
     $(this).parent().parent().next().find('.advert-share').toggle();
   });

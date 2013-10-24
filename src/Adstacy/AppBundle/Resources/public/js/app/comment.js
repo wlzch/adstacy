@@ -14,13 +14,16 @@
       if (!$mentions.is(':hidden')) {
         return;
       } else {
-        $(template.render({
+        var $tmpl = $(template.render({
           photo: Adstacy.user.photo,
           username: Adstacy.user.username,
           real_name: Adstacy.user.real_name,
-          time: 'just now',
+          time: new Date(),
+          strtime: new Date().toDateString(),
           content: $this.val()
-        })).insertBefore($this.closest('.media'));
+        }));
+        $tmpl.insertBefore($this.closest('.media'));
+        $tmpl.find('time').timeago();
         var serialized = $form.serialize();
         $this.val(''); //bug
         $.post($form.attr('action'), serialized, function(data) {
