@@ -105,7 +105,7 @@
         <a class="realname" href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">{{ user.realName }} <span class="username">@{{ user.username }}</span></a>
       </div>
       <div class="advert-date">
-        &middot; <time class="timeago" datetime="{{ ad.created|date('c') }}">{{ ad.created|date('F j, Y') }}</span>
+        <time class="timeago" datetime="{{ ad.created|date('c') }}">{{ ad.created|date('F j, Y') }}</span>
       </div>
     </div>
     {% if ad.type != 'text' %}
@@ -121,9 +121,11 @@
   <div class="advert-comments-container">
     {% if commentsLeft > 0 %}
       {% set lastId = _comments[0].id %}
-      <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}#comments" data-href="{{ path('adstacy_api_ad_comments', {id: ad.id, until: lastId}) }}" class="load-more-comments btn btn-default btn-block">
-        {{"comment.load_more"|trans({'%count%': commentsLeft})|raw}}
-      </a>
+      <div class="load-more-comments">
+        <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}#comments" data-href="{{ path('adstacy_api_ad_comments', {id: ad.id, until: lastId}) }}">
+          {{"comment.load_more"|trans({'%count%': commentsLeft})|raw}}
+        </a>
+      </div>
     {% endif %}
 
     <div class="advert-comments">

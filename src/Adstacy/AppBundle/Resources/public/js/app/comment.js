@@ -47,25 +47,26 @@
   });
   $loadComments.click(function() {
     var $this = $(this);
-    var href = $this.attr('data-href');
-    var $comments = $this.closest('.advert-comments-container').find('.advert-comments');
-    var html = $this.html();
-    $this.html('');
+    var $that = $(this).find('a');
+    var href = $that.attr('data-href');
+    var $comments = $that.closest('.advert-comments-container').find('.advert-comments');
+    var html = $that.html();
+    $that.html('');
     var spinner = new Spinner({className: 'spinner', length: 2, width: 2, radius: 2}).spin(this);
     $.getJSON(href, function(data) {
       var json = JSON.parse(data);
       var tmpl, left, len, cnt;
-      $this.html(html);
+      spinner.stop();
+      $that.html(html);
       len = json.data.comments.length;
-      cnt = parseInt($this.find('.comments-count').text());
+      cnt = parseInt($that.find('.comments-count').text());
       left = cnt - len;
       if (left <= 0) {
         $this.remove();
       } else {
-        $this.find('.comments-count').text(left);
-        $this.attr('data-href', json.meta.prev);
+        $that.find('.comments-count').text(left);
+        $that.attr('data-href', json.meta.prev);
       }
-      spinner.stop();
       $.each(json.data.comments, function(i, comment) {
         $tmpl = $(template.render({
           photo: comment.user.photo,
