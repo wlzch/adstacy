@@ -1,6 +1,6 @@
 $(function(){
   $('#site-menu-inner').slimScroll({
-    width: '240px',
+    width: '200px',
     height: '100%',
     size: '8px'
   });

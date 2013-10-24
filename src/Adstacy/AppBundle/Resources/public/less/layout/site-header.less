@@ -16,10 +16,10 @@ body {
 
 .open {
   > .site-menu {
-    width: 200px;
+    width: @site-menu-width;
   }
   > .site-content {
-    margin-left: 200px;
+    margin-left: @site-menu-width;
   }
 }
 
@@ -34,9 +34,10 @@ body {
   height: ~"@{height}";
   border-right: 1px solid @border-color;
   border-left: 1px solid @border-color;
-  border-top: 2px solid #b00;
+  border-top: 2px solid @brand-primary;
+  margin-top: -2px;
   overflow: hidden;
-  z-index: @zindex-sidebar;
+  z-index: @zindex-navbar-fixed;
   .transition(width ease .5s);
   background-color: #fff;
 }
@@ -46,24 +47,29 @@ body {
     margin: 0;
     padding: 0;
     list-style: none;
-    
+
     h3 {
-      font-size: 14px;
+      font-size: 20px;
       color: #aaa;
       margin-bottom: 0;
-      font-weight: bold;
+      font-weight: 300;
       padding: 5px 20px;
     }
-    
+
     a {
       font-size: 13px;
       color: #777;
       display: block;
       text-decoration: none;
-      &:hover {
-        background-color: #ddd;
-      }
       padding: 5px 20px;
+
+      &:hover {
+        background-color: @gray-lighter;
+      }
+
+      .icon {
+        margin-right: 5px;
+      }
     }
 
     &:last-child {
@@ -85,7 +91,7 @@ body {
 }
 
 .site-container {
-  padding-top: 51px;
+  padding-top: 52px;
 }
 
 .site-wrapper {
@@ -101,7 +107,7 @@ body {
 .site-sidebar {
   display: none;
   float: left;
-  width: 200px;
+  width: @site-menu-width;
 }
 
 .site-aside {
@@ -121,15 +127,7 @@ body {
 }
 
 .navbar {
-  border: 0;
-}
-
-#site-header {
-  background: #fff;
-  .navbar-header {
-    border-left: 1px solid #ccc;
-    border-right: 1px solid #ccc;
-  }
+  border-width: 0 0 2px;
 }
 
 .site-header a span {
@@ -142,9 +140,12 @@ body {
 }
 
 .navbar-brand {
-  color: #b00;
+  color: @brand-primary;
   padding: 15px 20px;
-  width: 198px;
+  width: @site-menu-width;
+  text-align: center;
+  border: solid @border-color;
+  border-width: 0 1px;
 }
 
 @media (min-width: 481px) {
@@ -170,7 +171,7 @@ body {
   }
 
   .site-menu {
-    width: 200px;
+    width: @site-menu-width;
   }
 
   .site-adverts {
