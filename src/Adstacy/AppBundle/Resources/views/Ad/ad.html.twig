@@ -4,6 +4,8 @@
 {% else %}
   {% set _comments = ad.comments %}
 {% endif %}
+{% set commentsLength = _comments|length %}
+{% set commentsLeft = ad.commentsCount - commentsLength %}
 <div class="advert item">
   {% if ad.type == 'image' %}
     <div class="advert-img">
@@ -113,13 +115,14 @@
     </div>
   </div>
 
-  {% if ad.commentsCount > _comments|length %}
-    <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}#comments" class="btn-comments-count btn btn-default btn-block">
-      <span class="comments-count">{{ ad.commentsCount }}</span> Comments &middot; {{"comment.load_more"|trans}}
-    </a>
-  {% endif %}
+  <div class="advert-comments-container">
+    {% if commentsLeft > 0 %}
+      {% set lastId = _comments[0].id %}
+      <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}#comments" data-href="{{ path('adstacy_api_ad_comments', {id: ad.id, until: lastId}) }}" class="load-more-comments btn btn-default btn-block">
+        {{"comment.load_more"|trans({'%count%': commentsLeft})|raw}}
+      </a>
+    {% endif %}
 
-  {% if app.user %}
     <div class="advert-comments">
       {% for comment in _comments %}
         <div class="media">
@@ -137,6 +140,7 @@
         </div>
       {% endfor %}
 
+      {% if app.user %}
       <div class="media">
         <div class="pull-left">
           <img src="{{ profile_pic(app.user) }}" alt="" width="32" height="32" class="media-object">
@@ -148,7 +152,8 @@
           </form>
         </div>
       </div>
+      {% endif %}
     </div>
-  {% endif %}
+  </div>
 </div>
 

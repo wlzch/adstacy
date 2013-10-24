@@ -68,7 +68,7 @@ user:
         message: Nobody follows %username% yet
 
 comment:
-    load_more: load more comments
+    load_more: View <span class="comments-count">%count%</span> more comments
 
 search:
     no_result:

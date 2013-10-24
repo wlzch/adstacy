@@ -50,7 +50,7 @@ class AdController extends ApiController
             return $this->noResult();
         }
 
-        $next = $comments[count($comments)-1]->getId();
+        $next = $comments[0]->getId();
         $res = array(
             'data' => array(
                 'comments' => $comments
