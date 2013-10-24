@@ -1,13 +1,12 @@
 {% extends 'AdstacyAppBundle::layout.html.twig' %}
 
-{% block title %}{{ ad.description }}{%endblock %}
+{% block title %}{% if ad.type == 'text' %}{{ ad.title }}{% else %}{{ ad.description|striptags|slice(0, 150) }}{% endif %}{%endblock %}
+
+{% block meta_description %}{{ ad.description|striptags|slice(0, 150) }}{% endblock %}
 
 {% block meta_keywords %}{{ ad.tags|join(',') }}{% endblock %}
 
-{% block meta_image %}
-  {% if ad.image %}
-    {{ app.request.scheme~"://"~app.request.host~vich_uploader_asset(ad, 'image') }}
-  {% endif %}
+{% block meta_image %}{% if ad.image %}{{ app.request.scheme~"://"~app.request.host~vich_uploader_asset(ad, 'image') }}{% endif %}
 {% endblock %}
 
 {% block head_scripts %}
