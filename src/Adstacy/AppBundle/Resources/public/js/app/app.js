@@ -17,14 +17,9 @@ $(function(){
     $siteContainer.toggleClass('open');
   });
 
-  $('#btn-search').click(function() {
+  $('#m-btn-search').click(function() {
     $siteHeader.addClass('focus');
     $searchInput.focus();
-  });
-
-  $('#search-dismiss').click(function() {
-    $searchInput.val("");
-    $siteHeader.removeClass('focus');
   });
 
   $searchInput.blur(function() {

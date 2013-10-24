@@ -10,14 +10,16 @@
       <a class="navbar-brand" href="{{ path('homepage') }}" title="Adstacy">Adstacy</a>
     </div>
 
-    <form id="search-form" action="{{ path('adstacy_app_search') }}">
-      <input id="search-box" type="text" class="form-control typeahead" placeholder="{{ "search"|trans }}" name="q" value="{{ app.request.query.get('q') }}">
-      <button id="search-dismiss" type="button" class="close">&times;</button>
-      <input type="submit" class="hide">
-    </form>
+    <div class="search-container">
+      <form id="search-form" class="navbar-left" action="{{ path('adstacy_app_search') }}">
+        <button id="btn-search" type="submit"><i class="icon icon-search"></i></button>
+        <input id="search-box" type="text" class="form-control typeahead" placeholder="{{ "search"|trans }}" name="q" value="{{ app.request.query.get('q') }}">
+        <input type="submit" class="hide">
+      </form>
+    </div>
 
     <ul class="nav navbar-nav navbar-right">
-      <li><a id="btn-search" title="Search"><i class="icon icon-search"></i></a></li>
+      <li><a id="m-btn-search" title="Search"><i class="icon icon-search"></i></a></li>
       {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
         <li><a href="{{ path('adstacy_app_ad_create') }}" id="create-advert-btn" title="{{ "ads.create"|trans }}"><i class="icon icon-plus"></i></a></li>
         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
@@ -48,7 +50,6 @@
             </div>
           </div>
         </li>
-
       {% endif %}
     </ul>
   </nav>
