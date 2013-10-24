@@ -32,14 +32,8 @@
 
 {% block image_widget %}
 {% set imageExists = obj and obj.image and obj.imagename %}
-<div class="image-upload-input">
-  <input class="image-upload" type="file" name="{{ full_name }}" {% if not imageExists and image_required %}required=required{% endif %} />
-  <div class="input-group">
-    <input type="text" class="form-control image-upload-text image-upload-trigger" placeholder="Click to choose image" readonly="readonly" />
-    <span class="input-group-btn">
-      <button class="btn btn-default btn-info image-upload-trigger" type="button">Choose Image</button>
-    </span>
-  </div>
+<div class="form-widget">
+  <input type="file" id="{{ id }}" name="{{ full_name }}" {{ block('widget_attributes') }} class="form-control" {% if not imageExists and image_required %}required=required{% endif %} >
 </div>
 
 <div class="image-preview {{ image_size }}">
@@ -58,27 +52,20 @@
 
 <script type="text/javascript">
   $(function() {
-    var $upload = $('.image-upload');
     var $preview = $('.image-preview');
-    var $trigger = $('.image-upload-trigger');
     var $text = $('.image-upload-text');
-    $upload.change(function(e) {
+    $('#{{ id }}').change(function(e) {
       var files = FileAPI.getFiles(e);
+      var $this = $(this);
       if (files && files[0]) {
-        var val = $upload.val();
-        $text.val(val.substring(val.lastIndexOf('\\') + 1, val.length));
         if (window.FileReader) {
           FileAPI.readAsImage(files[0], function(evt) {
             if (evt.type == 'load') {
               $preview.find('img').replaceWith(evt.result);
-              $text.val(files[0].name);
             }
           });
         }
       }
-    });
-    $trigger.click(function() {
-      $upload.trigger('click');
     });
   });
 </script>
