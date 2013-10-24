@@ -1,24 +1,18 @@
-<div class="panel panel-default user">
-  <div class="clearfix">
-    <h5 class="user-realname text-overflow"><a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">{{ user.realname }}</a></h5>
-    <div class="profile-picture">
-      <img src="{{ profile_pic(user) }}" width="105" height="105">
+<div class="panel panel-default user clearfix">
+  <div class="profile-picture">
+    <img src="{{ profile_pic(user) }}" width="48" height="48">
+  </div>
+  <div class="user-detail">
+    <div class="user-info">
+      <a class="realname"href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">{{ user.realname }} <span class="username">@{{ user.username }}</span></a>
+      <a href="{{ path('adstacy_app_user_followers', {username: user.username}) }}"><span class="user-followers-count">{{ user.followersCount }}</span> Followers</a>
+      <a href="{{ path('adstacy_app_user_ads', {username: user.username}) }}">{{ user.adsCount }} Ads</a>
     </div>
+    <p>{{ user.about }}</p>
   </div>
-
-  <div class="user-score">
-    <a href="{{ path('adstacy_app_user_followers', {username: user.username}) }}"><span class="user-followers-count">{{ user.followersCount }}</span> Followers</a> &nbsp; &nbsp;
-    <a href="{{ path('adstacy_app_user_ads', {username: user.username}) }}">{{ user.adsCount }} Ads</a>
-  </div>
-
-  {% set loggedInUser = app.user %}
-  {% if loggedInUser %}
-    {% if user == loggedInUser %}
-      <a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}" class="btn btn-success btn-block">View Profile</a>
-    {% else %}
+  <div class="user-actions">
+    {% if app.user and user != app.user %}
       {% include 'AdstacyAppBundle:User:follow_button.html.twig' with {user: user} %}
     {% endif %}
-  {% else %}
-    <a href="{{ path('adstacy_app_user_follow', {username: user.username}) }}" class="btn btn-primary btn-block">Follow</a>
-  {% endif %}
+  </div>
 </div>

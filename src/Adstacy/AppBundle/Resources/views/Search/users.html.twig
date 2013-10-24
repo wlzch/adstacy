@@ -14,9 +14,11 @@
 {% endblock %}
 
 {% block ajax_content %}
-  {% for user in paginator.getCurrentPageResults %}
-    {% include 'AdstacyAppBundle:User:user.html.twig' with {user: user} %}
-  {% endfor %}
+  <div class="users">
+    {% for user in paginator.getCurrentPageResults %}
+      {% include 'AdstacyAppBundle:User:user.html.twig' with {user: user} %}
+    {% endfor %}
+  </div>
   {% if paginator.hasNextPage %}
     {% set params = app.request.query.all|merge({page: paginator.getNextPage}) %}
     <a href="{{ path('adstacy_app_search', params )}}" class="btn btn-default btn-lg btn-block load-next next-page">More</a>

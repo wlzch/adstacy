@@ -132,10 +132,8 @@ class UserRepository extends EntityRepository
     {
         $em = $this->getEntityManager();
         $query = $em->createQuery('
-            SELECT partial u.{id,username,imagename,realName,adsCount,followersCount,profilePicture},
-            partial a.{id,imagename,thumbHeight,imageHeight,imageWidth}
+            SELECT partial u.{id,username,imagename,realName,adsCount,followersCount,profilePicture,about}
             FROM AdstacyAppBundle:User u
-            LEFT JOIN u.ads a
             WHERE u.id <> :id
             ORDER BY u.followersCount DESC
         ');

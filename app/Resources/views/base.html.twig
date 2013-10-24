@@ -164,6 +164,7 @@
       %}
         <script src="{{ asset_url }}" type="text/javascript"></script>
       {% endjavascripts %}
+      {% if not app.debug %}
       <script type="text/javascript">
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
@@ -185,6 +186,7 @@
           });
         }
       </script>
+      {% endif %}
     {% endblock %}
   </body>
 </html>

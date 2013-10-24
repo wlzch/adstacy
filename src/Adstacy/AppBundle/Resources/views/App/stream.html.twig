@@ -5,9 +5,6 @@
 {% block content %}
   <div class="site-body">
     {% if user.followingsCount <= 0 %}
-      <div class="page-title jumbotron text-center">
-        <h1>User to follows</h1>
-      </div>
       {{ block('ajax_content') }}
     {% else %}
       <div class="jscroll">
@@ -19,7 +16,7 @@
 
 {% block ajax_content %}
   {% if user.followingsCount <= 0 %}
-    <div class="clearfix">
+    <div class="clearfix users">
       {% for user in suggestionsPaginator.getCurrentPageResults %}
         {% include 'AdstacyAppBundle:User:user.html.twig' with {user: user} %}
       {% endfor %}
