@@ -89,6 +89,7 @@
     {% set twitterUrl = "https://twitter.com/share?url=#{adUrl}&text=#{desc}&hashtags=#{tags}" %}
     {% set facebookUrl = "https://www.facebook.com/sharer/sharer.php?u=#{adUrl}" %}
     <div class="advert-share btn-group btn-group-justified">
+      <p class="url">{{ url('adstacy_app_ad_show', {id: ad.id}) }}</p>
       <a href="{{ facebookUrl }}" class="btn btn-facebook facebook-share"><i class="icon icon-facebook"></i>Share</a>
       <a href="{{ twitterUrl }}" class="btn btn-twitter tweet"><i class="icon icon-twitter twitter-share"></i>Tweet</a>
     </div>
