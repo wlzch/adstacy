@@ -112,7 +112,7 @@ class PopulateRedisCommand extends ContainerAwareCommand
         $query = $em->createQuery('
             SELECT partial u.{id,username}, partial f.{id}
             FROM AdstacyAppBundle:User u
-            JOIN u.followings f
+            LEFT JOIN u.followings f
         ');
 
         // recommend the most common followings

@@ -1,22 +1,16 @@
 {% extends 'AdstacyAppBundle::layout.html.twig' %}
 
 {% block content %}
-  {% if users|length > 0 %}
-    <div class="page-title jumbotron text-center">
-      <h1>User to follow</h1>
-    </div>
-    <div class="adstacy-container">
-      {{ block('ajax_content') }}
-    </div>
-  {% else %}
-    <div class="page-title jumbotron text-center">
-      <h1></h1>
-    </div>
-  {% endif %}
+  <div class="adstacy-container">
+    <a href="{{ path('adstacy_app_who_to_follow') }}" class="btn btn-default" title="{{"find_friends"|trans}}">{{"find_friends"|trans}}</a>
+    <a href="{{ path('adstacy_app_who_to_follow_facebook') }}" class="btn btn-default" title="{{"find_friends"|trans}}">{{"find_friends_facebook"|trans}}</a>
+    <a href="{{ path('adstacy_app_who_to_follow_twitter') }}" class="btn btn-default" title="{{"find_friends_twitter"|trans}}">{{"find_friends_twitter"|trans}}</a>
+    {{ block('ajax_content') }}
+  </div>
 {% endblock %}
 
 {% block ajax_content %}
-  <div class="clearfix">
+  <div class="users clearfix">
     {% for user in users %}
       {% include 'AdstacyAppBundle:User:user.html.twig' with {user: user} %}
     {% endfor %}
