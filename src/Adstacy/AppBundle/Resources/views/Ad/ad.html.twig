@@ -9,13 +9,16 @@
       </a>
     </div>
   {% elseif ad.type == 'text' %}
-    <h3>{{ ad.title }}</h3>
+    <div class="advert-text">
+      <h3>{{ ad.title }}</h3>
+      <p>{{ ad.description|raw }}</p>
+    </div>
   {% elseif ad.type == 'youtube' %}
     <div class="advert-video" data-youtube-id="{{ ad.youtubeId }}">
       <a href="#">
         <img class="lazy" src="{{ asset('bundles/adstacyapp/img/transparent.gif') }}"
           data-original="http://img.youtube.com/vi/{{ ad.youtubeId }}/0.jpg"
-          width="{{ thumb_width }}" height="{{ thumb_width }}"
+          width="{{ thumb_width }}" height="{{ thumb_width * (9/16) }}"
         >
       </a>
       <div class="yt-player"></div>
@@ -75,19 +78,22 @@
 
   <div class="advert-detail">
     <div class="advert-user clearfix">
-      {% include 'AdstacyAppBundle:User:user_mini.html.twig' with {user: ad.user, text: ago(ad.created), as_link: true} %}
+      {% set user = ad.user %}
+      <div class="profile-picture">
+        <img class="profile-picture-img" src="{{ profile_pic(user) }}" alt="{{ user.username }}" width="48" height="48">
+      </div>
+      <div class="user-desc">
+        <a class="realname" href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">{{ user.realName }} <span class="username">@{{ user.username }}</span></a>
+      </div>
+      <div class="advert-date">
+        <span class="date">&middot; {{ ago(ad.created) }}</span>
+      </div>
     </div>
     <p class="advert-desc">{{ parse_url(ad.description) }}</p>
     <div class="advert-tags">
-      <a href="#">#kuliner</a>
-      <a href="#">#masakan</a>
-      <a href="#">#medan</a>
-      <a href="#">#indonesia</a>
-      <a href="#">#enak</a>
-      <a href="#">#mie</a>
-      <a href="#">#sotoAyam</a>
-      <a href="#">#pedas</a>
-      <a href="#">#pedas</a>
+      {% for tag in ad.tags %}
+        <a href="{{ path('adstacy_app_search', {q: tag}) }}">#{{tag}}</a>
+      {% endfor %}
     </div>
   </div>
 
@@ -98,24 +104,17 @@
   {% endif %}
 
   {% if app.user %}
-    <div class="advert-comment">
+    <div class="advert-comments">
       {% for comment in ad.comments %}
         <div class="media">
           <div class="pull-left">
-            <img src="" alt="" width="32" height="32" class="media-object">
+            <img src="{{ profile_pic(comment.user) }}" alt="" width="32" height="32" class="media-object">
           </div>
           <div class="media-body">
-            {# <p class="media-heading">
-              <a href="{{ path('adstacy_app_user_profile', {username: comment.user.username}) }}">{{ comment.user.realName }}</a>
-              <small>@{{ comment.user.userName }}</small>
-              <time>~ {{ ago(comment.created) }}</time>
-            </p> #}
             <p class="media-heading">
-              <a><strong>Erwin Zhang</strong></a>
-              <span class="text-muted">
-                @<span>rwinz</span>
-                <time>~ 2 weeks ago</time>
-              </span>
+              <a class="realname" href="{{ path('adstacy_app_user_profile', {username: comment.user.username}) }}">{{ comment.user.realName }}</a>
+              <span class="username">@{{ comment.user.userName }}</small>
+              <time>~ {{ ago(comment.created) }}</time>
             </p>
             <p>{{ comment.content }}</p>
           </div>
@@ -124,7 +123,7 @@
 
       <div class="media">
         <div class="pull-left">
-          <img src="" alt="" width="32" height="32" class="media-object">
+          <img src="{{ profile_pic(app.user) }}" alt="" width="32" height="32" class="media-object">
         </div>
         <div class="media-body">
           <form action="{{ path('adstacy_app_ad_comment', {id: ad.id}) }}" method="post">

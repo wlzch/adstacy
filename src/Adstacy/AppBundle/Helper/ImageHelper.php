@@ -3,6 +3,7 @@
 namespace Adstacy\AppBundle\Helper;
 
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Imagine\Gd\Imagine;
 use Imagine\Filter\Advanced\RelativeResize;
 use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesser;
@@ -21,7 +22,7 @@ class ImageHelper
                 $relativeResize = new RelativeResize('widen', $width);
                 $image = $relativeResize->apply($image);
                 $image->save($originalImage->getRealPath(), array(
-                        'format' => $originalImage->guessClientExtension()
+                        'format' => $originalImage->guessExtension()
                     )
                 );
             }
@@ -46,12 +47,13 @@ class ImageHelper
         }
         if (!$content) return false;
 
-        $path = '/tmp/'.uniqid();
+        $filename = uniqid();
+        $path = '/tmp/'.$filename;
         file_put_contents($path, $content);
         $ext = self::guessExtension($path);
         $newpath = $path.'.'.$ext;
         rename($path, $newpath);
-        $file = new File($newpath);
+        $file = new UploadedFile($newpath, $filename.'.'.$ext, null, null, null, true);
 
         return $file;
     }

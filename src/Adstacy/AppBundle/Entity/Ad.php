@@ -13,6 +13,7 @@ use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity(repositoryClass="Adstacy\AppBundle\Repository\AdRepository")
+ * @ORM\HasLifecycleCallbacks()
  * @Assert\Callback(methods={"isAdValid"})
  * @Vich\Uploadable
  * @JMS\ExclusionPolicy("none")
@@ -52,10 +53,10 @@ class Ad
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=25, nullable=true)
+     * @ORM\Column(name="youtube_url", type="string", length=255, nullable=true)
      * @JMS\Groups({"user_show", "ad_list", "ad_show"})
      */
-    private $youtubeId;
+    private $youtubeUrl;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -372,6 +373,8 @@ class Ad
             // hack for VichUploaderBundle because the listener will be called 
             // only if there is any field changes
             $this->setUpdated(new \Datetime());
+        } else {
+            $this->image = $image;
         }
     
         return $this;
@@ -390,9 +393,7 @@ class Ad
      */
     public function setImagename($imagename)
     {
-        if ($imagename) {
-            $this->imagename = $imagename;
-        }
+        $this->imagename = $imagename;
     
         return $this;
     }
@@ -585,35 +586,40 @@ class Ad
     public function isAdValid(ExecutionContextInterface $context)
     {
         if (!$this->type) {
-            $context->addViolationAt('type', 'ad.type.not_blank');
-        } else {
-            if ($this->type == 'image') {
-                if (!$this->imagename && !$this->image) {
-                    $context->addViolationAt('image', 'image.file.not_null');
-                } else {
-                    $context->validateValue($this->image, new Assert\Image(array(
-                        'maxSize' => '5M',
-                        'mimeTypes' => array('image/png', 'image/jpg', 'image/jpeg', 'image/pjpeg'),
-                        'minWidth' => 320,
-                        'maxSizeMessage' => 'image.file.max_size',
-                        'mimeTypesMessage' => 'image.file.mime_types',
-                        'minWidthMessage' => 'image.file.min_width'
-                    )));
-                }
-            } else if ($this->type == 'text') {
-                if (!$this->title) {
-                    $context->addViolationAt('title', 'ad.title.not_blank');
-                }
-                if (!$this->description) {
-                    $context->addViolationAt('description', 'ad.description.not_blank');
-                }
-            } else if ($this->type == 'youtube') {
-                if (!$this->youtubeId) {
-                    $context->addViolationAt('youtubeId', 'ad.youtubeId.not_blank');
-                }
+            $this->type = 'image';
+        }
+        if ($this->type == 'image') {
+            if (!$this->imagename && !$this->image) {
+                $context->addViolationAt('image', 'image.file.not_null');
             } else {
-                $context->addViolation('ad.type.not_supported');
+                $context->validateValue($this->image, new Assert\Image(array(
+                    'maxSize' => '5M',
+                    'mimeTypes' => array('image/png', 'image/jpg', 'image/jpeg', 'image/pjpeg'),
+                    'minWidth' => 320,
+                    'maxSizeMessage' => 'image.file.max_size',
+                    'mimeTypesMessage' => 'image.file.mime_types',
+                    'minWidthMessage' => 'image.file.min_width'
+                )));
             }
+        } else if ($this->type == 'text') {
+            if (!$this->title) {
+                $context->addViolationAt('title', 'ad.title.not_blank');
+            }
+            if (!$this->description) {
+                $context->addViolationAt('description', 'ad.description.not_blank');
+            }
+        } else if ($this->type == 'youtube') {
+            if (!$this->youtubeUrl) {
+                $context->addViolationAt('youtubeUrl', 'ad.youtube_url.not_blank');
+            } else {
+                $matches = null;
+                preg_match_all('/https?:\/\/(?:[0-9A-Z-]+\.)?(?:youtu\.be\/|youtube\.com\S*[^\w\-\s])([\w\-]{11})(?=[^\w\-]|$)(?![?=&+%\w.-]*(?:[\'"][^<>]*>|<\/a>))[?=&+%\w.-]*/i', $this->youtubeUrl, $matches);
+                if (!$matches || count($matches[1]) <= 0) {
+                    $context->addViolationAt('youtubeUrl', 'ad.youtube_url.not_valid');
+                }
+            }
+        } else {
+            $context->addViolation('ad.type.not_supported');
         }
     }
 
@@ -702,7 +708,7 @@ class Ad
      */
     public function getType()
     {
-        return $this->type;
+        return $this->type ?: 'image';
     }
 
     /**
@@ -729,25 +735,58 @@ class Ad
     }
 
     /**
-     * Set youtubeId
-     *
-     * @param string $youtubeId
-     * @return Ad
-     */
-    public function setYoutubeId($youtubeId)
-    {
-        $this->youtubeId = $youtubeId;
-    
-        return $this;
-    }
-
-    /**
      * Get youtubeId
      *
      * @return string 
      */
     public function getYoutubeId()
     {
-        return $this->youtubeId;
+        $matches = null;
+        preg_match_all('/https?:\/\/(?:[0-9A-Z-]+\.)?(?:youtu\.be\/|youtube\.com\S*[^\w\-\s])([\w\-]{11})(?=[^\w\-]|$)(?![?=&+%\w.-]*(?:[\'"][^<>]*>|<\/a>))[?=&+%\w.-]*/i', $this->youtubeUrl, $matches);
+
+        return isset($matches[1][0]) ? $matches[1][0] : null;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     * @ORM\PrePersist
+     */
+    public function ensureType()
+    {
+        if ($this->type == 'image') {
+            $this->setTitle(null);
+            $this->setYoutubeUrl(null);
+        } elseif ($this->type == 'text') {
+            $this->setImage(null);
+            $this->setImagename(null);
+            $this->setYoutubeUrl(null);
+        } elseif ($this->type == 'youtube') {
+            $this->setImage(null);
+            $this->setImagename(null);
+            $this->setTitle(null);
+        }
+    }
+
+    /**
+     * Set youtubeUrl
+     *
+     * @param string $youtubeUrl
+     * @return Ad
+     */
+    public function setYoutubeUrl($youtubeUrl)
+    {
+        $this->youtubeUrl = $youtubeUrl;
+    
+        return $this;
+    }
+
+    /**
+     * Get youtubeUrl
+     *
+     * @return string 
+     */
+    public function getYoutubeUrl()
+    {
+        return $this->youtubeUrl;
     }
 }

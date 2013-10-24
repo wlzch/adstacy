@@ -1,4 +1,4 @@
-<header id="site-header" class="site-header navbar navbar-inverse navbar-fixed-top">
+<header id="site-header" class="site-header navbar navbar-fixed-top">
   <nav class="site-wrapper">
     <div class="navbar-header navbar-left">
       <a id="site-menu-toggle" href="#" class="navbar-toggle">
@@ -7,7 +7,7 @@
         <i class="icon-bar"></i>
         <i class="icon-bar"></i>
       </a>
-      <a class="navbar-brand" href="{{ path('homepage') }}" title="Adstacy"><span>ADS</span>tacy</a>
+      <a class="navbar-brand" href="{{ path('homepage') }}" title="Adstacy">Adstacy</a>
     </div>
 
     <form id="search-form" action="{{ path('adstacy_app_search') }}">
@@ -17,12 +17,12 @@
     </form>
 
     <ul class="nav navbar-nav navbar-right">
-      <li><a id="btn-search" title="Search"><span>Search</span><i class="icon icon-search"></i></a></li>
+      <li><a id="btn-search" title="Search"><i class="icon icon-search"></i></a></li>
       {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-        <li><a href="{{ path('adstacy_app_ad_create') }}" id="create-advert-btn" title="{{ "ads.create"|trans }}"><span>{{ "ads.create"|trans }}</span><i class="icon icon-plus"></i></a></li>
+        <li><a href="{{ path('adstacy_app_ad_create') }}" id="create-advert-btn" title="{{ "ads.create"|trans }}"><i class="icon icon-plus"></i></a></li>
         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
           <li>
-            <a class="dropdown-toggle" id="notif-btn" title="Notification" data-toggle="dropdown" data-href="{{ path('adstacy_notification_readall') }}"><span>Notification</span><i class="icon icon-bell"></i></a>
+            <a class="dropdown-toggle" id="notif-btn" title="Notification" data-toggle="dropdown" data-href="{{ path('adstacy_notification_readall') }}"><i class="icon icon-bell"></i></a>
             <span class="notif-count label label-danger">{{ app.user.notificationsCount }}</span>
             {{ render_top_notification(5) }}
           </li>
@@ -40,7 +40,7 @@
               {{ form_login() }}
 
               {% for owner in hwi_oauth_resource_owners() %}
-                <a class="btn btn-block btn-{{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">{{"login.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
+                <a class="btn btn-{{ owner }} btn-block btn-social" href="{{ hwi_oauth_login_url(owner) }}"><i class="icon icon-{{ owner }}"></i>{{"login.with"|trans}} {{ owner|trans({}, 'HWIOAuthBundle') }}</a>
               {% endfor %}
             </div>
             <div class="dropdown-box-footer">

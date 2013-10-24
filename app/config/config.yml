@@ -14,7 +14,7 @@ parameters:
     max_notifications: 50
     max_who_to_follow: 10
 
-    thumb_width: 234
+    thumb_width: 448
     mini_thumb_size: 100
     profile_pic_size: 100
     desc_length: 255

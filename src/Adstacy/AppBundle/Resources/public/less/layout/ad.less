@@ -33,6 +33,16 @@
   }
 }
 
+.advert-text {
+  background: #333;
+  color: #fff !important;
+  padding: 15px;
+  h3 {
+    text-align: center;
+    margin: 0 0 15px 0;
+  }
+}
+
 .advert-tags {
   // .text-overflow();
 }
@@ -48,10 +58,12 @@
 }
 
 .advert-action {
+  background: #f2f2f2;
   border-top: 1px solid @border-color;
 
   .btn {
     height: 46px;
+    border-bottom: 0;
   }
 
   .pull-left .btn {
@@ -97,7 +109,7 @@
   }
 }
 
-.advert-comment {
+.advert-comments {
   padding: 10px 15px;
   border-top: 1px solid @border-color;
 
@@ -117,6 +129,16 @@
       margin: 0;
     }
   }
+  .realname {
+    font-size: 13px;
+  }
+  .username {
+    font-size: 12px;
+  }
+  time {
+    font-size: 11px;
+    color: #999;
+  }
 }
 
 .btn-comments-count {
@@ -134,31 +156,29 @@
 
 }
 
-// OLD
-.user-mini {
-  .user-desc {
-    width: 100px;
-    line-height: 1;
-    float: left;
-  }
+.advert-user {
   .profile-picture {
     float: left;
     margin-right: 10px;
+  }
+  .advert-date {
+    float: right;
+  }
+  .date {
+    color: #aaa;
+    font-size: 12px;
   }
   .profile-picture-img {
     width: 30px;
     height: 30px;
   }
-  .user-label {
-    color: #aaa;
-    font-size: 11px;
+  .user-desc {
+    margin-top: 3px;
   }
-  .user-realname {
+  a.realname {
+    float: left;
     font-size: 13px;
     font-weight: bold;
     margin-bottom: 4px;
-  }
-  .user-realname-a {
-    color: @gray;
   }
 }

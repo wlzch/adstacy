@@ -2,66 +2,98 @@
 @import "../bootstrap/mixins.less";
 
 #create-advert {
+  width: 480px;
   label {
     color: #555;
-  }
-
-  #create-advert-desc, #create-advert-content {
-    margin: 10px 0;
   }
 
   span.help {
     color: #b00;
     font-size: 14px;
   }
+  .bootstrap-tagsinput {
+    width: 416px;
+    margin: 0;
+  }
+
+  .progress-bar {
+    background-color: #b00;
+  }
+
+  .big-center-text {
+    text-align: center;
+    font-size: 30px;
+  }
+}
+
+.form-content-container {
+  margin: 10px 0;
+  border: 1px solid #e3e3e3;
+}
+
+#create-advert-tags {
+  padding: 5px 5px 5px 10px;
+  border-top: 1px solid #e3e3e3;
+  i:before {
+    margin: 0;
+  }
+}
+
+#create-advert-url {
+  width: 90%;
+  float: left;
+}
+
+#create-advert-url-ok {
+  width: 10%;
+  float: left;
+}
+
+#ad_title, #ad_youtubeId {
+  border-bottom: 0;
+  border-left: 0;
+  border-right: 0;
+  box-shadow: none;
+  border-top: 1px solid #e3e3e3;
+}
+
+#create-advert-image-trigger {
+  display: block;
+  padding: 7px;
+  text-align: center;
+  background-color: #f2f2f2;
+  color: #555;
+  text-decoration: none;
+  &:hover {
+    background-color: #ddd;
+  }
+}
+
+#create-advert-image-modal {
+  .close {
+    opacity: 1;
+  }
 }
 
 //short desc textarea
 #ad_description {
   resize: none;
-  height: 74px;
+  height: 200px;
 }
 
 #create-advert-image {
-  overflow: hidden;
-  width: 100%;
-
-  .image-upload-input {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .image-upload {
-    cursor: pointer;
-    display: block;
-    font-size: 23px;
-    padding: 5px;
-    position: absolute;
-    right: 0;
-    top: 0;
-    text-align: right;
-    z-index: 100;
-    width: 100%;
-    .opacity(0);
-  }
-
-  .image-preview {
-    width: 100%;
-    display: block;
-    margin: 10px auto;
-    text-align: center;
-    img {
-      max-width: 800px;
-    }
-  }
+  background-color: #f4f4f4;
+  padding: 9px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  margin: 6px 0;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1) inset;
 }
 
-.bootstrap-tagsinput {
-  width: 100%;
-}
-
-.progress-bar {
-  background-color: #b00;
+#ytplayer {
+  img {
+    max-width: 446px;
+  }
 }
 
 @media screen and (max-width: @screen-tablet) {

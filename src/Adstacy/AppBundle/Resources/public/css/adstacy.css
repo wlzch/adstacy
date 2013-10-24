@@ -21,9 +21,6 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
-.icon:before {
-  margin: 0 8px;
-}
 .icon-home:before {
 	content: "\e000";
 }

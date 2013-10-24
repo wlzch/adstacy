@@ -4,19 +4,6 @@
     <div class="profile-picture">
       <img src="{{ profile_pic(user) }}" width="105" height="105">
     </div>
-    <div class="user-adverts clearfix">
-      {% set ads = user.ads %}
-      {% for i in 0..3 %}
-        <div class="user-mini-advert">
-          {% if ads[i] is defined %}
-            {% set ad = ads[i] %}
-            <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}">
-              <img src="{{ vich_uploader_asset(ad, 'image')|imagine_filter('mini_thumb') }}" width="47" height="50">
-            </a>
-          {% endif %}
-        </div>
-      {% endfor %}
-    </div>
   </div>
 
   <div class="user-score">
@@ -34,5 +21,4 @@
   {% else %}
     <a href="{{ path('adstacy_app_user_follow', {username: user.username}) }}" class="btn btn-primary btn-block">Follow</a>
   {% endif %}
-
 </div>
