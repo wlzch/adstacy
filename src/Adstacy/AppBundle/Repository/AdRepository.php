@@ -275,7 +275,7 @@ class AdRepository extends EntityRepository
                        SELECT c0.id
                        FROM ad_comment c0
                        WHERE c0.ad_id = a.id
-                       ORDER BY c0.created DESC
+                       ORDER BY c0.id DESC
                        LIMIT 2
                    )
                 )
