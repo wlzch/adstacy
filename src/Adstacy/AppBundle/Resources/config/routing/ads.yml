@@ -45,7 +45,6 @@ adstacy_app_ad_comment_delete:
         _controller: AdstacyAppBundle:Ad:deleteComment
     requirements:
         id: \d+
-    methods: [POST]
 
 adstacy_app_ad_edit:
     path: /ads/{id}/edit

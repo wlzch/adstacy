@@ -11,6 +11,9 @@
               <span class="username">@{{ username }}</small>
             </a>
             &middot; <time class="timeago" datetime="{{ time }}">{{ strtime }}</time>
+            {{#delete}}
+              <a href="javascript:;" data-href="/comments/{{ id }}/delete" class="pull-right delete">x</a>
+            {{/delete}}
           </p>
           <p>{{ content }}</p>
         </div>

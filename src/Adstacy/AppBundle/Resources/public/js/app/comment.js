@@ -2,7 +2,18 @@
   var $comment = $('textarea.comment-box');
   var $loadComments = $('.load-more-comments');
   var template = Hogan.compile(templates.comment);
+  var $deletes = $('a.delete-comment');
   // must bind enter keydown checking first before mentionsInput because ordering matters.
+  var deleteComment = function() {
+    var $this, $comment;
+    $this = $(this);
+    $comment = $this.closest('.comment');
+    $comment.remove();
+    $.post($this.attr('data-href'), function(data) {
+      // do nothing;
+    });
+    return false;
+  };
   $comment.keydown(function(event) {
     var $this = $(this);
     var $form = $this.closest('form');
@@ -46,13 +57,16 @@
     }
   });
   $loadComments.click(function() {
-    var $this = $(this);
-    var $that = $(this).find('a');
-    var href = $that.attr('data-href');
-    var $comments = $that.closest('.advert-comments-container').find('.advert-comments');
-    var html = $that.html();
+    var $this, $that, $advert, $comments, href, html, spinner;
+    $this = $(this);
+    $that = $(this).find('a');
+    $advert = $(this).closest('.advert');
+    var adUsername = $advert.attr('data-username');
+    href = $that.attr('data-href');
+    $comments = $that.closest('.advert-comments-container').find('.advert-comments');
+    html = $that.html();
     $that.html('');
-    var spinner = new Spinner({className: 'spinner', length: 2, width: 2, radius: 2}).spin(this);
+    spinner = new Spinner({className: 'spinner', length: 2, width: 2, radius: 2}).spin(this);
     $.getJSON(href, function(data) {
       var json = JSON.parse(data);
       var tmpl, left, len, cnt;
@@ -69,17 +83,21 @@
       }
       $.each(json.data.comments, function(i, comment) {
         $tmpl = $(template.render({
+          id: comment.id,
           photo: comment.user.photo,
           username: comment.user.username,
           real_name: comment.user.real_name,
           time: comment.created,
           strtime: new Date(comment.created).toDateString(),
-          content: comment.content
+          content: comment.content,
+          delete: (Adstacy.user.username == comment.user.username) || (Adstacy.user.username == adUsername)
         }));
         $comments.prepend($tmpl);
         $tmpl.find('time').timeago();
+        $tmpl.find('a.delete-comment').click(deleteComment);
       });
     });
     return false;
   });
+  $deletes.click(deleteComment);
 })();

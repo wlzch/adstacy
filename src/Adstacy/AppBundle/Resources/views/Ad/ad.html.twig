@@ -6,7 +6,7 @@
 {% endif %}
 {% set commentsLength = _comments|length %}
 {% set commentsLeft = ad.commentsCount - commentsLength %}
-<div class="advert item">
+<div class="advert item" data-username="{{ ad.user.username }}">
   {% if ad.type == 'image' %}
     <div class="advert-img">
       {% set thumbnail, original = null, null %}
@@ -149,6 +149,9 @@
                 <span class="username">@{{ comment.user.userName }}</span>
               </a>
               &middot; <time class="timeago" datetime="{{ comment.created|date('c') }}">{{ comment.created|date('F j, Y') }}</time>
+              {% if app.user and (app.user == comment.user or app.user == comment.user) %}
+                <a href="javascript:;" data-href="{{ path('adstacy_app_ad_comment_delete', {id: comment.id}) }}" class="pull-right delete-comment">x</a>
+              {% endif %}
             </p>
             <p>{{ comment.content }}</p>
           </div>
