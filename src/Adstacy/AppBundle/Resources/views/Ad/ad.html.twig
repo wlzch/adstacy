@@ -49,7 +49,7 @@
         <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-default btn-promote promote {% if promoted %}hide{% endif %}" title="Broadcast">
           <i class="icon icon-bullhorn"></i><span>broadcast</span>
         </a>
-        <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-primary btn-promote unpromote {% if not promoted %}hide{% endif %}" title="Unbroadcast">
+        <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-promote unpromote {% if not promoted %}hide{% endif %}" title="Unbroadcast">
           <i class="icon icon-bullhorn"></i><span>unbroadcast</span>
         </a>
       </div>
