@@ -159,7 +159,7 @@
               </a>
               &middot; <time class="timeago" datetime="{{ comment.created|date('c') }}">{{ comment.created|date('F j, Y') }}</time>
               {% if app.user and (app.user == comment.user or app.user == comment.user) %}
-                <a href="javascript:;" data-href="{{ path('adstacy_app_ad_comment_delete', {id: comment.id}) }}" class="pull-right delete-comment">x</a>
+                <a href="javascript:;" data-href="{{ path('adstacy_app_ad_comment_delete', {id: comment.id}) }}" class="pull-right delete-comment">&times;</a>
               {% endif %}
             </p>
             <p>{{ comment.content }}</p>

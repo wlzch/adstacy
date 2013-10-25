@@ -26,15 +26,23 @@
     border-radius: 5px 5px 0 0;
   }
 }
+
 .delete-comment {
+  font-size: 14px;
   color: #999;
+
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 .comment-box {
   width: 100%;
   display: block;
-  height: 32px;
-  padding: 2px 4px;
+  height: 34px;
+  padding: 0 4px;
+  font-size: 12px;
+  line-height: 16px;
   background-color: #eee;
   resize: none;
   border: 1px solid @border-color;
@@ -186,7 +194,10 @@
     font-size: 11px;
     color: #aaa;
   }
+}
 
+.media + .comment {
+  margin-top: 10px;
 }
 
 .comment {
