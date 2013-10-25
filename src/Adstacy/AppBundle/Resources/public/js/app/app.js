@@ -1,6 +1,6 @@
 $(function(){
   $('.site-menu').perfectScrollbar({
-                                        
+
   });
 });
 
@@ -26,10 +26,16 @@ $(function(){
   });
 
   $('.timeago').timeago();
-  $('.btn-share').click(function() {
+  $('.btn-share').click(function(event) {
     var $share = $(this).parent().parent().next().find('.advert-share');
-    $share.toggle();
+    $share.show();
     $share.find('.url').select();
+    $share.addClass('open');
+    event.preventDefault();
+    return false;
+  });
+  $('body').click(function() {
+    $('.advert-share.open').removeClass('open').hide();
   });
   $('img.lazy').lazyload();
   $().UItoTop({ easingType: 'easeOutQuart' });
