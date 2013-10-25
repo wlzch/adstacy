@@ -2,7 +2,7 @@
 @import "../bootstrap/mixins.less";
 
 #create-advert {
-  width: 480px;
+  // width: 480px;
 
   label {
     color: #555;
@@ -65,22 +65,9 @@
   border: 1px solid #e3e3e3;
 }
 
-#create-advert-url {
-  width: 90%;
-  float: left;
-}
-
-#create-advert-url-ok {
-  width: 10%;
-  float: left;
-}
-
-#ad_title, #ad_youtubeId {
-  border-bottom: 0;
-  border-left: 0;
-  border-right: 0;
-  box-shadow: none;
-  border-top: 1px solid #e3e3e3;
+#ad_title, #ad_youtubeUrl {
+  border: 0;
+  .box-shadow(none);
 }
 
 #create-advert-image-trigger {
@@ -122,19 +109,6 @@
   }
 }
 
-@media screen and (max-width: @screen-tablet) {
-  #create-advert {
-    width: 100%;
-
-    .image-preview.medium img {
-      max-width: 100%;
-    }
-  }
-
-  #create-advert-image {
-    width: 100%;
-    float: none;
-    border: 0;
-    min-height: 0;
-  }
+.image-preview.medium img {
+  max-width: 100%;
 }
