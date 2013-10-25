@@ -17,29 +17,39 @@ class LoadAdData extends DataFixture
         foreach ($finder->files()->in($path) as $img) {
             $images[] = new UploadedFile($img->getRealPath(), $img->getFilename());
         }
+        $usernames = array('welly', 'suwandi', 'erwin', 'admin', 'andy', 'ricky', 'robert', 'wilson', 'dennis', 'hendra', 'david', 'rudy',
+            'tony', 'jimmy', 'rita', 'fanny', 'dewi', 'kartika', 'angela', 'yenny', 'lisa', 'jenny',
+            'erlika', 'tina', 'louis', 'sally', 'chistine', 'beny', 'yurica', 'melisa', 'anita',
+            'wendy', 'susanti', 'albert', 'hendy', 'fendy', 'stanley', 'siska', 'cindy', 'catherine',
+            'antonio', 'steven', 'novita', 'cynthia', 'andika', 'putra', 'putri', 'lusi', 'linda',
+            'sanny', 'erna', 'halim', 'rani', 'dicky', 'july', 'donita', 'mega', 'mentari', 'mika'
+        );
 
-        $ads = array();
-        for ($i = 1; $i <= 32; $i++) {
+        $ads = array();$imgIndex = 0;
+        for ($i = 1; $i <= 48; $i++) {
             $tags = $this->faker->words($this->faker->randomNumber(0, 10));
-            $definedTags = array('promo', 'jual');
-            $tags = array_merge($tags, $definedTags);
-
-            $description = $this->faker->sentence($this->faker->randomNumber(1, 10));
-            $image = $images[$i - 1];
-            $users = array($this->getReference('user-suwandi'), $this->getReference('user-welly'), $this->getReference('user-erwin'));
-            $user = $users[$this->faker->randomNumber(0, count($users) - 1)];
-
+            $description = $this->faker->sentence($this->faker->randomNumber(1, 50));
+            $user = $this->getReference('user-'.$usernames[$this->faker->randomNumber(0, count($usernames) - 1)]);
             $ad = new Ad();
-            $ad->setImage($image);
+            if ($this->faker->randomNumber(0, 1) == 0 && $imgIndex < 32) {
+                $image = $images[$imgIndex];
+                $imgIndex++;
+                $ad->setType('image');
+                $ad->setImage($image);
+            } else {
+                $ad->setType('text');
+                $ad->setTitle($this->faker->sentence($this->faker->randomNumber(1, 10)));
+            }
+
             $ad->setDescription($description);
             $ad->setTags($tags);
             $ad->setUser($user);
-            $ad->setType('image');
             $ad->setCreated($this->faker->dateTimeThisMonth);
             $ads[] = $ad;
             $manager->persist($ad);
             $this->addReference('ad-'.$i, $ad);
         }
+        for ($i = 1; $i <= 15; $i++)
         $manager->flush();
     }
 
