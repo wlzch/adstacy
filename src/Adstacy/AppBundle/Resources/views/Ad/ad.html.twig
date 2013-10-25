@@ -157,17 +157,17 @@
       {% endfor %}
 
       {% if app.user %}
-      <div class="media">
-        <div class="pull-left">
-          <img src="{{ profile_pic(app.user) }}" alt="" width="32" height="32" class="media-object">
+        <div class="comment">
+          <div class="pull-left">
+            <img src="{{ profile_pic(app.user) }}" alt="" width="32" height="32">
+          </div>
+          <div class="comment-body">
+            <form action="{{ path('adstacy_app_ad_comment', {id: ad.id}) }}" method="post">
+              <textarea name="comment[content]" required="required" class="comment-box" placeholder="{{"form_comment.placeholders.content"|trans}}"></textarea>
+              <input type="submit" value="{{"comment"|trans}}" class="hide">
+            </form>
+          </div>
         </div>
-        <div class="media-body">
-          <form action="{{ path('adstacy_app_ad_comment', {id: ad.id}) }}" method="post">
-            <textarea name="comment[content]" required="required" class="comment-box" placeholder="{{"form_comment.placeholders.content"|trans}}"></textarea>
-            <input type="submit" value="{{"comment"|trans}}" class="hide">
-          </form>
-        </div>
-      </div>
       {% endif %}
     </div>
   </div>

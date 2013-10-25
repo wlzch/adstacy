@@ -429,8 +429,8 @@
                 lineHeight = parseInt(elmInputBox.css('line-height'), 10) || 18;
 
             elmAutocompleteList.css('width', '15em'); // Sort of a guess
-            elmAutocompleteList.css('left', position.left);
-            elmAutocompleteList.css('top', lineHeight + position.top);
+            // elmAutocompleteList.css('left', position.left);
+            // elmAutocompleteList.css('top', lineHeight + position.top);
         }
 
         function resetInput() {
@@ -482,7 +482,7 @@
         else if (typeof method === 'string' && this.length > 0) {
 
             var instance = $.data(this[0], 'mentionsInput');
-            
+
             if (instance) {
                 if (_.isFunction(instance[method])) {
                     return instance[method].apply(this, Array.prototype.slice.call(outerArguments, 1));
@@ -505,7 +505,7 @@
 
             if (typeof method === 'object' || !method) {
                 return instance.init.call(this, this);
-            } 
+            }
 
         });
     };
