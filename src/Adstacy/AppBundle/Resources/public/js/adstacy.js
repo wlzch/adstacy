@@ -100,14 +100,35 @@
       return false;
     }
   };
+  var filterUser = function(query, users) {
+    return _.filter(users, function(user) { return user.username && user.username.toLowerCase().indexOf(query.toLowerCase()) > -1 });
+  }
   Adstacy.options = {
     mentionsInput: {
       onDataRequest: function (mode, query, triggerChar, callback) {
-        $.getJSON(Routing.generate('adstacy_api_users', {q: query}), function(data) {
-          data = _.filter(data, function(item) { return item.username.toLowerCase().indexOf(query.toLowerCase()) > -1 });
+        var users, that;
+        that = this;
+        if (query && query.length >= 2) {
+          if (Adstacy.user) {
+            users = $.jStorage.get('adstacy.network');
+            if (!users) {
+              $.getJSON(Routing.generate('adstacy_api_network'), function(data) {
+                $.jStorage.set('adstacy.network', data);
+                $.jStorage.setTTL('adstacy.network', 864000);
+                users = filterUser(query, users);
+                callback.call(that, users);
+              });
+            } else {
+              users = filterUser(query, users);
+              callback.call(that, users);
+            }
+          }
+          $.getJSON(Routing.generate('adstacy_api_users', {q: query}), function(data) {
+            users = users.concat(filterUser(query, data));
 
-          callback.call(this, data);
-        });
+            callback.call(that, users);
+          });
+        }
       }
     },
     jscrollAd: {
