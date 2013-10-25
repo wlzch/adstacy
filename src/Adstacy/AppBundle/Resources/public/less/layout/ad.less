@@ -64,11 +64,13 @@
 }
 
 .advert-tags {
-  // .text-overflow();
+  margin-top: 5px;
 }
 
 .advert-detail {
   border-top: 1px solid @border-color;
+  border-bottom: 1px solid @border-color;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.04);
   padding: 10px 15px;
 }
 
@@ -137,7 +139,6 @@
 }
 
 .advert-comments-container {
-  border-top: 2px solid @border-color;
   padding-top: 3px;
 }
 .advert-comments {
@@ -172,10 +173,12 @@
 }
 
 .load-more-comments {
-  color: @brand-primary;
   padding: 3px 0 0 0;
   text-align: center;
   height: 23px;
+  a {
+    color: @bootstrap-blue;
+  }
 }
 
 @media (min-width: 481px) {

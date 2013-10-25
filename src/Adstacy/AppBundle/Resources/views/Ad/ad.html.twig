@@ -131,7 +131,7 @@
     {% if commentsLeft > 0 %}
       {% set lastId = _comments[0].id %}
       <div class="load-more-comments">
-        <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}#comments" data-href="{{ path('adstacy_api_ad_comments', {id: ad.id, until: lastId}) }}">
+        <a href="#" data-href="{{ path('adstacy_api_ad_comments', {id: ad.id, until: lastId}) }}">
           {{"comment.load_more"|trans({'%count%': commentsLeft})|raw}}
         </a>
       </div>
@@ -139,7 +139,7 @@
 
     <div class="advert-comments">
       {% for comment in _comments %}
-        <div class="media">
+        <div class="comment media" data-id="{{ comment.id }}">
           <div class="pull-left">
             <img src="{{ profile_pic(comment.user) }}" alt="" width="32" height="32" class="media-object">
           </div>
