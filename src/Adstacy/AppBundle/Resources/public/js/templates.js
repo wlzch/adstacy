@@ -12,7 +12,7 @@
             </a>
             &middot; <time class="timeago" datetime="{{ time }}">{{ strtime }}</time>
             {{#delete}}
-              <a href="javascript:;" data-href="/comments/{{ id }}/delete" class="pull-right delete-comment">x</a>
+              <a href="javascript:;" data-href="/comments/{{ id }}/delete" class="pull-right delete-comment">&times;</a>
             {{/delete}}
           </p>
           <p>{{ content }}</p>
