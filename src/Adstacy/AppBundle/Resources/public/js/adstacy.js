@@ -3,12 +3,14 @@
   var $body = $('body');
   if ($body.attr('data-user')) {
     Adstacy.user = JSON.parse($body.attr('data-user'));
+    Adstacy.loggedIn = true;
   }
   Adstacy.templates = {
     comment: Hogan.compile(templates.comment)
   };
   Adstacy.events = {
     commentbox: function(event) {
+      if (!Adstacy.user) return;
       var $this = $(this);
       var $form = $this.closest('form');
       var template = Adstacy.templates.comment;
@@ -43,6 +45,7 @@
       return;
     },
     deleteComment: function(event) {
+      if (!Adstacy.user) return;
       var $this, $comment;
       $this = $(this);
       $comment = $this.closest('.comment');
@@ -87,7 +90,7 @@
             time: comment.created,
             strtime: new Date(comment.created).toDateString(),
             content: comment.content,
-            delete: (Adstacy.user.username == comment.user.username) || (Adstacy.user.username == adUsername)
+            delete: Adstacy.user && ((Adstacy.user.username == comment.user.username) || (Adstacy.user.username == adUsername))
           }));
           $comments.prepend($tmpl);
           $tmpl.find('time').timeago();

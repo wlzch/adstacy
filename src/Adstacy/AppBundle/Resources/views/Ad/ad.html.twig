@@ -43,9 +43,8 @@
   {% endif %}
 
   <div class="advert-action clearfix">
-    <div class="btn-group pull-left">
-      {# <a href="{{ path('adstacy_app_ad_promotes', {id: ad.id}) }}" class="btn btn-default"><span class="promotes-count">{{ ad.promoteesCount }}</span></a> #}
-      {% if app.user %}
+    {% if app.user %}
+      <div class="btn-group pull-left">
         {% set promoted = app.user.hasPromote(ad) %}
         <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-default btn-promote promote {% if promoted %}hide{% endif %}" title="Broadcast">
           <i class="icon icon-bullhorn"></i><span>broadcast</span>
@@ -53,12 +52,8 @@
         <a href="{{ path('adstacy_app_ad_unpromote', {id: ad.id}) }}" class="btn btn-primary btn-promote unpromote {% if not promoted %}hide{% endif %}" title="Unbroadcast">
           <i class="icon icon-bullhorn"></i><span>unbroadcast</span>
         </a>
-      {% else %}
-        <a href="{{ path('adstacy_app_ad_promote', {id: ad.id}) }}" class="btn btn-default btn-promote" title="Broadcast">
-          <i class="icon icon-bullhorn"></i><span>broadcast</span>
-        </a>
-      {% endif %}
-    </div>
+      </div>
+    {% endif %}
     <div class="btn-group pull-right">
       <a class="btn btn-default btn-share">
         <i class="icon icon-share"></i>
@@ -73,7 +68,9 @@
           {% if view is not defined or (view is defined and view == true) %}
           <li><a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}"><i class="icon icon-eye"></i><span>{{"view"|trans}}</span></a></li>
           {% endif %}
-          <li><a href="{{ path('adstacy_app_ad_report', {id: ad.id}) }}" class="report"><i class="icon icon-flag"></i><span>report</span></a></li>
+          {% if app.user %}
+          <li><a href="{{ path('adstacy_app_ad_report', {id: ad.id}) }}" class="report"><i class="icon icon-flag"></i><span>{{"report"|trans}}</span></a></li>
+          {% endif %}
           {% if app.user == ad.user %}
             <li><a href="{{ path('adstacy_app_ad_edit', {id: ad.id}) }}"><i class="icon icon-edit"></i><span class="owner-action-label">{{ "edit"|trans }}</span></a></li>
             <li><a data-toggle="modal" data-target="#confirm-modal"><i class="icon icon-delete"></i><span class="owner-action-label">{{ "delete"|trans }}</span></a></li>
