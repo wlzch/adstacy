@@ -1,8 +1,6 @@
 $(function(){
-  $('#site-menu-inner').slimScroll({
-    width: '200px',
-    height: '100%',
-    size: '8px'
+  $('.site-menu').perfectScrollbar({
+                                        
   });
 });
 
