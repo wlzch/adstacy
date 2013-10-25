@@ -26,11 +26,8 @@
   }
   $searchBox.typeahead([tagsOption, usersOption]);
   $searchBox.on('typeahead:selected', function(e, datum, name) {
-    $searchBox.prop('disabled', true);
     if (name == 'users') {
-      window.location.href = Routing.generate('adstacy_app_user_profile', {username: datum.username});
-    } else if (name == 'tags') {
-      window.location.href = Routing.generate('adstacy_app_search', {q: datum.value});
+      $searchBox.val('@'+$searchBox.val());
     }
   });
 })();
