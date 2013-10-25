@@ -3,6 +3,7 @@
 
 #create-advert {
   width: 480px;
+
   label {
     color: #555;
   }
@@ -10,10 +11,6 @@
   span.help {
     color: #b00;
     font-size: 14px;
-  }
-  .bootstrap-tagsinput {
-    width: 416px;
-    margin: 0;
   }
 
   .progress-bar {
@@ -24,19 +21,45 @@
     text-align: center;
     font-size: 30px;
   }
+
+  .twitter-typeahead {
+    width: 100%;
+  }
+
+  .bootstrap-tagsinput {
+    padding: 0;
+    margin: 0 0 0 40px;
+    display: block;
+    border: 0;
+
+    .tt-hint,
+    .tt-query {
+      padding: 4px;
+      width: 100% !important;
+    }
+  }
+
+  .pull-left {
+    padding: 5px 10px;
+
+    .icon-tags {
+      font-size: 16px;
+    }
+  }
+
+  .tt-dropdown-menu {
+    margin-top: 0;
+    border-top-width: 1px;
+  }
+}
+
+#create-advert-tags {
+  border-top: 1px solid @border-color;
 }
 
 .form-content-container {
   margin: 10px 0;
   border: 1px solid #e3e3e3;
-}
-
-#create-advert-tags {
-  padding: 5px 5px 5px 10px;
-  border-top: 1px solid #e3e3e3;
-  i:before {
-    margin: 0;
-  }
 }
 
 #create-advert-url {

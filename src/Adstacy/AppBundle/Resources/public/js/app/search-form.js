@@ -8,7 +8,7 @@
         wildcard: '_QUERY_'
       },
       template: '<a href="{{ url }}">{{ value }}</a>',
-      header: '<h3 class="tt-dropdown-header">Tags</h3>',
+      header: '<div class="tt-dropdown-header">tags</div>',
       engine: Hogan
   };
   var usersOption = {
@@ -17,8 +17,8 @@
         url: Routing.generate('adstacy_api_users', {q: '_QUERY_', cond: 'noment'}),
         wildcard: '_QUERY_'
       },
-      header: '<h3 class="tt-dropdown-header">Users</h3>',
-      template: '<a href="{{ url }}"><img src="{{ avatar }}" width="35" height="35"> <strong class="real-name">{{ name }}</strong> (<span class="username">{{ username }}</span>)</a>',
+      header: '<div class="tt-dropdown-header">users</div>',
+      template: '<a href="{{ url }}"><img src="{{ avatar }}" width="32" height="32"> <strong class="real-name">{{ name }}</strong> <span class="username text-muted">@{{ username }}</span></a>',
       engine: Hogan
   };
   if ($('body').hasClass('logged-in')) {
