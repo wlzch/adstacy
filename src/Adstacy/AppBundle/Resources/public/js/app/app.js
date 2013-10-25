@@ -34,9 +34,10 @@ $(function(){
 
   $('.timeago').timeago();
   $('.btn-share').click(function() {
-    $(this).parent().parent().next().find('.advert-share').toggle();
+    var $share = $(this).parent().parent().next().find('.advert-share');
+    $share.toggle();
+    $share.find('.url').select();
   });
-
   $('img.lazy').lazyload();
   $().UItoTop({ easingType: 'easeOutQuart' });
   $('.advert').ajaxlink('ads');
