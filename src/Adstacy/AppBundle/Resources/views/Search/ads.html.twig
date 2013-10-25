@@ -27,14 +27,7 @@
   {{ parent() }}
   <script type="text/javascript">
     $(function() {
-      $('.jscroll').jscroll({
-        callback: function(a, b) {
-          var $ads = $('.jscroll-added:last .advert');
-          $('.masonry').masonry('appended', $ads);
-          $ads.find('img.lazy').lazyload();
-          $ads.ajaxlink('ads');
-        }
-      });
+      $('.jscroll').jscroll(Adstacy.options.jscrollAd);
     });
   </script>
 {% endblock %}
