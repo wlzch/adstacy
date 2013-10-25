@@ -33,6 +33,16 @@
           $('.masonry').masonry('appended', $ads);
           $ads.find('img.lazy').lazyload();
           $ads.ajaxlink('ads');
+
+          $ads.find('textarea.comment-box').mentionsInput({
+            onDataRequest: function (mode, query, triggerChar, callback) {
+              $.getJSON(Routing.generate('adstacy_api_users', {q: query}), function(data) {
+                data = _.filter(data, function(item) { return item.username.toLowerCase().indexOf(query.toLowerCase()) > -1 });
+
+                callback.call(this, data);
+              });
+            }
+          });
         }
       });
     });
