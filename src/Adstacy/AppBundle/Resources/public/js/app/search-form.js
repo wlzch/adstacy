@@ -18,7 +18,7 @@
         wildcard: '_QUERY_'
       },
       header: '<div class="tt-dropdown-header">People</div>',
-      template: '<a href="{{ url }}"><img src="{{ avatar }}" width="32" height="32"> <strong class="real-name">{{ name }}</strong> <span class="username text-muted">@{{ username }}</span></a>',
+      template: '<a href="{{ url }}"><img class="avatar" src="{{ avatar }}" width="32" height="32"> <strong class="real-name">{{ name }}</strong> <span class="username text-muted">@{{ username }}</span></a>',
       engine: Hogan
   };
   if ($('body').hasClass('logged-in')) {
