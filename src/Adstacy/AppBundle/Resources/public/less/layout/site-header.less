@@ -1,10 +1,6 @@
 @import "../variables.less";
 @import "../mixins.less";
 
-.nav .open>a, .nav .open>a:hover, .nav .open>a:focus {
-  border-color: transparent;
-}
-
 html,
 body {
   height: 100%;
@@ -18,6 +14,7 @@ body {
   > .site-menu {
     width: @site-menu-width;
   }
+
   > .site-content {
     margin-left: @site-menu-width;
   }
@@ -34,14 +31,14 @@ body {
 }
 
 .site-menu {
-  @height: "calc(100% - 50px)";
+  @height: "calc(100% - @{navbar-height})";
   position: fixed;
   width: 0;
   height: ~"@{height}";
-  border-right: 1px solid @border-color;
-  border-left: 1px solid @border-color;
-  border-top: 2px solid @brand-primary;
-  margin-top: -2px;
+  border: solid @border-color;
+  border-top-color: @brand-primary;
+  border-width: 2px 1px 0 0;
+  // margin-top: -2px;
   overflow: hidden;
   z-index: @zindex-navbar-fixed;
   .transition(width ease .5s);
@@ -97,7 +94,7 @@ body {
 }
 
 .site-container {
-  padding-top: 52px;
+  padding-top: @navbar-height;
 }
 
 .site-wrapper {
@@ -153,7 +150,7 @@ body {
     top: 2px;
     margin-top: -2px;
 
-    .icon {
+    > li > a > .icon {
       font-size: 16px;
       padding: 0 3px;
     }
@@ -168,8 +165,8 @@ body {
 .navbar-brand {
   // color: @brand-primary;
   // padding: 15px 20px;
-  width: @site-menu-width;
   // text-align: center;
+  width: @site-menu-width;
   border: solid @border-color;
   border-width: 0 1px;
   display: none;
@@ -186,9 +183,6 @@ body {
   }
 }
 
-.twitter-typeahead {
-  width: 100%;
-}
 
 #search-form {
   width: 320px;
@@ -198,18 +192,33 @@ body {
   display: none;
 
   .form-control {
-    height: 52px;
+    height: (@navbar-height + 2px);
     position: absolute;
     width: 100%;
-    // z-index: 3000;
     padding: 10px 35px 10px 15px;
     .box-shadow(none);
-
 
     &:focus {
       .box-shadow(none);
       border-color: @blue-accent;
     }
+  }
+
+  .twitter-typeahead {
+    width: 100%;
+  }
+
+  .typeahead,
+  .tt-query,
+  .tt-hint {
+    width: 100%;
+    height: (@navbar-height + 2px);
+    border: solid transparent;
+    padding: 10px 35px 10px 15px;
+    background-color: transparent;
+    // border: solid transparent;
+    border-width: 0 0 2px;
+    outline: none;
   }
 }
 
@@ -221,9 +230,8 @@ body {
   -webkit-appearance: none;
   position: absolute;
   width: 20px;
-  line-height: 50px;
+  line-height: @navbar-height;
   right: 15px;
-  // z-index: 5000;
 
   .icon-search:before {
     margin: 0;
@@ -251,27 +259,48 @@ body {
   }
 }
 
+#login-express {
+  width: 255px;
+
+  .form-group {
+    margin-bottom: 10px;
+  }
+
+  .checkbox {
+    margin-top: 6px;
+    margin-bottom: 6px;
+  }
+}
+
 @media (max-width: 599px) {
   .search-container {
     margin-left: 60px;
+  }
 
-    #search-form {
-      width: 100%;
-    }
+  #search-form {
+    width: 100%;
+  }
+
+  #login-express-dropdown {
+    display: none;
+  }
+
+  #mobile-login-link {
+    display: block;
+  }
+
+  #search-box {
+    width: 100% !important;
   }
 }
 
-@media (min-width: 481px) {
-}
+@media (min-width: 481px) {}
 
 @media (min-width: 600px) {
-  #search-form {
-    // margin-left: 240px;
-  }
-
   .navbar-toggle {
     display: none;
   }
+
   .navbar-brand {
     display: block;
   }
@@ -288,28 +317,21 @@ body {
   .site-menu {
     width: @site-menu-width;
   }
-
-  .site-adverts {
-    width: auto;
-  }
 }
 
 @media (min-width: 720px) {
   #m-btn-search {
     display: none;
   }
+
   #search-form {
     display: block;
   }
 }
 
 @media (min-width: 960px) {
-  // .site-adverts {
-  //   margin-right: 240px;
-  // }
-
   .site-content-inner {
-    width: 720px;
+    width: 680px;
   }
 
   .site-body {
@@ -318,63 +340,5 @@ body {
 
   .site-sidebar {
     display: block;
-  }
-}
-
-// OLD
-/** Header Layout **/
-#login-express {
-  width: 255px;
-
-  .form-group {
-    margin-bottom: 10px;
-  }
-
-  .checkbox {
-    margin-top: 6px;
-    margin-bottom: 6px;
-  }
-}
-
-#user-nav-dropdown {
-  .btn-user {
-    padding: 0;
-  }
-  .user-profpic {
-    border-right: 1px solid @border-color;
-    display: inline-block;
-    height: 32px;
-    margin: 0;
-  }
-  .user-username {
-    width: 100px;
-    color: #555;
-    display:inline-block;
-    vertical-align: middle;
-  }
-}
-
-/** Responsive **/
-@media screen and (max-width: @screen-tablet) {
-  // Hide Components
-  #user-nav-dropdown {
-    display: none;
-  }
-  #login-express-dropdown {
-    display: none;
-  }
-
-  // Display Coponents
-  #mobile-login-link {
-    display: block;
-  }
-
-  // Adjust Components
-  #search-box {
-    width: 100% !important;
-  }
-  #register-link {
-    display: block;
-    margin-right: 0;
   }
 }
