@@ -4,6 +4,7 @@ namespace Adstacy\AppBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Adstacy\AppBundle\Entity\Ad;
+use Adstacy\AppBundle\Entity\Comment;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Finder\Finder;
 
@@ -39,6 +40,13 @@ class LoadAdData extends DataFixture
             } else {
                 $ad->setType('text');
                 $ad->setTitle($this->faker->sentence($this->faker->randomNumber(1, 10)));
+            }
+            $nOfComments = $this->faker->randomNumber(0, 10);
+            for ($k = 0; $k < $nOfComments; $k++) {
+                $comment = new Comment();
+                $comment->setContent($this->faker->sentence($this->faker->randomNumber(1, 15)));
+                $comment->setUser($user);
+                $ad->addComment($comment);
             }
 
             $ad->setDescription($description);
