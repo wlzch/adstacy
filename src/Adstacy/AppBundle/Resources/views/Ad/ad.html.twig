@@ -19,7 +19,7 @@
         {% set thumbnail = original %}
       {% endif %}
       <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}">
-        <img class="lazy" src="{{ asset('bundles/adstacyapp/img/transparent.gif') }}"
+        <img class="lazy {% if ad.imageWidth >= thumb_width %}full{% endif %}" src="{{ asset('bundles/adstacyapp/img/transparent.gif') }}"
           data-original="{{ thumbnail }}"
           data-high-res="{{ original }}"
           width="{{ width }}" height="{{ ad.imageHeight(width) }}">
