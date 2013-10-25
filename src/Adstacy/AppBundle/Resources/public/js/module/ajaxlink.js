@@ -6,7 +6,7 @@
         jsonField: 'promotes_count',
         firstSelector: 'a.promote',
         secondSelector: 'a.unpromote',
-        image_size: 14
+        image_size: 14,
       },
       promote_single: {
         countSelector: '.promotes-count',
@@ -35,26 +35,19 @@
       var settings = types[type];
       var $parent = $(this);
       var size = settings.image_size || options.image_size;
-      var loading = '<div style="line-height: 34px;">loading...</div>';
 
       $parent.find(settings.firstSelector+','+settings.secondSelector).click(function(event) {
         var $this = $(this);
-        var $html = $this.html();
-        $this.html(loading);
+        $parent.find(settings.firstSelector).toggleClass('hide');
+        $parent.find(settings.secondSelector).toggleClass('hide');
         $.post(this.href, function(data) {
-          $this.html($html);
           var json = JSON.parse(data);
           if (!json.error) {
             if (settings.countSelector) {
               $parent.find(settings.countSelector).text(json[settings.jsonField]);
             }
-            $parent.find(settings.firstSelector).toggleClass('hide');
-            $parent.find(settings.secondSelector).toggleClass('hide');
           }
         });
-
-        event.preventDefault();
-        event.stopPropagation();
 
         return false;
       });
