@@ -85,6 +85,7 @@ assetic:
             apply_to: "\.less$"
         uglifyjs2:
             bin: %kernel.root_dir%/../node_modules/.bin/uglifyjs
+            mangle: true
         uglifycss:
             bin: %kernel.root_dir%/../node_modules/.bin/uglifycss
         yui_css:

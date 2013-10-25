@@ -31,7 +31,7 @@
             strtime: new Date().toDateString(),
             content: $this.val()
           }));
-          $tmpl.insertBefore($this.closest('.media'));
+          $tmpl.insertBefore($this.closest('.comment'));
           $tmpl.find('time').timeago();
           var serialized = $form.serialize();
           $this.val(''); //bug
