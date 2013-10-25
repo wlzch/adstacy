@@ -23,7 +23,7 @@
             padding: 0,
             nextSelector: 'a.next-page',
             contentSelector: '',
-    		pagingSelector: ''
+            pagingSelector: ''
         }
     };
 
@@ -110,7 +110,6 @@
 
             if (_checkNextHref(data) && !data.waiting && iTotalHeight + _options.padding >= $inner.outerHeight()) {
 				data.nextHref = $.trim(data.nextHref + ' ' + _options.contentSelector);
-                _debug('info', 'jScroll:', $inner.outerHeight() - iTotalHeight, 'from bottom. Loading next request...');
                 return _load();
             }
         }
@@ -119,7 +118,6 @@
         function _checkNextHref(data) {
             data = data || $e.data('jscroll');
             if (!data.nextHref) {
-                _debug('warn', 'jScroll: nextSelector not found - destroying');
                 $e.jscroll.destroy();
                 return false;
             } else return true;
@@ -153,30 +151,9 @@
                     if (_options.callback) {
                         _options.callback.call(this);
                     }
-                    _debug('dir', data);
                 });
             });
         }
-
-        // Safe console debug - http://klauzinski.com/javascript/safe-firebug-console-in-javascript
-        function _debug(m) {
-            if (_options.debug && typeof console === 'object' && (typeof m === 'object' || typeof console[m] === 'function')) {
-                if (typeof m === 'object') {
-                    var args = [];
-                    for (var sMethod in m) {
-                        if (typeof console[sMethod] === 'function') {
-                            args = (m[sMethod].length) ? m[sMethod] : [m[sMethod]];
-                            console[sMethod].apply(console, args);
-                        } else {
-                            console.log.apply(console, args);
-                        }
-                    }
-                } else {
-                    console[m].apply(console, Array.prototype.slice.call(arguments, 1));
-                }
-            }
-        }
-
         // Expose API methods via the jQuery.jscroll namespace, e.g. $('sel').jscroll.method()
         $.extend($e.jscroll, {
             destroy: _destroy
