@@ -23,11 +23,11 @@
     </div>
   </div>
 
-  <div class="user-action btn-group btn-group-justified">
-    <a href="{{ path('adstacy_app_user_ads', {username: user.username}) }}" class="btn btn-default">Ads<div><b>{{ adsCount }}</b></div></a>
-    <a href="{{ path('adstacy_app_user_promotes', {username: user.username}) }}" class="btn btn-default">Broadcast<div><b>{{ promotesCount }}</b></div></a>
-    <a href="{{ path('adstacy_app_user_followers', {username: user.username}) }}" class="btn btn-default">Followers<div><b>{{ followersCount }}</b></div></a>
-    <a href="{{ path('adstacy_app_user_followings', {username: user.username}) }}" class="btn btn-default">Followings<div><b>{{ followingsCount }}</b></div></a>
+  <div class="user-action clearfix">
+    <a class="score first" href="{{ path('adstacy_app_user_ads', {username: user.username}) }}"><strong>{{ adsCount }}</strong> ADS</a>
+    <a class="score" href="{{ path('adstacy_app_user_promotes', {username: user.username}) }}"><strong>{{ promotesCount }}</strong> BROADCASTS</a>
+    <a class="score" href="{{ path('adstacy_app_user_followers', {username: user.username}) }}"><strong>{{ followersCount }}</strong> FOLLOWERS</a>
+    <a class="score last" href="{{ path('adstacy_app_user_followings', {username: user.username}) }}"><strong>{{ followingsCount }}</strong> FOLLOWINGS</a>
     {% if app.user %}
       {% if app.user != user %}
         {% set followed = app.user.hasFollowUser(user) %}
