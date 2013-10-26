@@ -30,4 +30,10 @@
       $searchBox.val('@'+$searchBox.val());
     }
   });
+  $searchForm.submit(function() {
+    if ($searchBox.val() == '') {
+      $searchBox.focus();
+      return false;
+    }
+  });
 })();
