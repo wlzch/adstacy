@@ -55,7 +55,7 @@
   background-color: @modal-content-bg;
   border: 1px solid @modal-content-fallback-border-color; //old browsers fallback (ie8 etc)
   border: 1px solid @modal-content-border-color;
-  border-radius: @border-radius-large;
+  border-radius: 3px 3px 0 0;
   .box-shadow(0 3px 9px rgba(0,0,0,.5));
   background-clip: padding-box;
   // Remove focus outline from opened modal
@@ -79,19 +79,30 @@
 // Modal header
 // Top section of the modal w/ title and dismiss
 .modal-header {
-  padding: @modal-title-padding;
+  padding: 3px 10px;
   border-bottom: 1px solid @modal-header-border-color;
-  min-height: (@modal-title-padding + @modal-title-line-height);
+  min-height: (3px + @modal-title-line-height);
+  background-color: #eee;
+  color: #555;
+  border-radius: 3px 3px 0 0;
+  text-shadow: 0 0 1px #aaa;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#E6E6E6), to(#CCCCCC));
+  background-image: -webkit-linear-gradient(top, #E6E6E6, #CCCCCC);
+  background-image: -moz-linear-gradient(top, #E6E6E6, #CCCCCC);
+  background-image: -ms-linear-gradient(top, #E6E6E6, #CCCCCC);
+  background-image: -o-linear-gradient(top, #E6E6E6, #CCCCCC);
+  background-image: linear-gradient(to bottom, #E6E6E6, #CCCCCC);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#E6E6E6, endColorstr=#CCCCCC);
 }
 // Close icon
 .modal-header .close {
-  margin-top: -2px;
+  margin-top: 2px;
 }
 
 // Title text within header
 .modal-title {
   margin: 0;
   line-height: @modal-title-line-height;
+  font-size: 14px;
 }
 
 // Modal body
@@ -104,10 +115,17 @@
 // Footer (for actions)
 .modal-footer {
   margin-top: 15px;
-  padding: (@modal-inner-padding - 1) @modal-inner-padding @modal-inner-padding;
+  padding: 5px 10px;
+  background-color: #eee;
   text-align: right; // right align buttons
   border-top: 1px solid @modal-footer-border-color;
   .clearfix(); // clear it in case folks use .pull-* classes on buttons
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#E6E6E6), to(#CCCCCC));
+  background-image: -webkit-linear-gradient(top, #E6E6E6, #CCCCCC);
+  background-image: -moz-linear-gradient(top, #E6E6E6, #CCCCCC);
+  background-image: -ms-linear-gradient(top, #E6E6E6, #CCCCCC);
+  background-image: -o-linear-gradient(top, #E6E6E6, #CCCCCC);
+  background-image: linear-gradient(to bottom, #E6E6E6, #CCCCCC);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#E6E6E6, endColorstr=#CCCCCC);
 
   // Properly space out buttons
   .btn + .btn {
