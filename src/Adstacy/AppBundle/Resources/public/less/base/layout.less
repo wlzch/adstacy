@@ -19,6 +19,25 @@ a.mention:hover {
   text-decoration: none;
 }
 
+.adstacy-single-col {
+  min-width: 500px;
+  max-width: 1024px;
+  margin: 50px auto;
+  .column {
+    width: 600px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .adstacy-single-col {
+    width: 100%;
+    .column {
+      width: 100%;
+    }
+  }
+}
+
 .btn-social {
   position: relative;
   text-align: left;
@@ -130,7 +149,7 @@ a.mention:hover {
 
 @media (min-width: 720px) {
   .item {
-    width: 450px;
+    width: 500px;
   }
 }
 

@@ -1,4 +1,4 @@
-<div class="panel panel-default user clearfix">
+<div class="user clearfix">
   <div class="profile-picture">
     <img src="{{ profile_pic(user) }}" width="48" height="48">
   </div>
@@ -8,7 +8,7 @@
       <a href="{{ path('adstacy_app_user_followers', {username: user.username}) }}"><span class="user-followers-count">{{ user.followersCount }}</span> Followers</a>
       <a href="{{ path('adstacy_app_user_ads', {username: user.username}) }}">{{ user.adsCount }} Ads</a>
     </div>
-    <p>{{ parse_url(parse_hashtag(user.about)) }}</p>
+    <p>{{ parse_url(parse_hashtag(more(user.about|striptags, 100))) }}</p>
   </div>
   <div class="user-actions">
     {% if app.user and user != app.user %}

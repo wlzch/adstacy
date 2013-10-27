@@ -1,4 +1,4 @@
-{% extends 'AdstacyAppBundle::layout.html.twig' %}
+{% extends '::base_single_column.html.twig' %}
 
 {% form_theme form _self %}
 
@@ -20,7 +20,7 @@
 {% endblock %}
 
 {% block content %}
-  <div id="register">
+  <div id="register" class="column">
     <div class="item panel panel-default">
       <div class="panel-heading">
         <h1>{{ "form_registration.title"|trans }}</h1>

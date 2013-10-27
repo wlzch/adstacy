@@ -3,15 +3,13 @@
 {% block title %}Your Ads Stream | Adstacy{% endblock %}
 
 {% block content %}
-  <div class="site-body">
-    {% if user.followingsCount <= 0 %}
+  {% if user.followingsCount <= 0 %}
+    {{ block('ajax_content') }}
+  {% else %}
+    <div class="jscroll">
       {{ block('ajax_content') }}
-    {% else %}
-      <div class="jscroll">
-        {{ block('ajax_content') }}
-      </div>
-    {% endif %}
-  </div>
+    </div>
+  {% endif %}
 {% endblock %}
 
 {% block ajax_content %}
