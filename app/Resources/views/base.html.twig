@@ -97,20 +97,35 @@
       {% endblock %}
 
       <div id="site-container" class="site-container site-wrapper">
+        {% set attr = app.request.attributes %}
         {% block navbar %}
         <div class="site-menu">
           <nav id="site-menu-inner" class="site-menu-inner">
             <ul class="site-main-menu">
               <li><h3>NAVIGATION</h3></li>
-              <li><a href="{{ path('homepage') }}" title="{{ "home"|trans }}"><i class="icon icon-home"></i> {{ "home"|trans }}</a></li>
-              <li><a href="{{ path('adstacy_app_explore') }}" title="Explore"><i class="icon icon-globe"></i> Explore</a></li>
-              <li><a href="{{ path('adstacy_app_trending') }}" title="Trending"><i class="icon icon-rocket"></i> Trending</a></li>
+              <li {% if attr.get('_route') == 'homepage' %}class="current"{% endif %}>
+                <a href="{{ path('homepage') }}" title="{{ "home"|trans }}"><i class="icon icon-home"></i> {{ "home"|trans }}</a>
+              </li>
+              <li {% if attr.get('_route') == 'adstacy_app_explore' %}class="current"{% endif %}>
+                <a href="{{ path('adstacy_app_explore') }}" title="Explore"><i class="icon icon-globe"></i> Explore</a>
+              </li>
+              <li {% if attr.get('_route') == 'adstacy_app_trending' %}class="current"{% endif %}>
+                <a href="{{ path('adstacy_app_trending') }}" title="Trending"><i class="icon icon-rocket"></i> Trending</a>
+              </li>
 
               {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                <li><a href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}" title="{{ "profile"|trans }}"><i class="icon icon-user"></i> {{ "profile"|trans }}</a></li>
-                <li><a href="{{ path('adstacy_app_who_to_follow') }}" title="{{ "find_friends"|trans }}"><i class="icon icon-frined"></i> {{ "find_friends"|trans }}</a></li>
-                <li><a href="{{ path('fos_user_profile_edit') }}" title="{{ "settings"|trans }}"><i class="icon icon-gear"></i> {{ "settings"|trans }}</a></li>
-                <li><a href="{{ path('fos_user_security_logout') }}" title="{{ "logout"|trans }}"><i class="icon icon-off"></i> {{ "logout"|trans }}</a></li>
+                <li {% if attr.get('_route') == 'adstacy_app_user_profile' and attr.get('username') == app.user.username %}class="current"{% endif %}>
+                  <a href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}" title="{{ "profile"|trans }}"><i class="icon icon-user"></i> {{ "profile"|trans }}</a>
+                </li>
+                <li {% if app.request.attributes.get('_route') == 'adstacy_app_who_to_follow' %}class="current"{% endif %}>
+                  <a href="{{ path('adstacy_app_who_to_follow') }}" title="{{ "find_friends"|trans }}"><i class="icon icon-frined"></i> {{ "find_friends"|trans }}</a>
+                </li>
+                <li {% if app.request.attributes.get('_route') == 'fos_user_profile_edit' %}class="current"{% endif %}>
+                  <a href="{{ path('fos_user_profile_edit') }}" title="{{ "settings"|trans }}"><i class="icon icon-gear"></i> {{ "settings"|trans }}</a>
+                </li>
+                <li>
+                  <a href="{{ path('fos_user_security_logout') }}" title="{{ "logout"|trans }}"><i class="icon icon-off"></i> {{ "logout"|trans }}</a>
+                </li>
               {% endif %}
             </ul>
             <ul>
@@ -119,10 +134,18 @@
             </ul>
             <ul>
               <li><h3>SITE INFO</h3></li>
-              <li><a href="{{ path('adstacy_app_page_show', {key: 'about'}) }}" title="{{ "about"|trans }}">{{ "about"|trans }}</a></li>
-              <li><a href="{{ path('adstacy_app_page_show', {key: 'terms'}) }}" title="{{ "terms"|trans }}">{{ "terms"|trans }}</a></li>
-              <li><a href="{{ path('adstacy_app_page_show', {key: 'privacy-policy'}) }}" title="{{ "privacy"|trans }}">{{ "privacy"|trans }}</a></li>
-              <li><a href="{{ path('adstacy_app_contact') }}" title="{{ "contact_us"|trans }}">{{ "contact_us"|trans }}</a></li>
+              <li {% if attr.get('_route') == 'adstacy_app_page_show' and attr.get('key') == 'about' %}class="current"{% endif %}>
+                <a href="{{ path('adstacy_app_page_show', {key: 'about'}) }}" title="{{ "about"|trans }}">{{ "about"|trans }}</a>
+              </li>
+              <li {% if attr.get('_route') == 'adstacy_app_page_show' and attr.get('key') == 'terms' %}class="current"{% endif %}>
+                <a href="{{ path('adstacy_app_page_show', {key: 'terms'}) }}" title="{{ "terms"|trans }}">{{ "terms"|trans }}</a>
+              </li>
+              <li {% if attr.get('_route') == 'adstacy_app_page_show' and attr.get('key') == 'privacy-policy' %}class="current"{% endif %}>
+                <a href="{{ path('adstacy_app_page_show', {key: 'privacy-policy'}) }}" title="{{ "privacy"|trans }}">{{ "privacy"|trans }}</a>
+              </li>
+              <li {% if attr.get('_route') == 'adstacy_app_contact' %}class="current"{% endif %}>
+                <a href="{{ path('adstacy_app_contact') }}" title="{{ "contact_us"|trans }}">{{ "contact_us"|trans }}</a>
+              </li>
             </ul>
           </nav>
         </div>

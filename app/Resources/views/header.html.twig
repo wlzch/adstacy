@@ -21,13 +21,11 @@
       <li><a id="m-btn-search" title="Search"><i class="icon icon-search"></i></a></li>
       {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
         <li><a href="{{ path('adstacy_app_ad_create') }}" id="create-advert-btn" title="{{ "ads.create"|trans }}"><i class="icon icon-plus"></i></a></li>
-        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-          <li>
-            <a class="dropdown-toggle" id="notif-btn" title="Notification" data-toggle="dropdown" data-href="{{ path('adstacy_notification_readall') }}"><i class="icon icon-bell"></i></a>
-            <span class="notif-count label label-danger">{{ app.user.notificationsCount }}</span>
-            {{ render_top_notification(5) }}
-          </li>
-        {% endif %}
+        <li>
+          <a class="dropdown-toggle" id="notif-btn" title="Notification" data-toggle="dropdown" data-href="{{ path('adstacy_notification_readall') }}"><i class="icon icon-bell"></i></a>
+          <span class="notif-count label label-danger">{{ app.user.notificationsCount }}</span>
+          {{ render_top_notification(5) }}
+        </li>
       {% else %}
         {% if register is not defined or (register is defined and register == true) %}
           <li><a id="register-link" href="{{ path('fos_user_registration_register') }}">{{ "register"|trans }}</a></li>

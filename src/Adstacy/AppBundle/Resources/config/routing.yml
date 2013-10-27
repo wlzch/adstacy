@@ -3,11 +3,6 @@ homepage:
     defaults:
         _controller: AdstacyAppBundle:App:index
 
-adstacy_app_stream:
-    path: /stream
-    defaults:
-        _controller: AdstacyAppBundle:App:stream
-
 adstacy_app_trending:
     path: /trending
     defaults:
