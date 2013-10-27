@@ -31,7 +31,7 @@ class AdController extends Controller
         $form = $this->createForm(new CommentType(), new Comment(), array(
             'action' => $this->generateUrl('adstacy_app_ad_comment', array('id' => $id))
         ));
-        $comments = $this->getRepository('AdstacyAppBundle:Comment')->findByAd($ad, null, 2);
+        $comments = $this->getRepository('AdstacyAppBundle:Comment')->findByAd($ad, null, 8);
 
         return $this->render('AdstacyAppBundle:Ad:show.html.twig', array(
             'ad' => $ad,
