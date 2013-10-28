@@ -20,14 +20,14 @@
   <div id="create-advert" class="panel panel-default column">
     <div class="panel-body clearfix">
       <div id="create-advert-toolbar" class="btn-group btn-group-justified">
-        <a class="btn btn-default" id="choose-advert-image" href="#"><i class="icon icon-picture"></i> image</a>
-        <a class="btn btn-default" id="choose-advert-text" href="#"><i class="icon icon-edit"></i> text</a>
-        <a class="btn btn-default" id="choose-advert-video" href="#"><i class="icon icon-youtube-play"></i> video</a>
+        <a class="btn {% if data.type == 'image' %}btn-primary{% else %}btn-default{% endif %}" id="choose-advert-image" href="#"><i class="icon icon-picture"></i> image</a>
+        <a class="btn {% if data.type == 'text' %}btn-primary{% else %}btn-default{% endif %}" id="choose-advert-text" href="#"><i class="icon icon-edit"></i> text</a>
+        <a class="btn {% if data.type == 'video' %}btn-primary{% else %}btn-default{% endif %}" id="choose-advert-video" href="#"><i class="icon icon-youtube-play"></i> video</a>
       </div>
       {{ form_start(form, {attr: {class: 'submit-disable'}}) }}
       {{ form_errors(form) }}
       <div class="form-content-container">
-        <a id="create-advert-image-trigger" data-toggle="modal" data-target="#create-advert-image-modal" class="{% if data.type != 'image' %}hide{% endif %}">
+        <a id="create-advert-image-trigger" data-toggle="modal" data-target="#create-advert-image-modal" class="btn btn-success{% if data.type != 'image' %}hide{% endif %}">
           {{"form_ad.image_trigger"|trans}}
         </a>
         <div id="create-advert-text" class="{% if data.type != 'text' %}hide{% endif %}">
@@ -80,7 +80,7 @@
                   <div class="input-group">
                     <input type="url" class="form-control" id="create-advert-url" name="url" placeholder="{{'form_ad.placeholders.url'|trans}}">
                     <span class="input-group-btn">
-                      <button type="button" class="btn btn-primary" id="create-advert-url-ok">OK</button>
+                      <button type="button" class="btn btn-primary inherit" id="create-advert-url-ok">OK</button>
                     </span>
                   </div>
                 </div>

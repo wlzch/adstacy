@@ -21,6 +21,9 @@ $(function() {
   var $youtube = $('#ytplayer');
 
   $chooseImage.click(function() {
+    $(this).removeClass('btn-default').addClass('btn-primary');
+    $chooseText.removeClass('btn-primary').addClass('btn-default');
+    $chooseVideo.removeClass('btn-primary').addClass('btn-default');
     $advertImage.removeClass('hide');
     $adImagesContainer.removeClass('hide');
     $advertImageTrigger.removeClass('hide');
@@ -30,6 +33,9 @@ $(function() {
     $imagePreview.show();
   });
   $chooseText.click(function() {
+    $(this).removeClass('btn-default').addClass('btn-primary');
+    $chooseImage.removeClass('btn-primary').addClass('btn-default');
+    $chooseVideo.removeClass('btn-primary').addClass('btn-default');
     $advertImage.addClass('hide');
     $adImagesContainer.addClass('hide');
     $advertImageTrigger.addClass('hide');
@@ -39,6 +45,9 @@ $(function() {
     $imagePreview.hide();
   });
   $chooseVideo.click(function() {
+    $(this).removeClass('btn-default').addClass('btn-primary');
+    $chooseImage.removeClass('btn-primary').addClass('btn-default');
+    $chooseText.removeClass('btn-primary').addClass('btn-default');
     $advertImage.addClass('hide');
     $adImagesContainer.addClass('hide');
     $advertImageTrigger.addClass('hide');
