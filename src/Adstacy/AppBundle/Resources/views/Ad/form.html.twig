@@ -20,9 +20,9 @@
   <div id="create-advert" class="panel panel-default column">
     <div class="panel-body clearfix">
       <div id="create-advert-toolbar" class="btn-group btn-group-justified">
-        <a class="btn {% if data.type == 'image' %}btn-primary{% else %}btn-default{% endif %}" id="choose-advert-image" href="#"><i class="icon icon-picture"></i> image</a>
-        <a class="btn {% if data.type == 'text' %}btn-primary{% else %}btn-default{% endif %}" id="choose-advert-text" href="#"><i class="icon icon-edit"></i> text</a>
-        <a class="btn {% if data.type == 'video' %}btn-primary{% else %}btn-default{% endif %}" id="choose-advert-video" href="#"><i class="icon icon-youtube-play"></i> video</a>
+        <a class="btn {% if data.type == 'image' %}btn-primary{% else %}btn-default{% endif %}" id="choose-advert-image" href="#"><i class="icon icon-image"></i> image</a>
+        <a class="btn {% if data.type == 'text' %}btn-primary{% else %}btn-default{% endif %}" id="choose-advert-text" href="#"><i class="icon icon-file"></i> text</a>
+        <a class="btn {% if data.type == 'video' %}btn-primary{% else %}btn-default{% endif %}" id="choose-advert-video" href="#"><i class="icon icon-video"></i> video</a>
       </div>
       {{ form_start(form, {attr: {class: 'submit-disable'}}) }}
       {{ form_errors(form) }}

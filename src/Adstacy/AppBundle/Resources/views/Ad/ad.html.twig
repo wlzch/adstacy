@@ -62,7 +62,7 @@
       </a>
       <div class="btn-group">
         <a class="btn btn-default btn-option" data-toggle="dropdown">
-          <i class="icon icon-ads"></i>
+          <i class="icon icon-ellipsis"></i>
           <span>more</span>
         </a>
         <ul class="dropdown-menu pull-right">
@@ -71,10 +71,10 @@
           {% endif %}
           {% if app.user %}
             {% if app.user == ad.user %}
-              <li><a href="{{ path('adstacy_app_ad_edit', {id: ad.id}) }}"><span class="owner-action-label">{{ "edit"|trans }}</span></a></li>
-              <li><a data-toggle="modal" data-target="#confirm-modal"><span class="owner-action-label">{{ "delete"|trans }}</span></a></li>
+              <li><a href="{{ path('adstacy_app_ad_edit', {id: ad.id}) }}"><i class="icon icon-edit"></i><span class="owner-action-label">{{ "edit"|trans }}</span></a></li>
+              <li><a data-toggle="modal" data-target="#confirm-modal"><i class="icon icon-delete"></i><span class="owner-action-label">{{ "delete"|trans }}</span></a></li>
             {% else %}
-              <li><a href="{{ path('adstacy_app_ad_report', {id: ad.id}) }}" class="report"><span>{{"report"|trans}}</span></a></li>
+              <li><a href="{{ path('adstacy_app_ad_report', {id: ad.id}) }}" class="report"><i class="icon icon-flag"></i><span>{{"report"|trans}}</span></a></li>
             {% endif %}
           {% endif %}
           {% if is_granted('ROLE_SUPER_ADMIN') %}
