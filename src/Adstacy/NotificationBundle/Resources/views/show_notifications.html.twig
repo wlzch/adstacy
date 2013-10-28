@@ -1,7 +1,9 @@
 {% extends 'AdstacyAppBundle::layout.html.twig' %}
 
+{% block site_body_class %}site-body-bg site-body-full{% endblock %}
+
 {% block content %}
-  <div class="adstacy-container">
-    {{ render_all_notification() }}
-  </div>
+  {{ render_all_notification() }}
 {% endblock %}
+
+{% block sidebar %}{% endblock %}
