@@ -61,7 +61,12 @@
         if (window.FileReader) {
           FileAPI.readAsImage(files[0], function(evt) {
             if (evt.type == 'load') {
-              $preview.find('img').replaceWith(evt.result);
+              var $img = $preview.find('img');
+              if ($img.length > 0) {
+                $img.replaceWith(evt.result);
+              } else {
+                $preview.append(evt.result);
+              }
             }
           });
         }
