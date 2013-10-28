@@ -67,21 +67,21 @@
         </a>
         <ul class="dropdown-menu pull-right">
           {% if view is not defined or (view is defined and view == true) %}
-          <li><a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}"><i class="icon icon-eye"></i><span>{{"view"|trans}}</span></a></li>
+          <li><a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}" class="label-group"><i class="icon icon-eye"></i><span class="text">{{"view"|trans}}</span></a></li>
           {% endif %}
           {% if app.user %}
             {% if app.user == ad.user %}
-              <li><a href="{{ path('adstacy_app_ad_edit', {id: ad.id}) }}"><i class="icon icon-edit"></i><span class="owner-action-label">{{ "edit"|trans }}</span></a></li>
-              <li><a data-toggle="modal" data-target="#confirm-modal"><i class="icon icon-delete"></i><span class="owner-action-label">{{ "delete"|trans }}</span></a></li>
+              <li><a href="{{ path('adstacy_app_ad_edit', {id: ad.id}) }}" class="label-group"><i class="icon icon-edit"></i><span class="text owner-action-label">{{ "edit"|trans }}</span></a></li>
+              <li><a data-toggle="modal" data-target="#confirm-modal" class="label-group"><i class="icon icon-delete"></i><span class="text owner-action-label">{{ "delete"|trans }}</span></a></li>
             {% else %}
-              <li><a href="{{ path('adstacy_app_ad_report', {id: ad.id}) }}" class="report"><i class="icon icon-flag"></i><span>{{"report"|trans}}</span></a></li>
+              <li><a href="{{ path('adstacy_app_ad_report', {id: ad.id}) }}" class="label-group report"><i class="icon icon-flag"></i><span class="text">{{"report"|trans}}</span></a></li>
             {% endif %}
           {% endif %}
           {% if is_granted('ROLE_SUPER_ADMIN') %}
             {% if ad.active %}
-              <a href="{{ path('adstacy_admin_ad_block', {id: ad.id}) }}">Block</a>
+              <li><a href="{{ path('adstacy_admin_ad_block', {id: ad.id}) }}" class="label-group"><i class="icon icon-info"></i><span class="text">Block</span></a></li>
             {% else %}
-              <a href="{{ path('adstacy_admin_ad_unblock', {id: ad.id}) }}">Unblock</a>
+              <li><a href="{{ path('adstacy_admin_ad_unblock', {id: ad.id}) }}" class="label-group"><i class="icon icon-info"></i><span class="text">Unblock</span></a></li>
             {% endif %}
           {% endif %}
         </ul>

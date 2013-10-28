@@ -4,7 +4,7 @@
   {% include 'AdstacyAppBundle:User:user_profile.html.twig' %}
 
   {% if paginator.getCurrentPageResults|length > 0 %}
-    <div class="adstacy-container jscroll clearfix">
+    <div class="jscroll clearfix">
       {{ block('ajax_content') }}
     </div>
   {% else %}

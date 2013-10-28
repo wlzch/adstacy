@@ -14,7 +14,7 @@
       {% if app.user and app.user == user %}
         <h1>{{ "ads.no_ads.self_message"|trans }}</h1>
         <p class="lead">{{ "ads.no_ads.help"|trans }}</p>
-        <a href="{{ path('adstacy_app_ad_create') }}" class="btn btn-success btn-lg" title="{{ "ads.create"|trans }}">{{ "ads.create"|trans }}<i class="icon icon-plus"></i></a>
+        <a href="{{ path('adstacy_app_ad_create') }}" class="btn btn-success btn-lg label-group" title="{{ "ads.create"|trans }}"><i class="icon icon-plus"></i><span class="text">{{ "ads.create"|trans }}</span></a>
       {% else %}
         <h1>{{ "ads.no_ads.message"|trans({'%username%': user.username}) }}</h1>
       {% endif %}
