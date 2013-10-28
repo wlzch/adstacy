@@ -20,6 +20,13 @@
 }
 
 .advert-img {
+  background-color: #000;
+  img {
+    background: url(@loader-img) no-repeat center;
+    .img-responsive();
+    margin: 0 auto;
+  }
+
   border-radius: 5px 5px 0 0;
   border-bottom: 1px solid @border-color;
   img.full {
@@ -49,17 +56,6 @@
 
 .jscroll-added .advert:first-child {
   margin-top: 15px;
-}
-
-.advert-img {
-  background-image: url('../img/noise.png');
-  position: relative;
-
-  img {
-    background: url(@loader-img) no-repeat center;
-    .img-responsive();
-    margin: 0 auto;
-  }
 }
 
 .advert-text {
