@@ -45,7 +45,8 @@ class LoadAdData extends DataFixture
             for ($k = 0; $k < $nOfComments; $k++) {
                 $comment = new Comment();
                 $comment->setContent($this->faker->sentence($this->faker->randomNumber(1, 15)));
-                $comment->setUser($user);
+                $commentUser = $this->getReference('user-'.$usernames[$this->faker->randomNumber(0, count($usernames) - 1)]);
+                $comment->setUser($commentUser);
                 $ad->addComment($comment);
             }
 
