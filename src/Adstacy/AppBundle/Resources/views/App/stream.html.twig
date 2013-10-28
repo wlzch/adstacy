@@ -2,7 +2,7 @@
 
 {% block title %}Your Ads Stream | Adstacy{% endblock %}
 
-{% block site_body_class %}site-body-no-bg{% endblock %}
+{% block site_body_class %}{% if user.followingsCount > 0 %}site-body-no-bg{% else %}site-body-bg{% endif %}{% endblock %}
 
 {% block content %}
   {% if user.followingsCount <= 0 %}
@@ -20,9 +20,6 @@
       {% for user in suggestionsPaginator.getCurrentPageResults %}
         {% include 'AdstacyAppBundle:User:user.html.twig' with {user: user} %}
       {% endfor %}
-    </div>
-    <div style="margin: 20px 7px 0;">
-      <a href="{{ path('adstacy_app_explore') }}" class="btn btn-success btn-block">{{ "continue_to_explore"|trans }}</a>
     </div>
   {% else %}
     {% set id = null %}
