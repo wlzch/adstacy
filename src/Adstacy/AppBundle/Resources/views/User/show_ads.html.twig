@@ -1,5 +1,7 @@
 {% extends is_ajax() ? '::ajax.html.twig' : 'AdstacyAppBundle:User:show.html.twig' %}
 
+{% block site_body_class %}site-body-no-bg{% endblock %}
+
 {% block show_content %}
   {% include 'AdstacyAppBundle:User:user_profile.html.twig' %}
 

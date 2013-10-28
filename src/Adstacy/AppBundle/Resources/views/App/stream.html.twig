@@ -2,6 +2,8 @@
 
 {% block title %}Your Ads Stream | Adstacy{% endblock %}
 
+{% block site_body_class %}site-body-no-bg{% endblock %}
+
 {% block content %}
   {% if user.followingsCount <= 0 %}
     {{ block('ajax_content') }}

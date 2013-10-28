@@ -153,7 +153,7 @@
           {% endblock %}
 
           <div class="site-content clearfix">
-            <div class="site-body">
+            <div class="site-body {% block site_body_class %}site-body-bg{% endblock %}">
               {% set allFlashes = {success: app.session.flashbag.get('success')} %}
               {% set allFlashes = allFlashes|merge({warning: app.session.flashbag.get('warning')}) %}
               {% set allFlashes = allFlashes|merge({error: app.session.flashbag.get('error')}) %}
