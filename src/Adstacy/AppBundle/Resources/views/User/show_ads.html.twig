@@ -10,7 +10,7 @@
       {{ block('ajax_content') }}
     </div>
   {% else %}
-    <div class="jumbotron text-center">
+    <div class="text-center">
       {% if app.user and app.user == user %}
         <h1>{{ "ads.no_ads.self_message"|trans }}</h1>
         <p class="lead">{{ "ads.no_ads.help"|trans }}</p>

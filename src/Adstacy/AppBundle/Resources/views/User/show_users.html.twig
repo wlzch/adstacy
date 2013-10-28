@@ -8,7 +8,7 @@
       {{ block('ajax_content') }}
     </div>
   {% else %}
-    <div class="jumbotron text-center">
+    <div class="text-center">
       {% if route == 'adstacy_app_user_followers' %}
         {% if app.user and app.user == user %}
           <h1>{{"user.no_followers.self_message"|trans}}</h1>
