@@ -87,16 +87,21 @@ class PopulateRedisCommand extends ContainerAwareCommand
             }
         }
 
+        $recommendation = array();
         foreach ($tags as $tag => $value) {
             $input = substr($tag, 0, 1);
             for ($i = 1, $len = strlen($tag); $i < $len; $i++) {
                 $input .= $tag[$i];
-                $redis->zadd('tags', 0, $input);
+                $recommendation[$input] = 0;
                 $cnt++;
             }
-            $redis->zadd('tags', 0, $tag.'*');
+            $recommendation[$tag.'*'] = 0;
             $cnt++;
         }
+        $redis->del('tags');
+        $cmd = $redis->createCommand('zadd');
+        $cmd->setArguments(array('tags', $recommendation));
+        $redis->executeCommand($cmd);
 
         $output->writeln($cnt.' tags data populated');
     }
