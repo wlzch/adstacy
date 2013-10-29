@@ -1,29 +1,28 @@
 {% extends is_ajax() ? '::ajax.html.twig' : 'AdstacyAppBundle:User:show.html.twig' %}
 
 {% block show_content %}
-  {% include 'AdstacyAppBundle:User:user_profile.html.twig' %}
-
-  {% if paginator.getCurrentPageResults|length > 0 %}
-    <div class="jscroll clearfix">
-      {{ block('ajax_content') }}
-    </div>
-  {% else %}
-    <div class="users">
-      {% if route == 'adstacy_app_user_followers' %}
-        {% if app.user and app.user == user %}
-          <h2>{{"user.no_followers.self_message"|trans}}</h2>
-        {% else %}
-          <h2>{{"user.no_followers.message"|trans({'%username%': user.username})}}</h2>
+  <div class="jscroll adstacy-container">
+    {% include 'AdstacyAppBundle:User:user_profile.html.twig' %}
+    {% if paginator.getCurrentPageResults|length > 0 %}
+        {{ block('ajax_content') }}
+    {% else %}
+      <div class="message-box">
+        {% if route == 'adstacy_app_user_followers' %}
+          {% if app.user and app.user == user %}
+            <div class="lead">{{"user.no_followers.self_message"|trans}}</div>
+          {% else %}
+            <div class="lead">{{"user.no_followers.message"|trans({'%username%': user.username})}}</div>
+          {% endif %}
+        {% elseif route == 'adstacy_app_user_followings' %}
+          {% if app.user and app.user == user %}
+            <div class="lead">{{"user.no_followings.message"|trans({'%username%': user.username})}}</div>
+          {% else %}
+            <div class="lead">{{"user.no_followings.message"|trans({'%username%': user.username})}}</div>
+          {% endif %}
         {% endif %}
-      {% elseif route == 'adstacy_app_user_followings' %}
-        {% if app.user and app.user == user %}
-          <h2>{{"user.no_followings.message"|trans({'%username%': user.username})}}</h2>
-        {% else %}
-          <h2>{{"user.no_followings.message"|trans({'%username%': user.username})}}</h2>
-        {% endif %}
-      {% endif %}
-    </div>
-  {% endif %}
+      </div>
+    {% endif %}
+  </div>
 {% endblock %}
 
 {% block ajax_content %}

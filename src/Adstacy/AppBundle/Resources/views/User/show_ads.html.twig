@@ -3,23 +3,25 @@
 {% block site_body_class %}site-body-no-bg{% endblock %}
 
 {% block show_content %}
-  {% include 'AdstacyAppBundle:User:user_profile.html.twig' %}
 
-  {% if ads|length > 0 %}
-    <div class="jscroll">
+  <div class="jscroll adstacy-container">
+    {% include 'AdstacyAppBundle:User:user_profile.html.twig' %}
+    {% if ads|length > 0 %}
       {{ block('ajax_content') }}
-    </div>
-  {% else %}
-    <div class="text-center">
-      {% if app.user and app.user == user %}
-        <h1>{{ "ads.no_ads.self_message"|trans }}</h1>
-        <p class="lead">{{ "ads.no_ads.help"|trans }}</p>
-        <a href="{{ path('adstacy_app_ad_create') }}" class="btn btn-success btn-lg label-group" title="{{ "ads.create"|trans }}"><i class="icon icon-plus"></i><span class="text">{{ "ads.create"|trans }}</span></a>
-      {% else %}
-        <h1>{{ "ads.no_ads.message"|trans({'%username%': user.username}) }}</h1>
-      {% endif %}
-    </div>
-  {% endif %}
+    {% else %}
+      <div class="message-box">
+        {% if app.user and app.user == user %}
+          <div class="lead">
+            {{ "ads.no_ads.self_message"|trans }}
+            <br><small>{{ "ads.no_ads.help"|trans }}</small>
+          </div>
+          <a href="{{ path('adstacy_app_ad_create') }}" class="btn btn-success btn-lg label-group" title="{{ "ads.create"|trans }}"><i class="icon icon-plus"></i><span class="text">{{ "ads.create"|trans }}</span></a>
+        {% else %}
+          <div class="">{{ "ads.no_ads.message"|trans({'%username%': user.username}) }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
 {% endblock %}
 
 {% block ajax_content %}

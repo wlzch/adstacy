@@ -93,7 +93,7 @@ body {
 
 .site-content {
   position: relative;
-  margin-left: 0;
+  margin: 30px 0;
   width: 100%;
   min-width: 320px;
   .transition(margin-left ease .5s);
@@ -174,7 +174,7 @@ body {
   // text-align: center;
   width: @site-menu-width;
   border: solid @border-color;
-  border-width: 0 1px;
+  border-width: 0;
   display: none;
   text-indent: -9999px;
   background: url("../img/logo.png") center no-repeat;
@@ -188,7 +188,6 @@ body {
     border-color: @blue-accent;
   }
 }
-
 
 #search-form {
   width: 320px;
@@ -206,7 +205,7 @@ body {
 
     &:focus {
       .box-shadow(none);
-      border-color: @blue-accent;
+      border-bottom-color: @blue-accent;
     }
   }
 
@@ -219,12 +218,13 @@ body {
   .tt-hint {
     width: 100%;
     height: (@navbar-height + 2px);
-    border: solid transparent;
+    border: solid @border-color;
     padding: 10px 35px 10px 15px;
     background-color: transparent;
     // border: solid transparent;
-    border-width: 0 0 2px;
+    border-width: 0 1px 2px;
     outline: none;
+    border-radius: 0;
   }
   .tt-dropdown-header {
     border-top: 1px solid #ccc;
@@ -293,6 +293,10 @@ body {
   }
 }
 
+.site-body {
+  margin: 0 15px;
+}
+
 @media (max-width: 599px) {
   .search-container {
     margin-left: 50px;
@@ -331,9 +335,8 @@ body {
   }
 
   .site-content {
-    margin-left: @site-menu-width + 20;
+    margin-left: @site-menu-width;
     width: auto;
-    margin-top: 20px;
   }
 
   .site-menu {
@@ -355,7 +358,7 @@ body {
   .site-body {
     float: left;
     min-width: 500px;
-    margin-bottom: 20px;
+
     .panel {
       margin: 0;
       border: 0;
@@ -368,7 +371,6 @@ body {
   .site-body-bg {
     background: #fff;
     border-radius: 5px;
-    border: 1px solid #ccc;
     box-shadow: 0 0 1px #ccc;
   }
 

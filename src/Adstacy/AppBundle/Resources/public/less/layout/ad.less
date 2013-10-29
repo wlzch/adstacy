@@ -3,7 +3,7 @@
 
 .advert {
   background: #fff;
-  margin: 15px auto 25px;
+  margin: 30px auto 0;
   border: 1px solid @border-color;
   border-radius: 5px;
   box-shadow: 0 0 1px #aaa;
@@ -23,14 +23,15 @@
 
 .advert-img {
   background-color: #000;
+  border-radius: 5px 5px 0 0;
+
   img {
-    background: url(@loader-img) no-repeat center;
-    .img-responsive();
+    background: url("../img/loader.gif") no-repeat center;
+    display: block;
+    max-width: 100%;
     margin: 0 auto;
   }
 
-  border-radius: 5px 5px 0 0;
-  border-bottom: 1px solid @border-color;
   img.full {
     border-radius: 5px 5px 0 0;
   }
@@ -91,6 +92,7 @@
 
 .advert-action {
   background: #f2f2f2;
+  border-top: 1px solid @border-color;
 
   .btn {
     height: 46px;

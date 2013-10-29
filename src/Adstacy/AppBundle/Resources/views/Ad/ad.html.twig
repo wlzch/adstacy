@@ -6,7 +6,7 @@
 {% endif %}
 {% set commentsLength = _comments|length %}
 {% set commentsLeft = ad.commentsCount - commentsLength %}
-<div class="advert item" data-username="{{ ad.user.username }}">
+<div class="advert" data-username="{{ ad.user.username }}">
   {% if ad.type == 'image' %}
     {% set thumbnail, original = null, null %}
     {% set original = vich_uploader_asset(ad, 'image') %}
@@ -18,7 +18,7 @@
       {% set thumbnail = original %}
     {% endif %}
     {% set height = ad.imageHeight(width) %}
-    <div class="advert-img" style="height: {{ height }}px">
+    <div class="advert-img" style="height: {{ height }}px;">
       <a href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}">
         <img class="lazy {% if ad.imageWidth >= thumb_width %}full{% endif %}" src="{{ asset('bundles/adstacyapp/img/transparent.gif') }}"
           data-original="{{ thumbnail }}"
