@@ -57,7 +57,6 @@ class UserManager
         $redisKey = 'recommendation:'.$user->getUsername();
         $redis->del($redisKey);
         $cmd = $redis->createCommand('zadd');
-        var_dump($recommendation);
         $cmd->setArguments(array($redisKey, $recommendation));
         $redis->executeCommand($cmd);
     }
