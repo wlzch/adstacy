@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use JMS\Serializer\SerializationContext;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Adstacy\AppBundle\Model\Contact;
+use Adstacy\AppBundle\Entity\User;
 use Adstacy\AppBundle\Form\Type\ContactType;
 use Adstacy\UserBundle\Form\Type\RegistrationFormType;
 use Adstacy\AppBundle\Helper\Twitter;
@@ -52,14 +53,14 @@ class AppController extends Controller
         $ads = $this->getRepository('AdstacyAppBundle:Ad')->findUserStream($user, $id, $limit);
 
         $suggestionsPaginator = array();
+        $users = array();
         if ($user->getFollowingsCount() <= 0) {
-            $suggestQuery = $this->getRepository('AdstacyAppBundle:User')->suggestUserQuery($user);
-            $suggestionsPaginator = $this->getDoctrinePaginator($suggestQuery, 10);
+            $users = $this->getRecommendations($user);
         }
 
         return $this->render('AdstacyAppBundle:App:stream.html.twig', array(
             'ads' => $ads,
-            'suggestionsPaginator' => $suggestionsPaginator,
+            'users' => $users,
             'user' => $user
         ));
     }
@@ -116,7 +117,15 @@ class AppController extends Controller
      */
     public function whoToFollowAction()
     {
-        $user = $this->getUser();
+        $users = $this->getRecommendations($this->getUser());
+
+        return $this->render('AdstacyAppBundle:App:who_to_follow.html.twig', array(
+            'users' => $users
+        ));
+    }
+
+    private function getRecommendations(User $user)
+    {
         $redis = $this->get('snc_redis.default');
         $request = $this->getRequest();
         $page = $request->query->get('page') ?: 1;
@@ -130,9 +139,7 @@ class AppController extends Controller
             $users = $this->getRepository('AdstacyAppBundle:User')->findById($ids);
         }
 
-        return $this->render('AdstacyAppBundle:App:who_to_follow.html.twig', array(
-            'users' => $users
-        ));
+        return $users;
     }
 
     /**

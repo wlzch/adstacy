@@ -18,7 +18,7 @@
   {% if user.followingsCount <= 0 %}
     <div class="clearfix users">
       <h2>{{"who_to_follow"|trans}}</h2>
-      {% for user in suggestionsPaginator.getCurrentPageResults %}
+      {% for user in users %}
         {% include 'AdstacyAppBundle:User:user.html.twig' with {user: user} %}
       {% endfor %}
     </div>
