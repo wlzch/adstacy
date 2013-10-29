@@ -26,7 +26,7 @@ class UserManager
         $redis = $this->container->get('snc_redis.default');
 
         $recommendation = array();
-        $followings = $user->getFollowings();
+        $followings = $user->getFollowings() ?: array();
         $followingsId = array();
 
         foreach ($followings as $following) {

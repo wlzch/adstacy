@@ -22,3 +22,9 @@ services:
         arguments: [%fos_user.model.user.class%]
         tags:
             - { name: form.type, alias: adstacy_resetting }
+
+    adstacy.listener.registration_completed:
+        class: Adstacy\UserBundle\EventListener\RegistrationCompletedListener
+        arguments: [@adstacy.manager.user]
+        tags:
+            - { name: kernel.event_subscriber }

@@ -1102,7 +1102,7 @@ class User implements UserInterface, GroupableInterface
      */
     public function getFollowers()
     {
-        return $this->followers;
+        return $this->followers ?: array();
     }
 
     /**
@@ -1193,7 +1193,7 @@ class User implements UserInterface, GroupableInterface
      */
     public function getFollowings()
     {
-        return $this->followings;
+        return $this->followings ?: array();
     }
 
     /**
@@ -1415,7 +1415,7 @@ class User implements UserInterface, GroupableInterface
      */
     public function getAds()
     {
-        return $this->ads;
+        return $this->ads ?: array();
     }
 
     public function setImage(File $image = null)
