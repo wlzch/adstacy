@@ -138,17 +138,25 @@ class AdController extends Controller
         if (!$ad) {
             throw $this->createNotFoundException();
         }
+        $request = $this->getRequest();
         $adUser = $ad->getUser();
         $user = $this->getUser();
         if ($adUser !== $user) {
-            $this->addFlash('error', $this->translate('flash.ad.delete.error_diff_user'));
-            return $this->redirect($this->generateUrl('adstacy_app_ad_show', array('id' => $ad->getId())));
+            if ($request->isXmlHttpRequest()) {
+                return new JsonResponse(array('status' => 'error', 'message' => $this->translate('flash.ad.delete.error_diff_user')));
+            } else {
+                $this->addFlash('error', $this->translate('flash.ad.delete.error_diff_user'));
+                return $this->redirect($this->generateUrl('adstacy_app_ad_show', array('id' => $ad->getId())));
+            }
         }
         $user->removeAd($ad);
         
         $em = $this->getManager();
         $em->remove($ad);
         $em->flush();
+        if ($request->isXmlHttpRequest()) {
+            return new JsonResponse(array('status' => 'ok', 'message' => $this->translate('flash.ad.delete.success')));
+        }
         $this->addFlash('success', $this->translate('flash.ad.delete.success'));
 
         return $this->redirect($this->generateUrl('adstacy_app_user_profile', array('username' => $user->getUsername())));

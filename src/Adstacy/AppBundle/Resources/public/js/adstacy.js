@@ -6,7 +6,33 @@
     Adstacy.loggedIn = true;
   }
   Adstacy.templates = {
-    comment: Hogan.compile(templates.comment)
+    comment: Hogan.compile(templates.comment),
+    modal: Hogan.compile(templates.modal)
+  };
+  Adstacy.modal = function(options) {
+    var $modal = $('#adstacy-modal');
+    var template = Adstacy.templates.modal;
+    options = $.extend({}, {
+      header: false,
+      body: false,
+      footer: false,
+      close: true,
+      events: []
+    }, options);
+    $modal.remove();
+    $modal = $(template.render({
+      header: options.header,
+      body: options.body,
+      footer: options.footer
+    }));
+    $body.append($modal);
+    $.each(options.events, function(i, _event) {
+      $modal.find(_event.selector).on(_event.name, _event.fn);
+    });
+    $modal.modal({show: true});
+    $modal.on('hidden.bs.modal', function() {
+      $modal.remove();
+    });
   };
   Adstacy.events = {
     commentbox: function(event) {
@@ -106,6 +132,31 @@
       $share.addClass('open');
       event.preventDefault();
       return false;
+    },
+    deleteAd: function(event) {
+      var $this = $(this);
+      var href = this.href;
+      Adstacy.modal({
+        header: $this.attr('data-modal-header'),
+        body: $this.attr('data-modal-body'),
+        footer: '<button type="button" class="btn btn-primary delete-sure">'+$this.attr('data-modal-delete')+'</button>',
+        events: [
+          {
+            selector: '.delete-sure',
+            name: 'click',
+            fn: function(event) {
+              $this.closest('.advert').remove();
+              $(this).closest('.modal').modal('hide');
+              $.post(href, function(data) {
+                // do nothing
+              });
+              return false;
+            }
+          }
+        ]
+      });
+
+      return false;
     }
   };
   var filterUser = function(query, users) {
@@ -148,8 +199,9 @@
         $commentBoxes.keydown(Adstacy.events.commentbox);
         $commentBoxes.mentionsInput(Adstacy.options.mentionsInput);
         $ads.find('.load-more-comments').click(Adstacy.events.loadComments);
-        $ads.find('.a.delete-comment').click(Adstacy.events.deleteComment);
+        $ads.find('a.delete-comment').click(Adstacy.events.deleteComment);
         $ads.find('.btn-share').click(Adstacy.events.share);
+        $ads.find('.delete').click(Adstacy.events.deleteAd);
       }
     }
   };

@@ -18,6 +18,29 @@
           <p>{{ content }}</p>
         </div>
       </div>
+    ',
+    modal: '
+      <div class="modal fade" id="adstacy-modal" tabindex="-1" role="dialog"> 
+          <div class="modal-dialog">
+            <div class="modal-content">
+              {{#header}}
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">{{{header}}}</h4>
+              </div>
+              {{/header}}
+              <div class="modal-body">
+                {{{ body }}}
+              </div>
+              {{#footer}}
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                {{{ footer }}}
+              </div>
+              {{/footer}}
+            </div>
+          </div>
+        </div>
     '
   };
 })(window);

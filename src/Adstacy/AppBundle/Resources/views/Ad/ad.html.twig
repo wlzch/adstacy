@@ -71,10 +71,22 @@
           {% endif %}
           {% if app.user %}
             {% if app.user == ad.user %}
-              <li><a href="{{ path('adstacy_app_ad_edit', {id: ad.id}) }}" class="label-group"><i class="icon icon-edit"></i><span class="text owner-action-label">{{ "edit"|trans }}</span></a></li>
-              <li><a data-toggle="modal" data-target="#confirm-modal" class="label-group"><i class="icon icon-delete"></i><span class="text owner-action-label">{{ "delete"|trans }}</span></a></li>
+              <li>
+                <a href="{{ path('adstacy_app_ad_edit', {id: ad.id}) }}" class="label-group">
+                  <i class="icon icon-edit"></i><span class="text owner-action-label">{{ "edit"|trans }}</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ path('adstacy_app_ad_delete', {id: ad.id}) }}" class="label-group delete" data-modal-header="{{"ads.delete.confirm_title"|trans}}" data-modal-body="{{"ads.delete.confirm_message"|trans}}" data-modal-delete="{{"ads.delete.button"|trans}}">
+                  <i class="icon icon-delete"></i><span class="text owner-action-label">{{ "delete"|trans }}</span>
+                </a>
+              </li>
             {% else %}
-              <li><a href="{{ path('adstacy_app_ad_report', {id: ad.id}) }}" class="label-group report"><i class="icon icon-flag"></i><span class="text">{{"report"|trans}}</span></a></li>
+              <li>
+                <a href="{{ path('adstacy_app_ad_report', {id: ad.id}) }}" class="label-group report">
+                  <i class="icon icon-flag"></i><span class="text">{{"report"|trans}}</span>
+                </a>
+              </li>
             {% endif %}
           {% endif %}
           {% if is_granted('ROLE_SUPER_ADMIN') %}

@@ -45,7 +45,7 @@ ads:
     create: Create ad
     delete:
         confirm_title: Delete Confirmation
-        confirm_message: Are you sure you want to delete this ads?
+        confirm_message: '<p>Are you sure you want to delete this ads?</p>'
         button: DELETE!
     no_ads:
         message: %username% doesn't have any ads yet

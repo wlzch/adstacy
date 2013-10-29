@@ -44,7 +44,7 @@ ads:
     create: Tambah iklan
     delete:
         confirm_title: Konfirmasi penghapusan
-        confirm_message: Apakah Anda yakin ingin menghapus iklan ini?
+        confirm_message: '<p>Apakah Anda yakin ingin menghapus iklan ini?</p>'
         button: HAPUS!
     no_ads:
         message: %username% belum mempunyai iklan
