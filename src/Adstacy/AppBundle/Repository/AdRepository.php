@@ -194,6 +194,17 @@ class AdRepository extends EntityRepository
         return $query->setParameter('since', $since)->getResult();
     }
 
+    /**
+     * Find ads having id in $ids
+     *
+     * @param array $ids
+     */
+    public function findByIds($ids = array())
+    {
+        return $this->_getAdsAndCommentsIn($ids);
+    }
+
+
     private function getNativeSqlMapping()
     {
         $rsm = new ResultSetMapping();
@@ -243,7 +254,6 @@ class AdRepository extends EntityRepository
      */
     private function getAdsAndCommentsIn(Query $filterQuery, $since = null, $limit = 10)
     {
-        $em = $this->getEntityManager();
         if ($since == null) {
             $since = 2000000000; // set to a very high last id if not present
         }
@@ -252,6 +262,17 @@ class AdRepository extends EntityRepository
         foreach ($filterQuery->getArrayResult() as $ad) {
             $ids[] = $ad['id'];
         }
+
+        return $this->_getAdsAndCommentsIn($ids);
+    }
+
+    /**
+     * The real implementation of getAdsAndCommentsIn
+     *
+     * @param array $ids
+     */
+    private function _getAdsAndCommentsIn($ids = array())
+    {
         if (count($ids) <= 0) {
             return array();
         }

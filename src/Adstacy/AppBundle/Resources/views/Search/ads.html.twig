@@ -3,7 +3,7 @@
 {% block site_body_class %}site-body-no-bg{% endblock %}
 
 {% block search_content %}
-  {% if paginator.getCurrentPageResults|length > 0 and app.request.query.get('q') != '' %}
+  {% if ads|length > 0 and app.request.query.get('q') != '' %}
     <div class="jscroll">
       {{ block('ajax_content') }}
     </div>
@@ -16,11 +16,11 @@
 {% endblock %}
 
 {% block ajax_content %}
-  {% for ad in paginator.getCurrentPageResults %}
+  {% for ad in ads %}
     {% include 'AdstacyAppBundle:Ad:ad.html.twig' with {ad: ad} %}
   {% endfor %}
-  {% if paginator.hasNextPage %}
-    {% set params = app.request.query.all|merge({page: paginator.getNextPage}) %}
+  {% if ads|length >= max_ads_per_page %}
+    {% set params = app.request.query.all|merge({page: (app.request.query.get('page') ?: 1) + 1}) %}
     <a href="{{ path('adstacy_app_search', params )}}" class="btn btn-default btn-lg btn-block load-next next-page">{{"more"|trans}}</a>
   {% endif %}
 {% endblock %}

@@ -19,7 +19,7 @@ class SearchController extends Controller
     public function searchAdsAction()
     {
         $request = $this->getRequest();
-        $finder = $this->get('fos_elastica.finder.website.ad');
+        $index = $this->get('fos_elastica.index.website.ad');
         $limit = $this->getParameter('max_ads_per_page');
         $q = $request->query->get('q');
         $tags = explode(' ', $q);
@@ -31,27 +31,33 @@ class SearchController extends Controller
         $constantQuery->setBoost(1);
 
         $existsFilter = new \Elastica\Filter\Exists('created');
-        $finalQuery = new \Elastica\Query\CustomFiltersScore($constantQuery);
+        $filterQuery = new \Elastica\Query\CustomFiltersScore($constantQuery);
         foreach ($tags as $tag) {
             $termFilter = new \Elastica\Filter\Term(array('tags' => $tag));
-            $finalQuery->addFilter($termFilter, 1.5);
+            $filterQuery->addFilter($termFilter, 1.5);
         }
-        $finalQuery->addFilterScript($existsFilter, 
+        $filterQuery->addFilterScript($existsFilter, 
             "(doc['created'].date.getMillis() / 1000000) * (1 / 10000000)"
         );
-        $finalQuery->setScoreMode('total');
+        $filterQuery->setScoreMode('total');
 
         $activeFilter = new \Elastica\Filter\Term(array('active' => true));
-        $finalQuery->addFilter($activeFilter, 1.5);
+        $filterQuery->addFilter($activeFilter, 1.5);
 
-        $adsPaginator = $finder->findPaginated($finalQuery);
-        $adsPaginator
-            ->setMaxPerPage($limit)
-            ->setCurrentPage($request->query->get('page') ?: 1)
-        ;
+        $finalQuery = new \Elastica\Query($filterQuery);
+
+        $page = $request->query->get('page') ?: 1;
+        $from = ($page - 1) * $limit;
+        $finalQuery->setFrom($from)->setLimit($limit)->setFields(array('id'));
+        $resultSet = $index->search($finalQuery);
+        $ids = array();
+        foreach ($resultSet->getResults() as $result) {
+            $ids[] = $result->getId();
+        }
+        $ads = $this->getRepository('AdstacyAppBundle:Ad')->findByIds($ids);
 
         return $this->render('AdstacyAppBundle:Search:ads.html.twig', array(
-            'paginator' => $adsPaginator,
+            'ads' => $ads,
             'search' => 'ads'
         ));
     }
