@@ -134,21 +134,23 @@
   </div> #}
 
   <div class="advert-detail">
-    <div class="advert-user clearfix">
+    <div class="advert-user media">
       {% set user = ad.user %}
-      <div class="profile-picture">
-        <img class="profile-picture-img" src="{{ profile_pic(user) }}" alt="{{ user.username }}" width="48" height="48">
+      <div class="pull-left">
+        <img class="media-object" src="{{ profile_pic(user) }}" alt="{{ user.username }}" width="32" height="32">
       </div>
-      <div class="user-desc">
-        <a class="realname" href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">{{ user.realName }} <span class="username">@{{ user.username }}</span></a>
-      </div>
-      <div class="advert-date">
-        <time class="timeago" datetime="{{ ad.created|date('c') }}">{{ ad.created|date('F j, Y') }}</span>
+      <div class="media-body">
+        <div class="media-heading">
+          <a class="realname" href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">{{ user.realName }} <span class="username">@{{ user.username }}</span></a>
+          <time class="pull-right timeago" datetime="{{ ad.created|date('c') }}">{{ ad.created|date('F j, Y') }}</time>
+          {# <div class="pull-right advert-date"> #}
+          {# </div> #}
+        </div>
+        {% if ad.type != 'text' %}
+          <p class="advert-desc">{{ parse_url(ad.description) }}</p>
+        {% endif %}
       </div>
     </div>
-    {% if ad.type != 'text' %}
-      <p class="advert-desc">{{ parse_url(ad.description) }}</p>
-    {% endif %}
     <div class="advert-tags">
       {% for tag in ad.tags %}
         <a href="{{ path('adstacy_app_search', {q: tag}) }}">#{{tag}}</a>
@@ -173,7 +175,7 @@
             <img src="{{ profile_pic(comment.user) }}" alt="" width="32" height="32" class="media-object">
           </div>
           <div class="media-body">
-            <p class="media-heading">
+            <div class="media-heading">
               <a class="realname" href="{{ path('adstacy_app_user_profile', {username: comment.user.username}) }}">{{ comment.user.realName }}
                 <span class="username">@{{ comment.user.userName }}</span>
               </a>
@@ -181,7 +183,7 @@
               {% if app.user and (app.user == comment.user or app.user == comment.user) %}
                 <a href="javascript:;" data-href="{{ path('adstacy_app_ad_comment_delete', {id: comment.id}) }}" class="pull-right delete-comment">&times;</a>
               {% endif %}
-            </p>
+            </div>
             <p>{{ comment.content }}</p>
           </div>
         </div>
