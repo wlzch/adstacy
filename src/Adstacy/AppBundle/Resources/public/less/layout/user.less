@@ -1,35 +1,28 @@
 .users {
   width: 500px;
+
+  .media {
+    margin: 0;
+  }
 }
+
 .user {
   width: 100%;
   padding: 10px;
   border-bottom: 1px solid #ccc;
 
-  .profile-picture {
-    float: left;
-    margin-right: 10px;
+  p {
+    margin: 0;
+  }
 
-    img {
-      border-radius: 3px;
-      width: 48px;
-      height: 48px;
-    }
+  .media-object {
+    border-radius: 3px;
+    width: 48px;
+    height: 48px;
   }
-  .user-detail {
-    float: left;
-    width: 70%;
-    p {
-      margin: 0;
-    }
-  }
-  .user-actions {
-    float: right;
-    width: 80px;
-  }
-  .user-info {
-    margin-bottom: 5px;
-    a {
+
+  .media-heading {
+    a:not(.btn) {
       color: #999;
       font-size: 11px;
       font-weight: bold;
@@ -42,10 +35,6 @@
     .username {
       font-size: 12px;
     }
-  }
-  .btn {
-    padding: 4px 10px;
-    width: 100%;
   }
 }
 
@@ -72,10 +61,11 @@ a.realname, a.username {
   border-radius: 5px;
   margin-bottom: 10px;
   width: 500px;
-  img {
-    margin-right: 8px;
+
+  .media-object {
     border-radius: 5px;
   }
+
   .media {
     padding: 10px;
   }
@@ -182,56 +172,56 @@ a.realname, a.username {
   }
 }
 
-@media screen and (max-width: @screen-phone) {
-  #user-profile {
-    margin-left: 0;
-    margin-right: 0;
-    width: 100%;
-    .user-profile-desc {
-      float: none;
-      width: 100%;
-      text-align: center;
-    }
-    .profile-picture {
-      float: none;
-      width: 100%;
-      text-align: center;
-      margin: 10px 0 0;
-    }
-    #user-profile-info .realname {
-      text-align: center;
-    }
-    #user-profile-menu {
-      text-align: center;
-      .pull-right, .pull-left {
-        float: none !important;
-      }
-      .btn {
-        display: block;
-        width: 100%;
-      }
-    }
-  }
-  .user {
-    width: 100%;
-    padding: 0;
-    margin: 14px 0 0;
-    height: auto;
-    .user-realname, .profile-picture, .user-adverts, .user-score {
-      text-align: center;
-    }
-    .profile-picture, .user-adverts {
-      float: none;
-    }
-    .user-adverts {
-      width: 210px;
-      margin: 0 auto;
-    }
-    .user-score {
-      margin-bottom: 0;
-    }
-  }
-}
+// @media screen and (max-width: @screen-phone) {
+//   #user-profile {
+//     margin-left: 0;
+//     margin-right: 0;
+//     width: 100%;
+//     .user-profile-desc {
+//       float: none;
+//       width: 100%;
+//       text-align: center;
+//     }
+//     .profile-picture {
+//       float: none;
+//       width: 100%;
+//       text-align: center;
+//       margin: 10px 0 0;
+//     }
+//     #user-profile-info .realname {
+//       text-align: center;
+//     }
+//     #user-profile-menu {
+//       text-align: center;
+//       .pull-right, .pull-left {
+//         float: none !important;
+//       }
+//       .btn {
+//         display: block;
+//         width: 100%;
+//       }
+//     }
+//   }
+//   .user {
+//     width: 100%;
+//     padding: 0;
+//     margin: 14px 0 0;
+//     height: auto;
+//     .user-realname, .profile-picture, .user-adverts, .user-score {
+//       text-align: center;
+//     }
+//     .profile-picture, .user-adverts {
+//       float: none;
+//     }
+//     .user-adverts {
+//       width: 210px;
+//       margin: 0 auto;
+//     }
+//     .user-score {
+//       margin-bottom: 0;
+//     }
+//   }
+// }
 
 .page-title {
   padding:0;
