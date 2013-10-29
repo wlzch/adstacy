@@ -98,6 +98,14 @@
         });
       });
       return false;
+    },
+    share: function(event) {
+      var $share = $(this).parent().parent().next().find('.advert-share');
+      $share.show();
+      $share.find('.url').select();
+      $share.addClass('open');
+      event.preventDefault();
+      return false;
     }
   };
   var filterUser = function(query, users) {
@@ -141,6 +149,7 @@
         $commentBoxes.mentionsInput(Adstacy.options.mentionsInput);
         $ads.find('.load-more-comments').click(Adstacy.events.loadComments);
         $ads.find('.a.delete-comment').click(Adstacy.events.deleteComment);
+        $ads.find('.btn-share').click(Adstacy.events.share);
       }
     }
   };

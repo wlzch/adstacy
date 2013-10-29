@@ -1,12 +1,5 @@
 (function() {
-  $('.btn-share').click(function(event) {
-    var $share = $(this).parent().parent().next().find('.advert-share');
-    $share.show();
-    $share.find('.url').select();
-    $share.addClass('open');
-    event.preventDefault();
-    return false;
-  });
+  $('.btn-share').click(Adstacy.events.share);
   $('body').click(function() {
     $('.advert-share.open').removeClass('open').hide();
   });
