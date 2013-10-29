@@ -82,17 +82,20 @@
       return false;
     },
     loadComments: function(event) {
-      var $this, $that, $advert, $comments, href, html, spinner, template;
-      template = Adstacy.templates.comment;
+      var $this, $that, $advert, $comments, href, html, spinner, template, adUsername;
       $this = $(this);
+      if ($this.attr('data-loading') == 'true') return false;
       $that = $(this).find('a');
       $advert = $(this).closest('.advert');
-      var adUsername = $advert.attr('data-username');
+      template = Adstacy.templates.comment;
+      adUsername = $advert.attr('data-username');
       href = $that.attr('data-href');
       $comments = $that.closest('.advert-comments-container').find('.advert-comments');
       html = $that.html();
       $that.html('');
       spinner = new Spinner({className: 'spinner', length: 2, width: 2, radius: 2}).spin(this);
+      $this.attr('data-loading', 'true');
+
       $.getJSON(href, function(data) {
         var json = JSON.parse(data);
         var tmpl, left, len, cnt;
@@ -121,6 +124,7 @@
           $comments.prepend($tmpl);
           $tmpl.find('time').timeago();
           $tmpl.find('a.delete-comment').click(Adstacy.events.deleteComment);
+          $this.removeAttr('data-loading');
         });
       });
       return false;
