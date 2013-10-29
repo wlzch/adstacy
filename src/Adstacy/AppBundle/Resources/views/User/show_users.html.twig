@@ -8,18 +8,18 @@
       {{ block('ajax_content') }}
     </div>
   {% else %}
-    <div class="text-center">
+    <div class="users">
       {% if route == 'adstacy_app_user_followers' %}
         {% if app.user and app.user == user %}
-          <h1>{{"user.no_followers.self_message"|trans}}</h1>
+          <h2>{{"user.no_followers.self_message"|trans}}</h2>
         {% else %}
-          <h1>{{"user.no_followers.message"|trans({'%username%': user.username})}}</h1>
+          <h2>{{"user.no_followers.message"|trans({'%username%': user.username})}}</h2>
         {% endif %}
       {% elseif route == 'adstacy_app_user_followings' %}
         {% if app.user and app.user == user %}
-          <h1>{{"user.no_followings.message"|trans({'%username%': user.username})}}</h1>
+          <h2>{{"user.no_followings.message"|trans({'%username%': user.username})}}</h2>
         {% else %}
-          <h1>{{"user.no_followings.message"|trans({'%username%': user.username})}}</h1>
+          <h2>{{"user.no_followings.message"|trans({'%username%': user.username})}}</h2>
         {% endif %}
       {% endif %}
     </div>
@@ -28,9 +28,16 @@
 
 {% block ajax_content %}
   <div class="users">
-  {% for following in paginator.getCurrentPageResults %}
-    {% include 'AdstacyAppBundle:User:user.html.twig' with {user: following} %}
-  {% endfor %}
+    <h2>
+      {% if route == 'adstacy_app_user_followers' %}
+        Followers
+      {% elseif route == 'adstacy_app_user_followings' %}
+        Followings
+      {% endif %}
+    </h2>
+    {% for following in paginator.getCurrentPageResults %}
+      {% include 'AdstacyAppBundle:User:user.html.twig' with {user: following} %}
+    {% endfor %}
   </div>
   {% if paginator.hasNextPage %}
     {% set params = app.request.query.all|merge({username: user.username, page: paginator.getNextPage}) %}
