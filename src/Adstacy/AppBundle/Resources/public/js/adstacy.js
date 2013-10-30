@@ -7,7 +7,8 @@
   }
   Adstacy.templates = {
     comment: Hogan.compile(templates.comment),
-    modal: Hogan.compile(templates.modal)
+    modal: Hogan.compile(templates.modal),
+    alert: Hogan.compile(templates.alert)
   };
   Adstacy.modal = function(options) {
     var $modal = $('#adstacy-modal');
@@ -38,6 +39,7 @@
     var types = type ? [type] : ['success', 'error'];
     var $container = $('.alert-container');
     var $alert;
+    var template = Adstacy.templates.alert;
     options = $.extend({}, {
       duration: 1000,
       timeout: 3000
@@ -47,7 +49,7 @@
       $body.append($container);
     }
     if (message) {
-      $alert = $('<div class="alert alert-'+type+' alert-dismissable">'+message+'</div>');
+      $alert = $(template.render({type: type, message: message}));
       $container.append($alert);
     } else {
       $.each(types, function() {

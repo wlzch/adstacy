@@ -41,6 +41,12 @@
             </div>
           </div>
         </div>
+    ',
+    alert: '
+      <div class="alert alert-{{ type }} alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <p>{{{ message }}}</p>
+      </div>
     '
   };
 })(window);
