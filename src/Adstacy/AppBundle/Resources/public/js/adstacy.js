@@ -34,10 +34,14 @@
       $modal.remove();
     });
   };
-  Adstacy.alert = function(type, message) {
+  Adstacy.alert = function(type, message, options) {
     var types = type ? [type] : ['success', 'error'];
     var $container = $('.alert-container');
     var $alert;
+    options = $.extend({}, {
+      duration: 1000,
+      timeout: 3000
+    }, options);
     if ($container.length <= 0) {
       $container = $('<div class="alert-container">');
       $body.append($container);
@@ -52,15 +56,15 @@
       });
       $alert = $('.alert');
     }
-    $alert.fadeIn(1000);
+    $alert.fadeIn(options.duration);
     setTimeout(function() {
-      $alert.fadeOut(1000, function() {
+      $alert.fadeOut(options.duration, function() {
         $alert.remove();
         if ($container.find('.alert').length <= 0) {
           $container.remove();
         }
       });
-    }, 3000);
+    }, options.timeout);
   };
   Adstacy.events = {
     commentbox: function(event) {
@@ -159,9 +163,12 @@
     },
     share: function(event) {
       var $share = $(this).parent().parent().next().find('.advert-share');
-      $share.show();
-      $share.find('.url').select();
-      $share.addClass('open');
+      if (!$share.hasClass('open')) {
+        $share.show();
+        $share.find('.url').select();
+        $share.addClass('open');
+        Adstacy.alert('success', 'Ctrl + C to copy url', {duration: 400, timeout: 1500});
+      }
       event.preventDefault();
       return false;
     },
