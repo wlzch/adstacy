@@ -151,7 +151,7 @@ $(function() {
       if (data.status == 'ok' && data.files.length > 0) {
         previewImage(data.files[0]);
       } else {
-        // show error here
+        Adstacy.alert('error', data.errors);
         $uploadImageContainer.show();
       }
       spinner.stop();

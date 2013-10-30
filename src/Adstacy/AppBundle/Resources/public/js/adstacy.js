@@ -49,6 +49,7 @@
       $body.append($container);
     }
     if (message) {
+      message = $.isArray(message) ? message[0] : message;
       $alert = $(template.render({type: type, message: message}));
       $container.append($alert);
     } else {
