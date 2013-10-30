@@ -108,6 +108,9 @@ form_ad:
     content: Long description
     content_trigger: Click to add more images and descriptions
     submit: Save
+    submit_image: Save image
+    submit_text: Save text
+    submit_video: Save video
     hashtags: Hashtags
     image_trigger: Click to upload image
     upload_image_title: Upload Image

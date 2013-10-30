@@ -92,7 +92,10 @@
       {{ form_widget(form.save, {
           attr: {
             'class': 'pull-right btn btn-primary submit-disable-btn',
-            'data-disable-text': "saving"|trans
+            'data-disable-text': "saving"|trans,
+            'data-trans-image': "form_ad.submit_image"|trans,
+            'data-trans-text': "form_ad.submit_text"|trans,
+            'data-trans-video': "form_ad.submit_video"|trans,
           }
         })
       }}

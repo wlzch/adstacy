@@ -101,6 +101,9 @@ form_ad:
     content: Deskripsi lengkap
     content_trigger: Klik untuk menambahkan gambar dan deskripsi lengkap
     submit: Simpan
+    submit_image: Simpan gambar
+    submit_text: Simpan text
+    submit_video: Simpan video
     hashtags: hashtags
     image_trigger: Klik untuk mengupload image
     upload_image_title: Upload Gambar

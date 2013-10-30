@@ -19,6 +19,7 @@ $(function() {
   var $modalBody = $modal.find('.modal-body');
   var $inputVideo = $('#ad_youtubeUrl');
   var $youtube = $('#ytplayer');
+  var $save = $('#ad_save');
 
   $chooseImage.click(function() {
     $(this).removeClass('btn-default').addClass('btn-primary');
@@ -31,6 +32,7 @@ $(function() {
     $advertVideo.addClass('hide');
     $advertType.val('image');
     $imagePreview.show();
+    $save.text($save.attr('data-trans-image'));
   });
   $chooseText.click(function() {
     $(this).removeClass('btn-default').addClass('btn-primary');
@@ -43,6 +45,7 @@ $(function() {
     $advertVideo.addClass('hide');
     $advertType.val('text');
     $imagePreview.hide();
+    $save.text($save.attr('data-trans-text'));
   });
   $chooseVideo.click(function() {
     $(this).removeClass('btn-default').addClass('btn-primary');
@@ -55,6 +58,7 @@ $(function() {
     $advertVideo.removeClass('hide');
     $advertType.val('youtube');
     $imagePreview.hide();
+    $save.text($save.attr('data-trans-video'));
   });
   var previewImage = function(file) {
     var $img = $imagePreview.find('img');
