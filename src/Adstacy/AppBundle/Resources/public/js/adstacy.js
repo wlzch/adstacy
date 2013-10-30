@@ -34,6 +34,32 @@
       $modal.remove();
     });
   };
+  Adstacy.alert = function(type, message) {
+    var types = type ? [type] : ['success', 'error'];
+    var $container = $('.alert-container');
+    var $alert;
+    if ($container.length <= 0) {
+      $container = $('<div class="alert-container">');
+      $body.append($container);
+    }
+    if (message) {
+      $alert = $('<div class="alert alert-'+type+' alert-dismissable">'+message+'</div>');
+      $container.append($alert);
+    } else {
+      $.each(types, function() {
+        $alert = $('.alert-'+this);
+        $container.append($alert);
+      });
+      $alert = $('.alert');
+    }
+    $alert.fadeIn(1000);
+    setTimeout(function() {
+      $alert.fadeOut(1000, function() {
+        $alert.remove();
+        $container.remove();
+      });
+    }, 3000);
+  };
   Adstacy.events = {
     commentbox: function(event) {
       if (!Adstacy.user) return;
