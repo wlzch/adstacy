@@ -1,6 +1,6 @@
 $(function() {
   var $container, $form, $chooseImage, $chooseText, $chooseVideo, $advertImage, $advertText, $advertImages, $advertUrl,
-    $advertUrlOk, $advertImageTrigger, $inputType, $uploadImageContainer, $adImagesContainer, $progress, $imagePreview,
+    $advertUrlOk, $advertImageTrigger, $inputType, $uploadImageContainer, $adImagesContainer, $progress, $imagePreview, $progressbar,
     $modal, $modalHeader, $modalBody, $inputVideo, $inputTitle, $inputDescription, $inputTags, $inputImage, $youtube, $save;
 
   $container = $('#create-advert');
@@ -18,6 +18,7 @@ $(function() {
   $uploadImageContainer = $container.find('#upload-image-container');
   $adImagesContainer = $container.find('#ad-images-container');
   $progress = $container.find('#progressbar');
+  $progressbar = $progress.find('.progress-bar');
   $imagePreview = $container.find('.image-preview');
   $modal = $container.find('#create-advert-image-modal');
   $modalHeader = $modal.find('.modal-header');
@@ -94,20 +95,21 @@ $(function() {
       } else {
         // display error
       }
-      $progress.progressbar('destroy');
     },
     fail: function(e, data) {
-      $progress.progressbar('destroy');
       $uploadImageContainer.hide();
+    },
+    always: function(e, data) {
+      $progress.hide();
+      $progress.css('width', '0%');
     },
     progressall: function(e, data) {
       var progress = parseInt(data.loaded / data.total * 100, 10);
-      $progress.progressbar({
-        value: progress
-      });
+      $progressbar.css('width', progress+'%');
     },
     start: function(e) {
-      $uploadImageContainer.hide();    
+      $uploadImageContainer.hide(); 
+      $progress.show();
     }
   }).prop('disabled', !$.support.fileInput)
   .parent().addClass($.support.fileInput ? undefined : 'disabled')
