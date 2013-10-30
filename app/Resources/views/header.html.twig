@@ -12,7 +12,7 @@
 
     <div class="search-container">
       <form id="search-form" class="navbar-left" action="{{ path('adstacy_app_search') }}">
-        <input id="search-box" type="text" class="form-control typeahead" placeholder="{{ "searchbox"|trans }}" name="q" value="{{ app.request.query.get('q') }}">
+        <input id="search-box" type="text" class="typeahead" placeholder="{{ "searchbox"|trans }}" name="q" value="{{ app.request.query.get('q') }}">
         <button id="btn-search" type="submit"><i class="icon icon-search"></i></button>
       </form>
     </div>
