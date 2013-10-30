@@ -96,6 +96,22 @@
         {% include '::header.html.twig' %}
       {% endblock %}
 
+      <div class="alert-container">
+        {% set allFlashes = {success: app.session.flashbag.get('success')} %}
+        {% set allFlashes = allFlashes|merge({warning: app.session.flashbag.get('warning')}) %}
+        {% set allFlashes = allFlashes|merge({error: app.session.flashbag.get('error')}) %}
+        {% if allFlashes|length > 0 %}
+          {% for key,flashes in allFlashes %}
+            {% for flash in flashes %}
+              <div class="alert alert-{{ key }} alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <p>{{ flash }}</p>
+              </div>
+            {% endfor %}
+          {% endfor %}
+        {% endif %}
+      </div>
+
       {% block container %}
         <div id="site-container" class="site-container site-wrapper">
           {% set attr = app.request.attributes %}
@@ -154,16 +170,6 @@
 
           <div class="site-content clearfix">
             <div class="site-body {% block site_body_class %}site-body-bg{% endblock %}">
-              {% set allFlashes = {success: app.session.flashbag.get('success')} %}
-              {% set allFlashes = allFlashes|merge({warning: app.session.flashbag.get('warning')}) %}
-              {% set allFlashes = allFlashes|merge({error: app.session.flashbag.get('error')}) %}
-              {% if allFlashes|length > 0 %}
-                {% for key,flashes in allFlashes %}
-                  {% for flash in flashes %}
-                    <div class="alert alert-{{ key }}">{{ flash }}</div>
-                  {% endfor %}
-                {% endfor %}
-              {% endif %}
 
               {% block content %}{% endblock %}
             </div>

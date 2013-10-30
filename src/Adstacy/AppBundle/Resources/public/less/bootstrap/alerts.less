@@ -31,6 +31,9 @@
   > p + p {
     margin-top: 5px;
   }
+  min-width: 500px;
+  color: #fff;
+  padding: 6px 15px;
 }
 
 // Dismissable alerts
@@ -54,7 +57,14 @@
 // Generate contextual modifier classes for colorizing the alert.
 
 .alert-success {
-  .alert-variant(@alert-success-bg; @alert-success-border; @alert-success-text);
+  color: #fff;
+  background-color: #4ba614;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#4ba614), to(#008c00));
+  background-image: -webkit-linear-gradient(top, #4ba614, #008c00);
+  background-image: -moz-linear-gradient(top, #4ba614, #008c00);
+  background-image: -ms-linear-gradient(top, #4ba614, #008c00);
+  background-image: -o-linear-gradient(top, #4ba614, #008c00);
+  background-image: linear-gradient(to bottom, #4ba614, #008c00);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#4ba614, endColorstr=#008c00)
 }
 .alert-info {
   .alert-variant(@alert-info-bg; @alert-info-border; @alert-info-text);
