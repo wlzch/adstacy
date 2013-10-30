@@ -21,13 +21,13 @@
 {% block site_body_class %}site-body-no-bg{% endblock %}
 
 {% block content %}
-  {% if not ad.active %}
   <div class="adstacy-container">
+  {% if not ad.active %}
     <div class="alert alert-danger">{{"ads.blocked"|trans({'%url%': path('adstacy_app_page_show', {key: 'page'})})|raw }}</div>
-  </div>
   {% else %}
     {% include 'AdstacyAppBundle:Ad:ad.html.twig' with {ad: ad, comments: comments, view: false} %}
   {% endif %}
+  </div>
 {% endblock %}
 
 {% block javascripts %}
