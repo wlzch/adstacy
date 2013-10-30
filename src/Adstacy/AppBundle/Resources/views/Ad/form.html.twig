@@ -24,7 +24,7 @@
         <a class="btn {% if data.type == 'text' %}btn-primary{% else %}btn-default{% endif %} label-group" id="choose-advert-text" href="#"><i class="icon icon-file"></i><span class="text">text</span></a>
         <a class="btn {% if data.type == 'video' %}btn-primary{% else %}btn-default{% endif %} label-group" id="choose-advert-video" href="#"><i class="icon icon-video"></i><span class="text">video</span></a>
       </div>
-      {{ form_start(form, {attr: {class: 'submit-disable'}}) }}
+      {{ form_start(form, {attr: {class: 'submit-disable validate'}}) }}
       {{ form_errors(form) }}
       <div class="form-content-container">
         <a id="create-advert-image-trigger" data-toggle="modal" data-target="#create-advert-image-modal" class="btn btn-success{% if data.type != 'image' %}hide{% endif %}">

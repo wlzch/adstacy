@@ -1,25 +1,35 @@
 $(function() {
-  var $chooseImage = $('#choose-advert-image');
-  var $chooseText = $('#choose-advert-text');
-  var $chooseVideo = $('#choose-advert-video');
-  var $advertImage = $('#create-advert-image');
-  var $advertText = $('#create-advert-text');
-  var $advertVideo = $('#create-advert-video');
-  var $advertImages = $('#create-advert-images');
-  var $advertUrl = $('#create-advert-url');
-  var $advertUrlOk = $('#create-advert-url-ok');
-  var $advertImageTrigger = $('#create-advert-image-trigger');
-  var $advertType = $('#ad_type');
-  var $uploadImageContainer = $('#upload-image-container');
-  var $adImagesContainer = $('#ad-images-container');
-  var $progress = $('#progressbar');
-  var $imagePreview = $('.image-preview');
-  var $modal = $('#create-advert-image-modal');
-  var $modalHeader = $modal.find('.modal-header');
-  var $modalBody = $modal.find('.modal-body');
-  var $inputVideo = $('#ad_youtubeUrl');
-  var $youtube = $('#ytplayer');
-  var $save = $('#ad_save');
+  var $container, $form, $chooseImage, $chooseText, $chooseVideo, $advertImage, $advertText, $advertImages, $advertUrl,
+    $advertUrlOk, $advertImageTrigger, $inputType, $uploadImageContainer, $adImagesContainer, $progress, $imagePreview,
+    $modal, $modalHeader, $modalBody, $inputVideo, $inputTitle, $inputDescription, $inputTags, $inputImage, $youtube, $save;
+
+  $container = $('#create-advert');
+  $form = $container.find('form');
+  $chooseImage = $container.find('#choose-advert-image');
+  $chooseText = $container.find('#choose-advert-text');
+  $chooseVideo = $container.find('#choose-advert-video');
+  $advertImage = $container.find('#create-advert-image');
+  $advertText = $container.find('#create-advert-text');
+  $advertVideo = $container.find('#create-advert-video');
+  $advertImages = $container.find('#create-advert-images');
+  $advertUrl = $container.find('#create-advert-url');
+  $advertUrlOk = $container.find('#create-advert-url-ok');
+  $advertImageTrigger = $container.find('#create-advert-image-trigger');
+  $uploadImageContainer = $container.find('#upload-image-container');
+  $adImagesContainer = $container.find('#ad-images-container');
+  $progress = $container.find('#progressbar');
+  $imagePreview = $container.find('.image-preview');
+  $modal = $container.find('#create-advert-image-modal');
+  $modalHeader = $modal.find('.modal-header');
+  $modalBody = $modal.find('.modal-body');
+  $inputImage = $container.find('#ad_imagename');
+  $inputVideo = $container.find('#ad_youtubeUrl');
+  $inputType = $container.find('#ad_type');
+  $inputTitle = $container.find('#ad_title');
+  $inputDescription = $container.find('#ad_description');
+  $inputTags = $container.find('#ad_tags');
+  $youtube = $container.find('#ytplayer');
+  $save = $container.find('#ad_save');
 
   $chooseImage.click(function() {
     $(this).removeClass('btn-default').addClass('btn-primary');
@@ -30,7 +40,7 @@ $(function() {
     $advertImageTrigger.removeClass('hide');
     $advertText.addClass('hide');
     $advertVideo.addClass('hide');
-    $advertType.val('image');
+    $inputType.val('image');
     $imagePreview.show();
     $save.text($save.attr('data-trans-image'));
   });
@@ -43,7 +53,7 @@ $(function() {
     $advertImageTrigger.addClass('hide');
     $advertText.removeClass('hide');
     $advertVideo.addClass('hide');
-    $advertType.val('text');
+    $inputType.val('text');
     $imagePreview.hide();
     $save.text($save.attr('data-trans-text'));
   });
@@ -56,7 +66,7 @@ $(function() {
     $advertImageTrigger.addClass('hide');
     $advertText.addClass('hide');
     $advertVideo.removeClass('hide');
-    $advertType.val('youtube');
+    $inputType.val('youtube');
     $imagePreview.hide();
     $save.text($save.attr('data-trans-video'));
   });
@@ -101,7 +111,7 @@ $(function() {
     }
   }).prop('disabled', !$.support.fileInput)
   .parent().addClass($.support.fileInput ? undefined : 'disabled')
-  $('#ad_tags').tagsinput({
+  $inputTags.tagsinput({
     itemText: function(item) {
       if (item && item.length > 0) {
         if (item[0] != '#') return '#'+item;
@@ -188,5 +198,39 @@ $(function() {
         }
       }
     });
+  })();
+  (function() {
+    // validation
+    var err = function(message) {
+      Adstacy.alert('error', message);
+
+      return false;
+    }
+    $form.submit(function() {
+      var $this, type, tags;
+      $this = $(this);
+      type = $inputType.val();
+      tags = $inputTags.val();
+      if (type == 'image') {
+        if (!$inputImage.val()) return err('Image must be uploaded');
+      } else if (type == 'text') {
+        if (!$inputTitle.val()) return err('Title must not be blank');
+        if (!$inputDescription.val().trim()) return err('Description must not be blank');
+      } else if (type == 'youtube') {
+        if (!$inputVideo.val()) return err('Youtube url must not be blank');
+        matches = /https?:\/\/(?:[0-9A-Z-]+\.)?(?:youtu\.be\/|youtube\.com\S*[^\w\-\s])([\w\-]{11})(?=[^\w\-]|$)(?![?=&+%\w.-]*(?:['"][^<>]*>|<\/a>))[?=&+%\w.-]*/ig.exec($inputVideo.val());
+        if (!matches) return err('Youtube url is not valid');
+      } else {
+        return err('An error occured. Please refresh this page and try again.');
+      }
+      if (!tags || tags.split(',').length <= 0) return err('Tags minimal 1');
+
+      var $btn = $this.find('.submit-disable-btn');
+      var text = $btn.attr('data-disable-text') || 'Submitting...';
+      $btn.attr('disabled', 'disabled');
+      $btn.html(text);
+      return false;// for debuggging purpose
+    });
+    $
   })();
 });
