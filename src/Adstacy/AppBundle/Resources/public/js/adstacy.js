@@ -56,7 +56,9 @@
     setTimeout(function() {
       $alert.fadeOut(1000, function() {
         $alert.remove();
-        $container.remove();
+        if ($container.find('.alert').length <= 0) {
+          $container.remove();
+        }
       });
     }, 3000);
   };

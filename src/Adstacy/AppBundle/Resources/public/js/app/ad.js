@@ -1,19 +1,20 @@
 (function() {
-  $('.advert').each(function() {
+  var $advert = $('.advert');
+  var $body = $('body');
+  $advert.find('.btn-share').click(Adstacy.events.share);
+  $advert.ajaxlink('ads');
+  $advert.find('.advert-action .report').click(function() {
     var $this = $(this);
-    $this.find('.btn-share').click(Adstacy.events.share);
-    $this.ajaxlink('ads');
-    $this.find('.advert-action .report').click(function() {
-      var $this = $(this);
-      $.post(this.href, function(data) {
-        console.log(data);
-        // display message
-      });
 
-      return false;
+    Adstacy.alert('success', 'Ad has been reported');
+    $.post(this.href, function(data) {
+      // do nothing
     });
-    $this.find('.delete').click(Adstacy.events.deleteAd);
+
+    $body.click();
+    return false;
   });
+  $advert.find('.delete').click(Adstacy.events.deleteAd);
   $('body').click(function() {
     $('.advert-share.open').removeClass('open').hide();
   });
