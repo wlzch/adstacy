@@ -109,7 +109,9 @@
       var $this, $comment;
       $this = $(this);
       $comment = $this.closest('.comment');
-      $comment.remove();
+      $comment.fadeOut('slow', function() {
+        $comment.remove();
+      });
       $.post($this.attr('data-href'), function(data) {
         // do nothing;
       });
@@ -188,6 +190,7 @@
             fn: function(event) {
               $this.closest('.advert').remove();
               $(this).closest('.modal').modal('hide');
+              Adstacy.alert('success', 'Ad successfully deleted');
               $.post(href, function(data) {
                 // do nothing
               });
