@@ -79,8 +79,8 @@ class LoadUserData extends DataFixture
                 for ($i = 1; $i <= $cnt; $i++) {
                     $rndUser = $users[$this->faker->randomNumber(0, $max)];
                     $rndUsername = $rndUser->getUsername();
-                    if (!in_array($rndUsername, $followUsernames)) {
-                        $user->addFollowing($rndUser);
+                    if (!in_array($rndUsername, $followUsernames) && $rndUsername != $username) {
+                        $rndUser->addFollower($user);
                         $followUsernames[] = $rndUsername;
                     }
                 }
