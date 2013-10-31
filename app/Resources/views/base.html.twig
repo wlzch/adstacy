@@ -105,8 +105,16 @@
           {% set attr = app.request.attributes %}
           {% block navbar %}
           <div class="site-menu">
-            <div class="top-border"></div>
             <nav id="site-menu-inner" class="site-menu-inner">
+              <div class="site-user-menu">
+                <img src="http://adstacy.dev/media/cache/profile_pic/uploads/5271411dde83a.jpeg" />
+
+
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                  <a class="username" href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}" title="{{ "profile"|trans }}">Suwandi Halim</a>
+                  <a href="{{ path('fos_user_security_logout') }}" title="{{ "logout"|trans }}">{{ "logout"|trans }}</a>
+                {% endif %}
+              </div>
               <ul class="site-main-menu">
                 <li><h3>NAVIGATION</h3></li>
                 <li {% if attr.get('_route') == 'homepage' %}class="current"{% endif %}>
@@ -120,17 +128,11 @@
                 </li>
 
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                  <li {% if attr.get('_route') == 'adstacy_app_user_profile' and attr.get('username') == app.user.username %}class="current"{% endif %}>
-                    <a href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}" title="{{ "profile"|trans }}"><i class="icon icon-user"></i> {{ "profile"|trans }}</a>
-                  </li>
                   <li {% if app.request.attributes.get('_route') == 'adstacy_app_who_to_follow' %}class="current"{% endif %}>
                     <a href="{{ path('adstacy_app_who_to_follow') }}" title="{{ "find_friends"|trans }}"><i class="icon icon-user-add"></i> {{ "find_friends"|trans }}</a>
                   </li>
                   <li {% if app.request.attributes.get('_route') == 'fos_user_profile_edit' %}class="current"{% endif %}>
                     <a href="{{ path('fos_user_profile_edit') }}" title="{{ "settings"|trans }}"><i class="icon icon-gear"></i> {{ "settings"|trans }}</a>
-                  </li>
-                  <li>
-                    <a href="{{ path('fos_user_security_logout') }}" title="{{ "logout"|trans }}"><i class="icon icon-off"></i> {{ "logout"|trans }}</a>
                   </li>
                 {% endif %}
               </ul>
