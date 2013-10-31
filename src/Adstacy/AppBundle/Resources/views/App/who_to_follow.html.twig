@@ -1,4 +1,4 @@
-{% extends 'AdstacyAppBundle::layout.html.twig' %}
+{% extends is_ajax() ? '::ajax.html.twig' : 'AdstacyAppBundle::layout.html.twig' %}
 
 {% block stylesheets %}
   {{ parent() }}
@@ -16,14 +16,27 @@
       <a href="{{ path('adstacy_app_who_to_follow_facebook') }}" class="facebook" title="{{"find_friends"|trans}}">{{"find_friends_facebook"|trans}}</a>
       <a href="{{ path('adstacy_app_who_to_follow_twitter') }}" class="twitter" title="{{"find_friends_twitter"|trans}}">{{"find_friends_twitter"|trans}}</a>
     </div>
-    {{ block('ajax_content') }}
+    <div class="jscroll users clearfix no-border">
+      {{ block('ajax_content') }}
+    </div>
   </div>
 {% endblock %}
 
 {% block ajax_content %}
-  <div class="users clearfix">
-    {% for user in users %}
-      {% include 'AdstacyAppBundle:User:user.html.twig' with {user: user} %}
-    {% endfor %}
-  </div>
+  {% for user in users %}
+    {% include 'AdstacyAppBundle:User:user.html.twig' with {user: user} %}
+  {% endfor %}
+  {% if users|length >= max_who_to_follow %}
+    {% set params = app.request.query.all|merge({page: (app.request.query.get('page') ?: 1) + 1}) %}
+    <a href="{{ path('adstacy_app_who_to_follow', params) }}" class="btn btn-default btn-lg btn-block load-next next-page">{{ "more"|trans }}</a>
+  {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script type="text/javascript">
+    $(function() {
+      $('.jscroll').jscroll(Adstacy.options.jscrollAd);
+    });
+  </script>
 {% endblock %}

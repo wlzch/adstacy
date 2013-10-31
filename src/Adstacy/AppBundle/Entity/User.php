@@ -352,6 +352,7 @@ class User implements UserInterface, GroupableInterface
         $this->promotesCount = 0;
         $this->notificationsCount = 0;
         $this->suggestions = array();
+        $this->subscription = true;
     }
 
     /**

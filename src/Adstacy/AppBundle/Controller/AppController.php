@@ -124,7 +124,7 @@ class AppController extends Controller
         ));
     }
 
-    private function getRecommendations(User $user, $limit)
+    private function getRecommendations(User $user, $limit = null)
     {
         $redis = $this->get('snc_redis.default');
         $request = $this->getRequest();

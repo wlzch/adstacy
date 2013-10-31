@@ -31,10 +31,8 @@ body {
   position: fixed;
   width: 0;
   height: ~"@{height}";
-  border: solid @border-color;
-  border-top-color: @brand-primary;
-  border-width: 3px 1px 0 1px;
-  .box-shadow(0 1px 5px #ddd);
+  border-top: 3px solid @brand-primary;
+  .box-shadow(~"0 1px 0 1px @{border-color}, 0 1px 5px #ddd");
   // margin-top: -2px;
   overflow: hidden;
   z-index: @zindex-navbar-fixed;
@@ -81,11 +79,11 @@ body {
   }
   .current {
     a {
-      background: #b00;
+      background: @brand-primary;
       color: #fff;
 
       &:hover {
-        background: #b00;
+        background: @brand-primary;
         color: #fff;
       }
     }
@@ -95,14 +93,18 @@ body {
 .site-user-menu {
   padding: 20px;
   padding-bottom: 0;
-  img {
-    float: left;
-    width: 45px;
-    margin-right: 8px;
+  white-space: nowrap;
+  line-height: 1;
+
+  .media-object {
+    width: 32px;
+    height: 32px;
   }
+
   a {
     font-size: 12px;
   }
+
   .username {
     color: #666;
     font-size: 13px;
@@ -164,25 +166,27 @@ body {
 }
 
 .navbar {
-  border-bottom: 1px solid @border-color;
+  border-bottom: 2px solid @border-color;
   .box-shadow(0 1px 1px #ddd);
 }
 
-.site-header a span {
-  display: none;
+.site-header{
+  height: (@navbar-height + 2px);
+  a span {
+    display: none;
+  }
 }
 
 .site-header {
   .navbar-left,
   .navbar-right {
-    position: relative;
-    top: 2px;
-    margin-top: -2px;
-
-    > li > a > .icon {
+    .icon {
       font-size: 16px;
       padding: 0 2px;
     }
+  }
+  a span {
+    display: none;
   }
 }
 
@@ -196,8 +200,6 @@ body {
   // padding: 15px 20px;
   // text-align: center;
   width: @site-menu-width;
-  border: solid @border-color;
-  border-width: 0;
   display: none;
   text-indent: -9999px;
   background: url("../img/logo.png") center no-repeat;
@@ -214,8 +216,10 @@ body {
 
 #search-form {
   display: none;
-  margin-top: 4px;
+  margin-top: 6px;
+  margin: 6px 0;
   position: relative;
+  top: 0;
   width: 320px;
 
   .twitter-typeahead {
@@ -280,18 +284,16 @@ body {
 }
 
 #create-advert-btn {
-  border-bottom: 2px solid transparent;
-
   &:hover {
-    border-color: @purple-accent;
+    color: #fff;
+    background: @brand-primary;
   }
 }
 
 #notif-btn {
-  border-bottom: 2px solid transparent;
-
   &:hover {
-    border-color: @green-accent;
+    background-color: #777;
+    color: #fff;
   }
 }
 
@@ -309,7 +311,7 @@ body {
 }
 
 .site-body {
-  margin: 0 15px;
+  margin: 0 30px;
 }
 .site-body-bg {
   background: #fff;
@@ -321,6 +323,7 @@ body {
 @media (max-width: 599px) {
   .search-container {
     margin-left: 50px;
+    padding-right: 10px;
   }
 
   #search-form {
@@ -393,7 +396,6 @@ body {
   .site-sidebar {
     display: block;
     width: 260px;
-    margin-left: 30px;
   }
   .site-aside {
     margin-bottom: 15px;

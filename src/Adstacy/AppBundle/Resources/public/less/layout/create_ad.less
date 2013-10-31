@@ -70,10 +70,11 @@
 
 #create-advert-image-trigger {
   display: block;
-  padding: 7px;
+  padding: 8px;
   text-align: center;
   text-decoration: none;
   border-radius: 0;
+  border-bottom: 0;
 }
 
 #create-advert-image-modal {
@@ -113,4 +114,30 @@
 
 #create-advert-toolbar .label-group .icon {
   font-size: 16px;
+}
+
+// wysihtml5 override
+#wysihtml5-container {
+  #wysihtml5-editor-toolbar {
+    header {
+      padding: 0;
+    }
+
+    .wysihtml5-command-active {
+      box-shadow: none;
+      border-bottom-color: #f00 !important;
+    }
+
+    .commands {
+      li {
+        display: inline-block;
+        margin-right: 0;
+        padding: 10px 5px;
+        text-shadow: 1px 0 1px #fff;
+        border-bottom: 2px solid transparent;
+        margin-bottom: -1px;
+      }
+    }
+
+  }
 }
