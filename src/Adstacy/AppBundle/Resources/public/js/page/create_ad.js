@@ -231,7 +231,6 @@ $(function() {
       var text = $btn.attr('data-disable-text') || Translator.trans('submitting');
       $btn.attr('disabled', 'disabled');
       $btn.html(text);
-      return false;// for debuggging purpose
     });
     $
   })();
