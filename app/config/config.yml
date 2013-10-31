@@ -34,6 +34,8 @@ parameters:
     web_dir: %kernel.root_dir%/../web
     no_profpic_img: /bundles/adstacyapp/img/nophoto.gif
 
+    translator.class: Funddy\Bundle\JsTranslationsBundle\ReadableTranslator\SymfonyReadableTranslator
+
 framework:
     #esi:             ~
     translator:
@@ -187,3 +189,7 @@ snc_redis:
             alias: default
             dsn: %redis_dsn%
             logging: %kernel.debug%
+
+funddy_js_translations:
+    languages: [id, en]
+    domains: [messages, validators]

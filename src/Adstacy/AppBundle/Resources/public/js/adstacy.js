@@ -172,7 +172,7 @@
         $share.show();
         $share.find('.url').select();
         $share.addClass('open');
-        Adstacy.alert('success', 'Ctrl + C to copy url', {duration: 400, timeout: 1500});
+        Adstacy.alert('success', Translator.trans('ctrl_copy'), {duration: 400, timeout: 1500});
       }
       event.preventDefault();
       return false;
@@ -181,9 +181,9 @@
       var $this = $(this);
       var href = this.href;
       Adstacy.modal({
-        header: $this.attr('data-modal-header'),
-        body: $this.attr('data-modal-body'),
-        footer: '<button type="button" class="btn btn-primary delete-sure">'+$this.attr('data-modal-delete')+'</button>',
+        header: Translator.trans('ads.delete.confirm_title'),
+        body: Translator.trans('ads.delete.confirm_message'),
+        footer: '<button type="button" class="btn btn-primary delete-sure">'+Translator.trans('ads.delete.button')+'</button>',
         events: [
           {
             selector: '.delete-sure',
@@ -191,7 +191,7 @@
             fn: function(event) {
               $this.closest('.advert').remove();
               $(this).closest('.modal').modal('hide');
-              Adstacy.alert('success', 'Ad successfully deleted');
+              Adstacy.alert('success', Translator.trans('flash.ad.delete.success'));
               $.post(href, function(data) {
                 // do nothing
               });

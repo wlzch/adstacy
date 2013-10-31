@@ -43,7 +43,7 @@ $(function() {
     $advertVideo.addClass('hide');
     $inputType.val('image');
     $imagePreview.show();
-    $save.text($save.attr('data-trans-image'));
+    $save.text(Translator.trans('form_ad.submit_image'));
   });
   $chooseText.click(function() {
     $(this).removeClass('btn-default').addClass('btn-primary');
@@ -56,7 +56,7 @@ $(function() {
     $advertVideo.addClass('hide');
     $inputType.val('text');
     $imagePreview.hide();
-    $save.text($save.attr('data-trans-text'));
+    $save.text(Translator.trans('form_ad.submit_text'));
   });
   $chooseVideo.click(function() {
     $(this).removeClass('btn-default').addClass('btn-primary');
@@ -69,7 +69,7 @@ $(function() {
     $advertVideo.removeClass('hide');
     $inputType.val('youtube');
     $imagePreview.hide();
-    $save.text($save.attr('data-trans-video'));
+    $save.text(Translator.trans('form_ad.submit_video'));
   });
   var previewImage = function(file) {
     var $img = $imagePreview.find('img');
@@ -78,7 +78,7 @@ $(function() {
     } else {
       $img.attr('src', file.src);
     }
-    $('#ad_imagename').val(file.name);
+    $inputImage.val(file.name);
     $modal.modal('hide');
   };
   $('#ad_image').fileupload({
@@ -214,21 +214,21 @@ $(function() {
       type = $inputType.val();
       tags = $inputTags.val();
       if (type == 'image') {
-        if (!$inputImage.val()) return err('Image must be uploaded');
+        if (!$inputImage.val()) return err(Translator.trans('ad.image.not_null'));
       } else if (type == 'text') {
-        if (!$inputTitle.val()) return err('Title must not be blank');
-        if (!$inputDescription.val().trim()) return err('Description must not be blank');
+        if (!$inputTitle.val()) return err(Translator.trans('ad.title.not_blank'));
+        if (!$inputDescription.val().trim()) return err(Translator.trans('ad.description.not_blank'));
       } else if (type == 'youtube') {
-        if (!$inputVideo.val()) return err('Youtube url must not be blank');
+        if (!$inputVideo.val()) return err(Translator.trans('ad.youtube_url.not_blank'));
         matches = /https?:\/\/(?:[0-9A-Z-]+\.)?(?:youtu\.be\/|youtube\.com\S*[^\w\-\s])([\w\-]{11})(?=[^\w\-]|$)(?![?=&+%\w.-]*(?:['"][^<>]*>|<\/a>))[?=&+%\w.-]*/ig.exec($inputVideo.val());
-        if (!matches) return err('Youtube url is not valid');
+        if (!matches) return err(Translator.trans('ad.youtube_url.not_valid'));
       } else {
-        return err('An error occured. Please refresh this page and try again.');
+        return err(Translator.trans('ad.error'));
       }
-      if (!tags || tags.split(',').length <= 0) return err('Tags minimal 1');
+      if (!tags || tags.split(',').length <= 0) return err(Translator.trans('ad.tags.min_count', {'{{ limit }}': 1}));
 
       var $btn = $this.find('.submit-disable-btn');
-      var text = $btn.attr('data-disable-text') || 'Submitting...';
+      var text = $btn.attr('data-disable-text') || Translator.trans('submitting');
       $btn.attr('disabled', 'disabled');
       $btn.html(text);
       return false;// for debuggging purpose

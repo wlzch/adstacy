@@ -6,7 +6,7 @@
   $advert.find('.advert-action .report').click(function() {
     var $this = $(this);
 
-    Adstacy.alert('success', 'Ad has been reported');
+    Adstacy.alert('success', Translator.trans('ads.report.success'));
     $.post(this.href, function(data) {
       // do nothing
     });
