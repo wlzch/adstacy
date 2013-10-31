@@ -168,21 +168,18 @@ body {
   .box-shadow(0 1px 1px #ddd);
 }
 
-.site-header a span {
-  display: none;
-}
-
-.site-header {
+#site-header {
+  border: 0;
+  border-bottom: 1px solid @border-color;
   .navbar-left,
   .navbar-right {
-    position: relative;
-    top: 2px;
-    margin-top: -2px;
-
-    > li > a > .icon {
+    .icon {
       font-size: 16px;
       padding: 0 2px;
     }
+  }
+  a span {
+    display: none;
   }
 }
 
@@ -196,8 +193,6 @@ body {
   // padding: 15px 20px;
   // text-align: center;
   width: @site-menu-width;
-  border: solid @border-color;
-  border-width: 0;
   display: none;
   text-indent: -9999px;
   background: url("../img/logo.png") center no-repeat;
@@ -214,7 +209,7 @@ body {
 
 #search-form {
   display: none;
-  margin-top: 4px;
+  margin-top: 6px;
   position: relative;
   width: 320px;
 
@@ -280,18 +275,16 @@ body {
 }
 
 #create-advert-btn {
-  border-bottom: 2px solid transparent;
-
   &:hover {
-    border-color: @purple-accent;
+    color: #fff;
+    background: @brand-primary;
   }
 }
 
 #notif-btn {
-  border-bottom: 2px solid transparent;
-
   &:hover {
-    border-color: @green-accent;
+    background-color: #777;
+    color: #fff;
   }
 }
 
