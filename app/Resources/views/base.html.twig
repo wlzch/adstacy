@@ -106,15 +106,15 @@
           {% block navbar %}
           <div class="site-menu">
             <nav id="site-menu-inner" class="site-menu-inner">
-              <div class="site-user-menu">
-                <img src="http://adstacy.dev/media/cache/profile_pic/uploads/5271411dde83a.jpeg" />
-
-
-                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                  <a class="username" href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}" title="{{ "profile"|trans }}">Suwandi Halim</a>
-                  <a href="{{ path('fos_user_security_logout') }}" title="{{ "logout"|trans }}">{{ "logout"|trans }}</a>
-                {% endif %}
-              </div>
+              {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                <div class="site-user-menu">
+                    <a href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}">
+                      <img src="{{ profile_pic(app.user) }}" alt="{{ app.user.username }}">
+                    </a>
+                    <a class="username" href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}" title="{{ "profile"|trans }}">{{ app.user.username }}</a> 
+                    <a href="{{ path('fos_user_security_logout') }}" title="{{ "logout"|trans }}">{{ "logout"|trans }}</a>
+                </div>
+              {% endif %}
               <ul class="site-main-menu">
                 <li><h3>NAVIGATION</h3></li>
                 <li {% if attr.get('_route') == 'homepage' %}class="current"{% endif %}>
