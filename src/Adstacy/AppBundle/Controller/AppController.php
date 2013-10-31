@@ -55,7 +55,7 @@ class AppController extends Controller
         $suggestionsPaginator = array();
         $users = array();
         if ($user->getFollowingsCount() <= 0) {
-            $users = $this->getRecommendations($user);
+            $users = $this->getRecommendations($user, 30);
         }
 
         return $this->render('AdstacyAppBundle:App:stream.html.twig', array(
@@ -124,12 +124,12 @@ class AppController extends Controller
         ));
     }
 
-    private function getRecommendations(User $user)
+    private function getRecommendations(User $user, $limit)
     {
         $redis = $this->get('snc_redis.default');
         $request = $this->getRequest();
         $page = $request->query->get('page') ?: 1;
-        $max = $this->getParameter('max_who_to_follow');
+        $max = $limit ?: $this->getParameter('max_who_to_follow');
         $start = ($page - 1) * $max;
         $end = $start + ($max - 1);
 
