@@ -165,19 +165,10 @@ body {
   }
 }
 
-.navbar {
-  border-bottom: 2px solid @border-color;
+#site-header {
+  border: 0;
+  border-bottom: 1px solid @border-color;
   .box-shadow(0 1px 1px #ddd);
-}
-
-.site-header{
-  height: (@navbar-height + 2px);
-  a span {
-    display: none;
-  }
-}
-
-.site-header {
   .navbar-left,
   .navbar-right {
     .icon {
@@ -188,21 +179,16 @@ body {
   a span {
     display: none;
   }
-}
+  .nav > li {
+    position: relative;
+    float: left;
+  }
 
-.nav > li {
-  position: relative;
-  float: left;
-}
-
-.navbar-brand {
-  // color: @brand-primary;
-  // padding: 15px 20px;
-  // text-align: center;
-  width: @site-menu-width;
-  display: none;
-  text-indent: -9999px;
-  background: url("../img/logo.png") center no-repeat;
+  .navbar-brand {
+    width: @site-menu-width;
+    text-indent: -9999px;
+    background: url("../img/logo.png") center no-repeat;
+  }
 }
 
 #m-btn-search {
