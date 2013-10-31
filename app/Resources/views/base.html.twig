@@ -112,7 +112,7 @@
                     <img src="{{ profile_pic(app.user) }}" alt="{{ app.user.username }}" width="32" height="32" class="media-object">
                   </a>
                   <div class="media-body">
-                    <a class="username" href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}" title="{{ "profile"|trans }}">{{ app.user.realname }}</a><br>
+                    <a class="username" href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}" title="{{ "profile"|trans }}">{{ app.user.realname }}</a>
                     <a href="{{ path('fos_user_security_logout') }}" title="{{ "logout"|trans }}">{{ "logout"|trans }}</a>
                   </div>
                 </div>

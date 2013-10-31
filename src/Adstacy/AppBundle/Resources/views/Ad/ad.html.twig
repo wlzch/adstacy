@@ -141,15 +141,13 @@
       <div class="media-body">
         <div class="media-heading">
           <a class="realname" href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">{{ user.realName }} <span class="username">@{{ user.username }}</span></a>
-          <time class="pull-right timeago" datetime="{{ ad.created|date('c') }}">{{ ad.created|date('F j, Y') }}</time>
-          {# <div class="pull-right advert-date"> #}
-          {# </div> #}
         </div>
-        {% if ad.type != 'text' %}
-          <p class="advert-desc">{{ parse_url(ad.description) }}</p>
-        {% endif %}
+        <time class="timeago" datetime="{{ ad.created|date('c') }}">{{ ad.created|date('F j, Y') }}</time>
       </div>
     </div>
+    {% if ad.type != 'text' %}
+      <p class="advert-desc">{{ parse_url(ad.description) }}</p>
+    {% endif %}
     <div class="advert-tags">
       {% for tag in ad.tags %}
         <a href="{{ path('adstacy_app_search', {q: tag}) }}">#{{tag}}</a>
