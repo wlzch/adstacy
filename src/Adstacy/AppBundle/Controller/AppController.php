@@ -120,7 +120,8 @@ class AppController extends Controller
         $users = $this->getRecommendations($this->getUser());
 
         return $this->render('AdstacyAppBundle:App:who_to_follow.html.twig', array(
-            'users' => $users
+            'users' => $users,
+            'source' => 'adstacy'
         ));
     }
 
@@ -181,7 +182,8 @@ class AppController extends Controller
                 }
 
                 return $this->render('AdstacyAppBundle:App:who_to_follow.html.twig', array(
-                    'users' => $usersToSuggest
+                    'users' => $usersToSuggest,
+                    'source' => 'facebook'
                 ));
             } catch (\FacebookApiException $exception) {
                 return $this->redirect($loginUrl);
@@ -210,7 +212,8 @@ class AppController extends Controller
         }
 
         return $this->render('AdstacyAppBundle:App:who_to_follow.html.twig', array(
-            'users' => $usersToSuggest
+            'users' => $usersToSuggest,
+            'source' => 'twitter'
         ));
     }
 }
