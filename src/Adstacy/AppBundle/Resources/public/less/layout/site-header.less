@@ -31,10 +31,8 @@ body {
   position: fixed;
   width: 0;
   height: ~"@{height}";
-  border: solid @border-color;
-  border-top-color: @brand-primary;
-  border-width: 3px 1px 0 1px;
-  .box-shadow(0 1px 5px #ddd);
+  border-top: 3px solid @brand-primary;
+  .box-shadow(~"0 1px 0 1px @{border-color}, 0 1px 5px #ddd");
   // margin-top: -2px;
   overflow: hidden;
   z-index: @zindex-navbar-fixed;
@@ -81,11 +79,11 @@ body {
   }
   .current {
     a {
-      background: #b00;
+      background: @brand-primary;
       color: #fff;
 
       &:hover {
-        background: #b00;
+        background: @brand-primary;
         color: #fff;
       }
     }
@@ -95,14 +93,18 @@ body {
 .site-user-menu {
   padding: 20px;
   padding-bottom: 0;
-  img {
-    float: left;
-    width: 45px;
-    margin-right: 8px;
+  white-space: nowrap;
+  line-height: 1;
+
+  .media-object {
+    width: 32px;
+    height: 32px;
   }
+
   a {
     font-size: 12px;
   }
+
   .username {
     color: #666;
     font-size: 13px;
@@ -164,13 +166,18 @@ body {
 }
 
 .navbar {
-  border-bottom: 1px solid @border-color;
+  border-bottom: 2px solid @border-color;
   .box-shadow(0 1px 1px #ddd);
 }
 
-#site-header {
-  border: 0;
-  border-bottom: 1px solid @border-color;
+.site-header{
+  height: (@navbar-height + 2px);
+  a span {
+    display: none;
+  }
+}
+
+.site-header {
   .navbar-left,
   .navbar-right {
     .icon {
@@ -210,7 +217,9 @@ body {
 #search-form {
   display: none;
   margin-top: 6px;
+  margin: 6px 0;
   position: relative;
+  top: 0;
   width: 320px;
 
   .twitter-typeahead {
@@ -314,6 +323,7 @@ body {
 @media (max-width: 599px) {
   .search-container {
     margin-left: 50px;
+    padding-right: 10px;
   }
 
   #search-form {
