@@ -8,7 +8,7 @@
         wildcard: '_QUERY_'
       },
       template: '<a href="{{ url }}">{{ value }}</a>',
-      header: '<div class="tt-dropdown-header">Ads</div>',
+      header: '<div class="tt-dropdown-header">ADS</div>',
       engine: Hogan
   };
   var usersOption = {
@@ -17,7 +17,7 @@
         url: Routing.generate('adstacy_api_users', {q: '_QUERY_', cond: 'noment'}),
         wildcard: '_QUERY_'
       },
-      header: '<div class="tt-dropdown-header">People</div>',
+      header: '<div class="tt-dropdown-header">PEOPLE</div>',
       template: '<a href="{{ url }}"><img class="avatar" src="{{ avatar }}" width="32" height="32"> <strong class="real-name">{{ name }}</strong> <span class="username text-muted">@{{ username }}</span></a>',
       engine: Hogan
   };
