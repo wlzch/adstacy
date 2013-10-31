@@ -18,6 +18,7 @@ edit: Edit
 more: More
 report: Report
 saving: Saving...
+submitting: Submitting...
 registering: Registering...
 loggingin: Logging in...
 promoted_by: Also promoted by
@@ -27,6 +28,7 @@ find_friends: Find friends
 find_friends_facebook: Find facebook friends
 find_friends_twitter: Find twitter friends
 who_to_follow: Who to follow
+ctrl_copy: Ctrl + C to copy
 
 search_users: Users
 search_ads: Ads

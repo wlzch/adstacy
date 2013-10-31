@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "7d11d8166882945a5ab3a6b7777f60c4",
+    "hash": "592fcc57135c0b938aa94c6e2611b535",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -963,6 +963,61 @@
                 "User management"
             ],
             "time": "2013-10-09 22:58:46"
+        },
+        {
+            "name": "funddy/jstranslations-bundle",
+            "version": "dev-master",
+            "target-dir": "Funddy/Bundle/JsTranslationsBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/funddy/jstranslations-bundle.git",
+                "reference": "4c834db17500d07dabfcbce2eccbba6953e98987"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/funddy/jstranslations-bundle/zipball/4c834db17500d07dabfcbce2eccbba6953e98987",
+                "reference": "4c834db17500d07dabfcbce2eccbba6953e98987",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "symfony/framework-bundle": ">=2.0",
+                "symfony/serializer": ">=2.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.7.2",
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Funddy\\Bundle\\JsTranslationsBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Keyvan Akbary",
+                    "email": "keyvan@funddy.com",
+                    "homepage": "http://keyvanakbary.com/"
+                }
+            ],
+            "description": "JsTranslations for Symfony2",
+            "homepage": "https://github.com/funddy/jstranslations-bundle",
+            "keywords": [
+                "js translations",
+                "translations",
+                "translator"
+            ],
+            "time": "2013-06-30 00:44:14"
         },
         {
             "name": "fzaninotto/faker",

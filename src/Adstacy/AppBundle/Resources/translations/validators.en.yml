@@ -1,6 +1,8 @@
 ad:
     image:
         not_null: You must upload an image
+    title:
+        not_blank: Title must not be blank
     description:
         max: Ad description at most {{ limit }} characters
         not_blank: Ad description must not be blank
@@ -11,6 +13,7 @@ ad:
     youtube_url:
         not_valid: Youtube url is not valid
         not_blank: Youtube url cannot be blank
+    error: An error occured. Please refresh this page and try again
 
 image:
     file:
