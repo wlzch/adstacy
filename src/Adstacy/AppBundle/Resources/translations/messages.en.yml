@@ -24,10 +24,12 @@ loggingin: Logging in...
 promoted_by: Also promoted by
 continue_to_explore: Continue to Explore
 or: OR
+you: You
 find_friends: Find Friends
 find_friends_facebook: Facebook Friends
 find_friends_twitter: Twitter Friends
 who_to_follow: Who to follow
+no_who_to_follow: Nobody to follow
 ctrl_copy: Ctrl + C to copy
 
 search_users: Users
@@ -67,6 +69,7 @@ ads:
     blocked: This ads have been blocked. Please edit it according to our <a href="%url%">terms</a>.
     report:
         success: Ads have been reported. We will look into this soon.
+    other_promotes: 'and <a class="count" href="#">%count%</a> others broadcast this'
 
 user:
     no_followers:

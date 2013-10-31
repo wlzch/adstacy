@@ -88,7 +88,7 @@
 
 .advert-desc {
   font-size: 12px;
-  margin: 0;
+  margin: 10px 0 0;
   .hyphens();
 }
 
@@ -120,8 +120,7 @@
   }
 
   a {
-    text-transform: uppercase;
-    font-size: 10px;
+    font-size: 12px;
 
     .icon {
       font-size: 16px;
@@ -157,6 +156,16 @@
   .advert-share, .advert-comment {
     padding: 10px 15px;
     border-top: 1px solid @border-color;
+  }
+}
+
+.advert-broadcasts {
+  padding: 13px 10px; 
+  width: 295px;
+  color: #aaa;
+  a {
+    font-size: 14px;
+    color: @bootstrap-blue;
   }
 }
 
@@ -248,8 +257,21 @@
 }
 
 .advert-user {
+  .media-body {
+    line-height: 32px;
+  }
+
   time {
     color: #aaa;
     font-size: 12px;
   }
+}
+
+.promote,
+.unpromote {
+  width: 94px;
+}
+
+.unpromote:hover {
+  color: @gray-light;
 }

@@ -19,7 +19,6 @@ $(function(){
   });
 
   $searchInput.blur(function() {
-    $searchInput.val("");
     $siteHeader.removeClass('focus');
   });
 

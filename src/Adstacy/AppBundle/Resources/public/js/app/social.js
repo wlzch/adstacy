@@ -6,10 +6,10 @@
     function() { $(this).text('Following'); }
   );
   $('.unpromote').hover(
-    function() { $(this).find('.text').text('Unpromote'); },
-    function() { $(this).find('.text').text('Promoted'); }
+    function() { $(this).find('.text').text('unbroadcast'); },
+    function() { $(this).find('.text').text('broadcasted'); }
   ).click(
-    function() { $(this).find('.text').text('Promoted'); }
+    function() { $(this).find('.text').text('broadcasted'); }
   );
   $('.tweet').click(function() {
     window.open(this.href,

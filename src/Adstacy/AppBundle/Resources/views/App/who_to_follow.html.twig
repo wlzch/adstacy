@@ -12,9 +12,9 @@
 {% block content %}
   <div id="who-to-follow">
     <div class="toolbar clearfix">
-      <a href="{{ path('adstacy_app_who_to_follow') }}" class="adstacy" title="{{"find_friends"|trans}}">{{"find_friends"|trans}}</a>
-      <a href="{{ path('adstacy_app_who_to_follow_facebook') }}" class="facebook" title="{{"find_friends"|trans}}">{{"find_friends_facebook"|trans}}</a>
-      <a href="{{ path('adstacy_app_who_to_follow_twitter') }}" class="twitter" title="{{"find_friends_twitter"|trans}}">{{"find_friends_twitter"|trans}}</a>
+      <a href="{{ path('adstacy_app_who_to_follow') }}" class="adstacy {% if source == 'adstacy' %}current{% endif %}" title="{{"find_friends"|trans}}">{{"find_friends"|trans}}</a>
+      <a href="{{ path('adstacy_app_who_to_follow_facebook') }}" class="facebook {% if source == 'facebook' %}current{% endif %}" title="{{"find_friends"|trans}}">{{"find_friends_facebook"|trans}}</a>
+      <a href="{{ path('adstacy_app_who_to_follow_twitter') }}" class="twitter {% if source == 'twitter' %}current{% endif %}" title="{{"find_friends_twitter"|trans}}">{{"find_friends_twitter"|trans}}</a>
     </div>
     <div class="jscroll users clearfix no-border">
       {{ block('ajax_content') }}
@@ -23,12 +23,16 @@
 {% endblock %}
 
 {% block ajax_content %}
-  {% for user in users %}
-    {% include 'AdstacyAppBundle:User:user.html.twig' with {user: user} %}
-  {% endfor %}
-  {% if users|length >= max_who_to_follow %}
-    {% set params = app.request.query.all|merge({page: (app.request.query.get('page') ?: 1) + 1}) %}
-    <a href="{{ path('adstacy_app_who_to_follow', params) }}" class="btn btn-default btn-lg btn-block load-next next-page">{{ "more"|trans }}</a>
+  {% if users|length > 0 %}
+    {% for user in users %}
+      {% include 'AdstacyAppBundle:User:user.html.twig' with {user: user} %}
+    {% endfor %}
+    {% if users|length >= max_who_to_follow %}
+      {% set params = app.request.query.all|merge({page: (app.request.query.get('page') ?: 1) + 1}) %}
+      <a href="{{ path('adstacy_app_who_to_follow', params) }}" class="btn btn-default btn-lg btn-block load-next next-page">{{ "more"|trans }}</a>
+    {% endif %}
+  {% else %}
+    <p class="big-center-text">{{"no_who_to_follow"|trans}}</p>
   {% endif %}
 {% endblock %}
 
