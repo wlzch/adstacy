@@ -67,6 +67,7 @@ twig:
         profile_pic_size: %profile_pic_size%
         max_ads_per_page: %max_ads_per_page%
         max_users_per_page: %max_users_per_page%
+        max_who_to_follow: %max_who_to_follow%
         desc_length: %desc_length%
         facebook_app_id: %facebook_app_id%
         adstacy_mail_support: %adstacy.mail.support%
