@@ -198,8 +198,9 @@ class AdController extends Controller
         // user can only promote once
         if (!$user->hasPromote($ad)) {
             $promote = new PromoteAd();
-            $ad->addPromotee($promote);
+            // ordering matters
             $user->addPromote($promote);
+            $ad->addPromotee($promote);
             $em = $this->getManager();
             $this->get('adstacy.notification.manager')->save($user, $ad->getUser(), $ad, false, 'promote');
             $em->persist($ad);
@@ -236,8 +237,9 @@ class AdController extends Controller
         // user can only unpromote if he has promote
         if ($user->hasPromote($ad)) {
             $promoteAd = $this->getRepository('AdstacyAppBundle:PromoteAd')->findOneBy(array('user' => $user, 'ad' => $ad));
-            $ad->removePromotee($promoteAd);
+            // ordering matters
             $user->removePromote($promoteAd);
+            $ad->removePromotee($promoteAd);
             $em = $this->getManager();
             $em->persist($ad);
             $em->persist($user);

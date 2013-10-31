@@ -223,6 +223,7 @@ class AdRepository extends EntityRepository
         $rsm->addFieldResult('a', 'active', 'active');
         $rsm->addFieldResult('a', 'created', 'created');
         $rsm->addFieldResult('a', 'updated', 'updated');
+        $rsm->addFieldResult('a', 'last_promotees', 'lastPromotees');
         $rsm->addJoinedEntityResult('Adstacy\AppBundle\Entity\User', 'u', 'a', 'user');
         $rsm->addFieldResult('u', 'u_id', 'id');
         $rsm->addFieldResult('u', 'u_username', 'username');

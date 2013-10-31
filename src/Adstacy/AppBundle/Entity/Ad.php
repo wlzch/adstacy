@@ -112,6 +112,12 @@ class Ad
     private $promoteesCount;
 
     /**
+     * @ORM\Column(name="last_promotees", type="simple_array", nullable=true)
+     * @JMS\Exclude
+     */
+    private $lastPromotees;
+
+    /**
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="ad", orphanRemoval=true, cascade={"persist", "remove"})
      * @JMS\Groups({"ad_list", "ad_show"})
      */
@@ -436,6 +442,7 @@ class Ad
         $this->promotees[] = $promotees;
         $this->setPromoteesCount($this->getPromoteesCount() + 1);
         $promotees->setAd($this);
+        $this->addLastPromotee($promotees->getUser()->getUsername());
     
         return $this;
     }
@@ -449,6 +456,7 @@ class Ad
     {
         $this->promotees->removeElement($promotees);
         $this->setPromoteesCount($this->getPromoteesCount() - 1);
+        $this->removeLastPromotee($promotees->getUser()->getUsername());
     }
 
     /**
@@ -778,5 +786,62 @@ class Ad
     public function getYoutubeUrl()
     {
         return $this->youtubeUrl;
+    }
+
+    /**
+     * @param string $username
+     */
+    public function addLastPromotee($username)
+    {
+        $promotees = $this->getLastPromotees();
+        $cnt = array_unshift($promotees, $username);
+        if ($cnt > 10) {
+            $promotees = array_slice($promotees, 0, 10);
+        }
+        $this->lastPromotees = $promotees;
+    }
+
+    /**
+     * @param string $username
+     */
+    public function removeLastPromotee($username)
+    {
+        $promotees = $this->getLastPromotees();
+        if (($index = array_search($username, $promotees)) !== false) {
+            unset($promotees[$index]);
+        }
+        $this->lastPromotees = $promotees;
+    }
+
+    /**
+     * Set lastPromotees
+     *
+     * @param array $lastPromotees
+     * @return Ad
+     */
+    public function setLastPromotees($lastPromotees)
+    {
+        if (count($lastPromottes) > 10) {
+            $lastPromotees = array_slice($lastPromotees, 0, 10);
+        }
+        $this->lastPromotees = $lastPromotees;
+    
+        return $this;
+    }
+
+    /**
+     * Get lastPromotees
+     *
+     * @param integer $limit last promotees
+     *
+     * @return array 
+     */
+    public function getLastPromotees($limit = null)
+    {
+        $promotees = $this->lastPromotees ?: array();
+        if (is_integer($limit)) {
+            return array_slice($promotees, 0, $limit);
+        }
+        return $promotees;
     }
 }
