@@ -1426,8 +1426,8 @@ class User implements UserInterface, GroupableInterface
             $imagine = new Imagine();
             $image = $imagine->open($image);
             $size = $image->getSize();
-            if ($size->getWidth() > 400) {
-                $relativeResize = new RelativeResize('widen', 400);
+            if ($size->getWidth() > 320) {
+                $relativeResize = new RelativeResize('widen', 320);
                 $image = $relativeResize->apply($image);
                 $image->save($originalImage->getRealPath(), array('format' => $originalImage->guessClientExtension()));
             }

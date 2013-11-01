@@ -360,8 +360,8 @@ class Ad
             $image = $imagine->open($image);
             $size = $image->getSize();
             if ($size->getWidth() > 0 && $size->getHeight() > 0) {
-                if ($size->getWidth() > 1024) {
-                    $relativeResize = new RelativeResize('widen', 1024);
+                if ($size->getWidth() > 640) {
+                    $relativeResize = new RelativeResize('widen', 640);
                     $image = $relativeResize->apply($image);
                     $image->save($originalImage->getRealPath(), array('format' => $originalImage->guessClientExtension()));
                     $size = $image->getSize();

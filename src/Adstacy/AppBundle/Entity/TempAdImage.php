@@ -58,7 +58,7 @@ class TempAdImage
 
     public function setImage(File $image)
     {
-        $this->image = ImageHelper::resizeImage($image);
+        $this->image = ImageHelper::resizeImage($image, 640);
     
         return $this;
     }
