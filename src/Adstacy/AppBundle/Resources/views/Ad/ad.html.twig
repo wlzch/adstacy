@@ -8,19 +8,14 @@
 {% set commentsLeft = ad.commentsCount - commentsLength %}
 <div class="advert" data-username="{{ ad.user.username }}">
   {% if ad.type == 'image' %}
-    {% set thumbnail, original = null, null %}
-    {% set original = vich_uploader_asset(ad, 'image') %}
     {% set width = ad.imageWidth %}
     {% if ad.imageWidth >= thumb_width %}
-      {% set thumbnail = original|imagine_filter('thumbnail') %}
       {% set width = thumb_width %}
-    {% else %}
-      {% set thumbnail = original %}
     {% endif %}
     {% set height = ad.imageHeight(width) %}
     <div class="advert-img" style="height: {{ height }}px;">
       <img class="lazy {% if ad.imageWidth >= thumb_width %}full{% endif %}" src="{{ asset('bundles/adstacyapp/img/transparent.gif') }}"
-        data-original="{{ thumbnail }}"
+        data-original="{{ vich_uploader_asset(ad, 'image') }}"
         width="{{ width }}" height="{{ height }}">
     </div>
   {% elseif ad.type == 'text' %}
