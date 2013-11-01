@@ -17,7 +17,7 @@
 {% block ajax_content %}
   {% if user.followingsCount <= 0 %}
     <div class="clearfix users">
-      <h2>{{"who_to_follow"|trans}}</h2>
+      <h2>{{"who_to_follow_getting_started"|trans}}</h2>
       {% for user in users %}
         {% include 'AdstacyAppBundle:User:user.html.twig' with {user: user} %}
       {% endfor %}
