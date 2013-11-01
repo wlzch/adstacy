@@ -200,15 +200,36 @@ class UserController extends Controller
      *
      * @Secure(roles="ROLE_USER")
      */
-    public function addFavouriteTagsAction()
+    public function addFavouriteTagAction()
     {
         $request = $this->getRequest();
         $tag = $request->query->get('tag');
         if (!$tag) {
-            return new JsonResponse(array('status' => 'error', 'message' => $this->translate('add_favourite_tags.required'))); 
+            return new JsonResponse(array('status' => 'error', 'message' => $this->translate('favtags.required'))); 
         }
         $user = $this->getUser();
         $user->addFavouriteTag($tag);
+        $em = $this->getManager();
+        $em->persist($user);
+        $em->flush();
+
+        return new JsonResponse(array('status' => 'ok', 'result' => array('tag' => $tag)));
+    }
+
+    /**
+     * Remove favourite tags
+     *
+     * @Secure(roles="ROLE_USER")
+     */
+    public function removeFavouriteTagAction()
+    {
+        $request = $this->getRequest();
+        $tag = $request->query->get('tag');
+        if (!$tag) {
+            return new JsonResponse(array('status' => 'error', 'message' => $this->translate('favtags.required'))); 
+        }
+        $user = $this->getUser();
+        $user->removeFavouriteTag($tag);
         $em = $this->getManager();
         $em->persist($user);
         $em->flush();

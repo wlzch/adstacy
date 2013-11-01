@@ -35,7 +35,14 @@ adstacy_app_tags:
 adstacy_app_favtags_add:
     path: /favtags/add
     defaults:
-        _controller: AdstacyAppBundle:User:addFavouriteTags
+        _controller: AdstacyAppBundle:User:addFavouriteTag
+    options:
+        expose: true
+
+adstacy_app_favtags_remove:
+    path: /favtags/remove
+    defaults:
+        _controller: AdstacyAppBundle:User:removeFavouriteTag
     options:
         expose: true
 

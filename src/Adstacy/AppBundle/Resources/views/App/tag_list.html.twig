@@ -1,10 +1,12 @@
-<li><a href="{{ path('adstacy_app_search', {q: 'kuliner'}) }}" title="Kuliner">Kuliner</a></li>
-<li><a href="{{ path('adstacy_app_search', {q: 'fashion'}) }}" title="Fashion">Fashion</a></li>
-<li><a href="{{ path('adstacy_app_search', {q: 'event'}) }}" title="Event">Event</a></li>
-<li><a href="{{ path('adstacy_app_search', {q: 'game'}) }}" title="Game">Game</a></li>
-<li><a href="{{ path('adstacy_app_search', {q: 'lowongan'}) }}" title="Lowongan">Lowongan</a></li>
-<li><a href="{{ path('adstacy_app_search', {q: 'carijodoh'}) }}" title="Cari Jodoh">Cari Jodoh</a></li>
-<li><a href="{{ path('adstacy_app_search', {q: 'movie'}) }}" title="Movie">Movie</a></li>
-<li><a href="{{ path('adstacy_app_search', {q: 'diskon'}) }}" title="Diskon">Diskon</a></li>
-<li><a href="{{ path('adstacy_app_search', {q: 'gadget'}) }}" title="Gadget">Gadget</a></li>
-<li><a href="{{ path('adstacy_app_search', {q: 'indonesia'}) }}" title="Indonesia">Indonesia</a></li>
+{% set tags = [] %}
+{% if app.user %}
+  {% set tags = app.user.favouriteTags %}
+  {% for tag in app.user.favouriteTags %}
+  <li><a href="{{ path('adstacy_app_search', {q: tag}) }}" title="{{tag|title}}">{{tag|title}}</a></li>
+  {% endfor %}
+{% endif %}
+
+{% set predefinedTags = ['kuliner', 'fashion', 'event', 'game', 'lowongan', 'carijodoh', 'movie', 'diskon', 'gadget', 'indonesia'] %}
+{% for tag in predefinedTags|slice(0, 10 - tags|length) %}
+<li><a href="{{ path('adstacy_app_search', {q: tag}) }}" title="{{tag|title}}">{{tag|title}}</a></li>
+{% endfor %}

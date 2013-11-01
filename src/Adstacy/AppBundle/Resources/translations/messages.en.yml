@@ -32,6 +32,7 @@ who_to_follow: Who to follow
 who_to_follow_getting_started: Follow these people to get started
 no_who_to_follow: Nobody to follow
 ctrl_copy: Ctrl + C to copy
+favtags.required: Tag cannot be blank
 
 search_users: Users
 search_ads: Ads
