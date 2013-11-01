@@ -14,7 +14,7 @@
         {% set width = thumb_width %}
       {% endif %}
       {% set height = ad.imageHeight(width) %}
-      <div class="advert-img">
+      <div class="advert-img" style="height: {{ height }}px;">
         <img class="lazy {% if ad.imageWidth >= thumb_width %}full{% endif %}" src="{{ asset('bundles/adstacyapp/img/transparent.gif') }}"
           data-original="{{ vich_uploader_asset(ad, 'image') }}"
           width="{{ width }}" height="{{ height }}">
