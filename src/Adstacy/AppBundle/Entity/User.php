@@ -1027,7 +1027,7 @@ class User implements UserInterface, GroupableInterface
      */
     public function getPromotesCount()
     {
-        return $this->promotesCount;
+        return $this->promotesCount ?: 0;
     }
 
     /**
@@ -1066,7 +1066,7 @@ class User implements UserInterface, GroupableInterface
      */
     public function getAdsCount()
     {
-        return $this->adsCount;
+        return $this->adsCount ?: 0;
     }
 
     /**
@@ -1161,7 +1161,7 @@ class User implements UserInterface, GroupableInterface
      */
     public function getFollowersCount()
     {
-        return $this->followersCount;
+        return $this->followersCount ?: 0;
     }
 
     /**
@@ -1184,7 +1184,7 @@ class User implements UserInterface, GroupableInterface
      */
     public function getFollowingsCount()
     {
-        return $this->followingsCount;
+        return $this->followingsCount ?: 0;
     }
 
     /**
