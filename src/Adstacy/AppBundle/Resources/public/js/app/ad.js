@@ -15,7 +15,8 @@
     return false;
   });
   $advert.find('.delete').click(Adstacy.events.deleteAd);
-  $('body').click(function() {
+  $advert.find('.advert-img').dblclick(Adstacy.events.adimagedblclick);
+  $body.click(function() {
     $('.advert-share.open').removeClass('open').hide();
   });
 })();

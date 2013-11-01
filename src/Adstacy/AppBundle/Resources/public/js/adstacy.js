@@ -70,6 +70,13 @@
     }, options.timeout);
   };
   Adstacy.events = {
+    adimagedblclick: function(event) {
+      var $this, $ad, $btn;
+      $this = $(this);
+      $ad = $this.closest('.advert');
+      $btn = $ad.find('.btn-promote:not(.hide)');
+      $btn.click();
+    },
     commentbox: function(event) {
       if (!Adstacy.user) return;
       var $this = $(this);
@@ -247,6 +254,7 @@
         $ads.find('a.delete-comment').click(Adstacy.events.deleteComment);
         $ads.find('.btn-share').click(Adstacy.events.share);
         $ads.find('.delete').click(Adstacy.events.deleteAd);
+        $ads.find('.advert-img').dblclick(Adstacy.events.adimagedblclick);
       }
     }
   };
