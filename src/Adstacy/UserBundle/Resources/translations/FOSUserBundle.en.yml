@@ -31,7 +31,7 @@ profile:
     edit:
         submit: Update
     flash:
-        updated: The profile has been updated
+        updated: Your profile has been updated
 
 # Password change
 change_password:
