@@ -121,6 +121,7 @@ $(function() {
       }
       return false;
     },
+    confirmKeys: [13, 32, 44, 188],
     typeahead: {
       name: 'tags',
       remote: {
