@@ -77,7 +77,7 @@
     {% endif %}
   </head>
 
-  <body class="{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %} logged-in {% endif %}" {% if app.user %}data-user="{{app.user|serialize('json')}}"{% endif %}>
+  <body id="adstacy" class="{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %} logged-in {% endif %}" {% if app.user %}data-user="{{app.user|serialize('json')}}"{% endif %}>
     {% block body %}
       {% block header %}
         {% include '::header.html.twig' %}
