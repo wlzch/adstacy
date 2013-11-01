@@ -70,12 +70,29 @@
     }, options.timeout);
   };
   Adstacy.events = {
-    adimagedblclick: function(event) {
+    broadcastclick: function() {
+      var $this, $parent;
+      $this = $(this);
+      $parent = $this.parent();
+      $parent.find('.btn-promote').toggleClass('hide');
+      $.post(this.href, function(data) {
+        // do nothing
+      });
+
+      return false;
+    },
+    adimagedblclick: function() {
       var $this, $ad, $btn;
       $this = $(this);
       $ad = $this.closest('.advert');
       $btn = $ad.find('.btn-promote:not(.hide)');
       $btn.click();
+    },
+    adreportclick: function() {
+      $body.click();
+      Adstacy.alert('success', Translator.trans('ads.report.success'));
+      $.post(this.href);
+      return false;
     },
     commentbox: function(event) {
       if (!Adstacy.user) return;
@@ -246,15 +263,16 @@
       callback: function(event) {
         var $ads = $('.jscroll-added:last .advert');
         $ads.find('img.lazy').lazyload();
-        $ads.ajaxlink('ads');
         var $commentBoxes = $ads.find('textarea.comment-box');
         $commentBoxes.keydown(Adstacy.events.commentbox);
         $commentBoxes.mentionsInput(Adstacy.options.mentionsInput);
+        $ads.find('.btn-promote').click(Adstacy.events.broadcastclick);
         $ads.find('.load-more-comments').click(Adstacy.events.loadComments);
         $ads.find('a.delete-comment').click(Adstacy.events.deleteComment);
         $ads.find('.btn-share').click(Adstacy.events.share);
         $ads.find('.delete').click(Adstacy.events.deleteAd);
         $ads.find('.advert-img').dblclick(Adstacy.events.adimagedblclick);
+        $ads.find('.report').click(Adstacy.events.adreportclick);
       }
     }
   };

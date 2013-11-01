@@ -1,19 +1,6 @@
 (function ($) {
   $.fn.ajaxlink = function(type, options) {
     var types = {
-      ads: {
-        countSelector: '.promotes-count',
-        jsonField: 'promotes_count',
-        firstSelector: 'a.promote',
-        secondSelector: 'a.unpromote',
-        image_size: 14,
-      },
-      promote_single: {
-        countSelector: '.promotes-count',
-        jsonField: 'promotes_count',
-        firstSelector: 'a.promote',
-        secondSelector: 'a.unpromote'
-      },
       users: {
         countSelector: '.user-followers-count',
         jsonField: 'followers_count',
