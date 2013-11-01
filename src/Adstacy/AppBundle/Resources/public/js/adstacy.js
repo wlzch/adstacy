@@ -226,6 +226,16 @@
       });
 
       return false;
+    },
+    collapseAd: function() {
+      var $parent = $(this).parent();
+      if ($(this).height() > 600) {
+        $parent.append('<a href="javascript:;" class="advert-expand collapsed icon"></a>');
+        $parent.find('.advert-expand').click(function() {
+          $parent.toggleClass('limit');
+          $(this).toggleClass('collapsed');
+        });
+      }
     }
   };
   var filterUser = function(query, users) {
@@ -273,6 +283,7 @@
         $ads.find('.delete').click(Adstacy.events.deleteAd);
         $ads.find('.advert-img').dblclick(Adstacy.events.adimagedblclick);
         $ads.find('.report').click(Adstacy.events.adreportclick);
+        $ads.find('.advert-object').children().each(Adstacy.events.collapseAd);
       }
     }
   };

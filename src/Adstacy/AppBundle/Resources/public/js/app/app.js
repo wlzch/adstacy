@@ -1,5 +1,6 @@
 $(function(){
   $('.site-menu').perfectScrollbar({});
+  $('.advert-object').children().each(Adstacy.events.collapseAd);
 });
 
 (function() {
