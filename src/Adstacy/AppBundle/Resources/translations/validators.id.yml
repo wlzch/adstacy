@@ -8,6 +8,7 @@ ad:
         max_count: Anda hanya dapat mengupload maksimal {{ limit }} gambar
     tags:
         min_count: Anda harus memasukkan minimal {{ limit }} tag
+        max_length: Tag maksimal {{ limit }} karakter
     youtube_url:
         not_valid: Url youtube tidak valid
         not_blank: Url youtube tidak boleh kosong

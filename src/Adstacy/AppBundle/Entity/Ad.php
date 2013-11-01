@@ -69,6 +69,12 @@ class Ad
      *  min="1",
      *  minMessage= "ad.tags.min_count"
      * )
+     * @Assert\All({
+     *   @Assert\Length(
+     *      max = "20",
+     *      maxMessage = "ad.tags.max_length"
+     *   )
+     * })
      * @ORM\Column(type="simple_array", nullable=true)
      * @JMS\Groups({"user_show", "ad_list", "ad_show"})
      */
