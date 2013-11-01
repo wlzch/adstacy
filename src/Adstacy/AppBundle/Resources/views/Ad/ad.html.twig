@@ -19,11 +19,9 @@
     {% endif %}
     {% set height = ad.imageHeight(width) %}
     <div class="advert-img" style="height: {{ height }}px;">
-      <a href="{{ original }}" data-lightbox="{{ ad.imagename }}">
-        <img class="lazy {% if ad.imageWidth >= thumb_width %}full{% endif %}" src="{{ asset('bundles/adstacyapp/img/transparent.gif') }}"
-          data-original="{{ thumbnail }}"
-          width="{{ width }}" height="{{ height }}">
-      </a>
+      <img class="lazy {% if ad.imageWidth >= thumb_width %}full{% endif %}" src="{{ asset('bundles/adstacyapp/img/transparent.gif') }}"
+        data-original="{{ thumbnail }}"
+        width="{{ width }}" height="{{ height }}">
     </div>
   {% elseif ad.type == 'text' %}
     <div class="advert-text">
