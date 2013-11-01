@@ -21,7 +21,7 @@ class LoadUserData extends DataFixture
         $welly = new User();
         $welly->setUsername('welly');
         $welly->setRealname('Welly Huang');
-        $welly->setAbout('IU fans\' items online seller, #IU \'s #album, #poster, #fashion and many more stuffs. Location for #Medan, #Indonesia. YM: wandi.lin@yahoo.com Hangout: wandi.lin13@gmail.com BB Pin: 25fa9088 HP: 0877 9399 5355');
+        $welly->setAbout($this->faker->sentence($this->faker->randomNumber(0, 15)));
         $welly->setEmail('wilzichi92@gmail.com');
         $encoder = $this->get('security.encoder_factory')->getEncoder($welly);
         $password = $encoder->encodePassword('welly', $welly->getSalt());
@@ -32,7 +32,7 @@ class LoadUserData extends DataFixture
         $erwin->setRealname('Erwin Zhang');
         $erwin->setEmail('rw7nz.cyruz@gmail.com');
         $erwin->setAbout('IU fans\' items online seller, #IU \'s #album, #poster, #fashion and many more stuffs. Location for #Medan, #Indonesia. YM: wandi.lin@yahoo.com Hangout: wandi.lin13@gmail.com BB Pin: 25fa9088 HP: 0877 9399 5355');
-        #$erwin->setAbout($this->faker->sentence(10));
+        $erwin->setAbout($this->faker->sentence($this->faker->randomNumber(0, 15)));
         $encoder = $this->get('security.encoder_factory')->getEncoder($erwin);
         $password = $encoder->encodePassword('rwinz', $erwin->getSalt());
         $erwin->setPassword($password);
@@ -68,7 +68,7 @@ class LoadUserData extends DataFixture
             $user->setUsername($username);
             $user->setRealname($username);
             $user->setEmail($username.'@gmail.com');
-            $user->setAbout('IU fans\' items online seller, #IU \'s #album, #poster, #fashion and many more stuffs. Location for #Medan, #Indonesia. YM: wandi.lin@yahoo.com Hangout: wandi.lin13@gmail.com BB Pin: 25fa9088 HP: 0877 9399 5355');
+            $user->setAbout($this->faker->sentence($this->faker->randomNumber(0, 15)));
             $encoder = $this->get('security.encoder_factory')->getEncoder($user);
             $password = $encoder->encodePassword($username, $user->getSalt());
             $user->setPassword($password);
