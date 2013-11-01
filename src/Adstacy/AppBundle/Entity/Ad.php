@@ -217,7 +217,7 @@ class Ad
      */
     public function setTags($tags = array())
     {
-        $this->tags = preg_replace('/[^A-Za-z0-9 ]/', '', $tags);
+        $this->tags = preg_replace('/[^A-Za-z0-9]/', '', array_unique($tags));
     
         return $this;
     }
