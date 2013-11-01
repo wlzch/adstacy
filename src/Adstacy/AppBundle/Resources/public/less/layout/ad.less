@@ -25,7 +25,13 @@
   position: relative;
   overflow: hidden;
   max-height: 9999px;
+  background: #000 url("../img/loader.gif") no-repeat center;
   .transition(max-height ease .2s);
+
+  &:hover .advert-expand {
+    background: rgba(0,0,0,.5);
+    color: #fff;
+  }
 }
 
 .advert-object.limit {
@@ -43,12 +49,11 @@
   line-height: 1;
   color: rgba(255,255,255,.5);
   #gradient > .vertical(rgba(0,0,0,0), rgba(0,0,0,.3));
+  .transition(background ease .2s);
 
   &:hover {
     text-decoration: none;
-    color: #fff;
     text-shadow: 0 0 5px #fff;
-    background: rgba(0,0,0,.5);
   }
 }
 
@@ -60,9 +65,7 @@
 }
 
 .advert-img {
-  background-color: #000;
   border-radius: 5px 5px 0 0;
-  background: #000 url("../img/loader.gif") no-repeat center;
 
   img {
     display: block;
@@ -121,10 +124,11 @@
 }
 
 .advert-detail {
+  position: relative;
+  z-index: 1;
   border-top: 1px solid @border-color;
   border-bottom: 1px solid @border-color;
-  margin-bottom: 3px;
-  box-shadow: 0 3px 4px rgba(0,0,0,0.175);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.175);
   padding: 10px 15px;
 }
 
