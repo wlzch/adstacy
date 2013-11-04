@@ -4,10 +4,10 @@ liip_imagine:
             quality: 90
             filters:
                 relative_resize: { widen: %thumb_width% }
-        mini_thumb:
-            quality: 50
+        small_thumb:
+            quality: 90
             filters:
-                thumbnail: { size: [%mini_thumb_size%, %mini_thumb_size%], mode: outbound }
+                thumbnail: { size: [%small_thumb_size%, %small_thumb_size%], mode: outbound }
         profile_pic:
             quality: 75
             filters:

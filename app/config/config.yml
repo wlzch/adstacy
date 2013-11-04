@@ -14,8 +14,8 @@ parameters:
     max_notifications: 50
     max_who_to_follow: 10
 
+    small_thumb_size: 250
     thumb_width: 498
-    mini_thumb_size: 100
     profile_pic_size: 100
     desc_length: 255
 
@@ -63,7 +63,7 @@ twig:
     strict_variables: %kernel.debug%
     globals:
         thumb_width: %thumb_width%
-        mini_thumb_size: %mini_thumb_size%
+        small_thumb_size: %small_thumb_size%
         profile_pic_size: %profile_pic_size%
         max_ads_per_page: %max_ads_per_page%
         max_users_per_page: %max_users_per_page%
