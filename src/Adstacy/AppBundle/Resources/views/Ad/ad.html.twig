@@ -42,16 +42,12 @@
     {% endif %}
   </div>
 
-  <div class="advert-detail">
-    <div class="advert-user media">
+  <div class="advert-detail clearfix">
+    <div class="advert-user">
       {% set user = ad.user %}
-      <div class="pull-left">
-        <img class="media-object" src="{{ profile_pic(user) }}" alt="{{ user.username }}" width="32" height="32">
-      </div>
-      <div class="media-body">
-        <a class="pull-left realname" href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">{{ user.realName }} <span class="username">@{{ user.username }}</span></a>
-        <time class="pull-right timeago" datetime="{{ ad.created|date('c') }}">{{ ad.created|date('F j, Y') }}</time>
-      </div>
+      <img src="{{ profile_pic(user) }}" alt="{{ user.username }}" width="32" height="32">
+      <a class="realname hovercard-user" href="{{ path('adstacy_app_user_profile', {username: user.username}) }}" data-username="{{ user.username }}">{{ user.realName }} <span class="username">@{{ user.username }}</span></a>
+      <time class="pull-right timeago" datetime="{{ ad.created|date('c') }}">{{ ad.created|date('F j, Y') }}</time>
     </div>
 
     {% if ad.type != 'text' %}
@@ -176,7 +172,7 @@
           </div>
           <div class="media-body">
             <div class="media-heading">
-              <a class="realname" href="{{ path('adstacy_app_user_profile', {username: comment.user.username}) }}">{{ comment.user.realName }}
+              <a class="realname hovercard-user" data-username="{{ comment.user.username }}" href="{{ path('adstacy_app_user_profile', {username: comment.user.username}) }}">{{ comment.user.realName }}
                 <span class="username">@{{ comment.user.userName }}</span>
               </a>
               &middot; <time class="timeago" datetime="{{ comment.created|date('c') }}">{{ comment.created|date('F j, Y') }}</time>

@@ -8,7 +8,8 @@
   Adstacy.templates = {
     comment: Hogan.compile(templates.comment),
     modal: Hogan.compile(templates.modal),
-    alert: Hogan.compile(templates.alert)
+    alert: Hogan.compile(templates.alert),
+    hovercarduser: Hogan.compile(templates.hovercarduser)
   };
   Adstacy.modal = function(options) {
     var $modal = $('#adstacy-modal');

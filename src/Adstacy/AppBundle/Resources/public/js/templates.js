@@ -47,6 +47,12 @@
           <button type="button" class="close" data-dismiss="alert">&times;</button>
           <p>{{{ message }}}</p>
       </div>
+    ',
+    hovercarduser: '
+      <div class="card-user">
+        <img src="{{ photo }}" class="profilepic" width="100" height="100">
+        <p>{{ about }}</p>
+      </div>
     '
   };
 })(window);

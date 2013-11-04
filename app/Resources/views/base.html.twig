@@ -206,6 +206,7 @@
       <script type="text/javascript" src="{{ asset('js/translations.' ~ app.request.locale ~ '.js') }}"></script>
       {% javascripts filter='uglifyjs2'
         '@AdstacyAppBundle/Resources/public/js/json2.js'
+        '@AdstacyAppBundle/Resources/public/js/detectmobilebrowser.js'
         '@AdstacyAppBundle/Resources/public/js/jquery.jscroll.js'
         '@AdstacyAppBundle/Resources/public/js/jstorage.js'
         '@AdstacyAppBundle/Resources/public/js/hogan.js'
@@ -218,6 +219,7 @@
         '@AdstacyAppBundle/Resources/public/js/perfect-scrollbar.js'
         '@AdstacyAppBundle/Resources/public/js/easing.js'
         '@AdstacyAppBundle/Resources/public/js/jquery.ui.totop.min.js'
+        '@AdstacyAppBundle/Resources/public/js/jquery.hovercard.js'
         'bundles/funddyjstranslations/js/lib/funddytranslations.js'
         '@AdstacyAppBundle/Resources/public/js/templates.js'
         '@AdstacyAppBundle/Resources/public/js/adstacy.js'
