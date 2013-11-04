@@ -70,8 +70,14 @@ class AppController extends Controller
      */
     public function trendingAction()
     {
-        $since = date('Y-m-d', strtotime('-7 day', time())); // 7 days ago
-        $ads = $this->getRepository('AdstacyAppBundle:Ad')->findTrendingPromotes();
+        $request = $this->getRequest();
+        $redis = $this->container->get('snc_redis.default');
+        $page = $request->query->get('page') ?: 1;
+        $max = $this->getParameter('max_ads_per_page');
+        $start = ($page - 1) * $max;
+        $end = $start + ($max - 1);
+        $ids = $redis->lrange('trending', $start, $end);
+        $ads = $this->getRepository('AdstacyAppBundle:Ad')->findByIds($ids);
 
         return $this->render('AdstacyAppBundle:App:trending.html.twig', array(
             'ads' => $ads

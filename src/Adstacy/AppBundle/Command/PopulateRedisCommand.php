@@ -27,6 +27,7 @@ class PopulateRedisCommand extends ContainerAwareCommand
             $this->populateUserData($input, $output);
             $this->populateTagData($input, $output);
             $this->populateRecommendation($input, $output);
+            $this->populateTrending($input, $output);
         } else {
             if (in_array('user', $whats)) {
                 $this->populateUserData($input, $output);
@@ -36,6 +37,9 @@ class PopulateRedisCommand extends ContainerAwareCommand
             }
             if (in_array('recommendation', $whats)) {
                 $this->populateRecommendation($input, $output);
+            }
+            if (in_array('trending', $whats)) {
+                $this->populateTrending($input, $output);
             }
         }
     }
@@ -129,5 +133,25 @@ class PopulateRedisCommand extends ContainerAwareCommand
             }
         }
         $output->writeln("$cnt data populated");
+    }
+
+    private function populateTrending(InputInterface $input, OutputInterface $output)
+    {
+        $output->writeln('Populating trending ads');
+        $container = $this->getContainer();
+        $repo = $container->get('doctrine')->getRepository('AdstacyAppBundle:Ad');
+        $redis = $this->getContainer()->get('snc_redis.default');
+
+        $ids = array();
+        foreach ($repo->findTrendingPromotes(100) as $ad) {
+            $ids[] = $ad->getId();
+        }
+
+        $redis->del('trending');
+        $cmd = $redis->createCommand('rpush');
+        $cmd->setArguments(array('trending', $ids));
+        $redis->executeCommand($cmd);
+
+        $output->writeln(count($ids).' trending data populated');
     }
 }

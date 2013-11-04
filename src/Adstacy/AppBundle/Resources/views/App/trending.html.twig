@@ -5,7 +5,7 @@
 {% block site_body_class %}site-body-no-bg{% endblock %}
 
 {% block content %}
-  <div class="adstacy-container">
+  <div class="adstacy-container jscroll">
     {{ block('ajax_content') }}
   </div>
 {% endblock %}
@@ -14,4 +14,17 @@
   {% for ad in ads %}
     {% include 'AdstacyAppBundle:Ad:ad.html.twig' with {ad: ad} %}
   {% endfor %}
+  {% if ads|length >= max_ads_per_page %}
+    {% set params = app.request.query.all|merge({page: (app.request.query.get('page') ?: 1) + 1}) %}
+    <a href="{{ path('adstacy_app_trending',  params) }}" class="btn btn-default btn-lg btn-block load-next next-page">{{ "more"|trans }}</a>
+  {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script type="text/javascript">
+    $(function() {
+      $('.jscroll').jscroll(Adstacy.options.jscrollAd);
+    });
+  </script>
 {% endblock %}
