@@ -165,33 +165,9 @@
 
               {% block content %}{% endblock %}
             </div>
-            <div class="site-sidebar">
+            <div id="sidebar" class="site-sidebar">
               {% block sidebar %}
               {{ render_sidebar_trending() }}
-              <div id="side-suggest-friend" class="site-aside">
-                <h2>People You May Know</h2>
-                <div class="media">
-                  <a href="#" class="pull-left"><img src="/bundles/adstacyapp/img/nophoto.gif" alt="suwandi" width="32" height="32" class="media-object" /></a>
-                  <div class="media-body">
-                    <a class="username" href="#">Suwandi Halim</a>
-                    <a class="btn btn-primary btn-sm">Follow</a>
-                  </div>
-                </div>
-                <div class="media">
-                  <a href="#" class="pull-left"><img src="/bundles/adstacyapp/img/nophoto.gif" alt="suwandi" width="32" height="32" class="media-object" /></a>
-                  <div class="media-body">
-                    <a class="username" href="#">Welly Huang</a>
-                    <a class="btn btn-primary btn-sm">Follow</a>
-                  </div>
-                </div>
-                <div class="media">
-                  <a href="#" class="pull-left"><img src="/bundles/adstacyapp/img/nophoto.gif" alt="suwandi" width="32" height="32" class="media-object" /></a>
-                  <div class="media-body">
-                    <a class="username" href="#">Erwin Cyrus</a>
-                    <a class="btn btn-primary btn-sm">Follow</a>
-                  </div>
-                </div>
-              </div>
               {% endblock %}
             </div>
           </div>

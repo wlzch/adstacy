@@ -12,6 +12,13 @@ adstacy_api_network:
     options:
         expose: true
 
+adstacy_api_recommendation:
+    path: /me/recommendations
+    defaults:
+        _controller: AdstacyApiBundle:User:listRecommendations
+    options:
+      expose: true
+
 adstacy_api_tags:
     path: /tags.json
     defaults:

@@ -202,6 +202,31 @@ class UserController extends ApiController
         return $this->listUsers($username, 'followings');
     }
 
+    /**
+     * @Secure(roles="ROLE_USER")
+     */
+    public function listRecommendationsAction()
+    {
+        $user = $this->getUser();
+        $redis = $this->get('snc_redis.default');
+        $ids = $redis->zrevrange('recommendation:'.$user->getUsername(), 0, -1);
+        $cnt = count($ids);
+        $inc = rand(0, $cnt / $this->getParameter('max_sidebar_recommendation'));
+        if ($cnt <= 0) {
+            return $this->noResult();
+        }
+        $users = $this->getRepository('AdstacyAppBundle:User')->findById(array($ids[$inc], $ids[$inc * 2], $ids[$inc * 3]));
+
+        $res = array(
+            'data' => array(
+                'users' => $users
+            ),
+            'meta' => array()
+        );
+
+        return $this->response($res, 'user_list');
+    }
+
     private function listUsers($username, $action)
     {
         $request = $this->getRequest();

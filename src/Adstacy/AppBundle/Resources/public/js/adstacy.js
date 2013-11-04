@@ -9,7 +9,8 @@
     comment: Hogan.compile(templates.comment),
     modal: Hogan.compile(templates.modal),
     alert: Hogan.compile(templates.alert),
-    hovercarduser: Hogan.compile(templates.hovercarduser)
+    hovercarduser: Hogan.compile(templates.hovercarduser),
+    sidebar_recommendation: Hogan.compile(templates.sidebar_recommendation)
   };
   Adstacy.modal = function(options) {
     var $modal = $('#adstacy-modal');
@@ -69,6 +70,32 @@
         }
       });
     }, options.timeout);
+  };
+  Adstacy.hoveruser = function($hovercard, options) {
+    if (!$.browser.mobile) {
+      var template = Adstacy.templates.hovercarduser;
+      options = $.extend({}, {
+        detailsHTML: '<p>loading...</p>',
+        delay: 300,
+        onHoverIn: function() {
+          var $this, $user, route, $detail;
+          $this = $(this);
+          $user = $this.find('.hovercard-user');
+          $detail = $this.find('.hc-details');
+          var route = Routing.generate('adstacy_api_user_show', {username: $user.attr('data-username')});
+          $.get(route, function(data) {
+            var json, user
+            json = JSON.parse(data);
+            user = json.data.user;
+            $detail.html(template.render({
+              photo: user.photo,
+              about: user.about
+            }));
+          });
+        }
+      }, options);
+      $hovercard.hovercard(options);
+    }
   };
   Adstacy.events = {
     broadcastclick: function() {

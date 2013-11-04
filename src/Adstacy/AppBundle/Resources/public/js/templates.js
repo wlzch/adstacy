@@ -48,6 +48,22 @@
           <p>{{{ message }}}</p>
       </div>
     ',
+    sidebar_recommendation: '
+      <div id="side-suggest-friend" class="side-aside">
+        <h2>People you may know</h2>
+        {{#users}}
+          <div class="media">
+            <a href="#" class="pull-left"><img src="{{ photo }}" width="32" height="32" class="media-object"></a>
+            <div class="media-body">
+              <div>
+                <a class="realname hovercard-user" data-username="{{ username }}" href="#">{{ real_name }}</a>
+              </div>
+              <a class="btn btn-primary btn-sm">Follow</a>
+            </div>
+          </div>
+        {{/users}}
+      </div>
+    ',
     hovercarduser: '
       <div class="card-user">
         <img src="{{ photo }}" class="profilepic" width="100" height="100">
