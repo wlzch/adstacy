@@ -25,7 +25,6 @@ $(function(){
 
   $('.timeago').timeago();
   $('img.lazy').lazyload();
-  $().UItoTop({ easingType: 'easeOutQuart' });
   $('.user').ajaxlink('users');
   Adstacy.alert();
 })();
