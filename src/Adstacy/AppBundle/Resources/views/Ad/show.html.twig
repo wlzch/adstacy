@@ -9,15 +9,6 @@
 {% block meta_image %}{% if ad.image %}{{ app.request.scheme~"://"~app.request.host~vich_uploader_asset(ad, 'image') }}{% endif %}
 {% endblock %}
 
-{% block head_scripts %}
-  {{ parent() }}
-  {% javascripts filter='uglifyjs2'
-    '@AdstacyAppBundle/Resources/public/js/jquery.scrolltofixed.min.js'
-  %}
-    <script src="{{ asset_url }}" type="text/javascript"></script>
-  {% endjavascripts %}
-{% endblock %}
-
 {% block site_body_class %}site-body-no-bg{% endblock %}
 
 {% block content %}
