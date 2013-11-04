@@ -2,8 +2,6 @@
     position: absolute; /* please don't change 'position' */
     bottom: 3px; /* there must be 'bottom' for ps-scrollbar-x-rail */
     height: 8px;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
     border-radius: 4px;
     opacity: 0;
     filter: alpha(opacity = 0);
@@ -35,8 +33,6 @@
     position: absolute; /* please don't change 'position' */
     right: 3px; /* there must be 'right' for ps-scrollbar-y-rail */
     width: 8px;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
     border-radius: 4px;
     opacity: 0;
     filter: alpha(opacity = 0);
@@ -69,8 +65,6 @@
     bottom: 0; /* there must be 'bottom' for ps-scrollbar-x */
     height: 8px;
     background-color: #aaa;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
     border-radius: 4px;
     -o-transition: background-color .2s linear;
     -webkit-transition: background-color.2s linear;
@@ -92,8 +86,6 @@
     right: 0; /* there must be 'right' for ps-scrollbar-y */
     width: 8px;
     background-color: #aaa;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
     border-radius: 4px;
     -o-transition: background-color .2s linear;
     -webkit-transition: background-color.2s linear;
