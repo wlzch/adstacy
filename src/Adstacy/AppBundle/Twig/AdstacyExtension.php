@@ -19,11 +19,17 @@ class AdstacyExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'is_ajax' => new \Twig_Function_Method($this, 'isAjax', array('is_safe' => array('html'))),
+            'is_ajax' => new \Twig_Function_Method($this, 'isAjax'),
+            'is_mobile' => new \Twig_Function_Method($this, 'isMobile'),
             'render_sidebar_trending' => new \Twig_Function_Method($this, 'renderSidebarTrending', array(
                 'is_safe' => array('html')
             )),
         );
+    }
+
+    public function isMobile()
+    {
+        return $this->container->get('adstacy.mobile_detect')->isMobile();
     }
     
     public function isAjax()

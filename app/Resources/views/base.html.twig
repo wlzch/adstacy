@@ -165,11 +165,13 @@
 
               {% block content %}{% endblock %}
             </div>
+            {% if not is_mobile() %}
             <div id="sidebar" class="site-sidebar fade-hover">
               {% block sidebar %}
               {{ render_sidebar_trending() }}
               {% endblock %}
             </div>
+            {% endif %}
           </div>
         </div>
       {% endblock %}
