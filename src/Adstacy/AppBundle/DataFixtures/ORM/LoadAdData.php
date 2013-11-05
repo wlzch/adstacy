@@ -26,19 +26,32 @@ class LoadAdData extends DataFixture
             'antonio', 'steven', 'novita', 'cynthia', 'andika', 'putra', 'putri', 'lusi', 'linda',
             'sanny', 'erna', 'halim', 'rani', 'dicky', 'july', 'donita', 'mega', 'mentari', 'mika'
         );
+        $urls  = array(
+            'http://www.youtube.com/watch?v=RQ3YKtd3hNE',
+            'http://www.youtube.com/watch?v=1OqZulSw_NM',
+            'http://www.youtube.com/watch?v=nOU3S4aZH0c',
+            'http://www.youtube.com/watch?v=HpEU14K2Pf8',
+            'http://www.youtube.com/watch?v=6pw972Kl3L0',
+            'http://www.youtube.com/watch?v=IubKXEsk-eQ',
+            'http://www.youtube.com/watch?v=amtAWCiagPE&feature=c4-overview-vl&list=PLZN2wZjY_38ADxMGe8XVQZngyCzrIYq9u',
+            'http://www.youtube.com/watch?v=VugK05JE7EA&feature=c4-overview-vl&list=PLZN2wZjY_38DySr9tbOeaasLGf_ImUHSc'
+        );
         $usernamesCnt = count($usernames);
+        $urlsCnt = count($urls);
 
-        $ads = array();$imgIndex = 0;
+        $ads = array();$imgIndex = 0;$urlIndex = 0;
         for ($i = 1; $i <= 48; $i++) {
             $tags = $this->faker->words($this->faker->randomNumber(0, 10));
-            $description = $this->faker->sentence($this->faker->randomNumber(1, 50));
+            $description = $this->faker->sentence($this->faker->randomNumber(1, 200));
             $user = $this->getReference('user-'.$usernames[$this->faker->randomNumber(0, $usernamesCnt - 1)]);
             $ad = new Ad();
-            if ($this->faker->randomNumber(0, 1) == 0 && $imgIndex < 32) {
-                $image = $images[$imgIndex];
-                $imgIndex++;
+            $rand = $this->faker->randomNumber(0, 4);
+            if (in_array($rand, array(0, 1)) && $imgIndex < 32) {
                 $ad->setType('image');
-                $ad->setImage($image);
+                $ad->setImage($images[$imgIndex++]);
+            } else if (in_array($rand, array(2, 3)) && $urlIndex < $urlsCnt) {
+                $ad->setType('youtube');
+                $ad->setYoutubeUrl($urls[$urlIndex++]);
             } else {
                 $ad->setType('text');
                 $ad->setTitle($this->faker->sentence($this->faker->randomNumber(1, 10)));
