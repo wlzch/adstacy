@@ -1,10 +1,12 @@
-<div class="site-aside">
-  <h2>Trending</h2>
-  {% if ad.type == 'image' %}
-    <img src="{{ vich_uploader_asset(ad, 'image')|imagine_filter('small_thumb') }}" class="side-trending-img" width="{{ small_thumb_size }}" height="{{ small_thumb_size }}"/>
-  {% elseif ad.type == 'text' %}
-    <h3>{{ ad.title }}</h3>
-  {% elseif ad.type == 'youtube' %}
-    <img src="http://img.youtube.com/vi/{{ ad.youtubeId }}/0.jpg">
-  {% endif %}
-</div>
+{% if ad %}
+  <div class="site-aside">
+    <h2>Trending</h2>
+    {% if ad.type == 'image' %}
+      <img src="{{ vich_uploader_asset(ad, 'image')|imagine_filter('small_thumb') }}" class="side-trending-img" width="{{ small_thumb_size }}" height="{{ small_thumb_size }}"/>
+    {% elseif ad.type == 'text' %}
+      <h3>{{ ad.title }}</h3>
+    {% elseif ad.type == 'youtube' %}
+      <img src="http://img.youtube.com/vi/{{ ad.youtubeId }}/0.jpg">
+    {% endif %}
+  </div>
+{% endif %}
