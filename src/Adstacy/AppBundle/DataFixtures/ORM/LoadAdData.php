@@ -42,19 +42,21 @@ class LoadAdData extends DataFixture
         $ads = array();$imgIndex = 0;$urlIndex = 0;
         for ($i = 1; $i <= 48; $i++) {
             $tags = $this->faker->words($this->faker->randomNumber(0, 10));
-            $description = $this->faker->sentence($this->faker->randomNumber(1, 200));
             $user = $this->getReference('user-'.$usernames[$this->faker->randomNumber(0, $usernamesCnt - 1)]);
             $ad = new Ad();
             $rand = $this->faker->randomNumber(0, 4);
             if (in_array($rand, array(0, 1)) && $imgIndex < 32) {
                 $ad->setType('image');
                 $ad->setImage($images[$imgIndex++]);
+                $ad->setDescription($this->faker->sentence($this->faker->randomNumber(1, 50)));
             } else if (in_array($rand, array(2, 3)) && $urlIndex < $urlsCnt) {
                 $ad->setType('youtube');
                 $ad->setYoutubeUrl($urls[$urlIndex++]);
+                $ad->setDescription($this->faker->sentence($this->faker->randomNumber(1, 50)));
             } else {
                 $ad->setType('text');
                 $ad->setTitle($this->faker->sentence($this->faker->randomNumber(1, 10)));
+                $ad->setDescription($this->faker->sentence($this->faker->randomNumber(20, 200)));
             }
             $nOfComments = $this->faker->randomNumber(0, 10);
             for ($k = 0; $k < $nOfComments; $k++) {
@@ -74,7 +76,6 @@ class LoadAdData extends DataFixture
                 }
             }
 
-            $ad->setDescription($description);
             $ad->setTags($tags);
             $ad->setUser($user);
             $ad->setCreated($this->faker->dateTimeThisMonth);
