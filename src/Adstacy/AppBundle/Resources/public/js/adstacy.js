@@ -312,6 +312,7 @@
         $ads.find('.advert-img').dblclick(Adstacy.events.adimagedblclick);
         $ads.find('.report').click(Adstacy.events.adreportclick);
         $ads.find('.advert-object').children().each(Adstacy.events.collapseAd);
+        Adstacy.hoveruser($ads.find('.hovercard-user'));
       }
     }
   };
