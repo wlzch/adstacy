@@ -217,7 +217,11 @@ class Ad
      */
     public function setTags($tags = array())
     {
-        $this->tags = preg_replace('/[^A-Za-z0-9]/', '', array_unique($tags));
+        $_tags = array();
+        foreach (array_unique($tags) as $tag) {
+            $_tags[] = $tag;
+        }
+        $this->tags = preg_replace('/[^A-Za-z0-9]/', '', $_tags);
     
         return $this;
     }
@@ -369,7 +373,7 @@ class Ad
                 if ($size->getWidth() > 640) {
                     $relativeResize = new RelativeResize('widen', 640);
                     $image = $relativeResize->apply($image);
-                    $image->save($originalImage->getRealPath(), array('format' => $originalImage->guessClientExtension()));
+                    $image->save($originalImage->getRealPath(), array('format' => $originalImage->guessExtension()));
                     $size = $image->getSize();
                 }
                 $this->image = $originalImage;
