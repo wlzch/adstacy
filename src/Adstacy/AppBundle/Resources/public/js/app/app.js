@@ -24,7 +24,6 @@
       $(this).parent().css('height', 'auto');
     }
   });
-  console.log(Adstacy.user);
   if (Adstacy.user) {
     $('.user').ajaxlink('users');
     Adstacy.alert();
