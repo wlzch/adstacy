@@ -128,6 +128,33 @@
       );
     }
   };
+  Adstacy.toggleExpander = function(object, expander) {
+    if (object.height() > 600) {
+      // console.log(object.height() + ' remove');
+      expander.removeClass('hide');
+    }
+    else {
+      // console.log(object.height() + ' add');
+      expander.addClass('hide');
+    }
+  };
+  Adstacy.collapseAd = function(object, isAssigned) {
+    object.each(function() {
+      var $this = $(this);
+      var $expander = $this.children('.advert-expand');
+      var $item = $this.children(':first-child');
+      Adstacy.toggleExpander($item, $expander);
+      // console.log(isAssigned);
+
+      if(!isAssigned) {
+        $expander.click(function() {
+          $this.toggleClass('limit');
+          $expander.toggleClass('collapsed');
+        });
+      }
+    });
+  };
+
   Adstacy.events = {
     broadcastcountclick: function() {
       var $this, $ad, $modal, $modalBody;
@@ -151,7 +178,7 @@
           $modalBody.html('');
           $modalBody.append($html);
           $html.find('a.next').click(function() {
-            fn($(this).attr('data-href')); 
+            fn($(this).attr('data-href'));
           });
           Adstacy.follow($html.find('.user-mini'));
         });
@@ -313,32 +340,6 @@
       });
 
       return false;
-    },
-    toggleExpander: function(object, expander) {
-      if (object.height() > 600) {
-        // console.log(object.height() + ' remove');
-        expander.removeClass('hide');
-      }
-      else {
-        // console.log(object.height() + ' add');
-        expander.addClass('hide');
-      }
-    },
-    collapseAd: function(object, isAssigned) {
-      object.each(function() {
-        var $this = $(this);
-        var $expander = $this.children('.advert-expand');
-        var $item = $this.children(':first-child');
-        Adstacy.events.toggleExpander($item, $expander);
-        // console.log(isAssigned);
-
-        if(!isAssigned) {
-          $expander.click(function() {
-            $this.toggleClass('limit');
-            $expander.toggleClass('collapsed');
-          });
-        }
-      });
     }
   };
   var filterUser = function(query, users) {
@@ -377,7 +378,9 @@
         var $ads = $('.jscroll-added:last .advert');
         $ads.find('img.lazy').lazyload({
           load: function() {
-            $(this).parent().css('height', 'auto');
+            var $parent = $(this).parent();
+            $parent.css('height', 'auto');
+            Adstacy.toggleExpander($parent, $parent.siblings());
           }
         });
         var $commentBoxes = $ads.find('textarea.comment-box');
@@ -388,7 +391,7 @@
         $ads.find('.timeago').timeago();
         $ads.find('.btn-share').click(Adstacy.events.share);
         $ads.find('.advert-img').dblclick(Adstacy.events.adimagedblclick);
-        Adstacy.events.collapseAd($ads.find('.advert-object'), false);
+        Adstacy.collapseAd($ads.find('.advert-object'), false);
         Adstacy.hoveruser($ads.find('.hovercard-user'));
         $ads.find('.delete').click(Adstacy.events.deleteAd);
         $ads.find('.report').click(Adstacy.events.adreportclick);

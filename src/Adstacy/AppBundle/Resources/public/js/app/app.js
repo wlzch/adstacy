@@ -21,7 +21,9 @@
   $('.timeago').timeago();
   $('img.lazy').lazyload({
     load: function() {
-      $(this).parent().css('height', 'auto');
+      var $parent = $(this).parent();
+      $parent.css('height', 'auto');
+      Adstacy.toggleExpander($parent, $parent.siblings());
     }
   });
   if (Adstacy.user) {
@@ -35,9 +37,9 @@
 
 $(function(){
   $('.site-menu').perfectScrollbar({});
-  Adstacy.events.collapseAd($('.advert-object'), false);
+  Adstacy.collapseAd($('.advert-object'), false);
 });
 
 $(window).on('resize orientationchange', function() {
-  Adstacy.events.collapseAd($('.advert-object'), true);
+  Adstacy.collapseAd($('.advert-object'), true);
 });
