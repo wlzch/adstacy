@@ -1,7 +1,7 @@
 (function() {
-  var $sidebar = $('#sidebar');
-  var template = Adstacy.templates.sidebar_recommendation;
   if (Adstacy.user) {
+    var $sidebar = $('#sidebar');
+    var template = Adstacy.templates.sidebar_recommendation;
     $.get(Routing.generate('adstacy_api_recommendation'), function(data) {
       var json, users, html;
       json = JSON.parse(data);

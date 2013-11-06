@@ -1,16 +1,18 @@
 (function() {
-  $('.unfollow-user').hover(
-    function() { $(this).text('Unfollow'); },
-    function() { $(this).text('Following'); }
-  ).click(
-    function() { $(this).text('Following'); }
-  );
-  $('.unpromote').hover(
-    function() { $(this).find('.text').text('unbroadcast'); },
-    function() { $(this).find('.text').text('broadcasted'); }
-  ).click(
-    function() { $(this).find('.text').text('broadcasted'); }
-  );
+  if (Adstacy.user) {
+    $('.unfollow-user').hover(
+      function() { $(this).text('Unfollow'); },
+      function() { $(this).text('Following'); }
+    ).click(
+      function() { $(this).text('Following'); }
+    );
+    $('.unpromote').hover(
+      function() { $(this).find('.text').text('unbroadcast'); },
+      function() { $(this).find('.text').text('broadcasted'); }
+    ).click(
+      function() { $(this).find('.text').text('broadcasted'); }
+    );
+  }
   $('.tweet').click(function() {
     window.open(this.href,
       'Twitter tweet',

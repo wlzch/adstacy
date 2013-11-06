@@ -24,8 +24,12 @@
       $(this).parent().css('height', 'auto');
     }
   });
-  $('.user').ajaxlink('users');
-  Adstacy.alert();
+  console.log(Adstacy.user);
+  if (Adstacy.user) {
+    $('.user').ajaxlink('users');
+    Adstacy.alert();
+    Adstacy.hoveruser($('.hovercard-user'));
+  }
 })();
 
 $(function(){
