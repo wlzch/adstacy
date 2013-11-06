@@ -25,7 +25,9 @@
     }
   });
   if (Adstacy.user) {
-    $('.user').ajaxlink('users');
+    Adstacy.follow($('.user'), function(data) {
+      $(this).closest('.user').find('.user-followers-count').text(data.followers_count);
+    });
     Adstacy.alert();
     Adstacy.hoveruser($('.hovercard-user'));
   }

@@ -13,3 +13,12 @@
 {% block content %}
   {% block show_content %}{% endblock %}
 {% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script type="text/javascript">
+    $(function() {
+      Adstacy.follow($('#user-profile'));
+    });
+  </script>
+{% endblock %}

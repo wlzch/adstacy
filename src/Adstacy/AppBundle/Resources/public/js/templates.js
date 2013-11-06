@@ -56,9 +56,10 @@
             <a href="#" class="pull-left"><img src="{{ photo }}" width="32" height="32" class="media-object"></a>
             <div class="media-body">
               <div>
-                <a class="realname hovercard-user" data-username="{{ username }}" href="#">{{ real_name }}</a>
+                <a class="realname hovercard-user" data-username="{{ username }}" href="/{{ username }}">{{ real_name }}</a>
               </div>
-              <a class="btn btn-primary btn-sm">Follow</a>
+              <button data-username="{{ username }}" class="btn btn-sm btn-follow btn-primary follow-user {{#followed}}hide{{/followed}}">Follow</button>
+              <button data-username="{{ username }}" class="btn btn-sm btn-follow btn-success unfollow-user {{^followed}}hide{{/followed}}">Following</button>
             </div>
           </div>
         {{/users}}
@@ -75,8 +76,9 @@
         {{#users}}
           <div class="user-mini">
             <img src="{{ photo }}" class="profilepic" width="50" height="50">
-            <a href="#" class="realname">{{ real_name }} <span class="username">{{ username }}</span></a>
-            <a href="#" class="btn btn-sm btn-primary pull-right">Follow</a>
+            <a href="/{{ username }}" class="realname">{{ real_name }} <span class="username">{{ username }}</span></a>
+            <button data-username="{{ username }}" class="btn btn-sm btn-follow btn-primary follow-user pull-right {{#followed}}hide{{/followed}}">Follow</button>
+            <button data-username="{{ username }}" class="btn btn-sm btn-follow btn-success unfollow-user pull-right {{^followed}}hide{{/followed}}">Following</button>
           </div>
         {{/users}}
       </div>

@@ -4,10 +4,12 @@
 
 {% block show_content %}
 
-  <div class="jscroll adstacy-container">
+  <div class="adstacy-container">
     {% include 'AdstacyAppBundle:User:user_profile.html.twig' %}
     {% if ads|length > 0 %}
-      {{ block('ajax_content') }}
+      <div class="jscroll">
+        {{ block('ajax_content') }}
+      </div>
     {% else %}
       <div class="message-box">
         {% if app.user and app.user == user %}
@@ -40,7 +42,6 @@
   {{ parent() }}
   <script type="text/javascript">
     $(function() {
-      $('#user-profile').ajaxlink('follow_single');
       $('.jscroll').jscroll(Adstacy.options.jscrollAd);
     });
   </script>

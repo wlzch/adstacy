@@ -28,14 +28,10 @@
     <a class="score" href="{{ path('adstacy_app_user_promotes', {username: user.username}) }}"><strong>{{ promotesCount }}</strong> BROADCASTS</a>
     <a class="score" href="{{ path('adstacy_app_user_followers', {username: user.username}) }}"><strong>{{ followersCount }}</strong> FOLLOWERS</a>
     <a class="score last" href="{{ path('adstacy_app_user_followings', {username: user.username}) }}"><strong>{{ followingsCount }}</strong> FOLLOWINGS</a>
-    {% if app.user %}
-      {% if app.user != user %}
-        {% set followed = app.user.hasFollowUser(user) %}
-        <a href="{{ path('adstacy_app_user_follow', {username: user.username}) }}" class="btn btn-primary btn-follow follow-user {% if followed %}hide{% endif %}">Follow</a>
-        <a href="{{ path('adstacy_app_user_unfollow', {username: user.username}) }}" class="btn btn-success btn-follow unfollow-user {% if not followed %}hide{% endif %}">Following</a>
-      {% endif %}
-    {% else %}
-      <a href="{{ path('adstacy_app_user_follow', {username: user.username}) }}" class="btn btn-primary btn-follow">Follow</a>
+    {% if app.user and app.user != user %}
+      {% set followed = app.user.hasFollowUser(user) %}
+      <button data-username="{{ user.username }}" class="btn btn-follow btn-primary follow-user {% if followed %}hide{% endif %}">Follow</button>
+      <button data-username="{{ user.username }}" class="btn btn-follow btn-success unfollow-user {% if not followed %}hide{% endif %}">Following</button>
     {% endif %}
   </div>
 </div>

@@ -3,10 +3,21 @@
 {% block site_body_class %}site-body-no-bg{% endblock %}
 
 {% block show_content %}
-  <div class="jscroll adstacy-container">
+  <div class="adstacy-container">
     {% include 'AdstacyAppBundle:User:user_profile.html.twig' %}
     {% if paginator.getCurrentPageResults|length > 0 %}
-        {{ block('ajax_content') }}
+      <div class="users clearfix">
+        <h2>
+          {% if route == 'adstacy_app_user_followers' %}
+            Followers
+          {% elseif route == 'adstacy_app_user_followings' %}
+            Followings
+          {% endif %}
+        </h2>
+        <div class="jscroll">
+          {{ block('ajax_content') }}
+        </div>
+      </div>
     {% else %}
       <div class="message-box">
         {% if route == 'adstacy_app_user_followers' %}
@@ -28,18 +39,9 @@
 {% endblock %}
 
 {% block ajax_content %}
-  <div class="users">
-    <h2>
-      {% if route == 'adstacy_app_user_followers' %}
-        Followers
-      {% elseif route == 'adstacy_app_user_followings' %}
-        Followings
-      {% endif %}
-    </h2>
-    {% for following in paginator.getCurrentPageResults %}
-      {% include 'AdstacyAppBundle:User:user.html.twig' with {user: following} %}
-    {% endfor %}
-  </div>
+  {% for following in paginator.getCurrentPageResults %}
+    {% include 'AdstacyAppBundle:User:user.html.twig' with {user: following} %}
+  {% endfor %}
   {% if paginator.hasNextPage %}
     {% set params = app.request.query.all|merge({username: user.username, page: paginator.getNextPage}) %}
     <a href="{{ path(route, params )}}" class="btn btn-default btn-lg btn-block load-next next-page">More</a>
@@ -50,15 +52,7 @@
   {{ parent() }}
   <script type="text/javascript">
     $(function() {
-      $('.user-thumb').ajaxlink('follow_user');
-      $('.jscroll').jscroll({
-        callback: function(a, b) {
-          var $users = $('.jscroll-added:last .user');
-          $('.masonry').masonry('appended', $users);
-          $users.find('img.lazy').lazyload();
-          $users.ajaxlink('users');
-        }
-      });
+      $('.jscroll').jscroll(Adstacy.options.jscrollUser);
     });
   </script>
 {% endblock %}

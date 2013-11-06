@@ -29,8 +29,12 @@ adstacy_app_user_follow:
     path: /{username}/follow
     defaults:
         _controller: AdstacyAppBundle:User:follow
+    options:
+        expose: true
 
 adstacy_app_user_unfollow:
     path: /{username}/unfollow
     defaults:
         _controller: AdstacyAppBundle:User:unfollow
+    options:
+        expose: true

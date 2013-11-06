@@ -101,6 +101,33 @@
       $hovercard.hovercard(options);
     }
   };
+  Adstacy.follow = function($user, cb) {
+    if (Adstacy.user) {
+      $user.find('.btn-follow').click(function() {
+        var $this, username, href, that;
+        $this = $(this);
+        that = this;
+        username = $this.attr('data-username');
+        if ($this.hasClass('follow-user')) {
+          href = Routing.generate('adstacy_app_user_follow', {username: username});
+        } else if ($this.hasClass('unfollow-user')) {
+          href = Routing.generate('adstacy_app_user_unfollow', {username: username});
+        } else {
+          return false;
+        }
+        $this.parent().find('.btn-follow').toggleClass('hide');
+        $.post(href, function(data) {
+          if (cb) cb.call(that, JSON.parse(data));
+        });
+      });
+      $user.find('.unfollow-user').hover(
+        function() { $(this).text('Unfollow'); },
+        function() { $(this).text('Following'); }
+      ).click(
+        function() { $(this).text('Following'); }
+      );
+    }
+  };
   Adstacy.events = {
     broadcastcountclick: function() {
       var $this, $ad, $modal;
@@ -111,16 +138,18 @@
         body: Adstacy.templates.loader.render()
       });
       $.getJSON(Routing.generate('adstacy_api_ad_broadcasts', {id: $ad.attr('data-id')}), function(data) {
-        var json, template, $html, html;
+        var json, template, $html, html, body;
+        $body = $modal.find('.modal-body');
         json = JSON.parse(data);
         template = Adstacy.templates.user_mini;
-        html = template.render({
+        $html = $(template.render({
           users: json.data.broadcasts,
           next: json.meta.next,
           next_label: Translator.trans('ads.broadcasts.next')
-        });
-        $html = $(html);
-        $modal.find('.modal-body').html(html);
+        }));
+        $body.html('');
+        $body.append($html);
+        Adstacy.follow($html.find('.user-mini'));
       });
     },
     broadcastclick: function() {
@@ -359,6 +388,12 @@
         $ads.find('.report').click(Adstacy.events.adreportclick);
         $ads.find('a.delete-comment').click(Adstacy.events.deleteComment);
         $ads.find('.advert-broadcasts .count').click(Adstacy.events.broadcastcountclick);
+      }
+    },
+    jscrollUser: {
+      callback: function(event) {
+        var $users = $('.jscroll-added:last .user');
+        Adstacy.follow($users);
       }
     }
   };

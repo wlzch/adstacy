@@ -13,6 +13,7 @@
         $html.hide();
         $sidebar.append($html);
         $html.fadeIn();
+        Adstacy.follow($html.find('.media'));
         Adstacy.hoveruser($html.find('.hovercard-user'), {openOnLeft: true});
       }
     });
