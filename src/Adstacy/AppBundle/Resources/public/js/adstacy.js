@@ -38,7 +38,7 @@
     $modal.on('hidden.bs.modal', function() {
       $modal.remove();
     });
-    
+
     return $modal;
   };
   Adstacy.alert = function(type, message, options) {
@@ -280,15 +280,31 @@
 
       return false;
     },
-    collapseAd: function() {
-      var $parent = $(this).parent();
-      if ($(this).height() > 600) {
-        $parent.append('<a href="javascript:;" class="advert-expand collapsed icon"></a>');
-        $parent.find('.advert-expand').click(function() {
-          $parent.toggleClass('limit');
-          $(this).toggleClass('collapsed');
-        });
+    toggleExpander: function(object, expander) {
+      if (object.height() > 600) {
+        // console.log(object.height() + ' remove');
+        expander.removeClass('hide');
       }
+      else {
+        // console.log(object.height() + ' add');
+        expander.addClass('hide');
+      }
+    },
+    collapseAd: function(object, isAssigned) {
+      object.each(function() {
+        var $this = $(this);
+        var $expander = $this.children('.advert-expand');
+        var $item = $this.children(':first-child');
+        Adstacy.events.toggleExpander($item, $expander);
+        // console.log(isAssigned);
+
+        if(!isAssigned) {
+          $expander.click(function() {
+            $this.toggleClass('limit');
+            $expander.toggleClass('collapsed');
+          });
+        }
+      });
     }
   };
   var filterUser = function(query, users) {
@@ -334,7 +350,7 @@
         $ads.find('.timeago').timeago();
         $ads.find('.btn-share').click(Adstacy.events.share);
         $ads.find('.advert-img').dblclick(Adstacy.events.adimagedblclick);
-        $ads.find('.advert-object').children().each(Adstacy.events.collapseAd);
+        Adstacy.events.collapseAd($ads.find('.advert-object'), false);
         Adstacy.hoveruser($ads.find('.hovercard-user'));
         $ads.find('.delete').click(Adstacy.events.deleteAd);
         $ads.find('.report').click(Adstacy.events.adreportclick);

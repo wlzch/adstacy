@@ -14,19 +14,21 @@
         {% set width = thumb_width %}
       {% endif %}
       {% set height = ad.imageHeight(width) %}
-      <div class="advert-img" style="height: {{ height }}px;">
+      <div class="advert-img">
         <img class="lazy {% if ad.imageWidth >= thumb_width %}full{% endif %}" src="{{ asset('bundles/adstacyapp/img/transparent.gif') }}"
           data-original="{{ vich_uploader_asset(ad, 'image') }}"
           width="{{ width }}" height="{{ height }}">
       </div>
     {% elseif ad.type == 'text' %}
       <div class="advert-text">
-        <h3>{{ ad.title }}</h3>
-        <p>{{ ad.description|raw }}</p>
-        <div class="advert-tags">
-          {% for tag in ad.tags %}
-            <a href="{{ path('adstacy_app_search', {q: tag}) }}">#{{tag}}</a>
-          {% endfor %}
+        <div class="advert-text-content">
+          <h3>{{ ad.title }}</h3>
+          <p>{{ ad.description|raw }}</p>
+          <div class="advert-tags">
+            {% for tag in ad.tags %}
+              <a href="{{ path('adstacy_app_search', {q: tag}) }}">#{{tag}}</a>
+            {% endfor %}
+          </div>
         </div>
       </div>
     {% elseif ad.type == 'youtube' %}
@@ -40,6 +42,7 @@
         <div class="yt-player"></div>
       </div>
     {% endif %}
+    <a href="javascript:;" class="advert-expand collapsed icon hide"></a>
   </div>
 
   <div class="advert-detail clearfix">

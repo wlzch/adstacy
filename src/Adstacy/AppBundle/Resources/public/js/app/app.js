@@ -1,6 +1,6 @@
 $(function(){
   $('.site-menu').perfectScrollbar({});
-  $('.advert-object').children().each(Adstacy.events.collapseAd);
+  Adstacy.events.collapseAd($('.advert-object'), false);
 });
 
 (function() {
@@ -28,3 +28,7 @@ $(function(){
   $('.user').ajaxlink('users');
   Adstacy.alert();
 })();
+
+$(window).on('resize orientationchange', function() {
+  Adstacy.events.collapseAd($('.advert-object'), true);
+});
