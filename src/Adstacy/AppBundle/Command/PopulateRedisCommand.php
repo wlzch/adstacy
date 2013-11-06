@@ -48,8 +48,7 @@ class PopulateRedisCommand extends ContainerAwareCommand
     {
         $output->writeln('Populating user data...');
         $em = $this->getContainer()->get('doctrine')->getManager();
-        $redis = $this->getContainer()->get('snc_redis.default');
-        $userHelper = $this->getContainer()->get('adstacy.helper.user');
+        $userManager = $this->getContainer()->get('adstacy.manager.user');
 
         $users = $em->createQuery('
             SELECT partial u.{id,username,realName,imagename,profilePicture}
@@ -58,13 +57,7 @@ class PopulateRedisCommand extends ContainerAwareCommand
 
         $cnt = 0;
         foreach ($users as $user) {
-            $username = $user->getUsername();
-            $redis->hmset("user:$username", 
-                'id', $user->getId(),
-                'name', $user->getRealName(),
-                'avatar', $userHelper->getProfilePicture($user, false),
-                'value', '@'.$user->getUsername()
-            );
+            $userManager->saveToRedis($user);
             $cnt++;
         }
 

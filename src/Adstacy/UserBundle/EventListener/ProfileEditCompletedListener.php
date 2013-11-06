@@ -8,9 +8,9 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Adstacy\AppBundle\Manager\UserManager;
 
 /**
- * Listener for registration complete
+ * Listener for profile edit completed
  */
-class RegistrationCompletedListener implements EventSubscriberInterface
+class ProfileEditCompletedListener implements EventSubscriberInterface
 {
     private $userManager;
 
@@ -25,13 +25,12 @@ class RegistrationCompletedListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            FOSUserEvents::REGISTRATION_COMPLETED => 'onRegistrationCompleted',
+            FOSUserEvents::PROFILE_EDIT_COMPLETED => 'onProfileEditCompleted',
         );
     }
 
-    public function onRegistrationCompleted(FilterUserResponseEvent $event)
+    public function onProfileEditCompleted(FilterUserResponseEvent $event)
     {
-        $this->userManager->suggestFollow($event->getUser());
         $this->userManager->saveToRedis($event->getUser());
     }
 }

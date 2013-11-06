@@ -60,4 +60,22 @@ class UserManager
         $cmd->setArguments(array($redisKey, $recommendation));
         $redis->executeCommand($cmd);
     }
+
+    /**
+     * Save $user to redis
+     *
+     * @param User $user
+     */
+    public function saveToRedis(User $user)
+    {
+        $redis = $this->container->get('snc_redis.default');
+        $userHelper = $this->container->get('adstacy.helper.user');
+        $username = $user->getUsername();
+        $redis->hmset("user:$username", 
+            'id', $user->getId(),
+            'name', $user->getRealName(),
+            'avatar', $userHelper->getProfilePicture($user, false),
+            'value', '@'.$user->getUsername()
+        );
+    }
 }

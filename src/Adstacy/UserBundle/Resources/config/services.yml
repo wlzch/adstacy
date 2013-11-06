@@ -28,3 +28,9 @@ services:
         arguments: [@adstacy.manager.user]
         tags:
             - { name: kernel.event_subscriber }
+
+    adstacy.listener.profile_edit_completed:
+        class: Adstacy\UserBundle\EventListener\ProfileEditCompletedListener
+        arguments: [@adstacy.manager.user]
+        tags:
+            - { name: kernel.event_subscriber }
