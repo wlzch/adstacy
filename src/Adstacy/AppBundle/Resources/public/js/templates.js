@@ -69,6 +69,20 @@
         <img src="{{ photo }}" class="profilepic" width="100" height="100">
         <p>{{ about }}</p>
       </div>
+    ',
+    user_mini: '
+      <div class="users-mini">
+        {{#users}}
+          <div class="user-mini">
+            <img src="{{ photo }}" class="profilepic" width="50" height="50">
+            <a href="#" class="realname">{{ real_name }} <span class="username">{{ username }}</span></a>
+            <a href="#" class="btn btn-primary pull-right">Follow</a>
+          </div>
+        {{/users}}
+      </div>
+    ',
+    loader: '
+      <img class="center" src="/bundles/adstacyapp/img/loader-alt.gif">
     '
   };
 })(window);

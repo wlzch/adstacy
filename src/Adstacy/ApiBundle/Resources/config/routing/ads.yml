@@ -15,3 +15,12 @@ adstacy_api_ad_comments:
         id: \d+
     options:
         expose: true
+
+adstacy_api_ad_broadcasts:
+    path: /{id}/broadcasts
+    defaults:
+        _controller: AdstacyApiBundle:Ad:listBroadcasts
+    requirements:
+        id: \d+
+    options:
+        expose: true

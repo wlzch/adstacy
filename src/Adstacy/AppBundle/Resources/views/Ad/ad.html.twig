@@ -6,7 +6,7 @@
 {% endif %}
 {% set commentsLength = _comments|length %}
 {% set commentsLeft = ad.commentsCount - commentsLength %}
-<div class="advert" data-username="{{ ad.user.username }}">
+<div class="advert" data-username="{{ ad.user.username }}" data-id="{{ ad.id }}">
   <div class="advert-object limit">
     {% if ad.type == 'image' %}
       {% set width = ad.imageWidth %}

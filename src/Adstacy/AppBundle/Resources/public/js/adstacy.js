@@ -10,7 +10,9 @@
     modal: Hogan.compile(templates.modal),
     alert: Hogan.compile(templates.alert),
     hovercarduser: Hogan.compile(templates.hovercarduser),
-    sidebar_recommendation: Hogan.compile(templates.sidebar_recommendation)
+    sidebar_recommendation: Hogan.compile(templates.sidebar_recommendation),
+    user_mini: Hogan.compile(templates.user_mini),
+    loader: Hogan.compile(templates.loader)
   };
   Adstacy.modal = function(options) {
     var $modal = $('#adstacy-modal');
@@ -36,6 +38,8 @@
     $modal.on('hidden.bs.modal', function() {
       $modal.remove();
     });
+    
+    return $modal;
   };
   Adstacy.alert = function(type, message, options) {
     var types = type ? [type] : ['success', 'error'];
@@ -98,6 +102,27 @@
     }
   };
   Adstacy.events = {
+    broadcastcountclick: function() {
+      var $this, $ad, $modal;
+      $this = $(this);
+      $ad = $this.closest('.advert');
+      $modal = Adstacy.modal({
+        header: 'Broadcasts',
+        body: Adstacy.templates.loader.render()
+      });
+      $.getJSON(Routing.generate('adstacy_api_ad_broadcasts', {id: $ad.attr('data-id')}), function(data) {
+        var json, template, $html, html;
+        json = JSON.parse(data);
+        template = Adstacy.templates.user_mini;
+        html = template.render({
+          users: json.data.broadcasts,
+          next: json.meta.next,
+          next_label: Translator.trans('ads.broadcasts.next')
+        });
+        $html = $(html);
+        $modal.find('.modal-body').html(html);
+      });
+    },
     broadcastclick: function() {
       var $this, $parent;
       $this = $(this);
@@ -306,14 +331,15 @@
         $commentBoxes.mentionsInput(Adstacy.options.mentionsInput);
         $ads.find('.btn-promote').click(Adstacy.events.broadcastclick);
         $ads.find('.load-more-comments').click(Adstacy.events.loadComments);
-        $ads.find('a.delete-comment').click(Adstacy.events.deleteComment);
-        $ads.find('.btn-share').click(Adstacy.events.share);
-        $ads.find('.delete').click(Adstacy.events.deleteAd);
-        $ads.find('.advert-img').dblclick(Adstacy.events.adimagedblclick);
-        $ads.find('.report').click(Adstacy.events.adreportclick);
-        $ads.find('.advert-object').children().each(Adstacy.events.collapseAd);
         $ads.find('.timeago').timeago();
+        $ads.find('.btn-share').click(Adstacy.events.share);
+        $ads.find('.advert-img').dblclick(Adstacy.events.adimagedblclick);
+        $ads.find('.advert-object').children().each(Adstacy.events.collapseAd);
         Adstacy.hoveruser($ads.find('.hovercard-user'));
+        $ads.find('.delete').click(Adstacy.events.deleteAd);
+        $ads.find('.report').click(Adstacy.events.adreportclick);
+        $ads.find('a.delete-comment').click(Adstacy.events.deleteComment);
+        $ads.find('.advert-broadcasts .count').click(Adstacy.events.broadcastcountclick);
       }
     }
   };

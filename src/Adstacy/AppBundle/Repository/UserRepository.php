@@ -172,4 +172,24 @@ class UserRepository extends EntityRepository
 
         return $query->getResult();
     }
+
+    /**
+     * Find users promoted $ad
+     *
+     * @param Ad $ad
+     */
+    public function findPromotesAdQuery(Ad $ad)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('
+            SELECT partial u.{id,username,imagename,realName,adsCount,followersCount,notificationsCount,profilePicture}
+            FROM AdstacyAppBundle:User u
+            JOIN u.promotes p
+            JOIN p.ad a
+            WHERE a.id = :id
+            ORDER BY p.created DESC
+        ');
+
+        return $query->setParameter('id', $ad->getId());
+    }
 }

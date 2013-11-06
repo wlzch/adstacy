@@ -62,4 +62,34 @@ class AdController extends ApiController
 
         return $this->response($res, 'comment_list');
     }
+
+    /**
+     * Return promotes
+     *
+     * @param integer $id
+     */
+    public function listBroadcastsAction($id)
+    {
+        if (($ad = $this->getRepository('AdstacyAppBundle:Ad')->find($id)) == false) {
+            throw $this->createNotFoundException();
+        }
+        $repo = $this->getRepository('AdstacyAppBundle:User');
+        $query = $repo->findPromotesAdQuery($ad);
+        $limit = $this->getParameter('max_list_broadcasts_per_page');
+        $paginator = $this->getDoctrinePaginator($query, $limit);
+        if ($paginator->getNbResults() <= 0) {
+            return $this->noResult();
+        }
+        $next = ($this->getRequest()->query->get('page') ?: 1) + 1;
+        $res = array(
+            'data' => array(
+                'broadcasts' => $paginator->getCurrentPageResults()->getArrayCopy()
+            ),
+            'meta' => array(
+                'next' => $this->generateUrl('adstacy_api_ad_broadcasts', array('id' => $id, 'page' => $next))
+            )
+        );
+
+        return $this->response($res, 'user_list');
+    }
 }

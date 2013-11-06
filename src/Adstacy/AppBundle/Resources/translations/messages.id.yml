@@ -69,6 +69,8 @@ ads:
     blocked: Iklan ini telah diblock. Silahkan edit berdasarkan <a href="%url%">ketentuan</a> kami
     report:
         success: Iklan telah dilaporkan. Kami akan melihatnya segera.
+    broadcasts:
+        next: Lihat broadcast berikutnya
 
 user:
     no_followers:
