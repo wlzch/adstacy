@@ -6,7 +6,7 @@ adstacy_app_user_profile:
         expose: true
 
 adstacy_app_user_promotes:
-    path: /{username}/promotes
+    path: /{username}/broadcasts
     defaults:
         _controller: AdstacyAppBundle:User:showPromotes
 
