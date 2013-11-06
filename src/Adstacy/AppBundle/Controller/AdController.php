@@ -154,6 +154,8 @@ class AdController extends Controller
         $em = $this->getManager();
         $em->remove($ad);
         $em->flush();
+        $redis = $this->get('snc_redis.default');
+        $redis->lrem('trending', 1, $id);
         if ($request->isXmlHttpRequest()) {
             return new JsonResponse(array('status' => 'ok', 'message' => $this->translate('flash.ad.delete.success')));
         }
