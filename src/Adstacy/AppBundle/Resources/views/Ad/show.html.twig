@@ -20,12 +20,3 @@
   {% endif %}
   </div>
 {% endblock %}
-
-{% block javascripts %}
-  {{ parent() }}
-  {% javascripts filter='uglifyjs2'
-    '@AdstacyAppBundle/Resources/public/js/page/show_ad.js'
-  %}
-    <script src="{{ asset_url }}" type="text/javascript"></script>
-  {% endjavascripts %}
-{% endblock %}
