@@ -51,7 +51,7 @@
     </div>
 
     {% if ad.type != 'text' %}
-      <p class="advert-desc">{{ parse_url(ad.description) }}</p>
+      <div class="advert-desc">{{ parse_url(ad.description) }}</div>
       <div class="advert-tags">
         {% for tag in ad.tags %}
           <a href="{{ path('adstacy_app_search', {q: tag}) }}">#{{tag}}</a>
