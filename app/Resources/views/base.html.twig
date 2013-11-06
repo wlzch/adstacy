@@ -200,34 +200,38 @@
       {% endjavascripts %}
 
       {% if not app.debug %}
-      <script type="text/javascript">
-        (function() {
-          // google analytics
-          var ga = document.createElement('script');     ga.type = 'text/javascript'; ga.async = true;
-          ga.src = ('https:'   == document.location.protocol ? 'https://ssl'   : 'http://www') + '.google-analytics.com/ga.js';
-          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        <script type="text/javascript">
+          (function() {
+            // google analytics
+            var ga = document.createElement('script');     ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:'   == document.location.protocol ? 'https://ssl'   : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 
-        })();
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-        function onYouTubeIframeAPIReady() {
-          $('.advert-video').each(function() {
-            var $cont = $(this);
-            $cont.find('a').click(function() {
-              var $this = $(this);
-              var player = new YT.Player($cont[0], {
-                height: '270',
-                width: '448',
-                videoId: $cont.attr('data-youtube-id')
+          })();
+        </script>
+        {% block youtube_javascript %}
+        <script type="text/javascript">
+          var tag = document.createElement('script');
+          tag.src = "https://www.youtube.com/iframe_api";
+          var firstScriptTag = document.getElementsByTagName('script')[0];
+          firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+          function onYouTubeIframeAPIReady() {
+            $('.advert-video').each(function() {
+              var $cont = $(this);
+              $cont.find('a').click(function() {
+                var $this = $(this);
+                var player = new YT.Player($cont[0], {
+                  height: '300',
+                  width: '498',
+                  videoId: $cont.attr('data-youtube-id')
+                });
+
+                return false;
               });
-
-              return false;
             });
-          });
-        }
-      </script>
+          }
+        </script>
+        {% endblock %}
       {% endif %}
     {% endblock %}
   </body>
