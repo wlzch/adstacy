@@ -1,8 +1,3 @@
-$(function(){
-  $('.site-menu').perfectScrollbar({});
-  Adstacy.events.collapseAd($('.advert-object'), false);
-});
-
 (function() {
   var $window = $(window);
   var $siteContainer = $('#site-container');
@@ -24,10 +19,19 @@ $(function(){
   });
 
   $('.timeago').timeago();
-  $('img.lazy').lazyload();
+  $('img.lazy').lazyload({
+    load: function() {
+      $(this).parent().css('height', 'auto');
+    }
+  });
   $('.user').ajaxlink('users');
   Adstacy.alert();
 })();
+
+$(function(){
+  $('.site-menu').perfectScrollbar({});
+  Adstacy.events.collapseAd($('.advert-object'), false);
+});
 
 $(window).on('resize orientationchange', function() {
   Adstacy.events.collapseAd($('.advert-object'), true);

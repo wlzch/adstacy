@@ -341,7 +341,11 @@
     jscrollAd: {
       callback: function(event) {
         var $ads = $('.jscroll-added:last .advert');
-        $ads.find('img.lazy').lazyload();
+        $ads.find('img.lazy').lazyload({
+          load: function() {
+            $(this).parent().css('height', 'auto');
+          }
+        });
         var $commentBoxes = $ads.find('textarea.comment-box');
         $commentBoxes.keydown(Adstacy.events.commentbox);
         $commentBoxes.mentionsInput(Adstacy.options.mentionsInput);
