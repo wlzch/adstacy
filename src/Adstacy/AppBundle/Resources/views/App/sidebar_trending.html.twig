@@ -1,12 +1,23 @@
 {% if ad %}
-  <div class="site-aside">
+  <div id="sidebar-trending" class="site-aside">
     <h2>Trending</h2>
     {% if ad.type == 'image' %}
-      <img src="{{ vich_uploader_asset(ad, 'image')|imagine_filter('small_thumb') }}" class="side-trending-img" width="{{ small_thumb_size }}" height="{{ small_thumb_size }}"/>
+      {% set height = ad.imageHeight %}
+      {% if height >= small_thumb_size %}
+        {% set height = small_thumb_size %}
+      {% endif %}
+      {% set width = ad.imageWidth(height) %}
+      <div class="sidebar-trending-img">
+        <img src="{{ vich_uploader_asset(ad, 'image')|imagine_filter('small_thumb') }}" width="{{ width }}" height="{{ height }}">
+      </div>
     {% elseif ad.type == 'text' %}
-      <h3>{{ ad.title }}</h3>
+      <div class="sidebar-trending-text">
+        <h3>{{ ad.title }}</h3>
+      </div>
     {% elseif ad.type == 'youtube' %}
-      <img src="http://img.youtube.com/vi/{{ ad.youtubeId }}/0.jpg">
+      <div class="sidebar-trending-youtube">
+        <img src="http://img.youtube.com/vi/{{ ad.youtubeId }}/0.jpg">
+      </div>
     {% endif %}
   </div>
 {% endif %}

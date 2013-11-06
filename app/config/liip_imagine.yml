@@ -7,7 +7,7 @@ liip_imagine:
         small_thumb:
             quality: 90
             filters:
-                thumbnail: { size: [%small_thumb_size%, %small_thumb_size%], mode: outbound }
+                thumbnail: { size: [%small_thumb_size%, %small_thumb_size%], mode: inset }
         profile_pic:
             quality: 75
             filters:

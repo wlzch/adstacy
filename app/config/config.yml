@@ -16,7 +16,7 @@ parameters:
     max_who_to_follow: 10
     max_sidebar_recommendation: 3
 
-    small_thumb_size: 250
+    small_thumb_size: 260
     thumb_width: 498
     profile_pic_size: 100
     desc_length: 255

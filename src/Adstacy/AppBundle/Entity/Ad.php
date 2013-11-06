@@ -497,8 +497,12 @@ class Ad
      *
      * @return integer 
      */
-    public function getImageWidth()
+    public function getImageWidth($height = null)
     {
+        if ($height) {
+            return round(($height/ $this->getImageHeight()) * $this->imageWidth);
+        }
+
         return $this->imageWidth;
     }
 
