@@ -207,13 +207,12 @@
       $comments = $that.closest('.advert-comments-container').find('.advert-comments');
       html = $that.html();
       $that.html('');
-      spinner = new Spinner({className: 'spinner', length: 2, width: 2, radius: 2}).spin(this);
+      $this.html(Adstacy.templates.loader.render({size: 15}));
       $this.attr('data-loading', 'true');
 
       $.getJSON(href, function(data) {
         var json = JSON.parse(data);
         var tmpl, left, len, cnt;
-        spinner.stop();
         $that.html(html);
         len = json.data.comments.length;
         cnt = parseInt($that.find('.comments-count').text());

@@ -149,7 +149,8 @@ $(function() {
     $uploadImageContainer.hide();
     var modalBody = $modalBody[0];
     var url = $advertUrl.val();
-    var spinner = new Spinner({className: 'spinner spinner-margin'}).spin(modalBody);
+    $uploadImageContainer.hide();
+    $modalBody.append(Adstacy.templates.loader.render());
     $.getJSON(Routing.generate('adstacy_app_upload_url', {url: url}), function(data) {
       if (data.status == 'ok' && data.files.length > 0) {
         previewImage(data.files[0]);
@@ -157,7 +158,7 @@ $(function() {
         Adstacy.alert('error', data.errors);
         $uploadImageContainer.show();
       }
-      spinner.stop();
+      $modalBody.find('.loader').remove();
 
       return false;
     });

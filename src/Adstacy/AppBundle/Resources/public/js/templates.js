@@ -76,13 +76,18 @@
           <div class="user-mini">
             <img src="{{ photo }}" class="profilepic" width="50" height="50">
             <a href="#" class="realname">{{ real_name }} <span class="username">{{ username }}</span></a>
-            <a href="#" class="btn btn-primary pull-right">Follow</a>
+            <a href="#" class="btn btn-sm btn-primary pull-right">Follow</a>
           </div>
         {{/users}}
       </div>
     ',
     loader: '
-      <img class="center" src="/bundles/adstacyapp/img/loader-alt.gif">
+      {{#size}}
+        <img class="center loader" src="/bundles/adstacyapp/img/loader-alt.gif" width="{{ size }}" height="{{ size }}">
+      {{/size}}
+      {{^size}}
+        <img class="center loader" src="/bundles/adstacyapp/img/loader-alt.gif">
+      {{/size}}
     '
   };
 })(window);
