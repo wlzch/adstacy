@@ -50,7 +50,7 @@
     ',
     sidebar_recommendation: '
       <div id="side-suggest-friend" class="side-aside">
-        <h2>People you may know</h2>
+        <h2><a href="/who-to-follow">People you may know</a></h2>
         {{#users}}
           <div class="media">
             <a href="#" class="pull-left"><img src="{{ photo }}" width="32" height="32" class="media-object"></a>
