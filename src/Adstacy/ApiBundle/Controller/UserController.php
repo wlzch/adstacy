@@ -215,7 +215,11 @@ class UserController extends ApiController
         if ($cnt <= 0) {
             return $this->noResult();
         }
-        $users = $this->getRepository('AdstacyAppBundle:User')->findById(array($ids[$inc], $ids[$inc * 2], $ids[$inc * 3]));
+        $_ids = array();
+        if (isset($ids[$inc])) $_ids[] = $ids[$inc];
+        if (isset($ids[$inc * 2])) $_ids[] = $ids[$inc * 2];
+        if (isset($ids[$inc * 3])) $_ids[] = $ids[$inc * 3];
+        $users = $this->getRepository('AdstacyAppBundle:User')->findById($_ids);
 
         $res = array(
             'data' => array(
