@@ -56,7 +56,8 @@ ads:
         self_message: Anda belum mempunyai iklan
         help: Buat iklan anda sekarang
     no_promotes:
-        message: Iklan ini belum pernah di promote
+        message: %username% belum broadcast 1 ads pun
+        self_message: Anda belum broadcast 1 ads pun
     comment:
         success: Komentar berhasil ditambahkan
         fail: Komentar gagal ditambahkan

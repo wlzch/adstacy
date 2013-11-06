@@ -28,7 +28,7 @@
           {% endif %}
         {% elseif route == 'adstacy_app_user_followings' %}
           {% if app.user and app.user == user %}
-            <div class="lead">{{"user.no_followings.message"|trans({'%username%': user.username})}}</div>
+            <div class="lead">{{"user.no_followings.self_message"|trans}}</div>
           {% else %}
             <div class="lead">{{"user.no_followings.message"|trans({'%username%': user.username})}}</div>
           {% endif %}

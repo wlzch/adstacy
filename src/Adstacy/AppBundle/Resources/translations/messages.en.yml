@@ -58,7 +58,8 @@ ads:
         self_message: You don't have any ads yet
         help: Create an ads now
     no_promotes:
-        message: No promotes on this ad yet
+        message: %username% hasn't broadcasted any ads yet
+        self_message: You haven't broadcasted any ads yet
     comment:
         success: Comment added
         fail: Comment failed

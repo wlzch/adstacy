@@ -12,14 +12,22 @@
       </div>
     {% else %}
       <div class="message-box">
-        {% if app.user and app.user == user %}
-          <div class="lead">
-            {{ "ads.no_ads.self_message"|trans }}
-            <br><small>{{ "ads.no_ads.help"|trans }}</small>
-          </div>
-          <a href="{{ path('adstacy_app_ad_create') }}" class="btn btn-success btn-lg label-group" title="{{ "ads.create"|trans }}"><i class="icon icon-plus"></i><span class="text">{{ "ads.create"|trans }}</span></a>
-        {% else %}
-          <div class="">{{ "ads.no_ads.message"|trans({'%username%': user.username}) }}</div>
+        {% if tab == 'ads' %}
+          {% if app.user and app.user == user %}
+            <div class="lead">
+              {{ "ads.no_ads.self_message"|trans }}
+              <br><small>{{ "ads.no_ads.help"|trans }}</small>
+            </div>
+            <a href="{{ path('adstacy_app_ad_create') }}" class="btn btn-success btn-lg label-group" title="{{ "ads.create"|trans }}"><i class="icon icon-plus"></i><span class="text">{{ "ads.create"|trans }}</span></a>
+          {% else %}
+            <div class="">{{ "ads.no_ads.message"|trans({'%username%': user.username}) }}</div>
+          {% endif %}
+        {% elseif tab == 'promotes' %}
+          {% if app.user and app.user == user %}
+            <div class="lead">{{"ads.no_promotes.self_message"|trans}}</div>
+          {% else %}
+            <div class="lead">{{"ads.no_promotes.message"|trans({'%username%': user.username})}}</div>
+          {% endif %}
         {% endif %}
       </div>
     {% endif %}
