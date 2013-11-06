@@ -202,6 +202,13 @@ a.realname, a.username {
   }
 }
 
+.users-mini {
+  & > a {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+  }
+}
 .user-mini {
   img {
     width: 35px;
@@ -210,9 +217,9 @@ a.realname, a.username {
   }
   padding: 5px 0;
   border-bottom: 1px solid #ccc;
-}
-.user-mini:first-child {
-  border-top: 1px solid #ccc;
+  &:first-child {
+    border-top: 1px solid #ccc;
+  }
 }
 
 // @media screen and (max-width: @screen-phone) {

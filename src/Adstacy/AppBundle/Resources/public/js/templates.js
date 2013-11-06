@@ -81,6 +81,9 @@
             <button data-username="{{ username }}" class="btn btn-sm btn-follow btn-success unfollow-user pull-right {{^followed}}hide{{/followed}}">Following</button>
           </div>
         {{/users}}
+        {{#next}}
+            <a href="javascript:;" class="next" data-href="{{ next }}">{{ next_label }}</a>
+        {{/next}}
       </div>
     ',
     loader: '

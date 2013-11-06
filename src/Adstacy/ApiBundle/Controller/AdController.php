@@ -80,15 +80,17 @@ class AdController extends ApiController
         if ($paginator->getNbResults() <= 0) {
             return $this->noResult();
         }
-        $next = ($this->getRequest()->query->get('page') ?: 1) + 1;
+        $result = $paginator->getCurrentPageResults()->getArrayCopy();
         $res = array(
             'data' => array(
-                'broadcasts' => $paginator->getCurrentPageResults()->getArrayCopy()
+                'broadcasts' => $result
             ),
-            'meta' => array(
-                'next' => $this->generateUrl('adstacy_api_ad_broadcasts', array('id' => $id, 'page' => $next))
-            )
+            'meta' => array()
         );
+        if (count($result) >= $limit) {
+            $next = ($this->getRequest()->query->get('page') ?: 1) + 1;
+            $res['meta']['next'] = $this->generateUrl('adstacy_api_ad_broadcasts', array('id' => $id, 'page' => $next));
+        }
 
         return $this->response($res, 'user_list');
     }

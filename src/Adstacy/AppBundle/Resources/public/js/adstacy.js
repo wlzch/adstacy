@@ -130,27 +130,33 @@
   };
   Adstacy.events = {
     broadcastcountclick: function() {
-      var $this, $ad, $modal;
+      var $this, $ad, $modal, $modalBody;
       $this = $(this);
       $ad = $this.closest('.advert');
       $modal = Adstacy.modal({
-        header: 'Broadcasts',
-        body: Adstacy.templates.loader.render()
+        header: 'Broadcasts'
       });
-      $.getJSON(Routing.generate('adstacy_api_ad_broadcasts', {id: $ad.attr('data-id')}), function(data) {
-        var json, template, $html, html, body;
-        $body = $modal.find('.modal-body');
-        json = JSON.parse(data);
-        template = Adstacy.templates.user_mini;
-        $html = $(template.render({
-          users: json.data.broadcasts,
-          next: json.meta.next,
-          next_label: Translator.trans('ads.broadcasts.next')
-        }));
-        $body.html('');
-        $body.append($html);
-        Adstacy.follow($html.find('.user-mini'));
-      });
+      $modalBody = $modal.find('.modal-body');
+      var fn = function(route) {
+        $modalBody.html(Adstacy.templates.loader.render());
+        $.getJSON(route, function(data) {
+          var json, template, $html, html, body;
+          json = JSON.parse(data);
+          template = Adstacy.templates.user_mini;
+          $html = $(template.render({
+            users: json.data.broadcasts,
+            next: json.meta.next,
+            next_label: Translator.trans('ads.broadcasts.next')
+          }));
+          $modalBody.html('');
+          $modalBody.append($html);
+          $html.find('a.next').click(function() {
+            fn($(this).attr('data-href')); 
+          });
+          Adstacy.follow($html.find('.user-mini'));
+        });
+      };
+      fn(Routing.generate('adstacy_api_ad_broadcasts', {id: $ad.attr('data-id')}));
     },
     broadcastclick: function() {
       var $this, $parent;
