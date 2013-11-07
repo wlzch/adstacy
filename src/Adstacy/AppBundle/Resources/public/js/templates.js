@@ -15,7 +15,7 @@
           {{/delete}}
         </div>
         <div class="media-body">
-          <p>{{ content }}</p>
+          <p>{{{ content }}}</p>
         </div>
       </div>
     ',

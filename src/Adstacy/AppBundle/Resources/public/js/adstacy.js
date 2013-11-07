@@ -128,13 +128,22 @@
       );
     }
   };
+  Adstacy.parseMention = function(text) {
+    return text.replace(/@([^@ ]+)/g, function(match, contents) {
+      return '<a class="mention" href="'+Routing.generate('adstacy_app_user_profile', {username: contents})+'">'+match+'</a>';
+    });
+  };
+  Adstacy.parseUrl = function(text) {
+    var regexp = /((http|https|ftp):\/\/(\S*?\.\S*?))(\s|\;|\)|\]|\[|\{|\}|,|\"|'|:|\<|$|\.\s)/gi;
+    return text.replace(regexp, function(match, contents) {
+      return '<a class="url" href="'+contents+'">'+match+'</a>';
+    });
+  };
   Adstacy.toggleExpander = function(object, expander) {
     if (object.height() > 600) {
-      // console.log(object.height() + ' remove');
       expander.removeClass('hide');
     }
     else {
-      // console.log(object.height() + ' add');
       expander.addClass('hide');
     }
   };
@@ -144,7 +153,6 @@
       var $expander = $this.children('.advert-expand');
       var $item = $this.children(':first-child');
       Adstacy.toggleExpander($item, $expander);
-      // console.log(isAssigned);
 
       if(!isAssigned) {
         $expander.click(function() {
@@ -234,7 +242,7 @@
             real_name: Adstacy.user.real_name,
             time: new Date(),
             strtime: new Date().toDateString(),
-            content: $this.val()
+            content: Adstacy.parseMention(Adstacy.parseUrl($this.val()))
           }));
           $tmpl.insertBefore($this.closest('.comment'));
           $tmpl.find('time').timeago();

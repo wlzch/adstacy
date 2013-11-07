@@ -187,7 +187,7 @@
             {% endif %}
           </div>
           <div class="media-body">
-            <p>{{ comment.content }}</p>
+            <p>{{ parse_mention(parse_url(comment.content)) }}</p>
           </div>
         </div>
       {% endfor %}
