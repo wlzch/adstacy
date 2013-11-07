@@ -17,23 +17,6 @@ use Adstacy\AppBundle\Helper\Formatter;
 class UserRepository extends EntityRepository
 {
     /**
-     * @override
-     *
-     * @param integer id
-     *
-     * @return User
-     */
-    public function findOneById($id)
-    {
-        $em = $this->getEntityManager();
-        $query = $em->createQuery('SELECT u FROM AdstacyAppBundle:User WHERE u.id = :id');
-        $query->useResultCache(true, 3600, 'UserFind');
-
-        return $query->setParameter('id', $id)->getSingleResult();
-    }
-
-
-    /**
      * Find $user followers query
      *
      * @param User $user
