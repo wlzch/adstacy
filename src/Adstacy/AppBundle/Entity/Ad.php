@@ -152,7 +152,7 @@ class Ad
     private $featureds;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      * @JMS\Groups({"user_show", "ad_list", "ad_show"})
      */
     private $active;
