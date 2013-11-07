@@ -1,6 +1,6 @@
 set :application, "Adstacy"
 set :user,        "ubuntu"
-set :domain,      "54.251.160.34"
+set :domain,      "54.254.148.228"
 set :deploy_to,   "/app/adstacy"
 set :app_path,    "app"
 set :web_path,    "web"
