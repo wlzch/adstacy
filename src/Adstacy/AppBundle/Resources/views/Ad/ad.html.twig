@@ -184,7 +184,7 @@
               <span class="username">@{{ comment.user.userName }}</span>
             </a>
             &middot; <time class="timeago" datetime="{{ comment.created|date('c') }}">{{ comment.created|date('F j, Y') }}</time>
-            {% if app.user and (app.user == comment.user or app.user == comment.user) %}
+            {% if app.user and (app.user == comment.user or app.user == ad.user) %}
               <button class="pull-right delete-comment">&times;</button>
             {% endif %}
           </div>
