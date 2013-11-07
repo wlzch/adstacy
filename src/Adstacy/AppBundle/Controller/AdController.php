@@ -208,18 +208,10 @@ class AdController extends Controller
             $em->persist($ad);
             $em->persist($user);
             $em->flush();
-            if ($request->isXmlHttpRequest()) {
-                return new JsonResponse(json_encode(array('id' => $ad->getId(), 'promotes_count' => $ad->getPromoteesCount())));
-            }
-            $this->addFlash('success', $this->translate('flash.ad.promote.success'));
-        } else {
-            if ($request->isXmlHttpRequest()) {
-                return new JsonResponse(json_encode(array('error' => $this->translate('flash.ad.promote.error_twice'))));
-            }
-            $this->addFlash('error', $this->translate('flash.ad.promote.error_twice'));
+            return new JsonResponse(json_encode(array('id' => $ad->getId(), 'promotes_count' => $ad->getPromoteesCount())));
         }
 
-        return $this->redirect($this->generateUrl('adstacy_app_ad_show', array('id' => $id)));
+        return new JsonResponse(json_encode(array('error' => $this->translate('flash.ad.promote.error_twice'))));
     }
 
     /**
@@ -246,18 +238,10 @@ class AdController extends Controller
             $em->persist($ad);
             $em->persist($user);
             $em->flush();
-            if ($request->isXmlHttpRequest()) {
-                return new JsonResponse(json_encode(array('id' => $ad->getId(), 'promotes_count' => $ad->getPromoteesCount())));
-            }
-            $this->addFlash('success', 'You successfully unpromoted this ad');
-        } else {
-            if ($request->isXmlHttpRequest()) {
-                return new JsonResponse(json_encode(array('error' => $this->translate('flash.ad.unpromote.error_not_promote'))));
-            }
-            $this->addFlash('error', $this->translate('flash.ad.unpromote.error_not_promote'));
+            return new JsonResponse(json_encode(array('id' => $ad->getId(), 'promotes_count' => $ad->getPromoteesCount())));
         }
 
-        return $this->redirect($this->generateUrl('adstacy_app_ad_show', array('id' => $id)));
+        return new JsonResponse(json_encode(array('error' => $this->translate('flash.ad.unpromote.error_not_promote'))));
     }
 
     /**

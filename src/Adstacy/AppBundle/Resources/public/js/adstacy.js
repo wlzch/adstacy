@@ -128,6 +128,31 @@
       );
     }
   };
+  Adstacy.broadcast = function($advert) {
+    if (Adstacy.user) {
+      $advert.find('.btn-promote').click(function() {
+        var $this, $parent, $ad, href;
+        $this = $(this);
+        $ad = $this.closest('.advert');
+        $ad.find('.btn-promote').toggleClass('hide');
+        if ($this.hasClass('promote')) {
+          href = Routing.generate('adstacy_app_ad_promote', {id: $ad.attr('data-id')});
+        } else if ($this.hasClass('unpromote')) {
+          href = Routing.generate('adstacy_app_ad_unpromote', {id: $ad.attr('data-id')});
+        } else {
+          return false;
+        }
+        $.post(href);
+      });
+
+      $advert.find('.unpromote').hover(
+        function() { $(this).find('.text').text('unbroadcast'); },
+        function() { $(this).find('.text').text('broadcasted'); }
+      ).click(
+        function() { $(this).find('.text').text('broadcasted'); }
+      );
+    }
+  };
   Adstacy.parseMention = function(text) {
     return text.replace(/@([^@ ]+)/g, function(match, contents) {
       return '<a class="mention" href="'+Routing.generate('adstacy_app_user_profile', {username: contents})+'">'+match+'</a>';
@@ -196,17 +221,6 @@
         });
       };
       fn(Routing.generate('adstacy_api_ad_broadcasts', {id: $ad.attr('data-id')}));
-    },
-    broadcastclick: function() {
-      var $this, $parent;
-      $this = $(this);
-      $parent = $this.parent();
-      $parent.find('.btn-promote').toggleClass('hide');
-      $.post(this.href, function(data) {
-        // do nothing
-      });
-
-      return false;
     },
     adimagedblclick: function() {
       var $this, $ad, $btn;
@@ -398,7 +412,7 @@
         var $commentBoxes = $ads.find('textarea.comment-box');
         $commentBoxes.keydown(Adstacy.events.commentbox);
         $commentBoxes.mentionsInput(Adstacy.options.mentionsInput);
-        $ads.find('.btn-promote').click(Adstacy.events.broadcastclick);
+        Adstacy.broadcast($ads);
         $ads.find('.load-more-comments').click(Adstacy.events.loadComments);
         $ads.find('.timeago').timeago();
         $ads.find('.btn-share').click(Adstacy.events.share);

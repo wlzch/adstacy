@@ -7,7 +7,7 @@
     $('.advert-share.open').removeClass('open').hide();
   });
   if (Adstacy.user) {
-    $advert.find('.btn-promote').click(Adstacy.events.broadcastclick);
+    Adstacy.broadcast($advert);
     $advert.find('.report').click(Adstacy.events.adreportclick);
     $advert.find('.delete').click(Adstacy.events.deleteAd);
     $advert.find('.advert-img').dblclick(Adstacy.events.adimagedblclick);
