@@ -21,7 +21,7 @@
   $('.timeago').timeago();
   $('img.lazy').lazyload({
     load: function() {
-      var $parent = $(this).parent();
+      var $parent = $(this).parent('.advert-image');
       $parent.css('height', 'auto');
       Adstacy.toggleExpander($parent, $parent.siblings());
     }
@@ -37,9 +37,9 @@
 
 $(function(){
   $('.site-menu').perfectScrollbar({});
-  Adstacy.collapseAd($('.advert-object'), false);
+  Adstacy.collapseAd($('.limit'), false);
 });
 
 $(window).on('resize orientationchange', function() {
-  Adstacy.collapseAd($('.advert-object'), true);
+  Adstacy.collapseAd($('.limit'), true);
 });

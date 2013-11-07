@@ -382,7 +382,7 @@
         var $ads = $('.jscroll-added:last .advert');
         $ads.find('img.lazy').lazyload({
           load: function() {
-            var $parent = $(this).parent();
+            var $parent = $(this).parent('.advert-img');
             $parent.css('height', 'auto');
             Adstacy.toggleExpander($parent, $parent.siblings());
           }
@@ -395,7 +395,7 @@
         $ads.find('.timeago').timeago();
         $ads.find('.btn-share').click(Adstacy.events.share);
         $ads.find('.advert-img').dblclick(Adstacy.events.adimagedblclick);
-        Adstacy.collapseAd($ads.find('.advert-object'), false);
+        Adstacy.collapseAd($ads.find('.limit'), false);
         Adstacy.hoveruser($ads.find('.hovercard-user'));
         $ads.find('.delete').click(Adstacy.events.deleteAd);
         $ads.find('.report').click(Adstacy.events.adreportclick);

@@ -7,8 +7,8 @@
 {% set commentsLength = _comments|length %}
 {% set commentsLeft = ad.commentsCount - commentsLength %}
 <div class="advert" data-username="{{ ad.user.username }}" data-id="{{ ad.id }}">
-  <div class="advert-object limit">
-    {% if ad.type == 'image' %}
+  {% if ad.type == 'image' %}
+    <div class="advert-object limit">
       {% set width = ad.imageWidth %}
       {% if ad.imageWidth >= thumb_width %}
         {% set width = thumb_width %}
@@ -19,7 +19,10 @@
           data-original="{{ vich_uploader_asset(ad, 'image') }}"
           width="{{ width }}" height="{{ height }}">
       </div>
-    {% elseif ad.type == 'text' %}
+      <a href="javascript:;" class="advert-expand collapsed icon hide"></a>
+    </div>
+  {% elseif ad.type == 'text' %}
+    <div class="advert-object limit">
       <div class="advert-text">
         <div class="advert-text-content">
           <h3>{{ ad.title }}</h3>
@@ -31,19 +34,20 @@
           </div>
         </div>
       </div>
-    {% elseif ad.type == 'youtube' %}
+      <a href="javascript:;" class="advert-expand collapsed icon hide"></a>
+    </div>
+  {% elseif ad.type == 'youtube' %}
+    <div class="advert-object static">
       <div class="advert-video" data-youtube-id="{{ ad.youtubeId }}">
-        <a href="javascript:;">
-          <img class="lazy" src="{{ asset('bundles/adstacyapp/img/transparent.gif') }}"
-            data-original="http://img.youtube.com/vi/{{ ad.youtubeId }}/0.jpg"
-            width="{{ thumb_width }}" height="{{ thumb_width * (3/4) }}"
-          >
-        </a>
+        <img class="lazy" src="{{ asset('bundles/adstacyapp/img/transparent.gif') }}"
+          data-original="http://img.youtube.com/vi/{{ ad.youtubeId }}/0.jpg"
+          width="{{ thumb_width }}" height="372"
+        >
+        <a href="javascript:;" class="btn-play"><i class="icon icon-video"></i></a>
         <div class="yt-player"></div>
       </div>
-    {% endif %}
-    <a href="javascript:;" class="advert-expand collapsed icon hide"></a>
-  </div>
+    </div>
+  {% endif %}
 
   <div class="advert-detail clearfix">
     <div class="advert-user">

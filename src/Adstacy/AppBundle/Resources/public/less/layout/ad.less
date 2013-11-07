@@ -32,6 +32,10 @@
   }
 }
 
+.advert-object.static {
+  line-height: 0;
+}
+
 .advert-object.limit {
   max-height: @advert-limit !important;
   .transition(max-height ease .2s);
@@ -332,4 +336,25 @@
 .unpromote:hover {
   margin-left: 0;
   color: @gray-light;
+}
+
+.advert-video {
+  .btn-play {
+    width: 100%;
+    display: block;
+    position: absolute;
+    top: 0;
+    background: rgba(0, 0, 0, 0.2) url("../img/dots.png");
+    text-align: center;
+    font-size: 64px;
+    line-height: 372px;
+    color: rgba(255,255,255,.7);
+    .transition(~"background .2s, color .2s");
+
+    &:hover {
+      background: transparent;
+      color: rgba(255,0,0,.7);
+      text-decoration: none;
+    }
+  }
 }
