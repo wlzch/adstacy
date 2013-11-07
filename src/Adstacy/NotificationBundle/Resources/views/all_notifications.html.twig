@@ -1,14 +1,14 @@
-<div class="page-title text-center">
-  <h2>Notifications</h2>
+<div class="panel panel-default">
+  <div class="panel-heading"><h2>Notifications</h2></div>
+  <ul id="all-notifications" class="list-group notifications">
+    {% if notifications|length > 0 %}
+      {% for notification in notifications %}
+        <li class="list-group-item clearfix">
+          {% include 'AdstacyNotificationBundle::notification.html.twig' with {notification: notification} %}
+        </li>
+      {% endfor %}
+    {% else %}
+      <li class="no-new-notifications">{{ 'notification.no_notification'|trans }}</li>
+    {% endif %}
+  </ul>
 </div>
-<ul id="all-notifications" class="list-group notifications">
-  {% if notifications|length > 0 %}
-    {% for notification in notifications %}
-      <li class="list-group-item clearfix">
-        {% include 'AdstacyNotificationBundle::notification.html.twig' with {notification: notification} %}
-      </li>
-    {% endfor %}
-  {% else %}
-    <li class="no-new-notifications">{{ 'notification.no_notification'|trans }}</li>
-  {% endif %}
-</ul>

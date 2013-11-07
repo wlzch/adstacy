@@ -39,7 +39,7 @@
 .notification {
   display: block;
   text-decoration: none;
-  padding: 10px;
+  padding: 10px 15px;
   color: #999;
 
   &:hover {
@@ -67,6 +67,10 @@
   .notification {
     white-space: normal;
   }
+
+  > li > a:last-child {
+    .border-bottom-radius(@border-radius-base);
+  }
 }
 
 #show-all-notifications a {
@@ -78,10 +82,6 @@
 }
 
 #all-notifications {
-
-  .list-group-item:first-child a {
-    .border-top-radius(@border-radius-base);
-  }
 
   .list-group-item:last-child a {
     .border-bottom-radius(@border-radius-base);
@@ -106,20 +106,5 @@
     background-color: #333;
     float: right;
     margin-right: 20px;
-  }
-}
-
-@media screen and (max-width: @screen-tablet) {
-  #all-notifications {
-    border-radius: 0;
-    width: 100%;
-
-    > li {
-      border-radius: 0;
-    }
-
-    .notification {
-      width: 100%;
-    }
   }
 }
