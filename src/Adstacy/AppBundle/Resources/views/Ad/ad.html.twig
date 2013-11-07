@@ -173,16 +173,16 @@
           <div class="pull-left">
             <img src="{{ profile_pic(comment.user) }}" alt="" width="32" height="32" class="media-object">
           </div>
+          <div class="media-heading">
+            <a class="realname hovercard-user" data-username="{{ comment.user.username }}" href="{{ path('adstacy_app_user_profile', {username: comment.user.username}) }}">{{ comment.user.realName }}
+              <span class="username">@{{ comment.user.userName }}</span>
+            </a>
+            &middot; <time class="timeago" datetime="{{ comment.created|date('c') }}">{{ comment.created|date('F j, Y') }}</time>
+            {% if app.user and (app.user == comment.user or app.user == comment.user) %}
+              <a href="javascript:;" data-href="{{ path('adstacy_app_ad_comment_delete', {id: comment.id}) }}" class="pull-right delete-comment">&times;</a>
+            {% endif %}
+          </div>
           <div class="media-body">
-            <div class="media-heading">
-              <a class="realname hovercard-user" data-username="{{ comment.user.username }}" href="{{ path('adstacy_app_user_profile', {username: comment.user.username}) }}">{{ comment.user.realName }}
-                <span class="username">@{{ comment.user.userName }}</span>
-              </a>
-              &middot; <time class="timeago" datetime="{{ comment.created|date('c') }}">{{ comment.created|date('F j, Y') }}</time>
-              {% if app.user and (app.user == comment.user or app.user == comment.user) %}
-                <a href="javascript:;" data-href="{{ path('adstacy_app_ad_comment_delete', {id: comment.id}) }}" class="pull-right delete-comment">&times;</a>
-              {% endif %}
-            </div>
             <p>{{ comment.content }}</p>
           </div>
         </div>

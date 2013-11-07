@@ -5,22 +5,22 @@
         <div class="pull-left">
           <img src="{{ photo }}" alt="" width="32" height="32" class="media-object">
         </div>
+        <div class="media-heading">
+          <a class="realname" href="/{{ username }}">{{ real_name }}
+            <span class="username">@{{ username }}</small>
+          </a>
+          &middot; <time class="timeago" datetime="{{ time }}">{{ strtime }}</time>
+          {{#delete}}
+            <a href="javascript:;" data-href="/comments/{{ id }}/delete" class="pull-right delete-comment">&times;</a>
+          {{/delete}}
+        </div>
         <div class="media-body">
-          <div class="media-heading">
-            <a class="realname" href="/{{ username }}">{{ real_name }}
-              <span class="username">@{{ username }}</small>
-            </a>
-            &middot; <time class="timeago" datetime="{{ time }}">{{ strtime }}</time>
-            {{#delete}}
-              <a href="javascript:;" data-href="/comments/{{ id }}/delete" class="pull-right delete-comment">&times;</a>
-            {{/delete}}
-          </div>
           <p>{{ content }}</p>
         </div>
       </div>
     ',
     modal: '
-      <div class="modal fade" id="adstacy-modal" tabindex="-1" role="dialog"> 
+      <div class="modal fade" id="adstacy-modal" tabindex="-1" role="dialog">
           <div class="modal-dialog">
             <div class="modal-content">
               {{#header}}
