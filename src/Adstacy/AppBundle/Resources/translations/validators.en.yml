@@ -29,6 +29,7 @@ user:
         max: Username maximal {{ limit }} characters
         valid: Please use only letters (a-z), numbers, periods, and underscores on Username
         unique: Username is already used
+        reserved: Username is reserved. Please choose another username.
     email:
         not_blank: Email cannot be blank
         email: Email is not valid

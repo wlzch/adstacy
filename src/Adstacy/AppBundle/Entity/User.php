@@ -1004,6 +1004,13 @@ class User implements UserInterface, GroupableInterface
            if (!preg_match('/^[a-zA-Z0-9\.\_]{1,}$/', $this->username)) { // for english chars + numbers only
                $context->addViolationAt('username', 'user.username.valid');
            }
+           if (in_array($this->username, array(
+            'admin', 'explore', 'stream', 'trending', 'who-to-follow', 'settings', 'search', 'contact-us',
+            'login', 'logout', 'register', 'notifications', 'profile', 'resetting', 'upload', 'upload-url',
+            'tags'
+           ))) {
+               $context->addViolationAt('username', 'user.username.reserved');
+           }
        }
    }
 

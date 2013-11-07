@@ -29,6 +29,7 @@ user:
         max: Username maksimal {{ limit }} karakter
         valid: Username hanya boleh berisi huruf (a-z), angka, titik dan underscore
         unique: Username telah dipakai
+        reserved: Username telah direserved. Silahkan pakai username lain.
     email:
         not_blank: Email harus diisi
         email: Email tidak valid
