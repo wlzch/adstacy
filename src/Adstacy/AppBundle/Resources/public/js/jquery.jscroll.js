@@ -19,7 +19,7 @@
         defaults: {
             debug: true,
             autoTrigger: true,
-            loadingHtml: '<div class="load-next"><div class="loader-img"></div></div>',
+            loadingHtml: '<img class="center loader" src="/bundles/adstacyapp/img/loader-alt.gif">',
             padding: 0,
             nextSelector: 'a.next-page',
             contentSelector: '',
