@@ -6,6 +6,8 @@ notification:
     promote: 'promote ad anda'
     block_ad: 'block iklan anda'
     unblock_ad: 'unblock iklan anda'
+    facebook_friend_join: '(teman facebook Anda) baru saja mendaftar'
+    twitter_friend_join: '(teman twitter Anda) baru saja mendaftar'
 
     no_notification: Tidak ada notifikasi
     show_all: Semua notifikasi

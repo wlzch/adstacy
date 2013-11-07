@@ -18,9 +18,9 @@ edit: Ubah
 more: Lagi
 report: Lapor
 saving: Menyimpan...
+submitting: Mengsubmit...
 registering: Mendaftarkan...
 loggingin: Logging in...
-promoted_by: Juga dipromote oleh
 continue_to_explore: Lanjut ke Explore
 or: ATAU
 you: Kamu
@@ -42,7 +42,6 @@ about: Tentang
 terms: Ketentuan
 privacy: Kebijakan Privasi
 contact_us: Kontak Kami
-beta_info: Adstacy sedang dalam Beta. Kontak kami <a href="%url%">disini</a> jika Anda mempunyai kritik, saran ataupun pertanyaan
 subscription_notice: Kami akan mengirimkan notifikasi yang belum terbaca ke email 2 kali dalam 1 hari
 
 ads:
@@ -70,6 +69,7 @@ ads:
     blocked: Iklan ini telah diblock. Silahkan edit berdasarkan <a href="%url%">ketentuan</a> kami
     report:
         success: Iklan telah dilaporkan. Kami akan melihatnya segera.
+    other_promotes: 'dan <a class="count" href="javascript:;">%count%</a> orang lainnya juga broadcast'
     broadcasts:
         next: Lihat broadcast berikutnya
 
@@ -88,8 +88,14 @@ search:
         message: Hasil Pencarian Tidak Ditemukan
         help: Cari dengan kata kunci lainnya
 
+form_registration:
+    agreement: Dengan klik daftar, anda setuju dengan <a href="%terms_url%">Aturan Layanan</a> dan <a href="%privacy_url%">Kebijakan Privasi</a>
+    fullname: Nama Lengkap
+    submit: Daftar
+    title: Daftar
+
 form_profile:
-    profile_picture: Gambar profil
+    profile_picture: Foto profil
     fullname: Nama lengkap
     about_me: Tentang Saya
     subcription: Subskripsi email
@@ -120,7 +126,6 @@ form_ad:
         url: http://
         title: Judul
         youtube_url: Paste url video youtube
-    characters_left: 'sisa <span id="chars-left">%left%</span> karakter'
     help:
         upload_from_computer: Upload dari komputer (mendukung jpg dan png)
         upload_from_url: Paste url dari image (mendukung jpg dan png)
@@ -130,6 +135,11 @@ form_contact:
     email: Email
     content: Isi
     submit: Kirim
+
+form_comment:
+    content: Komentar
+    placeholders:
+        content: Komentar
 
 form_password:
     submit: Ubah password

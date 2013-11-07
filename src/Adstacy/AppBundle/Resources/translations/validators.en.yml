@@ -1,11 +1,10 @@
 ad:
     image:
         not_null: You must upload an image
+    description:
+        not_blank: Ad description must not be blank
     title:
         not_blank: Title must not be blank
-    description:
-        max: Ad description at most {{ limit }} characters
-        not_blank: Ad description must not be blank
     images:
         max_count: You can only upload max {{ limit }} images
     tags:
@@ -14,12 +13,12 @@ ad:
     youtube_url:
         not_valid: Youtube url is not valid
         not_blank: Youtube url cannot be blank
-    error: An error occured. Please refresh this page and try again
+    error: An error occured. Please refresh this page and try again.
 
 image:
     file:
-        max_size: Image is too large ({{ size}}). Maximum size is {{ limit }}
         mime_types: Image must be of type png or jpg
+        max_size: Image is too large ({{ size}}). Maximum size is {{ limit }}
         min_width: Image width is too small({{ width }}px). Min width allowed is {{ min_width }}px
         not_null: Image must be uploaded
 

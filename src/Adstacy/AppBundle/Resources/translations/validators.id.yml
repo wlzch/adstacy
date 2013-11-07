@@ -2,8 +2,9 @@ ad:
     image:
         not_null: Gambar harus diupload
     description:
-        max: Deskripsi maksimal {{ limit }} karakter
         not_blank: Deskripsi harus diisi
+    title:
+        not_blank: Judul harus diisi
     images:
         max_count: Anda hanya dapat mengupload maksimal {{ limit }} gambar
     tags:
@@ -12,10 +13,12 @@ ad:
     youtube_url:
         not_valid: Url youtube tidak valid
         not_blank: Url youtube tidak boleh kosong
+    error: Kesalahan terjadi. Silahkan refresh halaman ini dan coba lagi.
 
 image:
     file:
         mime_types: Gambar harus jpg atau png
+        max_size: Gambar terlalu besar ({{ size}}). Maksimum besar gambar adalah {{ limit }}
         min_width: Lebar gambar terlalu kecil({{ width }}px). Minimal lebar {{ min_width }}px
         not_null: Gambar harus diupload
 
@@ -37,3 +40,7 @@ user:
         min: Password minimal {{ limit }} karakter
     about:
         max: Tentang maksimal {{ limit }} karakter 
+comment:
+    content:
+        not_blank: Komentar tidak boleh kosong
+        max: Komentar maksimal {{ limit }} karakter
