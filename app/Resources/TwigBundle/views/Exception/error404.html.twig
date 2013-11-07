@@ -9,14 +9,14 @@
   {% endstylesheets %}
 {% endblock %}
 
-{% block content %}
+{% block container %}
   <div id="error-page">
     <h2>Page Not Found</h2>
     <h3>The page you are looking for is not here. Are you looking for something else?</h3>
     <div class="links">
-      <a class="btn btn-success" href="{{ path('homepage') }}">Homepage</a>
+      <a class="btn btn-success btn-lg" href="{{ path('homepage') }}">Homepage</a>
       {% if app.request.headers.get('referer') %}
-      <a class="btn btn-success" href="{{ app.request.headers.get('referer') }}">Back to previous page</a>
+      <a class="btn btn-success btn-lg" href="{{ app.request.headers.get('referer') }}">Back to previous page</a>
       {% endif %}
     </div>
   </div>

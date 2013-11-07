@@ -9,13 +9,13 @@
   {% endstylesheets %}
 {% endblock %}
 
-{% block content %}
+{% block container %}
   <div id="error-page">
     <h2>Forbidden Access</h2>
     <h3>You shall not pass! Only the chosen one may pass.</h3>
     <div class="links">
-      <a class="btn btn-success" href="{{ path('homepage') }}">Homepage</a>
-      <a class="btn btn-success" href="{{ app.request.headers.get('referer') }}">Back to previous page</a>
+      <a class="btn btn-success btn-lg" href="{{ path('homepage') }}">Homepage</a>
+      <a class="btn btn-success btn-lg" href="{{ app.request.headers.get('referer') }}">Back to previous page</a>
     </div>
   </div>
 {% endblock %}
