@@ -114,7 +114,7 @@ class User implements UserInterface, GroupableInterface
     private $adsCount;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="followings")
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="followings", fetch="EXTRA_LAZY")
      **/
     private $followers;
 
@@ -126,7 +126,7 @@ class User implements UserInterface, GroupableInterface
     private $followersCount;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", inversedBy="followers")
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="followers", fetch="EXTRA_LAZY")
      * @ORM\JoinTable(name="follow",
      *      joinColumns={
      *        @ORM\JoinColumn(name="follower", referencedColumnName="id")
@@ -158,7 +158,7 @@ class User implements UserInterface, GroupableInterface
     private $about;
 
     /**
-     * @ORM\OneToMany(targetEntity="PromoteAd", mappedBy="user", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="PromoteAd", mappedBy="user", orphanRemoval=true, fetch="EXTRA_LAZY")
      */
     private $promotes;
 
@@ -1351,24 +1351,6 @@ class User implements UserInterface, GroupableInterface
     }
 
     /**
-     * Checks wheter followers has promote ad
-     *
-     * @param Ad $ad
-     *
-     * @return boolean
-     */
-    public function hasFollowingsPromote(Ad $ad)
-    {
-        foreach ($this->getFollowings() as $user) {
-            if ($user->hasPromote($ad)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
      * Set realName
      *
      * @param string $realName
@@ -1533,27 +1515,6 @@ class User implements UserInterface, GroupableInterface
     public function getPromotes()
     {
         return $this->promotes;
-    }
-
-    /**
-     * Get $limit followings user who has also promote $ad
-     *
-     * @param Ad $ad
-     * @param integer $limit
-     */
-    public function getFollowingsPromoted(Ad $ad, $limit = 3)
-    {
-        $i = 0;
-        $users = array();
-        foreach ($this->getFollowings() as $following) {
-            if ($following->hasPromote($ad)) {
-                $users[] = $following;
-                $i++;
-                if ($i == $limit) return $users;
-            }
-        }
-
-        return $users;
     }
 
     /**
