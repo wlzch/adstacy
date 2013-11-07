@@ -114,11 +114,9 @@ class UserController extends ApiController
             throw $this->createNotFoundException();
         };
 
-        $ads = $user->getAds()->slice(0, $limit);
         $res = array(
             'data' => array(
-                'user' => $user,
-                'ads' => $ads
+                'user' => $user
             ),
             'meta' => array(
                 'url_followers' => $this->generateUrl('adstacy_api_user_followers', array('username' => $username)),
