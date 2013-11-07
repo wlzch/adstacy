@@ -1,7 +1,7 @@
 (function() {
   var $comment = $('textarea.comment-box');
   var $loadComments = $('.load-more-comments');
-  var $deletes = $('a.delete-comment');
+  var $deletes = $('.delete-comment');
   $loadComments.click(Adstacy.events.loadComments);
   if (Adstacy.user) {
     // must bind enter keydown checking first before mentionsInput because ordering matters.

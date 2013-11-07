@@ -1,7 +1,7 @@
 (function(window) {
   window.templates = {
     comment: '
-      <div class="comment media">
+      <div class="comment media" data-id="{{ id }}">
         <div class="pull-left">
           <img src="{{ photo }}" alt="" width="32" height="32" class="media-object">
         </div>

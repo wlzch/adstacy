@@ -278,7 +278,7 @@
       $comment.fadeOut('slow', function() {
         $comment.remove();
       });
-      $.post($this.attr('data-href'));
+      $.post(Routing.generate('adstacy_app_ad_comment_delete', {id: $comment.attr('data-id')}));
       return false;
     },
     loadComments: function(event) {

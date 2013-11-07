@@ -52,6 +52,8 @@ adstacy_app_ad_comment_delete:
     requirements:
         id: \d+
     methods: [POST]
+    options:
+        expose: true
 
 adstacy_app_ad_edit:
     path: /ads/{id}/edit
