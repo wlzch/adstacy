@@ -278,9 +278,7 @@
       $comment.fadeOut('slow', function() {
         $comment.remove();
       });
-      $.post($this.attr('data-href'), function(data) {
-        // do nothing;
-      });
+      $.post($this.attr('data-href'));
       return false;
     },
     loadComments: function(event) {
