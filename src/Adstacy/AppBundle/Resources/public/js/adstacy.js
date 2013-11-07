@@ -215,19 +215,20 @@
     },
     commentbox: function(event) {
       if (!Adstacy.user) return;
-      var $this = $(this);
-      var $form = $this.closest('form');
-      var template = Adstacy.templates.comment;
+      var $this, $form, template, $mentions, $tmpl, serialized;
+      $this = $(this);
+      $form = $this.closest('form');
+      template = Adstacy.templates.comment;
       if ($.trim($this.val()).length <= 0) {
         return;
       }
 
       if (event.which == 13) {
-        var $mentions = $('.mentions-autocomplete-list');
+        $mentions = $('.mentions-autocomplete-list');
         if (!$mentions.is(':hidden')) {
           return;
         } else {
-          var $tmpl = $(template.render({
+          $tmpl = $(template.render({
             photo: Adstacy.user.photo,
             username: Adstacy.user.username,
             real_name: Adstacy.user.real_name,
@@ -237,11 +238,10 @@
           }));
           $tmpl.insertBefore($this.closest('.comment'));
           $tmpl.find('time').timeago();
-          var serialized = $form.serialize();
+          serialized = $form.serialize();
           $this.val(''); //bug
-          $.post($form.attr('action'), serialized, function(data) {
-            // do nothing
-          });
+          event.preventDefault();
+          $.post($form.attr('action'), serialized);
 
           return;
         }
