@@ -225,8 +225,9 @@
               $cont.find('a').click(function() {
                 var $this = $(this);
                 var player = new YT.Player($cont[0], {
-                  height: '300',
+                  height: '372',
                   width: '498',
+                  autoplay: true,
                   videoId: $cont.attr('data-youtube-id')
                 });
 
