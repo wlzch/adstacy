@@ -70,32 +70,17 @@
   <div class="advert-action clearfix">
     {% set promoted = null %}
     {% if app.user %}
-      <div class="btn-group pull-left">
+      <div class="pull-left">
         {% set promoted = app.user.hasPromote(ad) %}
         <button class="btn btn-default btn-promote promote {% if promoted %}hide{% endif %}" title="Broadcast">
           <i class="icon icon-bullhorn"></i><span class="text">broadcast</span>
         </button>
-        <button class="btn btn-promote unpromote {% if not promoted %}hide{% endif %}" title="Broadcasted">
+        <button class="btn btn-default btn-promote unpromote {% if not promoted %}hide{% endif %}" title="Broadcasted">
           <i class="icon icon-bullhorn"></i><span class="text">broadcasted</span>
         </button>
       </div>
     {% endif %}
-    {% set lastPromotees = ad.getLastPromotees(3) %}
-    {% set cntLastPromotees = lastPromotees|length %}
-    {% set promoteesCount = ad.promoteesCount %}
-    {% if cntLastPromotees > 0 %}
-      <div class="advert-broadcasts pull-left text-overflow">
-        {% for index, promotee in lastPromotees %}
-          <a href="{{ path('adstacy_app_user_profile', {username: promotee}) }}">{{ promotee }}</a>{% if index != cntLastPromotees - 1 %}{% if promoteesCount > cntLastPromotees or (promoteesCount == cntLastPromotees and index != cntLastPromotees - 2) %},{% else %} and {% endif %}{% endif %}
-        {% endfor %}
-        <span>
-        {% if promoteesCount > cntLastPromotees %}
-          {{"ads.other_promotes"|trans({'%count%': promoteesCount - cntLastPromotees })|raw}}
-        {% endif %}
-        broadcast this
-        </span>
-      </div>
-    {% endif %}
+
     <div class="btn-group pull-right">
       <a class="btn btn-default btn-share">
         <i class="icon icon-share"></i>
@@ -140,6 +125,23 @@
         </ul>
       </div>
     </div>
+
+    {% set lastPromotees = ad.getLastPromotees(3) %}
+    {% set cntLastPromotees = lastPromotees|length %}
+    {% set promoteesCount = ad.promoteesCount %}
+    {% if cntLastPromotees > 0 %}
+      <div class="advert-broadcasts text-overflow">
+        {% for index, promotee in lastPromotees %}
+          <a href="{{ path('adstacy_app_user_profile', {username: promotee}) }}">{{ promotee }}</a>{% if index != cntLastPromotees - 1 %}{% if promoteesCount > cntLastPromotees or (promoteesCount == cntLastPromotees and index != cntLastPromotees - 2) %},{% else %} and {% endif %}{% endif %}
+        {% endfor %}
+        <span>
+        {% if promoteesCount > cntLastPromotees %}
+          {{"ads.other_promotes"|trans({'%count%': promoteesCount - cntLastPromotees })|raw}}
+        {% endif %}
+        broadcast this
+        </span>
+      </div>
+    {% endif %}
   </div>
 
   <div class="advert-action-content">

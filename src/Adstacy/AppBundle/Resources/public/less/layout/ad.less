@@ -8,11 +8,6 @@
   border-radius: @border-radius-large;
   box-shadow: 0 0 1px #aaa;
 
-  .dropdown-menu {
-    border-right: 0;
-    min-width: initial;
-    text-transform: uppercase;
-  }
   .media-heading {
     line-height: 1;
   }
@@ -148,8 +143,10 @@
   border-bottom: 1px solid @border-color;
 
   .btn {
-    height: 46px;
-    border-bottom: 0;
+    height: 48px;
+    width: 48px;
+    padding: 6px;
+    border-width: 0 1px;
     border-radius: 0 !important;
     font-size: 12px;
 
@@ -162,21 +159,47 @@
     }
   }
 
-  .promote {
-    border: 0;
-    border-right: 1px solid @border-color;
-  }
+  .promote,
   .unpromote {
-    border: 0;
-    background-color: #fff;
-    color: @brand-primary;
-    border-right: 1px solid @border-color;
-    border-left: 1px solid @border-color;
+    width: 95px;
   }
 
-  .pull-right .btn {
-    border: 0;
-    border-left: 1px solid @border-color;
+  .unpromote {
+    background-color: #fff;
+    color: @brand-primary;
+
+    &:hover {
+      margin-left: 0;
+      color: @gray-light;
+    }
+  }
+
+  .pull-left {
+    margin-left: -1px;
+  }
+
+  .pull-right {
+    margin-right: -1px;
+  }
+
+  a {
+    font-size: 12px;
+
+    .icon {
+      font-size: 16px;
+    }
+
+    span {
+      display: block;
+    }
+  }
+
+  .btn-option + .dropdown-menu {
+    min-width: initial;
+    right: 1px;
+    text-transform: uppercase;
+    border-top: 1px solid @green-accent;
+    border-radius: 0 !important;
   }
 }
 
@@ -189,9 +212,12 @@
     .box-shadow(0 6px 12px rgba(0,0,0,.175));
     background-clip: padding-box;
     position: absolute;
-    top: 0;
+    top: -1px;
     background-color: #fff;
+    border-top: 1px solid @blue-accent;
+    padding: 10px 15px;
   }
+
   .url {
     text-align: center;
     color: #555;
@@ -201,15 +227,16 @@
     width: 100%;
   }
 
-  .advert-share, .advert-comment {
+  .advert-comment {
     padding: 10px 15px;
     border-top: 1px solid @border-color;
   }
 }
 
 .advert-broadcasts {
-  padding: 13px 10px;
-  width: 295px;
+  padding: 14px 10px;
+  max-width: 404px; // 498px - 94px
+  min-width: 100px; // 288px - 94px - 94px
   color: #aaa;
   a {
     font-size: 14px;
@@ -322,16 +349,6 @@
     font-size: 12px;
     float: right;
   }
-}
-
-.promote,
-.unpromote {
-  width: 94px;
-}
-
-.unpromote:hover {
-  margin-left: 0;
-  color: @gray-light;
 }
 
 .advert-video {
