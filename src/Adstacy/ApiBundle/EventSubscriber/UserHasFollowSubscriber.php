@@ -30,6 +30,8 @@ class UserHasFollowSubscriber implements EventSubscriberInterface
             $user = $this->container->get('security.context')->getToken()->getUser();
             if ($user->hasFollowUser($object)) {
                 $event->getVisitor()->addData('followed', true);
+            } else if ($user === $object) {
+                $event->getVisitor()->addData('self', true);
             }
         }
     }

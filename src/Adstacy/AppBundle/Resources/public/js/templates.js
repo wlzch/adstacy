@@ -77,8 +77,10 @@
           <div class="user-mini">
             <img src="{{ photo }}" class="profilepic" width="50" height="50">
             <a href="/{{ username }}" class="realname">{{ real_name }} <span class="username">{{ username }}</span></a>
-            <button data-username="{{ username }}" class="btn btn-sm btn-follow btn-primary follow-user pull-right {{#followed}}hide{{/followed}}">Follow</button>
-            <button data-username="{{ username }}" class="btn btn-sm btn-follow btn-success unfollow-user pull-right {{^followed}}hide{{/followed}}">Following</button>
+            {{#show_button}}
+              <button data-username="{{ username }}" class="btn btn-sm btn-follow btn-primary follow-user pull-right {{#followed}}hide{{/followed}}">Follow</button>
+              <button data-username="{{ username }}" class="btn btn-sm btn-follow btn-success unfollow-user pull-right {{^followed}}hide{{/followed}}">Following</button>
+            {{/show_button}}
           </div>
         {{/users}}
         {{#next}}

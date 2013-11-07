@@ -167,12 +167,16 @@
       var fn = function(route) {
         $modalBody.html(Adstacy.templates.loader.render());
         $.getJSON(route, function(data) {
-          var json, template, $html, html, body;
+          var json, template, $html, html, body, users;
           json = JSON.parse(data);
           template = Adstacy.templates.user_mini;
+          $.each(json.data.broadcasts, function() {
+            this.show_button = Adstacy.user && this.self !== true;
+          });
           $html = $(template.render({
             users: json.data.broadcasts,
             next: json.meta.next,
+            logged_in: Adstacy.user,
             next_label: Translator.trans('ads.broadcasts.next')
           }));
           $modalBody.html('');
