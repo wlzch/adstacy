@@ -1,5 +1,7 @@
 {% extends is_ajax() ? '::ajax.html.twig' : 'AdstacyAppBundle::layout.html.twig' %}
 
+{% block site_body_class %}site-body-no-bg{% endblock %}
+
 {% block stylesheets %}
   {{ parent() }}
   {% stylesheets filter='cssrewrite, uglifycss'
@@ -10,7 +12,7 @@
 {% endblock %}
 
 {% block content %}
-  <div id="who-to-follow">
+  <div id="who-to-follow" class="adstacy-container">
     <div class="toolbar clearfix">
       <a href="{{ path('adstacy_app_who_to_follow') }}" class="adstacy {% if source == 'adstacy' %}current{% endif %}" title="{{"find_friends"|trans}}">{{"find_friends"|trans}}</a>
       <a href="{{ path('adstacy_app_who_to_follow_facebook') }}" class="facebook {% if source == 'facebook' %}current{% endif %}" title="{{"find_friends"|trans}}">{{"find_friends_facebook"|trans}}</a>
