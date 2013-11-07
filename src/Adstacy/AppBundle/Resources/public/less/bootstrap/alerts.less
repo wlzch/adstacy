@@ -32,7 +32,6 @@
   > p + p {
     margin-top: 5px;
   }
-  min-width: 500px;
   color: #fff;
   padding: 6px 15px;
 }
@@ -75,4 +74,17 @@
 }
 .alert-danger {
   .alert-variant(@alert-danger-bg; @alert-danger-border; @alert-danger-text);
+}
+
+@media screen and (max-width: 500px) {
+  .alert {
+    width: 320px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 501px) {
+  .alert {
+    width: 500px;
+  }
 }
