@@ -36,6 +36,8 @@ set  :dump_assetic_assets, true
 # Change ACL on the app/logs and app/cache directories
 after "symfony:composer:install", "npm:install"
 after "deploy", "symfony:clear_apc"
+before "symfony:assetic:dump", "symfony:dump_js_routing"
+before "symfony:assetic:dump", "symfony:dump_js_translations"
  
 namespace :npm do
   desc "Run npm install"
@@ -52,12 +54,26 @@ namespace :symfony do
     run "#{try_sudo} sh -c 'cd #{latest_release} && #{php_bin} #{symfony_console} apc:clear --env=prod'"
     capifony_puts_ok
   end
+
+  desc "Dump js routing"
+  task :dump_js_routing do
+    capifony_pretty_print "--> Dump js routing"
+    run "#{try_sudo} sh -c 'cd #{latest_release} && #{php_bin} #{symfony_console} fos:js-routing:dump'"
+    capifony_puts_ok
+  end
+
+  desc "Dump js translations"
+  task :dump_js_translations do
+    capifony_pretty_print "--> Dump js translations"
+    run "#{try_sudo} sh -c 'cd #{latest_release} && #{php_bin} #{symfony_console} funddy:jstranslations:dump'"
+    capifony_puts_ok
+  end
 end
 
 namespace :adstacy do
     task :populate_redis do
         capifony_pretty_print "--> Populating redis data"
-        run "#{try_sudo} sh -c 'cd #{latest_release} && #{php_bin} #{symfony_console} adstacy:redis:populate"
+        run "#{try_sudo} sh -c 'cd #{latest_release} && #{php_bin} #{symfony_console} adstacy:redis:populate all"
         capifony_puts_ok
     end
 
