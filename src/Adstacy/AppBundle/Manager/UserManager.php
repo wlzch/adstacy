@@ -75,6 +75,7 @@ class UserManager
             'id', $user->getId(),
             'name', $user->getRealName(),
             'avatar', $userHelper->getProfilePicture($user, false),
+            'username',  $username,
             'value', '@'.$user->getUsername()
         );
     }
