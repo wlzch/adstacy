@@ -1,0 +1,4 @@
+<li data-tag="{{ tag }}" {% if app.user.hasFavouriteTag(tag) %}class="favourited"{% endif %}>
+  <a href="{{ path('adstacy_app_search', {q: tag}) }}">{{ tag }}</a>
+  <button><i class="icon icon-star"></i></button>
+</li>

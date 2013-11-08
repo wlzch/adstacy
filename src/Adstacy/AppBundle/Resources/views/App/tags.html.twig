@@ -12,8 +12,8 @@
 {% endblock %}
 
 {% block content %}
-  <div class="adstacy-container panel panel-default">
-    <ul id="browse-tags" class="jscroll">
+  <div class="adstacy-container">
+    <ul class="jscroll tags clearfix">
       {{ block('ajax_content') }}
     </ul>
   </div>
@@ -21,7 +21,7 @@
 
 {% block ajax_content %}
   {% for tag in tags %}
-    <li><a href="{{ path('adstacy_app_search', {q: tag}) }}">{{ tag }}</a></li>
+    {% include 'AdstacyAppBundle:App:tag.html.twig' with {tag: tag} %}
   {% endfor %}
   {% if tags|length >= max_tags_per_page %}
     {% set params = app.request.query.all|merge({page: (app.request.query.get('page') ?: 1) + 1}) %}
@@ -33,7 +33,13 @@
   {{ parent() }}
   <script type="text/javascript">
     $(function() {
-      $('.jscroll').jscroll();
+      $('.tags').find('button').click(Adstacy.events.tag_favourite);
+      $('.jscroll').jscroll({
+        callback: function() {
+          var $tags = $('.jscroll-added:last button');
+          $tags.click(Adstacy.events.tag_favourite);
+        }
+      });
     });
   </script>
 {% endblock %}

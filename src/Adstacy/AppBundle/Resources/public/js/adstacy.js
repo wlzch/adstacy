@@ -164,6 +164,9 @@
       return '<a class="url" href="'+contents+'">'+match+'</a>';
     });
   };
+  Adstacy.toTitleCase = function(str) {
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  },
   Adstacy.toggleExpander = function(object, expander) {
     if (object.height() > 600) {
       expander.removeClass('hide');
@@ -194,6 +197,21 @@
   };
 
   Adstacy.events = {
+    tag_favourite: function() {
+      var $this, $parent, tag, $html;
+      $this = $(this);
+      $parent = $this.closest('li');
+      tag = $parent.attr('data-tag');
+      if ($parent.hasClass('favourited')) {
+        $.post(Routing.generate('adstacy_app_favtags_remove', {tag: tag}));
+        $('#favourites').find('li[data-tag='+$parent.attr('data-tag')+']').fadeOut();
+      } else {
+        $.post(Routing.generate('adstacy_app_favtags_add', {tag: $parent.attr('data-tag')}));
+        $html = $('<li data-tag="'+tag+'"><a href="'+Routing.generate('adstacy_app_search', {q: tag})+'">'+Adstacy.toTitleCase(tag)+'</a>').hide();
+        $html.insertAfter($('#favourites li:first-child')).fadeIn('slow');
+      }
+      $parent.toggleClass('favourited');
+    },
     broadcastcountclick: function() {
       var $this, $ad, $modal, $modalBody;
       $this = $(this);

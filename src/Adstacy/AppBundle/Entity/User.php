@@ -1639,12 +1639,13 @@ class User implements UserInterface, GroupableInterface
     /**
      * Add favourite tag
      *
-     * @param string $favouriteTag
+     * @param string $tag
      */
-    public function addFavouriteTag($favouriteTag)
+    public function addFavouriteTag($tag)
     {
-        if (!in_array($favouriteTag, $this->favouriteTags)) {
-            $this->favouriteTags[] = $favouriteTag;
+        $tag = trim($tag);
+        if (!in_array($tag, $this->favouriteTags) && strlen($tag) > 0) {
+            $this->favouriteTags[] = $tag;
         }
     }
 
@@ -1668,5 +1669,18 @@ class User implements UserInterface, GroupableInterface
     public function getFavouriteTags()
     {
         return $this->favouriteTags;
+    }
+
+    /**
+     * Wheter user has favourite tag
+     *
+     * @param string $tag
+     *
+     * @return boolean/
+     *
+     */
+    public function hasFavouriteTag($tag)
+    {
+      return in_array($tag, $this->getFavouriteTags());
     }
 }

@@ -2,8 +2,24 @@
 
 {% block site_body_class %}site-body-no-bg{% endblock %}
 
+{% block stylesheets %}
+  {{ parent() }}
+  {% stylesheets filter='cssrewrite, uglifycss'
+    'bundles/adstacyapp/less/layout/tags.less'
+  %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
+  {% endstylesheets %}
+{% endblock %}
+
 {% block search_content %}
   {% if ads|length > 0 and app.request.query.get('q') != '' %}
+    <div class="panel panel-default">
+      <ul class="tags clearfix">
+        {% for tag in app.request.query.get('q')|split(' ') %}
+          {% include 'AdstacyAppBundle:App:tag.html.twig' with {tag: tag} %}
+        {% endfor %}
+      </ul>
+    </div>
     <div class="jscroll">
       {{ block('ajax_content') }}
     </div>
@@ -29,6 +45,7 @@
   {{ parent() }}
   <script type="text/javascript">
     $(function() {
+      $('.tags').find('button').click(Adstacy.events.tag_favourite);
       $('.jscroll').jscroll(Adstacy.options.jscrollAd);
     });
   </script>
