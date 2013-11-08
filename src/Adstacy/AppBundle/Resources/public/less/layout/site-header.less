@@ -146,19 +146,23 @@ body {
 .navbar-toggle {
   float: left;
   padding: 12px 15px;
+  background: #f8f8f8;
+  border: solid @border-color !important;
+  border-width: 0 1px !important;
+  border-radius: 0;
 
   .icon-bar {
+    border-bottom: 1px solid rgba(0,0,0,.2);
     display: block;
-    width: 20px;
+    width: 25px;
     height: 2px;
     border-radius: 1px;
   }
   .icon-bar + .icon-bar {
     margin-top: 5px;
   }
-
   &:hover {
-    background-color: #eee;;
+    background: #eee !important;
   }
 }
 
