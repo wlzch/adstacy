@@ -187,6 +187,11 @@
       }
     });
   };
+  Adstacy.normalizeImgHeight = function() {
+    var $parent = $(this).parent('.advert-img');
+    $parent.css('height', 'auto');
+    Adstacy.toggleExpander($parent, $parent.siblings());
+  };
 
   Adstacy.events = {
     broadcastcountclick: function() {
@@ -400,13 +405,7 @@
     jscrollAd: {
       callback: function(event) {
         var $ads = $('.jscroll-added:last .advert');
-        $ads.find('img.lazy').lazyload({
-          load: function() {
-            var $parent = $(this).parent('.advert-img');
-            $parent.css('height', 'auto');
-            Adstacy.toggleExpander($parent, $parent.siblings());
-          }
-        });
+        $ads.find('img.lazy').lazyload({ load: Adstacy.normalizeImgHeight });
         var $commentBoxes = $ads.find('textarea.comment-box');
         $commentBoxes.keydown(Adstacy.events.commentbox);
         $commentBoxes.mentionsInput(Adstacy.options.mentionsInput);

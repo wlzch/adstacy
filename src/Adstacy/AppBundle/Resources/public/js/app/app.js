@@ -19,13 +19,7 @@
   });
 
   $('.timeago').timeago();
-  $('img.lazy').lazyload({
-    load: function() {
-      var $parent = $(this).parent('.advert-image');
-      $parent.css('height', 'auto');
-      Adstacy.toggleExpander($parent, $parent.siblings());
-    }
-  });
+  $('img.lazy').lazyload({ load: Adstacy.normalizeImgHeight });
   if (Adstacy.user) {
     Adstacy.follow($('.user'), function(data) {
       $(this).closest('.user').find('.user-followers-count').text(data.followers_count);
