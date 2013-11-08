@@ -39,8 +39,14 @@
   }
 }
 
-@media screen and (min-width: 481px) {
+@media screen and (max-width: 480px) {
   #settings {
-    width: 600px;
+    .form-group .pull-left {
+      float: none !important;
+      text-align: left;
+    }
+    .offset-label {
+      margin-left: 0;
+    }
   }
 }
