@@ -38,7 +38,7 @@
   {% set id = null %}
   {% for ad in ads %}
     {% set id = ad.id %}
-    {% include 'AdstacyAppBundle:Ad:ad.html.twig' with {ad: ad, user: user, promotedBy: true} %}
+    {% include 'AdstacyAppBundle:Ad:ad.html.twig' with {ad: ad, user: user} %}
   {% endfor %}
   {% if ads|length >= max_ads_per_page %}
     {% set params = app.request.query.all|merge({username: user.username, id: id}) %}
