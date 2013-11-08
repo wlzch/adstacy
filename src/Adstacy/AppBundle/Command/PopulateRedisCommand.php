@@ -80,7 +80,7 @@ class PopulateRedisCommand extends ContainerAwareCommand
         foreach ($ads as $ad) {
             $adTags = $ad->getTags();
             foreach ($adTags as $tag) {
-              $tags[$tag] = 1;
+              $tags[$tag] = (isset($tags[$tag]) ? $tags[$tag] : 0) + 1;
             }
         }
 
@@ -96,11 +96,16 @@ class PopulateRedisCommand extends ContainerAwareCommand
             $cnt++;
         }
         $redis->del('tags');
+        $redis->del('all_tags');
         $cmd = $redis->createCommand('zadd');
         $cmd->setArguments(array('tags', $recommendation));
         $redis->executeCommand($cmd);
+        $cmd = $redis->createCommand('zadd');
+        $cmd->setArguments(array('all_tags', $tags));
+        $redis->executeCommand($cmd);
 
-        $output->writeln($cnt.' tags data populated');
+        $output->writeln($cnt.' suggestion tags data populated');
+        $output->writeln(count($tags). ' tags populated');
     }
 
     private function populateRecommendation(InputInterface $input, OutputInterface $output)

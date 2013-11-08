@@ -11,6 +11,7 @@ parameters:
     max_users_per_page: 10
     max_comments_per_page: 10
     max_list_broadcasts_per_page: 10
+    max_tags_per_page: 50
     max_notifications: 50
     max_who_to_follow: 10
     max_sidebar_recommendation: 3
@@ -67,6 +68,7 @@ twig:
         small_thumb_size: %small_thumb_size%
         profile_pic_size: %profile_pic_size%
         max_ads_per_page: %max_ads_per_page%
+        max_tags_per_page: %max_ads_per_page%
         max_users_per_page: %max_users_per_page%
         max_who_to_follow: %max_who_to_follow%
         desc_length: %desc_length%

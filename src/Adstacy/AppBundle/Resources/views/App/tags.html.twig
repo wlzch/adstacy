@@ -1,4 +1,6 @@
-{% extends 'AdstacyAppBundle::layout.html.twig' %}
+{% extends is_ajax() ? '::ajax.html.twig' : 'AdstacyAppBundle::layout.html.twig' %}
+
+{% block title %}All Tags| Adstacy{% endblock %}
 
 {% block stylesheets %}
   {{ parent() }}
@@ -11,7 +13,27 @@
 
 {% block content %}
   <div class="adstacy-container panel panel-default">
-  <ul id="browse-tags">
-    {% include 'AdstacyAppBundle:App:tag_list.html.twig' %}
-  </ul>
+    <ul id="browse-tags" class="jscroll">
+      {{ block('ajax_content') }}
+    </ul>
+  </div>
+{% endblock %}
+
+{% block ajax_content %}
+  {% for tag in tags %}
+    <li><a href="{{ path('adstacy_app_search', {q: tag}) }}">{{ tag }}</a></li>
+  {% endfor %}
+  {% if tags|length >= max_tags_per_page %}
+    {% set params = app.request.query.all|merge({page: (app.request.query.get('page') ?: 1) + 1}) %}
+    <a href="{{ path('adstacy_app_tags', params) }}" class="btn btn-default btn-lg btn-block load-next next-page">{{ "more"|trans }}</a>
+  {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script type="text/javascript">
+    $(function() {
+      $('.jscroll').jscroll();
+    });
+  </script>
 {% endblock %}

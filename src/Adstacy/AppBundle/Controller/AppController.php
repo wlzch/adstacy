@@ -89,7 +89,16 @@ class AppController extends Controller
      */
     public function tagsAction()
     {
-        return $this->render('AdstacyAppBundle:App:tags.html.twig');
+        $redis = $this->get('snc_redis.default');
+        $page = $this->getRequest()->query->get('page') ?: 1;
+        $max = $this->getParameter('max_tags_per_page');
+        $start = ($page - 1) * $max;
+        $end = $start + ($max - 1);
+        $tags = $redis->zrevrange('all_tags', $start, $end);
+
+        return $this->render('AdstacyAppBundle:App:tags.html.twig', array(
+          'tags' => $tags
+        ));
     }
 
     public function contactUsAction()
