@@ -32,7 +32,7 @@
     });
   }
   Adstacy.alert();
-  Adstacy.hoveruser($('.hovercard-user'));
+  Adstacy.hoveruser($('.hovercard-user'), {width: 400});
 })();
 
 $(function(){

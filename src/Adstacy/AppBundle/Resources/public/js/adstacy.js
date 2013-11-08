@@ -317,7 +317,7 @@
             real_name: comment.user.real_name,
             time: comment.created,
             strtime: new Date(comment.created).toDateString(),
-            content: comment.content,
+            content: Adstacy.parseMention(Adstacy.parseUrl(comment.content)),
             delete: Adstacy.user && ((Adstacy.user.username == comment.user.username) || (Adstacy.user.username == adUsername))
           }));
           $comments.prepend($tmpl);
