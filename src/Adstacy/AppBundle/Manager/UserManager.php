@@ -47,7 +47,7 @@ class UserManager
         }
 
         foreach ($repo->findPopularUsers() as $popularUser) {
-            if (!isset($recommendation[$popularUser->getId()])) {
+            if (!isset($recommendation[$popularUser->getId()]) && $popularUser !== $user) {
                 if (!in_array($popularUser->getId(), $followingsId)) {
                     $recommendation[$popularUser->getId()] = 0;
                 }
