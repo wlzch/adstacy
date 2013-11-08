@@ -384,7 +384,7 @@ class AdController extends Controller
                 'files' => array(
                     array (
                         'name' => $image->getImagename(),
-                        'src' => $assetHelper->assetUrl($uploaderHelper->asset($image, 'image')),
+                        'src' => $uploaderHelper->asset($image, 'image'),
                         'id' => $image->getId()
                     )
                 )

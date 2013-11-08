@@ -8,7 +8,7 @@
       {% endif %}
       {% set width = ad.imageWidth(height) %}
       <a class="sidebar-trending-img" href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}">
-        <img src="{{ vich_uploader_asset(ad, 'image')|imagine_filter('small_thumb') }}" width="{{ width }}" height="{{ height }}">
+        <img src="{{ ad.imagename|imagine_filter('small_thumb') }}" width="{{ width }}" height="{{ height }}">
       </a>
     {% elseif ad.type == 'text' %}
       <a class="sidebar-trending-text" href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}">

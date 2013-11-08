@@ -21,3 +21,22 @@ monolog:
             type:  stream
             path:  %kernel.logs_dir%/%kernel.environment%.log
             level: debug
+
+knp_gaufrette:
+    filesystems:
+        image_fs:
+            adapter: amazon_s3_image_adapter
+
+vich_uploader:
+    db_driver: orm
+    gaufrette: true
+    storage: vich_uploader.storage.gaufrette
+    mappings:
+        ad_image:
+            uri_prefix: https://adstacy.s3.amazonaws.com/uploads
+            upload_destination: image_fs
+            namer: vich_uploader.namer_uniqid
+        user_image:
+            uri_prefix: https://adstacy.s3.amazonaws.com/uploads
+            upload_destination: image_fs
+            namer: vich_uploader.namer_uniqid

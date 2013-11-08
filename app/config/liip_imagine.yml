@@ -1,4 +1,7 @@
 liip_imagine:
+    cache: amazon_s3
+    cache_clearer: false
+    data_loader: image_fs
     filter_sets:
         thumbnail:
             quality: 90

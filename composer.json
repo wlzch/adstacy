@@ -28,7 +28,6 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "vich/uploader-bundle": "v0.9.0",
-        "knplabs/knp-gaufrette-bundle": "v0.1.4",
         "hwi/oauth-bundle": "0.3.0",
         "doctrine/doctrine-migrations-bundle": "dev-master",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
@@ -48,7 +47,10 @@
         "predis/predis": "0.8.*",
         "facebook/php-sdk": "3.2.*",
         "j7mbo/twitter-api-php": "dev-master",
-        "funddy/jstranslations-bundle": "2.0.*"
+        "funddy/jstranslations-bundle": "2.0.*",
+        "aws/aws-sdk-php": "dev-master",
+        "knplabs/knp-gaufrette-bundle": "dev-master",
+        "knplabs/gaufrette": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

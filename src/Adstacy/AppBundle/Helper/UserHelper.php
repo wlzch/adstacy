@@ -26,7 +26,7 @@ class UserHelper
         $cacheManager = $this->container->get('liip_imagine.cache.manager');
         $host = $this->container->getParameter('adstacy.host');
         if ($user->getImage() && $user->getImagename()) {
-            $path = $cacheManager->getBrowserPath($uploaderHelper->asset($user, 'image'), 'profile_pic');
+            $path = $cacheManager->getBrowserPath($user->getImagename(), 'profile_pic');
             if ($absolute) return $host.$path;
             return $path;
         }

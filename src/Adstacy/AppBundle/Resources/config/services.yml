@@ -26,3 +26,29 @@ services:
     adstacy.helper.asset:
         class: Adstacy\AppBundle\Helper\AssetHelper
         arguments: [@router]
+
+    amazon.s3:
+      class: Aws\S3\S3Client
+      factory_class: Aws\S3\S3Client
+      factory_method: factory
+      arguments:
+            -
+                key: %aws_key%
+                secret: %aws_secret_key%
+                region: %aws_s3_region%
+
+    adstacy.imagine.cache.resolver.amazon_s3:
+      class: Liip\ImagineBundle\Imagine\Cache\Resolver\AwsS3Resolver
+      arguments:
+        - @amazon.s3
+        - %aws_s3_bucket%
+      tags:
+        - { name: 'liip_imagine.cache.resolver', resolver: 'amazon_s3' }
+
+    liip_imagine.data.loader.stream.profile_photos:
+            class: "%liip_imagine.data.loader.stream.class%"
+            arguments:
+                - "@liip_imagine"
+                - 'gaufrette://image_fs/'
+            tags:
+                - { name: 'liip_imagine.data.loader', loader: 'image_fs' }

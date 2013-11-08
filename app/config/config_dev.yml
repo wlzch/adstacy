@@ -44,3 +44,25 @@ ornicar_apc:
 
 fos_js_routing:
     request_context_base_url: '/app_dev.php'
+
+knp_gaufrette:
+    filesystems:
+        image_fs:
+            adapter: local_image_adapter
+
+vich_uploader:
+    db_driver: orm
+    gaufrette: true
+    storage: vich_uploader.storage.gaufrette
+    mappings:
+        ad_image:
+            uri_prefix: /uploads
+            upload_destination: image_fs
+            namer: vich_uploader.namer_uniqid
+        user_image:
+            uri_prefix: /uploads
+            upload_destination: image_fs
+            namer: vich_uploader.namer_uniqid
+
+liip_imagine:
+    data_root: %kernel.root_dir%/../web/uploads

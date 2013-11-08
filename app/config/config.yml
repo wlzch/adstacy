@@ -4,7 +4,6 @@ imports:
     - { resource: oauth.yml }
     - { resource: liip_imagine.yml }
     - { resource: elasticsearch.yml }
-    - { resource: uploader.yml }
 
 parameters:
     elfinder.loader: Adstacy\AppBundle\Loader\FMElfinderLoader
@@ -196,3 +195,16 @@ snc_redis:
 funddy_js_translations:
     languages: [id, en]
     domains: [messages, validators]
+
+knp_gaufrette:
+    stream_wrapper: ~
+    adapters:
+        amazon_s3_image_adapter:
+            aws_s3:
+                service_id: amazon.s3
+                bucket_name: adstacy
+                options:
+                    directory: uploads
+        local_image_adapter:
+            local:
+                directory: %kernel.root_dir%/../web/uploads

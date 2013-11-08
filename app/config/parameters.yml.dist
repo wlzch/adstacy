@@ -21,5 +21,10 @@ parameters:
     node_path:         "/usr/local/bin/node"
     node_modules_path: "/usr/local/lib/node_modules"
 
+    aws_key: "KEY"
+    aws_secret_key: "SECRET"
+    aws_s3_region: "REGION"
+    aws_s3_bucket: "adstacy"
+
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
