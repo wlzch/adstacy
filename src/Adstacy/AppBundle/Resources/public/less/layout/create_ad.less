@@ -4,7 +4,6 @@
 #create-advert {
   box-shadow: 0 0 3px #999;
   border: 1px solid #ccc;
-  width: 480px;
 
   label {
     color: #555;
@@ -135,19 +134,27 @@
     }
 
   }
+
+  [data-wysihtml5-dialog] {
+    border-radius: 0;
+    border-width: 0 0 1px;
+  }
+
+  @media screen and (max-width: 400px) {
+    [data-wysihtml5-dialog] input {
+      width: 100%;
+    }
+  }
 }
 
-@media (max-width: 481px) {
-  #create-advert {
-    width: 100%;
-  }
-  .adstacy-single-col {
-    min-width: 200px;
-  }
-}
-
-@media (max-width: 321px) {
-  #create-advert-toolbar .text {
-    display: none;
+@media screen and (max-width: 320px) {
+  #create-advert-toolbar {
+    .icon {
+      margin: 0;
+    }
+    .text {
+      display: block;
+      text-align: center;
+    }
   }
 }
