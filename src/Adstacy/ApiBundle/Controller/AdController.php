@@ -94,4 +94,41 @@ class AdController extends ApiController
 
         return $this->response($res, 'user_list');
     }
+
+    /**
+     * Randomly chose trending ad
+     */
+    public function listTrendingAction()
+    {
+        $redis = $this->get('snc_redis.default');
+        $max = $this->getParameter('max_sidebar_trending');
+        $cnt = $redis->llen('trending');
+        $rand = rand(0, $cnt - $max - 1);
+        $ids = $redis->lrange('trending', $rand, $rand + $max);
+
+        $ads = array();
+        $cacheManager = $this->get('liip_imagine.cache.manager');
+        foreach ($this->getRepository('AdstacyAppBundle:Ad')->findById($ids) as $ad) {
+            $_ad = array('id' => $ad->getId());
+            if ($ad->getType() == 'image') {
+                $_ad['is_image'] = true;
+                $_ad['image'] = $cacheManager->getBrowserPath($ad->getImagename(), 'small_thumb');
+            } else if ($ad->getType() == 'text') {
+                $_ad['is_text'] = true;
+                $_ad['title'] = $ad->getTitle();
+            } else if ($ad->getType() == 'youtube') {
+                $_ad['is_youtube'] = true;
+                $_ad['youtube_id'] = $ad->getYoutubeId();
+            }
+            $ads[] = $_ad;
+        }
+        $res = array(
+            'data' => array(
+                'ads' => $ads
+            ),
+            'meta' => array()
+        );
+
+        return $this->response($res, 'ad_list');
+    }
 }

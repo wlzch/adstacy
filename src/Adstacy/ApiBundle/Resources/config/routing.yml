@@ -19,6 +19,13 @@ adstacy_api_recommendation:
     options:
       expose: true
 
+adstacy_api_trending:
+    path: /trending
+    defaults:
+        _controller: AdstacyApiBundle:Ad:listTrending
+    options:
+        expose: true
+
 adstacy_api_tags:
     path: /tags.json
     defaults:

@@ -49,21 +49,18 @@
       </div>
     ',
     sidebar_recommendation: '
-      <div id="side-suggest-friend" class="side-aside">
-        <h2><a href="/who-to-follow">People you may know</a></h2>
-        {{#users}}
-          <div class="media">
-            <a href="#" class="pull-left"><img src="{{ photo }}" width="32" height="32" class="media-object"></a>
-            <div class="media-body">
-              <div>
-                <a class="realname hovercard-user" data-username="{{ username }}" href="/{{ username }}">{{ real_name }}</a>
-              </div>
-              <button data-username="{{ username }}" class="btn btn-sm btn-follow btn-primary follow-user {{#followed}}hide{{/followed}}">Follow</button>
-              <button data-username="{{ username }}" class="btn btn-sm btn-follow btn-success unfollow-user {{^followed}}hide{{/followed}}">Following</button>
+      {{#users}}
+        <div class="media">
+          <a href="#" class="pull-left"><img src="{{ photo }}" width="32" height="32" class="media-object"></a>
+          <div class="media-body">
+            <div>
+              <a class="realname hovercard-user" data-username="{{ username }}" href="/{{ username }}">{{ real_name }}</a>
             </div>
+            <button data-username="{{ username }}" class="btn btn-sm btn-follow btn-primary follow-user {{#followed}}hide{{/followed}}">Follow</button>
+            <button data-username="{{ username }}" class="btn btn-sm btn-follow btn-success unfollow-user {{^followed}}hide{{/followed}}">Following</button>
           </div>
-        {{/users}}
-      </div>
+        </div>
+      {{/users}}
     ',
     hovercarduser: '
       <div class="card-user">
@@ -95,6 +92,27 @@
       {{^size}}
         <img class="center loader" src="/bundles/adstacyapp/img/loader-alt.gif">
       {{/size}}
+    ',
+    trending_ad: '
+      {{#ads}}
+        <div class="sidebar-trending-advert">
+          {{#is_image}}
+            <a class="sidebar-trending-img" href="/ads/{{ id }}">
+              <img src="{{ image }}">
+            </a>
+          {{/is_image}}
+          {{#is_text}}
+            <a class="sidebar-trending-text" href="/ads/{{ id }}">
+              <h3>{{ title }}</h3>
+            </a>
+          {{/is_text}}
+          {{#is_youtube}}
+            <a class="sidebar-trending-youtube" href="/ads/{{ id }}">
+              <img src="http://img.youtube.com/vi/{{ youtube_id }}/0.jpg">
+            </a>
+          {{/is_youtube}}
+        </div>
+      {{/ads}}
     '
   };
 })(window);

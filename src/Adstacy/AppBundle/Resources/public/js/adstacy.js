@@ -12,7 +12,8 @@
     hovercarduser: Hogan.compile(templates.hovercarduser),
     sidebar_recommendation: Hogan.compile(templates.sidebar_recommendation),
     user_mini: Hogan.compile(templates.user_mini),
-    loader: Hogan.compile(templates.loader)
+    loader: Hogan.compile(templates.loader),
+    trending_ad: Hogan.compile(templates.trending_ad)
   };
   Adstacy.modal = function(options) {
     var $modal = $('#adstacy-modal');

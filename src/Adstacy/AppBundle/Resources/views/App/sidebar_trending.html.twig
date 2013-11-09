@@ -1,23 +1,8 @@
 {% if ad %}
-  <div id="sidebar-trending" class="site-aside">
+  <div id="sidebar-trending" class="site-aside" style="display: none;">
     <h2><a href="{{ path('adstacy_app_trending') }}">Trending</a></h2>
-    {% if ad.type == 'image' %}
-      {% set height = ad.imageHeight %}
-      {% if height >= small_thumb_size %}
-        {% set height = small_thumb_size %}
-      {% endif %}
-      {% set width = ad.imageWidth(height) %}
-      <a class="sidebar-trending-img" href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}">
-        <img src="{{ ad.imagename|imagine_filter('small_thumb') }}" width="{{ width }}" height="{{ height }}">
-      </a>
-    {% elseif ad.type == 'text' %}
-      <a class="sidebar-trending-text" href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}">
-        <h3>{{ ad.title }}</h3>
-      </a>
-    {% elseif ad.type == 'youtube' %}
-      <a class="sidebar-trending-youtube" href="{{ path('adstacy_app_ad_show', {id: ad.id}) }}">
-        <img src="http://img.youtube.com/vi/{{ ad.youtubeId }}/0.jpg">
-      </a>
-    {% endif %}
+  </div>
+  <div id="side-suggest-friend" class="side-aside" style="display: none;">
+    <h2><a href="{{ path('adstacy_app_who_to_follow') }}">People you may know</a></h2>
   </div>
 {% endif %}

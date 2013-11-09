@@ -15,6 +15,7 @@ parameters:
     max_notifications: 50
     max_who_to_follow: 10
     max_sidebar_recommendation: 3
+    max_sidebar_trending: 3
 
     small_thumb_size: 260
     thumb_width: 498

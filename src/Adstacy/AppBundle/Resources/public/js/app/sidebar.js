@@ -1,21 +1,43 @@
 (function() {
-  if (Adstacy.user) {
-    var $sidebar = $('#sidebar');
-    var template = Adstacy.templates.sidebar_recommendation;
-    $.get(Routing.generate('adstacy_api_recommendation'), function(data) {
-      var json, users, html;
-      json = JSON.parse(data);
-      users = json.data.users;
-      if (users && users.length > 0) {
-        $html = $(template.render({
-          users: users
-        }));
-        $html.hide();
-        $sidebar.append($html);
-        $html.fadeIn();
-        Adstacy.follow($html.find('.media'));
-        Adstacy.hoveruser($html.find('.hovercard-user'), {openOnLeft: true});
-      }
-    });
+  if (!$.browser.mobile) {
+    var $sidebar, $trending, $recommendation, loadTrending;
+    $sidebar = $('#sidebar');
+    $trending = $sidebar.find('#sidebar-trending');
+    $recommendation = $sidebar.find('#side-suggest-friend');
+    loadTrending = function() {
+      console.log('called');
+      $.get(Routing.generate('adstacy_api_trending'), function(data) {
+        var json, $html, ads;
+        json = JSON.parse(data);
+        ads = json.data.ads;
+        if (ads && ads.length > 0) {
+          $html = $(Adstacy.templates.trending_ad.render({
+            'ads': ads
+          }));
+          $trending.find('.sidebar-trending-advert').remove();
+          $trending.hide();
+          $trending.append($html);
+          $trending.fadeIn(1000);
+        }
+      });
+    };
+    loadTrending();
+    setInterval(loadTrending, 10000);
+    if (Adstacy.user) {
+      $.get(Routing.generate('adstacy_api_recommendation'), function(data) {
+        var json, users, $html;
+        json = JSON.parse(data);
+        users = json.data.users;
+        if (users && users.length > 0) {
+          $html = $(Adstacy.templates.sidebar_recommendation.render({
+            users: users
+          }));
+          $recommendation.append($html);
+          $recommendation.fadeIn();
+          Adstacy.follow($recommendation.find('.media'));
+          Adstacy.hoveruser($recommendation.find('.hovercard-user'), {openOnLeft: true});
+        }
+      });
+    }
   }
 })();
