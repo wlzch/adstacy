@@ -1,11 +1,10 @@
 (function() {
   if (!$.browser.mobile) {
-    var $sidebar, $trending, $recommendation, loadTrending;
+    var $sidebar, $trending, $recommendation, loadTrending, loadRecommendation;
     $sidebar = $('#sidebar');
     $trending = $sidebar.find('#sidebar-trending');
     $recommendation = $sidebar.find('#side-suggest-friend');
     loadTrending = function() {
-      console.log('called');
       $.get(Routing.generate('adstacy_api_trending'), function(data) {
         var json, $html, ads;
         json = JSON.parse(data);
@@ -22,22 +21,28 @@
       });
     };
     loadTrending();
-    setInterval(loadTrending, 10000);
+    setInterval(loadTrending, 20000);
     if (Adstacy.user) {
-      $.get(Routing.generate('adstacy_api_recommendation'), function(data) {
-        var json, users, $html;
-        json = JSON.parse(data);
-        users = json.data.users;
-        if (users && users.length > 0) {
-          $html = $(Adstacy.templates.sidebar_recommendation.render({
-            users: users
-          }));
-          $recommendation.append($html);
-          $recommendation.fadeIn();
-          Adstacy.follow($recommendation.find('.media'));
-          Adstacy.hoveruser($recommendation.find('.hovercard-user'), {openOnLeft: true});
-        }
-      });
+      loadRecommendation = function() {
+        $.get(Routing.generate('adstacy_api_recommendation'), function(data) {
+          var json, users, $html;
+          json = JSON.parse(data);
+          users = json.data.users;
+          if (users && users.length > 0) {
+            $html = $(Adstacy.templates.sidebar_recommendation.render({
+              users: users
+            }));
+            $recommendation.find('.media').remove();
+            $recommendation.hide();
+            $recommendation.append($html);
+            $recommendation.fadeIn();
+            Adstacy.follow($recommendation.find('.media'));
+            Adstacy.hoveruser($recommendation.find('.hovercard-user'), {openOnLeft: true});
+          }
+        });
+      };
+      loadRecommendation();
+      setInterval(loadRecommendation, 20000);
     }
   }
 })();
