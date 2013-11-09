@@ -3,14 +3,10 @@ liip_imagine:
     cache_clearer: false
     data_loader: image_fs
     filter_sets:
-        thumbnail:
-            quality: 90
-            filters:
-                relative_resize: { widen: %thumb_width% }
         small_thumb:
-            quality: 90
+            quality: 100
             filters:
-                thumbnail: { size: [%small_thumb_size%, %small_thumb_size%], mode: inset }
+                relative_resize: { widen: %small_thumb_size% }
         profile_pic:
             quality: 75
             filters:

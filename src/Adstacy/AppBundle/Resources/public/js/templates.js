@@ -98,7 +98,7 @@
         <div class="sidebar-trending-advert">
           {{#is_image}}
             <a class="sidebar-trending-img" href="/ads/{{ id }}">
-              <img src="{{ image }}">
+              <img src="{{ image }}" width="{{ width }}" height="{{ height }}">
             </a>
           {{/is_image}}
           {{#is_text}}

@@ -108,11 +108,14 @@ class AdController extends ApiController
 
         $ads = array();
         $cacheManager = $this->get('liip_imagine.cache.manager');
+        $thumbWidth = $this->getParameter('small_thumb_size');
         foreach ($this->getRepository('AdstacyAppBundle:Ad')->findById($ids) as $ad) {
             $_ad = array('id' => $ad->getId());
             if ($ad->getType() == 'image') {
                 $_ad['is_image'] = true;
                 $_ad['image'] = $cacheManager->getBrowserPath($ad->getImagename(), 'small_thumb');
+                $_ad['width'] = $thumbWidth;
+                $_ad['height'] = $ad->getImageHeight($thumbWidth);
             } else if ($ad->getType() == 'text') {
                 $_ad['is_text'] = true;
                 $_ad['title'] = $ad->getTitle();
