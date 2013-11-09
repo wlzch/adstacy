@@ -26,7 +26,7 @@
       <div class="advert-text">
         <div class="advert-text-content">
           <h3>{{ ad.title }}</h3>
-          <p>{{ ad.description|raw }}</p>
+          <p>{{ ad.description|raw|purify }}</p>
           <div class="advert-tags">
             {% for tag in ad.tags %}
               <a href="{{ path('adstacy_app_search', {q: tag}) }}">#{{tag}}</a>
@@ -58,7 +58,7 @@
     </div>
 
     {% if ad.type != 'text' %}
-      <div class="advert-desc">{{ parse_url(ad.description) }}</div>
+      <div class="advert-desc">{{ ad.description|raw|purify }}</div>
       <div class="advert-tags">
         {% for tag in ad.tags %}
           <a href="{{ path('adstacy_app_search', {q: tag}) }}">#{{tag}}</a>
