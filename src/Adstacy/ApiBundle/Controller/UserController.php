@@ -207,17 +207,15 @@ class UserController extends ApiController
     {
         $user = $this->getUser();
         $redis = $this->get('snc_redis.default');
-        $ids = $redis->zrevrange('recommendation:'.$user->getUsername(), 0, -1);
-        $cnt = count($ids);
-        $inc = rand(0, $cnt / $this->getParameter('max_sidebar_recommendation'));
-        if ($cnt <= 0) {
+
+        $max = $this->getParameter('max_sidebar_recommendation');
+        $cnt = $redis->zcard('recommendation:'.$user->getUsername());
+        $rand = rand(0, $cnt - $max - 1);
+        $ids = $redis->zrevrange('recommendation:'.$user->getUsername(), $rand, $rand + $max - 1);
+        if (count($ids) <= 0) {
             return $this->noResult();
         }
-        $_ids = array();
-        if (isset($ids[$inc])) $_ids[] = $ids[$inc];
-        if (isset($ids[$inc * 2])) $_ids[] = $ids[$inc * 2];
-        if (isset($ids[$inc * 3])) $_ids[] = $ids[$inc * 3];
-        $users = $this->getRepository('AdstacyAppBundle:User')->findById($_ids);
+        $users = $this->getRepository('AdstacyAppBundle:User')->findById($ids);
 
         $res = array(
             'data' => array(
