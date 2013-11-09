@@ -108,7 +108,7 @@
           {{/is_text}}
           {{#is_youtube}}
             <a class="sidebar-trending-youtube" href="/ads/{{ id }}">
-              <img src="http://img.youtube.com/vi/{{ youtube_id }}/0.jpg">
+              <img src="http://img.youtube.com/vi/{{ youtube_id }}/0.jpg" width="260" height="195">
             </a>
           {{/is_youtube}}
         </div>
