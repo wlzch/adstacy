@@ -3,14 +3,18 @@
     <img src="{{ profile_pic(user) }}" width="48" height="48" class="media-object">
   </div>
   <div class="media-body">
+    <div class="pull-right">
+      {% if app.user and user != app.user %}
+        {% include 'AdstacyAppBundle:User:follow_button.html.twig' with {user: user} %}
+      {% endif %}
+    </div>
     <div class="media-heading">
-      <a class="realname"href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">{{ user.realname }} <span class="username">@{{ user.username }}</span></a>
-      <a href="{{ path('adstacy_app_user_followers', {username: user.username}) }}"><span class="user-followers-count">{{ user.followersCount }}</span> Followers</a>
-      <a href="{{ path('adstacy_app_user_ads', {username: user.username}) }}">{{ user.adsCount }} Ads</a>
-      <div class="pull-right">
-        {% if app.user and user != app.user %}
-          {% include 'AdstacyAppBundle:User:follow_button.html.twig' with {user: user} %}
-        {% endif %}
+      <a class="realname" href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">{{ user.realname }} <span class="username">@{{ user.username }}</span></a>
+      <div class="user-detail">
+        <a href="{{ path('adstacy_app_user_followers', {username: user.username}) }}">
+          <span class="user-followers-count">{{ user.followersCount }}</span> Followers
+        </a>
+        <a href="{{ path('adstacy_app_user_ads', {username: user.username}) }}">{{ user.adsCount }} Ads</a>
       </div>
     </div>
     <p>{{ parse_url(parse_hashtag(more(user.about|striptags, 100))) }}</p>

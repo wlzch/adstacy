@@ -87,6 +87,7 @@ a.realname, a.username {
 
   .media {
     padding: 10px;
+    border-bottom: 1px solid #ddd;
   }
 
   .media-body {
@@ -106,6 +107,12 @@ a.realname, a.username {
       color: @brand-primary;
     }
   }
+
+  .btn-follow {
+    float: right;
+    margin-right: 10px;
+    margin-top: 5px;
+  }
 }
 
 .user-action {
@@ -121,6 +128,9 @@ a.realname, a.username {
       text-decoration: none;
       background-color: #eee;
     }
+    &.first {
+      border-top: 0;
+    }
     &.last {
       .border-bottom-radius(@border-radius-base);
     }
@@ -132,15 +142,7 @@ a.realname, a.username {
     font-size: 16px;
   }
 
-  .btn {
-    float: right;
-    margin-right: 8px;
-    margin-top: 4px;
-  }
-
   @media screen and (min-width: 481px) {
-    border-top: 1px solid #ddd;
-
     .score {
       float: left;
       border-right: 1px solid #ddd;
