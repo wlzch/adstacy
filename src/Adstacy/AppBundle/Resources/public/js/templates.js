@@ -54,7 +54,7 @@
           <a href="#" class="pull-left"><img src="{{ photo }}" width="32" height="32" class="media-object"></a>
           <div class="media-body">
             <div>
-              <a class="realname hovercard-user" data-username="{{ username }}" href="/{{ username }}">{{ real_name }}</a>
+              <a class="realname hovercard-user text-overflow" data-username="{{ username }}" href="/{{ username }}">{{ real_name }}</a>
             </div>
             <button data-username="{{ username }}" class="btn btn-sm btn-follow btn-primary follow-user {{#followed}}hide{{/followed}}">Follow</button>
             <button data-username="{{ username }}" class="btn btn-sm btn-follow btn-success unfollow-user {{^followed}}hide{{/followed}}">Following</button>
@@ -98,16 +98,16 @@
         <div class="sidebar-trending-advert">
           {{#is_image}}
             <a class="sidebar-trending-img" href="/ads/{{ id }}">
-              <img src="{{ image }}" width="{{ width }}" height="{{ height }}">
+              <img src="{{ image }}" width="{{ width }}" height="{{ height }}" target="_blank">
             </a>
           {{/is_image}}
           {{#is_text}}
-            <a class="sidebar-trending-text" href="/ads/{{ id }}">
+            <a class="sidebar-trending-text" href="/ads/{{ id }}" target="_blank">
               <h3>{{ title }}</h3>
             </a>
           {{/is_text}}
           {{#is_youtube}}
-            <a class="sidebar-trending-youtube" href="/ads/{{ id }}">
+            <a class="sidebar-trending-youtube" href="/ads/{{ id }}" target="_blank">
               <img src="http://img.youtube.com/vi/{{ youtube_id }}/0.jpg" width="260" height="195">
             </a>
           {{/is_youtube}}

@@ -17,7 +17,7 @@ parameters:
     max_sidebar_recommendation: 3
     max_sidebar_trending: 3
 
-    small_thumb_size: 260
+    small_thumb_size: 240
     thumb_width: 498
     profile_pic_size: 100
     desc_length: 255
