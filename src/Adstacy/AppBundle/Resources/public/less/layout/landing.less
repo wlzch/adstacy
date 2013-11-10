@@ -1,15 +1,13 @@
 @import "../variables.less";
 @import "../bootstrap/mixins.less";
 
-body {
-  padding-top: 50px;
-  margin-bottom: 0;
-  background-color: #333;
-}
-
 #landing .wrapper {
   width: 999px;
   margin: 0 auto;
+
+  @media (max-width: @screen-tablet) {
+    width: 100% !important;
+  }
 }
 
 #landing-title {
@@ -38,6 +36,14 @@ body {
       margin-bottom: 5px;
     }
   }
+
+  @media (min-width: @screen-md-max) {
+    background-size: cover;
+  }
+
+  @media (max-width: @screen-tablet) {
+    background: @gray-darker;
+  }
 }
 
 #landing-heading {
@@ -50,6 +56,14 @@ body {
 #landing-screenshot {
   float: left;
   margin-top: 40px;
+
+  @media (max-width: @screen-tablet) {
+    float: none;
+
+    img {
+      .img-responsive(block);
+    }
+  }
 }
 
 #landing-social {
@@ -59,7 +73,13 @@ body {
   .box-shadow(0 -2px 0 -1px rgba(0,0,0,0.15));
 
   .btn {
-    margin: 0 10px;
+    margin: 10px 10px 0;
+
+    @media (max-width: @screen-tablet) {
+      &:first-child {
+        margin-top: 0;
+      }
+    }
   }
 }
 
@@ -67,42 +87,14 @@ body {
   width: 300px;
   float: right;
   margin-top: 60px;
-}
 
-@media screen and (max-width: @screen-tablet) {
-  #landing .wrapper,
-  #register-form {
-    width: 100% !important;
+  .panel {
+    width: 100%;
   }
 
-  #landing-screenshot,
-  #register-form {
+  @media (max-width: @screen-tablet) {
+    margin: 60px 15px 0;
+    width: auto;
     float: none;
-  }
-
-  #register-form {
-    margin: 20px 0;
-  }
-
-  #landing-screenshot {
-    img {
-      .img-responsive(block);
-    }
-  }
-
-  #landing-title {
-    background: @gray-darker;
-  }
-
-  #landing-social {
-    .btn:not(:first-child) {
-      margin-top: 10px;
-    }
-  }
-}
-
-@media screen and (min-width: @screen-md-max) {
-  #landing-title {
-    background-size: cover;
   }
 }
