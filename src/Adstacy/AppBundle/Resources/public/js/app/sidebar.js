@@ -21,7 +21,7 @@
       });
     };
     loadTrending();
-    setInterval(loadTrending, 20000);
+    setInterval(loadTrending, 30000);
     if (Adstacy.user) {
       loadRecommendation = function() {
         $.get(Routing.generate('adstacy_api_recommendation'), function(data) {
@@ -42,7 +42,7 @@
         });
       };
       loadRecommendation();
-      setInterval(loadRecommendation, 20000);
+      setInterval(loadRecommendation, 30000);
     }
   }
 })();
