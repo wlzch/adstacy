@@ -5,6 +5,9 @@
     Adstacy.user = JSON.parse($body.attr('data-user'));
     Adstacy.loggedIn = true;
   }
+  if ($body.find('.adstacy-single-col').length > 0) {
+    Adstacy.single_page = true;
+  }
   Adstacy.templates = {
     comment: Hogan.compile(templates.comment),
     modal: Hogan.compile(templates.modal),

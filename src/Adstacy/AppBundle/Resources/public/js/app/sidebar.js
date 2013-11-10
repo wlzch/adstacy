@@ -1,5 +1,5 @@
 (function() {
-  if (!$.browser.mobile) {
+  if (!$.browser.mobile && !Adstacy.single_page) {
     var $sidebar, $trending, $recommendation, loadTrending, loadRecommendation;
     $sidebar = $('#sidebar');
     $trending = $sidebar.find('#sidebar-trending');
