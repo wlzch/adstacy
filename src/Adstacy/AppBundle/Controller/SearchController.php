@@ -73,16 +73,20 @@ class SearchController extends Controller
     {
         $request = $this->getRequest();
         $finder = $this->get('fos_elastica.finder.website.user');
-        $limit = $this->getParameter('max_users_per_page');
+        $redis = $this->get('snc_redis.default');
+        if ($redis->hexists("user:$username", 'id')) {
+            return $this->redirect($this->generateUrl('adstacy_app_user_profile', array('username' => $username)));
+        };
+        //$limit = $this->getParameter('max_users_per_page');
 
-        $usersPaginator = $finder->findPaginated($username);
-        $usersPaginator 
-            ->setMaxPerPage($limit)
-            ->setCurrentPage($request->query->get('page') ?: 1)
-        ;
+        //$usersPaginator = $finder->findPaginated($username);
+        //$usersPaginator 
+            //->setMaxPerPage($limit)
+            //->setCurrentPage($request->query->get('page') ?: 1)
+        //;
 
         return $this->render('AdstacyAppBundle:Search:users.html.twig', array(
-            'paginator' => $usersPaginator,
+            'users' => array(),
             'search' => 'users'
         ));
     }

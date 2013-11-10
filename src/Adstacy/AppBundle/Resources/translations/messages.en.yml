@@ -89,6 +89,7 @@ search:
     no_result:
         message: No Results Found
         help: Please try a different keywords
+        user_help: Are you trying to find another user?
 
 form_registration:
     agreement: By clicking register, you agree to your <a href="%terms_url%">Terms of Service</a> and <a href="%privacy_url%">Privacy Policy</a>

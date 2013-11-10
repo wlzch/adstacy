@@ -89,6 +89,7 @@ search:
     no_result:
         message: Hasil Pencarian Tidak Ditemukan
         help: Cari dengan kata kunci lainnya
+        user_help: Apakah Anda mencari user lain?
 
 form_registration:
     agreement: Dengan klik daftar, anda setuju dengan <a href="%terms_url%">Aturan Layanan</a> dan <a href="%privacy_url%">Kebijakan Privasi</a>
