@@ -3,8 +3,8 @@
   {% set tags = app.user.favouriteTags %}
   {% for tag in app.user.favouriteTags %}
   <li data-tag="{{ tag }}">
-    <a href="{{ path('adstacy_app_search', {q: tag}) }}" title="{{tag|title}}">{{tag|title}}</a>
     <button>&times;</button>
+    <a href="{{ path('adstacy_app_search', {q: tag}) }}" title="{{tag|title}}">{{tag|title}}</a>
   </li>
   {% endfor %}
 {% endif %}
