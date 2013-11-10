@@ -5,6 +5,10 @@
     border-radius: 5px;
     padding: 10px;
     box-shadow: 0 0 4px #999;
+
+    @media (min-width: 960px) {
+      margin-bottom: 15px;
+    }
   }
 
   h2 {
@@ -68,5 +72,15 @@
   }
   .media, .media-body {
     overflow: visible;
+  }
+}
+
+.site-sidebar {
+  display: none;
+  float: left;
+
+  @media (min-width: 960px) {
+    display: block;
+    width: 260px;
   }
 }
