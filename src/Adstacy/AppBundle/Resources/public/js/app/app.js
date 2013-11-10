@@ -1,6 +1,7 @@
+var $window = $(window);
+
 (function() {
-  var $window, $siteContainer, $siteHeader, $searchDismiss, $searchInput, $favourites;
-  $window = $(window);
+  var $siteContainer, $siteHeader, $searchDismiss, $searchInput, $favourites;
   $siteContainer = $('#site-container');
   $siteHeader = $('#site-header');
   $searchDismiss = $('#search-dismiss');
@@ -40,10 +41,12 @@
 })();
 
 $(function(){
-  $('.site-menu').perfectScrollbar({});
+  // assign site menu height, replace calc
+  $('#site-menu').height($window.height() - 43).perfectScrollbar({ wheelSpeed: 20 });
   Adstacy.collapseAd($('.limit'), false);
 });
 
-$(window).on('resize orientationchange', function() {
+$window.on('resize orientationchange', function() {
   Adstacy.collapseAd($('.limit'), true);
+  $('#site-menu').height($window.height() - 43).perfectScrollbar('update');
 });

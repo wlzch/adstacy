@@ -12,10 +12,11 @@
 }
 
 .site-menu {
-  @height: "calc(100% - @{navbar-height})";
+  // @height: "calc(100% - @{navbar-height})";
   position: fixed;
   width: 0;
-  height: ~"@{height}";
+  height: 100%; // prevent unready height assignment
+  // height: ~"@{height}";
   border-top: 3px solid @brand-primary;
   .box-shadow(~"0 1px 0 1px @{border-color}, 0 1px 5px #ddd");
   // margin-top: -2px;
