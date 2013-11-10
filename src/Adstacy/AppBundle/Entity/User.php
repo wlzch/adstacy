@@ -874,6 +874,17 @@ class User implements UserInterface, GroupableInterface
         return $this->profilePicture;
     }
 
+    /**
+     * @return string
+     */
+    public function getFacebookProfilePicture()
+    {
+        if ($this->getFacebookId()) {
+            return sprintf('http://graph.facebook.com/%d/picture?width=100&height=100', $this->getFacebookId());
+        }
+        return 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc1/c25.0.81.81/s50x50/252231_1002029915278_1941483569_s.jpg';
+    }
+
     public function __toString()
     {
         return (string) $this->getUsername();

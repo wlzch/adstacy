@@ -31,7 +31,7 @@ class UserHelper
             return $path;
         }
         if ($user->getFacebookId()) {
-            return sprintf('http://graph.facebook.com/%d/picture', $user->getFacebookId());
+            return $user->getFacebookProfilePicture();
         };
         if ($user->getProfilePicture()) {
             return $user->getProfilePicture();
