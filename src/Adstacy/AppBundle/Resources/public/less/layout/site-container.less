@@ -2,7 +2,7 @@
 @import "../mixins.less";
 
 .open {
-  > .site-menu {
+  > #site-menu {
     width: @site-menu-width;
   }
 
@@ -11,7 +11,7 @@
   }
 }
 
-.site-menu {
+#site-menu {
   // @height: "calc(100% - @{navbar-height})";
   position: fixed;
   width: 0;
@@ -30,7 +30,7 @@
   }
 }
 
-.site-menu-inner {
+#site-menu-inner {
   position: relative;
   .more {
     color: #b00;
@@ -83,7 +83,7 @@
   }
 }
 
-.site-user-menu {
+#site-user-menu {
   padding: 20px 20px 10px 20px;
   white-space: nowrap;
   line-height: 1;

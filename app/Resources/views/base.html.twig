@@ -102,10 +102,10 @@
         <div id="site-container" class="site-container site-wrapper">
           {% set attr = app.request.attributes %}
           {% block navbar %}
-          <div class="site-menu">
+          <div id="site-menu">
             <nav id="site-menu-inner" class="site-menu-inner">
               {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                <div class="site-user-menu media">
+                <div id="site-user-menu" class="media">
                   <a href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}" class="pull-left">
                     <img src="{{ profile_pic(app.user) }}" alt="{{ app.user.username }}" width="32" height="32" class="media-object">
                   </a>
@@ -115,7 +115,7 @@
                   </div>
                 </div>
               {% endif %}
-              <ul class="site-main-menu">
+              <ul id="site-main-menu">
                 <li><h3>NAVIGATION</h3></li>
                 <li {% if attr.get('_route') == 'homepage' %}class="current"{% endif %}>
                   <a href="{{ path('homepage') }}" title="{{ "home"|trans }}"><i class="icon icon-home"></i> {{ "home"|trans }}</a>

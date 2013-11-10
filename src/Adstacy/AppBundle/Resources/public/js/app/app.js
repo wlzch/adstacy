@@ -1,12 +1,13 @@
-var $window = $(window);
 
 (function() {
-  var $siteContainer, $siteHeader, $searchDismiss, $searchInput, $favourites;
+  var $window, $siteContainer, $siteHeader, $searchDismiss, $searchInput, $favourites, $siteMenu;
+  $window = $(window);
   $siteContainer = $('#site-container');
   $siteHeader = $('#site-header');
   $searchDismiss = $('#search-dismiss');
   $searchInput = $('#search-form input[type=text]');
   $favourites = $('#favourites');
+  $siteMenu = $('#site-menu');
 
   $('#site-menu-toggle').click(function() {
     $siteContainer.toggleClass('open');
@@ -23,12 +24,19 @@ var $window = $(window);
 
   $('.timeago').timeago();
   $('img.lazy').lazyload({ load: Adstacy.normalizeImgHeight });
+  Adstacy.alert();
+  // assign site menu height, replace calc
+  $siteMenu.height($window.height() - 43).perfectScrollbar({ wheelSpeed: 20 });
+  Adstacy.collapseAd($('.limit'), false);
+  $window.on('resize orientationchange', function() {
+    Adstacy.collapseAd($('.limit'), true);
+    $siteMenu.height($window.height() - 43).perfectScrollbar('update');
+  });
   if (Adstacy.user) {
     Adstacy.follow($('.user'), function(data) {
       $(this).closest('.user').find('.user-followers-count').text(data.followers_count);
     });
   }
-  Adstacy.alert();
   $favourites.find('button').click(function() {
       var $this, $parent, tag, $html;
       $this = $(this);
@@ -39,14 +47,3 @@ var $window = $(window);
   });
   Adstacy.hoveruser($('.hovercard-user'), {width: 400});
 })();
-
-$(function(){
-  // assign site menu height, replace calc
-  $('#site-menu').height($window.height() - 43).perfectScrollbar({ wheelSpeed: 20 });
-  Adstacy.collapseAd($('.limit'), false);
-});
-
-$window.on('resize orientationchange', function() {
-  Adstacy.collapseAd($('.limit'), true);
-  $('#site-menu').height($window.height() - 43).perfectScrollbar('update');
-});
