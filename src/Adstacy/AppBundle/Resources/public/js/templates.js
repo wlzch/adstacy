@@ -81,7 +81,7 @@
           </div>
         {{/users}}
         {{#next}}
-            <a href="javascript:;" class="next" data-href="{{ next }}">{{ next_label }}</a>
+            <a href="javascript:;" class="btn btn-success next" data-href="{{ next }}">{{ next_label }}</a>
         {{/next}}
       </div>
     ',
