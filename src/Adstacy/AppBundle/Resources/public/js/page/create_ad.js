@@ -123,7 +123,7 @@ $(function() {
     },
     confirmKeys: [13, 32, 44, 188],
     typeahead: {
-      name: 'tags',
+      name: 'inputtags',
       remote: {
         url: Routing.generate('adstacy_api_tags', {q: '_QUERY_'}),
         wildcard: '_QUERY_'
