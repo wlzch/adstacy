@@ -1,9 +1,11 @@
 (function() {
-  var $window = $(window);
-  var $siteContainer = $('#site-container');
-  var $siteHeader = $('#site-header');
-  var $searchDismiss = $('#search-dismiss');
-  var $searchInput = $('#search-form input[type=text]');
+  var $window, $siteContainer, $siteHeader, $searchDismiss, $searchInput, $favourites;
+  $window = $(window);
+  $siteContainer = $('#site-container');
+  $siteHeader = $('#site-header');
+  $searchDismiss = $('#search-dismiss');
+  $searchInput = $('#search-form input[type=text]');
+  $favourites = $('#favourites');
 
   $('#site-menu-toggle').click(function() {
     $siteContainer.toggleClass('open');
@@ -26,6 +28,14 @@
     });
   }
   Adstacy.alert();
+  $favourites.find('button').click(function() {
+      var $this, $parent, tag, $html;
+      $this = $(this);
+      $parent = $this.closest('li');
+      tag = $parent.attr('data-tag');
+      $.post(Routing.generate('adstacy_app_favtags_remove', {tag: tag}));
+      $parent.fadeOut();
+  });
   Adstacy.hoveruser($('.hovercard-user'), {width: 400});
 })();
 
