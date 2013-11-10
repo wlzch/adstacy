@@ -30,6 +30,9 @@ class UserHelper
             if ($absolute) return $host.$path;
             return $path;
         }
+        if ($user->getFacebookId()) {
+            return sprintf('http://graph.facebook.com/%d/picture', $user->getFacebookId());
+        };
         if ($user->getProfilePicture()) {
             return $user->getProfilePicture();
         }
