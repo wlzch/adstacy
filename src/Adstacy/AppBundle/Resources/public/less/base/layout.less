@@ -1,3 +1,8 @@
+html,
+body {
+  height: 100%;
+}
+
 body {
   color: @gray-dark;
   background: @body-bg url("../img/noise.png");
@@ -5,18 +10,18 @@ body {
 
 a {
   cursor: pointer;
-}
 
-a.url, a.mention {
-  color: #428bca;
-
-  &:hover {
-    color: darken(#428bca, 20%);
+  &.url,
+  &.mention {
+    color: #428bca;
+    &:hover {
+      color: darken(#428bca, 20%);
+    }
   }
-}
 
-a.mention:hover {
-  text-decoration: none;
+  &.mention:hover {
+    text-decoration: none;
+  }
 }
 
 .label-group {
@@ -52,19 +57,21 @@ a.mention:hover {
       margin-bottom: 0;
     }
   }
-}
 
-.follow-user,
-.unfollow-user {
-  min-width: 80px;
-}
-
-@media screen and (max-width: 480px) {
-  .adstacy-single-col {
+  @media screen and (max-width: 480px) {
     width: 100%;
+
     .column {
       width: 100%;
     }
+  }
+}
+
+.btn-follow {
+  width: 80px;
+
+  + .btn-block {
+    margin-top: 0;
   }
 }
 
@@ -76,6 +83,7 @@ a.mention:hover {
   margin: 0 auto;
   left: 50%;
   margin-left: -250px;
+
   .alert {
     margin-bottom: 5px;
   }
@@ -100,14 +108,14 @@ a.mention:hover {
     background-color: rgba(255,255,255,.05);
     .box-shadow(1px 0 1px rgba(0,0,0,.2));
   }
-}
 
-.btn-social.btn-lg {
-  padding: 10px 16px 10px 70px;
+  &.btn-lg {
+    padding: 10px 16px 10px 70px;
 
-  .icon {
-    font-size: 21px;
-    padding: 11px 16px;
+    .icon {
+      font-size: 21px;
+      padding: 11px 16px;
+    }
   }
 }
 
@@ -117,10 +125,6 @@ a.mention:hover {
 @-ms-viewport       { width: device-width; }
 @-o-viewport        { width: device-width; }
 @viewport           { width: device-width; }
-
-.btn-follow + .btn-block {
-  margin-top: 0;
-}
 
 .load-next {
   position: relative;
@@ -146,7 +150,6 @@ a.mention:hover {
 
   > li {
     border-top: 1px solid @border-color;
-
     &:first-child {
       border-top: 0;
     }
@@ -161,7 +164,6 @@ a.mention:hover {
 .btn-group-justified {
   .btn {
     border-width: 1px 0 1px 1px;
-
     &:last-child {
       border-width: 1px;
     }
