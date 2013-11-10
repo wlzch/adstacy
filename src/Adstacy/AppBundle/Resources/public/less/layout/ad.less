@@ -22,7 +22,7 @@
   max-height: 9999px;
   background: #000 url("../img/loader.gif") no-repeat center;
   .border-top-radius(@border-radius-base);
-  .transition(max-height ease .2s);
+  // .transition(max-height .2s);
 
   &:hover .advert-expand {
     background: rgba(0,0,0,.5);
@@ -37,7 +37,7 @@
 
 .advert-object.limit {
   max-height: @advert-limit !important;
-  .transition(max-height ease .2s);
+  // .transition(max-height .2s);
 }
 
 .advert-expand {
