@@ -25,7 +25,7 @@
     <div class="advert-object limit">
       <div class="advert-text">
         <div class="advert-text-content">
-          <h3>{{ ad.title }}</h3>
+          <h3>{{ ad.title|purify }}</h3>
           <p>{{ ad.description|raw|purify }}</p>
           <div class="advert-tags">
             {% for tag in ad.tags %}
