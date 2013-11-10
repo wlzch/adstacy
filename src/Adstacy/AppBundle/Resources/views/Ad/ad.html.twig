@@ -54,7 +54,7 @@
       {% set user = ad.user %}
       <img src="{{ profile_pic(user) }}" alt="{{ user.username }}" width="32" height="32">
       <a class="realname hovercard-user" href="{{ path('adstacy_app_user_profile', {username: user.username}) }}" data-username="{{ user.username }}">{{ user.realName }} <span class="username">@{{ user.username }}</span></a>
-      <time class="pull-right timeago" datetime="{{ ad.created|date('c') }}">{{ ad.created|date('F j, Y') }}</time>
+      <time class="timeago" datetime="{{ ad.created|date('c') }}">{{ ad.created|date('F j, Y') }}</time>
     </div>
 
     {% if ad.type != 'text' %}
