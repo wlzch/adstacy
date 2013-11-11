@@ -166,16 +166,16 @@
               {% block content %}{% endblock %}
             </div>
             {% if not is_mobile() %}
-            <div id="sidebar" class="site-sidebar fade-hover">
               {% block sidebar %}
-                <div id="sidebar-trending" class="site-aside" style="display: none;">
-                  <h2><a href="{{ path('adstacy_app_trending') }}">Trending</a></h2>
-                </div>
-                <div id="side-suggest-friend" class="site-aside" style="display: none;">
-                  <h2><a href="{{ path('adstacy_app_who_to_follow') }}">People you may know</a></h2>
+                <div id="sidebar" class="site-sidebar fade-hover">
+                    <div id="sidebar-trending" class="site-aside" style="display: none;">
+                      <h2><a href="{{ path('adstacy_app_trending') }}">Trending</a></h2>
+                    </div>
+                    <div id="side-suggest-friend" class="site-aside" style="display: none;">
+                      <h2><a href="{{ path('adstacy_app_who_to_follow') }}">People you may know</a></h2>
+                    </div>
                 </div>
               {% endblock %}
-            </div>
             {% endif %}
           </div>
         </div>
