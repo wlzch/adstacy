@@ -16,7 +16,7 @@
   {% endfor %}
   {% if ads|length >= max_ads_per_page %}
     {% set params = app.request.query.all|merge({page: (app.request.query.get('page') ?: 1) + 1}) %}
-    <a href="{{ path('adstacy_app_trending',  params) }}" class="btn btn-default btn-lg btn-block load-next next-page">{{ "more"|trans }}</a>
+    <a href="{{ path('adstacy_app_trending',  params) }}" class="load-next next-page">{{ "more"|trans }}</a>
   {% endif %}
 {% endblock %}
 
