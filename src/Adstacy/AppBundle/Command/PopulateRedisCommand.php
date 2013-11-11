@@ -142,11 +142,11 @@ class PopulateRedisCommand extends ContainerAwareCommand
 
         $ids = array();
         foreach ($repo->findTrendingPromotes(100) as $ad) {
-            $ids[] = $ad->getId();
+            $ids[$ad->getId()] = $ad->getPromoteesCount();;
         }
 
         $redis->del('trending');
-        $cmd = $redis->createCommand('rpush');
+        $cmd = $redis->createCommand('zadd');
         $cmd->setArguments(array('trending', $ids));
         $redis->executeCommand($cmd);
 

@@ -198,10 +198,11 @@ class AdRepository extends EntityRepository
      * Find ads having id in $ids
      *
      * @param array $ids
+     * @param string $order
      */
-    public function findByIds($ids = array())
+    public function findByIds($ids = array(), $order = null)
     {
-        return $this->_getAdsAndCommentsIn($ids);
+        return $this->_getAdsAndCommentsIn($ids, $order);
     }
 
 
@@ -250,10 +251,11 @@ class AdRepository extends EntityRepository
      * @param Query $filterQuery
      * @param integer $since
      * @param integer $limit
+     * @param string $order
      *
      * @return array
      */
-    private function getAdsAndCommentsIn(Query $filterQuery, $since = null, $limit = 10)
+    private function getAdsAndCommentsIn(Query $filterQuery, $since = null, $limit = 10, $order = null)
     {
         if ($since == null) {
             $since = 2000000000; // set to a very high last id if not present
@@ -264,7 +266,7 @@ class AdRepository extends EntityRepository
             $ids[] = $ad['id'];
         }
 
-        return $this->_getAdsAndCommentsIn($ids);
+        return $this->_getAdsAndCommentsIn($ids, $order);
     }
 
     /**
@@ -272,7 +274,7 @@ class AdRepository extends EntityRepository
      *
      * @param array $ids
      */
-    private function _getAdsAndCommentsIn($ids = array())
+    private function _getAdsAndCommentsIn($ids = array(), $order = null)
     {
         if (count($ids) <= 0) {
             return array();
@@ -280,6 +282,9 @@ class AdRepository extends EntityRepository
         $em = $this->getEntityManager();
         $rsm = $this->getNativeSqlMapping();
         $ids = Formatter::arrayToSql($ids);
+        if (is_null($order)) {
+            $order = 'a.id DESC';
+        }
         $query = $em->createNativeQuery("
             SELECT a.*,
                 u.id as u_id, u.username as u_username, u.imagename as u_imagename, u.real_name as u_real_name,
@@ -302,7 +307,7 @@ class AdRepository extends EntityRepository
                    )
                 )
             ) AND a.active = TRUE
-            ORDER BY a.id DESC
+            ORDER BY $order
         ", $rsm);
 
         return $query->getResult();

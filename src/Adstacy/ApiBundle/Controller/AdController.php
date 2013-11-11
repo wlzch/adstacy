@@ -102,9 +102,9 @@ class AdController extends ApiController
     {
         $redis = $this->get('snc_redis.default');
         $max = $this->getParameter('max_sidebar_trending');
-        $cnt = $redis->llen('trending');
+        $cnt = $redis->zcard('trending');
         $rand = rand(0, $cnt - $max - 1);
-        $ids = $redis->lrange('trending', $rand, $rand + $max - 1);
+        $ids = $redis->zrevrange('trending', $rand, $rand + $max - 1);
 
         $ads = array();
         $cacheManager = $this->get('liip_imagine.cache.manager');

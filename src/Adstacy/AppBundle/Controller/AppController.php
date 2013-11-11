@@ -76,8 +76,8 @@ class AppController extends Controller
         $max = $this->getParameter('max_ads_per_page');
         $start = ($page - 1) * $max;
         $end = $start + ($max - 1);
-        $ids = $redis->lrange('trending', $start, $end);
-        $ads = $this->getRepository('AdstacyAppBundle:Ad')->findByIds($ids);
+        $ids = $redis->zrevrange('trending', $start, $end);
+        $ads = $this->getRepository('AdstacyAppBundle:Ad')->findByIds($ids, 'a.promotees_count DESC');
 
         return $this->render('AdstacyAppBundle:App:trending.html.twig', array(
             'ads' => $ads
