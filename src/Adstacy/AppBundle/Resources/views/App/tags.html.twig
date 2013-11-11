@@ -1,6 +1,6 @@
 {% extends is_ajax() ? '::ajax.html.twig' : 'AdstacyAppBundle::layout.html.twig' %}
 
-{% block title %}All Tags| Adstacy{% endblock %}
+{% block title %}All Tags | Adstacy{% endblock %}
 
 {% block site_body_class %}{% endblock %}
 
@@ -15,7 +15,7 @@
 
 {% block content %}
   <div class="adstacy-container site-body-bg">
-    <ul class="jscroll tags clearfix">
+    <ul class="jscroll tags">
       {{ block('ajax_content') }}
     </ul>
   </div>
