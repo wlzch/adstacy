@@ -1,100 +1,79 @@
 @import "../variables.less";
-@import "../bootstrap/mixins.less";
+@import "../mixins.less";
 
-#landing .wrapper {
-  width: 999px;
-  margin: 0 auto;
-
-  @media (max-width: @screen-tablet) {
-    width: 100% !important;
-  }
-}
-
-#landing-title {
-  background-color: @gray-darker;
-  background-size: cover;
-  margin-bottom: 0;
-  padding-top: 10px;
+.landing-title {
+  margin: 60px 0;
+  text-shadow: 1px 1px 0 #fff;
+  text-align: center;
 
   h1 {
-    color: #fff;
-    margin: 40px 0 10px;
-    font-weight: bold;
     font-size: 48px;
-    text-align: center;
+    font-weight: bold;
+    margin: 0 0 10px;
   }
 
   h2 {
     font-size: 24px;
-    color: #fff;
-    text-align: center;
-    margin: 0 0 40px;
-  }
-
-  .panel {
-    .form-group {
-      margin-bottom: 5px;
-    }
-  }
-
-  @media (min-width: @screen-md-max) {
-    background-size: cover;
-  }
-
-  @media (max-width: @screen-tablet) {
-    background: @gray-darker;
+    font-weight: 300;
+    margin: 0 0 30px;
   }
 }
 
-#landing-heading {
-  text-align: center;
-  .btn {
-    padding: 12px 40px;
+.landing-screenshot {
+  width: 100%;
+
+  img {
+    .img-responsive(block);
   }
-}
 
-#landing-screenshot {
-  float: left;
-  margin-top: 40px;
-
-  @media (max-width: @screen-tablet) {
-    float: none;
-
-    img {
-      .img-responsive(block);
-    }
-  }
-}
-
-#landing-social {
-  border-top: 1px solid rgba(255,255,255,0.15);
-  padding: 20px 0;
-  text-align: center;
-  .box-shadow(0 -2px 0 -1px rgba(0,0,0,0.15));
-
-  .btn {
-    margin: 10px 10px 0;
-
-    @media (max-width: @screen-tablet) {
-      &:first-child {
-        margin-top: 0;
-      }
-    }
+  @media (min-width: @screen-tablet) {
+    float: left;
+    width: 65%;
   }
 }
 
 #register-form {
-  width: 300px;
-  float: right;
-  margin-top: 60px;
+  max-width: 480px;
+  margin: 30px auto;
+  border: 1px solid @border-color;
 
-  .panel {
-    width: 100%;
+  .panel-heading {
+    padding: 10px 15px;
   }
 
-  @media (max-width: @screen-tablet) {
-    margin: 60px 15px 0;
-    width: auto;
-    float: none;
+  .btn-block + .btn-block {
+    margin-top: 10px;
+  }
+
+  p {
+    font-size: 12px;
+  }
+
+  @media (min-width: @screen-tablet) {
+    width: 35%;
+    float: left;
+    margin: 0;
+  }
+}
+
+.landing-social {
+  border-top: 1px solid #fff;
+  padding: 20px 0;
+  text-align: center;
+  margin: 20px 0;
+  .box-shadow(0 -1px 0 @border-color);
+
+  .btn-social {
+    display: block;
+    width: 200px;
+    margin: 10px auto 0;
+    &:first-child {
+      margin-top: 0;
+    }
+
+    @media (min-width: @screen-phone) {
+      display: inline-block;
+      margin: 0 10px;
+    }
   }
 }

@@ -181,8 +181,8 @@ flash:
             success: You have successfully unfollowed %username%
 
 landing:
-    welcome: Find and Share Various Ads
-    desc: '#kuliner #lowongan #fashion #acara #game etc'
+    welcome: 'The #1 Social Advertising Media'
+    desc: 'Share & Find Any Promotional Ads'
     explore: Explore Now
     features:
         easy:
