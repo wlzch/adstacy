@@ -75,6 +75,14 @@ class RegistrationFormType extends BaseType
         ;
     }
 
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'Adstacy\AppBundle\Entity\User',
+            'csrf_protection'   => false,
+        ));
+    }
+
     public function getName()
     {
         return 'adstacy_registration';

@@ -30,7 +30,6 @@
             <div class="alert alert-danger">{{ "security.login.failed"|trans({}, 'FOSUserBundle') }}</div>
           {% endif %}
         {% endif %}
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
 
         <div class="form-group">
           <label for="_username" class="hide">{{ 'security.login.username'|trans }}</label>
