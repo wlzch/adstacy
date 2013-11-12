@@ -98,6 +98,7 @@ class UserProvider implements UserProviderInterface, OAuthAwareUserProviderInter
         $setter_token = $setter.'AccessToken';
         $setter_username = $setter.'Username';
         $setter_real_name = $setter.'RealName';
+        $newUser = false;
 
         //when the user is registrating
         if (null === $user) {
@@ -105,6 +106,7 @@ class UserProvider implements UserProviderInterface, OAuthAwareUserProviderInter
               $user = $_user;
             } else {
                 // create new user here
+                $newUser = true;
                 $user = $this->userManager->createUser();
                 $nickname = $response->getNickname();
 
@@ -137,6 +139,10 @@ class UserProvider implements UserProviderInterface, OAuthAwareUserProviderInter
         $user->$setter_token($response->getAccessToken());
         $user->addRole('ROLE_'.strtoupper($service));
         $this->userManager->updateUser($user);
+        if ($newUser) {
+            $this->container->get('adstacy.manager.user')->suggestFollow($user);
+            $this->container->get('adstacy.manager.user')->saveToRedis($user);
+        }
  
         return $user;
     }
