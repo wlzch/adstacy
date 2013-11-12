@@ -71,7 +71,8 @@ ads:
     blocked: This ads have been blocked. Please edit it according to our <a href="%url%">terms</a>.
     report:
         success: Ads have been reported. We will look into this soon.
-    other_promotes: 'and <a class="count" href="javascript:;">%count%</a> others broadcast this'
+    other_promotes: 'and <a class="count" href="javascript:;">%count%</a> others'
+    broadcast_this: 'broadcast this'
     broadcasts:
         next: Load next broadcasts
 

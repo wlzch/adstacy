@@ -71,7 +71,8 @@ ads:
     blocked: Iklan ini telah diblock. Silahkan edit berdasarkan <a href="%url%">ketentuan</a> kami
     report:
         success: Iklan telah dilaporkan. Kami akan melihatnya segera.
-    other_promotes: 'dan <a class="count" href="javascript:;">%count%</a> orang lainnya juga broadcast'
+    other_promotes: 'dan <a class="count" href="javascript:;">%count%</a> orang lainnya'
+    broadcast_this: 'broadcast ini'
     broadcasts:
         next: Lihat broadcast berikutnya
 
