@@ -15,6 +15,15 @@ use Symfony\Component\Security\Core\Exception\AccountStatusException;
  */
 class ConnectController extends BaseController
 {
+    public function connectAction(Request $request)
+    {
+        $response = parent::connectAction($request);
+        if ($response instanceof RedirectResponse) {
+            $response->headers->setCookie(new Cookie('logged_in', 'true'));
+        }
+
+        return $response;
+    }
     public function connectServiceAction(Request $request, $service)
     {
         $connect = $this->container->getParameter('hwi_oauth.connect');
@@ -53,6 +62,9 @@ class ConnectController extends BaseController
         $router = $this->container->get('router');
         $request->getSession()->getFlashBag()->add('success', 'You have successfully connected with your '.$service.' account');
 
-        return new RedirectResponse($router->generate('fos_user_profile_edit'));
+        $response = new RedirectResponse($router->generate('fos_user_profile_edit'));
+        $response->headers->setCookie(new Cookie('logged_in', 'true'));
+
+        return $response;
     }
 }
