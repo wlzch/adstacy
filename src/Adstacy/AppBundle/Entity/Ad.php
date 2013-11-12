@@ -503,7 +503,7 @@ class Ad
             return round(($height/ $this->getImageHeight()) * $this->imageWidth);
         }
 
-        return $this->imageWidth;
+        return $this->imageWidth ?: 0;
     }
 
     /**
@@ -532,7 +532,7 @@ class Ad
             return round(($width / $this->getImageWidth()) * $this->imageHeight);
         }
 
-        return $this->imageHeight;
+        return $this->imageHeight ?: 0;
     }
 
     /**

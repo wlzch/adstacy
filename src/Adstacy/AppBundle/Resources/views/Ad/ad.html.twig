@@ -14,10 +14,10 @@
         {% set width = thumb_width %}
       {% endif %}
       {% set height = ad.imageHeight(width) %}
-      <div class="advert-img" style="height: {{ height }}px;">
+      <div class="advert-img" {% if height > 0 %}style="height: {{ height }}px;"{% endif %}>
         <img class="lazy {% if ad.imageWidth >= thumb_width %}full{% endif %}" src="{{ asset('bundles/adstacyapp/img/transparent.gif') }}"
           data-original="{{ vich_uploader_asset(ad, 'image') }}"
-          width="{{ width }}" height="{{ height }}">
+          {% if width > 0 and height > 0 %}width="{{ width }}" height="{{ height }}"{% endif %}>
       </div>
       <a href="javascript:;" class="advert-expand collapsed icon hide"></a>
     </div>
