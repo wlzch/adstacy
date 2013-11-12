@@ -165,7 +165,7 @@
 
   <div class="advert-comments-container">
     {% if commentsLeft > 0 %}
-      {% set lastId = _comments[0].id %}
+      {% set lastId = _comments[commentsLength - 1].id %}
       <div class="load-more-comments">
         <a href="javascript:;" data-href="{{ path('adstacy_api_ad_comments', {id: ad.id, until: lastId}) }}">
           {{"comment.load_more"|trans({'%count%': commentsLeft})|raw}}
