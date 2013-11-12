@@ -29,10 +29,14 @@
     </script>
     {% endif %}
 
-    <link rel="icon shortcut" type="image/ico" href="{{ asset('favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
     <link rel="apple-touch-icon" sizes="114×114" href="{{ asset('apple-touch-icon-114x114.png') }}" />
     <link rel="apple-touch-icon" sizes="72×72" href="{{ asset('apple-touch-icon-72x72.png') }}" />
     <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}" />
+    <link rel="apple-touch-icon-precomposed" sizes="114×114" href="{{ asset('apple-touch-icon-114x114.png') }}" />
+    <link rel="apple-touch-icon-precomposed" sizes="72×72" href="{{ asset('apple-touch-icon-72x72.png') }}" />
+    <link rel="apple-touch-icon-precomposed" href="{{ asset('apple-touch-icon.png') }}" />
+
 
     {% block stylesheets %}
       {% stylesheets filter='cssrewrite, uglifycss'
