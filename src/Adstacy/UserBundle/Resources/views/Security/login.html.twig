@@ -24,11 +24,14 @@
 
       <form class="panel-body submit-disable" role="form" action="{{ path("fos_user_security_check") }}" method="post">
         {% if error %}
-          {% if error == 'User account is locked.' %}
-            <div class="alert alert-danger">{{ "security.login.locked"|trans({}, 'FOSUserBundle') }}</div>
-          {% else %}
-            <div class="alert alert-danger">{{ "security.login.failed"|trans({}, 'FOSUserBundle') }}</div>
-          {% endif %}
+          <div class="alert alert-error alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {% if error == 'User account is locked.' %}
+              {{ "security.login.locked"|trans({}, 'FOSUserBundle') }}
+            {% else %}
+              {{ "security.login.failed"|trans({}, 'FOSUserBundle') }}
+            {% endif %}
+          </div>
         {% endif %}
 
         <div class="form-group">

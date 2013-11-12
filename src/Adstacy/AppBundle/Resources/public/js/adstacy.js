@@ -52,7 +52,7 @@
     var template = Adstacy.templates.alert;
     options = $.extend({}, {
       duration: 1000,
-      timeout: 3000
+      timeout: 5000
     }, options);
     if ($container.length <= 0) {
       $container = $('<div class="alert-container">');
