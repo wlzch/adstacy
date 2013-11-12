@@ -83,3 +83,11 @@ _sonata_admin:
 
 AdstacyAppBundle_user:
     resource: "@AdstacyAppBundle/Resources/config/routing/users.yml"
+
+# hacky?
+catch_all:
+    path: /{anything}
+    defaults:
+        controller: AdstacyAppBundle:App:catchAll
+    requirements:
+        anything: ".+"

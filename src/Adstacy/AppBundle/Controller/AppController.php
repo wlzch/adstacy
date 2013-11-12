@@ -231,4 +231,12 @@ class AppController extends Controller
             'source' => 'twitter'
         ));
     }
+
+    /**
+     * A hacky solution to catch any unregistered route
+     */
+    public function catchAllAction($anything)
+    {
+        throw $this->createNotFoundException();
+    }
 }
