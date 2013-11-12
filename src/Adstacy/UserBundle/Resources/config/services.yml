@@ -34,3 +34,7 @@ services:
         arguments: [@adstacy.manager.user]
         tags:
             - { name: kernel.event_subscriber }
+
+    adstacy.user.login_success_handler:
+        class: Adstacy\UserBundle\Authentication\Handler\LoginSuccessHandler
+        arguments: [@router]

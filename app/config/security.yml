@@ -28,7 +28,12 @@ security:
             form_login:
                 provider: fos_userbundle
                 csrf_provider:  form.csrf_provider
-            logout: true
+                success_handler: adstacy.user.login_success_handler
+            logout:
+                path: /logout
+                target: /
+                delete_cookies:
+                    logged_in: { path: null, domain: null }
             anonymous: true
             switch_user: { role: ROLE_SUPER_ADMIN, parameter: _impersonate }
             remember_me:
