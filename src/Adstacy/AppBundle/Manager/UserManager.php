@@ -56,11 +56,13 @@ class UserManager
             }
         }
 
-        $redisKey = 'recommendation:'.$user->getUsername();
-        $redis->del($redisKey);
-        $cmd = $redis->createCommand('zadd');
-        $cmd->setArguments(array($redisKey, $recommendation));
-        $redis->executeCommand($cmd);
+        if (count($recommendation) > 0) {
+            $redisKey = 'recommendation:'.$user->getUsername();
+            $redis->del($redisKey);
+            $cmd = $redis->createCommand('zadd');
+            $cmd->setArguments(array($redisKey, $recommendation));
+            $redis->executeCommand($cmd);
+        }
     }
 
     /**
