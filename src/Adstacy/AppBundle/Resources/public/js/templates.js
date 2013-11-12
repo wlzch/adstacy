@@ -6,7 +6,7 @@
           <img src="{{ photo }}" alt="" width="32" height="32" class="media-object">
         </div>
         <div class="media-heading">
-          <a class="name hovercard-user" href="/{{ username }}">
+          <a class="name hovercard-user" data-username="{{ username }}" href="/{{ username }}">
             <span class="realname">{{ real_name }}</span>
             <span class="username">@{{ username }}</span>
           </a>

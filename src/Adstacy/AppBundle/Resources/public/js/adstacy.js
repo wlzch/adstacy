@@ -350,6 +350,7 @@
           $comments.prepend($tmpl);
           $tmpl.find('time').timeago();
           $tmpl.find('a.delete-comment').click(Adstacy.events.deleteComment);
+          Adstacy.hoveruser($tmpl.find('.hovercard-user'), {width: 400});
           $this.removeAttr('data-loading');
         });
       });
