@@ -206,7 +206,7 @@ $(function() {
   (function() {
     // validation
     var err = function(message) {
-      Adstacy.alert('error', message);
+      Adstacy.alert('error', message, {timeout: 5000});
 
       return false;
     }
