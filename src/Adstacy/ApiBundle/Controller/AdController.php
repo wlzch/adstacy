@@ -116,6 +116,7 @@ class AdController extends ApiController
                 $_ad['image'] = $cacheManager->getBrowserPath($ad->getImagename(), 'small_thumb');
                 $_ad['width'] = $thumbWidth;
                 $_ad['height'] = $ad->getImageHeight($thumbWidth);
+                if ($_ad['height'] <= 0) continue;
             } else if ($ad->getType() == 'text') {
                 $_ad['is_text'] = true;
                 $_ad['title'] = $ad->getTitle();
