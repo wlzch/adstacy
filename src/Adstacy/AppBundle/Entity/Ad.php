@@ -499,7 +499,7 @@ class Ad
      */
     public function getImageWidth($height = null)
     {
-        if ($height) {
+        if ($height && $this->getImageHeight()) {
             return round(($height/ $this->getImageHeight()) * $this->imageWidth);
         }
 
@@ -528,7 +528,7 @@ class Ad
      */
     public function getImageHeight($width = null)
     {
-        if ($width) {
+        if ($width && $this->getImageWidth()) {
             return round(($width / $this->getImageWidth()) * $this->imageHeight);
         }
 
