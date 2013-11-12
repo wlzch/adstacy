@@ -181,8 +181,8 @@ flash:
             success: %username% berhasil di unfollow
 
 landing:
-    welcome: Cari dan Berbagi Promosi
-    desc: '#kuliner #lowongan #fashion #acara #game etc'
+    welcome: 'The #1 Social Advertising Media'
+    desc: temukan dan berbagi berbagai iklan promosi dengan mudah
     explore: Explore Sekarang
     features:
         easy:
