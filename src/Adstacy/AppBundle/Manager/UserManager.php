@@ -35,12 +35,14 @@ class UserManager
 
         foreach ($followings as $following) {
             foreach ($following->getFollowings() as $followingsFollowing) {
-                $followingsFollowingId = $followingsFollowing->getId();
-                if (!in_array($followingsFollowingId, $followingsId)) {
-                    if (isset($recommendation[$followingsFollowingId])) {
-                        $recommendation[$followingsFollowingId]++;
-                    } else {
-                        $recommendation[$followingsFollowingId] = 1;
+                if ($followingsFollowing !== $user) {
+                    $followingsFollowingId = $followingsFollowing->getId();
+                    if (!in_array($followingsFollowingId, $followingsId)) {
+                        if (isset($recommendation[$followingsFollowingId])) {
+                            $recommendation[$followingsFollowingId]++;
+                        } else {
+                            $recommendation[$followingsFollowingId] = 1;
+                        }
                     }
                 }
             }
