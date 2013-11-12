@@ -1,25 +1,25 @@
 <div id="user-profile" class="panel panel-default">
-  <div class="media">
+  <div class="media user">
     <div class="pull-left">
       <img src="{{ profile_pic(user) }}" class="media-object" width="100" height="100">
     </div>
     <div class="media-body">
       <h4 class="media-heading">
-        <a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">{{ user.realname }}</a>
-        <small>@{{ user.username }}</small>
+        <a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}" class="name">
+          <span class="realname">{{ user.realname }}</span>
+          <span class="username">@{{ user.username }}</span>
+        </a>
       </h4>
-      <div>
+      <p class="user-desc">
         {% if user.about %}
           {{ parse_url(parse_hashtag(user.about)) }}
         {% else %}
-          <i>
             No Description About User.
             {% if app.user and app.user == user %}
               Go to <a href="{{ path('fos_user_profile_edit') }}">Settings</a> to write.
             {% endif %}
-          </i>
         {% endif %}
-      </div>
+      </p>
     </div>
   </div>
 

@@ -106,15 +106,15 @@
         <div id="site-container" class="site-container site-wrapper">
           {% set attr = app.request.attributes %}
           {% block navbar %}
-          <div id="site-menu">
+          <div id="site-menu" class="site-menu">
             <nav id="site-menu-inner" class="site-menu-inner">
               {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                <div id="site-user-menu" class="media">
+                <div id="site-user-menu" class="media user">
                   <a href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}" class="pull-left">
                     <img src="{{ profile_pic(app.user) }}" alt="{{ app.user.username }}" width="32" height="32" class="media-object">
                   </a>
                   <div class="media-body">
-                    <a class="username" href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}" title="{{ "profile"|trans }}">{{ app.user.realname }}</a>
+                    <a class="name" href="{{ path('adstacy_app_user_profile', {username: app.user.username}) }}" title="{{ "profile"|trans }}"><span class="realname">{{ app.user.realname }}</span></a>
                     <a href="{{ path('fos_user_security_logout') }}" title="{{ "logout"|trans }}">{{ "logout"|trans }}</a>
                   </div>
                 </div>

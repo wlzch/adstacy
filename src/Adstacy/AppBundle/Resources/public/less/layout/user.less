@@ -14,15 +14,10 @@
   }
 }
 
-.user {
+.user-card {
   width: 100%;
   padding: 10px;
-  border-bottom: 1px solid #eee;
-
-  p {
-    font-size: 12px;
-    margin: 0;
-  }
+  border-bottom: 1px solid @gray-lighter;
 
   .media-object {
     border-radius: 3px;
@@ -30,45 +25,72 @@
     height: 48px;
   }
 
-  .media-heading {
-    margin: 0;
-    a:not(.btn) {
-      color: #999;
-      font-size: 11px;
-      font-weight: bold;
-      margin-right: 3px;
-    }
-    a.realname {
-      font-size: 14px;
+  &:hover {
+    background: @gray-lighter;
+    box-shadow: 0 0 3px @gray-dark;
+
+    .user-detail a,
+    .username {
       color: @gray;
     }
-    .username {
-      font-size: 12px;
-    }
-  }
-  &:hover {
-    background-color: #eee;
-    box-shadow: 0 0 3px #333;
-    .realname, .username {
+
+    .realname {
       color: @brand-primary;
     }
-    .media-heading a:not(.btn) {
-      color: #666;
-    }
   }
 }
 
-a.realname, a.username {
-  text-decoration: none;
-}
-.realname {
-  color: @gray;
-  font-weight: bold;
-}
+.user {
+  .name {
+    text-decoration: none;
+    &:hover {
+      text-decoration: none;
+      .realname {
+        color: @brand-primary;
+      }
+    }
+  }
 
-.username {
-  color: #bbb;
-  font-weight: bold;
+  .realname {
+    font-size: 14px;
+    font-weight: bold;
+    color: @gray;
+    vertical-align: middle;
+  }
+
+  .username {
+    font-size: 12px;
+    color: @gray-light;
+  }
+
+  .user-desc {
+    font-size: 12px;
+    font-style: italic;
+    margin: 0;
+  }
+
+  .user-detail {
+    font-size: 12px;
+
+    a {
+      color: @gray-light;
+      margin-left: 5px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+
+  @media (min-width: @screen-phone) {
+    .user-detail {
+      display: inline;
+
+      a:first-child {
+        margin-left: 5px;
+      }
+    }
+  }
 }
 
 .avatar {
@@ -100,12 +122,12 @@ a.realname, a.username {
     }
   }
 
-  .media-heading {
-    margin: 0 0 5px;
+  .realname {
+    font-size: 20px;
+  }
 
-    a {
-      color: @brand-primary;
-    }
+  .username {
+    font-size: 16px;
   }
 
   .btn-follow {
@@ -230,59 +252,4 @@ a.realname, a.username {
   box-shadow: 0 0 2px #ccc;
   padding: 10px;
   margin-bottom: 10px;
-}
-
-// @media screen and (max-width: @screen-phone) {
-//   #user-profile {
-//     margin-left: 0;
-//     margin-right: 0;
-//     width: 100%;
-//     .user-profile-desc {
-//       float: none;
-//       width: 100%;
-//       text-align: center;
-//     }
-//     .profile-picture {
-//       float: none;
-//       width: 100%;
-//       text-align: center;
-//       margin: 10px 0 0;
-//     }
-//     #user-profile-info .realname {
-//       text-align: center;
-//     }
-//     #user-profile-menu {
-//       text-align: center;
-//       .pull-right, .pull-left {
-//         float: none !important;
-//       }
-//       .btn {
-//         display: block;
-//         width: 100%;
-//       }
-//     }
-//   }
-//   .user {
-//     width: 100%;
-//     padding: 0;
-//     margin: 14px 0 0;
-//     height: auto;
-//     .user-realname, .profile-picture, .user-adverts, .user-score {
-//       text-align: center;
-//     }
-//     .profile-picture, .user-adverts {
-//       float: none;
-//     }
-//     .user-adverts {
-//       width: 210px;
-//       margin: 0 auto;
-//     }
-//     .user-score {
-//       margin-bottom: 0;
-//     }
-//   }
-// }
-
-.page-title {
-  padding:0;
 }

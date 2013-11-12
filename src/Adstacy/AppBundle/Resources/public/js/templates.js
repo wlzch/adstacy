@@ -1,13 +1,14 @@
 (function(window) {
   window.templates = {
     comment: '
-      <div class="comment media" data-id="{{ id }}">
+      <div class="comment media user" data-id="{{ id }}">
         <div class="pull-left">
           <img src="{{ photo }}" alt="" width="32" height="32" class="media-object">
         </div>
         <div class="media-heading">
-          <a class="realname" href="/{{ username }}">{{ real_name }}
-            <span class="username">@{{ username }}</small>
+          <a class="name hovercard-user" href="/{{ username }}">
+            <span class="realname">{{ real_name }}</span>
+            <span class="username">@{{ username }}</span>
           </a>
           &middot; <time class="timeago" datetime="{{ time }}">{{ strtime }}</time>
           {{#delete}}
@@ -50,11 +51,15 @@
     ',
     sidebar_recommendation: '
       {{#users}}
-        <div class="media">
-          <a href="#" class="pull-left"><img src="{{ photo }}" width="32" height="32" class="media-object"></a>
+        <div class="media user">
+          <a href="/{{ username }}" class="pull-left">
+            <img src="{{ photo }}" width="32" height="32" class="media-object">
+          </a>
           <div class="media-body">
             <div>
-              <a class="realname hovercard-user text-overflow" data-username="{{ username }}" href="/{{ username }}">{{ real_name }}</a>
+              <a class="name hovercard-user text-overflow" data-username="{{ username }}" href="/{{ username }}">
+                <span class="realname">{{ real_name }}</span>
+              </a>
             </div>
             <button data-username="{{ username }}" class="btn btn-sm btn-follow btn-primary follow-user {{#followed}}hide{{/followed}}">Follow</button>
             <button data-username="{{ username }}" class="btn btn-sm btn-follow btn-success unfollow-user {{^followed}}hide{{/followed}}">Following</button>
@@ -71,9 +76,12 @@
     user_mini: '
       <div class="users-mini">
         {{#users}}
-          <div class="user-mini">
+          <div class="user-mini user">
             <img src="{{ photo }}" class="profilepic" width="50" height="50">
-            <a href="/{{ username }}" class="realname">{{ real_name }} <span class="username">{{ username }}</span></a>
+            <a href="/{{ username }}" class="name">
+              <span class="realname">{{ real_name }}</span>
+              <span class="username">@{{ username }}</span>
+            </a>
             {{#show_button}}
               <button data-username="{{ username }}" class="btn btn-sm btn-follow btn-primary follow-user pull-right {{#followed}}hide{{/followed}}">Follow</button>
               <button data-username="{{ username }}" class="btn btn-sm btn-follow btn-success unfollow-user pull-right {{^followed}}hide{{/followed}}">Following</button>
@@ -81,7 +89,7 @@
           </div>
         {{/users}}
         {{#next}}
-            <a href="javascript:;" class="btn btn-success next" data-href="{{ next }}">{{ next_label }}</a>
+          <a href="javascript:;" class="btn btn-success next" data-href="{{ next }}">{{ next_label }}</a>
         {{/next}}
       </div>
     ',

@@ -1,4 +1,4 @@
-<div class="user media">
+<div class="user user-card media">
   <div class="pull-left">
     <img src="{{ profile_pic(user) }}" width="48" height="48" class="media-object">
   </div>
@@ -9,7 +9,10 @@
       {% endif %}
     </div>
     <div class="media-heading">
-      <a class="realname" href="{{ path('adstacy_app_user_profile', {username: user.username}) }}">{{ user.realname }} <span class="username">@{{ user.username }}</span></a>
+      <a href="{{ path('adstacy_app_user_profile', {username: user.username}) }}" class="name">
+        <span class="realname">{{ user.realname }}</span>
+        <span class="username">@{{ user.username }}</span>
+      </a>
       <div class="user-detail">
         <a href="{{ path('adstacy_app_user_followers', {username: user.username}) }}">
           <span class="user-followers-count">{{ user.followersCount }}</span> Followers
@@ -17,6 +20,6 @@
         <a href="{{ path('adstacy_app_user_ads', {username: user.username}) }}">{{ user.adsCount }} Ads</a>
       </div>
     </div>
-    <p>{{ parse_url(parse_hashtag(more(user.about|striptags, 100))) }}</p>
+    <p class="user-desc">{{ parse_url(parse_hashtag(more(user.about|striptags, 100))) }}</p>
   </div>
 </div>
