@@ -9,6 +9,7 @@ use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Exception\AccountStatusException;
+use Symfony\Component\HttpFoundation\Cookie;
 
 /**
  * Extends the base controller so that user doesnt have to confirm to connect account
