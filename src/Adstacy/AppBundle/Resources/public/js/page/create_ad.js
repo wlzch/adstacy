@@ -143,6 +143,7 @@ $(function() {
   });
   $modal.on('show.bs.modal', function() {
     $uploadImageContainer.show();
+    $progress.css('width', '0%');
     $advertUrl.val('');
   });
   var uploadFromUrl = function() {
