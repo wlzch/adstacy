@@ -336,7 +336,7 @@
           $that.find('.comments-count').text(left);
           $that.attr('data-href', json.meta.prev);
         }
-        $.each(json.data.comments, function(i, comment) {
+        $.each(json.data.comments.reverse(), function(i, comment) {
           $tmpl = $(template.render({
             id: comment.id,
             photo: comment.user.photo,

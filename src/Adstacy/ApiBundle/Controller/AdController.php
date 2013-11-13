@@ -53,7 +53,7 @@ class AdController extends ApiController
         $next = $comments[0]->getId();
         $res = array(
             'data' => array(
-                'comments' => array_reverse($comments)
+                'comments' => $comments
             ),
             'meta' => array(
                 'prev' => $this->generateUrl('adstacy_api_ad_comments', array('id' => $id, 'until' => $next))
