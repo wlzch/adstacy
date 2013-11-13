@@ -11,6 +11,28 @@
   }
 }
 
+.single {
+  &.open {
+    > #site-menu {
+      width: @site-menu-width;
+    }
+
+    > .adstacy-single-col {
+      margin-left: @site-menu-width;
+    }
+  }
+
+  > #site-menu {
+    width: 0;
+    .box-shadow(none);
+  }
+
+  > .adstacy-single-col {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
 #site-menu {
   // @height: "calc(100% - @{navbar-height})";
   position: fixed;

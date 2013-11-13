@@ -103,7 +103,7 @@
       {% endif %}
 
       {% block container %}
-        <div id="site-container" class="site-container site-wrapper">
+        <div id="site-container" class="site-container site-wrapper {% block single %}{% endblock %}">
           {% set attr = app.request.attributes %}
           {% block navbar %}
           <div id="site-menu" class="site-menu">
@@ -166,6 +166,7 @@
           </div>
           {% endblock %}
 
+          {% block inner_container %}
           <div class="site-content clearfix">
             <div class="site-body {% block site_body_class %}site-body-bg{% endblock %}">
 
@@ -184,6 +185,7 @@
               {% endblock %}
             {% endif %}
           </div>
+          {% endblock %}
         </div>
       {% endblock %}
     {% endblock %}

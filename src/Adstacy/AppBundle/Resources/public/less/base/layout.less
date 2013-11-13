@@ -43,14 +43,14 @@ a {
 }
 
 .adstacy-single-col {
-  // min-width: 500px;
   min-width: 320px;
   max-width: 1024px;
-  padding: (@navbar-height + 30px) 15px 30px;
+  padding: 30px 15px;
   margin: 0 auto;
+  .transition(margin-left .5s);
 
   .column {
-    width: 500px;
+    max-width: 500px;
     margin: 0 auto;
 
     .panel:first-child {
