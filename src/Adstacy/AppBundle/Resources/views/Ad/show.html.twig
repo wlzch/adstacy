@@ -1,6 +1,6 @@
 {% extends 'AdstacyAppBundle::layout.html.twig' %}
 
-{% block title %}{% if ad.type == 'text' %}{{ ad.title }}{% else %}{{ ad.description|striptags|slice(0, 150) }}{% endif %}{%endblock %}
+{% block title %}{% if ad.type == 'text' %}{{ ad.title }}{% else %}{% if ad.type == 'image' %}Image{% else %}Video{% endif %} ad by {{ ad.user.realName }}{% endif %}{%endblock %}
 
 {% block meta_description %}{{ ad.description|striptags|slice(0, 150) }}{% endblock %}
 
