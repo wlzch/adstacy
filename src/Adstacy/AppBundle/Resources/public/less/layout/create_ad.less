@@ -46,10 +46,15 @@
     margin-top: 0;
     border-top-width: 1px;
   }
+
+  .tt-suggestion.tt-is-under-cursor {
+    color: #555;
+  }
 }
 
 #create-advert-tags {
   border-top: 1px solid @border-color;
+  height: 31px;
 }
 
 .form-content-container {
@@ -102,10 +107,6 @@
   max-width: 100%;
 }
 
-.commands > .command > .icon {
-  font-size: 16px;
-}
-
 #create-advert-toolbar .label-group .icon {
   font-size: 16px;
 }
@@ -117,32 +118,41 @@
       padding: 0;
     }
 
-    .wysihtml5-command-active {
-      box-shadow: none;
-      border-bottom-color: #f00 !important;
-    }
-
     .commands {
-      li {
+      font-size: 0;
+
+      > .wysihtml5-command-active {
+        box-shadow: none;
+        border-bottom-color: #f00;
+      }
+
+      > .command {
         display: inline-block;
         margin-right: 0;
-        padding: 10px 5px;
+        padding: 10px 4px;
         text-shadow: 1px 0 1px #fff;
         border-bottom: 2px solid transparent;
         margin-bottom: -1px;
+
+        @media (min-width: @screen-phone) {
+          padding: 10px;
+        }
+
+        > .icon {
+          font-size: 16px;
+        }
       }
     }
 
-  }
+    [data-wysihtml5-dialog] {
+      border-radius: 0;
+      border-width: 0 0 1px;
 
-  [data-wysihtml5-dialog] {
-    border-radius: 0;
-    border-width: 0 0 1px;
-  }
-
-  @media screen and (max-width: 400px) {
-    [data-wysihtml5-dialog] input {
-      width: 100%;
+      @media screen and (max-width: 400px) {
+        [data-wysihtml5-dialog-field] {
+          width: 100%;
+        }
+      }
     }
   }
 }
