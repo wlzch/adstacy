@@ -29,7 +29,7 @@
       {% include 'AdstacyAppBundle:Ad:ad.html.twig' with {ad: ad, promotedBy: true} %}
     {% endfor %}
     {% if ads|length >= max_ads_per_page %}
-      <a href="{{ path('adstacy_app_stream', {id: id})}}" class="load-next next-page">{{ "more"|trans }}</a>
+      <a href="{{ path('homepage', {id: id})}}" class="load-next next-page">{{ "more"|trans }}</a>
     {% endif %}
   {% endif %}
 {% endblock %}
