@@ -2,7 +2,7 @@
 {% if comments is defined %}
   {% set _comments = comments %}
 {% else %}
-  {% set _comments = ad.comments %}
+  {% set _comments = ad.comments|reverse %}
 {% endif %}
 {% set commentsLength = _comments|length %}
 {% set commentsLeft = ad.commentsCount - commentsLength %}
@@ -168,7 +168,7 @@
 
   <div class="advert-comments-container">
     {% if commentsLeft > 0 %}
-      {% set lastId = _comments[commentsLength - 1].id %}
+      {% set lastId = _comments[0].id > _comments[1].id ? _comments[1].id : _comments[0].id %} {# hacky #}
       <div class="load-more-comments">
         <a href="javascript:;" data-href="{{ path('adstacy_api_ad_comments', {id: ad.id, until: lastId}) }}">
           {{"comment.load_more"|trans({'%count%': commentsLeft})|raw}}

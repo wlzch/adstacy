@@ -1,4 +1,3 @@
-
 (function() {
   var $window, $siteContainer, $siteHeader, $searchDismiss, $searchInput, $favourites, $siteMenu;
   $window = $(window);
