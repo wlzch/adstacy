@@ -120,7 +120,7 @@ class AdRepository extends EntityRepository
     {
         $em = $this->getEntityManager();
         $query = $em->createQuery('
-            SELECT partial a.{id}
+            SELECT DISTINCT a.id
             FROM AdstacyAppBundle:Ad a
             JOIN a.user u
             JOIN u.followers f
