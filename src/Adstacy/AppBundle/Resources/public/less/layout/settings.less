@@ -1,52 +1,8 @@
 @import "../variables.less";
+@import "../mixins.less";
 
 #settings {
-  margin: 0 auto;
-
-  .form-group,
-  .form-widget,
-  .form-text {
-    overflow: hidden;
-    zoom: 1;
-  }
-
-  .form-group {
-    &:last-of-type {
-      margin-bottom: 0;
-    }
-
-    > .pull-left {
-      text-align: right;
-      width: 150px;
-      line-height: 34px;
-      margin: 0 15px 0 0;
-    }
-  }
-
-  .form-text {
-    line-height: 34px;
-  }
-
-  .offset-label {
-    margin-left: 165px;
-  }
-
-  textarea.form-control {
-    resize: vertical;
-  }
   input[type=file].form-control {
     background-color: #eee;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  #settings {
-    .form-group .pull-left {
-      float: none !important;
-      text-align: left;
-    }
-    .offset-label {
-      margin-left: 0;
-    }
   }
 }

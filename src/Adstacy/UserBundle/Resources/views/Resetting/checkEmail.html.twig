@@ -1,14 +1,14 @@
 {% extends '::base_single_column.html.twig' %}
-
+{#
 {% block stylesheets %}
   {{ parent() }}
   {% stylesheets filter='cssrewrite, uglifycss'
-    'bundles/adstacyapp/less/layout/reset.less'
+    'bundles/adstacyapp/less/layout/form-panel.less'
   %}
     <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
   {% endstylesheets %}
 {% endblock %}
-
+#}
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block content %}

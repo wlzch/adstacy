@@ -5,6 +5,7 @@
 {% block stylesheets %}
   {{ parent() }}
   {% stylesheets filter='cssrewrite, uglifycss'
+    'bundles/adstacyapp/less/layout/form-panel.less'
     'bundles/adstacyapp/less/layout/settings.less'
   %}
     <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
@@ -32,7 +33,7 @@
 {% endblock %}
 
 {% block content %}
-  <div id="settings" class="column">
+  <div id="settings" class="form-panel column">
     <div class="panel panel-default">
       <div class="panel-heading"><h2>Settings</h2></div>
       <div class="panel-body">
@@ -65,7 +66,7 @@
           <div class="form-group">
             <div class="form-widget offset-label">
               {{ form_widget(form.save, { attr: {
-                    'class': 'form-control btn btn-primary submit-disable-btn',
+                    'class': 'btn btn-primary btn-block submit-disable-btn',
                     'data-disable-text': "saving"|trans
                   }
                 })
@@ -133,5 +134,3 @@
     </div>
   </div>
 {% endblock %}
-
-{% block sidebar %}{% endblock %}

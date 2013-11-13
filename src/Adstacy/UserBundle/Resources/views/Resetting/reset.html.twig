@@ -5,7 +5,7 @@
 {% block stylesheets %}
   {{ parent() }}
   {% stylesheets filter='cssrewrite, uglifycss'
-    'bundles/adstacyapp/less/layout/reset.less'
+    'bundles/adstacyapp/less/layout/form-panel.less'
   %}
     <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
   {% endstylesheets %}
@@ -25,7 +25,7 @@
 {% block content %}
 {% trans_default_domain 'FOSUserBundle' %}
 
-<div id="reset-verification" class="panel panel-default column">
+<div id="reset-verification" class="form-panel panel panel-default column">
   <div class="panel-heading">
     <h2>Reset Verification</h2>
   </div>
