@@ -31,6 +31,7 @@
         {% elseif route == 'adstacy_app_user_followings' %}
           {% if app.user and app.user == user %}
             <div class="lead">{{"user.no_followings.self_message"|trans}}</div>
+            <a href="{{ path('adstacy_app_who_to_follow') }}" class="btn btn-success btn-lg label-group" title="{{ "find_friends"|trans }}"><i class="icon icon-user-add"></i><span class="text">{{ "find_friends"|trans }}</span></a>
           {% else %}
             <div class="lead">{{"user.no_followings.message"|trans({'%username%': user.username})}}</div>
           {% endif %}

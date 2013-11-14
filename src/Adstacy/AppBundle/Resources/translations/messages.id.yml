@@ -82,6 +82,7 @@ user:
         self_message: Anda belum mempunyai follower
     no_followings:
         message: Belum ada yang follow Anda
+        self_message: Anda belum follow siapapun
 
 comment:
     load_more: Lihat <span class="comments-count">%count%</span> komentar lainnya

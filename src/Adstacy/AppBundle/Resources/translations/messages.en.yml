@@ -82,6 +82,7 @@ user:
         self_message: You don't have any followers yet
     no_followings:
         message: Nobody follows %username% yet
+        self_message: You haven't follow anyone yet
 
 comment:
     load_more: View <span class="comments-count">%count%</span> more comments
