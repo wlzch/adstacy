@@ -1,9 +1,7 @@
-{% set _comments = [] %}
-{% if comments is defined %}
-  {% set _comments = comments %}
-{% else %}
-  {% set _comments = ad.comments|reverse %}
+{% if comments is not defined %}
+  {% set comments = ad.comments %}
 {% endif %}
+{% set _comments = sort_comments(comments) %}
 {% set commentsLength = _comments|length %}
 {% set commentsLeft = ad.commentsCount - commentsLength %}
 <div class="advert" data-username="{{ ad.user.username }}" data-id="{{ ad.id }}">
@@ -168,7 +166,7 @@
 
   <div class="advert-comments-container">
     {% if commentsLeft > 0 %}
-      {% set lastId = _comments[0].id > _comments[1].id ? _comments[1].id : _comments[0].id %} {# hacky #}
+      {% set lastId = _comments[0].id %}
       <div class="load-more-comments">
         <a href="javascript:;" data-href="{{ path('adstacy_api_ad_comments', {id: ad.id, until: lastId}) }}">
           {{"comment.load_more"|trans({'%count%': commentsLeft})|raw}}
