@@ -6,11 +6,13 @@
 
 {% block content %}
   {% if user.followingsCount <= 0 %}
-    <div class="adstacy-container users panel panel-default">
+    <div id="get-started-follow" class="adstacy-container panel panel-default">
       <div class="panel-heading">
         <h2>{{"who_to_follow_getting_started"|trans}}</h2>
       </div>
-      {{ block('ajax_content') }}
+      <div class="users">
+        {{ block('ajax_content') }}
+      </div>
     </div>
   {% else %}
     <div class="jscroll adstacy-container">
