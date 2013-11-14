@@ -33,10 +33,10 @@ vich_uploader:
     storage: vich_uploader.storage.gaufrette
     mappings:
         ad_image:
-            uri_prefix: https://adstacy.s3.amazonaws.com/uploads
+            uri_prefix: https://adstacy.s3-%aws_s3_region%.amazonaws.com/uploads
             upload_destination: image_fs
             namer: vich_uploader.namer_uniqid
         user_image:
-            uri_prefix: https://adstacy.s3.amazonaws.com/uploads
+            uri_prefix: https://adstacy.s3-%aws_s3_region%.amazonaws.com/uploads
             upload_destination: image_fs
             namer: vich_uploader.namer_uniqid
