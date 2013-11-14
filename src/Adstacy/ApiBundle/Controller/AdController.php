@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use JMS\Serializer\SerializationContext;
+use Adstacy\AppBundle\Helper\Formatter;
 
 class AdController extends ApiController
 {
@@ -101,16 +102,27 @@ class AdController extends ApiController
     public function listTrendingAction()
     {
         $redis = $this->get('snc_redis.default');
+        $cacheManager = $this->get('liip_imagine.cache.manager');
+        $thumbWidth = $this->getParameter('small_thumb_size');
+        $em = $this->getManager();
         $max = $this->getParameter('max_sidebar_trending');
+
         $cnt = $redis->zcard('trending');
         $rand = rand(0, $cnt - $max - 1);
         $ids = $redis->zrevrange('trending', $rand, $rand + $max - 1);
 
         $ads = array();
-        $cacheManager = $this->get('liip_imagine.cache.manager');
-        $thumbWidth = $this->getParameter('small_thumb_size');
-        foreach ($this->getRepository('AdstacyAppBundle:Ad')->findById($ids) as $ad) {
-            $_ad = array('id' => $ad->getId());
+        $formattedIds = Formatter::arrayToSql($ids);
+        $query = $em->createQuery("
+          SELECT partial a.{id, type, imagename, imageWidth, imageHeight, created, title, youtubeUrl}
+          FROM AdstacyAppBundle:Ad a
+          WHERE a.id IN $formattedIds AND a.active = TRUE
+        ");
+        foreach ($query->getResult() as $ad) {
+            $_ad = array(
+              'id' => $ad->getId(),
+              'created' => $ad->getCreated()
+            );
             if ($ad->getType() == 'image') {
                 $_ad['is_image'] = true;
                 $_ad['image'] = $cacheManager->getBrowserPath($ad->getImagename(), 'small_thumb');
