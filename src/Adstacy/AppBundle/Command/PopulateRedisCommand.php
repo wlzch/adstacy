@@ -78,7 +78,7 @@ class PopulateRedisCommand extends ContainerAwareCommand
 
         $cnt = 0;
         foreach ($ads as $ad) {
-            $adTags = $ad->getTags();
+            $adTags = $ad->getNormalizedTags();
             foreach ($adTags as $tag) {
               $tags[$tag] = (isset($tags[$tag]) ? $tags[$tag] : 0) + 1;
             }

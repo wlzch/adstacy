@@ -95,7 +95,6 @@ class AppController extends Controller
         $start = ($page - 1) * $max;
         $end = $start + ($max - 1);
         $tags = $redis->zrevrange('all_tags', $start, $end);
-        $tags = array_intersect_key($tags, array_unique(array_map('strtolower', $tags)));
 
         return $this->render('AdstacyAppBundle:App:tags.html.twig', array(
           'tags' => $tags

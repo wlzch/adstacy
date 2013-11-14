@@ -81,6 +81,11 @@ class Ad
     private $tags;
 
     /**
+     * Normalized tags to be saved into elasticsearch
+     */
+    private $normalizedTags;
+
+    /**
      * @ORM\Column(type="datetime")
      * @JMS\Groups({"user_show", "ad_list", "ad_show"})
      */
@@ -857,5 +862,18 @@ class Ad
             return array_slice($promotees, 0, $limit);
         }
         return $promotees;
+    }
+
+    /**
+     * Normalized tags to be saved into elastic search
+     *
+     * @return array
+     */
+    public function getNormalizedTags()
+    {
+        $tags = $this->getTags();
+        $tags = array_map('strtolower', array_intersect_key($tags, array_unique(array_map('strtolower', $tags))));
+
+        return $tags;
     }
 }

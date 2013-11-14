@@ -21,11 +21,11 @@ class SearchController extends Controller
         $request = $this->getRequest();
         $index = $this->get('fos_elastica.index.website.ad');
         $limit = $this->getParameter('max_ads_per_page');
-        $q = $request->query->get('q');
+        $q = strtolower($request->query->get('q'));
         $tags = explode(' ', $q);
         $tags = preg_replace('/[^A-Za-z0-9]/', '', $tags);
 
-        $tagsFilter = new \Elastica\Filter\Terms('tags', $tags);
+        $tagsFilter = new \Elastica\Filter\Terms('normalizedTags', $tags);
 
         $constantQuery = new \Elastica\Query\ConstantScore($tagsFilter);
         $constantQuery->setBoost(1);
@@ -33,7 +33,7 @@ class SearchController extends Controller
         $existsFilter = new \Elastica\Filter\Exists('created');
         $filterQuery = new \Elastica\Query\CustomFiltersScore($constantQuery);
         foreach ($tags as $tag) {
-            $termFilter = new \Elastica\Filter\Term(array('tags' => $tag));
+            $termFilter = new \Elastica\Filter\Term(array('normalizedTags' => $tag));
             $filterQuery->addFilter($termFilter, 1.5);
         }
         $filterQuery->addFilterScript($existsFilter, 
