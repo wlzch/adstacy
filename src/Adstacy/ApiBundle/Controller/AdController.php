@@ -87,8 +87,8 @@ class AdController extends ApiController
             ),
             'meta' => array()
         );
-        if (count($result) >= $limit) {
-            $next = ($this->getRequest()->query->get('page') ?: 1) + 1;
+        if ($paginator->hasNextPage()) {
+            $next = $paginator->getNextPage();
             $res['meta']['next'] = $this->generateUrl('adstacy_api_ad_broadcasts', array('id' => $id, 'page' => $next));
         }
 
