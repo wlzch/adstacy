@@ -362,7 +362,9 @@
         $share.show();
         $share.find('.url').select();
         $share.addClass('open');
-        Adstacy.alert('success', Translator.trans('ctrl_copy'), {duration: 400, timeout: 1500});
+        if (!$.browser.mobile) {
+          Adstacy.alert('success', Translator.trans('ctrl_copy'), {duration: 400, timeout: 1500});
+        }
       }
       event.preventDefault();
       return false;
@@ -421,6 +423,9 @@
           $.getJSON(Routing.generate('adstacy_api_users', {q: query}), function(data) {
             users = users || [];
             users = users.concat(filterUser(query, data) || []);
+            users = _.uniq(users, function(user) {
+              return user.username;
+            });
 
             callback.call(that, users);
           });
