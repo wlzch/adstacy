@@ -1990,12 +1990,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/Gaufrette.git",
-                "reference": "e0047fd432f975b00a9e3601c49f28e458f61c91"
+                "reference": "a283d0d62ad09542cb75eacd8ff68b6478c1559e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/Gaufrette/zipball/e0047fd432f975b00a9e3601c49f28e458f61c91",
-                "reference": "e0047fd432f975b00a9e3601c49f28e458f61c91",
+                "url": "https://api.github.com/repos/KnpLabs/Gaufrette/zipball/a283d0d62ad09542cb75eacd8ff68b6478c1559e",
+                "reference": "a283d0d62ad09542cb75eacd8ff68b6478c1559e",
                 "shasum": ""
             },
             "require": {
@@ -2063,7 +2063,7 @@
                 "filesystem",
                 "media"
             ],
-            "time": "2013-10-10 06:25:07"
+            "time": "2013-11-12 14:14:07"
         },
         {
             "name": "knplabs/knp-gaufrette-bundle",
@@ -3921,59 +3921,6 @@
         }
     ],
     "packages-dev": [
-        {
-            "name": "amazonwebservices/aws-sdk-for-php",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/amazonwebservices/aws-sdk-for-php.git",
-                "reference": "e483d8802aa258df6a3f92926fe9e852788cdc73"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/amazonwebservices/aws-sdk-for-php/zipball/e483d8802aa258df6a3f92926fe9e852788cdc73",
-                "reference": "e483d8802aa258df6a3f92926fe9e852788cdc73",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.2.0"
-            },
-            "suggest": {
-                "aws/aws-sdk-php": "You should consider upgrading to version 2 of the AWS SDK for PHP"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "authentication/",
-                    "extensions/",
-                    "lib/",
-                    "services/",
-                    "utilities/",
-                    "sdk.class.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Amazon Web Services",
-                    "homepage": "http://aws.amazon.com"
-                }
-            ],
-            "description": "AWS SDK for PHP",
-            "homepage": "http://aws.amazon.com/sdkforphp/",
-            "keywords": [
-                "amazon",
-                "aws",
-                "dynamodb",
-                "ec2",
-                "s3",
-                "sdk"
-            ],
-            "time": "2013-10-14 21:53:07"
-        },
         {
             "name": "behat/behat",
             "version": "2.5.x-dev",
