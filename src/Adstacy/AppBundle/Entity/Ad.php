@@ -872,8 +872,11 @@ class Ad
     public function getNormalizedTags()
     {
         $tags = $this->getTags();
-        $tags = array_map('strtolower', array_intersect_key($tags, array_unique(array_map('strtolower', $tags))));
+        $_tags = array();
+        foreach (array_intersect_key($tags, array_unique(array_map('strtolower', $tags))) as $tag) {
+          $_tags[] = strtolower($tag);
+        }
 
-        return $tags;
+        return $_tags;
     }
 }
