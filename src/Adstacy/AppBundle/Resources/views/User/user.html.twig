@@ -17,7 +17,9 @@
         <a href="{{ path('adstacy_app_user_followers', {username: user.username}) }}">
           <span class="user-followers-count">{{ user.followersCount }}</span> Followers
         </a>
-        <a href="{{ path('adstacy_app_user_ads', {username: user.username}) }}">{{ user.adsCount }} Ads</a>
+        <a href="{{ path('adstacy_app_user_ads', {username: user.username}) }}">
+          <span class="user-ads-count">{{ user.adsCount }}</span> Ads
+        </a>
       </div>
     </div>
     <p class="user-desc">{{ parse_url(parse_hashtag(more(user.about|striptags, 100))) }}</p>
