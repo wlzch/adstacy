@@ -395,12 +395,13 @@
     }
   };
   var filterUser = function(query, users) {
-    return _.filter(users, function(user) { return user.username && user.username.toLowerCase().indexOf(query.toLowerCase()) > -1 });
+    return _.filter(users, function(user) { return user && user.username && user.username.toLowerCase().indexOf(query.toLowerCase()) > -1 });
   }
   Adstacy.options = {
     mentionsInput: {
       onDataRequest: function (mode, query, triggerChar, callback) {
         var users, that;
+        users = [];
         that = this;
         if (query && query.length >= 2) {
           if (Adstacy.user) {
@@ -418,7 +419,8 @@
             }
           }
           $.getJSON(Routing.generate('adstacy_api_users', {q: query}), function(data) {
-            users = users.concat(filterUser(query, data));
+            users = users || [];
+            users = users.concat(filterUser(query, data) || []);
 
             callback.call(that, users);
           });
