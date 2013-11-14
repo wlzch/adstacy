@@ -17,7 +17,7 @@ class UserController extends ApiController
     {
         $request = $this->getRequest();
         $results = array();
-        $q = $request->query->get('q');
+        $q = strtolower($request->query->get('q'));
         $withoutMention = $request->query->get('cond') == 'noment';
         $response = null;
         $redis = $this->get('snc_redis.default');

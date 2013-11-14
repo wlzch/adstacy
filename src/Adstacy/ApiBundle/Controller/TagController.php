@@ -16,7 +16,7 @@ class TagController extends ApiController
     {
         $request = $this->getRequest();
         $results = array();
-        $q = $request->query->get('q');
+        $q = strtolower($request->query->get('q'));
         $response = null;
         $redis = $this->get('snc_redis.default');
         $tags = explode(' ', $q);
