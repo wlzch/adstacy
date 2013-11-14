@@ -1,16 +1,6 @@
 .users {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-
   .media {
     margin: 0;
-  }
-  h2 {
-    font-size: 18px;
-    padding: 12px 10px;
-    margin: 0;
-    border-bottom: 1px solid #ddd;
   }
 }
 
@@ -23,6 +13,14 @@
     border-radius: 3px;
     width: 48px;
     height: 48px;
+  }
+
+  .user-action {
+    margin-left: 10px;
+  }
+
+  .jscroll-added:last-child &:last-child {
+    .border-bottom-radius(@border-radius-base);
   }
 
   &:hover {

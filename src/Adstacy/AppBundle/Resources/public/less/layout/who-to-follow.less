@@ -1,42 +1,42 @@
+@import "../variables.less";
+@import "../mixins.less";
+
 #who-to-follow {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
   .toolbar {
-    border-radius: 5px 5px 0 0;
-    border-bottom: 1px solid #ddd;
-    background-color: #fff;
-    margin-bottom: 5px;
+    border-bottom: 1px solid darken(@border-color, 10%);
+    .box-shadow(0 1px 3px rgba(0,0,0,.175));
+
+    .btn-default {
+      padding: 12px;
+      border-width: 0 0 0 1px;
+      white-space: normal;
+
+      &:first-child {
+        border-left: 0;
+        border-radius: @border-radius-base 0 0 0;
+      }
+      &:last-child {
+        border-radius: 0 @border-radius-base 0 0;
+      }
+    }
   }
-  .adstacy, .twitter, .facebook {
-    display: block;
-    float: left;
-    margin: 0;
-    padding: 12px 10px 10px;
-  }
+
   .adstacy {
-    border-right: 1px solid #ddd;
-    border-radius: 4px 0 0 0;
     color: #b00;
-    width: 30%;
     &.current {
       background: #b00;
       color: #fff;
     }
   }
   .facebook {
-    border-right: 1px solid #ddd;
     color: #133783;
-    width: 38%;
     &.current {
       background: #133783;
       color: #fff;
     }
   }
   .twitter {
-    border-radius: 0 0 0 4px;
     color: #0271bf;
-    width: 32%;
     &.current {
       background: #0271bf;
       color: #fff;

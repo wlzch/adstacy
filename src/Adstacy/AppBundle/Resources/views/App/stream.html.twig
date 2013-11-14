@@ -6,8 +6,10 @@
 
 {% block content %}
   {% if user.followingsCount <= 0 %}
-    <div class="adstacy-container clearfix users">
-      <h2>{{"who_to_follow_getting_started"|trans}}</h2>
+    <div class="adstacy-container users panel panel-default">
+      <div class="panel-heading">
+        <h2>{{"who_to_follow_getting_started"|trans}}</h2>
+      </div>
       {{ block('ajax_content') }}
     </div>
   {% else %}

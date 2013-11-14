@@ -12,11 +12,11 @@
 {% endblock %}
 
 {% block content %}
-  <div id="who-to-follow" class="adstacy-container">
-    <div class="toolbar clearfix">
-      <a href="{{ path('adstacy_app_who_to_follow') }}" class="adstacy {% if source == 'adstacy' %}current{% endif %}" title="{{"find_friends"|trans}}">{{"find_friends"|trans}}</a>
-      <a href="{{ path('adstacy_app_who_to_follow_facebook') }}" class="facebook {% if source == 'facebook' %}current{% endif %}" title="{{"find_friends"|trans}}">{{"find_friends_facebook"|trans}}</a>
-      <a href="{{ path('adstacy_app_who_to_follow_twitter') }}" class="twitter {% if source == 'twitter' %}current{% endif %}" title="{{"find_friends_twitter"|trans}}">{{"find_friends_twitter"|trans}}</a>
+  <div id="who-to-follow" class="adstacy-container panel panel-default">
+    <div class="btn-group btn-group-justified toolbar">
+      <a href="{{ path('adstacy_app_who_to_follow') }}" class="btn btn-default label-group adstacy {% if source == 'adstacy' %}current{% endif %}" title="{{"find_friends"|trans}}"><i class="icon icon-user-add"></i><span class="text">{{"find_friends"|trans}}</span></a>
+      <a href="{{ path('adstacy_app_who_to_follow_facebook') }}" class="btn btn-default label-group facebook {% if source == 'facebook' %}current{% endif %}" title="{{"find_friends"|trans}}"><i class="icon icon-facebook"></i><span class="text">{{"find_friends_facebook"|trans}}</span></a>
+      <a href="{{ path('adstacy_app_who_to_follow_twitter') }}" class="btn btn-default label-group twitter {% if source == 'twitter' %}current{% endif %}" title="{{"find_friends_twitter"|trans}}"><i class="icon icon-twitter"></i><span class="text">{{"find_friends_twitter"|trans}}</span></a>
     </div>
     <div class="jscroll users clearfix no-border">
       {{ block('ajax_content') }}

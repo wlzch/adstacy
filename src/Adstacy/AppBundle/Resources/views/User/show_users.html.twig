@@ -6,15 +6,17 @@
   <div class="adstacy-container">
     {% include 'AdstacyAppBundle:User:user_profile.html.twig' %}
     {% if paginator.getCurrentPageResults|length > 0 %}
-      <div class="users clearfix">
-        <h2>
-          {% if route == 'adstacy_app_user_followers' %}
-            Followers
-          {% elseif route == 'adstacy_app_user_followings' %}
-            Followings
-          {% endif %}
-        </h2>
-        <div class="jscroll">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2>
+            {% if route == 'adstacy_app_user_followers' %}
+              Followers
+            {% elseif route == 'adstacy_app_user_followings' %}
+              Followings
+            {% endif %}
+          </h2>
+        </div>
+        <div class="jscroll users">
           {{ block('ajax_content') }}
         </div>
       </div>
