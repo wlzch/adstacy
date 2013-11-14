@@ -15,9 +15,10 @@
   $('#m-btn-search').click(function() {
     $siteHeader.addClass('focus');
     $searchInput.focus();
+    return false;
   });
 
-  $searchInput.blur(function() {
+  $siteContainer.click(function() {
     $siteHeader.removeClass('focus');
   });
 
