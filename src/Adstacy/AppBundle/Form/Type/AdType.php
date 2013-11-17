@@ -65,7 +65,8 @@ class AdType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Adstacy\AppBundle\Entity\Ad'
+                'data_class' => 'Adstacy\AppBundle\Entity\Ad',
+                'csrf_protection' => false
             )
         );
     }
