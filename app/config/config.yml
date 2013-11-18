@@ -214,4 +214,4 @@ knp_gaufrette:
 
 exercise_html_purifier:
     default:
-        HTML.Allowed: 'p,ul,ol,li,h2,h3,a[href],b,div,span,i,strong,em'
+        HTML.Allowed: 'p,ul,ol,li,h2,h3,a[href],b,div,span,i,strong,em,br'
