@@ -211,3 +211,7 @@ knp_gaufrette:
         local_image_adapter:
             local:
                 directory: %kernel.root_dir%/../web/uploads
+
+exercise_html_purifier:
+    default:
+        HTML.Allowed: 'p,ul,ol,li,h2,h3,a[href],b,div,span,i,strong,em'
