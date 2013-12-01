@@ -56,6 +56,7 @@ class ChangePasswordFormType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => $this->class,
             'intention'  => 'change_password',
+            'csrf_protection' => false
         ));
     }
 

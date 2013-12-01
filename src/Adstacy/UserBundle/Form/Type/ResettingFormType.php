@@ -46,6 +46,7 @@ class ResettingFormType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => $this->class,
             'intention'  => 'resetting',
+            'csrf_protection' => false
         ));
     }
 
